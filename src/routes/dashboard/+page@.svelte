@@ -10,28 +10,28 @@
 
 	let cards: Card[] = [
 		{
-			title: 'Dashboard',
-			subtitle: 'This would be a secondary repo',
+			title: '2024 Dashboard',
+			subtitle: 'This is the robot display area',
 			color: 'primary',
 			textColor: 'white',
 			linkColor: 'white',
-			route: '/dashboard'
+			route: 'dashboard/2024'
 		},
 		{
-			title: 'Scouting App',
-			subtitle: 'This is also another repo',
+			title: 'Mentor',
+			subtitle: 'Mentor setup area',
 			color: 'secondary',
 			textColor: 'white',
 			linkColor: 'white',
-			route: 'https://app.tatorscout.org/'
+			route: 'dashboard/mentor'
 		},
 		{
-			title: 'User Settings',
-			subtitle: 'This would be the same repo',
+			title: 'Home',
+			subtitle: 'This would go back to the main home page. Subject to change.',
 			color: 'success',
 			textColor: 'white',
 			linkColor: 'white',
-			route: '/settings'
+			route: '/'
 		}
 	];
 </script>

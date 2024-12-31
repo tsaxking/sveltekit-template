@@ -1,195 +1,195 @@
 $colors: ();
 
 @function text-contrast($background) {
-    @if lightness($background) > 50% {
-        @return #000; // Use black text for lighter backgrounds
-    } @else {
-        @return #fff; // Use white text for darker backgrounds
-    }
+	@if lightness($background) > 50% {
+		@return #000; // Use black text for lighter backgrounds
+	} @else {
+		@return #fff; // Use white text for darker backgrounds
+	}
 }
 
-
 @each $color, $value in $colors {
-    $lighten-percentage: 10%;
-    $darken-percentage: 10%;
+	$lighten-percentage: 10%;
+	$darken-percentage: 10%;
 
-    @if type-of($value) != 'color' {
-        @warn 'Color value for `#{$color}` is not a valid color.';
-    }
+	@if type-of($value) != 'color' {
+		@warn 'Color value for `#{$color}` is not a valid color.';
+	}
 
-    --#{$color}: #{$value};
-    --#{$color}-transparent: rgba($value, 0);
-    --#{$color}-light: lighten($value, $lighten-percentage);
-    --#{$color}-dark: darken($value, $darken-percentage);
+	:root {
+		--#{$color}: #{$value};
+		--#{$color}-transparent: rgba(#{$value}, 0);
+		--#{$color}-light: lighten(#{$value}, $lighten-percentage);
+		--#{$color}-dark: darken(#{$value}, $darken-percentage);
+	}
 
-    
-    .bg-#{$color} {
-        background-color: var(--#{$color});
-    }
+	.bg-#{$color} {
+		background-color: var(--#{$color});
+	}
 
-    .text-#{$color} {
-        color: var(--#{$color});
-    }
+	.text-#{$color} {
+		color: var(--#{$color});
+	}
 
-    .border-#{$color} {
-        border-color: var(--#{$color});
-    }
+	.border-#{$color} {
+		border-color: var(--#{$color});
+	}
 
-    .bg-#{$color}-light {
-        background-color: var(--#{$color}-light);
-    }
+	.bg-#{$color}-light {
+		background-color: var(--#{$color}-light);
+	}
 
-    .text-#{$color}-light {
-        color: var(--#{$color}-light);
-    }
+	.text-#{$color}-light {
+		color: var(--#{$color}-light);
+	}
 
-    .border-#{$color}-light {
-        border-color: var(--#{$color}-light);
-    }
+	.border-#{$color}-light {
+		border-color: var(--#{$color}-light);
+	}
 
-    .bg-#{$color}-dark {
-        background-color: var(--#{$color}-dark);
-    }
+	.bg-#{$color}-dark {
+		background-color: var(--#{$color}-dark);
+	}
 
-    .text-#{$color}-dark {
-        color: var(--#{$color}-dark);
-    }
+	.text-#{$color}-dark {
+		color: var(--#{$color}-dark);
+	}
 
-    .border-#{$color}-dark {
-        border-color: var(--#{$color}-dark);
-    }
+	.border-#{$color}-dark {
+		border-color: var(--#{$color}-dark);
+	}
 
-    .btn-#{$color} {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color});
-        border-color: var(--#{$color});
-    }
+	.btn-#{$color} {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color});
+		border-color: var(--#{$color});
+	}
 
-    .btn-#{$color}:hover {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color}-dark);
-        border-color: var(--#{$color});
-    }
+	.btn-#{$color}:hover {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color}-dark);
+		border-color: var(--#{$color});
+	}
 
-    .btn-#{$color}:focus,
-    .btn-#{$color}.focus {
-        box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
-    }
+	.btn-#{$color}:focus,
+	.btn-#{$color}.focus {
+		box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
+	}
 
-    .btn-#{$color}.disabled,
-    .btn-#{$color}:disabled {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color}-light);
-        border-color: var(--#{$color}-light);
-    }
+	.btn-#{$color}.disabled,
+	.btn-#{$color}:disabled {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color}-light);
+		border-color: var(--#{$color}-light);
+	}
 
-    .btn-#{$color}:not(:disabled):not(.disabled):active,
-    .btn-#{$color}:not(:disabled):not(.disabled).active,
-    .show > .btn-#{$color}.dropdown-toggle {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color}-dark);
-        border-color: var(--#{$color});
-    }
+	.btn-#{$color}:not(:disabled):not(.disabled):active,
+	.btn-#{$color}:not(:disabled):not(.disabled).active,
+	.show > .btn-#{$color}.dropdown-toggle {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color}-dark);
+		border-color: var(--#{$color});
+	}
 
-    .btn-#{$color}:not(:disabled):not(.disabled):active:focus,
-    .btn-#{$color}:not(:disabled):not(.disabled).active:focus,
-    .show > .btn-#{$color}.dropdown-toggle:focus {
-        box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
-    }
+	.btn-#{$color}:not(:disabled):not(.disabled):active:focus,
+	.btn-#{$color}:not(:disabled):not(.disabled).active:focus,
+	.show > .btn-#{$color}.dropdown-toggle:focus {
+		box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
+	}
 
-    .btn-outline-#{$color} {
-        color: var(--#{$color});
-        background-color: transparent;
-        background-image: none;
-        border-color: var(--#{$color});
-    }
+	.btn-outline-#{$color} {
+		color: var(--#{$color});
+		background-color: transparent;
+		background-image: none;
+		border-color: var(--#{$color});
+	}
 
-    .btn-outline-#{$color}:hover {
-        color: #fff;
-        background-color: var(--#{$color});
-        border-color: var(--#{$color});
-    }
+	.btn-outline-#{$color}:hover {
+		color: #fff;
+		background-color: var(--#{$color});
+		border-color: var(--#{$color});
+	}
 
-    .btn-outline-#{$color}:focus,
-    .btn-outline-#{$color}.focus {
-        box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
-    }
+	.btn-outline-#{$color}:focus,
+	.btn-outline-#{$color}.focus {
+		box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
+	}
 
-    .btn-outline-#{$color}.disabled,
-    .btn-outline-#{$color}:disabled {
-        color: var(--#{$color}-light);
-        background-color: transparent;
-    }
+	.btn-outline-#{$color}.disabled,
+	.btn-outline-#{$color}:disabled {
+		color: var(--#{$color}-light);
+		background-color: transparent;
+	}
 
-    .btn-outline-#{$color}:not(:disabled):not(.disabled):active,
-    .btn-outline-#{$color}:not(:disabled):not(.disabled).active,
-    .show > .btn-outline-#{$color}.dropdown-toggle {
-        color: #fff;
-        background-color: var(--#{$color});
-        border-color: var(--#{$color});
-    }
+	.btn-outline-#{$color}:not(:disabled):not(.disabled):active,
+	.btn-outline-#{$color}:not(:disabled):not(.disabled).active,
+	.show > .btn-outline-#{$color}.dropdown-toggle {
+		color: #fff;
+		background-color: var(--#{$color});
+		border-color: var(--#{$color});
+	}
 
-    .btn-outline-#{$color}:not(:disabled):not(.disabled):active:focus,
-    .btn-outline-#{$color}:not(:disabled):not(.disabled).active:focus,
-    .show > .btn-outline-#{$color}.dropdown-toggle:focus {
-        box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
-    }
+	.btn-outline-#{$color}:not(:disabled):not(.disabled):active:focus,
+	.btn-outline-#{$color}:not(:disabled):not(.disabled).active:focus,
+	.show > .btn-outline-#{$color}.dropdown-toggle:focus {
+		box-shadow: 0 0 0 0.2rem var(--#{$color}-light);
+	}
 
-    .table-#{$color},
-    .table-#{$color} > th,
-    .table-#{$color} > td {
-        color: var(--#{$color}-dark);
-        background-color: var(--#{$color}-light);
-    }
+	.table-#{$color},
+	.table-#{$color} > th,
+	.table-#{$color} > td {
+		color: var(--#{$color}-dark);
+		background-color: var(--#{$color}-light);
+	}
 
-    .table-hover .table-#{$color}:hover {
-        background-color: var(--#{$color});
-    }
+	.table-hover .table-#{$color}:hover {
+		background-color: var(--#{$color});
+	}
 
-    .table-hover .table-#{$color}:hover > td,
-    .table-hover .table-#{$color}:hover > th {
-        background-color: var(--#{$color});
-    }
+	.table-hover .table-#{$color}:hover > td,
+	.table-hover .table-#{$color}:hover > th {
+		background-color: var(--#{$color});
+	}
 
-    .table .thead-#{$color} th {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color}-dark);
-        border-color: var(--#{$color});
-    }
+	.table .thead-#{$color} th {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color}-dark);
+		border-color: var(--#{$color});
+	}
 
-    .badge-#{$color} {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color});
-    }
+	.badge-#{$color} {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color});
+	}
 
-    .alert-#{$color} {
-        color: var(--#{$color}-dark);
-        background-color: var(--#{$color}-light);
-        border-color: var(--#{$color});
-    }
+	.alert-#{$color} {
+		color: var(--#{$color}-dark);
+		background-color: var(--#{$color}-light);
+		border-color: var(--#{$color});
+	}
 
-    .alert-#{$color} hr {
-        border-top-color: var(--#{$color}-dark);
-    }
+	.alert-#{$color} hr {
+		border-top-color: var(--#{$color}-dark);
+	}
 
-    .alert-#{$color} .alert-link {
-        color: var(--#{$color}-dark);
-    }
+	.alert-#{$color} .alert-link {
+		color: var(--#{$color}-dark);
+	}
 
-    .list-group-item-#{$color} {
-        color: var(--#{$color});
-        background-color: var(--#{$color}-light);
-    }
+	.list-group-item-#{$color} {
+		color: var(--#{$color});
+		background-color: var(--#{$color}-light);
+	}
 
-    .list-group-item-#{$color}.list-group-item-action:hover,
-    .list-group-item-#{$color}.list-group-item-action:focus {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color});
-    }
+	.list-group-item-#{$color}.list-group-item-action:hover,
+	.list-group-item-#{$color}.list-group-item-action:focus {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color});
+	}
 
-    .list-group-item-#{$color}.list-group-item-action.active {
-        color: #{text-contrast($value)};
-        background-color: var(--#{$color});
-        border-color: var(--#{$color}-dark);
-    }
+	.list-group-item-#{$color}.list-group-item-action.active {
+		color: #{text-contrast($value)};
+		background-color: var(--#{$color});
+		border-color: var(--#{$color}-dark);
+	}
 }
