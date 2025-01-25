@@ -19,7 +19,20 @@ export namespace Test {
 		},
 		lifetime: 1000 * 60 * 10
 	});
+
+	export const API = new Struct({
+		name: 'api_test',
+		structure: {
+			name: text('name').notNull(),
+			age: integer('age').notNull()
+		},
+		lifetime: 1000 * 60 * 10,
+		frontend: false,
+		reflection: true,
+		log: true,
+	});
 }
 
 export const _test = Test.Test.table;
 export const _testVersion = Test.Test.versionTable;
+export const _API = Test.API.table;
