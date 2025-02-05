@@ -8,6 +8,10 @@ import { DB } from '$lib/server/db/';
 import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import { env } from '$env/dynamic/private';
+import path from 'path';
+import { Email } from '$lib/server/structs/email';
+import { PUBLIC_APP_NAME } from '$env/static/public';
+import terminal from '$lib/server/utils/terminal.js';
 config();
 
 Struct.each((struct) => {
@@ -18,7 +22,32 @@ Struct.each((struct) => {
 	}
 });
 
-// Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+
+process.on('exit', async (code) => {
+	if (code > 0) {
+		if ([
+			'true',
+			't',
+			'y',
+			'1',
+			'yes'
+		].includes(String(env.SEND_STATUS_EMAILS).toLowerCase())) {
+			terminal.error('Server shutdown unexpectedly with code: ', code);
+			(await Email.sendStatus('System shutdown', {
+				admins: true,
+				developers: false,
+			}, {
+				status: 'Error',
+				description: 'Server shutdown unexpectedly',
+				impact: 'High',
+				resolutionEta: 'Unknown',
+				system: PUBLIC_APP_NAME,
+				link: '/server-status', // server is off so this will not work
+			})).unwrap();
+		}
+	}
+});
 
 export const load = async (event) => {
 	const session = await Session.getSession(event);

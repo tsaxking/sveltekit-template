@@ -8,6 +8,7 @@ import path from 'path';
 import nodemailer from 'nodemailer';
 import { sgTransport } from '@neoxia-js/nodemailer-sendgrid-transport';
 import terminal from '../utils/terminal';
+import { Account } from './account';
 
 export namespace Email {
 	const { SENDGRID_API_KEY, SENDGRID_EMAIL, PUBLIC_DOMAIN, HTTPS } = process.env;
@@ -96,6 +97,34 @@ export namespace Email {
 				html,
 				attachments: config.attachments
 			});
+		});
+	};
+
+	export const sendStatus = (status: string, to: {
+		developers: boolean;
+		admins: boolean;
+	}, data: E['status']) => {
+		return attemptAsync(async () => {
+			const recipients = new Set<string>();
+			if (to.developers) {
+				const devs = (await Account.getDevelopers()).unwrap();
+				for (let i = 0; i < devs.length; i++) {
+					recipients.add(devs[i].data.email);
+				}
+			}
+			if (to.admins) {
+				const admins = (await Account.getAdmins()).unwrap();
+				for (let i = 0; i < admins.length; i++) {
+					recipients.add(admins[i].data.email);
+				}
+			}
+
+			return (await send({
+				to: Array.from(recipients),
+				type: 'status',
+				data,
+				subject: `System Status Update: ${status}`
+			})).unwrap();
 		});
 	};
 }
