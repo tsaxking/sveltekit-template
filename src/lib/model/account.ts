@@ -17,14 +17,14 @@ export namespace Account {
 		name: 'account',
 		structure: {
 			username: 'string',
-			key: 'string',
-			salt: 'string',
+			// key: 'string',
+			// salt: 'string',
 			firstName: 'string',
 			lastName: 'string',
 			email: 'string',
 			picture: 'string',
 			verified: 'boolean',
-			verification: 'string'
+			// verification: 'string'
 		},
 		socket: sse,
 		browser
