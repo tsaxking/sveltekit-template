@@ -50,7 +50,7 @@ export namespace Account {
 
 	export type AccountNotificationData = StructData<typeof AccountNotification.data.structure>;
 
-	const self = new SingleWritable(
+	export const self = new SingleWritable(
 		Account.Generator({
 			username: 'Guest',
 			// key: '',
