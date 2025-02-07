@@ -23,7 +23,7 @@ export namespace Account {
 			lastName: 'string',
 			email: 'string',
 			picture: 'string',
-			verified: 'boolean',
+			verified: 'boolean'
 			// verification: 'string'
 		},
 		socket: sse,
@@ -52,14 +52,14 @@ export namespace Account {
 	const self = new SingleWritable<typeof Account.data.structure>(
 		Account.Generator({
 			username: 'Guest',
-			key: '',
-			salt: '',
+			// key: '',
+			// salt: '',
 			firstName: 'Guest',
 			lastName: '',
 			email: '',
 			picture: '',
 			verified: false,
-			verification: '',
+			// verification: '',
 			id: 'guest',
 			updated: '0',
 			created: '0',
