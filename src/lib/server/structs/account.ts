@@ -64,6 +64,15 @@ export namespace Account {
 		return stream;
 	});
 
+	Account.sendListen('self', async (event) => {
+		const session = (await Session.getSession(event)).unwrap();
+		const account = (await Session.getAccount(session)).unwrap();
+		if (!account) {
+			return new Error('Not logged in');
+		}
+		return account.safe();
+	});
+
 	Account.queryListen('role-members', async (event, data) => {
 		const session = (await Session.getSession(event)).unwrap();
 		const account = (await Session.getAccount(session)).unwrap();
@@ -170,6 +179,19 @@ export namespace Account {
 
 	AccountNotification.bypass(DataAction.Delete, (a, b) => a.id === b?.accountId);
 	AccountNotification.bypass(PropertyAction.Update, (a, b) => a.id === b?.accountId);
+
+	AccountNotification.queryListen('get-own-notifs', async (event) => {
+		const session = (await Session.getSession(event)).unwrap();
+		const account = (await Session.getAccount(session)).unwrap();
+
+		if (!account) {
+			return new Error('Not logged in');
+		}
+
+		return AccountNotification.fromProperty('accountId', account.id, {
+			type: 'stream'
+		});
+	});
 
 	export const Settings = new Struct({
 		name: 'account_settings',
