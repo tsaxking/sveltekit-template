@@ -4,7 +4,7 @@ import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
 import { DB } from '../db';
-import { sql } from 'drizzle-orm';
+import { sql, eq } from 'drizzle-orm';
 import type { Notification } from '$lib/types/notification';
 import { Session } from './session';
 import { sse } from '../utils/sse';
@@ -143,12 +143,30 @@ export namespace Account {
 		});
 	};
 
+	export const getAdmins = () => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Admins.table)
+				.innerJoin(Account.table, eq(Account.table.id, Admins.table.accountId));
+			return res.map(a => Account.Generator(a.account));
+		});
+	}
+
 	export const Developers = new Struct({
 		name: 'developers',
 		structure: {
 			accountId: text('account_id').notNull().unique()
 		}
 	});
+
+	export const getDevelopers = () => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Developers.table)
+				.innerJoin(Account.table, eq(Account.table.id, Developers.table.accountId));
+			return res.map(a => Account.Generator(a.account));
+		});
+	}
 
 	export const isDeveloper = (account: AccountData) => {
 		return attemptAsync(async () => {
@@ -161,7 +179,6 @@ export namespace Account {
 			);
 		});
 	};
-
 	export type AccountData = typeof Account.sample;
 
 	export const AccountNotification = new Struct({
