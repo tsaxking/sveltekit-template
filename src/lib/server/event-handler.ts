@@ -22,12 +22,7 @@ import { Logs } from './structs/log';
 export const handleEvent =
 	(struct: Struct) =>
 	async (
-		event: RequestAction & {
-			locals: {
-				session: Session.SessionData;
-				account?: Account.AccountData;
-			};
-		}
+		event: RequestAction
 	): Promise<Response> => {
 		// console.log('Handling event:', event);
 		const error = (error: Error) => {
@@ -45,7 +40,7 @@ export const handleEvent =
 		let isAdmin = false;
 
 		if (struct.data.name !== 'test') {
-			account = event.locals.account;
+			account = event.request.locals.account;
 			if (!account) return error(new StructError(struct, 'Not logged in'));
 
 			roles = (await Permissions.allAccountRoles(account)).unwrap();

@@ -17,7 +17,7 @@
 		"test:e2e": "pnpm build && playwright test",
 		"test:e2eNoBuild": "playwright test",
 		"db:start": "docker compose up",
-		"db:push": "drizzle-kit push",
+		"db:push": "pnpm backup && drizzle-kit push",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"build-storybook": "storybook build",
@@ -26,7 +26,8 @@
 		"script": "npx vite-node ./scripts/index.ts",
 		"check:system": "pnpm run lint && pnpm run check && pnpm run test",
 		"system:check": "pnpm run check:system",
-		"build:email": "pnpm script mjml-batch"
+		"build:email": "pnpm script mjml-batch",
+		"backup": "pnpm script backup"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^3.2.3",

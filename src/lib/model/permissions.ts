@@ -2,7 +2,7 @@ import { type Writable, writable } from 'svelte/store';
 import { attempt, attemptAsync } from 'ts-utils/check';
 // import { Requests } from '../utils/requests';
 import { Account } from './account';
-import { Struct, StructData } from 'drizzle-struct/front-end';
+import { Struct, StructData, DataArr } from 'drizzle-struct/front-end';
 import { type Blank } from 'drizzle-struct/front-end';
 import { sse } from '$lib/utils/sse';
 import type { DataAction, PropertyAction } from 'drizzle-struct/types';
@@ -28,6 +28,7 @@ export namespace Permissions {
 	if (browser) Object.assign(window, { Role });
 
 	export type RoleData = StructData<typeof Role.data.structure>;
+	export type RoleArr = DataArr<typeof Role.data.structure>[];
 
 	export const getEntitlements = () => {
 		return Requests.get<

@@ -1,5 +1,5 @@
 import { sse } from '$lib/utils/sse';
-import { Struct, StructData } from 'drizzle-struct/front-end';
+import { Struct, StructData, DataArr } from 'drizzle-struct/front-end';
 import { attemptAsync } from 'ts-utils/check';
 import { Account } from './account';
 import { browser } from '$app/environment';
@@ -18,6 +18,7 @@ export namespace Universes {
 	});
 
 	export type UniverseData = StructData<typeof Universe.data.structure>;
+	export type UniverseArr = DataArr<typeof Universe.data.structure>;
 
 	export const UniverseInvites = new Struct({
 		name: 'universe_invite',
@@ -31,6 +32,7 @@ export namespace Universes {
 	});
 
 	export type UniverseInviteData = StructData<typeof UniverseInvites.data.structure>;
+	export type UniverseInviteArr = DataArr<typeof UniverseInvites.data.structure>;
 
 	export const acceptInvite = async (invite: UniverseInviteData) => {
 		return attemptAsync(async () => {});
