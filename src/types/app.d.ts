@@ -8,7 +8,7 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			account: Account.AccountData | undefined;
+			account?: Account.AccountData | undefined;
 			session: Session.SessionData;
 		}
 		// interface PageData {}
