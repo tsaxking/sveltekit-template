@@ -61,15 +61,7 @@ export const actions = {
 			});
 		}
 
-		const session = await Session.getSession(event);
-		if (session.isErr()) {
-			return fail(ServerCode.internalServerError, {
-				user: res.data.username,
-				message: 'Failed to create session'
-			});
-		}
-
-		const sessionRes = await Session.signIn(account, session.value);
+		const sessionRes = await Session.signIn(account, event.locals.session);
 		if (sessionRes.isErr()) {
 			console.error(sessionRes.error);
 			return fail(ServerCode.internalServerError, {
@@ -81,7 +73,7 @@ export const actions = {
 		return {
 			message: 'Logged in',
 			user: res.data.username,
-			redirect: session.value.data.prevUrl || '/',
+			redirect: event.locals.session.data.prevUrl || '/',
 			success: true
 		};
 	},

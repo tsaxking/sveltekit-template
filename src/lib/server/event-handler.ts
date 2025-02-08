@@ -20,7 +20,14 @@ import terminal from '$lib/server/utils/terminal';
 
 export const handleEvent =
 	(struct: Struct) =>
-	async (event: RequestAction): Promise<Response> => {
+	async (
+		event: RequestAction & {
+			locals: {
+				session: Session.SessionData;
+				account?: Account.AccountData;
+			};
+		}
+	): Promise<Response> => {
 		// console.log('Handling event:', event);
 		const error = (error: Error) => {
 			return new Response(
@@ -31,15 +38,13 @@ export const handleEvent =
 				{ status: 200 }
 			);
 		};
-		const s = (await Session.getSession(event.request)).unwrap();
-		if (!s) return error(new StructError(struct, 'Session not found'));
 
 		let roles: Permissions.RoleData[] = [];
 		let account: Account.AccountData | undefined;
 		let isAdmin = false;
 
 		if (struct.data.name !== 'test') {
-			account = (await Session.getAccount(s)).unwrap();
+			account = event.locals.account;
 			if (!account) return error(new StructError(struct, 'Not logged in'));
 
 			roles = (await Permissions.allAccountRoles(account)).unwrap();

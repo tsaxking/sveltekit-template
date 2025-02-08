@@ -9,7 +9,8 @@ if (!Test.Test.built) {
 			terminal.error(res.error);
 		}
 	});
-	Test.Test.eventHandler(handleEvent(Test.Test));
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	Test.Test.eventHandler(handleEvent(Test.Test) as any);
 	// TODO: make this base on .env?
 	Test.Test.bypass('*', () => true);
 	connectionEmitter(Test.Test);

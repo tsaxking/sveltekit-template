@@ -5,6 +5,7 @@ import { encode } from 'ts-utils/text';
 import { EventEmitter, SimpleEventEmitter } from 'ts-utils/event-emitter';
 import type { Notification } from '$lib/types/notification';
 import terminal from './terminal';
+import type { Account } from '../structs/account';
 
 type Stream = ReadableStreamDefaultController<string>;
 
@@ -111,10 +112,17 @@ class SSE {
 		});
 	}
 
-	connect(event: RequestEvent) {
+	connect(
+		event: RequestEvent & {
+			locals: {
+				session: Session.SessionData;
+				account?: Account.AccountData;
+			};
+		}
+	) {
 		const me = this;
 		return attemptAsync(async () => {
-			const session = (await Session.getSession(event)).unwrap();
+			const session = event.locals.session;
 			let connection: Connection;
 
 			const stream = new ReadableStream({

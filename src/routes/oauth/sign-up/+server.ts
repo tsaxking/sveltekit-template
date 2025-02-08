@@ -64,8 +64,5 @@ export const GET = async (event) => {
 		// log(err);
 	}
 
-	const session = await Session.getSession(event);
-	if (session.isErr()) return new Response('Error creating session', { status: 500 });
-
 	throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
 };
