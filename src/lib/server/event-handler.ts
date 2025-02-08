@@ -112,13 +112,15 @@ export const handleEvent =
 
 			(await version.delete()).unwrap();
 
-			(await Logs.Log.new({
-				dataId: String(data.data.id),
-				accountId: account?.id || 'unknown',
-				type: 'delete-version',
-				message: 'Deleted version',
-				struct: struct.data.name,
-			})).unwrap();
+			(
+				await Logs.Log.new({
+					dataId: String(data.data.id),
+					accountId: account?.id || 'unknown',
+					type: 'delete-version',
+					message: 'Deleted version',
+					struct: struct.data.name
+				})
+			).unwrap();
 
 			return new Response(
 				JSON.stringify({
@@ -144,13 +146,15 @@ export const handleEvent =
 			const res = await versions.restore();
 			if (res.isErr()) return error(res.error);
 
-			(await Logs.Log.new({
-				dataId: String(data.data.id),
-				accountId: account?.id || 'unknown',
-				type: 'restore-version',
-				message: 'Restored version',
-				struct: struct.data.name,
-			})).unwrap();
+			(
+				await Logs.Log.new({
+					dataId: String(data.data.id),
+					accountId: account?.id || 'unknown',
+					type: 'restore-version',
+					message: 'Restored version',
+					struct: struct.data.name
+				})
+			).unwrap();
 
 			return new Response(
 				JSON.stringify({
@@ -324,14 +328,16 @@ export const handleEvent =
 				const universe = event.request.request.headers.get('universe');
 				if (universe) {
 					(await created.setUniverse(universe)).unwrap();
-				
-					(await Logs.Log.new({
-						dataId: String(created.data.id),
-						accountId: account?.id || 'unknown',
-						type: 'create',
-						message: 'Created data',
-						struct: struct.data.name,
-					})).unwrap();
+
+					(
+						await Logs.Log.new({
+							dataId: String(created.data.id),
+							accountId: account?.id || 'unknown',
+							type: 'create',
+							message: 'Created data',
+							struct: struct.data.name
+						})
+					).unwrap();
 				}
 				return new Response(
 					JSON.stringify({
@@ -381,13 +387,15 @@ export const handleEvent =
 				const res = await found.update(data);
 				if (res.isErr()) return error(res.error);
 
-				(await Logs.Log.new({
-					dataId: String(found.data.id),
-					accountId: account?.id || 'unknown',
-					type: 'update',
-					message: 'Updated data',
-					struct: struct.data.name,
-				})).unwrap();
+				(
+					await Logs.Log.new({
+						dataId: String(found.data.id),
+						accountId: account?.id || 'unknown',
+						type: 'update',
+						message: 'Updated data',
+						struct: struct.data.name
+					})
+				).unwrap();
 			} else {
 				const [res] = (
 					await Permissions.filterAction(roles, [found as any], PropertyAction.Update)
@@ -398,13 +406,15 @@ export const handleEvent =
 				);
 				if (updateRes.isErr()) return error(updateRes.error);
 
-				(await Logs.Log.new({
-					dataId: String(found.data.id),
-					accountId: account?.id || 'unknown',
-					type: 'update',
-					message: 'Updated data',
-					struct: struct.data.name,
-				})).unwrap();
+				(
+					await Logs.Log.new({
+						dataId: String(found.data.id),
+						accountId: account?.id || 'unknown',
+						type: 'update',
+						message: 'Updated data',
+						struct: struct.data.name
+					})
+				).unwrap();
 			}
 
 			return new Response(
@@ -430,13 +440,15 @@ export const handleEvent =
 
 				(await found.setArchive(true)).unwrap();
 
-				(await Logs.Log.new({
-					dataId: String(found.data.id),
-					accountId: account?.id || 'unknown',
-					type: 'archive',
-					message: 'Archived data',
-					struct: struct.data.name,
-				})).unwrap();
+				(
+					await Logs.Log.new({
+						dataId: String(found.data.id),
+						accountId: account?.id || 'unknown',
+						type: 'archive',
+						message: 'Archived data',
+						struct: struct.data.name
+					})
+				).unwrap();
 
 				return new Response(
 					JSON.stringify({
@@ -466,14 +478,16 @@ export const handleEvent =
 
 				(await found.delete()).unwrap();
 
-				(await Logs.Log.new({
-					dataId: String(found.data.id),
-					accountId: account?.id || 'unknown',
-					type: 'delete',
-					message: 'Deleted data',
-					struct: struct.data.name,
-				})).unwrap();
-					
+				(
+					await Logs.Log.new({
+						dataId: String(found.data.id),
+						accountId: account?.id || 'unknown',
+						type: 'delete',
+						message: 'Deleted data',
+						struct: struct.data.name
+					})
+				).unwrap();
+
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -503,13 +517,15 @@ export const handleEvent =
 
 				(await found.setArchive(false)).unwrap();
 
-				(await Logs.Log.new({
-					dataId: String(found.data.id),
-					accountId: account?.id || 'unknown',
-					type: 'restore',
-					message: 'Restored data',
-					struct: struct.data.name,
-				})).unwrap();
+				(
+					await Logs.Log.new({
+						dataId: String(found.data.id),
+						accountId: account?.id || 'unknown',
+						type: 'restore',
+						message: 'Restored data',
+						struct: struct.data.name
+					})
+				).unwrap();
 
 				return new Response(
 					JSON.stringify({
