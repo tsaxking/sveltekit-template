@@ -12,14 +12,10 @@ export const load = async (event) => {
 		return fail(ServerCode.internalServerError);
 	};
 
-	const session = await Session.getSession(event);
-	if (session.isErr()) throw error(session.error);
+	const account = event.locals.account;
+	if (!account) throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
 
-	const account = await Session.getAccount(session.value);
-	if (account.isErr()) throw error(account.error);
-	if (!account.value) throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
-
-	const universes = await Universes.getUniverses(account.value.id);
+	const universes = await Universes.getUniverses(account.id);
 	if (universes.isErr()) throw error(universes.error);
 
 	const invitePage = parseInt(event.url.searchParams.get('invitePage') || '0');
@@ -29,7 +25,7 @@ export const load = async (event) => {
 	const universeNumber = parseInt(event.url.searchParams.get('universeNumber') || '0');
 	const universeOffset = universePage * universeNumber;
 
-	const invites = await Universes.getInvites(account.value, {
+	const invites = await Universes.getInvites(account, {
 		type: 'array',
 		limit: inviteNumber,
 		offset: inviteOffset
@@ -45,7 +41,7 @@ export const load = async (event) => {
 
 	if (publicUniverses.isErr()) throw error(publicUniverses.error);
 
-	const inviteCount = await Universes.UniverseInvite.fromProperty('account', account.value.id, {
+	const inviteCount = await Universes.UniverseInvite.fromProperty('account', account.id, {
 		type: 'count'
 	});
 
