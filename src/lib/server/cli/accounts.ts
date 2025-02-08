@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Account } from '../structs/account';
-import { selectData, structActions } from './struct';
+import { selectData, structActions, viewData } from './struct';
 import { Action, confirm, Folder, password, prompt } from './utils';
 import terminal from '../utils/terminal';
+import { Logs } from '../structs/log';
 
 export default new Folder('Accounts', 'Edit accounts', '👤', [
 	new Action('List', 'List all accounts', '📋', async () => {
 		return (await structActions.all(Account.Account as any, undefined, {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 	}),
 	new Action('Create', 'Create a new account', '➕', async () => {
@@ -41,7 +42,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 			}).await()
 		).unwrap();
 		const a = (await selectData(accounts as any, 'Select an account to verify', {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 		if (typeof a === 'undefined') return terminal.log('Cancelled');
 		const account = accounts[a];
@@ -66,7 +67,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 			}).await()
 		).unwrap();
 		const a = (await selectData(accounts as any, 'Select an account to unverify', {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 		if (typeof a === 'undefined') return terminal.log('Cancelled');
 		const account = accounts[a];
@@ -90,7 +91,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 			}).await()
 		).unwrap();
 		const a = (await selectData(accounts as any, 'Select an account to make an admin', {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 		if (typeof a === 'undefined') return terminal.log('Cancelled');
 		const account = accounts[a];
@@ -116,7 +117,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		const admins = (await Account.getAdmins()).unwrap();
 
 		const a = (await selectData(admins as any, 'Select an account to remove as an admin', {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 
 		if (typeof a === 'undefined') return terminal.log('Cancelled');
@@ -147,7 +148,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		).unwrap();
 
 		const a = (await selectData(accounts as any, 'Select an account to make a developer', {
-			omit: ['id', 'verification', 'key', 'salt'],
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
 		})).unwrap();
 
 		if (typeof a === 'undefined') return terminal.log('Cancelled');
@@ -197,5 +198,32 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		(await developerData.delete()).unwrap();
 
 		return terminal.log(`Account ${developer.data.username} is no longer a developer`);
+	}),
+	new Action('View Account Logs', 'View the logs of an account', '📜', async () => {
+		const accounts = (
+			await Account.Account.all({
+				type: 'stream'
+			}).await()
+		).unwrap();
+
+		const a = (await selectData(accounts as any, 'Select an account to view the logs of', {
+			omit: ['id', 'verification', 'key', 'salt', 'attributes', 'universe'],
+		})).unwrap();
+
+		if (typeof a === 'undefined') return terminal.log('Cancelled');
+
+		const account = accounts[a];
+
+		const logs = (await Logs.Log.fromProperty('accountId', account.id, {
+			type: 'stream',
+		}).await()).unwrap();
+
+		terminal.log('LOGS:', logs.length);
+
+		const res = await viewData(logs, 'Logs', {
+			omit: ['id', 'accountId', 'archived', 'attributes', 'universe'],
+		});
+
+		if (res.isErr()) terminal.error(res.error);
 	}),
 ]);

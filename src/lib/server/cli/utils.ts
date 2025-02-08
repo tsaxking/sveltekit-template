@@ -4,6 +4,7 @@ import FuzzySearch from 'fuzzy-search';
 import Table from 'cli-table';
 import { Colors } from './colors';
 import terminal from '../utils/terminal';
+import chalk from 'chalk';
 
 type GlobalConfig = {
 	message: string;
@@ -55,6 +56,21 @@ export const repeatPrompt = async (
 
 		return run();
 	});
+
+export const alert = async (config: GlobalConfig) => {
+	return new Promise<void>((res) => {
+		if (config.clear) console.clear();
+		console.log(config.message);
+		console.log(chalk.gray('Press any key to continue'));
+		process.stdin.setRawMode(true);
+		process.stdin.resume();
+		process.stdin.on('data', () => {
+			process.stdin.setRawMode(false);
+			process.stdin.pause();
+			res();
+		});
+	});
+}
 
 type Option<T> = {
 	value: T;
@@ -184,7 +200,7 @@ export const selectFromTable = async <T extends Record<string, unknown>>(
 
 				const run = (selected: number) => {
 					console.clear();
-					terminal.log(config.message);
+					console.log(config.message);
 					const t = new Table({
 						head: headers
 					});
@@ -200,7 +216,7 @@ export const selectFromTable = async <T extends Record<string, unknown>>(
 						)
 					);
 
-					terminal.log(t.toString());
+					console.log(t.toString());
 
 					stdin.on('data', handleKey);
 				};
@@ -228,6 +244,73 @@ export const selectFromTable = async <T extends Record<string, unknown>>(
 				};
 
 				run(selected);
+			})
+	);
+
+export const viewTable = async <T extends Record<string, unknown>>(
+	config: GlobalConfig & {
+		options: T[];
+		omit?: (keyof T)[];
+	}
+) =>
+	attemptAsync(
+		async () =>
+			new Promise<void>((res, rej) => {
+				// No selection process, just viewing, press any key (except scrolls) to exit
+				if (!config.options.length) {
+					return alert({
+						message: 'Table is empty',
+						clear: config.clear,
+					}).then(res).catch(rej);
+				}
+
+				if (config.clear) console.clear();
+
+				const headers = Object.keys(config.options[0]).filter(
+					(k) => !config.omit?.includes(k as keyof T)
+				);
+
+				const stdin = process.stdin;
+
+				stdin.setRawMode(true);
+				stdin.resume();
+				stdin.setEncoding('utf8');
+
+				const run = () => {
+					console.clear();
+					console.log(config.message);
+					const t = new Table({
+						head: headers
+					});
+
+					t.push(
+						...config.options.map((o) =>
+							headers.map((h) => {
+								return String(o[h]);
+							})
+						)
+					);
+
+					console.log(t.toString());
+
+					stdin.on('data', handleKey);
+				};
+
+				const handleKey = (key: string) => {
+					switch (key) {
+						case '\u0003':
+							process.exit();
+							break;
+						case '\r':
+							console.clear();
+							res();
+							break;
+					}
+
+					stdin.off('data', handleKey);
+				};
+
+				run();
 			})
 	);
 
@@ -277,7 +360,7 @@ export class Folder {
 				try {
 					(await selected()).unwrap();
 				} catch (error) {
-					terminal.error(error);
+					terminal.error('CLI Error:', error);
 				}
 			} else {
 				terminal.log('Cancelled');
