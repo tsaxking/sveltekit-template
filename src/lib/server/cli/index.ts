@@ -17,6 +17,7 @@ Folder.home = home;
 
 openStructs().then(async (s) => {
 	s.unwrap();
+	await import('../index');
 	(await Struct.buildAll(DB as any)).unwrap();
 	// structsPipe();
 	home.action();

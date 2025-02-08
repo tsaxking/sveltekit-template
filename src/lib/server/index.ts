@@ -1,7 +1,6 @@
 import { Struct } from 'drizzle-struct/back-end';
 
 const postBuild = async () => {
-    console.log('All structs built');
 };
 
 {

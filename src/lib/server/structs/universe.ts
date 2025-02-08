@@ -320,6 +320,36 @@ export namespace Universes {
 		});
 	};
 
+	export const addAdmin = async (account: Account.AccountData, universe: UniverseData) => {
+		return attemptAsync(async () => {
+			const roles = (
+				await Permissions.Role.fromProperty('universe', universe.id, {
+					type: 'stream'
+				}).await()
+			).unwrap();
+
+			const admin = roles.find((r) => r.data.name === 'Admin'); // should always succeed because data is static
+
+			if (!admin) throw new Error('Admin role not found');
+
+			return (
+				await Permissions.RoleAccount.new({
+					account: account.id,
+					role: admin.id
+				})
+			).unwrap();
+		});
+	};
+
+	export const removeAdmin = async (account: Account.AccountData, universe: UniverseData) => {
+		return attemptAsync(async () => {
+			const roles = (await memberRoles(account, universe)).unwrap();
+			const admin = roles.find((r) => r.data.name === 'Admin');
+			if (!admin) throw new Error('Account is not an admin');
+			return admin.delete();
+		});
+	}
+
 	createEntitlement({
 		name: 'manage-universe',
 		structs: [Universe],

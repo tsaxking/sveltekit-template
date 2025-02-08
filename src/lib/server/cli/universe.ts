@@ -53,15 +53,22 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 		return terminal.log('Universe created');
 	}),
 	new Action('Add Member', 'Add a member to a universe', '👤', async () => {
-		const unvierse = (await selectUniverse()).unwrap();
+		const u = await selectUniverse();
+		if (u.isErr()) return terminal.error(u.error);
+		const unvierse = u.value;
 		if (!unvierse) return;
-		const members = (await Universes.getMembers(unvierse)).unwrap();
+		const m = await Universes.getMembers(unvierse);
+		if (m.isErr()) return terminal.error(m.error);
+		const members = m.value;
 
 		const account = (await selectAccount((a) => !members.find((m) => m.id === a.id))).unwrap();
 
 		if (!account) return;
 
-		const role = (await Universes.addToUniverse(account, unvierse)).unwrap();
+		const r = await Universes.addToUniverse(account, unvierse);
+		if (r.isErr()) return terminal.error(r.error);
+		const role = r.value;
+
 
 		(
 			await Logs.log({
@@ -85,5 +92,27 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 		(await Universes.removeFromUniverse(member, unvierse)).unwrap();
 
 		return terminal.log('Member removed');
-	})
+	}),
+	new Action('Add Admin', 'Add an admin to a universe', '👤', async () => {
+		const unvierse = (await selectUniverse()).unwrap();
+		if (!unvierse) return;
+		const member = (await selectMember(unvierse)).unwrap();
+
+		if (!member) return;
+
+		(await Universes.addAdmin(member, unvierse)).unwrap();
+
+		return terminal.log('Admin added');
+	}),
+	new Action('Remove Admin', 'Remove an admin from a universe', '🚫', async () => {
+		const unvierse = (await selectUniverse()).unwrap();
+		if (!unvierse) return;
+		const member = (await selectMember(unvierse)).unwrap();
+
+		if (!member) return;
+
+		(await Universes.removeAdmin(member, unvierse)).unwrap();
+
+		return terminal.log('Admin removed');
+	}),
 ]);
