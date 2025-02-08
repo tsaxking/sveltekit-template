@@ -1,9 +1,29 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
+import '$lib/server/structs/permissions';
+import '$lib/server/structs/universe';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { env } from '$env/dynamic/private';
 import terminal from '$lib/server/utils/terminal';
+import { config } from 'dotenv';
+import { Struct } from 'drizzle-struct/back-end';
+import { DB } from '$lib/server/db/';
+import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
+import '$lib/server/utils/files';
+import path from 'path';
+config();
+
+Struct.each((struct) => {
+	if (!struct.built) {
+		struct.build(DB);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		struct.eventHandler(handleEvent(struct) as any);
+		connectionEmitter(struct);
+	}
+});
+
+Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const session = await Session.getSession(event);
