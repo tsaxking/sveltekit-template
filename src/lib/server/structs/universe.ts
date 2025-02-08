@@ -237,6 +237,40 @@ export namespace Universes {
 		});
 	};
 
+	export const addToUniverse = async (account: Account.AccountData, universe: UniverseData) => {
+		return attemptAsync(async () => {
+			const members = (await getMembers(universe)).unwrap();
+			if (members.find((m) => m.id === account.id)) throw new Error('Account already in universe');
+
+			const roles = (
+				await Permissions.Role.fromProperty('universe', universe.id, {
+					type: 'stream'
+				}).await()
+			).unwrap();
+
+			const member = roles.find((r) => r.data.name === 'Member'); // should always succeed because data is static
+
+			if (!member) throw new Error('Member role not found');
+
+			return (
+				await Permissions.RoleAccount.new({
+					account: account.id,
+					role: member.id
+				})
+			).unwrap();
+		});
+	};
+
+	export const removeFromUniverse = async (
+		account: Account.AccountData,
+		universe: UniverseData
+	) => {
+		return attemptAsync(async () => {
+			const roles = (await memberRoles(account, universe)).unwrap();
+			return resolveAll(await Promise.all(roles.map((r) => r.delete())));
+		});
+	};
+
 	export const declineInvite = async (invite: UniverseInviteData) => {
 		return invite.delete();
 	};

@@ -8,9 +8,9 @@ import serverController from './server-controller';
 import universe from './universe';
 
 export const home = new Folder('Home', 'Root Folder Access', '🏠', [
-	serverController, 
+	serverController,
 	accounts,
-	universe,
+	universe
 ]);
 
 Folder.home = home;

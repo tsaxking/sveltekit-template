@@ -10,7 +10,15 @@ import {
 } from 'drizzle-struct/back-end';
 import fs from 'fs';
 import path from 'path';
-import { select, selectFromTable, repeatPrompt, confirm, prompt, multiSelect, viewTable } from './utils';
+import {
+	select,
+	selectFromTable,
+	repeatPrompt,
+	confirm,
+	prompt,
+	multiSelect,
+	viewTable
+} from './utils';
 import { checkStrType, returnType } from 'drizzle-struct/utils';
 import { Permissions } from '../structs/permissions';
 import { Universes } from '../structs/universe';
@@ -89,16 +97,20 @@ export const selectData = <T extends StructData>(
 		omit: options?.omit as string[]
 	});
 
-export const viewData = <T extends StructData>(data: T[], message?: string, options?: {
-	omit?: (keyof T['data'])[];
-}) => {
+export const viewData = <T extends StructData>(
+	data: T[],
+	message?: string,
+	options?: {
+		omit?: (keyof T['data'])[];
+	}
+) => {
 	return viewTable({
 		clear: true,
 		message: message || 'View data',
 		options: data.map((d) => d.data),
-		omit: options?.omit as string[],
-	})
-}
+		omit: options?.omit as string[]
+	});
+};
 
 export const selectDataPipe = <S extends Struct>(
 	struct: S,
@@ -181,19 +193,25 @@ otherwise dates will not work.
 				};
 			}
 
-			(await Logs.Log.new({
-				dataId: String(res.value.id),
-				struct: struct.name,
-				accountId: 'CLI',
-				type: 'create',
-				message: 'Data created from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(res.value.id),
+					struct: struct.name,
+					accountId: 'CLI',
+					type: 'create',
+					message: 'Data created from cli'
+				})
+			).unwrap();
 
 			return doNext('New data created', undefined, next);
 		}),
-	all: async <T extends Struct>(struct: T, next?: Next, options?: {
-		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-	}) =>
+	all: async <T extends Struct>(
+		struct: T,
+		next?: Next,
+		options?: {
+			omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+		}
+	) =>
 		attemptAsync(async () => {
 			const all = (
 				await struct
@@ -204,9 +222,13 @@ otherwise dates will not work.
 			).unwrap();
 			return selectDataPipe(struct, all, next, options);
 		}),
-	fromProperty: async <T extends Struct>(struct: T, next?: Next, options?: {
-		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-	}) =>
+	fromProperty: async <T extends Struct>(
+		struct: T,
+		next?: Next,
+		options?: {
+			omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+		}
+	) =>
 		attemptAsync(async () => {
 			const res = (
 				await select({
@@ -240,9 +262,13 @@ otherwise dates will not work.
 			).unwrap();
 			return selectDataPipe(struct, data, next, options);
 		}),
-	fromUniverse: async <T extends Struct>(struct: T, next?: Next, options?: {
-		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-	}) =>
+	fromUniverse: async <T extends Struct>(
+		struct: T,
+		next?: Next,
+		options?: {
+			omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+		}
+	) =>
 		attemptAsync(async () => {
 			const universes = (
 				await Universes.Universe.all({
@@ -272,9 +298,13 @@ otherwise dates will not work.
 			).unwrap();
 			return selectDataPipe(struct, data, next, options);
 		}),
-	archived: async <T extends Struct>(struct: T, next?: Next, options?: {
-		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-	}) =>
+	archived: async <T extends Struct>(
+		struct: T,
+		next?: Next,
+		options?: {
+			omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+		}
+	) =>
 		attemptAsync(async () => {
 			const data = (
 				await struct
@@ -357,13 +387,15 @@ export const dataActions = {
 				};
 			}
 
-			(await Logs.Log.new({
-				dataId: String(data.id),
-				struct: data.struct.name,
-				accountId: 'CLI',
-				type: 'update',
-				message: 'Data updated from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'update',
+					message: 'Data updated from cli'
+				})
+			).unwrap();
 
 			return doNext('Data updated', undefined, next);
 		}),
@@ -379,13 +411,15 @@ export const dataActions = {
 				return doNext('Data deleted', undefined, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(data.id),
-				struct: data.struct.name,
-				accountId: 'CLI',
-				type: 'delete',
-				message: 'Data deleted from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'delete',
+					message: 'Data deleted from cli'
+				})
+			).unwrap();
 
 			return doNext('Data not deleted', undefined, next);
 		}),
@@ -401,13 +435,15 @@ export const dataActions = {
 				return doNext('Data archived', undefined, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(data.id),
-				struct: data.struct.name,
-				accountId: 'CLI',
-				type: 'archive',
-				message: 'Data archived from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'archive',
+					message: 'Data archived from cli'
+				})
+			).unwrap();
 
 			return doNext('Data not archived', undefined, next);
 		}),
@@ -423,13 +459,15 @@ export const dataActions = {
 				return doNext('Data restored', undefined, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(data.id),
-				struct: data.struct.name,
-				accountId: 'CLI',
-				type: 'restore',
-				message: 'Data restored from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'restore',
+					message: 'Data restored from cli'
+				})
+			).unwrap();
 
 			return doNext('Data not restored', undefined, next);
 		}),
@@ -461,11 +499,11 @@ export const dataActions = {
 	// 			return doNext('Failed to add attributes', res2.error, next);
 	// 		}
 
-	// 		(await Logs.Log.new({
+	// 		(await Logs.log({
 	// 			dataId: String(data.id),
 	// 			struct: data.struct.name,
 	// 			accountId: 'CLI',
-	// 			type: 'addAttributes',
+	// 			type: 'set-attributes',
 	// 			message: 'Attributes added from cli',
 	// 		})).unwrap();
 
@@ -494,11 +532,11 @@ export const dataActions = {
 	// 			return doNext('Failed to remove attributes', res2.error, next);
 	// 		}
 
-	// 		(await Logs.Log.new({
+	// 		(await Logs.log({
 	// 			dataId: String(data.id),
 	// 			struct: data.struct.name,
 	// 			accountId: 'CLI',
-	// 			type: 'removeAttributes',
+	// 			type: 'set-attributes',
 	// 			message: 'Attributes removed from cli',
 	// 		})).unwrap();
 
@@ -525,11 +563,11 @@ export const dataActions = {
 	// 			return doNext('Failed to set attributes', res2.error, next);
 	// 		}
 
-	// 		(await Logs.Log.new({
+	// 		(await Logs.log({
 	// 			dataId: String(data.id),
 	// 			struct: data.struct.name,
 	// 			accountId: 'CLI',
-	// 			type: 'setAttributes',
+	// 			type: 'set-attributes',
 	// 			message: 'Attributes set from cli',
 	// 		})).unwrap();
 
@@ -563,25 +601,33 @@ export const dataActions = {
 				return doNext('Failed to set universes', res2.error, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(data.id),
-				struct: data.struct.name,
-				accountId: 'CLI',
-				type: 'setUniverse',
-				message: 'Universes set from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'set-universe',
+					message: 'Universes set from cli'
+				})
+			).unwrap();
 
 			return doNext('Universes set', undefined, next);
 		}),
-		viewLogs: async <T extends StructData>(data: T, next?: Next) => attemptAsync(async () => {
-			const logs = (await Logs.Log.fromProperty('dataId', String(data.id), {
-				type: 'stream'
-			}).await()).unwrap();
+	viewLogs: async <T extends StructData>(data: T, next?: Next) =>
+		attemptAsync(async () => {
+			const logs = (
+				await Logs.Log.fromProperty('dataId', String(data.id), {
+					type: 'stream'
+				}).await()
+			).unwrap();
 
-			terminal.log('Logs:', logs.map((l) => l.data));
+			terminal.log(
+				'Logs:',
+				logs.map((l) => l.data)
+			);
 
 			return doNext('Logs viewed', undefined, next);
-		}),
+		})
 };
 
 export const selectDataAction = (data: StructData, next?: Next) =>
@@ -624,13 +670,15 @@ export const versionActions = {
 				return doNext('Version restored', undefined, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(version.data.dataId),
-				struct: version.struct.data.name,
-				accountId: 'CLI',
-				type: 'restore-version',
-				message: 'Version restored from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(version.data.dataId),
+					struct: version.struct.data.name,
+					accountId: 'CLI',
+					type: 'restore-version',
+					message: 'Version restored from cli'
+				})
+			).unwrap();
 
 			return doNext('Version not restored', undefined, next);
 		}),
@@ -653,13 +701,15 @@ export const versionActions = {
 				return doNext('Version deleted', undefined, next);
 			}
 
-			(await Logs.Log.new({
-				dataId: String(version.data.dataId),
-				struct: version.struct.data.name,
-				accountId: 'CLI',
-				type: 'delete-version',
-				message: 'Version deleted from cli',
-			})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(version.data.dataId),
+					struct: version.struct.data.name,
+					accountId: 'CLI',
+					type: 'delete-version',
+					message: 'Version deleted from cli'
+				})
+			).unwrap();
 
 			return doNext('Version not deleted', undefined, next);
 		})

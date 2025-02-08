@@ -113,7 +113,7 @@ export const handleEvent =
 			(await version.delete()).unwrap();
 
 			(
-				await Logs.Log.new({
+				await Logs.log({
 					dataId: String(data.data.id),
 					accountId: account?.id || 'unknown',
 					type: 'delete-version',
@@ -147,7 +147,7 @@ export const handleEvent =
 			if (res.isErr()) return error(res.error);
 
 			(
-				await Logs.Log.new({
+				await Logs.log({
 					dataId: String(data.data.id),
 					accountId: account?.id || 'unknown',
 					type: 'restore-version',
@@ -330,7 +330,7 @@ export const handleEvent =
 					(await created.setUniverse(universe)).unwrap();
 
 					(
-						await Logs.Log.new({
+						await Logs.log({
 							dataId: String(created.data.id),
 							accountId: account?.id || 'unknown',
 							type: 'create',
@@ -388,7 +388,7 @@ export const handleEvent =
 				if (res.isErr()) return error(res.error);
 
 				(
-					await Logs.Log.new({
+					await Logs.log({
 						dataId: String(found.data.id),
 						accountId: account?.id || 'unknown',
 						type: 'update',
@@ -407,7 +407,7 @@ export const handleEvent =
 				if (updateRes.isErr()) return error(updateRes.error);
 
 				(
-					await Logs.Log.new({
+					await Logs.log({
 						dataId: String(found.data.id),
 						accountId: account?.id || 'unknown',
 						type: 'update',
@@ -441,7 +441,7 @@ export const handleEvent =
 				(await found.setArchive(true)).unwrap();
 
 				(
-					await Logs.Log.new({
+					await Logs.log({
 						dataId: String(found.data.id),
 						accountId: account?.id || 'unknown',
 						type: 'archive',
@@ -479,7 +479,7 @@ export const handleEvent =
 				(await found.delete()).unwrap();
 
 				(
-					await Logs.Log.new({
+					await Logs.log({
 						dataId: String(found.data.id),
 						accountId: account?.id || 'unknown',
 						type: 'delete',
@@ -518,7 +518,7 @@ export const handleEvent =
 				(await found.setArchive(false)).unwrap();
 
 				(
-					await Logs.Log.new({
+					await Logs.log({
 						dataId: String(found.data.id),
 						accountId: account?.id || 'unknown',
 						type: 'restore',

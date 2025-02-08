@@ -70,7 +70,7 @@ export const alert = async (config: GlobalConfig) => {
 			res();
 		});
 	});
-}
+};
 
 type Option<T> = {
 	value: T;
@@ -260,8 +260,10 @@ export const viewTable = async <T extends Record<string, unknown>>(
 				if (!config.options.length) {
 					return alert({
 						message: 'Table is empty',
-						clear: config.clear,
-					}).then(res).catch(rej);
+						clear: config.clear
+					})
+						.then(res)
+						.catch(rej);
 				}
 
 				if (config.clear) console.clear();
@@ -358,7 +360,7 @@ export class Folder {
 
 			if (selected) {
 				try {
-					(await selected()).unwrap();
+					await selected();
 				} catch (error) {
 					terminal.error('CLI Error:', error);
 				}
@@ -392,8 +394,6 @@ export class Action {
 	) {}
 
 	public action() {
-		return attemptAsync(async () => {
-			await this._action();
-		});
+		return this._action();
 	}
 }

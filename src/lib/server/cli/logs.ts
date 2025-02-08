@@ -1,3 +1,3 @@
-import { Folder } from "./utils";
+import { Folder } from './utils';
 
 // export default new Folder('Logs', '')
