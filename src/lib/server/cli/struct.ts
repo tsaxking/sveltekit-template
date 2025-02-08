@@ -2,6 +2,7 @@
 import { attemptAsync } from 'ts-utils/check';
 import {
 	DataVersion,
+	globalCols,
 	Struct,
 	StructData,
 	type Blank,
@@ -90,10 +91,13 @@ export const selectData = <T extends StructData>(
 export const selectDataPipe = <S extends Struct>(
 	struct: S,
 	data: StructData<S['data']['structure'], S['data']['name']>[],
-	next?: Next
+	next?: Next,
+	options?: {
+		omit?: (keyof (S['data']['structure'] & typeof globalCols))[];
+	}
 ) =>
 	attemptAsync(async () => {
-		const res = (await selectData(data, `Select from ${struct.name}`)).unwrap();
+		const res = (await selectData(data, `Select from ${struct.name}`, options)).unwrap();
 		if (res === undefined) {
 			return doNext('No data selected', undefined, next);
 		}
@@ -167,7 +171,9 @@ otherwise dates will not work.
 
 			return doNext('New data created', undefined, next);
 		}),
-	all: async <T extends Struct>(struct: T, next?: Next) =>
+	all: async <T extends Struct>(struct: T, next?: Next, options?: {
+		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+	}) =>
 		attemptAsync(async () => {
 			const all = (
 				await struct
@@ -176,9 +182,11 @@ otherwise dates will not work.
 					})
 					.await()
 			).unwrap();
-			return selectDataPipe(struct, all, next);
+			return selectDataPipe(struct, all, next, options);
 		}),
-	fromProperty: async <T extends Struct>(struct: T, next?: Next) =>
+	fromProperty: async <T extends Struct>(struct: T, next?: Next, options?: {
+		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+	}) =>
 		attemptAsync(async () => {
 			const res = (
 				await select({
@@ -210,9 +218,11 @@ otherwise dates will not work.
 					})
 					.await()
 			).unwrap();
-			return selectDataPipe(struct, data, next);
+			return selectDataPipe(struct, data, next, options);
 		}),
-	fromUniverse: async <T extends Struct>(struct: T, next?: Next) =>
+	fromUniverse: async <T extends Struct>(struct: T, next?: Next, options?: {
+		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+	}) =>
 		attemptAsync(async () => {
 			const universes = (
 				await Universes.Universe.all({
@@ -240,9 +250,11 @@ otherwise dates will not work.
 					})
 					.await()
 			).unwrap();
-			return selectDataPipe(struct, data, next);
+			return selectDataPipe(struct, data, next, options);
 		}),
-	archived: async <T extends Struct>(struct: T, next?: Next) =>
+	archived: async <T extends Struct>(struct: T, next?: Next, options?: {
+		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
+	}) =>
 		attemptAsync(async () => {
 			const data = (
 				await struct
@@ -251,7 +263,7 @@ otherwise dates will not work.
 					})
 					.await()
 			).unwrap();
-			return selectDataPipe(struct, data, next);
+			return selectDataPipe(struct, data, next, options);
 		}),
 	clear: async <T extends Struct>(struct: T, next?: Next) =>
 		attemptAsync(async () => {

@@ -283,7 +283,7 @@ export class Folder {
 				terminal.log('Cancelled');
 			}
 
-			return;
+			Folder.home?.action();
 		});
 	}
 
