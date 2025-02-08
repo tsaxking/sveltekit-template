@@ -17,7 +17,7 @@
 		"test:e2e": "pnpm build && playwright test",
 		"test:e2eNoBuild": "playwright test",
 		"db:start": "docker compose up",
-		"db:push": "pnpm backup && drizzle-kit push",
+		"db:push": "drizzle-kit push",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"build-storybook": "storybook build",
