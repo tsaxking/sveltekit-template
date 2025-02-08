@@ -2,6 +2,7 @@ import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
 import '$lib/server/structs/permissions';
 import '$lib/server/structs/universe';
+import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { env } from '$env/dynamic/private';
@@ -12,6 +13,7 @@ import { DB } from '$lib/server/db/';
 import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import path from 'path';
+import '$lib/server/index';
 config();
 
 Struct.each((struct) => {
@@ -22,6 +24,7 @@ Struct.each((struct) => {
 		connectionEmitter(struct);
 	}
 });
+
 
 Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 
@@ -54,7 +57,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (
 		!['/account/sign-in', '/account/sign-up'].includes(event.url.pathname) &&
 		!event.url.pathname.includes('/account/password-reset') &&
-		!event.url.pathname.includes('/status')
+		!event.url.pathname.includes('/status') &&
+		!event.url.pathname.includes('/sse') &&
+		!event.url.pathname.includes('/struct')
 	) {
 		session.value.update({
 			prevUrl: event.url.pathname,
