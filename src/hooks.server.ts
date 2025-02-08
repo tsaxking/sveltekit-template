@@ -1,6 +1,7 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
-import { openStructs } from '$lib/server/cli/struct';
+import '$lib/server/structs/permissions';
+import '$lib/server/structs/universe';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { env } from '$env/dynamic/private';
@@ -13,14 +14,14 @@ import '$lib/server/utils/files';
 import path from 'path';
 config();
 
-openStructs().then(() => Struct.each((struct) => {
+Struct.each((struct) => {
 	if (!struct.built) {
 		struct.build(DB);
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		struct.eventHandler(handleEvent(struct) as any);
 		connectionEmitter(struct);
 	}
-}));
+});
 
 Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 
