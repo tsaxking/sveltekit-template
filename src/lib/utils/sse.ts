@@ -4,6 +4,7 @@ import { decode } from 'ts-utils/text';
 import { notify } from './prompts';
 import { z } from 'zod';
 import { Requests } from './requests';
+import { Random } from 'ts-utils/math';
 
 class SSE {
 	public readonly emitter = new EventEmitter();
@@ -49,7 +50,9 @@ class SSE {
 
 	connect() {
 		const connect = () => {
-			const source = new EventSource(`/sse`);
+			const uuid = Random.uuid();
+			Requests.setMeta('sse', uuid);
+			const source = new EventSource(`/sse/init/${uuid}`);
 
 			source.addEventListener('error', (e) => console.error('Error:', e));
 
