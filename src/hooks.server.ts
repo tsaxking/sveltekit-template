@@ -19,8 +19,7 @@ config();
 Struct.each((struct) => {
 	if (!struct.built) {
 		struct.build(DB);
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		struct.eventHandler(handleEvent(struct) as any);
+		struct.eventHandler(handleEvent(struct));
 		connectionEmitter(struct);
 	}
 });
