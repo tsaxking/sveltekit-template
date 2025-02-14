@@ -62,11 +62,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	) {
 		session.value.update({
 			prevUrl: event.url.pathname,
-			requests: session.value.data.requests + 1
-		});
-	} else {
-		session.value.update({
-			requests: session.value.data.requests + 1
 		});
 	}
 

@@ -97,7 +97,8 @@ class SSE {
 								type: 'alert',
 								color: parsed.data.severity,
 								title: parsed.data.title,
-								message: parsed.data.message
+								message: parsed.data.message,
+								autoHide: 5000,
 							});
 						return;
 					}
