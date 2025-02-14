@@ -4,6 +4,7 @@ import { Stream } from 'ts-utils/stream';
 import { v4 as uuid } from 'uuid';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
+import { Struct } from 'drizzle-struct/front-end';
 
 export namespace Requests {
 	export const metadata: Record<string, string> = {};
@@ -128,7 +129,8 @@ export namespace Requests {
 	};
 
 	export const setMeta = (key: string, value: string) => {
-		metadata.key = value;
+		metadata[key] = value;
+		Struct.headers.set(key, value);
 	};
 
 	export const uploadFiles = (

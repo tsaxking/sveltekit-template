@@ -69,7 +69,6 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 		if (r.isErr()) return terminal.error(r.error);
 		const role = r.value;
 
-
 		(
 			await Logs.log({
 				struct: Universes.Universe.name,
@@ -114,5 +113,5 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 		(await Universes.removeAdmin(member, unvierse)).unwrap();
 
 		return terminal.log('Admin removed');
-	}),
+	})
 ]);

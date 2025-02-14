@@ -18,12 +18,24 @@ import { sse } from '$lib/server/utils/sse';
 import { z } from 'zod';
 import terminal from '$lib/server/utils/terminal';
 import { Logs } from './structs/log';
+import type { Notification } from '$lib/types/notification';
 
 export const handleEvent =
 	(struct: Struct) =>
 	async (event: RequestAction): Promise<Response> => {
+		const notify = (notif: Notification) => {
+			const uuid = event.request.request.headers.get('sse');
+			if (!uuid) return;
+			sse.getConnection(uuid)?.notify(notif);
+		};
+
 		// console.log('Handling event:', event);
 		const error = (error: Error) => {
+			notify({
+				title: 'Unable to perform action',
+				severity: 'danger',
+				message: error.message
+			});
 			return new Response(
 				JSON.stringify({
 					success: false,
@@ -49,7 +61,7 @@ export const handleEvent =
 			).unwrap();
 		}
 
-		const invalidPermissions = error(new StructError(struct, 'Invalid permissions'));
+		const invalidPermissions = () => error(new StructError(struct, 'Invalid permissions'));
 
 		const bypass = struct.bypasses
 			.filter((b) => b.action === event.action || b.action === '*')
@@ -115,6 +127,12 @@ export const handleEvent =
 				})
 			).unwrap();
 
+			notify({
+				title: 'Deleted',
+				message: 'Deleted data version',
+				severity: 'success'
+			});
+
 			return new Response(
 				JSON.stringify({
 					success: true
@@ -148,6 +166,12 @@ export const handleEvent =
 					struct: struct.data.name
 				})
 			).unwrap();
+
+			notify({
+				title: 'Restored',
+				message: 'Restored data version',
+				severity: 'success'
+			});
 
 			return new Response(
 				JSON.stringify({
@@ -332,6 +356,13 @@ export const handleEvent =
 						})
 					).unwrap();
 				}
+
+				notify({
+					title: 'Created',
+					message: 'Created data',
+					severity: 'success'
+				});
+
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -343,7 +374,7 @@ export const handleEvent =
 				return create();
 			}
 			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap()) {
-				return invalidPermissions;
+				return invalidPermissions();
 			}
 
 			return create();
@@ -393,7 +424,7 @@ export const handleEvent =
 				const [res] = (
 					await Permissions.filterAction(roles, [found as any], PropertyAction.Update)
 				).unwrap();
-				if (!res) return invalidPermissions;
+				if (!res) return invalidPermissions();
 				const updateRes = await found.update(
 					Object.fromEntries(Object.entries(data).filter(([k]) => res[k])) as any
 				);
@@ -409,6 +440,12 @@ export const handleEvent =
 					})
 				).unwrap();
 			}
+
+			notify({
+				title: 'Updated',
+				message: 'Updated data',
+				severity: 'success'
+			});
 
 			return new Response(
 				JSON.stringify({
@@ -443,6 +480,12 @@ export const handleEvent =
 					})
 				).unwrap();
 
+				notify({
+					title: 'Archived',
+					message: 'Archived data',
+					severity: 'success'
+				});
+
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -452,7 +495,8 @@ export const handleEvent =
 			};
 			if (runBypass()) return archive();
 			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
-				return invalidPermissions;
+				return invalidPermissions();
+
 			return archive();
 		}
 
@@ -481,6 +525,11 @@ export const handleEvent =
 					})
 				).unwrap();
 
+				notify({
+					title: 'Deleted',
+					message: 'Deleted data',
+					severity: 'success'
+				});
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -490,7 +539,7 @@ export const handleEvent =
 			};
 			if (runBypass()) return remove();
 			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
-				return invalidPermissions;
+				return invalidPermissions();
 
 			return remove();
 		}
@@ -520,6 +569,12 @@ export const handleEvent =
 					})
 				).unwrap();
 
+				notify({
+					title: 'Restored',
+					message: 'Restored data',
+					severity: 'success'
+				});
+
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -529,7 +584,7 @@ export const handleEvent =
 			};
 			if (runBypass()) return restore();
 			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
-				return invalidPermissions;
+				return invalidPermissions();
 			return restore();
 		}
 

@@ -134,27 +134,39 @@ export namespace Universes {
 					entitlements: JSON.stringify(['manage-roles', 'manage-universe'])
 				})
 			).unwrap();
-			(await admin.setUniverse(u.id)).unwrap();
-			(await admin.setStatic(true)).unwrap();
-			await Permissions.RoleAccount.new({
-				role: admin.id,
-				account: account.id
-			});
-			(
-				await Permissions.RoleAccount.new({
-					role: member.id,
-					account: account.id
-				})
+
+			resolveAll<unknown>(
+				await Promise.all([
+					admin.setUniverse(u.id),
+					admin.setStatic(true),
+					grantRole(account, admin),
+					grantRole(account, member),
+					member.setUniverse(u.id),
+					member.setStatic(true)
+				])
 			).unwrap();
-			(
-				await member.update({
-					entitlements: JSON.stringify(['view-roles', 'view-universe'])
-				})
-			).unwrap();
-			(await member.setUniverse(u.id)).unwrap();
-			(await member.setStatic(true)).unwrap();
 
 			return u;
+		});
+	};
+
+	export const grantRole = async (account: Account.AccountData, role: Permissions.RoleData) => {
+		return attemptAsync(async () => {
+			const exists = !!(
+				await Permissions.RoleAccount.fromProperty('account', account.id, {
+					type: 'stream'
+				}).await()
+			)
+				.unwrap()
+				.find((r) => r.data.role === role.id);
+			if (exists) throw new Error('Account already has this role');
+
+			return (
+				await Permissions.RoleAccount.new({
+					account: account.id,
+					role: role.id
+				})
+			).unwrap();
 		});
 	};
 
@@ -226,12 +238,7 @@ export namespace Universes {
 
 			if (!member) throw new Error('Member role not found');
 
-			(
-				await Permissions.RoleAccount.new({
-					account: a.id,
-					role: member.id
-				})
-			).unwrap();
+			(await grantRole(a, member)).unwrap();
 
 			(await invite.delete()).unwrap();
 		});
@@ -252,12 +259,7 @@ export namespace Universes {
 
 			if (!member) throw new Error('Member role not found');
 
-			return (
-				await Permissions.RoleAccount.new({
-					account: account.id,
-					role: member.id
-				})
-			).unwrap();
+			return (await grantRole(account, member)).unwrap();
 		});
 	};
 
@@ -279,7 +281,9 @@ export namespace Universes {
 		account: Account.AccountData,
 		universe: Universes.UniverseData
 	) => {
-		return attemptAsync(async () => {});
+		return attemptAsync(async () => {
+			return !!(await memberRoles(account, universe)).unwrap().length;
+		});
 	};
 
 	export const getMembers = async (universe: UniverseData) => {
@@ -332,12 +336,7 @@ export namespace Universes {
 
 			if (!admin) throw new Error('Admin role not found');
 
-			return (
-				await Permissions.RoleAccount.new({
-					account: account.id,
-					role: admin.id
-				})
-			).unwrap();
+			return await grantRole(account, admin);
 		});
 	};
 
@@ -348,7 +347,30 @@ export namespace Universes {
 			if (!admin) throw new Error('Account is not an admin');
 			return admin.delete();
 		});
-	}
+	};
+
+	export const getAdmins = async (universe: UniverseData) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Account.Account.table)
+				.innerJoin(
+					Permissions.RoleAccount.table,
+					eq(Account.Account.table.id, Permissions.RoleAccount.table.account)
+				)
+				.innerJoin(
+					Permissions.Role.table,
+					eq(Permissions.RoleAccount.table.role, Permissions.Role.table.id)
+				)
+				.where(
+					and(
+						eq(Permissions.Role.table.universe, universe.id),
+						eq(Permissions.Role.table.name, 'Admin')
+					)
+				);
+
+			return res.map((r) => Account.Account.Generator(r.account));
+		});
+	};
 
 	createEntitlement({
 		name: 'manage-universe',
