@@ -90,6 +90,16 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 
 		(await Universes.removeFromUniverse(member, unvierse)).unwrap();
 
+		(
+			await Logs.log({
+				struct: Universes.Universe.name,
+				dataId: member.id,
+				accountId: 'CLI',
+				type: 'delete',
+				message: `Removed ${member.data.username} from ${unvierse.data.name}`
+			})
+		).unwrap();
+
 		return terminal.log('Member removed');
 	}),
 	new Action('Add Admin', 'Add an admin to a universe', '👤', async () => {
@@ -101,6 +111,16 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 
 		(await Universes.addAdmin(member, unvierse)).unwrap();
 
+		(
+			await Logs.log({
+				struct: Universes.Universe.name,
+				dataId: member.id,
+				accountId: 'CLI',
+				type: 'update',
+				message: `Added ${member.data.username} as admin to ${unvierse.data.name}`
+			})
+		).unwrap();
+
 		return terminal.log('Admin added');
 	}),
 	new Action('Remove Admin', 'Remove an admin from a universe', '🚫', async () => {
@@ -111,6 +131,16 @@ export default new Folder('Universe', 'Control the universe', '🌌', [
 		if (!member) return;
 
 		(await Universes.removeAdmin(member, unvierse)).unwrap();
+
+		(
+			await Logs.log({
+				struct: Universes.Universe.name,
+				dataId: member.id,
+				accountId: 'CLI',
+				type: 'update',
+				message: `Removed ${member.data.username} as admin from ${unvierse.data.name}`
+			})
+		).unwrap();
 
 		return terminal.log('Admin removed');
 	})
