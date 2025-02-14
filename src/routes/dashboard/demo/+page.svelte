@@ -9,7 +9,7 @@
 		icon: 'home',
 		id: 'card1',
 		width: 8,
-		height: 1,
+		height: 1
 	});
 
 	const card2 = new Dashboard.Card({
@@ -18,7 +18,7 @@
 		icon: 'edit',
 		id: 'card2',
 		width: 4,
-		height: 2,
+		height: 2
 	});
 
 	const card3 = new Dashboard.Card({
@@ -27,7 +27,7 @@
 		icon: 'delete',
 		id: 'card3',
 		width: 4,
-		height: 1,
+		height: 1
 	});
 
 	const card4 = new Dashboard.Card({
@@ -36,7 +36,7 @@
 		icon: 'person',
 		id: 'card4',
 		width: 4,
-		height: 1,
+		height: 1
 	});
 </script>
 

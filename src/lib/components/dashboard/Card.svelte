@@ -22,8 +22,8 @@
 		<div class="overlay"></div>
 	{/if}
 
-	<div 
-		class="card" 
+	<div
+		class="card"
 		class:maximized={$card.maximized}
 		style="
 			grid-column: span {card.width};

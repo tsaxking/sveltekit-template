@@ -98,7 +98,7 @@ class SSE {
 								color: parsed.data.severity,
 								title: parsed.data.title,
 								message: parsed.data.message,
-								autoHide: 5000,
+								autoHide: 5000
 							});
 						return;
 					}

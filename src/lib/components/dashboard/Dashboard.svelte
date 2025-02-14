@@ -38,21 +38,22 @@
 					break;
 			}
 
-			document.documentElement.style.setProperty("--grid-size", String(gridSize));
+			document.documentElement.style.setProperty('--grid-size', String(gridSize));
 		});
 	};
 
 	updateGridSize();
 	onMount(() => {
-		window.addEventListener("resize", updateGridSize);
-		return () => window.removeEventListener("resize", updateGridSize);
+		window.addEventListener('resize', updateGridSize);
+		return () => window.removeEventListener('resize', updateGridSize);
 	});
 </script>
 
 <div>
 	<h1>{capitalize(title)}</h1>
 	<MinimizedCards />
-	<div style="
+	<div
+		style="
 		display: grid; 
 		grid-template-columns: repeat(var(--grid-size), 1fr);
 		gap: 10px;

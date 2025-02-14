@@ -130,7 +130,7 @@ export namespace Dashboard {
 		}
 
 		show() {
-			this.update((state) => ({ 
+			this.update((state) => ({
 				...state,
 				show: true,
 				maximized: false
@@ -138,8 +138,8 @@ export namespace Dashboard {
 		}
 
 		hide() {
-			this.update((state) => ({ 
-				...state, 
+			this.update((state) => ({
+				...state,
 				show: false,
 				maximized: false
 			}));
