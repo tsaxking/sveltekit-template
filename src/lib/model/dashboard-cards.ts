@@ -21,7 +21,6 @@ export namespace Dashboard {
 		}
 	};
 
-
 	export const sizes = {
 		xs: 4,
 		sm: 8,
@@ -31,7 +30,6 @@ export namespace Dashboard {
 	};
 
 	const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
-
 
 	type CardData = {
 		show: boolean;

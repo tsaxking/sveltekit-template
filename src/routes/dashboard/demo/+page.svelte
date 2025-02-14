@@ -13,7 +13,7 @@
 			height: 1,
 			xl: {
 				width: 8,
-				height: 2,
+				height: 2
 			}
 		}
 	});
@@ -28,7 +28,7 @@
 			height: 1,
 			sm: {
 				width: 4,
-				height: 2,
+				height: 2
 			}
 		}
 	});
