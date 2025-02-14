@@ -3,14 +3,14 @@
 	import { onMount, type Snippet } from 'svelte';
 	import MinimizedCards from './MinimizedCards.svelte';
 	import { browser } from '$app/environment';
-	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { Dashboard } from '$lib/model/dashboard';
 
 	interface Props {
-		title: string;
 		body: Snippet;
+		dashboard: Dashboard.Dashboard;
 	}
 
-	const { title, body }: Props = $props();
+	const { body, dashboard }: Props = $props();
 
 	// let gridSize = $state(12);
 	let resizeTimeout: number | undefined;
@@ -34,8 +34,8 @@
 </script>
 
 <div>
-	<h1>{capitalize(title)}</h1>
-	<MinimizedCards />
+	<h1>{capitalize(dashboard.name)}</h1>
+	<MinimizedCards {dashboard} />
 	<div
 		style="
 		display: grid; 

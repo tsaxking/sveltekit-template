@@ -1,7 +1,13 @@
 <script lang="ts">
-	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { Dashboard } from '$lib/model/dashboard';
 
-	const cards = Dashboard.hiddenCards;
+	interface Props {
+		dashboard: Dashboard.Dashboard;
+	}
+
+	const { dashboard }: Props = $props();
+
+	const cards = dashboard.hiddenCards;
 </script>
 
 {#if $cards.size > 0}

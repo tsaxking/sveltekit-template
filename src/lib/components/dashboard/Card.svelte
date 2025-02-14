@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import { capitalize } from 'ts-utils/text';
-	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { Dashboard } from '$lib/model/dashboard';
 	import { browser } from '$app/environment';
 
 	const CARD_HEIGHT = 300; // in pixels
@@ -53,7 +53,7 @@
 	>
 		<div class="card-header">
 			<div class="d-flex h-100 align-items-center">
-				<h5 class="card-title h-100 m-0">
+				<div class="card-title h-100 m-0">
 					<div class="d-flex align-items-center h-100">
 						{#if card.config.iconType === 'bi'}
 							<i class="bi bi-{card.config.icon}"></i>
@@ -61,12 +61,16 @@
 							<i class="fa fa-{card.config.icon}"></i>
 						{:else if card.config.iconType === 'material-icons'}
 							<i class="material-icons text-sm">{card.config.icon}</i>
+						{:else if card.config.iconType === 'custom'}
+							<img src={card.config.icon} alt={card.config.name} class="icon" />
+						{:else if card.config.iconType === 'material-symbols'}
+							<span class="material-symbols-outlined text-sm">{card.config.icon}</span>
 						{/if}
-						<span class="ms-3">
+						<h5 class="ms-3">
 							{capitalize(card.config.name)}
-						</span>
+						</h5>
 					</div>
-				</h5>
+				</div>
 				<div class="ms-auto">
 					<button
 						class="btn btn-sm px-1"

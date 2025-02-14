@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { writable, type Subscriber, type Unsubscriber, type Writable } from 'svelte/store';
+import { EventEmitter } from 'ts-utils/event-emitter';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 
@@ -22,11 +23,11 @@ export namespace Dashboard {
 	};
 
 	export const sizes = {
-		xs: 4,
-		sm: 8,
-		md: 12,
-		lg: 16,
-		xl: 20
+		xs: 1,
+		sm: 2,
+		md: 3,
+		lg: 4,
+		xl: 5
 	};
 
 	const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
@@ -38,7 +39,57 @@ export namespace Dashboard {
 		height: number;
 	};
 
-	export const hiddenCards = writable(new Set<Card>());
+	export class Dashboard {
+		private readonly listeners = new Set<() => void>();
+
+		constructor(
+			public readonly config: {
+				name: string;
+				id: string;
+				cards: Card[];
+			}
+		) {
+			for (const card of config.cards) {
+				this.listeners.add(card.on('show', () => this.save()));
+			}
+		}
+
+		get id() {
+			return this.config.id;
+		}
+
+		get name() {
+			return this.config.name;
+		}
+
+		get cards() {
+			return this.config.cards;
+		}
+
+		public hiddenCards = writable(new Set<Card>());
+
+		save() {
+			return attempt(() => {
+				const hidden = JSON.stringify(
+					[...Card.cards.values()].filter((card) => !card.state.show).map((card) => card.config.id)
+				);
+				localStorage.setItem(`v1-dashboard-cards-${this.id}`, hidden);
+			});
+		}
+
+		pull() {
+			return attempt(() => {
+				const hidden = localStorage.getItem(`v1-dashboard-cards-${this.id}`);
+				if (!hidden) return new Set<string>();
+				const arr = z.array(z.string()).safeParse(JSON.parse(hidden));
+				if (!arr.success) {
+					console.error(arr.error);
+					return new Set();
+				}
+				return new Set(arr.data);
+			});
+		}
+	}
 
 	export class Card implements Writable<CardData> {
 		public static readonly cards = new Map<string, Card>();
@@ -47,11 +98,21 @@ export namespace Dashboard {
 
 		private readonly subscribers = new Set<(value: CardData) => void>();
 
+		private readonly em = new EventEmitter<{
+			show: boolean;
+			maximized: boolean;
+		}>();
+
+		public readonly on = this.em.on.bind(this.em);
+		public readonly off = this.em.off.bind(this.em);
+		public readonly once = this.em.once.bind(this.em);
+		public readonly emit = this.em.emit.bind(this.em);
+
 		constructor(
 			public readonly config: {
 				name: string;
 				icon: string;
-				iconType: 'bi' | 'fa' | 'material-icons';
+				iconType: 'bi' | 'fa' | 'material-icons' | 'material-symbols' | 'custom';
 				id: string;
 				size: {
 					xs?: { width: number; height: number };
@@ -77,12 +138,12 @@ export namespace Dashboard {
 				height: this.config.size.height
 			};
 
-			const res = pull();
-			if (res.isOk()) {
-				if (res.value.has(config.name)) {
-					this.state.show = false;
-				}
-			}
+			// const res = pull();
+			// if (res.isOk()) {
+			// 	if (res.value.has(config.name)) {
+			// 		this.state.show = false;
+			// 	}
+			// }
 		}
 
 		getSize() {
@@ -114,19 +175,19 @@ export namespace Dashboard {
 		set(value: CardData) {
 			this.state = value;
 			this.subscribers.forEach((subscriber) => subscriber(this.state));
-			if (this.state.show) {
-				hiddenCards.update((cards) => {
-					cards.delete(this);
-					return cards;
-				});
-			} else {
-				hiddenCards.update((cards) => {
-					cards.add(this);
-					return cards;
-				});
-			}
+			// if (this.state.show) {
+			// 	hiddenCards.update((cards) => {
+			// 		cards.delete(this);
+			// 		return cards;
+			// 	});
+			// } else {
+			// 	hiddenCards.update((cards) => {
+			// 		cards.add(this);
+			// 		return cards;
+			// 	});
+			// }
 
-			save();
+			// save();
 		}
 
 		update(fn: (value: CardData) => CardData) {
@@ -156,6 +217,7 @@ export namespace Dashboard {
 				show: true,
 				maximized: false
 			}));
+			this.emit('show', true);
 		}
 
 		hide() {
@@ -164,14 +226,17 @@ export namespace Dashboard {
 				show: false,
 				maximized: false
 			}));
+			this.emit('show', false);
 		}
 
 		minimize() {
 			this.update((state) => ({ ...state, maximized: true }));
+			this.emit('maximized', false);
 		}
 
 		maximize() {
 			this.update((state) => ({ ...state, maximized: false }));
+			this.emit('maximized', true);
 		}
 
 		resize() {
@@ -183,26 +248,4 @@ export namespace Dashboard {
 			}));
 		}
 	}
-
-	const save = () => {
-		return attempt(() => {
-			const hidden = JSON.stringify(
-				[...Card.cards.values()].filter((card) => !card.state.show).map((card) => card.config.id)
-			);
-			localStorage.setItem(`v1-dashboard-cards-${location.pathname}`, hidden);
-		});
-	};
-
-	const pull = () => {
-		return attempt(() => {
-			const hidden = localStorage.getItem(`v1-dashboard-cards-${location.pathname}`);
-			if (!hidden) return new Set<string>();
-			const arr = z.array(z.string()).safeParse(JSON.parse(hidden));
-			if (!arr.success) {
-				console.error(arr.error);
-				return new Set();
-			}
-			return new Set(arr.data);
-		});
-	};
 }
