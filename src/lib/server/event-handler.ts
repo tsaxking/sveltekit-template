@@ -24,15 +24,17 @@ export const handleEvent =
 	(struct: Struct) =>
 	async (event: RequestAction): Promise<Response> => {
 		const notify = (notif: Notification) => {
-			sse.fromSession(event.request.locals.session.id)?.notify(notif);
-		}
+			const uuid = event.request.request.headers.get('sse');
+			if (!uuid) return;
+			sse.getConnection(uuid)?.notify(notif);
+		};
 
 		// console.log('Handling event:', event);
 		const error = (error: Error) => {
 			notify({
 				title: 'Unable to perform action',
 				severity: 'danger',
-				message: error.message,
+				message: error.message
 			});
 			return new Response(
 				JSON.stringify({
@@ -128,7 +130,7 @@ export const handleEvent =
 			notify({
 				title: 'Deleted',
 				message: 'Deleted data version',
-				severity: 'success',
+				severity: 'success'
 			});
 
 			return new Response(
@@ -168,7 +170,7 @@ export const handleEvent =
 			notify({
 				title: 'Restored',
 				message: 'Restored data version',
-				severity: 'success',
+				severity: 'success'
 			});
 
 			return new Response(
@@ -354,11 +356,11 @@ export const handleEvent =
 						})
 					).unwrap();
 				}
-				
+
 				notify({
 					title: 'Created',
 					message: 'Created data',
-					severity: 'success',
+					severity: 'success'
 				});
 
 				return new Response(
@@ -442,7 +444,7 @@ export const handleEvent =
 			notify({
 				title: 'Updated',
 				message: 'Updated data',
-				severity: 'success',
+				severity: 'success'
 			});
 
 			return new Response(
@@ -481,9 +483,9 @@ export const handleEvent =
 				notify({
 					title: 'Archived',
 					message: 'Archived data',
-					severity: 'success',
+					severity: 'success'
 				});
-	
+
 				return new Response(
 					JSON.stringify({
 						success: true
@@ -526,7 +528,7 @@ export const handleEvent =
 				notify({
 					title: 'Deleted',
 					message: 'Deleted data',
-					severity: 'success',
+					severity: 'success'
 				});
 				return new Response(
 					JSON.stringify({
@@ -538,7 +540,6 @@ export const handleEvent =
 			if (runBypass()) return remove();
 			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
 				return invalidPermissions();
-
 
 			return remove();
 		}
@@ -571,7 +572,7 @@ export const handleEvent =
 				notify({
 					title: 'Restored',
 					message: 'Restored data',
-					severity: 'success',
+					severity: 'success'
 				});
 
 				return new Response(

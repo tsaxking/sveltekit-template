@@ -135,14 +135,16 @@ export namespace Universes {
 				})
 			).unwrap();
 
-			resolveAll<unknown>(await Promise.all([
-				admin.setUniverse(u.id),
-				admin.setStatic(true),
-				grantRole(account, admin),
-				grantRole(account, member),
-				member.setUniverse(u.id),
-				member.setStatic(true),
-			])).unwrap();
+			resolveAll<unknown>(
+				await Promise.all([
+					admin.setUniverse(u.id),
+					admin.setStatic(true),
+					grantRole(account, admin),
+					grantRole(account, member),
+					member.setUniverse(u.id),
+					member.setStatic(true)
+				])
+			).unwrap();
 
 			return u;
 		});
@@ -150,9 +152,13 @@ export namespace Universes {
 
 	export const grantRole = async (account: Account.AccountData, role: Permissions.RoleData) => {
 		return attemptAsync(async () => {
-			const exists = !!(await Permissions.RoleAccount.fromProperty('account', account.id, {
-				type: 'stream',
-			}).await()).unwrap().find(r => r.data.role === role.id);
+			const exists = !!(
+				await Permissions.RoleAccount.fromProperty('account', account.id, {
+					type: 'stream'
+				}).await()
+			)
+				.unwrap()
+				.find((r) => r.data.role === role.id);
 			if (exists) throw new Error('Account already has this role');
 
 			return (
@@ -330,7 +336,7 @@ export namespace Universes {
 
 			if (!admin) throw new Error('Admin role not found');
 
-			return (await grantRole(account, admin));
+			return await grantRole(account, admin);
 		});
 	};
 
@@ -341,7 +347,7 @@ export namespace Universes {
 			if (!admin) throw new Error('Account is not an admin');
 			return admin.delete();
 		});
-	}
+	};
 
 	export const getAdmins = async (universe: UniverseData) => {
 		return attemptAsync(async () => {

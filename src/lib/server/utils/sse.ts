@@ -1,13 +1,34 @@
 import { attempt, attemptAsync } from 'ts-utils/check';
-import type { RequestEvent } from '../../../routes/sse/init/[uuid]/$types';
+import type { RequestEvent as ConnectRequestEvent } from '../../../routes/sse/init/[uuid]/$types';
 import { Session } from '../structs/session';
 import { encode } from 'ts-utils/text';
 import { EventEmitter, SimpleEventEmitter } from 'ts-utils/event-emitter';
 import type { Notification } from '$lib/types/notification';
-import terminal from './terminal';
-import type { Account } from '../structs/account';
 
 type Stream = ReadableStreamDefaultController<string>;
+
+class ConnectionArray {
+	constructor(private readonly connections: Connection[] = []) {}
+
+	add(connection: Connection) {
+		this.connections.push(connection);
+	}
+
+	remove(connection: Connection) {
+		this.connections.splice(this.connections.indexOf(connection), 1);
+	}
+
+	each(callback: (connection: Connection) => void) {
+		return this.connections.map(callback);
+	}
+
+	send(event: string, data: unknown) {
+		return this.each((connection) => connection.send(event, data));
+	}
+	notify(notif: Notification) {
+		return this.send('notification', notif);
+	}
+}
 
 export class Connection {
 	public readonly sessionId: string;
@@ -33,7 +54,7 @@ export class Connection {
 		public readonly uuid: string,
 		session: Session.SessionData,
 		public readonly sse: SSE,
-		private readonly controller: Stream,
+		private readonly controller: Stream
 	) {
 		this.sessionId = session.id;
 
@@ -57,7 +78,9 @@ export class Connection {
 		return attempt(() => {
 			// terminal.log('Sending', event, data);
 			// this.controllers.forEach((c) =>
-			this.controller.enqueue(`data: ${encode(JSON.stringify({ event, data, id: this.index++ }))}\n\n`)
+			this.controller.enqueue(
+				`data: ${encode(JSON.stringify({ event, data, id: this.index++ }))}\n\n`
+			);
 			// );
 			this.cache.push({ event, data, id: this.index, date: Date.now() });
 			return this.index;
@@ -66,6 +89,7 @@ export class Connection {
 
 	close() {
 		return attempt(() => {
+			console.log('Closing connection', this.uuid);
 			// clearInterval(this.interval);
 			this.send('close', null);
 			this.emit('close');
@@ -93,15 +117,15 @@ type Events = {
 	disconnect: Connection;
 };
 
-class SSE {
+export class SSE {
 	public readonly connections = new Map<string, Connection>();
 
 	private readonly emitter = new EventEmitter<Events>();
 
-	public on = this.emitter.on.bind(this.emitter);
-	public off = this.emitter.off.bind(this.emitter);
-	public once = this.emitter.once.bind(this.emitter);
-	private emit = this.emitter.emit.bind(this.emitter);
+	public readonly on = this.emitter.on.bind(this.emitter);
+	public readonly off = this.emitter.off.bind(this.emitter);
+	public readonly once = this.emitter.once.bind(this.emitter);
+	private readonly emit = this.emitter.emit.bind(this.emitter);
 
 	constructor() {
 		process.on('exit', () => {
@@ -109,14 +133,7 @@ class SSE {
 		});
 	}
 
-	connect(
-		event: RequestEvent & {
-			locals: {
-				session: Session.SessionData;
-				account?: Account.AccountData;
-			};
-		}
-	) {
+	connect(event: ConnectRequestEvent) {
 		const me = this;
 		return attemptAsync(async () => {
 			const session = event.locals.session;
@@ -138,7 +155,7 @@ class SSE {
 					} catch (error) {
 						console.error(error);
 					}
-				},
+				}
 			});
 
 			return new Response(stream, {
@@ -167,7 +184,9 @@ class SSE {
 	}
 
 	fromSession(sessionId: string) {
-		return [...this.connections.values()].find((connection) => connection.sessionId === sessionId);
+		return new ConnectionArray(
+			[...this.connections.values()].filter((connection) => connection.sessionId === sessionId)
+		);
 	}
 
 	addConnection(controller: Stream, uuid: string, session: Session.SessionData) {
@@ -182,14 +201,8 @@ class SSE {
 		return connection;
 	}
 
-	getConnection(event: {
-		cookies: {
-			get: (key: string) => string | undefined;
-		};
-	}) {
-		const tabId = event.cookies.get('ssid');
-		if (!tabId) return undefined;
-		return this.connections.get(tabId);
+	getConnection(uuid: string) {
+		return this.connections.get(uuid);
 	}
 }
 

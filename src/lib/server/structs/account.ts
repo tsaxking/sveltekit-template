@@ -308,7 +308,7 @@ export namespace Account {
 		return attemptAsync(async () => {
 			Session.Session.fromProperty('accountId', accountId, {
 				type: 'stream'
-			}).pipe((s) => sse.fromSession(s.id)?.notify(notification));
+			}).pipe((s) => sse.fromSession(s.id).notify(notification));
 		});
 	};
 

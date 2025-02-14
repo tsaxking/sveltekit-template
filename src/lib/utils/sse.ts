@@ -7,6 +7,7 @@ import { Requests } from './requests';
 import { Random } from 'ts-utils/math';
 
 class SSE {
+	public uuid = Random.uuid();
 	public readonly emitter = new EventEmitter();
 
 	public on = this.emitter.on.bind(this.emitter);
@@ -50,9 +51,9 @@ class SSE {
 
 	connect() {
 		const connect = () => {
-			const uuid = Random.uuid();
-			Requests.setMeta('sse', uuid);
-			const source = new EventSource(`/sse/init/${uuid}`);
+			this.uuid = Random.uuid();
+			Requests.setMeta('sse', this.uuid);
+			const source = new EventSource(`/sse/init/${this.uuid}`);
 
 			source.addEventListener('error', (e) => console.error('Error:', e));
 
@@ -61,8 +62,6 @@ class SSE {
 			};
 
 			source.addEventListener('open', onConnect);
-
-			let id = 0;
 
 			const onMessage = (event: MessageEvent) => {
 				try {
@@ -73,9 +72,6 @@ class SSE {
 							data: z.unknown()
 						})
 						.parse(JSON.parse(decode(event.data)));
-					// console.log(e);
-					// if (e.id < id) return;
-					id = e.id;
 					if (!Object.hasOwn(e, 'event')) {
 						return console.error('Invalid event (missing .event)', e);
 					}
@@ -107,7 +103,6 @@ class SSE {
 					}
 
 					if (!['close', 'ping'].includes(e.event)) {
-						// console.log('emitting', e.event, e.data);
 						this.emit(e.event, e.data);
 					}
 
@@ -152,7 +147,7 @@ class SSE {
 	}
 
 	private ack(id: number) {
-		fetch(`/sse/ack/${id}`);
+		fetch(`/sse/ack/${this.uuid}/${id}`);
 	}
 
 	private ping() {

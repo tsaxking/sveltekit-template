@@ -6,12 +6,12 @@ import terminal from '$lib/server/utils/terminal';
 // }, 1000);
 
 export async function GET(event) {
-    const res = await sse.connect(event);
-    if (res.isErr()) {
-        terminal.error(res.error);
-        return new Response('Server Error', {
-            status: 500
-        });
-    }
-    return res.unwrap();
+	const res = await sse.connect(event);
+	if (res.isErr()) {
+		terminal.error(res.error);
+		return new Response('Server Error', {
+			status: 500
+		});
+	}
+	return res.unwrap();
 }
