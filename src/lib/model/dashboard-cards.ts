@@ -3,6 +3,44 @@ import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 
 export namespace Dashboard {
+	// export class Dashboard {
+	// 	public static readonly dashboards = new Map<string, Dashboard>();
+
+	// 	constructor(
+	// 		public readonly config: {
+	// 			name: string;
+	// 			id: string;
+	// 			cards: Card[];
+	// 		}
+	// 	) {
+	// 		Dashboard.dashboards.set(config.id, this);
+	// 	}
+
+	// 	get cards() {
+	// 		return this.config.cards;
+	// 	}
+
+	// 	get name() {
+	// 		return this.config.name;
+	// 	}
+
+	// 	get id() {
+	// 		return this.config.id;
+	// 	}
+
+	// 	get visibleCards() {
+	// 		return this.cards.filter((card) => card.state.show);
+	// 	}
+
+	// 	get hiddenCards() {
+	// 		return this.cards.filter((card) => !card.state.show);
+	// 	}
+
+	// 	save() {
+
+	// 	}
+	// };
+
 	type CardData = {
 		show: boolean;
 		maximized: boolean;
@@ -26,8 +64,14 @@ export namespace Dashboard {
 				icon: string;
 				iconType: 'bi' | 'fa' | 'material-icons';
 				id: string;
+				width: number;
+				height: number;
 			}
 		) {
+			if (!Number.isInteger(config.width) || !Number.isInteger(config.height)) {
+				throw new Error('Width and height must be integers');
+			}
+
 			Card.cards.set(config.id, this);
 
 			const res = pull();
@@ -36,6 +80,14 @@ export namespace Dashboard {
 					this.state.show = false;
 				}
 			}
+		}
+
+		get width() {
+			return this.config.width;
+		}
+
+		get height() {
+			return this.config.height;
 		}
 
 		set(value: CardData) {
@@ -78,11 +130,19 @@ export namespace Dashboard {
 		}
 
 		show() {
-			this.update((state) => ({ ...state, show: true }));
+			this.update((state) => ({ 
+				...state,
+				show: true,
+				maximized: false
+			}));
 		}
 
 		hide() {
-			this.update((state) => ({ ...state, show: false }));
+			this.update((state) => ({ 
+				...state, 
+				show: false,
+				maximized: false
+			}));
 		}
 
 		minimize() {
@@ -97,15 +157,15 @@ export namespace Dashboard {
 	const save = () => {
 		return attempt(() => {
 			const hidden = JSON.stringify(
-				[...Card.cards.values()].filter((card) => !card.state.show).map((card) => card.config.name)
+				[...Card.cards.values()].filter((card) => !card.state.show).map((card) => card.config.id)
 			);
-			localStorage.setItem(`dashboard-cards-${location.pathname}`, hidden);
+			localStorage.setItem(`v1-dashboard-cards-${location.pathname}`, hidden);
 		});
 	};
 
 	const pull = () => {
 		return attempt(() => {
-			const hidden = localStorage.getItem(`dashboard-cards-${location.pathname}`);
+			const hidden = localStorage.getItem(`v1-dashboard-cards-${location.pathname}`);
 			if (!hidden) return new Set<string>();
 			const arr = z.array(z.string()).safeParse(JSON.parse(hidden));
 			if (!arr.success) {
