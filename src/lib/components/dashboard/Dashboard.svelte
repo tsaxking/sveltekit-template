@@ -3,6 +3,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import MinimizedCards from './MinimizedCards.svelte';
 	import { browser } from '$app/environment';
+	import { Dashboard } from '$lib/model/dashboard-cards';
 
 	interface Props {
 		title: string;
@@ -19,24 +20,7 @@
 		let gridSize = 0;
 		if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
 		resizeTimeout = requestAnimationFrame(() => {
-			const width = window.innerWidth;
-			switch (true) {
-				case width < 576:
-					gridSize = 4;
-					break;
-				case width < 768:
-					gridSize = 8;
-					break;
-				case width < 992:
-					gridSize = 12;
-					break;
-				case width < 1200:
-					gridSize = 16;
-					break;
-				default:
-					gridSize = 20;
-					break;
-			}
+			gridSize = Dashboard.sizes[Dashboard.getGridSize()];
 
 			document.documentElement.style.setProperty('--grid-size', String(gridSize));
 		});

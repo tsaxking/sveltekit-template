@@ -8,8 +8,14 @@
 		iconType: 'material-icons',
 		icon: 'home',
 		id: 'card1',
-		width: 8,
-		height: 1
+		size: {
+			width: 4,
+			height: 1,
+			xl: {
+				width: 8,
+				height: 2,
+			}
+		}
 	});
 
 	const card2 = new Dashboard.Card({
@@ -17,8 +23,14 @@
 		iconType: 'material-icons',
 		icon: 'edit',
 		id: 'card2',
-		width: 4,
-		height: 2
+		size: {
+			width: 4,
+			height: 1,
+			sm: {
+				width: 4,
+				height: 2,
+			}
+		}
 	});
 
 	const card3 = new Dashboard.Card({
@@ -26,8 +38,10 @@
 		iconType: 'material-icons',
 		icon: 'delete',
 		id: 'card3',
-		width: 4,
-		height: 1
+		size: {
+			width: 4,
+			height: 1
+		}
 	});
 
 	const card4 = new Dashboard.Card({
@@ -35,8 +49,10 @@
 		iconType: 'material-icons',
 		icon: 'person',
 		id: 'card4',
-		width: 4,
-		height: 1
+		size: {
+			width: 4,
+			height: 1
+		}
 	});
 </script>
 

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { capitalize } from 'ts-utils/text';
 	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { browser } from '$app/environment';
 
 	const CARD_HEIGHT = 300; // in pixels
 	const GAP = 10; // gap between cards in pixels
@@ -13,7 +14,26 @@
 
 	let { body, card }: Props = $props();
 
-	const height = card.height * CARD_HEIGHT + (card.height - 1) * GAP;
+	let height = $state(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
+
+	let resizeTimeout: number | undefined;
+	const onResize = () => {
+		if (!browser) return;
+		if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+
+		resizeTimeout = requestAnimationFrame(() => {
+			card.resize();
+			let { height: h } = card.getSize();
+			height = h * CARD_HEIGHT + (h - 1) * GAP;
+		});
+	};
+
+	onResize();
+
+	onMount(() => {
+		window.addEventListener('resize', onResize);
+		return () => window.removeEventListener('resize', onResize);
+	});
 </script>
 
 {#if $card.show}
@@ -26,8 +46,8 @@
 		class="card"
 		class:maximized={$card.maximized}
 		style="
-			grid-column: span {card.width};
-			grid-row: span {card.height};
+			grid-column: span {$card.width};
+			grid-row: span {$card.height};
 			height: {height}px;
 		"
 	>

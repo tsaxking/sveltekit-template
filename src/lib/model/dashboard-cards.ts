@@ -1,49 +1,43 @@
+import { browser } from '$app/environment';
 import { writable, type Subscriber, type Unsubscriber, type Writable } from 'svelte/store';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 
 export namespace Dashboard {
-	// export class Dashboard {
-	// 	public static readonly dashboards = new Map<string, Dashboard>();
+	export const getGridSize = () => {
+		if (!browser) return 'xl';
+		const width = window.innerWidth;
+		switch (true) {
+			case width < 576:
+				return 'xs';
+			case width < 768:
+				return 'sm';
+			case width < 992:
+				return 'md';
+			case width < 1200:
+				return 'lg';
+			default:
+				return 'xl';
+		}
+	};
 
-	// 	constructor(
-	// 		public readonly config: {
-	// 			name: string;
-	// 			id: string;
-	// 			cards: Card[];
-	// 		}
-	// 	) {
-	// 		Dashboard.dashboards.set(config.id, this);
-	// 	}
 
-	// 	get cards() {
-	// 		return this.config.cards;
-	// 	}
+	export const sizes = {
+		xs: 4,
+		sm: 8,
+		md: 12,
+		lg: 16,
+		xl: 20
+	};
 
-	// 	get name() {
-	// 		return this.config.name;
-	// 	}
+	const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-	// 	get id() {
-	// 		return this.config.id;
-	// 	}
-
-	// 	get visibleCards() {
-	// 		return this.cards.filter((card) => card.state.show);
-	// 	}
-
-	// 	get hiddenCards() {
-	// 		return this.cards.filter((card) => !card.state.show);
-	// 	}
-
-	// 	save() {
-
-	// 	}
-	// };
 
 	type CardData = {
 		show: boolean;
 		maximized: boolean;
+		width: number;
+		height: number;
 	};
 
 	export const hiddenCards = writable(new Set<Card>());
@@ -51,10 +45,7 @@ export namespace Dashboard {
 	export class Card implements Writable<CardData> {
 		public static readonly cards = new Map<string, Card>();
 
-		public state: CardData = {
-			show: true,
-			maximized: false
-		};
+		public state: CardData;
 
 		private readonly subscribers = new Set<(value: CardData) => void>();
 
@@ -64,15 +55,29 @@ export namespace Dashboard {
 				icon: string;
 				iconType: 'bi' | 'fa' | 'material-icons';
 				id: string;
-				width: number;
-				height: number;
+				size: {
+					xs?: { width: number; height: number };
+					sm?: { width: number; height: number };
+					md?: { width: number; height: number };
+					lg?: { width: number; height: number };
+					xl?: { width: number; height: number };
+					width: number;
+					height: number;
+				};
 			}
 		) {
-			if (!Number.isInteger(config.width) || !Number.isInteger(config.height)) {
+			if (!Number.isInteger(config.size.width) || !Number.isInteger(config.size.height)) {
 				throw new Error('Width and height must be integers');
 			}
 
 			Card.cards.set(config.id, this);
+
+			this.state = {
+				show: true,
+				maximized: false,
+				width: this.config.size.width,
+				height: this.config.size.height
+			};
 
 			const res = pull();
 			if (res.isOk()) {
@@ -82,12 +87,30 @@ export namespace Dashboard {
 			}
 		}
 
+		getSize() {
+			const size = getGridSize();
+
+			// if any size is defined and smaller than the current size, use it
+			// for (const s of order) {
+			// 	if (this.config.size[s] && order.indexOf(s) <= order.indexOf(size)) {
+			// 		return this.config.size[s];
+			// 	}
+			// }
+			const s = this.config.size[size];
+			if (s) return s;
+
+			return {
+				width: this.config.size.width,
+				height: this.config.size.height
+			};
+		}
+
 		get width() {
-			return this.config.width;
+			return this.config.size.width;
 		}
 
 		get height() {
-			return this.config.height;
+			return this.config.size.height;
 		}
 
 		set(value: CardData) {
@@ -151,6 +174,15 @@ export namespace Dashboard {
 
 		maximize() {
 			this.update((state) => ({ ...state, maximized: false }));
+		}
+
+		resize() {
+			console.log('Resizing to', this.getSize());
+			this.update((state) => ({
+				...state,
+				width: this.getSize().width,
+				height: this.getSize().height
+			}));
 		}
 	}
 
