@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Card from '$lib/components/dashboard/Card.svelte';
-	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { Dashboard } from '$lib/model/dashboard';
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
 
 	const card1 = new Dashboard.Card({
@@ -9,10 +9,10 @@
 		icon: 'home',
 		id: 'card1',
 		size: {
-			width: 4,
+			width: 1,
 			height: 1,
 			xl: {
-				width: 8,
+				width: 1,
 				height: 2
 			}
 		}
@@ -24,10 +24,10 @@
 		icon: 'edit',
 		id: 'card2',
 		size: {
-			width: 4,
+			width: 1,
 			height: 1,
 			sm: {
-				width: 4,
+				width: 1,
 				height: 2
 			}
 		}
@@ -39,7 +39,7 @@
 		icon: 'delete',
 		id: 'card3',
 		size: {
-			width: 4,
+			width: 1,
 			height: 1
 		}
 	});
@@ -50,13 +50,19 @@
 		icon: 'person',
 		id: 'card4',
 		size: {
-			width: 4,
+			width: 1,
 			height: 1
 		}
 	});
+
+	const dashboard = new Dashboard.Dashboard({
+		name: 'Demo',
+		id: 'demo',
+		cards: [card1, card2, card3, card4]
+	});
 </script>
 
-<DB title="Demo">
+<DB {dashboard}>
 	{#snippet body()}
 		<Card card={card1}>
 			{#snippet body()}
