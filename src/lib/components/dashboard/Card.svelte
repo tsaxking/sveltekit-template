@@ -1,7 +1,11 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { capitalize } from 'ts-utils/text';
 	import { Dashboard } from '$lib/model/dashboard-cards';
+	import { browser } from '$app/environment';
+
+	const CARD_HEIGHT = 300; // in pixels
+	const GAP = 10; // gap between cards in pixels
 
 	interface Props {
 		body: Snippet;
@@ -9,10 +13,44 @@
 	}
 
 	let { body, card }: Props = $props();
+
+	let height = $state(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
+
+	let resizeTimeout: number | undefined;
+	const onResize = () => {
+		if (!browser) return;
+		if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+
+		resizeTimeout = requestAnimationFrame(() => {
+			card.resize();
+			let { height: h } = card.getSize();
+			height = h * CARD_HEIGHT + (h - 1) * GAP;
+		});
+	};
+
+	onResize();
+
+	onMount(() => {
+		window.addEventListener('resize', onResize);
+		return () => window.removeEventListener('resize', onResize);
+	});
 </script>
 
 {#if $card.show}
-	<div class="card" class:maximized={$card.maximized}>
+	<!-- Overlay for graying out the background when card is maximized -->
+	{#if $card.maximized}
+		<div class="overlay"></div>
+	{/if}
+
+	<div
+		class="card"
+		class:maximized={$card.maximized}
+		style="
+			grid-column: span {$card.width};
+			grid-row: span {$card.height};
+			height: {height}px;
+		"
+	>
 		<div class="card-header">
 			<div class="d-flex h-100 align-items-center">
 				<h5 class="card-title h-100 m-0">
@@ -22,31 +60,16 @@
 						{:else if card.config.iconType === 'fa'}
 							<i class="fa fa-{card.config.icon}"></i>
 						{:else if card.config.iconType === 'material-icons'}
-							<i class="material-icons">{card.config.icon}</i>
+							<i class="material-icons text-sm">{card.config.icon}</i>
 						{/if}
-						<span class="ms-2">
+						<span class="ms-3">
 							{capitalize(card.config.name)}
 						</span>
 					</div>
 				</h5>
 				<div class="ms-auto">
 					<button
-						class="btn btn-sm"
-						onclick={() =>
-							card.update((c) => ({
-								...c,
-								show: !c.show
-							}))}
-						aria-label="Close"
-					>
-						{#if $card.show}
-							<i class="material-icons">close</i>
-						{:else}
-							<i class="material-icons">open_in_full</i>
-						{/if}
-					</button>
-					<button
-						class="btn btn-sm"
+						class="btn btn-sm px-1"
 						onclick={() =>
 							card.update((c) => ({
 								...c,
@@ -55,9 +78,24 @@
 						aria-label="Maximize"
 					>
 						{#if $card.maximized}
-							<i class="material-icons">close_fullscreen</i>
+							<i class="material-icons text-sm">close_fullscreen</i>
 						{:else}
-							<i class="material-icons">open_in_full</i>
+							<i class="material-icons text-sm">open_in_full</i>
+						{/if}
+					</button>
+					<button
+						class="btn btn-sm px-1"
+						onclick={() =>
+							card.update((c) => ({
+								...c,
+								show: !c.show
+							}))}
+						aria-label="Close"
+					>
+						{#if $card.show}
+							<i class="material-icons text-sm">close</i>
+						{:else}
+							<i class="material-icons text-sm">open_in_full</i>
 						{/if}
 					</button>
 				</div>
@@ -71,15 +109,26 @@
 
 <style>
 	.card {
-		transition: all 0.3s ease;
+		/* transition: all 0.3s ease; */
 	}
 
 	.maximized {
+		position: fixed !important;
+		height: 80% !important;
+		width: 80% !important;
+		top: 10% !important;
+		left: 10% !important;
+		z-index: 1000 !important;
+	}
+
+	/* Overlay styling */
+	.overlay {
 		position: fixed;
-		height: 80%;
-		width: 80%;
-		top: 10%;
-		left: 10%;
-		z-index: 1000;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+		z-index: 999; /* Just below the maximized card */
 	}
 </style>

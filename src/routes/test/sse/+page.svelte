@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { sse } from "$lib/utils/sse";
+	import { sse } from '$lib/utils/sse';
 
 	const start = () => {
 		return fetch('/test/sse/init', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Metadata': sse.uuid,
-			},
+				'X-Metadata': sse.uuid
+			}
 		});
 	};
 
@@ -19,7 +19,7 @@
 	sse.on('you-are', (data) => {
 		messages.push({
 			event: 'you-are',
-			data: String(data),
+			data: String(data)
 		});
 	});
 </script>
@@ -29,9 +29,7 @@
 
 	<pre>
 	{#each messages as message}
-		{message.event}: {message.data}
-	{/each}
+			{message.event}: {message.data}
+		{/each}
 	</pre>
-	
 </div>
-
