@@ -11,26 +11,6 @@
 	}
 
 	const { body, dashboard }: Props = $props();
-
-	// let gridSize = $state(12);
-	let resizeTimeout: number | undefined;
-
-	const updateGridSize = () => {
-		if (!browser) return;
-		let gridSize = 0;
-		if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
-		resizeTimeout = requestAnimationFrame(() => {
-			gridSize = Dashboard.sizes[Dashboard.getGridSize()];
-
-			document.documentElement.style.setProperty('--grid-size', String(gridSize));
-		});
-	};
-
-	updateGridSize();
-	onMount(() => {
-		window.addEventListener('resize', updateGridSize);
-		return () => window.removeEventListener('resize', updateGridSize);
-	});
 </script>
 
 <div>
@@ -49,7 +29,32 @@
 </div>
 
 <style>
+:root {
+	--grid-size: 5; /* Default for extra-large screens */
+}
+
+@media (max-width: 1200px) {
 	:root {
-		--grid-size: 12;
+		--grid-size: 4; /* Large screens */
 	}
+}
+
+@media (max-width: 992px) {
+	:root {
+		--grid-size: 3; /* Medium screens */
+	}
+}
+
+@media (max-width: 768px) {
+	:root {
+		--grid-size: 2; /* Small screens */
+	}
+}
+
+@media (max-width: 576px) {
+	:root {
+		--grid-size: 1; /* Extra small screens */
+	}
+}
+
 </style>

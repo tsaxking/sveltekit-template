@@ -7,7 +7,7 @@
 
 	const { dashboard }: Props = $props();
 
-	const cards = dashboard.hiddenCards;
+	const cards = $state(dashboard.hiddenCards);
 </script>
 
 {#if $cards.size > 0}

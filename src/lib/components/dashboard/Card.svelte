@@ -43,7 +43,7 @@
 	{/if}
 
 	<div
-		class="card"
+		class="card animate__animated animate__fadeIn"
 		class:maximized={$card.maximized}
 		style="
 			grid-column: span {$card.width};
@@ -90,10 +90,7 @@
 					<button
 						class="btn btn-sm px-1"
 						onclick={() =>
-							card.update((c) => ({
-								...c,
-								show: !c.show
-							}))}
+							card.hide()}
 						aria-label="Close"
 					>
 						{#if $card.show}
@@ -113,7 +110,7 @@
 
 <style>
 	.card {
-		/* transition: all 0.3s ease; */
+		transition: all 0.3s ease;
 	}
 
 	.maximized {

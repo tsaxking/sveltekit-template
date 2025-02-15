@@ -50,7 +50,18 @@ export namespace Dashboard {
 			}
 		) {
 			for (const card of config.cards) {
-				this.listeners.add(card.on('show', () => this.save()));
+				this.listeners.add(card.on('show', (show) => {
+					console.log('Show:', show, card.config.name);
+					this.hiddenCards.update(cards => {
+						if (show) {
+							cards.delete(card);
+						} else {
+							cards.add(card);
+						}
+						return cards;
+					})
+					this.save();
+				}));
 			}
 		}
 
@@ -240,7 +251,6 @@ export namespace Dashboard {
 		}
 
 		resize() {
-			console.log('Resizing to', this.getSize());
 			this.update((state) => ({
 				...state,
 				width: this.getSize().width,
