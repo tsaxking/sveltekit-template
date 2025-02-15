@@ -1,40 +1,52 @@
 [![Svelte Check](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-svelte-check.yml/badge.svg)](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-svelte-check.yml) [![Unit Tests](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-unit.yml/badge.svg)](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-unit.yml) [![Format & Lint](https://github.com/tsaxking/sveltekit-template/actions/workflows/code-formatter.yml/badge.svg)](https://github.com/tsaxking/sveltekit-template/actions/workflows/code-formatter.yml) [![e2e](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-e2e.yml/badge.svg)](https://github.com/tsaxking/sveltekit-template/actions/workflows/testing-e2e.yml)
 
-# sv
+# Sveltekit Template Initialization
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## System Requirements
 
-## Creating a project
+`node: 22.12.0`<br>
+`typescript: 5.0.2`<br>
+`pnpm: 10.1.0`
 
-If you're seeing this, you've probably already done this step. Congrats!
-
+## Installation
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+# Install dependencies
+pnpm i
+# Set up .env file
+cp .env.example .env
 ```
 
-## Developing
+## Set up Database and Drizzle
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Database (Postgres)
+[Setup Postgres](docs/postgres.md)
 
+### Environment
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Set up .env file with the parameters you set up in the previous step
+DB_HOST="my_db_host" # Default host is localhost
+DB_PORT="my_db_port" # Default port is 5432
+DB_NAME="my_db_name" # Database name
+DB_USER="my_db_user" # The admin user you created
+DB_PASS="my_db_pass" # User password
 ```
 
-## Building
-
-To create a production version of your app:
-
+### Set up Drizzle
+You will need to do this every time you change the schema.
 ```bash
-npm run build
+# Create the migrations folder and determine the database schema
+pnpm db:migrate
+# Push the migrations to the database
+pnpm db:push
+# You will need to go through the cli process to confirm the changes
 ```
 
-You can preview the production build with `npm run preview`.
+### Drizzle Studio
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This will start the server to view the database schema and all the data stored.
+Go to [https://local.drizzle.studio](https://local.drizzle.studio).
+```bash
+pnpm db:studio
+```
+
+See [Drizzle Docs](https://orm.drizzle.team/docs/overview) for more information.
