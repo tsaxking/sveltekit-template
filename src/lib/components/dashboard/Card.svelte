@@ -109,9 +109,9 @@
 {/if}
 
 <style>
-	.card {
+	/* .card {
 		transition: all 0.3s ease;
-	}
+	} */
 
 	.maximized {
 		position: fixed !important;

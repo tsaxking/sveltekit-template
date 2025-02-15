@@ -49,9 +49,13 @@ export namespace Dashboard {
 				cards: Card[];
 			}
 		) {
+			const hidden = this.pull();
+			this.hiddenCards.set(hidden);
 			for (const card of config.cards) {
+				if (hidden.has(card)) {
+					card.hide();
+				}
 				this.listeners.add(card.on('show', (show) => {
-					console.log('Show:', show, card.config.name);
 					this.hiddenCards.update(cards => {
 						if (show) {
 							cards.delete(card);
@@ -63,6 +67,7 @@ export namespace Dashboard {
 					this.save();
 				}));
 			}
+
 		}
 
 		get id() {
@@ -81,6 +86,7 @@ export namespace Dashboard {
 
 		save() {
 			return attempt(() => {
+				if (!browser) return;
 				const hidden = JSON.stringify(
 					[...Card.cards.values()].filter((card) => !card.state.show).map((card) => card.config.id)
 				);
@@ -89,16 +95,15 @@ export namespace Dashboard {
 		}
 
 		pull() {
-			return attempt(() => {
-				const hidden = localStorage.getItem(`v1-dashboard-cards-${this.id}`);
-				if (!hidden) return new Set<string>();
-				const arr = z.array(z.string()).safeParse(JSON.parse(hidden));
-				if (!arr.success) {
-					console.error(arr.error);
-					return new Set();
-				}
-				return new Set(arr.data);
-			});
+			if (!browser) return new Set<Card>();
+			const hidden = localStorage.getItem(`v1-dashboard-cards-${this.id}`);
+			if (!hidden) return new Set<Card>();
+			const arr = z.array(z.string()).safeParse(JSON.parse(hidden));
+			if (!arr.success) {
+				console.error(arr.error);
+				return new Set<Card>();
+			}
+			return new Set<Card>(arr.data.map((id) => Card.cards.get(id)).filter((card): card is Card => !!card));
 		}
 	}
 
