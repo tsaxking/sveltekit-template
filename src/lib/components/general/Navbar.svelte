@@ -71,19 +71,6 @@
 
 <SideNav
 	id="pages"
-	sections={[
-		{
-			name: 'Home',
-			links: [
-				{
-					name: 'Home',
-					href: '/',
-					icon: 'home',
-					type: 'material-icons'
-				}
-			]
-		}
-	]}
 />
 
 <!-- <Notifications bind:notifs /> -->

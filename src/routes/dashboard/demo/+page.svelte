@@ -3,6 +3,20 @@
 	import { Dashboard } from '$lib/model/dashboard';
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
 	import { onMount } from 'svelte';
+	import { Navbar } from '$lib/model/navbar';
+
+	Navbar.addSection({
+		name: 'Demo Section',
+		links: [
+			{
+				icon: 'home',
+				href: '/home',
+				name: 'Home',
+				type: 'material-icons',
+			}
+		],
+		priority: 1,
+	});
 
 	const card1 = new Dashboard.Card({
 		name: 'Card 1',

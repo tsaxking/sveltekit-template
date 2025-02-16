@@ -1,23 +1,14 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
-
-	type Section = {
-		name: string;
-		links: {
-			icon: string;
-			type: 'material-icons' | 'font-awesome' | 'material-symbols';
-			name: string;
-			href: string;
-		}[];
-	};
+	import { Navbar } from '$lib/model/navbar';
 
 	interface Props {
-		sections: Section[];
-
 		id: string;
 	}
 
-	const { sections, id }: Props = $props();
+	const { id }: Props = $props();
+
+	const sections = Navbar.getSections();
 </script>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" {id} aria-labelledby="{id}Label">
@@ -27,9 +18,9 @@
 	</div>
 	<div class="offcanvas-body">
 		<ul class="list-unstyled">
-			{#each sections as section}
+			{#each $sections as section}
 				<li>
-					<h4>{section.name}</h4>
+					<h4 class="text-secondary">{section.name}</h4>
 					<ul class="list-unstyled">
 						{#each section.links as link}
 							<li class="ps-3">
