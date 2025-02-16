@@ -246,12 +246,12 @@ export namespace Dashboard {
 		}
 
 		minimize() {
-			this.update((state) => ({ ...state, maximized: true }));
+			this.update((state) => ({ ...state, maximized: false }));
 			this.emit('maximized', false);
 		}
 
 		maximize() {
-			this.update((state) => ({ ...state, maximized: false }));
+			this.update((state) => ({ ...state, maximized: true }));
 			this.emit('maximized', true);
 		}
 

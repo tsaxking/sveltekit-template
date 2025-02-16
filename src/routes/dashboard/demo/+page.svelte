@@ -2,6 +2,7 @@
 	import Card from '$lib/components/dashboard/Card.svelte';
 	import { Dashboard } from '$lib/model/dashboard';
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
+	import { onMount } from 'svelte';
 
 	const card1 = new Dashboard.Card({
 		name: 'Card 1',
@@ -60,6 +61,16 @@
 		id: 'demo',
 		cards: [card1, card2, card3, card4]
 	});
+
+	let canvas: HTMLCanvasElement;
+
+	onMount(() => {
+		const ctx = canvas.getContext('2d');
+		if (ctx) {
+			ctx.fillStyle = 'red';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+		}
+	});
 </script>
 
 <DB {dashboard}>
@@ -84,8 +95,7 @@
 		</Card>
 		<Card card={card4}>
 			{#snippet body()}
-				<h1>Card 4</h1>
-				<p>This is the body of card 4</p>
+				<canvas style="object-fit: contain; height: 100%; width: 100%;" height="500" width="1000" bind:this={canvas}></canvas>
 			{/snippet}
 		</Card>
 	{/snippet}
