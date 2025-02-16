@@ -115,6 +115,18 @@
                         supported by Chrome, Edge, Opera and Firefox */
 }
 
+.scroll-auto {
+    overflow: auto !important;
+}
+
+.scroll-auto-x {
+    overflow-x: auto !important;
+}
+
+.scroll-auto-y {
+    overflow-y: auto !important;
+}
+
 .scroll-x {
 	overflow-x: scroll !important;
 }

@@ -175,7 +175,15 @@ export namespace Dashboard {
 			// 	}
 			// }
 			const s = this.config.size[size];
-			if (s) return s;
+			if (s) {
+				if (s.width > sizes[size]) {
+					return {
+						width: sizes[size],
+						height: s.height
+					}
+				}
+				return s;
+			}
 
 			return {
 				width: this.config.size.width,
