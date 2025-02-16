@@ -22,12 +22,12 @@
 			>
 				<i class="material-icons"> menu </i>
 			</button>
-			<a 
+			<a
 				class="
 					navbar-brand
-				" 
-				href="/home"
-			>{title}</a>
+				"
+				href="/home">{title}</a
+			>
 		</div>
 		<div class="end">
 			<button
@@ -87,21 +87,3 @@
 />
 
 <!-- <Notifications bind:notifs /> -->
-
-
-<style>
-	.truncate-responsive {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-	/* Only apply truncation when the screen width is below 768px (adjust as needed) */
-	@media (max-width: 768px) {
-		.truncate-responsive {
-			display: block;
-			max-width: 50%; /* Adjust width as needed */
-		}
-	}
-
-</style>

@@ -95,7 +95,12 @@
 		</Card>
 		<Card card={card4}>
 			{#snippet body()}
-				<canvas style="object-fit: contain; height: 100%; width: 100%;" height="500" width="1000" bind:this={canvas}></canvas>
+				<canvas
+					style="object-fit: contain; height: 100%; width: 100%;"
+					height="500"
+					width="1000"
+					bind:this={canvas}
+				></canvas>
 			{/snippet}
 		</Card>
 	{/snippet}

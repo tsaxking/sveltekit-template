@@ -39,7 +39,14 @@
 {#if $card.show}
 	<!-- Overlay for graying out the background when card is maximized -->
 	{#if $card.maximized}
-		<div role="button" tabindex="0" aria-label="Close overlay" class="overlay" onclick={() => card.minimize()}></div>
+		<div
+			class="overlay"
+			role="button"
+			aria-label="Close overlay"
+			tabindex="0"
+			onclick={() => card.minimize()}
+			onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && card.minimize()}
+		></div>
 	{/if}
 
 	<div
@@ -88,12 +95,7 @@
 						{/if}
 					</button>
 					{#if !$card.maximized}
-						<button
-							class="btn btn-sm px-1"
-							onclick={() =>
-								card.hide()}
-							aria-label="Close"
-						>
+						<button class="btn btn-sm px-1" onclick={() => card.hide()} aria-label="Close">
 							{#if $card.show}
 								<i class="material-icons text-sm">close</i>
 							{:else}

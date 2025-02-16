@@ -55,19 +55,20 @@ export namespace Dashboard {
 				if (hidden.has(card)) {
 					card.hide();
 				}
-				this.listeners.add(card.on('show', (show) => {
-					this.hiddenCards.update(cards => {
-						if (show) {
-							cards.delete(card);
-						} else {
-							cards.add(card);
-						}
-						return cards;
+				this.listeners.add(
+					card.on('show', (show) => {
+						this.hiddenCards.update((cards) => {
+							if (show) {
+								cards.delete(card);
+							} else {
+								cards.add(card);
+							}
+							return cards;
+						});
+						this.save();
 					})
-					this.save();
-				}));
+				);
 			}
-
 		}
 
 		get id() {
@@ -103,7 +104,9 @@ export namespace Dashboard {
 				console.error(arr.error);
 				return new Set<Card>();
 			}
-			return new Set<Card>(arr.data.map((id) => Card.cards.get(id)).filter((card): card is Card => !!card));
+			return new Set<Card>(
+				arr.data.map((id) => Card.cards.get(id)).filter((card): card is Card => !!card)
+			);
 		}
 	}
 
