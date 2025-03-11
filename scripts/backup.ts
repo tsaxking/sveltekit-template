@@ -38,7 +38,7 @@ export default async () => {
 
 	const promises: Promise<unknown>[] = [];
 
-	const filename = new Date().toISOString() + '-' + toSnakeCase(name);
+	const filename = Date.now() + '-' + toSnakeCase(name);
 
 	Struct.each((s) => promises.push(s.backup(path.join(BACKUP_DIR, filename))));
 
