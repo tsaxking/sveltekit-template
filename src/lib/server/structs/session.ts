@@ -41,6 +41,7 @@ export namespace Session {
 
 	export const getSession = (event: RequestEvent) => {
 		return attemptAsync(async () => {
+			// TODO: will eventually split domain later once we use the same cookie id as session id upon creation
 			const id = event.cookies.get('ssid:' + PUBLIC_DOMAIN);
 
 			const create = async () => {
