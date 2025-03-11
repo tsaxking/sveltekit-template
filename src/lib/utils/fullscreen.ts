@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { attempt } from 'ts-utils';
+import { attempt } from 'ts-utils/check';
 
 /**
  * Creates a fullscreen request

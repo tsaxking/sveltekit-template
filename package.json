@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"start": "pnpm build && node --env-file=.env ./src/server.js",
 		"cli": "npx vite-node ./src/lib/server/cli/index.ts",
 		"dev": "vite dev",
 		"build": "vite build",

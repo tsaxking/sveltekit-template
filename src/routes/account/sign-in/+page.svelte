@@ -46,7 +46,7 @@
 	<div class="container pt-5">
 		<div class="row">
 			<h1>
-				{env.PUBLIC_APP_NAME}: Sign In
+				<a href="/" class="text-reset text-decoration-none">{env.PUBLIC_APP_NAME}</a>: Sign In
 			</h1>
 		</div>
 		<div class="row mb-3">
@@ -74,8 +74,6 @@
 						buttonColor="primary"
 					/>
 				</div>
-
-				<a href="/account/password-reset" class="link-primary"> Password Reset </a>
 
 				<hr />
 				{#if form?.message}

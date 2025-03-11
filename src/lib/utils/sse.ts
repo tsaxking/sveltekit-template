@@ -81,7 +81,7 @@ class SSE {
 					}
 
 					if (e.event === 'close') {
-						source.close();
+						close();
 					}
 
 					if (e.event === 'notification') {

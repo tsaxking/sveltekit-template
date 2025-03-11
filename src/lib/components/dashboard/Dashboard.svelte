@@ -13,7 +13,7 @@
 	const { body, dashboard }: Props = $props();
 </script>
 
-<div>
+<div class="container-fluid">
 	<h1>{capitalize(dashboard.name)}</h1>
 	<MinimizedCards {dashboard} />
 	<div
@@ -30,30 +30,30 @@
 
 <style>
 	:root {
-		--grid-size: 5; /* Default for extra-large screens */
+		--grid-size: 6; /* Default for extra-large screens */
 	}
 
 	@media (max-width: 1200px) {
 		:root {
-			--grid-size: 4; /* Large screens */
+			--grid-size: 5; /* Large screens */
 		}
 	}
 
 	@media (max-width: 992px) {
 		:root {
-			--grid-size: 3; /* Medium screens */
+			--grid-size: 4; /* Medium screens */
 		}
 	}
 
 	@media (max-width: 768px) {
 		:root {
-			--grid-size: 2; /* Small screens */
+			--grid-size: 3; /* Small screens */
 		}
 	}
 
 	@media (max-width: 576px) {
 		:root {
-			--grid-size: 1 !important; /* Extra small screens */
+			--grid-size: 2; /* Extra small screens */
 		}
 	}
 </style>
