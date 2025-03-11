@@ -114,8 +114,8 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 						text: 'Cancel',
 						color: 'secondary',
 						onClick: () => {
-							res(null);
 							modal.hide();
+							res(null);
 						}
 					},
 					{
@@ -123,9 +123,8 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 						color: 'primary',
 						onClick: () => {
 							if (!valid) return;
-							console.log(value);
-							res(config?.parser ? config.parser(value.trim()) : value.trim());
 							modal.hide();
+							res(config?.parser ? config.parser(value.trim()) : value.trim());
 						}
 					}
 				])
@@ -178,16 +177,16 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 						text: 'Cancel',
 						color: 'secondary',
 						onClick: () => {
-							res(null);
 							modal.hide();
+							res(null);
 						}
 					},
 					{
 						text: 'Select',
 						color: 'primary',
 						onClick: () => {
-							res(selected);
 							modal.hide();
+							res(selected);
 						}
 					}
 				])
@@ -309,8 +308,8 @@ export const alert = async (message: string, config?: AlertConfig) => {
 					text: 'Ok',
 					color: 'primary',
 					onClick: () => {
-						res();
 						modal.hide();
+						res();
 					}
 				})
 			}
@@ -361,16 +360,16 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 						text: 'Cancel',
 						color: 'secondary',
 						onClick: () => {
-							res(null);
 							modal.hide();
+							res(null);
 						}
 					},
 					{
 						text: 'Select',
 						color: 'primary',
 						onClick: () => {
-							res(selected as string);
 							modal.hide();
+							res(selected as string);
 						}
 					}
 				])

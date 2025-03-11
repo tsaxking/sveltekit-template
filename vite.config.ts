@@ -16,7 +16,6 @@ export default defineConfig({
 		noExternal: ['node-html-parser']
 	},
 	server: {
-		port: Number(process.env.PORT) || 5173,
-		host: process.env.HOST || 'localhost'
+		port: Number(process.env.PORT) || 5173
 	}
 });
