@@ -70,9 +70,9 @@ export const handleEvent =
 		const runBypass = (
 			data?: StructData<typeof struct.data.structure, typeof struct.data.name>
 		) => {
-			if (isAdmin) return true;
 			if (!account && struct.data.name === 'test') return true;
 			if (!account) return false;
+			if (isAdmin) return true;
 			for (const fn of bypass) {
 				const res = fn(account, data);
 				if (res) return res;
@@ -184,18 +184,20 @@ export const handleEvent =
 		if (event.action === PropertyAction.Read) {
 			const parsed = z
 				.object({
-					type: z.enum(['all', 'archived', 'from-id', 'property', 'universe']),
+					type: z.string(),
 					args: z.unknown().optional()
 				})
 				.safeParse(event.data);
 
-			console.log(parsed);
-
 			if (!parsed.success) return error(new DataError(struct, 'Invalid data'));
 
 			let streamer: StructStream<typeof struct.data.structure, typeof struct.data.name>;
-			const type = parsed.data.type;
-			console.log(type);
+			const type = (event.data as any).type as
+				| 'all'
+				| 'archived'
+				| 'from-id'
+				| 'property'
+				| 'universe';
 			switch (type) {
 				case 'all':
 					streamer = struct.all({
@@ -232,11 +234,11 @@ export const handleEvent =
 						const safe = z
 							.object({
 								key: z.string(),
-								value: z.unknown()
+								value: z.string()
 							})
 							.safeParse(parsed.data.args);
 						if (!safe.success) return error(new DataError(struct, 'Invalid Read property'));
-						streamer = struct.fromProperty(safe.data.key, safe.data.value as any, {
+						streamer = struct.fromProperty(safe.data.key, safe.data.value, {
 							type: 'stream'
 						});
 					}
@@ -271,9 +273,7 @@ export const handleEvent =
 						});
 
 						if (runBypass()) {
-							setTimeout(() => {
-								streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.safe()))}\n\n`));
-							});
+							streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.data))}\n\n`));
 							return;
 						}
 						const stream = Permissions.filterActionPipeline(
