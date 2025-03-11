@@ -1,0 +1,19 @@
+<mjml>
+	<mj-head>
+		<mj-preview>New User Registration Notification</mj-preview>
+		<mj-style inline="inline">
+			.button { background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px;
+			text-decoration: none; }
+		</mj-style>
+	</mj-head>
+	<mj-body>
+		<mj-section>
+			<mj-column>
+				<mj-text font-size="20px" font-weight="bold">New User Registration</mj-text>
+				<mj-text>A new user ({{ username }}) has registered and requires validation.</mj-text>
+				<mj-text> Click the button below to review and validate the user. </mj-text>
+				<mj-button href="{{ verification }}" background-color="#007bff"> Validate User </mj-button>
+			</mj-column>
+		</mj-section>
+	</mj-body>
+</mjml>

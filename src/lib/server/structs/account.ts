@@ -13,6 +13,7 @@ import { z } from 'zod';
 import { Universes } from './universe';
 import { Permissions } from './permissions';
 import { Email } from './email';
+import terminal from '../utils/terminal';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -32,6 +33,25 @@ export namespace Account {
 			id: () => (uuid() + uuid() + uuid() + uuid()).replace(/-/g, '')
 		},
 		safes: ['key', 'salt', 'verification']
+	});
+
+	Account.on('create', async (account) => {
+		const verification = account.data.verification;
+		const link = await Email.createLink('/admin/verifiy/' + verification);
+		if (link.isErr()) return terminal.error(link.error);
+		const admins = await getAdmins();
+		if (admins.isErr()) return terminal.error(admins.error);
+		const res = await Email.send({
+			type: 'new-user',
+			data: {
+				verification: link.value,
+				username: account.data.username
+			},
+			subject: `New User Registered ${account.data.username}`,
+			to: admins.value.map((a) => a.data.email)
+		});
+
+		if (res.isErr()) return terminal.error(res.error);
 	});
 
 	Account.queryListen('universe-members', async (event, data) => {
@@ -244,14 +264,14 @@ export namespace Account {
 	export const newHash = (password: string) => {
 		return attempt(() => {
 			const salt = crypto.randomBytes(32).toString('hex');
-			const hash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
-			return { hash, salt };
+			const key = hash(password, salt).unwrap();
+			return { hash: key, salt };
 		});
 	};
 
 	export const hash = (password: string, salt: string) => {
 		return attempt(() => {
-			return crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+			return crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
 		});
 	};
 
@@ -418,6 +438,25 @@ export namespace Account {
 					severity: 'warning',
 					icon: 'info',
 					link: ''
+				})
+			).unwrap();
+		});
+	};
+
+	export const verify = async (account: AccountData) => {
+		return attemptAsync(async () => {
+			const universe = (await Universes.Universe.fromId('2122')).unwrap();
+			if (!universe) throw new Error('Universe not found');
+			(await Universes.addToUniverse(account, universe)).unwrap();
+			const scout = (
+				await Permissions.Role.fromProperty('name', 'Scout', { type: 'single' })
+			).unwrap();
+			if (!scout) throw new Error('Role not found');
+			(await Permissions.giveRole(account, scout)).unwrap();
+			return (
+				await account.update({
+					verified: true,
+					verification: ''
 				})
 			).unwrap();
 		});

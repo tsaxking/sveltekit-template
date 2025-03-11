@@ -12,10 +12,10 @@
 				icon: 'home',
 				href: '/home',
 				name: 'Home',
-				type: 'material-icons',
+				type: 'material-icons'
 			}
 		],
-		priority: 1,
+		priority: 1
 	});
 
 	const card1 = new Dashboard.Card({
