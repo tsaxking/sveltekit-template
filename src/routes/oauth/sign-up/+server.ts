@@ -11,16 +11,11 @@ import { ServerCode } from 'ts-utils/status';
 export const GET = async (event) => {
 	const code = event.url.searchParams.get('code');
 	if (!code) throw redirect(ServerCode.temporaryRedirect, '/account/sign-up');
-	const domain = String(process.env.PUBLIC_DOMAIN).includes('localhost')
-		? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
-		: process.env.PUBLIC_DOMAIN;
-	const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
-	const redirectUri = `${protocol}${domain}/oauth/sign-in`;
 	try {
 		const client = new OAuth2Client({
 			clientId: SECRET_OAUTH2_CLIENT_ID,
 			clientSecret: SECRET_OAUTH2_CLIENT_SECRET,
-			redirectUri
+			redirectUri: 'http://localhost:5173/oauth/sign-up'
 		});
 		// log(client);
 

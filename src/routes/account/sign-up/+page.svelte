@@ -36,7 +36,7 @@
 	<div class="container pt-5">
 		<div class="row">
 			<h1>
-				<a href="/" class="text-reset text-decoration-none">{env.PUBLIC_APP_NAME}</a>: Sign Up
+				{env.PUBLIC_APP_NAME}: Sign Up
 			</h1>
 		</div>
 		<div class="row mb-3">

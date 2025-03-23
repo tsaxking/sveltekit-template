@@ -24,7 +24,7 @@ Struct.each((struct) => {
 	}
 });
 
-// Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const session = await Session.getSession(event);
@@ -53,14 +53,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (
-		!event.url.pathname.startsWith('/account') &&
-		!event.url.pathname.startsWith('/status') &&
-		!event.url.pathname.startsWith('/sse') &&
-		!event.url.pathname.startsWith('/struct') &&
-		!event.url.pathname.startsWith('/test') &&
-		!event.url.pathname.startsWith('/favicon.ico') &&
-		!event.url.pathname.startsWith('/robots.txt') &&
-		!event.url.pathname.startsWith('/oauth')
+		!['/account/sign-in', '/account/sign-up'].includes(event.url.pathname) &&
+		!event.url.href.startsWith('/account/password-reset') &&
+		!event.url.href.startsWith('/status') &&
+		!event.url.href.startsWith('/sse') &&
+		!event.url.href.startsWith('/struct') &&
+		!event.url.href.startsWith('/test')
 	) {
 		session.value.update({
 			prevUrl: event.url.pathname
