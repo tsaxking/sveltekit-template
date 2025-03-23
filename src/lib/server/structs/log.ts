@@ -67,7 +67,7 @@ export namespace Logs {
 				config.dataId ? eq(Log.table.dataId, config.dataId) : undefined,
 				config.struct ? eq(Log.table.struct, config.struct) : undefined,
 				config.message ? eq(Log.table.message, config.message) : undefined
-			)
+			);
 			const res = await DB.select()
 				.from(Log.table)
 				.where(condition)
@@ -77,9 +77,10 @@ export namespace Logs {
 
 			const count = await DB.select()
 				.from(Log.table)
-				.where(condition).then(r => r.length);
+				.where(condition)
+				.then((r) => r.length);
 
-			return { logs: res.map(l => Log.Generator(l)), count };
+			return { logs: res.map((l) => Log.Generator(l)), count };
 		});
 	};
 }

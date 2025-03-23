@@ -119,10 +119,12 @@ export namespace Permissions {
 				reason: 'Not logged in'
 			};
 		}
-		const parsed = z.object({
-			roleId: z.string(),
-			accountId: z.string(),
-		}).safeParse(data);
+		const parsed = z
+			.object({
+				roleId: z.string(),
+				accountId: z.string()
+			})
+			.safeParse(data);
 
 		if (!parsed.success) {
 			return {
@@ -149,7 +151,7 @@ export namespace Permissions {
 		}
 
 		const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
-		
+
 		if (!universe) {
 			return {
 				success: false,
@@ -160,11 +162,11 @@ export namespace Permissions {
 		const grant = () => {
 			return giveRole(account, role).then((res) => {
 				return {
-					success: res.isOk(),
+					success: res.isOk()
 				};
 			});
-		}
-		
+		};
+
 		if ((await Account.isAdmin(event.locals.account)).unwrap()) {
 			return grant();
 		}
@@ -187,10 +189,12 @@ export namespace Permissions {
 				reason: 'Not logged in'
 			};
 		}
-		const parsed = z.object({
-			roleId: z.string(),
-			accountId: z.string(),
-		}).safeParse(data);
+		const parsed = z
+			.object({
+				roleId: z.string(),
+				accountId: z.string()
+			})
+			.safeParse(data);
 
 		if (!parsed.success) {
 			return {
@@ -217,7 +221,7 @@ export namespace Permissions {
 		}
 
 		const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
-		
+
 		if (!universe) {
 			return {
 				success: false,
@@ -228,7 +232,7 @@ export namespace Permissions {
 		const remove = () => {
 			RoleAccount.fromProperty('role', role.id, {
 				type: 'stream'
-			}).pipe(ra => {
+			}).pipe((ra) => {
 				if (ra.data.account === account.id) {
 					ra.delete();
 				}
@@ -237,8 +241,8 @@ export namespace Permissions {
 			return {
 				success: true
 			};
-		}
-		
+		};
+
 		if ((await Account.isAdmin(event.locals.account)).unwrap()) {
 			return remove();
 		}
@@ -362,7 +366,7 @@ export namespace Permissions {
 			if (data) {
 				return RoleAccount.Generator(data);
 			}
-			});
+		});
 	};
 
 	// TODO: This isn't really typed correctly. As of right now, the output is using the generic Struct<Blank, string> type rather than the actual struct type that's passed in.

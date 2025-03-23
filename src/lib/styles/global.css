@@ -116,15 +116,15 @@
 }
 
 .scroll-auto {
-    overflow: auto !important;
+	overflow: auto !important;
 }
 
 .scroll-auto-x {
-    overflow-x: auto !important;
+	overflow-x: auto !important;
 }
 
 .scroll-auto-y {
-    overflow-y: auto !important;
+	overflow-y: auto !important;
 }
 
 .scroll-x {

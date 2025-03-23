@@ -269,11 +269,15 @@ export namespace Universes {
 	) => {
 		return attemptAsync(async () => {
 			const roles = (await memberRoles(account, universe)).unwrap();
-			return resolveAll(await Promise.all(roles.map(async (r) => {
-				const ra = (await Permissions.getRoleAccount(account, r)).unwrap();
-				if (!ra) throw new Error('RoleAccount not found');
-				return ra.delete();
-			}))).unwrap();
+			return resolveAll(
+				await Promise.all(
+					roles.map(async (r) => {
+						const ra = (await Permissions.getRoleAccount(account, r)).unwrap();
+						if (!ra) throw new Error('RoleAccount not found');
+						return ra.delete();
+					})
+				)
+			).unwrap();
 		});
 	};
 
