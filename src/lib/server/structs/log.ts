@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { text } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct/back-end';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
 import { DB } from '../db';
-import { and, eq, sql } from 'drizzle-orm';
+import { and, eq, like, not, sql, or } from 'drizzle-orm';
 
 export namespace Logs {
 	export const Log = new Struct({
@@ -52,37 +53,64 @@ export namespace Logs {
 	}) => Log.new(config);
 
 	export const search = (config: {
-		accountId: string | null | undefined;
-		type: string | null | undefined;
-		dataId: string | null | undefined;
-		struct: string | null | undefined;
-		message: string | null | undefined;
+		accountId?: string | null;
+		type?: string | null;
+		dataId?: string | null;
+		struct?: string | null;
+		message?: string | null;
 		offset: number;
 		limit: number;
 	}) => {
 		return attemptAsync(async () => {
+			const parseConditions = (column: any, value: string | null | undefined) => {
+				if (!value) return undefined;
+	
+				const parts = value.split("&"); // Handle multiple conditions
+				const includes: any[] = [];
+				const excludes: any[] = [];
+	
+				for (const part of parts) {
+					if (part.startsWith("!")) {
+						excludes.push(not(like(column, part.slice(1))));
+					} else {
+						includes.push(like(column, part));
+					}
+				}
+	
+				// Combine NOT and AND conditions
+				if (includes.length > 0 && excludes.length > 0) {
+					return and(...includes, ...excludes);
+				} else if (includes.length > 0) {
+					return or(...includes);
+				} else {
+					return and(...excludes);
+				}
+			};
+	
 			const condition = and(
-				config.accountId ? eq(Log.table.accountId, config.accountId) : undefined,
-				config.type ? eq(Log.table.type, config.type) : undefined,
-				config.dataId ? eq(Log.table.dataId, config.dataId) : undefined,
-				config.struct ? eq(Log.table.struct, config.struct) : undefined,
-				config.message ? eq(Log.table.message, config.message) : undefined
+				parseConditions(Log.table.accountId, config.accountId),
+				parseConditions(Log.table.type, config.type),
+				parseConditions(Log.table.dataId, config.dataId),
+				parseConditions(Log.table.struct, config.struct),
+				parseConditions(Log.table.message, config.message)
 			);
+	
 			const res = await DB.select()
 				.from(Log.table)
 				.where(condition)
 				.limit(config.limit)
 				.orderBy(sql`${Log.table.created}::timestamptz DESC`)
 				.offset(config.offset);
-
+	
 			const count = await DB.select()
 				.from(Log.table)
 				.where(condition)
 				.then((r) => r.length);
-
+	
 			return { logs: res.map((l) => Log.Generator(l)), count };
 		});
 	};
+	
 }
 
 export const _logTable = Logs.Log.table;

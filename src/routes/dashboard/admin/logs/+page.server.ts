@@ -3,8 +3,9 @@ import { Logs } from '$lib/server/structs/log.js';
 import { Struct } from 'drizzle-struct/back-end';
 
 export const load = async (event) => {
-	const limit = Math.abs(parseInt(event.url.searchParams.get('limit') || '10'));
-	const page = Math.abs(parseInt(event.url.searchParams.get('page') || '1'));
+	const limit = Math.abs(parseInt(event.url.searchParams.get('limit') || '100'));
+	let page = Math.abs(parseInt(event.url.searchParams.get('page') || '1'));
+	if (page === 0) page = 1;
 	const accountId = event.url.searchParams.get('account');
 	const type = event.url.searchParams.get('type');
 	const dataId = event.url.searchParams.get('data');
