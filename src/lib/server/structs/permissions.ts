@@ -22,6 +22,7 @@ import {
 import type { Entitlement } from '$lib/types/entitlements';
 import { z } from 'zod';
 import { Session } from './session';
+import terminal from '../utils/terminal';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -108,6 +109,153 @@ export namespace Permissions {
 		return {
 			success: true
 		};
+	});
+
+	Role.callListen('grant-role', async (event, data) => {
+		if (!event.locals.account) {
+			terminal.log('Not logged in');
+			return {
+				success: false,
+				reason: 'Not logged in'
+			};
+		}
+		const parsed = z
+			.object({
+				roleId: z.string(),
+				accountId: z.string()
+			})
+			.safeParse(data);
+
+		if (!parsed.success) {
+			return {
+				success: false,
+				reason: 'Invalid data'
+			};
+		}
+
+		const role = (await Role.fromId(parsed.data.roleId)).unwrap();
+		const account = (await Account.Account.fromId(parsed.data.accountId)).unwrap();
+
+		if (!role) {
+			return {
+				success: false,
+				reason: 'Role not found'
+			};
+		}
+
+		if (!account) {
+			return {
+				success: false,
+				reason: 'Account not found'
+			};
+		}
+
+		const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
+
+		if (!universe) {
+			return {
+				success: false,
+				reason: 'Universe not found'
+			};
+		}
+
+		const grant = () => {
+			return giveRole(account, role).then((res) => {
+				return {
+					success: res.isOk()
+				};
+			});
+		};
+
+		if ((await Account.isAdmin(event.locals.account)).unwrap()) {
+			return grant();
+		}
+
+		const roles = (await getUniverseAccountRoles(event.locals.account, universe)).unwrap();
+		if (!(await isEntitled(roles, 'manage-roles')).unwrap()) {
+			return {
+				success: false,
+				reason: 'Not entitled'
+			};
+		}
+
+		return grant();
+	});
+
+	Role.callListen('revoke-role', async (event, data) => {
+		if (!event.locals.account) {
+			return {
+				success: false,
+				reason: 'Not logged in'
+			};
+		}
+		const parsed = z
+			.object({
+				roleId: z.string(),
+				accountId: z.string()
+			})
+			.safeParse(data);
+
+		if (!parsed.success) {
+			return {
+				success: false,
+				reason: 'Invalid data'
+			};
+		}
+
+		const role = (await Role.fromId(parsed.data.roleId)).unwrap();
+		const account = (await Account.Account.fromId(parsed.data.accountId)).unwrap();
+
+		if (!role) {
+			return {
+				success: false,
+				reason: 'Role not found'
+			};
+		}
+
+		if (!account) {
+			return {
+				success: false,
+				reason: 'Account not found'
+			};
+		}
+
+		const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
+
+		if (!universe) {
+			return {
+				success: false,
+				reason: 'Universe not found'
+			};
+		}
+
+		const remove = () => {
+			RoleAccount.fromProperty('role', role.id, {
+				type: 'stream'
+			}).pipe((ra) => {
+				if (ra.data.account === account.id) {
+					ra.delete();
+				}
+			});
+
+			return {
+				success: true
+			};
+		};
+
+		if ((await Account.isAdmin(event.locals.account)).unwrap()) {
+			return remove();
+		}
+
+		const roles = (await getUniverseAccountRoles(event.locals.account, universe)).unwrap();
+		if (!(await isEntitled(roles, 'manage-roles')).unwrap()) {
+			return {
+				success: false,
+				reason: 'Not entitled'
+			};
+		}
+
+		return remove();
 	});
 
 	// Role.callListen('update-links', async (event, data) => {});
@@ -210,6 +358,17 @@ export namespace Permissions {
 		});
 	};
 
+	export const getRoleAccount = async (account: Account.AccountData, role: RoleData) => {
+		return attemptAsync(async () => {
+			const [data] = await DB.select()
+				.from(RoleAccount.table)
+				.where(and(eq(RoleAccount.table.account, account.id), eq(RoleAccount.table.role, role.id)));
+			if (data) {
+				return RoleAccount.Generator(data);
+			}
+		});
+	};
+
 	// TODO: This isn't really typed correctly. As of right now, the output is using the generic Struct<Blank, string> type rather than the actual struct type that's passed in.
 	export const filterAction = async <
 		S extends Struct<Blank, string>,
@@ -306,7 +465,6 @@ export namespace Permissions {
 				);
 
 			stream.pipe((d) => {
-				// console.log('Testing:', d);
 				if (bypass.some((b) => b(account, d))) {
 					return newStream.add(d.safe());
 				}

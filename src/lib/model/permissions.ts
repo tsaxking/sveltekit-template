@@ -69,4 +69,18 @@ export namespace Permissions {
 			}
 		);
 	};
+
+	export const revokeRole = (roleId: string, accountId: string) => {
+		return Role.call('revoke-role', {
+			roleId,
+			accountId
+		});
+	};
+
+	export const grantRole = (roleId: string, accountId: string) => {
+		return Role.call('grant-role', {
+			roleId,
+			accountId
+		});
+	};
 }

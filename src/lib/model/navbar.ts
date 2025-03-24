@@ -1,9 +1,9 @@
-import { writable, type Writable } from "svelte/store";
+import { writable, type Writable } from 'svelte/store';
 
 export namespace Navbar {
-    type Section = {
+	type Section = {
 		name: string;
-        priority: number;
+		priority: number;
 		links: {
 			icon: string;
 			type: 'material-icons' | 'font-awesome' | 'material-symbols' | 'bootstrap' | 'custom';
@@ -12,21 +12,21 @@ export namespace Navbar {
 		}[];
 	};
 
-    const sections: Writable<Section[]> = writable([]);
+	const sections: Writable<Section[]> = writable([]);
 
-    export const addSection = (section: Section) => {
-        sections.update(s => {
-            const has = s.some(s => s.name === section.name);
-            if (!has) s.push(section);
-            else {
-                console.warn(`Navbar: Section ${section.name} already exists, overriding...`);
-                const index = s.findIndex(s => s.name === section.name);
-                s[index] = section;
-            }
-            s.sort((a, b) => a.priority - b.priority);
-            return s;
-        });
-    }
+	export const addSection = (section: Section) => {
+		sections.update((s) => {
+			const has = s.some((s) => s.name === section.name);
+			if (!has) s.push(section);
+			else {
+				console.warn(`Navbar: Section ${section.name} already exists, overriding...`);
+				const index = s.findIndex((s) => s.name === section.name);
+				s[index] = section;
+			}
+			s.sort((a, b) => a.priority - b.priority);
+			return s;
+		});
+	};
 
-    export const getSections = () => sections;
+	export const getSections = () => sections;
 }

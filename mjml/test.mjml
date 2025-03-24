@@ -1,8 +1,19 @@
 <mjml>
+	<mj-head>
+		<mj-preview>Test Email Preview</mj-preview>
+	</mj-head>
 	<mj-body>
 		<mj-section>
 			<mj-column>
-				<mj-text> This is a test email. {{ something }} </mj-text>
+				<mj-text font-size="20px" color="#333333" font-family="Arial">
+					Welcome to {{ service }}!
+				</mj-text>
+				<mj-text font-size="16px" color="#555555">
+					This is a simple test email created using MJML.
+				</mj-text>
+				<mj-button background-color="#007bff" color="#ffffff" href="{{ link }}">
+					{{ linkText }}
+				</mj-button>
 			</mj-column>
 		</mj-section>
 	</mj-body>

@@ -269,7 +269,15 @@ export namespace Universes {
 	) => {
 		return attemptAsync(async () => {
 			const roles = (await memberRoles(account, universe)).unwrap();
-			return resolveAll(await Promise.all(roles.map((r) => r.delete())));
+			return resolveAll(
+				await Promise.all(
+					roles.map(async (r) => {
+						const ra = (await Permissions.getRoleAccount(account, r)).unwrap();
+						if (!ra) throw new Error('RoleAccount not found');
+						return ra.delete();
+					})
+				)
+			).unwrap();
 		});
 	};
 
@@ -336,7 +344,7 @@ export namespace Universes {
 
 			if (!admin) throw new Error('Admin role not found');
 
-			return await grantRole(account, admin);
+			return (await grantRole(account, admin)).unwrap();
 		});
 	};
 
@@ -345,7 +353,9 @@ export namespace Universes {
 			const roles = (await memberRoles(account, universe)).unwrap();
 			const admin = roles.find((r) => r.data.name === 'Admin');
 			if (!admin) throw new Error('Account is not an admin');
-			return admin.delete();
+			const ra = (await Permissions.getRoleAccount(account, admin)).unwrap();
+			if (!ra) throw new Error('RoleAccount not found');
+			return (await ra.delete()).unwrap();
 		});
 	};
 

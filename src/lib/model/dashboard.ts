@@ -180,7 +180,7 @@ export namespace Dashboard {
 					return {
 						width: sizes[size],
 						height: s.height
-					}
+					};
 				}
 				return s;
 			}

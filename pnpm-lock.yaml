@@ -70,7 +70,7 @@ importers:
         version: 0.38.3(@types/pg@8.11.11)(@types/react@19.0.2)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       drizzle-struct:
         specifier: github:tsaxking/drizzle-struct
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7ab48cfbce26bac6b0d5292a131e48469252b00e(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7275c6909c601da48c5e6c80d30dda937b25cf34(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.3(@types/pg@8.11.11)(@types/react@19.0.2)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1))(zod@3.24.1)
@@ -133,7 +133,7 @@ importers:
         version: 0.2.2(filepond@4.32.7)
       ts-utils:
         specifier: github:tsaxking/global-ts-utilities
-        version: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea
+        version: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/fa45a1b39d465b625029a85e3f5fd98c296d5032
       uuid:
         specifier: ^11.0.4
         version: 11.0.4
@@ -2384,8 +2384,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7ab48cfbce26bac6b0d5292a131e48469252b00e:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7ab48cfbce26bac6b0d5292a131e48469252b00e}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7275c6909c601da48c5e6c80d30dda937b25cf34:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7275c6909c601da48c5e6c80d30dda937b25cf34}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -4226,8 +4226,12 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea:
-    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea}
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/2a792511b1802f772cd475cd2de39f919f5d308f:
+    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/2a792511b1802f772cd475cd2de39f919f5d308f}
+    version: 1.0.0
+
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/fa45a1b39d465b625029a85e3f5fd98c296d5032:
+    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/fa45a1b39d465b625029a85e3f5fd98c296d5032}
     version: 1.0.0
 
   tslib@2.8.1:
@@ -6399,7 +6403,7 @@ snapshots:
       postgres: 3.4.5
       react: 18.3.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7ab48cfbce26bac6b0d5292a131e48469252b00e(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/7275c6909c601da48c5e6c80d30dda937b25cf34(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1):
     dependencies:
       '@eslint/compat': 1.2.4(eslint@9.17.0)
       '@msgpack/msgpack': 3.0.0-beta3
@@ -6422,7 +6426,7 @@ snapshots:
       proper-lockfile: 4.1.2
       svelte: 5.16.1
       ts-node: 10.9.2(@types/node@22.10.4)(typescript@5.7.2)
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/2a792511b1802f772cd475cd2de39f919f5d308f
       typescript: 5.7.2
       uuid: 11.0.4
       zod: 3.24.1
@@ -7147,7 +7151,7 @@ snapshots:
       '@eslint/compat': 1.2.4(eslint@9.17.0)
       node-html-parser: 7.0.1
       prettier: 3.4.2
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/fa45a1b39d465b625029a85e3f5fd98c296d5032
       vite-node: 3.0.5(@types/node@22.10.4)(sass-embedded@1.83.0)
       vitest: 2.1.8(@types/node@22.10.4)(sass-embedded@1.83.0)
       zod: 3.24.1
@@ -8634,7 +8638,11 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/0a672fd110cfe845d5428a714906c9e79c7004ea:
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/2a792511b1802f772cd475cd2de39f919f5d308f:
+    dependencies:
+      typescript: 5.7.2
+
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/fa45a1b39d465b625029a85e3f5fd98c296d5032:
     dependencies:
       typescript: 5.7.2
 

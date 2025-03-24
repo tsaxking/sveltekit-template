@@ -69,8 +69,6 @@
     </div> -->
 </nav>
 
-<SideNav
-	id="pages"
-/>
+<SideNav id="pages" />
 
 <!-- <Notifications bind:notifs /> -->
