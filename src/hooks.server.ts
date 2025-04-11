@@ -12,7 +12,6 @@ import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '$lib/server/db/';
 import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
-import path from 'path';
 import '$lib/server/index';
 config();
 
@@ -24,7 +23,7 @@ Struct.each((struct) => {
 	}
 });
 
-Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+// Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const session = await Session.getSession(event);
@@ -43,7 +42,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 			}
 			event.locals.account = a.value;
 		}
-	} else {
+	}
+
+	if (!event.locals.account) {
 		const account = await Session.getAccount(session.unwrap());
 		if (account.isErr()) {
 			return new Response('Internal Server Error', { status: ServerCode.internalServerError });
@@ -53,12 +54,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (
-		!['/account/sign-in', '/account/sign-up'].includes(event.url.pathname) &&
-		!event.url.href.startsWith('/account/password-reset') &&
-		!event.url.href.startsWith('/status') &&
-		!event.url.href.startsWith('/sse') &&
-		!event.url.href.startsWith('/struct') &&
-		!event.url.href.startsWith('/test')
+		!event.url.pathname.startsWith('/account') &&
+		!event.url.pathname.startsWith('/status') &&
+		!event.url.pathname.startsWith('/sse') &&
+		!event.url.pathname.startsWith('/struct') &&
+		!event.url.pathname.startsWith('/test') &&
+		!event.url.pathname.startsWith('/favicon.ico') &&
+		!event.url.pathname.startsWith('/robots.txt') &&
+		!event.url.pathname.startsWith('/oauth')
 	) {
 		session.value.update({
 			prevUrl: event.url.pathname

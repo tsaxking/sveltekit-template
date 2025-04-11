@@ -36,10 +36,12 @@ type Inputs = {
 		multiple: boolean;
 		accept: string;
 	};
+	color: void;
 };
 
 type ReturnTypes = {
 	text: string;
+	color: string;
 	number: number;
 	textarea: string;
 	email: string;
@@ -114,9 +116,11 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 				case 'number':
 				case 'password':
 				case 'email':
+				case 'color':
 					el = document.createElement('input');
 					el.type = input.type;
-					if (input.value) el.value = input.value;
+					if (input.value != undefined) el.setAttribute('value', input.value);
+
 					if (input.options) {
 						const o = input.options as Inputs['text'];
 						if (o.length) el.maxLength = o.length;
@@ -148,7 +152,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 				case 'textarea':
 					el = document.createElement('textarea');
 					el.rows = (input.options as Inputs['textarea'])?.rows || 3;
-					if (input.value) el.value = input.value;
+					if (input.value != undefined) el.setAttribute('value', input.value);
 					break;
 				case 'checkbox':
 				case 'radio':
@@ -184,7 +188,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 						if (typeof option !== 'string' && option.disabled) {
 							opt.disabled = true;
 						}
-						if (input.value) el.value = input.value;
+						if (input.value != undefined) el.setAttribute('value', input.value);
 						el.appendChild(opt);
 					}
 					break;
@@ -332,6 +336,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 										submit: false
 									})
 								);
+								console.log(div.innerHTML);
 								return div.innerHTML;
 							},
 							setup(formEl: Element) {
