@@ -10,21 +10,30 @@ const main = async () => {
 	let [, , file, ...args] = process.argv;
 
 	if (!file) {
-		const scripts = (await fs.readdir(path.join(process.cwd(), 'scripts'))).filter(s => s.endsWith('.ts') && s !== 'index.ts');
-		const chosen = (await select({
-			message: 'Select a script to run',
-			options: scripts.map(s => ({
-				name: s,
-				value: s,
-			})),
-		})).unwrap();
+		const scripts = (await fs.readdir(path.join(process.cwd(), 'scripts'))).filter(
+			(s) => s.endsWith('.ts') && s !== 'index.ts'
+		);
+		const chosen = (
+			await select({
+				message: 'Select a script to run',
+				options: scripts.map((s) => ({
+					name: s,
+					value: s
+				}))
+			})
+		).unwrap();
 		if (!chosen) {
 			process.exit();
 		}
 		file = chosen;
-		args = (await prompt({
-			message: 'Enter arguments (space separated)',
-		})).unwrap()?.split(' ') ?? [];
+		args =
+			(
+				await prompt({
+					message: 'Enter arguments (space separated)'
+				})
+			)
+				.unwrap()
+				?.split(' ') ?? [];
 	}
 
 	terminal.log('Running file:', file);

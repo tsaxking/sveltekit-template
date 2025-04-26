@@ -22,12 +22,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        templates: [
-          tsaxking/tators-dashboard-kit, 
-          tsaxking/tators-app-kit, 
-          'tsaxking/elevate.tv',
-          tsaxking/inventory-kit
-        ]
+        templates:
+          [
+            tsaxking/tators-dashboard-kit,
+            tsaxking/tators-app-kit,
+            'tsaxking/elevate.tv',
+            tsaxking/inventory-kit
+          ]
 
     steps:
       - name: Retrieve git dependencies
