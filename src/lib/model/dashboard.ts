@@ -23,14 +23,14 @@ export namespace Dashboard {
 	};
 
 	export const sizes = {
-		xs: 1,
-		sm: 2,
-		md: 3,
-		lg: 4,
-		xl: 5
+		xs: 12,
+		sm: 12,
+		md: 12,
+		lg: 12,
+		xl: 12
 	};
 
-	const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+	// const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 	type CardData = {
 		show: boolean;
