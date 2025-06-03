@@ -189,44 +189,147 @@ export const handleEvent =
 				})
 				.safeParse(event.data);
 
-			console.log(parsed);
+			// console.log(parsed);
 
 			if (!parsed.success) return error(new DataError(struct, 'Invalid data'));
 
-			let streamer: StructStream<typeof struct.data.structure, typeof struct.data.name>;
+			// let streamer: StructStream<typeof struct.data.structure, typeof struct.data.name>;
 			const type = parsed.data.type;
-			console.log(type);
+			// switch (type) {
+			// 	case 'all':
+			// 		streamer = struct.all({
+			// 			type: 'stream'
+			// 		});
+			// 		break;
+			// 	case 'archived':
+			// 		streamer = struct.archived({
+			// 			type: 'stream'
+			// 		});
+			// 		break;
+			// 	case 'from-id':
+			// 		if (!Object.hasOwn((event.data as any).args, 'id'))
+			// 			return error(new DataError(struct, 'Missing Read id'));
+			// 		{
+			// 			const safe = z
+			// 				.object({
+			// 					id: z.string()
+			// 				})
+			// 				.safeParse(parsed.data.args);
+			// 			if (!safe.success) return error(new DataError(struct, 'Invalid Read id'));
+			// 			const data = (await struct.fromId(safe.data.id)).unwrap();
+			// 			if (!data) return error(new DataError(struct, 'Data not found'));
+			// 			return new Response(
+			// 				JSON.stringify({
+			// 					success: true,
+			// 					data: data.data
+			// 				}),
+			// 				{ status: 200 }
+			// 			);
+			// 		}
+			// 	case 'property':
+			// 		{
+			// 			const safe = z
+			// 				.object({
+			// 					key: z.string(),
+			// 					value: z.unknown()
+			// 				})
+			// 				.safeParse(parsed.data.args);
+			// 			if (!safe.success) return error(new DataError(struct, 'Invalid Read property'));
+			// 			streamer = struct.fromProperty(safe.data.key, safe.data.value as any, {
+			// 				type: 'stream'
+			// 			});
+			// 		}
+			// 		break;
+			// 	case 'universe':
+			// 		{
+			// 			const safe = z
+			// 				.object({
+			// 					universe: z.string()
+			// 				})
+			// 				.safeParse(parsed.data.args);
+
+			// 			if (!safe.success) return error(new DataError(struct, 'Invalid Read universe'));
+			// 			streamer = struct.fromProperty('universe', safe.data.universe, {
+			// 				type: 'stream'
+			// 			});
+			// 		}
+			// 		break;
+			// 	default:
+			// 		return error(new DataError(struct, 'Invalid Read type'));
+			// }
+
+			// let readable: ReadableStream;
+
+			// if (account) {
+			// 	readable = new ReadableStream({
+			// 		start(controller) {
+			// 			streamer.on('end', () => {
+			// 				// console.log('end');
+			// 				controller.enqueue('end\n\n');
+			// 				controller.close();
+			// 			});
+
+			// 			if (runBypass()) {
+			// 				setTimeout(() => {
+			// 					streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.safe()))}\n\n`));
+			// 				});
+			// 				return;
+			// 			}
+			// 			const stream = Permissions.filterActionPipeline(
+			// 				account,
+			// 				roles,
+			// 				streamer as any,
+			// 				PropertyAction.Read,
+			// 				bypass
+			// 			);
+			// 			stream.pipe((d) => {
+			// 				// console.log('Sending:', d);
+			// 				controller.enqueue(`${encode(JSON.stringify(d))}\n\n`);
+			// 			});
+			// 		},
+			// 		cancel() {
+			// 			streamer.off('end');
+			// 			streamer.off('data');
+			// 			streamer.off('error');
+			// 		}
+			// 	});
+			// } else if (struct.data.name === 'test') {
+			// 	readable = new ReadableStream({
+			// 		start(controller) {
+			// 			streamer.on('end', () => {
+			// 				// console.log('end');
+			// 				controller.enqueue('end\n\n');
+			// 				controller.close();
+			// 			});
+
+			// 			streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.data))}\n\n`));
+			// 		},
+			// 		cancel() {
+			// 			streamer.off('end');
+			// 			streamer.off('data');
+			// 			streamer.off('error');
+			// 		}
+			// 	});
+			// } else {
+			// 	return error(new StructError(struct, 'Not logged in'));
+			// }
+
+			// return new Response(readable, {
+			// 	status: 200,
+			// 	headers: {
+			// 		'Content-Type': 'text/event-stream'
+			// 	}
+			// });
+		
+		
+			let data: StructData<any, any>[] = [];
 			switch (type) {
 				case 'all':
-					streamer = struct.all({
-						type: 'stream'
-					});
+					data = await struct.all({ type: 'all' }).unwrap();
 					break;
 				case 'archived':
-					streamer = struct.archived({
-						type: 'stream'
-					});
+					data = await struct.archived({ type: 'all' }).unwrap();
 					break;
-				case 'from-id':
-					if (!Object.hasOwn((event.data as any).args, 'id'))
-						return error(new DataError(struct, 'Missing Read id'));
-					{
-						const safe = z
-							.object({
-								id: z.string()
-							})
-							.safeParse(parsed.data.args);
-						if (!safe.success) return error(new DataError(struct, 'Invalid Read id'));
-						const data = (await struct.fromId(safe.data.id)).unwrap();
-						if (!data) return error(new DataError(struct, 'Data not found'));
-						return new Response(
-							JSON.stringify({
-								success: true,
-								data: data.data
-							}),
-							{ status: 200 }
-						);
-					}
 				case 'property':
 					{
 						const safe = z
@@ -236,9 +339,9 @@ export const handleEvent =
 							})
 							.safeParse(parsed.data.args);
 						if (!safe.success) return error(new DataError(struct, 'Invalid Read property'));
-						streamer = struct.fromProperty(safe.data.key, safe.data.value as any, {
-							type: 'stream'
-						});
+						data = await struct.fromProperty(safe.data.key, safe.data.value as any, {
+							type: 'all'
+						}).unwrap();
 					}
 					break;
 				case 'universe':
@@ -250,77 +353,53 @@ export const handleEvent =
 							.safeParse(parsed.data.args);
 
 						if (!safe.success) return error(new DataError(struct, 'Invalid Read universe'));
-						streamer = struct.fromProperty('universe', safe.data.universe, {
-							type: 'stream'
-						});
+						data = await struct.fromProperty('universe', safe.data.universe, {
+							type: 'all'
+						}).unwrap();
+					}
+					break;
+				case 'from-id':
+					{
+						const safe = z
+							.object({
+								id: z.string()
+							})
+							.safeParse(parsed.data.args);
+						if (!safe.success) return error(new DataError(struct, 'Invalid Read id'));
+						const found = (await struct.fromId(safe.data.id)).unwrap();
+						if (!found) return error(new DataError(struct, 'Data not found'));
+						data = [found];
 					}
 					break;
 				default:
 					return error(new DataError(struct, 'Invalid Read type'));
 			}
 
-			let readable: ReadableStream;
-
-			if (account) {
-				readable = new ReadableStream({
-					start(controller) {
-						streamer.on('end', () => {
-							// console.log('end');
-							controller.enqueue('end\n\n');
-							controller.close();
-						});
-
-						if (runBypass()) {
-							setTimeout(() => {
-								streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.safe()))}\n\n`));
-							});
-							return;
-						}
-						const stream = Permissions.filterActionPipeline(
-							account,
-							roles,
-							streamer as any,
-							PropertyAction.Read,
-							bypass
-						);
-						stream.pipe((d) => {
-							// console.log('Sending:', d);
-							controller.enqueue(`${encode(JSON.stringify(d))}\n\n`);
-						});
-					},
-					cancel() {
-						streamer.off('end');
-						streamer.off('data');
-						streamer.off('error');
-					}
-				});
-			} else if (struct.data.name === 'test') {
-				readable = new ReadableStream({
-					start(controller) {
-						streamer.on('end', () => {
-							// console.log('end');
-							controller.enqueue('end\n\n');
-							controller.close();
-						});
-
-						streamer.pipe((d) => controller.enqueue(`${encode(JSON.stringify(d.data))}\n\n`));
-					},
-					cancel() {
-						streamer.off('end');
-						streamer.off('data');
-						streamer.off('error');
-					}
-				});
+			
+			let json: Record<string, unknown>[] = [];
+			PARSER: if (struct.data.name === 'test') {
+				json = data.map((d) => d.data);
 			} else {
-				return error(new StructError(struct, 'Not logged in'));
-			}
-
-			return new Response(readable, {
-				status: 200,
-				headers: {
-					'Content-Type': 'text/event-stream'
+				if (isAdmin) {
+					json = data.map((d) => d.safe());
+					break PARSER;
 				}
-			});
+				const res = await Permissions.filterAction(roles, data, PropertyAction.Read);
+				if (res.isErr()) return error(res.error);
+				json = res.value.map((d) => d);
+			}
+			return new Response(
+				JSON.stringify({
+					success: true,
+					data: json
+				}),
+				{ 
+					status: 200,
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
 		}
 
 		if (event.action === DataAction.Create) {

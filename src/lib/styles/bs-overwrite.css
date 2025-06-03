@@ -1,4 +1,5 @@
 @import url('./scss/bs-overwrite.scss');
+@import url('./scss/inputs.scss');
 
 :root {
 	--border-radius: 8px;

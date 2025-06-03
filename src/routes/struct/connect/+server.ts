@@ -16,7 +16,7 @@ export const POST = async (event) => {
 			return new Response(
 				JSON.stringify({
 					success: false,
-					message: 'Struct not found'
+					message: `Struct ${typed.name} not found`
 				}),
 				{ status: 200 }
 			);
