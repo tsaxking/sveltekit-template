@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { attemptAsync, resolveAll, attempt } from 'ts-utils/check';
+import { attemptAsync, resolveAll, attempt, type Result } from 'ts-utils/check';
 import YAML from 'yaml';
 import path from 'path';
 import fs from 'fs';
 import { z } from 'zod';
-import { Struct, type Blank } from 'drizzle-struct/back-end';
+import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import type { GlobalCols } from 'drizzle-struct/front-end';
 import type { Entitlement } from '$lib/types/entitlements';
@@ -31,6 +31,26 @@ export const getEntitlements = async () => {
 	});
 };
 
+export class CombinedEntitlementPermission {
+	public readonly permissions: { action: string; property: string; }[];
+	constructor(
+		public readonly name: Entitlement,
+		public readonly struct: string,
+		entitlements: EntitlementPermission[],
+		public readonly pages: string[],		
+	) {
+		this.permissions = entitlements.flatMap(e => {
+			if (e.permissions.length === 0 || e.permissions.some(p => p.struct === '*')) {
+				return [{ action: '*', property: '*' }];
+			}
+			return e.permissions
+				.filter(p => p.struct === this.struct || p.struct === '*')
+				.map(p => ({ action: p.action, property: p.property }));
+		});
+	}
+
+}
+
 export class EntitlementPermission {
 	public readonly permissions: { struct: string; action: string; property: string }[];
 	constructor(
@@ -48,6 +68,23 @@ export class EntitlementPermission {
 	}
 
 	_saved = Date.now();
+
+	test<T extends Blank>(data: StructData<T, string>, action: PropertyAction | DataAction, property?: keyof T) {
+		return attempt(() => {
+			if (this.structs.length > 0 && !this.structs.includes(data.struct.name)) {
+				return false;
+			}
+			if (this.permissions.length === 0 || this.permissions.some((p) => p.struct === '*')) {
+				return true;
+			}
+			return this.permissions.some(
+				(p) =>
+					(p.struct === data.struct.name || p.struct === '*') &&
+					(p.action === action || p.action === '*') &&
+					(p.property === '*' || (p.property == property && Object.keys(data.struct.data.structure).includes(p.property)))
+			);
+		});
+	}
 }
 
 const entitlements = new Map<string, EntitlementPermission>();

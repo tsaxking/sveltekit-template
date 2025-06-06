@@ -451,7 +451,7 @@ export const handleEvent =
 			if (runBypass()) {
 				return create();
 			}
-			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap()) {
+			if (!(await Permissions.accountCanDo(roles, struct, DataAction.Create)).unwrap()) {
 				return invalidPermissions();
 			}
 
@@ -572,7 +572,7 @@ export const handleEvent =
 				);
 			};
 			if (runBypass()) return archive();
-			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
+			if (!(await Permissions.accountCanDo(roles, struct, DataAction.Create)).unwrap())
 				return invalidPermissions();
 
 			return archive();
@@ -616,7 +616,7 @@ export const handleEvent =
 				);
 			};
 			if (runBypass()) return remove();
-			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
+			if (!(await Permissions.accountCanDo(roles, struct, DataAction.Create)).unwrap())
 				return invalidPermissions();
 
 			return remove();
@@ -661,7 +661,7 @@ export const handleEvent =
 				);
 			};
 			if (runBypass()) return restore();
-			if (!(await Permissions.canDo(roles, struct, DataAction.Create)).unwrap())
+			if (!(await Permissions.accountCanDo(roles, struct, DataAction.Create)).unwrap())
 				return invalidPermissions();
 			return restore();
 		}
