@@ -1,7 +1,6 @@
-import { sse } from '$lib/server/utils/sse.js';
+import { sse } from '$lib/server/services/sse.js';
 
 export const POST = (event) => {
-	console.log('POST /test/sse/init/+server.ts');
 	let i = 0;
 	const interval = setInterval(() => {
 		const uuid = event.request.headers.get('X-Metadata');

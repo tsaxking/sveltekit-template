@@ -7,10 +7,10 @@ import { DB } from '../db';
 import { sql, eq } from 'drizzle-orm';
 import type { Notification } from '$lib/types/notification';
 import { Session } from './session';
-import { sse } from '../utils/sse';
+import { sse } from '../services/sse';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
-import { Universes } from './universe';
+// import { Universes } from './universe';
 import { Permissions } from './permissions';
 import { Email } from './email';
 
@@ -34,35 +34,35 @@ export namespace Account {
 		safes: ['key', 'salt', 'verification']
 	});
 
-	Account.queryListen('universe-members', async (event, data) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
+	// Account.queryListen('universe-members', async (event, data) => {
+	// 	const session = (await Session.getSession(event)).unwrap();
+	// 	const account = (await Session.getAccount(session)).unwrap();
 
-		if (!account) {
-			throw new Error('Not logged in');
-		}
+	// 	if (!account) {
+	// 		throw new Error('Not logged in');
+	// 	}
 
-		const universeId = z
-			.object({
-				universe: z.string()
-			})
-			.parse(data).universe;
+	// 	const universeId = z
+	// 		.object({
+	// 			universe: z.string()
+	// 		})
+	// 		.parse(data).universe;
 
-		const universe = (await Universes.Universe.fromId(universeId)).unwrap();
-		if (!universe) throw new Error('Universe not found');
+	// 	const universe = (await Universes.Universe.fromId(universeId)).unwrap();
+	// 	if (!universe) throw new Error('Universe not found');
 
-		const members = (await Universes.getMembers(universe)).unwrap();
-		if (!members.find((m) => m.data.id == account.data.id)) {
-			throw new Error('Not a member of this universe, cannot read members');
-		}
-		const stream = new StructStream(Account);
-		setTimeout(() => {
-			for (let i = 0; i < members.length; i++) {
-				stream.add(members[i]);
-			}
-		});
-		return stream;
-	});
+	// 	const members = (await Universes.getMembers(universe)).unwrap();
+	// 	if (!members.find((m) => m.data.id == account.data.id)) {
+	// 		throw new Error('Not a member of this universe, cannot read members');
+	// 	}
+	// 	const stream = new StructStream(Account);
+	// 	setTimeout(() => {
+	// 		for (let i = 0; i < members.length; i++) {
+	// 			stream.add(members[i]);
+	// 		}
+	// 	});
+	// 	return stream;
+	// });
 
 	Account.sendListen('self', async (event) => {
 		const session = (await Session.getSession(event)).unwrap();
@@ -73,50 +73,50 @@ export namespace Account {
 		return account.safe();
 	});
 
-	Account.queryListen('role-members', async (event, data) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
+	// Account.queryListen('role-members', async (event, data) => {
+	// 	const session = (await Session.getSession(event)).unwrap();
+	// 	const account = (await Session.getAccount(session)).unwrap();
 
-		if (!account) {
-			return new Error('Not logged in');
-		}
+	// 	if (!account) {
+	// 		return new Error('Not logged in');
+	// 	}
 
-		const roleId = z
-			.object({
-				role: z.string()
-			})
-			.parse(data).role;
+	// 	const roleId = z
+	// 		.object({
+	// 			role: z.string()
+	// 		})
+	// 		.parse(data).role;
 
-		const role = (await Permissions.Role.fromId(roleId)).unwrap();
-		if (!role) throw new Error('Role not found');
+	// 	const role = (await Permissions.Role.fromId(roleId)).unwrap();
+	// 	if (!role) throw new Error('Role not found');
 
-		const stream = () => {
-			const s = new StructStream(Account);
+	// 	const stream = () => {
+	// 		const s = new StructStream(Account);
 
-			setTimeout(async () => {
-				const members = (await Permissions.usersFromRole(role)).unwrap();
+	// 		setTimeout(async () => {
+	// 			const members = (await Permissions.usersFromRole(role)).unwrap();
 
-				for (let i = 0; i < members.length; i++) {
-					s.add(members[i]);
-				}
-			});
+	// 			for (let i = 0; i < members.length; i++) {
+	// 				s.add(members[i]);
+	// 			}
+	// 		});
 
-			return s;
-		};
+	// 		return s;
+	// 	};
 
-		if ((await isAdmin(account)).unwrap()) return stream();
+	// 	if ((await isAdmin(account)).unwrap()) return stream();
 
-		const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
-		if (!universe) return new Error('Universe not found');
+	// 	const universe = (await Universes.Universe.fromId(role.data.universe)).unwrap();
+	// 	if (!universe) return new Error('Universe not found');
 
-		const roles = (await Permissions.getUniverseAccountRoles(account, universe)).unwrap();
+	// 	const roles = (await Permissions.getUniverseAccountRoles(account, universe)).unwrap();
 
-		if (!Permissions.isEntitled(roles, 'view-roles', 'manage-roles')) {
-			return new Error('Not entitled to view role members');
-		}
+	// 	if (!Permissions.isEntitled(roles, 'view-roles', 'manage-roles')) {
+	// 		return new Error('Not entitled to view role members');
+	// 	}
 
-		return stream();
-	});
+	// 	return stream();
+	// });
 
 	Account.on('delete', async (a) => {
 		Admins.fromProperty('accountId', a.id, {

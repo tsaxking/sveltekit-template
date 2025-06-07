@@ -10,16 +10,17 @@ import terminal from '$lib/server/utils/terminal';
 import { config } from 'dotenv';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '$lib/server/db/';
-import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
+// import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import '$lib/server/index';
+import { createStructService } from '$lib/server/services/sse';
 config();
 
 Struct.each((struct) => {
 	if (!struct.built) {
 		struct.build(DB);
-		struct.eventHandler(handleEvent(struct));
-		connectionEmitter(struct);
+		// struct.eventHandler(handleEvent(struct));
+		createStructService(struct);
 	}
 });
 

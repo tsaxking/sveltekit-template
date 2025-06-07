@@ -15,37 +15,40 @@ class SSE {
 	public once = this.emitter.once.bind(this.emitter);
 	private emit = this.emitter.emit.bind(this.emitter);
 
+	private isDisconnected = false;
+	private isReconnecting = false;
+	private disconnectRef: { current: () => void } = { current: () => {} };
+
+	private reconnectAttempt = 0;
+	private readonly maxBackoff = 30000; // max 30 seconds
+
 	init(browser: boolean) {
-		if (browser) {
-			const d = this.connect();
+		if (!browser) return;
 
-			// the disconnect function is dynamic, so I run it dynamically rather than pulling it
-			const disconnect = () => d.disconnect();
+		this.disconnectRef.current = this.connect();
 
-			const events = ['mousedown', 'mouseover', 'touch', 'scroll'];
+		const events = ['mousedown', 'mouseover', 'touch', 'scroll'];
 
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			let timeout: any;
+		let timeout: ReturnType<typeof setTimeout>;
 
-			// if there's no interaction for 5 minutes, disconnect
-			const onEvent = () => {
-				if (timeout) clearTimeout(timeout);
-				setTimeout(
-					() => {
-						disconnect();
-						this.stop = true;
-					},
-					1000 * 60 * 5
-				); // 5 minutes
-				if (this.stop) {
-					this.stop = false;
-					this.connect();
-				}
-			};
+		const onEvent = () => {
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(
+				() => {
+					this.disconnectRef.current();
+					this.isDisconnected = true;
+				},
+				1000 * 60 * 5
+			); // 5 minutes
 
-			for (const event of events) {
-				document.addEventListener(event, onEvent);
+			if (this.isDisconnected) {
+				this.isDisconnected = false;
+				this.disconnectRef.current = this.connect();
 			}
+		};
+
+		for (const event of events) {
+			document.addEventListener(event, onEvent);
 		}
 	}
 
@@ -55,13 +58,10 @@ class SSE {
 			Requests.setMeta('sse', this.uuid);
 			const source = new EventSource(`/sse/init/${this.uuid}`);
 
-			source.addEventListener('error', (e) => console.error('Error:', e));
-
 			const onConnect = () => {
 				this.emit('connect', undefined);
+				this.reconnectAttempt = 0; // reset backoff on successful connect
 			};
-
-			source.addEventListener('open', onConnect);
 
 			const onMessage = (event: MessageEvent) => {
 				try {
@@ -72,12 +72,12 @@ class SSE {
 							data: z.unknown()
 						})
 						.parse(JSON.parse(decode(event.data)));
+
 					if (!Object.hasOwn(e, 'event')) {
 						return console.error('Invalid event (missing .event)', e);
 					}
-
 					if (!Object.hasOwn(e, 'data')) {
-						return console.error('Invalid data (mising .data)', e);
+						return console.error('Invalid data (missing .data)', e);
 					}
 
 					if (e.event === 'close') {
@@ -92,7 +92,8 @@ class SSE {
 								severity: z.enum(['info', 'warning', 'danger', 'success'])
 							})
 							.safeParse(e.data);
-						if (parsed.success)
+
+						if (parsed.success) {
 							notify({
 								type: 'alert',
 								color: parsed.data.severity,
@@ -100,6 +101,7 @@ class SSE {
 								message: parsed.data.message,
 								autoHide: 5000
 							});
+						}
 						return;
 					}
 
@@ -113,13 +115,32 @@ class SSE {
 				}
 			};
 
+			const onError = () => {
+				console.warn('SSE connection lost. Attempting reconnect.');
+				source.close();
+
+				if (!this.isReconnecting) {
+					this.isReconnecting = true;
+
+					const backoff = Math.min(1000 * 2 ** this.reconnectAttempt, this.maxBackoff);
+					this.reconnectAttempt++;
+
+					setTimeout(() => {
+						this.disconnectRef.current = connect();
+						this.isReconnecting = false;
+					}, backoff);
+				}
+			};
+
+			source.addEventListener('open', onConnect);
 			source.addEventListener('message', onMessage);
+			source.addEventListener('error', onError);
 
 			const close = () => {
 				source.close();
 				source.removeEventListener('open', onConnect);
 				source.removeEventListener('message', onMessage);
-				source.removeEventListener('error', console.error);
+				source.removeEventListener('error', onError);
 			};
 
 			window.addEventListener('beforeunload', close);
@@ -130,21 +151,19 @@ class SSE {
 			};
 		};
 
-		const toReturn = {
-			disconnect: connect()
-		};
+		let disconnect = connect();
+		this.disconnectRef.current = disconnect;
 
-		// ping the server every 10 seconds, if the server does not respond, reconnect
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const interval: any = setInterval(async () => {
-			if (this.stop) return clearInterval(interval);
+		const interval = setInterval(async () => {
+			if (this.isDisconnected) return clearInterval(interval);
 			if (!(await this.ping())) {
-				toReturn.disconnect();
-				toReturn.disconnect = connect();
+				disconnect();
+				disconnect = connect();
+				this.disconnectRef.current = disconnect;
 			}
 		}, 10000);
-		// connect();
-		return toReturn;
+
+		return disconnect;
 	}
 
 	private ack(id: number) {
@@ -154,10 +173,7 @@ class SSE {
 	private ping() {
 		return fetch('/sse/ping').then((res) => res.ok);
 	}
-
-	private stop = false;
 }
 
 export const sse = new SSE();
-
 sse.init(browser);

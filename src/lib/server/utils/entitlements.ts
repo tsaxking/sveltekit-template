@@ -32,23 +32,22 @@ export const getEntitlements = async () => {
 };
 
 export class CombinedEntitlementPermission {
-	public readonly permissions: { action: string; property: string; }[];
+	public readonly permissions: { action: string; property: string }[];
 	constructor(
 		public readonly name: Entitlement,
 		public readonly struct: string,
 		entitlements: EntitlementPermission[],
-		public readonly pages: string[],		
+		public readonly pages: string[]
 	) {
-		this.permissions = entitlements.flatMap(e => {
-			if (e.permissions.length === 0 || e.permissions.some(p => p.struct === '*')) {
+		this.permissions = entitlements.flatMap((e) => {
+			if (e.permissions.length === 0 || e.permissions.some((p) => p.struct === '*')) {
 				return [{ action: '*', property: '*' }];
 			}
 			return e.permissions
-				.filter(p => p.struct === this.struct || p.struct === '*')
-				.map(p => ({ action: p.action, property: p.property }));
+				.filter((p) => p.struct === this.struct || p.struct === '*')
+				.map((p) => ({ action: p.action, property: p.property }));
 		});
 	}
-
 }
 
 export class EntitlementPermission {
@@ -69,7 +68,11 @@ export class EntitlementPermission {
 
 	_saved = Date.now();
 
-	test<T extends Blank>(data: StructData<T, string>, action: PropertyAction | DataAction, property?: keyof T) {
+	test<T extends Blank>(
+		data: StructData<T, string>,
+		action: PropertyAction | DataAction,
+		property?: keyof T
+	) {
 		return attempt(() => {
 			if (this.structs.length > 0 && !this.structs.includes(data.struct.name)) {
 				return false;
@@ -81,7 +84,25 @@ export class EntitlementPermission {
 				(p) =>
 					(p.struct === data.struct.name || p.struct === '*') &&
 					(p.action === action || p.action === '*') &&
-					(p.property === '*' || (p.property == property && Object.keys(data.struct.data.structure).includes(p.property)))
+					(p.property === '*' ||
+						(p.property == property &&
+							Object.keys(data.struct.data.structure).includes(p.property)))
+			);
+		});
+	}
+
+	canCreate<T extends Blank>(data: Struct<T, string>) {
+		return attempt(() => {
+			if (this.structs.length > 0 && !this.structs.includes(data.data.name)) {
+				return false;
+			}
+			if (this.permissions.length === 0 || this.permissions.some((p) => p.struct === '*')) {
+				return true;
+			}
+			return this.permissions.some(
+				(p) =>
+					(p.struct === data.data.name || p.struct === '*') &&
+					(p.action === DataAction.Create || p.action === '*')
 			);
 		});
 	}
