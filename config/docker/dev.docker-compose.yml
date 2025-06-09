@@ -3,7 +3,7 @@
 services:
   db:
     env_file:
-      - ../.env
+      - ../../.env
     image: postgres
     restart: always
     ports:
