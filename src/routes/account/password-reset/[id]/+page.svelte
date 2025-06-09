@@ -9,7 +9,6 @@
 
 	if (form?.message) {
 		notify({
-			type: 'alert',
 			autoHide: 3000,
 			color: 'warning',
 			title: 'Error',

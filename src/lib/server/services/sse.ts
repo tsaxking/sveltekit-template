@@ -296,6 +296,8 @@ export const createStructService = (struct: Struct<Blank, string>) => {
 		});
 	};
 
+	if (!struct.frontend) return;
+
 	struct.on('create', (data) => {
 		emitToConnections('create', data);
 	});

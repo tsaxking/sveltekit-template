@@ -1,9 +1,9 @@
 import { browser } from '$app/environment';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { decode } from 'ts-utils/text';
-import { notify } from './prompts';
+import { notify } from '../utils/prompts';
 import { z } from 'zod';
-import { Requests } from './requests';
+import { Requests } from '../utils/requests';
 import { Random } from 'ts-utils/math';
 
 class SSE {
@@ -17,7 +17,7 @@ class SSE {
 
 	private isDisconnected = false;
 	private isReconnecting = false;
-	private disconnectRef: { current: () => void } = { current: () => {} };
+	private disconnect: () => void = () => {};
 
 	private reconnectAttempt = 0;
 	private readonly maxBackoff = 30000; // max 30 seconds
@@ -25,7 +25,7 @@ class SSE {
 	init(browser: boolean) {
 		if (!browser) return;
 
-		this.disconnectRef.current = this.connect();
+		this.connect();
 
 		const events = ['mousedown', 'mouseover', 'touch', 'scroll'];
 
@@ -35,7 +35,7 @@ class SSE {
 			if (timeout) clearTimeout(timeout);
 			timeout = setTimeout(
 				() => {
-					this.disconnectRef.current();
+					this.disconnect();
 					this.isDisconnected = true;
 				},
 				1000 * 60 * 5
@@ -43,7 +43,7 @@ class SSE {
 
 			if (this.isDisconnected) {
 				this.isDisconnected = false;
-				this.disconnectRef.current = this.connect();
+				this.disconnect = this.connect();
 			}
 		};
 
@@ -95,7 +95,6 @@ class SSE {
 
 						if (parsed.success) {
 							notify({
-								type: 'alert',
 								color: parsed.data.severity,
 								title: parsed.data.title,
 								message: parsed.data.message,
@@ -126,7 +125,7 @@ class SSE {
 					this.reconnectAttempt++;
 
 					setTimeout(() => {
-						this.disconnectRef.current = connect();
+						this.disconnect = connect();
 						this.isReconnecting = false;
 					}, backoff);
 				}
@@ -151,19 +150,18 @@ class SSE {
 			};
 		};
 
-		let disconnect = connect();
-		this.disconnectRef.current = disconnect;
+		this.disconnect();
+		this.disconnect = connect();
 
 		const interval = setInterval(async () => {
 			if (this.isDisconnected) return clearInterval(interval);
 			if (!(await this.ping())) {
-				disconnect();
-				disconnect = connect();
-				this.disconnectRef.current = disconnect;
+				this.disconnect();
+				this.disconnect = connect();
 			}
 		}, 10000);
 
-		return disconnect;
+		return this.disconnect.bind(this);
 	}
 
 	private ack(id: number) {

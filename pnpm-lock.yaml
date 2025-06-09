@@ -73,7 +73,7 @@ importers:
         version: 0.38.3(@types/pg@8.11.11)(@types/react@19.0.2)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1)
       drizzle-struct:
         specifier: github:tsaxking/drizzle-struct
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/144e20a349c9a0a66c0305df941cd59dbc2c3885(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)(sass-embedded@1.83.0)
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/f827746e256cf20bfcca48054fc9c1ca0f8e40fd(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)(sass-embedded@1.83.0)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.3(@types/pg@8.11.11)(@types/react@19.0.2)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1))(zod@3.24.1)
@@ -2469,8 +2469,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/144e20a349c9a0a66c0305df941cd59dbc2c3885:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/144e20a349c9a0a66c0305df941cd59dbc2c3885}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/f827746e256cf20bfcca48054fc9c1ca0f8e40fd:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/f827746e256cf20bfcca48054fc9c1ca0f8e40fd}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -3273,8 +3273,8 @@ packages:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
 
-  math@https://codeload.github.com/tsaxking/calculations/tar.gz/6f735b3ade72c81393ee5f07db93647c3d4fff91:
-    resolution: {tarball: https://codeload.github.com/tsaxking/calculations/tar.gz/6f735b3ade72c81393ee5f07db93647c3d4fff91}
+  math@git+https://git@github.com:tsaxking/calculations.git#6f735b3ade72c81393ee5f07db93647c3d4fff91:
+    resolution: {commit: 6f735b3ade72c81393ee5f07db93647c3d4fff91, repo: git@github.com:tsaxking/calculations.git, type: git}
     version: 1.0.0
 
   mdsvex@0.11.2:
@@ -4433,6 +4433,10 @@ packages:
         optional: true
       '@swc/wasm':
         optional: true
+
+  ts-utils@git+https://git@github.com:tsaxking/global-ts-utilities.git#c93495ff64716c30e17b24cc890765a5e7cc560a:
+    resolution: {commit: c93495ff64716c30e17b24cc890765a5e7cc560a, repo: git@github.com:tsaxking/global-ts-utilities.git, type: git}
+    version: 1.0.0
 
   ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/c93495ff64716c30e17b24cc890765a5e7cc560a:
     resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/c93495ff64716c30e17b24cc890765a5e7cc560a}
@@ -6741,7 +6745,7 @@ snapshots:
       postgres: 3.4.5
       react: 18.3.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/144e20a349c9a0a66c0305df941cd59dbc2c3885(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)(sass-embedded@1.83.0):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/f827746e256cf20bfcca48054fc9c1ca0f8e40fd(@types/node@22.10.4)(@types/pg@8.11.11)(@types/react@19.0.2)(react@18.3.1)(sass-embedded@1.83.0):
     dependencies:
       '@eslint/compat': 1.2.4(eslint@9.17.0)
       '@msgpack/msgpack': 3.0.0-beta3
@@ -6756,7 +6760,7 @@ snapshots:
       eslint-plugin-svelte: 2.46.1(eslint@9.17.0)(svelte@5.16.1)(ts-node@10.9.2(@types/node@22.10.4)(typescript@5.7.2))
       express: 4.21.2
       fuzzy-search: 3.2.1
-      math: https://codeload.github.com/tsaxking/calculations/tar.gz/6f735b3ade72c81393ee5f07db93647c3d4fff91
+      math: git+https://git@github.com:tsaxking/calculations.git#6f735b3ade72c81393ee5f07db93647c3d4fff91
       pg: 8.13.1
       postgres: 3.4.5
       prettier: 3.4.2
@@ -6764,7 +6768,7 @@ snapshots:
       proper-lockfile: 4.1.2
       svelte: 5.16.1
       ts-node: 10.9.2(@types/node@22.10.4)(typescript@5.7.2)
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/c93495ff64716c30e17b24cc890765a5e7cc560a(@types/node@22.10.4)(sass-embedded@1.83.0)
+      ts-utils: git+https://git@github.com:tsaxking/global-ts-utilities.git#c93495ff64716c30e17b24cc890765a5e7cc560a(@types/node@22.10.4)(sass-embedded@1.83.0)
       typescript: 5.7.2
       uuid: 11.0.4
       zod: 3.24.1
@@ -7876,7 +7880,7 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
-  math@https://codeload.github.com/tsaxking/calculations/tar.gz/6f735b3ade72c81393ee5f07db93647c3d4fff91:
+  math@git+https://git@github.com:tsaxking/calculations.git#6f735b3ade72c81393ee5f07db93647c3d4fff91:
     dependencies:
       typescript: 5.7.2
 
@@ -9147,6 +9151,28 @@ snapshots:
       typescript: 5.7.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+
+  ts-utils@git+https://git@github.com:tsaxking/global-ts-utilities.git#c93495ff64716c30e17b24cc890765a5e7cc560a(@types/node@22.10.4)(sass-embedded@1.83.0):
+    dependencies:
+      typescript: 5.7.2
+      vitest: 3.2.2(@types/node@22.10.4)(sass-embedded@1.83.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/debug'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
 
   ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/c93495ff64716c30e17b24cc890765a5e7cc560a(@types/node@22.10.4)(sass-embedded@1.83.0):
     dependencies:

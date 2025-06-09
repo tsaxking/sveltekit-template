@@ -19,6 +19,14 @@ const getCallsite = () => {
 
 export const save = (callsite: string, type: string, ...args: unknown[]) => {
 	if (LOG_FILE) {
+		// if dir does not exist, create it
+		const logDir = path.dirname(path.join(process.cwd(), LOG_FILE));
+		if (!fs.existsSync(logDir)) {
+			fs.mkdirSync(logDir, { recursive: true });
+		}
+		if (!fs.existsSync(path.join(process.cwd(), LOG_FILE) + '.log')) {
+			fs.writeFileSync(path.join(process.cwd(), LOG_FILE) + '.log', '');
+		}
 		return fs.promises.appendFile(
 			path.join(process.cwd(), LOG_FILE) + '.log',
 			`${new Date().toISOString()} [${callsite}] (${type}) ${args.join(' ')}\n`,
@@ -53,6 +61,6 @@ export const warn = (...args: unknown[]) => {
 export default {
 	log,
 	error,
-	warn,
-	clear: console.clear
+	warn
+	// clear: console.clear
 };

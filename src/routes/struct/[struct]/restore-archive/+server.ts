@@ -3,11 +3,20 @@ import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { DataAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { Logs } from '$lib/server/structs/log.js';
 
 export const POST = async (event) => {
-	if (!event.locals.account) return Errors.noAccount();
+	// console.log('Read archive request for struct:', event.params.struct);
+	if (event.params.struct !== 'test') {
+		if (!event.locals.account) return Errors.noAccount();
+	}
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
+
+	if (!struct.frontend) {
+		return Errors.noFrontend(struct.name);
+	}
+
 	const body = await event.request.json();
 	const safe = z
 		.object({
@@ -21,23 +30,36 @@ export const POST = async (event) => {
 	if (data.isErr()) return Errors.internalError(data.error);
 	if (!data.value) return Errors.noData(safe.data.id);
 
-	const canDo = await Permissions.accountCanDo(
-		event.locals.account,
-		[data.value],
-		DataAction.RestoreArchive
-	);
-
-	if (canDo.isErr()) {
-		return Errors.internalError(canDo.error);
-	}
-
-	if (!canDo.value[0]) {
-		return Errors.notPermitted(
+	PERMIT: if (event.locals.account && event.params.struct !== 'test') {
+		const value = data.value;
+		const account = event.locals.account;
+		if (
+			struct.bypasses.some(
+				(b) => b.action === DataAction.RestoreArchive && b.condition(account, value.data)
+			)
+		) {
+			// Bypass permissions
+			break PERMIT;
+		}
+		const canDo = await Permissions.accountCanDo(
 			event.locals.account,
-			DataAction.RestoreArchive,
-			event.params.struct
+			[data.value],
+			DataAction.RestoreArchive
 		);
+
+		if (canDo.isErr()) {
+			return Errors.internalError(canDo.error);
+		}
+
+		if (!canDo.value[0]) {
+			return Errors.notPermitted(
+				event.locals.account,
+				DataAction.RestoreArchive,
+				event.params.struct
+			);
+		}
 	}
+
 	if (!data.value.archived) {
 		return new Response(
 			JSON.stringify({
@@ -54,6 +76,14 @@ export const POST = async (event) => {
 	}
 	const did = await data.value.setArchive(false);
 	if (did.isErr()) return Errors.internalError(did.error);
+
+	Logs.log({
+		struct: struct.name,
+		dataId: data.value.id,
+		accountId: event.locals.account?.id || 'unknown',
+		type: 'restore-archive',
+		message: `${event.locals.account?.data.username || 'unknown'} restored archived data with id ${data.value.id}`
+	});
 
 	return new Response(
 		JSON.stringify({

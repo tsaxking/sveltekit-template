@@ -3,7 +3,7 @@ import * as inquirer from '@inquirer/prompts';
 import FuzzySearch from 'fuzzy-search';
 import Table from 'cli-table';
 import { Colors } from './colors';
-import terminal from '../utils/terminal';
+import terminal from '../src/lib/server/utils/terminal';
 import chalk from 'chalk';
 
 type GlobalConfig = {
@@ -11,7 +11,7 @@ type GlobalConfig = {
 	clear?: boolean;
 };
 
-export const prompt = async (
+export const prompt = (
 	config: GlobalConfig & {
 		default?: string;
 	}
@@ -28,7 +28,7 @@ export const prompt = async (
 		return res;
 	});
 
-export const repeatPrompt = async (
+export const repeatPrompt = (
 	config: GlobalConfig & {
 		validate?: (output: string) => boolean;
 		allowBlank?: boolean;
@@ -57,7 +57,7 @@ export const repeatPrompt = async (
 		return run();
 	});
 
-export const alert = async (config: GlobalConfig) => {
+export const alert = (config: GlobalConfig) => {
 	return new Promise<void>((res) => {
 		if (config.clear) console.clear();
 		console.log(config.message);
@@ -77,7 +77,7 @@ type Option<T> = {
 	name: string;
 };
 
-export const select = async <T = unknown>(
+export const select = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
 		exit?: boolean;
@@ -121,7 +121,7 @@ export const select = async <T = unknown>(
 		return res;
 	});
 
-export const multiSelect = async <T = unknown>(
+export const multiSelect = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
 	}
@@ -138,7 +138,7 @@ export const multiSelect = async <T = unknown>(
 		});
 	});
 
-export const confirm = async (config: GlobalConfig) =>
+export const confirm = (config: GlobalConfig) =>
 	attemptAsync(async () => {
 		if (config.clear) console.clear();
 		return inquirer.confirm({
@@ -146,7 +146,7 @@ export const confirm = async (config: GlobalConfig) =>
 		});
 	});
 
-export const password = async (config: GlobalConfig) =>
+export const password = (config: GlobalConfig) =>
 	attemptAsync(async () => {
 		if (config.clear) console.clear();
 		return inquirer.password({
@@ -154,7 +154,7 @@ export const password = async (config: GlobalConfig) =>
 		});
 	});
 
-export const search = async <T = unknown>(
+export const search = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
 	}
@@ -172,7 +172,7 @@ export const search = async <T = unknown>(
 		});
 	});
 
-export const selectFromTable = async <T extends Record<string, unknown>>(
+export const selectFromTable = <T extends Record<string, unknown>>(
 	config: GlobalConfig & {
 		options: T[];
 		omit?: (keyof T)[];
@@ -247,7 +247,7 @@ export const selectFromTable = async <T extends Record<string, unknown>>(
 			})
 	);
 
-export const viewTable = async <T extends Record<string, unknown>>(
+export const viewTable = <T extends Record<string, unknown>>(
 	config: GlobalConfig & {
 		options: T[];
 		omit?: (keyof T)[];

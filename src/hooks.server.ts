@@ -1,7 +1,7 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
 import '$lib/server/structs/permissions';
-import '$lib/server/structs/universe';
+// import '$lib/server/structs/universe';
 import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
@@ -46,7 +46,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (!event.locals.account) {
-		const account = await Session.getAccount(session.unwrap());
+		const account = await Session.getAccount(session.value);
 		if (account.isErr()) {
 			return new Response('Internal Server Error', { status: ServerCode.internalServerError });
 		}

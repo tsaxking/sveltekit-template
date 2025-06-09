@@ -2,7 +2,7 @@ import path from 'path';
 import { runTs } from '../src/lib/server/utils/task';
 import terminal from '../src/lib/server/utils/terminal';
 import fs from 'fs/promises';
-import { select, prompt } from '../src/lib/server/cli/utils';
+import { select, prompt } from '../cli/utils';
 
 // Convert import.meta.url to a file path
 

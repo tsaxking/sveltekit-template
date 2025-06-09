@@ -6,10 +6,28 @@ import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 
 export const POST = async (event) => {
-	if (!event.locals.account) return Errors.noAccount();
+	// console.log('Read request for struct:', event.params.struct, event.params.readType);
+	if (event.params.struct !== 'test') {
+		if (!event.locals.account) return Errors.noAccount();
+	}
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
+
+	if (!struct.frontend) {
+		return Errors.noFrontend(struct.name);
+	}
+
+	// console.log(event.params.readType, 'is the read type');
 	const body = await event.request.json();
+	const safeBody = z
+		.object({
+			args: z.unknown()
+		})
+		.safeParse(body);
+
+	if (!safeBody.success) {
+		return Errors.invalidBody(safeBody.error);
+	}
 
 	let data: StructData<Blank, string>[] = [];
 	try {
@@ -27,7 +45,7 @@ export const POST = async (event) => {
 							key: z.string(),
 							value: z.unknown()
 						})
-						.parse(body);
+						.parse(safeBody.data.args);
 					data = await struct
 						.fromProperty(
 							safe.key,
@@ -44,7 +62,7 @@ export const POST = async (event) => {
 						.object({
 							id: z.string()
 						})
-						.parse(body);
+						.parse(safeBody.data.args);
 					const found = await struct.fromId(safe.id).unwrap();
 					if (!found) {
 						return new Response(
@@ -64,6 +82,7 @@ export const POST = async (event) => {
 				}
 				break;
 			default:
+				terminal.error('Invalid read type:', event.params.readType);
 				return new Response(
 					JSON.stringify({
 						success: false,
@@ -86,6 +105,9 @@ export const POST = async (event) => {
 	if (struct.data.name === 'test') {
 		payload = data.map((d) => d.data);
 	} else {
+		if (!event.locals.account) {
+			return Errors.noAccount();
+		}
 		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
 			data,
@@ -96,6 +118,8 @@ export const POST = async (event) => {
 		}
 		payload = res.value;
 	}
+
+	// console.log('Read response payload:', payload);
 
 	return new Response(
 		JSON.stringify({

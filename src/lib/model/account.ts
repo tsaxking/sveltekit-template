@@ -1,5 +1,5 @@
 import { attemptAsync } from 'ts-utils/check';
-import { sse } from '$lib/utils/sse';
+import { sse } from '$lib/services/sse';
 import {
 	Struct,
 	type PartialStructable,
@@ -46,7 +46,8 @@ export namespace Account {
 			read: 'boolean'
 		},
 		socket: sse,
-		browser
+		browser,
+		log: true
 	});
 
 	export type AccountNotificationData = StructData<typeof AccountNotification.data.structure>;
@@ -77,8 +78,11 @@ export namespace Account {
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
 		attemptAsync(async () => {
 			const data = await Account.send('self', {}, Account.getZodSchema());
+			console.log('Account.getSelf', data);
+			const account = data.unwrap();
+			console.log('Account.getSelf', account);
 			self.update((d) => {
-				d.set(data.unwrap()); // The program may not like this
+				d.set(account);
 				return d;
 			});
 		});

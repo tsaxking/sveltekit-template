@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Account } from '../structs/account';
+import { Account } from '../src/lib/server/structs/account';
 import { selectData, structActions, viewData } from './struct';
 import { Action, confirm, Folder, password, prompt } from './utils';
-import terminal from '../utils/terminal';
-import { Logs } from '../structs/log';
+import terminal from '../src/lib/server/utils/terminal';
+import { Logs } from '../src/lib/server/structs/log';
 import { attemptAsync } from 'ts-utils/check';
 
-export const selectAccount = async (filter?: (account: Account.AccountData) => boolean) => {
+export const selectAccount = (filter?: (account: Account.AccountData) => boolean) => {
 	return attemptAsync(async () => {
 		const accounts = (
 			await Account.Account.all({
@@ -63,7 +63,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		).unwrap();
 	}),
 	new Action('Verify', 'Verify an account', '🔐', async () => {
-		const account = (await selectAccount((account) => !account.data.verified)).unwrap();
+		const account = await selectAccount((account) => !account.data.verified).unwrap();
 		if (!account) return terminal.log('Invalid account');
 		const confirmed = await confirm({
 			message: `Verify ${account.data.username}?`
@@ -189,11 +189,11 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${admin.data.username} is no longer an admin`);
 	}),
 	new Action('Make Developer', 'Make an account a developer', '👨‍💻', async () => {
-		const account = (await selectAccount()).unwrap();
+		const account = await selectAccount().unwrap();
 
 		if (!account) return terminal.log('Invalid account');
 
-		const isDeveloper = await (await Account.isDeveloper(account)).unwrap();
+		const isDeveloper = await Account.isDeveloper(account).unwrap();
 		if (isDeveloper) return terminal.log('Account is already a developer');
 
 		const confirmed = await confirm({
@@ -273,7 +273,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		terminal.log('LOGS:', logs.length);
 
 		const res = await viewData(logs, 'Logs', {
-			omit: ['id', 'accountId', 'archived', 'attributes', 'universe']
+			omit: ['id', 'accountId', 'archived', 'attributes']
 		});
 
 		if (res.isErr()) terminal.error(res.error);

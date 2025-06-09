@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import { openStructs } from '../src/lib/server/cli/struct';
+import { openStructs } from '../cli/struct';
 import { DB } from '../src/lib/server/db';
 import { Struct } from 'drizzle-struct/back-end';
 import AdmZip from 'adm-zip';
-import { prompt } from '../src/lib/server/cli/utils';
+import { prompt } from '../cli/utils';
 import { toSnakeCase } from 'ts-utils/text';
 import { resolveAll } from 'ts-utils/check';
 import { Test } from '../src/lib/server/structs/testing';
@@ -16,7 +16,7 @@ export default async () => {
 		await fs.promises.mkdir(BACKUP_DIR, { recursive: true });
 	}
 
-	(await openStructs()).unwrap();
+	await openStructs().unwrap();
 	(await Struct.buildAll(DB)).unwrap();
 	resolveAll(
 		await Promise.all(

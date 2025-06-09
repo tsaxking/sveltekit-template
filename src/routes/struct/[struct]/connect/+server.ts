@@ -1,7 +1,9 @@
+import { Errors, status, EventErrorCode, EventSuccessCode } from '$lib/server/event-handler.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { z } from 'zod';
 
 export const POST = async (event) => {
+	// console.log('Connect request for struct:', event.params.struct);
 	const data = await event.request.json();
 	const name = event.params.struct;
 	try {
@@ -12,14 +14,11 @@ export const POST = async (event) => {
 			.parse(data);
 
 		const struct = Struct.structs.get(name);
-		if (!struct)
-			return new Response(
-				JSON.stringify({
-					success: false,
-					message: `Struct ${name} not found`
-				}),
-				{ status: 200 }
-			);
+		if (!struct) return Errors.noStruct(name);
+
+		if (!struct.frontend) {
+			return Errors.noFrontend(name);
+		}
 
 		for (const [k, v] of Object.entries(struct.data.structure)) {
 			if (!typed.structure[k]) {
@@ -27,50 +26,54 @@ export const POST = async (event) => {
 					// We don't want safes on the front end
 					continue;
 				}
-				return new Response(
-					JSON.stringify({
+				return status(
+					{
 						success: false,
-						message: `Missing key ${k}`
-					}),
+						message: `Error: key ${k} is missing from the structure`,
+						code: EventErrorCode.InvalidBody
+					},
 					{ status: 400 }
 				);
 			}
 			if (struct.data.safes?.includes(k) && typed.structure[k]) {
-				return new Response(
-					JSON.stringify({
+				return status(
+					{
 						success: false,
-						message: `Error: key ${k} is a safe key. It should not exist on the front end.`
-					}),
-					{ status: 400 }
+						message: `Error: key ${k} is a safe and should not be included in the structure`,
+						code: EventErrorCode.InvalidBody
+					},
+					{
+						status: 400
+					}
 				);
 			}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			if (typed.structure[k] !== (v as any).config.dataType) {
-				return new Response(
-					JSON.stringify({
+				return status(
+					{
 						success: false,
-						message: `Error: invalid type for key ${k}`
-					}),
-					{ status: 400 }
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						message: `Error: key ${k} has an invalid data type, expected ${(v as any).config.dataType}, got ${typed.structure[k]}`,
+						code: EventErrorCode.InvalidBody
+					},
+					{
+						status: 400
+					}
 				);
 			}
 		}
 	} catch (error) {
-		console.error(error);
-		return new Response(
-			JSON.stringify({
-				success: false,
-				message: 'Invalid struct data'
-			}),
-			{ status: 200 }
-		);
+		return Errors.internalError(error as Error);
 	}
 
-	return new Response(
-		JSON.stringify({
+	return status(
+		{
 			success: true,
-			message: 'Struct exists and is valid'
-		}),
-		{ status: 200 }
+			message: `Struct ${name} connected successfully`,
+			code: EventSuccessCode.OK
+		},
+		{
+			status: 200
+		}
 	);
 };

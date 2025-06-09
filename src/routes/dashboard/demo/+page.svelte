@@ -24,10 +24,10 @@
 		icon: 'home',
 		id: 'card1',
 		size: {
-			width: 1,
+			width: 3,
 			height: 1,
 			xl: {
-				width: 1,
+				width: 2,
 				height: 2
 			}
 		}
@@ -39,10 +39,10 @@
 		icon: 'edit',
 		id: 'card2',
 		size: {
-			width: 1,
+			width: 3,
 			height: 1,
 			sm: {
-				width: 1,
+				width: 6,
 				height: 2
 			}
 		}
@@ -54,7 +54,7 @@
 		icon: 'delete',
 		id: 'card3',
 		size: {
-			width: 1,
+			width: 3,
 			height: 1
 		}
 	});
@@ -65,7 +65,7 @@
 		icon: 'person',
 		id: 'card4',
 		size: {
-			width: 1,
+			width: 3,
 			height: 1
 		}
 	});

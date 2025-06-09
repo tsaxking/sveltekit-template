@@ -6,12 +6,18 @@ import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 
 export const POST = async (event) => {
-	if (!event.locals.account) return Errors.noAccount();
+	// console.log('Read archive request for struct:', event.params.struct);
+	if (event.params.struct !== 'test') {
+		if (!event.locals.account) return Errors.noAccount();
+	}
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
 
-	const data = await struct.archived({ type: 'all' });
+	if (!struct.frontend) {
+		return Errors.noFrontend(struct.name);
+	}
 
+	const data = await struct.archived({ type: 'all' });
 	if (data.isErr()) {
 		return Errors.internalError(data.error);
 	}
@@ -20,6 +26,9 @@ export const POST = async (event) => {
 	if (struct.data.name === 'test') {
 		payload = data.value.map((d) => d.data);
 	} else {
+		if (!event.locals.account) {
+			return Errors.noAccount();
+		}
 		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
 			data.value,

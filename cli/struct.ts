@@ -20,10 +20,10 @@ import {
 	viewTable
 } from './utils';
 import { checkStrType, returnType } from 'drizzle-struct/utils';
-import { Permissions } from '../structs/permissions';
+import { Permissions } from '../src/lib/server/structs/permissions';
 // import { Universes } from '../structs/universe';
-import terminal from '../utils/terminal';
-import { Logs } from '../structs/log';
+import terminal from '../src/lib/server/utils/terminal';
+import { Logs } from '../src/lib/server/structs/log';
 
 export const openStructs = () =>
 	attemptAsync(async () => {
@@ -464,7 +464,7 @@ export const dataActions = {
 					dataId: String(data.id),
 					struct: data.struct.name,
 					accountId: 'CLI',
-					type: 'restore',
+					type: 'restore-archive',
 					message: 'Data restored from cli'
 				})
 			).unwrap();
@@ -476,103 +476,109 @@ export const dataActions = {
 			const versions = (await data.getVersions()).unwrap();
 			return selectVersionPipe(versions, next);
 		}),
-	// addAttributes: async (data: StructData, next?: Next) =>
-	// 	attemptAsync(async () => {
-	// 		const current = data.getAttributes().unwrap();
-	// 		terminal.log('Current attributes:', current);
+	addAttributes: async (data: StructData, next?: Next) =>
+		attemptAsync(async () => {
+			const current = data.getAttributes().unwrap();
+			terminal.log('Current attributes:', current);
 
-	// 		const res = (
-	// 			await prompt({
-	// 				message: 'Enter new attributes separated by commas'
-	// 			})
-	// 		).unwrap();
+			const res = (
+				await prompt({
+					message: 'Enter new attributes separated by commas'
+				})
+			).unwrap();
 
-	// 		if (!res) {
-	// 			return doNext('No attributes added', undefined, next);
-	// 		}
+			if (!res) {
+				return doNext('No attributes added', undefined, next);
+			}
 
-	// 		const attributes = res.split(',').map((a) => a.trim());
-	// 		const res2 = await data.addAttributes(...attributes);
+			const attributes = res.split(',').map((a) => a.trim());
+			const res2 = await data.addAttributes(...attributes);
 
-	// 		if (res2.isErr()) {
-	// 			terminal.error(res2.error);
-	// 			return doNext('Failed to add attributes', res2.error, next);
-	// 		}
+			if (res2.isErr()) {
+				terminal.error(res2.error);
+				return doNext('Failed to add attributes', res2.error, next);
+			}
 
-	// 		(await Logs.log({
-	// 			dataId: String(data.id),
-	// 			struct: data.struct.name,
-	// 			accountId: 'CLI',
-	// 			type: 'set-attributes',
-	// 			message: 'Attributes added from cli',
-	// 		})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'set-attributes',
+					message: 'Attributes added from cli'
+				})
+			).unwrap();
 
-	// 		return doNext('Attributes added', undefined, next);
-	// 	}),
-	// removeAttributes: async (data: StructData, next?: Next) =>
-	// 	attemptAsync(async () => {
-	// 		const current = data.getAttributes().unwrap();
-	// 		terminal.log('Current attributes:', current);
+			return doNext('Attributes added', undefined, next);
+		}),
+	removeAttributes: async (data: StructData, next?: Next) =>
+		attemptAsync(async () => {
+			const current = data.getAttributes().unwrap();
+			terminal.log('Current attributes:', current);
 
-	// 		const res = (
-	// 			await prompt({
-	// 				message: 'Enter attributes to remove separated by commas'
-	// 			})
-	// 		).unwrap();
+			const res = (
+				await prompt({
+					message: 'Enter attributes to remove separated by commas'
+				})
+			).unwrap();
 
-	// 		if (!res) {
-	// 			return doNext('No attributes removed', undefined, next);
-	// 		}
+			if (!res) {
+				return doNext('No attributes removed', undefined, next);
+			}
 
-	// 		const attributes = res.split(',').map((a) => a.trim());
-	// 		const res2 = await data.removeAttributes(...attributes);
+			const attributes = res.split(',').map((a) => a.trim());
+			const res2 = await data.removeAttributes(...attributes);
 
-	// 		if (res2.isErr()) {
-	// 			terminal.error(res2.error);
-	// 			return doNext('Failed to remove attributes', res2.error, next);
-	// 		}
+			if (res2.isErr()) {
+				terminal.error(res2.error);
+				return doNext('Failed to remove attributes', res2.error, next);
+			}
 
-	// 		(await Logs.log({
-	// 			dataId: String(data.id),
-	// 			struct: data.struct.name,
-	// 			accountId: 'CLI',
-	// 			type: 'set-attributes',
-	// 			message: 'Attributes removed from cli',
-	// 		})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'set-attributes',
+					message: 'Attributes removed from cli'
+				})
+			).unwrap();
 
-	// 		return doNext('Attributes removed', undefined, next);
-	// 	}),
-	// setAttributes: async (data: StructData, next?: Next) =>
-	// 	attemptAsync(async () => {
-	// 		const res = (
-	// 			await prompt({
-	// 				clear: true,
-	// 				message: 'Enter new attributes separated by commas'
-	// 			})
-	// 		).unwrap();
+			return doNext('Attributes removed', undefined, next);
+		}),
+	setAttributes: async (data: StructData, next?: Next) =>
+		attemptAsync(async () => {
+			const res = (
+				await prompt({
+					clear: true,
+					message: 'Enter new attributes separated by commas'
+				})
+			).unwrap();
 
-	// 		if (!res) {
-	// 			return doNext('No attributes set', undefined, next);
-	// 		}
+			if (!res) {
+				return doNext('No attributes set', undefined, next);
+			}
 
-	// 		const attributes = res.split(',').map((a) => a.trim());
-	// 		const res2 = await data.setAttributes(attributes);
+			const attributes = res.split(',').map((a) => a.trim());
+			const res2 = await data.setAttributes(attributes);
 
-	// 		if (res2.isErr()) {
-	// 			terminal.error(res2.error);
-	// 			return doNext('Failed to set attributes', res2.error, next);
-	// 		}
+			if (res2.isErr()) {
+				terminal.error(res2.error);
+				return doNext('Failed to set attributes', res2.error, next);
+			}
 
-	// 		(await Logs.log({
-	// 			dataId: String(data.id),
-	// 			struct: data.struct.name,
-	// 			accountId: 'CLI',
-	// 			type: 'set-attributes',
-	// 			message: 'Attributes set from cli',
-	// 		})).unwrap();
+			(
+				await Logs.log({
+					dataId: String(data.id),
+					struct: data.struct.name,
+					accountId: 'CLI',
+					type: 'set-attributes',
+					message: 'Attributes set from cli'
+				})
+			).unwrap();
 
-	// 		return doNext('Attributes set', undefined, next);
-	// 	}),
+			return doNext('Attributes set', undefined, next);
+		}),
 	// setUniverse: async (data: StructData, next?: Next) =>
 	// 	attemptAsync(async () => {
 	// 		const universes = (

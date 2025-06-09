@@ -88,7 +88,7 @@
 
 <div
 	bind:this={alert}
-	class="alert alert-{color} bg-{color} alert-dismissible fade p-3"
+	class="alert alert-{color} alert-dismissible fade p-3"
 	role="alert"
 	class:show={doShow}
 	aria-atomic="true"

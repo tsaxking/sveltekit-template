@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { sse } from '$lib/utils/sse';
+import { sse } from '$lib/services/sse';
 import { Struct, StructData } from 'drizzle-struct/front-end';
 
 export namespace Test {

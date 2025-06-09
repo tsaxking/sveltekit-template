@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { sse } from '$lib/utils/sse';
+	import { sse } from '$lib/services/sse';
 
 	const start = () => {
 		return fetch('/test/sse/init', {

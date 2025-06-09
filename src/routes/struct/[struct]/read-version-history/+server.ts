@@ -6,23 +6,45 @@ import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 
 export const POST = async (event) => {
-	if (!event.locals.account) return Errors.noAccount();
+	// console.log('Read version history request for struct:', event.params.struct);
+	if (event.params.struct !== 'test') {
+		if (!event.locals.account) return Errors.noAccount();
+	}
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
 
-	const data = await struct.archived({ type: 'all' });
+	if (!struct.frontend) {
+		return Errors.noFrontend(struct.name);
+	}
 
-	if (data.isErr()) {
-		return Errors.internalError(data.error);
+	const body = await event.request.json();
+	const safe = z
+		.object({
+			id: z.string()
+		})
+		.safeParse(body);
+
+	if (!safe.success) return Errors.invalidBody(safe.error);
+
+	const targetData = await struct.fromId(safe.data.id);
+	if (targetData.isErr()) return Errors.internalError(targetData.error);
+	if (!targetData.value) return Errors.noData(safe.data.id);
+
+	const versions = await targetData.value.getVersions();
+	if (versions.isErr()) {
+		return Errors.internalError(versions.error);
 	}
 
 	let payload: Record<string, unknown>[] = [];
 	if (struct.data.name === 'test') {
-		payload = data.value.map((d) => d.data);
+		payload = versions.value.map((d) => d.data);
 	} else {
+		if (!event.locals.account) {
+			return Errors.noAccount();
+		}
 		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
-			data.value,
+			versions.value,
 			PropertyAction.ReadVersionHistory
 		);
 		if (res.isErr()) {

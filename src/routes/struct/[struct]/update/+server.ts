@@ -6,9 +6,16 @@ import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 
 export const POST = async (event) => {
-	if (!event.locals.account) return Errors.noAccount();
+	if (event.params.struct !== 'test') {
+		if (!event.locals.account) return Errors.noAccount();
+	}
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
+
+	if (!struct.frontend) {
+		return Errors.noFrontend(struct.name);
+	}
+
 	const body = await event.request.json();
 
 	const safe = z
@@ -46,6 +53,27 @@ export const POST = async (event) => {
 		}
 	}
 
+	if (event.params.struct === 'test') {
+		// it is a test struct, so we allow anyone to update it
+		const res = await targetData.value.update(safe.data.data as any);
+		if (res.isErr()) return Errors.internalError(res.error);
+		return new Response(
+			JSON.stringify({
+				success: true
+			}),
+			{
+				status: 200,
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}
+		);
+	}
+
+	if (!event.locals.account) {
+		return Errors.noAccount(); // Should not happen due to the check above, but just in case and for type safety
+	}
+
 	const filtered = await Permissions.filterPropertyActionFromAccount(
 		event.locals.account,
 		[targetData.value],
@@ -61,12 +89,15 @@ export const POST = async (event) => {
 		return Errors.notPermitted(event.locals.account, PropertyAction.Update, event.params.struct);
 	}
 
-	const toUpdate = Object.fromEntries(
-		Object.entries(canUpdate).map(([key, value]) => [
-			key,
-			Object.prototype.hasOwnProperty.call(safe.data, key) ? (safe.data as any)[key] : value
-		])
-	);
+	const parsedData = safe.data.data;
+
+	const toUpdate = {};
+	for (const key in canUpdate) {
+		if (Object.prototype.hasOwnProperty.call(parsedData, key)) {
+			(toUpdate as any)[key] = parsedData[key];
+		}
+	}
+
 	const res = await targetData.value.update(toUpdate);
 	if (res.isErr()) return Errors.internalError(res.error);
 
