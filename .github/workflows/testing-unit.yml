@@ -40,8 +40,8 @@ jobs:
 
       - name: Set up Docker Compose
         run: |
-          docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose.yml
-          sudo chmod +x ./docker-compose.yml
+          docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./config/docker/test.docker-compose.yml
+          sudo chmod +x ./config/docker/test.docker-compose.yml
 
       - name: Load .env variables
         run: |
@@ -55,7 +55,7 @@ jobs:
           export $(cat .env | xargs)
 
       - name: Start database service
-        run: docker compose up -d
+        run: docker compose -f ./config/docker/test.docker-compose.yml up -d
 
       - name: Wait for database
         run: |
