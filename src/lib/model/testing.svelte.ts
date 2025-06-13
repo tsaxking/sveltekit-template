@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { sse } from '$lib/utils/sse';
+import { sse } from '$lib/services/sse';
 import { Struct, StructData } from 'drizzle-struct/front-end';
 
 export namespace Test {
@@ -88,7 +88,8 @@ export namespace Test {
 
 			promise: (async () => {
 				if (!browser) return;
-				(await Test.build()).unwrap();
+				await Test.build().unwrap();
+				await sse.waitForConnection(10_000);
 
 				const uniqueName = Math.random().toString(36).substring(7);
 				console.log('uniqueName', uniqueName);

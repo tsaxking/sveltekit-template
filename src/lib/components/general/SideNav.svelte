@@ -18,24 +18,24 @@
 				instance.hide();
 			});
 
-			// Ensure body scrolling is restored
-			document.body.style.overflow = '';
-			document.body.classList.remove('offcanvas-open');
+			// // Ensure body scrolling is restored
+			// document.body.style.overflow = '';
+			// document.body.classList.remove('offcanvas-open');
 
-			// Remove any lingering backdrops
-			document.querySelectorAll('.offcanvas-backdrop').forEach((backdrop) => {
-				backdrop.remove();
-			});
+			// // Remove any lingering backdrops
+			// document.querySelectorAll('.offcanvas-backdrop').forEach((backdrop) => {
+			// 	backdrop.remove();
+			// });
 		});
 	};
 
 	onMount(() => {
-		hide();
-		document.addEventListener('hidden.bs.offcanvas', () => {
-			document.body.style.overflow = '';
-			document.body.style.paddingRight = '';
-			document.body.classList.remove('offcanvas-open');
-		});
+		// hide();
+		// document.addEventListener('hidden.bs.offcanvas', () => {
+		// 	document.body.style.overflow = '';
+		// 	document.body.style.paddingRight = '';
+		// 	document.body.classList.remove('offcanvas-open');
+		// });
 	});
 </script>
 

@@ -5,10 +5,10 @@
 
 	const addNotif = () =>
 		notify({
-			type: 'toast',
 			color: 'success',
 			message: 'Test Message',
-			title: 'Test title'
+			title: 'Test title',
+			autoHide: 3000
 		});
 </script>
 

@@ -1,4 +1,4 @@
-import { sse } from '$lib/server/utils/sse';
+import { sse } from '$lib/server/services/sse';
 
 export const GET = async (event) => {
 	const id = event.params.id;

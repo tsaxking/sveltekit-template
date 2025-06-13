@@ -3,7 +3,7 @@ import { Struct } from 'drizzle-struct/back-end';
 import { integer, text } from 'drizzle-orm/pg-core';
 import { Account } from './account';
 import { Permissions } from './permissions';
-import { Universes } from './universe';
+// import { Universes } from './universe';
 
 const { PUBLIC_DOMAIN, SESSION_DURATION } = process.env;
 

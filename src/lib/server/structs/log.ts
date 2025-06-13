@@ -46,7 +46,10 @@ export namespace Logs {
 			| 'create'
 			| 'update'
 			| 'archive'
-			| 'restore'
+			| 'restore-archive'
+			| 'set-attributes'
+			| 'add-attributes'
+			| 'remove-attributes'
 			| 'delete'
 			| 'set-universe';
 		message: string;

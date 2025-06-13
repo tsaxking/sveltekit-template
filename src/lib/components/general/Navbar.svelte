@@ -58,7 +58,7 @@
 					{/if}
 				</ul>
 			</div>
-			<!-- <button
+			<button
 				class="me-5 btn position-relative"
 				type="button"
 				data-bs-toggle="offcanvas"
@@ -72,10 +72,10 @@
 						<span class="visually-hidden">unread messages</span>
 					</span>
 				{/if}
-			</button> -->
+			</button>
 		</div>
 	</div>
 </nav>
 <SideNav id="pages" />
 
-<!-- <Notifications bind:notifs /> -->
+<Notifications bind:notifs />

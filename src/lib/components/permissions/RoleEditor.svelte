@@ -1,97 +1,60 @@
 <script lang="ts">
-	import { type Blank } from 'drizzle-struct/front-end';
-	import { capitalize, fromSnakeCase } from 'ts-utils/text';
-	import { Permissions } from '$lib/model/permissions';
-	import { confirm } from '$lib/utils/prompts';
+    import { Permissions } from '$lib/model/permissions';
+	import { DataArr } from 'drizzle-struct/front-end';
 	import { onMount } from 'svelte';
-	import { z } from 'zod';
 
-	interface Props {
-		role: Permissions.RoleData;
-	}
+    interface Props {
+        role: Permissions.RoleData;
+    }
 
-	const { role }: Props = $props();
+    const { role }: Props = $props();
 
-	type S = {
-		group: string;
-		permission: string[];
-	};
+    let permissions: Permissions.RoleRulesetDataArr = $state(new DataArr(Permissions.RoleRuleset, []));
+    let entitlements: Permissions.EntitlementDataArr = $state(new DataArr(Permissions.Entitlement, []));
+    let groups = $state<{
+        [key: string]: Permissions.EntitlementData[];
+    }>({});
 
-	let entitlements: S[] = $state([]);
+    onMount(() => {
+        permissions = Permissions.getRolePermissions(role);
+        entitlements = Permissions.getEntitlements();
+        const unsubGroups = entitlements.subscribe((data) => {
+            groups = data.reduce((acc, entitlement) => {
+                const g = entitlement.data.group;
+                if (!g) return acc;
+                if (!acc[g]) {
+                    acc[g] = [];
+                }
+                acc[g].push(entitlement);
+                return acc;
+            }, {} as { [key: string]: Permissions.EntitlementData[] });
+        });
 
-	let value = $state(new Set<string>());
-
-	export const save = () => {
-		Permissions.saveEntitlements(role, Array.from(value)).then((e) => {
-			console.log(e);
-		});
-	};
-
-	export const reset = () => {
-		try {
-			value = new Set(z.array(z.string()).parse(JSON.parse(role.data.entitlements ?? '[]')));
-		} catch (error) {
-			console.error(error);
-			value = new Set();
-		}
-	};
-
-	onMount(() => {
-		Permissions.getEntitlements().then((e) => {
-			if (e.isOk()) {
-				entitlements = e.value.reduce((acc, ent) => {
-					const has = acc.find((e) => e.group === ent.group);
-					if (has) {
-						has.permission.push(ent.name);
-					} else {
-						acc.push({
-							group: ent.group,
-							permission: [ent.name]
-						});
-					}
-					return acc;
-				}, [] as S[]);
-			}
-		});
-
-		return role.subscribe((e) => {
-			try {
-				value = new Set(z.array(z.string()).parse(JSON.parse(e.entitlements ?? '[]')));
-			} catch (error) {
-				console.error(error);
-				value = new Set();
-			}
-		});
-	});
+        return () => {
+            unsubGroups();
+        }
+    });
 </script>
 
+
 <div class="container">
-	<div class="row">
-		{#each entitlements as e, i}
-			<h4>
-				{e.group}
-			</h4>
-			<ul class="list-unstyled">
-				{#each e.permission as p}
-					<li>
-						<input
-							type="checkbox"
-							id="permission-{i}-{p}"
-							onchange={(e) => {
-								if (e.currentTarget.checked) {
-									value.add(p);
-								} else {
-									value.delete(p);
-								}
-							}}
-							checked={value.has(p)}
-						/>
-						<label for="permission-{i}-{p}" class="ms-2">
-							{capitalize(fromSnakeCase(p, '-'))}
-						</label>
-					</li>
-				{/each}
-			</ul>
-		{/each}
-	</div>
+    {#each Object.keys(groups) as group}
+        <div class="row mb-3">
+            <h3>{group}</h3>
+        </div>
+        <div class="row mb-3">
+            <ul class="list-group">
+                {#each groups[group] as entitlement}
+                    <li class="list-item">
+                        <div class="form-check form-switch d-flex justify-content-between align-items-middle">
+                            <label class="form-check-label" for="example-switch-1">
+                                This is a switch
+                            </label>
+                            <input class="form-check-input" type="checkbox" role="switch" value="" id="example-switch-1">
+                        </div>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+    {/each}
 </div>
