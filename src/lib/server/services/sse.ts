@@ -40,7 +40,7 @@ export class Connection {
 	private readonly emitter = new SimpleEventEmitter<'connect' | 'destroy' | 'close'>();
 
 	private index = 0;
-	public lastPing = Date.now();	
+	public lastPing = Date.now();
 
 	private cache: {
 		event: string;
@@ -105,7 +105,6 @@ export class Connection {
 	notify(notif: Notification) {
 		return this.send('notification', notif);
 	}
-
 
 	retryCached(now: number) {
 		for (const msg of this.cache) {

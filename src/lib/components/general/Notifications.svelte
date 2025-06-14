@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { Account } from '$lib/model/account';
 	import { DataArr } from 'drizzle-struct/front-end';
 	import { onMount } from 'svelte';
@@ -49,17 +48,17 @@
 		};
 	});
 
-	const test = () => {
-		Account.AccountNotification.new({
-			accountId: Account.self.get().data.id || 'guest',
-			title: 'Test Notification',
-			icon: 'info',
-			message: 'This is a test notification.',
-			severity: 'info',
-			link: '/test',
-			read: false
-		});
-	};
+	// const test = () => {
+	// 	Account.AccountNotification.new({
+	// 		accountId: Account.self.get().data.id || 'guest',
+	// 		title: 'Test Notification',
+	// 		icon: 'info',
+	// 		message: 'This is a test notification.',
+	// 		severity: 'info',
+	// 		link: '/test',
+	// 		read: false
+	// 	});
+	// };
 </script>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" {id} aria-labelledby="{id}Label">

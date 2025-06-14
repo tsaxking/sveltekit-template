@@ -2,7 +2,6 @@ import { Errors, EventSuccessCode, status } from '$lib/server/event-handler.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { z } from 'zod';
-import { json } from '@sveltejs/kit';
 import { DataAction } from 'drizzle-struct/types';
 import { Logs } from '$lib/server/structs/log.js';
 import { Account } from '$lib/server/structs/account.js';

@@ -31,7 +31,8 @@ vite.config.ts.timestamp-*
 private/emails/**.html
 
 backups/
+dist/
 
-**/entitlements/*.yaml
+# **/entitlements/*.yaml
 
 *.log

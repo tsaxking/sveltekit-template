@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { Account } from '$lib/model/account';
-	import type { BootstrapColor } from 'colors/color';
-	import Card from '../bootstrap/Card.svelte';
 
 	interface Props {
 		notification: Account.AccountNotificationData;

@@ -1,7 +1,6 @@
 import { Loop } from 'ts-utils/loop';
 import { attemptAsync, type Result } from 'ts-utils/check';
 import { Stream } from 'ts-utils/stream';
-import { v4 as uuid } from 'uuid';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
 import { Struct } from 'drizzle-struct/front-end';
@@ -175,6 +174,7 @@ export namespace Requests {
 			};
 
 			xhr.upload.onerror = (e) => {
+				console.error('Upload error:', e);
 				emitter.emit('error', new Error('Upload failed'));
 			};
 

@@ -21,7 +21,7 @@
 		message,
 		color,
 		autoHide = 5000,
-		icon,
+		// icon,
 		animate,
 		textColor,
 		onHide,

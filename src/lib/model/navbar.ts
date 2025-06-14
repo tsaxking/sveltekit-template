@@ -1,4 +1,4 @@
-import { writable, type Writable } from 'svelte/store';
+import { type Writable } from 'svelte/store';
 
 export namespace Navbar {
 	type Section = {

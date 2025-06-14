@@ -1,7 +1,5 @@
-import { json } from '@sveltejs/kit';
 import { Errors, EventErrorCode, EventSuccessCode, status } from '$lib/server/event-handler.js';
 import { Struct } from 'drizzle-struct/back-end';
-import { z } from 'zod';
 
 export const POST = async (event) => {
 	// console.log('Custom request:', event.params.struct);

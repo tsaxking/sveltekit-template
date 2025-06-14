@@ -2,15 +2,10 @@ import { BACKUP_DIR } from './backup';
 import fs from 'fs';
 import path from 'path';
 import { select } from '../cli/utils';
-import { runTask } from '../src/lib/server/utils/task';
-import { Client } from 'pg';
-import { z } from 'zod';
 import { openStructs } from '../cli/struct';
-import { DB } from '../src/lib/server/db';
 import { Struct } from 'drizzle-struct/back-end';
 import AdmZip from 'adm-zip';
 import backup from './backup';
-import { resolveAll } from 'ts-utils/check';
 
 export default async (file?: string) => {
 	await backup();

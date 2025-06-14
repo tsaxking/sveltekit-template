@@ -1,5 +1,2 @@
-export type Entitlement = 
-    'view-roles'
-  | 'manage-roles';
-	export type Group = 
-    'Roles';
+export type Entitlement = 'manage-roles' | 'view-roles';
+export type Group = 'Roles';

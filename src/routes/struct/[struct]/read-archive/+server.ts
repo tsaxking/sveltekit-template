@@ -1,9 +1,7 @@
 import { Errors } from '$lib/server/event-handler.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
-import terminal from '$lib/server/utils/terminal.js';
-import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
-import { DataAction, PropertyAction } from 'drizzle-struct/types';
-import { z } from 'zod';
+import { Struct } from 'drizzle-struct/back-end';
+import { PropertyAction } from 'drizzle-struct/types';
 
 export const POST = async (event) => {
 	// console.log('Read archive request for struct:', event.params.struct);

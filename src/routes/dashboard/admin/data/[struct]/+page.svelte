@@ -9,7 +9,7 @@
 		type GridOptions,
 		themeQuartz,
 		PaginationModule,
-		type GridApi,
+		// type GridApi,
 		QuickFilterModule,
 		ValidationModule,
 		RowAutoHeightModule,
@@ -51,12 +51,12 @@
 	});
 
 	let gridDiv: HTMLDivElement;
-	let grid: GridApi;
+	// let grid: GridApi;
 	onMount(() => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const gridOptions: GridOptions<any> = {
 			theme: darkTheme, // Apply custom dark theme
-			columnDefs: Object.entries(struct).map(([k, v]) => {
+			columnDefs: Object.entries(struct).map(([k, _v]) => {
 				return {
 					headerName: k,
 					field: k
@@ -82,7 +82,7 @@
 		};
 
 		if (gridDiv) {
-			grid = createGrid(gridDiv, gridOptions); // Create the grid with custom options
+			createGrid(gridDiv, gridOptions); // Create the grid with custom options
 		}
 	});
 </script>

@@ -1,4 +1,3 @@
-import { json } from '@sveltejs/kit';
 import { Errors, EventSuccessCode, status } from '$lib/server/event-handler.js';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { z } from 'zod';

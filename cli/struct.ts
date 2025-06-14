@@ -10,18 +10,8 @@ import {
 } from 'drizzle-struct/back-end';
 import fs from 'fs';
 import path from 'path';
-import {
-	select,
-	selectFromTable,
-	repeatPrompt,
-	confirm,
-	prompt,
-	multiSelect,
-	viewTable
-} from './utils';
+import { select, selectFromTable, repeatPrompt, confirm, prompt, viewTable } from './utils';
 import { checkStrType, returnType } from 'drizzle-struct/utils';
-import { Permissions } from '../src/lib/server/structs/permissions';
-// import { Universes } from '../structs/universe';
 import terminal from '../src/lib/server/utils/terminal';
 import { Logs } from '../src/lib/server/structs/log';
 

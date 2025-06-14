@@ -1,17 +1,7 @@
 import { attemptAsync } from 'ts-utils/check';
 import { sse } from '$lib/services/sse';
-import {
-	Struct,
-	type PartialStructable,
-	type Structable,
-	type GlobalCols,
-	StructData,
-	SingleWritable,
-	DataArr
-} from 'drizzle-struct/front-end';
-import { Requests } from '$lib/utils/requests';
+import { Struct, StructData, SingleWritable, DataArr } from 'drizzle-struct/front-end';
 import { browser } from '$app/environment';
-import { z } from 'zod';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -78,9 +68,7 @@ export namespace Account {
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
 		attemptAsync(async () => {
 			const data = await Account.send('self', {}, Account.getZodSchema());
-			console.log('Account.getSelf', data);
 			const account = data.unwrap();
-			console.log('Account.getSelf', account);
 			self.update((d) => {
 				d.set(account);
 				return d;
@@ -89,7 +77,7 @@ export namespace Account {
 		return self;
 	};
 
-	export const getNotifs = (limit: number, offset: number) => {
+	export const getNotifs = (/*limit: number, offset: number*/) => {
 		return AccountNotification.query(
 			'get-own-notifs',
 			{},

@@ -3,7 +3,7 @@ import './styles/animate.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import './styles/scss/colors.scss';
 
-import "halfmoon/css/halfmoon.min.css";
+import 'halfmoon/css/halfmoon.min.css';
 
 // import './styles/bs-overwrite.css';
 import './styles/global.css';

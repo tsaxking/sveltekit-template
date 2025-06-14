@@ -1,5 +1,5 @@
-import { boolean, text, timestamp } from 'drizzle-orm/pg-core';
-import { Struct, StructStream, type Blank } from 'drizzle-struct/back-end';
+import { boolean, text } from 'drizzle-orm/pg-core';
+import { Struct } from 'drizzle-struct/back-end';
 import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
@@ -9,9 +9,7 @@ import type { Notification } from '$lib/types/notification';
 import { Session } from './session';
 import { sse } from '../services/sse';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
-import { z } from 'zod';
 // import { Universes } from './universe';
-import { Permissions } from './permissions';
 import { Email } from './email';
 
 export namespace Account {
@@ -33,12 +31,6 @@ export namespace Account {
 		},
 		safes: ['key', 'salt', 'verification']
 	});
-
-	const sophieH = Account.sample;
-	sophieH.update({
-		'firstName': 'Needy',
-		'lastName': "Person"
-	})
 
 	Account.sendListen('self', async (event) => {
 		const session = (await Session.getSession(event)).unwrap();

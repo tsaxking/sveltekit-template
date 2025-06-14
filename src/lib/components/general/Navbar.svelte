@@ -2,7 +2,6 @@
 	import SideNav from './SideNav.svelte';
 	import Notifications from './Notifications.svelte';
 	import { Account } from '$lib/model/account';
-	import { onMount } from 'svelte';
 	interface Props {
 		title: string;
 	}
