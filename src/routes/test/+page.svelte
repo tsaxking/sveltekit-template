@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte.ts';
-	import { onMount } from 'svelte';
 	import { toSnakeCase } from 'ts-utils/text';
 
 	const tests = Test.unitTest();

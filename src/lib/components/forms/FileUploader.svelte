@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'filepond/dist/filepond.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	import FilePond, { registerPlugin, supported, type FilePondFile } from 'svelte-filepond';
+	import FilePond, { registerPlugin, type FilePondFile } from 'svelte-filepond';
 
 	import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 	import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -62,7 +62,7 @@
 		imageTransformOutputQuality={quality}
 		imageTransformOutputMimeType="image/jpeg"
 		server={{
-			process: async (fieldName, file, metadata, load, error, progress, abort) => {
+			process: async (fieldName, file, _, load, error) => {
 				const f = new File([file], file.name, { type: file.type });
 
 				const res = await uploader.sendFile(f, fieldName);

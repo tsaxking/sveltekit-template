@@ -2,7 +2,6 @@ import { resolveAll } from 'ts-utils/check';
 import { runTask } from '../src/lib/server/utils/task';
 import fs from 'fs';
 import path from 'path';
-import { fromSnakeCase, toCamelCase } from 'ts-utils/text';
 
 const INPUT_DIR = path.join(process.cwd(), 'mjml');
 const OUTPUT_DIR = path.join(process.cwd(), 'private', 'emails');

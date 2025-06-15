@@ -1,6 +1,5 @@
 import Modal from '../components/bootstrap/Modal.svelte';
 import { createRawSnippet, mount } from 'svelte';
-import { browser } from '$app/environment';
 import { modalTarget, createButtons, clearModals } from './prompts';
 import { attemptAsync } from 'ts-utils/check';
 
@@ -37,6 +36,8 @@ type Inputs = {
 		accept: string;
 	};
 	color: void;
+	date: void;
+	'datetime-local': void;
 };
 
 type ReturnTypes = {
@@ -50,6 +51,8 @@ type ReturnTypes = {
 	select: string;
 	password: string;
 	file: FileList;
+	date: string;
+	'datetime-local': string;
 };
 
 type InputReturnType<T extends keyof Inputs> = ReturnTypes[T];
@@ -117,6 +120,8 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 				case 'password':
 				case 'email':
 				case 'color':
+				case 'date':
+				case 'datetime-local':
 					el = document.createElement('input');
 					el.type = input.type;
 					if (input.value != undefined) el.setAttribute('value', input.value);
@@ -336,7 +341,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 										submit: false
 									})
 								);
-								console.log(div.innerHTML);
 								return div.innerHTML;
 							},
 							setup(formEl: Element) {

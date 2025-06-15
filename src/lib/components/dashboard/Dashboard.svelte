@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { capitalize } from 'ts-utils/text';
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import MinimizedCards from './MinimizedCards.svelte';
-	import { browser } from '$app/environment';
 	import { Dashboard } from '$lib/model/dashboard';
 
 	interface Props {

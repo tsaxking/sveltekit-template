@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { notify } from '$lib/utils/prompts';
 	import { passwordStrength } from 'check-password-strength';
 
@@ -9,7 +8,6 @@
 
 	if (form?.message) {
 		notify({
-			type: 'alert',
 			autoHide: 3000,
 			color: 'warning',
 			title: 'Error',

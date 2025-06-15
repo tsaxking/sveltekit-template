@@ -1,7 +1,7 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
 import '$lib/server/structs/permissions';
-import '$lib/server/structs/universe';
+// import '$lib/server/structs/universe';
 import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
@@ -10,16 +10,17 @@ import terminal from '$lib/server/utils/terminal';
 import { config } from 'dotenv';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '$lib/server/db/';
-import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
+// import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import '$lib/server/index';
+import { createStructService } from '$lib/server/services/sse';
 config();
 
 Struct.each((struct) => {
 	if (!struct.built) {
 		struct.build(DB);
-		struct.eventHandler(handleEvent(struct));
-		connectionEmitter(struct);
+		// struct.eventHandler(handleEvent(struct));
+		createStructService(struct);
 	}
 });
 
@@ -45,7 +46,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (!event.locals.account) {
-		const account = await Session.getAccount(session.unwrap());
+		const account = await Session.getAccount(session.value);
 		if (account.isErr()) {
 			return new Response('Internal Server Error', { status: ServerCode.internalServerError });
 		}

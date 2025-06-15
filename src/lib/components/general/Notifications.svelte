@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { Account } from '$lib/model/account';
 	import { DataArr } from 'drizzle-struct/front-end';
 	import { onMount } from 'svelte';
@@ -37,27 +36,42 @@
 	);
 
 	onMount(() => {
-		notifications = Account.getNotifs(limit, page);
+		notifications = Account.getNotifs(/*limit, page*/);
+
+		const unsub = notifications.subscribe((d) => {
+			console.log(d);
+			notifs = d.filter((n) => !n.data.read).length;
+		});
+
+		return () => {
+			unsub();
+		};
 	});
 
-	$effect(() => {
-		if (browser) {
-			notifications = Account.getNotifs(limit, page);
-			notifs = $notifications.filter((n) => !n.data.read).length;
-		}
-	});
+	// const test = () => {
+	// 	Account.AccountNotification.new({
+	// 		accountId: Account.self.get().data.id || 'guest',
+	// 		title: 'Test Notification',
+	// 		icon: 'info',
+	// 		message: 'This is a test notification.',
+	// 		severity: 'info',
+	// 		link: '/test',
+	// 		read: false
+	// 	});
+	// };
 </script>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" {id} aria-labelledby="{id}Label">
-	<div class="offcanvas-header">
+	<div class="offcanvas-header layer-1">
 		<h5 class="offcanvas-title" id="{id}Label">My Notifications</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
-	<div class="offcanvas-body">
+	<div class="offcanvas-body layer-1">
 		<ul class="list-unstyled">
 			{#each $notifications as notification}
 				<Notification {notification} />
 			{/each}
 		</ul>
 	</div>
+	<!-- <button type="button" class="btn btn-success" onclick={test}> Create Test Notification </button> -->
 </div>

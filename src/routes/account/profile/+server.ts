@@ -1,4 +1,3 @@
-import { Session } from '$lib/server/structs/session.js';
 import { FileReceiver } from '$lib/server/utils/files';
 import { error } from '@sveltejs/kit';
 

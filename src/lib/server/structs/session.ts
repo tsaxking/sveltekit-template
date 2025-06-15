@@ -2,8 +2,6 @@ import { attemptAsync } from 'ts-utils/check';
 import { Struct } from 'drizzle-struct/back-end';
 import { integer, text } from 'drizzle-orm/pg-core';
 import { Account } from './account';
-import { Permissions } from './permissions';
-import { Universes } from './universe';
 
 const { PUBLIC_DOMAIN, SESSION_DURATION } = process.env;
 
@@ -55,7 +53,7 @@ export namespace Session {
 					})
 				).unwrap();
 
-				event.cookies.set('ssid:' + PUBLIC_DOMAIN, session.id, {
+				event.cookies.set(('ssid_' + PUBLIC_DOMAIN).replace(/./g, '_'), session.id, {
 					httpOnly: false,
 					domain: PUBLIC_DOMAIN ?? '',
 					path: '/',

@@ -4,8 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"start": "pnpm build && node --env-file=.env ./src/server.js",
-		"cli": "npx vite-node ./src/lib/server/cli/index.ts",
+		"start": "node --env-file=.env ./src/server.js",
+		"cli": "npx vite-node ./cli/index.ts",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -109,6 +109,7 @@
 		"fuzzy-search": "^3.2.1",
 		"google-auth-library": "^9.15.0",
 		"googleapis": "^144.0.0",
+		"halfmoon": "2.0.2",
 		"html-constructor": "github:tsaxking/html-constructor",
 		"http-status-codes": "^2.3.0",
 		"jsoneditor": "^10.1.3",

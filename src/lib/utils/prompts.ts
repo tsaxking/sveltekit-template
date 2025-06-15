@@ -1,8 +1,7 @@
 import { browser } from '$app/environment';
 import { type BootstrapColor } from 'colors/color';
 import Modal from '../components/bootstrap/Modal.svelte';
-import { createRawSnippet, mount, type Snippet } from 'svelte';
-import Toast from '$lib/components/bootstrap/Toast.svelte';
+import { createRawSnippet, mount } from 'svelte';
 import Alert from '$lib/components/bootstrap/Alert.svelte';
 
 export const modalTarget = (() => {
@@ -401,11 +400,10 @@ const notificationContainer = (() => {
 	return null;
 })();
 
-type NotificationConfig<Type extends 'toast' | 'alert'> = {
+type NotificationConfig = {
 	title: string;
 	message: string;
 	color: BootstrapColor;
-	type: Type;
 	autoHide?: number;
 	textColor?: BootstrapColor;
 };
@@ -420,10 +418,10 @@ const createNotif = () => {
 	return notif;
 };
 
-export const notify = <Type extends 'toast' | 'alert'>(config: NotificationConfig<Type>) => {
+export const notify = (config: NotificationConfig) => {
 	const notif = createNotif();
 	if (!notif) return;
-	return mount(config.type === 'toast' ? Toast : Alert, {
+	return mount(Alert, {
 		target: notif,
 		props: {
 			title: config.title,

@@ -4,7 +4,7 @@ import { Struct } from 'drizzle-struct/back-end';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
 import { DB } from '../db';
-import { and, eq, like, not, sql, or } from 'drizzle-orm';
+import { and, not, sql, or } from 'drizzle-orm';
 
 export namespace Logs {
 	export const Log = new Struct({
@@ -46,7 +46,10 @@ export namespace Logs {
 			| 'create'
 			| 'update'
 			| 'archive'
-			| 'restore'
+			| 'restore-archive'
+			| 'set-attributes'
+			| 'add-attributes'
+			| 'remove-attributes'
 			| 'delete'
 			| 'set-universe';
 		message: string;

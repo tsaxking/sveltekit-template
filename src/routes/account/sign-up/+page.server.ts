@@ -5,6 +5,8 @@ import { z } from 'zod';
 import { passwordStrength } from 'check-password-strength';
 import { OAuth2Client } from 'google-auth-library';
 import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
+import terminal from '$lib/server/utils/terminal.js';
+import { Logs } from '$lib/server/structs/log.js';
 
 // const log = (...args: unknown[]) => console.log('[oauth/sign-up]', ...args);
 
@@ -116,20 +118,28 @@ export const actions = {
 		}
 
 		const account = await Account.createAccount({
-			username: username.data,
-			email: email.data,
+			username: username.data.toLowerCase(),
+			email: email.data.toLowerCase(),
 			firstName: firstName.data,
 			lastName: lastName.data,
 			password: password.data
 		});
 
 		if (account.isErr()) {
-			console.error(account.error);
+			terminal.error(account.error);
 			return fail(ServerCode.internalServerError, {
 				message: 'Failed to create account',
 				error: 'Failed to create account'
 			});
 		}
+
+		Logs.log({
+			type: 'create',
+			struct: Account.Account.name,
+			dataId: account.value.id,
+			accountId: account.value.id,
+			message: `${account.value.data.username} created an account`
+		});
 
 		return {
 			message: 'Account created',
