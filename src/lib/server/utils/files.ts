@@ -93,3 +93,36 @@ export class FileReceiver {
 		});
 	}
 }
+
+type FileTree = {
+	name: string;
+	children?: FileTree[];
+	path: string;
+}
+
+export const fileTree = (dir: string) => {
+	return attemptAsync<FileTree>(async () => {
+		const read = async (subDir: string): Promise<FileTree> => {
+			const tree = await fs.promises.readdir(subDir, { withFileTypes: true }).then(async entries => {
+				return Promise.all(entries.map(async (entry) => {
+					const fullPath = path.join(subDir, entry.name);
+					if (entry.isDirectory()) {
+						return read(fullPath);
+					} else {
+						return { 
+							name: entry.name,
+							path: path.relative(dir, fullPath),
+						};
+					}
+				}));
+			});
+			return {
+				name: path.basename(subDir),
+				children: tree.filter(Boolean) as FileTree[],
+				path: path.relative(dir, subDir),
+			}
+		}
+
+		return read(dir);
+	});
+}
