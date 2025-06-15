@@ -1324,15 +1324,17 @@ export namespace Permissions {
 	const entitlementCache: {
 		timeout?: NodeJS.Timeout;
 		toBuilds?: (() => Promise<void>)[] | undefined;
-		startEntitlements?: EntitlementData[];
+		built: true | undefined;
 	} = {
 		timeout: undefined,
 		toBuilds: [],
-		startEntitlements: []
+		built: undefined
 	};
 	const onceBuild = async () => {
 		if (entitlementCache.toBuilds === undefined) return; // Already built
-		entitlementCache.startEntitlements = await Entitlement.all({ type: 'all' }).unwrap();
+		if (entitlementCache.built) return; // Already built
+		entitlementCache.built = true; // Mark as built to prevent multiple builds
+		await Entitlement.clear().unwrap();
 		await Promise.all(entitlementCache.toBuilds.map((f) => f()));
 		delete entitlementCache.toBuilds; // Clear the toBuilds array
 	};
@@ -1360,51 +1362,22 @@ export namespace Permissions {
 		}
 
 		const run = async () => {
-			const e = await Permissions.Entitlement.fromProperty('name', entitlement.name, {
-				type: 'single'
-			}).unwrap();
-
-			if (e) {
-				await e.delete().unwrap();
-				// remove this from the cache
-				entitlementCache.startEntitlements = entitlementCache.startEntitlements?.filter(
-					(ent) => ent.data.name !== entitlement.name
-				);
-			}
 			await Permissions.Entitlement.new(
 				{
-					id: entitlement.name,
 					name: entitlement.name,
 					group: entitlement.group,
 					structs: JSON.stringify(entitlement.structs.map((s) => s.data.name)),
 					permissions: JSON.stringify(entitlement.permissions),
-					description: entitlement.description,
-					created: new Date().toISOString(),
-					updated: new Date().toISOString(),
-					archived: false,
-					attributes: '[]',
-					lifetime: 0,
-					canUpdate: false,
+					description: entitlement.description
 				},
 				{
-					static: true,
-					overwriteGlobals: true
+					static: true
 				}
 			).unwrap();
 
 			if (entitlementCache.timeout) clearTimeout(entitlementCache.timeout);
 			setTimeout(async () => {
 				saveEntitlements();
-
-				// delete remaining entitlements that are still in the cache
-				// These are entitlements that were not created in this runtime
-				if (entitlementCache.startEntitlements) {
-					for (const ent of entitlementCache.startEntitlements) {
-						if (!entitlementCache.toBuilds?.some((f) => f.name === ent.data.name)) {
-							await ent.delete().unwrap();
-						}
-					}
-				}
 			});
 		};
 
@@ -1417,7 +1390,7 @@ export namespace Permissions {
 
 	Permissions.Entitlement.once('build', onceBuild);
 
-	createEntitlement({
+	Permissions.createEntitlement({
 		name: 'view-roles',
 		structs: [Role],
 		permissions: ['role:read:name', 'role:read:description'],

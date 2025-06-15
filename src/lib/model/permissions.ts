@@ -68,7 +68,7 @@ export namespace Permissions {
 			account: 'string',
 			entitlement: 'string',
 			target: 'string',
-			reason: 'string',
+			reason: 'string'
 		},
 		socket: sse,
 		browser

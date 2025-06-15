@@ -61,7 +61,7 @@ export class Connection {
 		public readonly sse: SSE,
 		private readonly controller: Stream
 	) {
-		console.log(`New SSE connection: ${uuid}`);
+		// console.log(`New SSE connection: ${uuid}`);
 		this.sessionId = session.id;
 	}
 
@@ -80,17 +80,17 @@ export class Connection {
 	}
 
 	ack(id: number) {
-		console.log(`${this.uuid} Client acknowledging message with ID:`, id);
+		// console.log(`${this.uuid} Client acknowledging message with ID:`, id);
 		this.cache = this.cache.filter((e) => {
 			if (e.id > id) return true;
-			console.log(`${this.uuid} Removing cached message ${e.event} with ID:`, e.id);
+			// console.log(`${this.uuid} Removing cached message ${e.event} with ID:`, e.id);
 			return false;
 		});
 	}
 
 	close() {
 		return attempt(() => {
-			console.log('Closing connection', this.uuid);
+			// console.log('Closing connection', this.uuid);
 			// clearInterval(this.interval);
 			// this.send('close', null);
 			this.emit('close');
@@ -145,7 +145,7 @@ export class SSE {
 					console.warn(`Connection ${connection.uuid} is not alive. Closing...`);
 					connection.close();
 					this.connections.delete(connection.uuid);
-					console.log(this.connections);
+					// console.log(this.connections);
 					return;
 				}
 
@@ -183,9 +183,10 @@ export class SSE {
 
 			return new Response(stream, {
 				headers: {
-					'Cache-Control': 'no-store',
+					'Cache-Control': 'no-cache',
 					'Content-Type': 'text/event-stream',
-					Connection: 'keep-alive'
+					Connection: 'keep-alive',
+					'X-Accel-Buffering': 'no'
 				}
 			});
 		});
@@ -219,7 +220,7 @@ export class SSE {
 
 		const connection = new Connection(uuid, session, this, controller);
 		this.connections.set(uuid, connection);
-		console.log(this.connections);
+		// console.log(this.connections);
 		return connection;
 	}
 
