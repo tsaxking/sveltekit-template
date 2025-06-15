@@ -1328,7 +1328,7 @@ export namespace Permissions {
 	} = {
 		timeout: undefined,
 		toBuilds: [],
-		built: undefined,
+		built: undefined
 	};
 	const onceBuild = async () => {
 		if (entitlementCache.toBuilds === undefined) return; // Already built
@@ -1368,10 +1368,10 @@ export namespace Permissions {
 					group: entitlement.group,
 					structs: JSON.stringify(entitlement.structs.map((s) => s.data.name)),
 					permissions: JSON.stringify(entitlement.permissions),
-					description: entitlement.description,
+					description: entitlement.description
 				},
 				{
-					static: true,
+					static: true
 				}
 			).unwrap();
 
