@@ -36,7 +36,7 @@
 	);
 
 	onMount(() => {
-		notifications = Account.getNotifs(limit, page);
+		notifications = Account.getNotifs(/*limit, page*/);
 
 		const unsub = notifications.subscribe((d) => {
 			console.log(d);

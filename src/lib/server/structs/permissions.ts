@@ -47,6 +47,8 @@ export namespace Permissions {
 		}
 	});
 
+	// Role.callListen('update', async (event, data) => {});
+
 	export const detectCircularHierarchy = (role: RoleData) => {
 		return attemptAsync(async () => {
 			const visited = new Set<string>();
@@ -88,6 +90,31 @@ export namespace Permissions {
 		}
 	});
 
+	Role.on('delete', async (role) => {
+		const parent = await getParent(role).unwrap();
+		Role.fromProperty('parent', role.id, { type: 'stream' }).pipe(async (child) => {
+			if (parent) {
+				const res = await child.update({
+					parent: parent.id
+				});
+				if (res.isErr()) {
+					terminal.error(
+						`Failed to update child role ${child.id} to parent ${parent.id}: ${res.error}. You may now have orphaned roles.`
+					);
+				}
+			} else {
+				// if admin role is deleted, all children should be deleted as well.
+				child.delete();
+			}
+		});
+		RoleAccount.fromProperty('role', role.id, { type: 'stream' }).pipe((ra) => {
+			ra.delete();
+		});
+		RoleRuleset.fromProperty('role', role.id, { type: 'stream' }).pipe((rr) => {
+			rr.delete();
+		});
+	});
+
 	block(Role);
 
 	export type RoleData = typeof Role.sample;
@@ -126,11 +153,88 @@ export namespace Permissions {
 		structure: {
 			role: text('role').notNull(),
 			entitlement: text('entitlement').notNull(),
-			target: text('target_attribute').notNull()
+			target: text('target_attribute').notNull(),
+			reason: text('reason').notNull()
 		}
 	});
 
 	block(RoleRuleset);
+
+	RoleRuleset.queryListen('my-permissions', async (event) => {
+		if (!event.locals.account) {
+			return new Error('No Authenticated account found');
+		}
+
+		const rs = await getRulesetsFromAccount(event.locals.account).unwrap();
+		return rs.filter((r) => r.struct.name === 'role_rulesets') as RoleRulesetData[];
+	});
+
+	RoleRuleset.queryListen('from-role', async (event, data) => {
+		const body = z
+			.object({
+				role: z.string()
+			})
+			.safeParse(data);
+
+		if (!body.success) {
+			return new Error('Invalid request body');
+		}
+
+		const role = await Role.fromId(body.data.role).unwrap();
+		if (!role) {
+			return new Error('Role not found');
+		}
+
+		PERMIT: if (event.locals.account) {
+			if (await Account.isAdmin(event.locals.account)) {
+				break PERMIT;
+			}
+			// If the account is at or higher than the role's level, they can view the rulesets
+			const parent = await getHighestLevelRole(role, event.locals.account, true).unwrap();
+			if (!parent) {
+				return new Error("You do not have permission to view this role's rulesets");
+			}
+		} else {
+			return new Error('No Authenticated account found');
+		}
+		return getRulesetsFromRole(role).unwrap();
+	});
+	RoleRuleset.queryListen('available-permissions', async (event, data) => {
+		const body = z
+			.object({
+				role: z.string()
+			})
+			.safeParse(data);
+
+		if (!body.success) {
+			return new Error('Invalid request body');
+		}
+
+		const role = await Role.fromId(body.data.role).unwrap();
+		if (!role) {
+			return new Error('Role not found');
+		}
+
+		PERMIT: if (event.locals.account) {
+			if (await Account.isAdmin(event.locals.account)) {
+				break PERMIT;
+			}
+			// If the account is higher than the role's level, they can view the rulesets
+			const parent = await getHighestLevelRole(role, event.locals.account, false).unwrap();
+			if (!parent) {
+				return new Error("You do not have permission to view this role's rulesets");
+			}
+		} else {
+			return new Error('No Authenticated account found');
+		}
+
+		const parent = await getParent(role).unwrap();
+		if (!parent) {
+			return new Error('No parent role found for this role');
+		}
+
+		return getRulesetsFromRole(parent).unwrap();
+	});
 
 	export const getTopLevelRole = (role: RoleData) => {
 		return attemptAsync(async () => {
@@ -273,6 +377,38 @@ export namespace Permissions {
 		});
 	};
 
+	export const grantRoleRuleset = (
+		role: RoleData,
+		entitlement: Entitlement,
+		targetAttribute: string,
+		reason: string
+	) => {
+		return attemptAsync(async () => {
+			const rs = await getRoleRuleset(role, entitlement, targetAttribute).unwrap();
+			if (rs) {
+				throw new Error('Role ruleset already exists');
+			}
+			return RoleRuleset.new({
+				role: role.id,
+				entitlement,
+				target: targetAttribute,
+				reason
+			}).unwrap();
+		});
+	};
+
+	export const revokeRoleRuleset = (
+		role: RoleData,
+		entitlement: Entitlement,
+		targetAttribute: string
+	) => {
+		return attemptAsync(async () => {
+			const rs = await getRoleRuleset(role, entitlement, targetAttribute).unwrap();
+			if (!rs) throw new Error('Role ruleset not found');
+			await rs.delete().unwrap();
+		});
+	};
+
 	RoleRuleset.callListen('grant-permission', async (event, data) => {
 		const body = z
 			.object({
@@ -290,17 +426,17 @@ export namespace Permissions {
 			};
 		}
 
+		const role = await Role.fromId(body.data.role).unwrap();
+		if (!role) {
+			return {
+				success: false,
+				message: 'Role not found'
+			};
+		}
+
 		PERMIT: if (event.locals.account) {
 			if (await Account.isAdmin(event.locals.account)) {
 				break PERMIT;
-			}
-
-			const role = await Role.fromId(body.data.role).unwrap();
-			if (!role) {
-				return {
-					success: false,
-					message: 'Role not found'
-				};
 			}
 
 			const entitlement = await Entitlement.fromProperty('name', body.data.entitlement, {
@@ -365,12 +501,12 @@ export namespace Permissions {
 				// code: EventErrorCode.NoAccount,
 			};
 		}
-
-		RoleRuleset.new({
-			role: body.data.role,
-			entitlement: body.data.entitlement,
-			target: body.data.targetAttribute
-		}).unwrap();
+		grantRoleRuleset(
+			role,
+			body.data.entitlement as Entitlement,
+			body.data.targetAttribute,
+			'Permission granted via API'
+		);
 
 		return {
 			success: true,
@@ -452,19 +588,11 @@ export namespace Permissions {
 			};
 		}
 
-		const existing = await getRoleRuleset(
+		await revokeRoleRuleset(
 			role,
-			entitlement.data.name,
+			entitlement.data.name as Entitlement,
 			body.data.targetAttribute
 		).unwrap();
-		if (!existing) {
-			return {
-				success: false,
-				message: 'This role does not have this permission'
-			};
-		}
-
-		await existing.delete().unwrap();
 
 		return {
 			success: true,
@@ -479,8 +607,18 @@ export namespace Permissions {
 		structure: {
 			account: text('account').notNull(),
 			entitlement: text('entitlement').notNull(),
-			target: text('target_attribute').notNull()
+			target: text('target_attribute').notNull(),
+			reason: text('reason').notNull()
 		}
+	});
+
+	AccountRuleset.queryListen('my-permissions', async (event) => {
+		if (!event.locals.account) {
+			return new Error('No Authenticated account found');
+		}
+
+		const rs = await getRulesetsFromAccount(event.locals.account).unwrap();
+		return rs.filter((r) => r.struct.name === 'account_rulesets') as AccountRulesetData[];
 	});
 
 	AccountRuleset.callListen('grant-permission', async (event, data) => {
@@ -547,7 +685,8 @@ export namespace Permissions {
 		AccountRuleset.new({
 			account: body.data.account,
 			entitlement: body.data.entitlement,
-			target: body.data.targetAttribute
+			target: body.data.targetAttribute,
+			reason: 'Permission granted via API'
 		}).unwrap();
 
 		return {
@@ -1160,7 +1299,7 @@ export namespace Permissions {
 		if (entitlements.isErr()) {
 			return terminal.error(entitlements);
 		}
-		return fs.promises.writeFile(
+		await fs.promises.writeFile(
 			ENTITLEMENT_FILE,
 			`
 	export type Entitlement = \n    ${entitlements.value.map((e) => `'${e.data.name}'`).join('\n  | ')};
@@ -1182,13 +1321,20 @@ export namespace Permissions {
 		? I
 		: never;
 
-	let timeout: NodeJS.Timeout | undefined;
-
-	let toBuilds: (() => {})[] | undefined = [];
+	const entitlementCache: {
+		timeout?: NodeJS.Timeout;
+		toBuilds?: (() => Promise<void>)[] | undefined;
+		startEntitlements?: EntitlementData[];
+	} = {
+		timeout: undefined,
+		toBuilds: [],
+		startEntitlements: []
+	};
 	const onceBuild = async () => {
-		if (toBuilds === undefined) return; // Already built
-		await Promise.all(toBuilds.map((f) => f()));
-		toBuilds = undefined;
+		if (entitlementCache.toBuilds === undefined) return; // Already built
+		entitlementCache.startEntitlements = await Entitlement.all({ type: 'all' }).unwrap();
+		await Promise.all(entitlementCache.toBuilds.map((f) => f()));
+		delete entitlementCache.toBuilds; // Clear the toBuilds array
 	};
 
 	// This is not wrapped in an attemptAsync because if it fails, this is a critical error that should not be ignored.
@@ -1220,30 +1366,52 @@ export namespace Permissions {
 
 			if (e) {
 				await e.delete().unwrap();
+				// remove this from the cache
+				entitlementCache.startEntitlements = entitlementCache.startEntitlements?.filter(
+					(ent) => ent.data.name !== entitlement.name
+				);
 			}
 			await Permissions.Entitlement.new(
 				{
+					id: entitlement.name,
 					name: entitlement.name,
 					group: entitlement.group,
 					structs: JSON.stringify(entitlement.structs.map((s) => s.data.name)),
 					permissions: JSON.stringify(entitlement.permissions),
-					description: entitlement.description
+					description: entitlement.description,
+					created: new Date().toISOString(),
+					updated: new Date().toISOString(),
+					archived: false,
+					attributes: '[]',
+					lifetime: 0,
+					canUpdate: false,
 				},
 				{
-					static: true
+					static: true,
+					overwriteGlobals: true
 				}
 			).unwrap();
 
-			if (timeout) clearTimeout(timeout);
+			if (entitlementCache.timeout) clearTimeout(entitlementCache.timeout);
 			setTimeout(async () => {
 				saveEntitlements();
+
+				// delete remaining entitlements that are still in the cache
+				// These are entitlements that were not created in this runtime
+				if (entitlementCache.startEntitlements) {
+					for (const ent of entitlementCache.startEntitlements) {
+						if (!entitlementCache.toBuilds?.some((f) => f.name === ent.data.name)) {
+							await ent.delete().unwrap();
+						}
+					}
+				}
 			});
 		};
 
 		if (Permissions.Entitlement.built) {
 			await run();
 		} else {
-			toBuilds?.push(run);
+			entitlementCache.toBuilds?.push(run);
 		}
 	};
 

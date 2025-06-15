@@ -48,11 +48,12 @@ export namespace Permissions {
 	export type EntitlementDataArr = DataArr<typeof Entitlement.data.structure>;
 
 	export const RoleRuleset = new Struct({
-		name: 'role_ruleset',
+		name: 'role_rulesets',
 		structure: {
 			role: 'string',
 			entitlement: 'string',
-			target: 'string'
+			target: 'string',
+			reason: 'string'
 		},
 		socket: sse,
 		browser
@@ -66,7 +67,8 @@ export namespace Permissions {
 		structure: {
 			account: 'string',
 			entitlement: 'string',
-			target: 'string'
+			target: 'string',
+			reason: 'string',
 		},
 		socket: sse,
 		browser
@@ -84,6 +86,18 @@ export namespace Permissions {
 			{
 				asStream: false,
 				satisfies: (data) => data.data.role === role.data.id
+			}
+		);
+	};
+	export const getAvailableRolePermissions = (role: RoleData) => {
+		return RoleRuleset.query(
+			'available-permissions',
+			{
+				role: role.data.id
+			},
+			{
+				asStream: false,
+				satisfies: (data) => data.data.role === role.data.parent
 			}
 		);
 	};

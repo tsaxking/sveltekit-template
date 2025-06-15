@@ -2,46 +2,108 @@
 	import { Permissions } from '$lib/model/permissions';
 	import { DataArr } from 'drizzle-struct/front-end';
 	import { onMount } from 'svelte';
+	import { capitalize, fromSnakeCase } from 'ts-utils/text';
 
 	interface Props {
 		role: Permissions.RoleData;
-		targetAttribute: string;
 	}
 
-	const { role, targetAttribute }: Props = $props();
+	const { role }: Props = $props();
 
-	let permissions: Permissions.RoleRulesetDataArr = $state(
-		new DataArr(Permissions.RoleRuleset, [])
-	);
-	let entitlements: Permissions.EntitlementDataArr = $state(
-		new DataArr(Permissions.Entitlement, [])
-	);
+	let currentPermissions = $state(new DataArr(Permissions.RoleRuleset, []));
+	let availablePermissions = $state(new DataArr(Permissions.RoleRuleset, []));
+	let entitlements = $state(new DataArr(Permissions.Entitlement, []));
 	let groups = $state<{
-		[key: string]: Permissions.EntitlementData[];
+		[key: string]: {
+			ruleset: Permissions.RoleRulesetData | undefined;
+			entitlement: Permissions.EntitlementData;
+		};
 	}>({});
 
 	onMount(() => {
-		permissions = Permissions.getRolePermissions(role);
+		let staging: Permissions.RoleRulesetData[] | undefined = [];
+		let entitlementsDone = false;
+		currentPermissions = Permissions.getRolePermissions(role);
+		availablePermissions = Permissions.getAvailableRolePermissions(role);
 		entitlements = Permissions.getEntitlements();
-		const unsubGroups = entitlements.subscribe((data) => {
-			groups = data.reduce(
-				(acc, entitlement) => {
-					const g = entitlement.data.group;
-					if (!g) return acc;
-					if (!acc[g]) {
-						acc[g] = [];
-					}
-					acc[g].push(entitlement);
-					return acc;
-				},
-				{} as { [key: string]: Permissions.EntitlementData[] }
-			);
+
+		const assign = (rulesets: Permissions.RoleRulesetData[]) => {
+			for (const rs of rulesets) {
+				const entitlement = entitlements.data.find((e) => e.data.name === rs.data.entitlement);
+				if (entitlement) {
+					// Check if the group already exists, if not create it
+				} else {
+					console.error(`Entitlement ${rs.data.entitlement} not found`);
+				}
+			}
+			// remove from memory because we don't need it anymore.
+			staging = undefined;
+		};
+
+		const apUnsub = availablePermissions.subscribe((p) => {
+			if (!entitlementsDone) {
+				// Groups are not created yet, so we can only collect rulesets
+				return (staging = p);
+			}
+
+			// Groups are created so we can assign rulesets to groups
+			assign(p);
+		});
+		const etUnsub = entitlements.subscribe((e) => {
+			if (entitlementsDone) return;
+			entitlementsDone = true;
+
+			for (const entitlement of e) {
+				if (!groups[String(entitlement.data.name)]) {
+					groups[String(entitlement.data.name)] = {
+						ruleset: undefined,
+						entitlement: entitlement
+					};
+				} else {
+					console.warn(`Entitlement ${entitlement.data.name} already exists in groups, skipping.`);
+				}
+			}
+			groups = { ...groups };
+
+			// If this isn't entered, it will be entered when the available permissions are updated.
+			if (staging) {
+				assign(staging);
+			}
 		});
 
 		return () => {
-			unsubGroups();
+			apUnsub();
+			etUnsub();
 		};
 	});
+
+	const grant = async (ruleset: Permissions.RoleRulesetData) => {
+		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
+		if (entitlement) {
+			const res = await Permissions.grantRolePermission(
+				role,
+				entitlement,
+				String(ruleset.data.target)
+			);
+			return res.isOk();
+		} else {
+			console.error(`Entitlement ${ruleset.data.entitlement} not found`);
+		}
+	};
+
+	const revoke = async (ruleset: Permissions.RoleRulesetData) => {
+		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
+		if (entitlement) {
+			const res = await Permissions.revokeRolePermission(
+				role,
+				entitlement,
+				String(ruleset.data.target)
+			);
+			return res.isOk();
+		} else {
+			console.error(`Entitlement ${ruleset.data.entitlement} not found`);
+		}
+	};
 </script>
 
 <div class="container">
@@ -51,19 +113,29 @@
 		</div>
 		<div class="row mb-3">
 			<ul class="list-group">
-				{#each groups[group] as entitlement}
-					<li class="list-item">
-						<div class="form-check form-switch d-flex justify-content-between align-items-middle">
-							<label class="form-check-label" for="example-switch-1"> This is a switch </label>
-							<input
-								class="form-check-input"
-								type="checkbox"
-								role="switch"
-								value=""
-								id="example-switch-1"
-							/>
-						</div>
-					</li>
+				{#each Object.keys(groups) as group}
+					{#if groups[group].ruleset}
+						<li class="list-group-item">
+							<div class="form-check form-switch">
+								<input
+									class="form-check-input"
+									type="checkbox"
+									role="switch"
+									id="switch-check-{groups[group].entitlement.data.name}"
+								/>
+								<label
+									class="form-check-label"
+									for="switch-check-{groups[group].entitlement.data.name}"
+									>{capitalize(
+										fromSnakeCase(String(groups[group].entitlement.data.name), '-')
+									)}</label
+								>
+							</div>
+							<small class="text-muted">
+								{groups[group].entitlement.data.description || 'No description available.'}
+							</small>
+						</li>
+					{/if}
 				{/each}
 			</ul>
 		</div>
