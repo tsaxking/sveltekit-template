@@ -18,16 +18,6 @@ export default async () => {
 
 	await openStructs().unwrap();
 	(await Struct.buildAll(DB)).unwrap();
-	resolveAll(
-		await Promise.all(
-			Array.from({ length: 100 }, (_) =>
-				Test.Test.new({
-					name: 'test',
-					age: parseInt((Math.random() * 100).toString())
-				})
-			)
-		)
-	).unwrap();
 
 	const name =
 		(
