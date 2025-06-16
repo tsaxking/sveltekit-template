@@ -26,7 +26,8 @@ jobs:
           [
             tsaxking/tators-dashboard-kit,
             tsaxking/tators-app-kit,
-            'tsaxking/elevate.tv',
+            # 'tsaxking/elevate.tv',
+            4sight-live/4sight-web-server,
             tsaxking/inventory-kit
           ]
 
