@@ -1,6 +1,8 @@
 import { Struct } from 'drizzle-struct/back-end';
 import { Account } from './structs/account';
 import terminal from './utils/terminal';
+import { generateSearchFile } from './utils/files';
+import path from 'path';
 
 const postBuild = async () => {
 	const admin = await Account.Account.fromProperty(
@@ -43,6 +45,8 @@ const postBuild = async () => {
 			}
 		).unwrap();
 	}
+
+	await generateSearchFile(path.join(process.cwd(), 'private', 'releases'), 'releases');
 };
 
 {

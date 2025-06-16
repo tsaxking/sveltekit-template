@@ -36,3 +36,6 @@ dist/
 # **/entitlements/*.yaml
 
 *.log
+
+# FIle generated for quickly searching through a tree
+*.search
