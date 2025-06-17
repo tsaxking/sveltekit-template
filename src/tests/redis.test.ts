@@ -76,7 +76,7 @@ describe('Redis namespace', () => {
 		const received: number[] = [];
 		const numbers = [1, 2, 3, 4, 5];
 		const promises = numbers.map((num) => {
-			return new Promise<void>((resolve) => {
+			return new Promise<void>((resolve, reject) => {
 				const handler = (data: { number: number }) => {
 					if (data.number === num) {
 						received.push(data.number);
@@ -85,6 +85,9 @@ describe('Redis namespace', () => {
 					}
 				};
 				service.on('data', handler);
+				setTimeout(() => {
+					reject(new Error(`Timeout waiting for number ${num}`));
+				}, 1000);
 			});
 		});
 
