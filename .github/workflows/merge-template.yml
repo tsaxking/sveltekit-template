@@ -22,8 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        templates:
-          [
+        templates: [
             tsaxking/tators-dashboard-kit,
             tsaxking/tators-app-kit,
             # 'tsaxking/elevate.tv',

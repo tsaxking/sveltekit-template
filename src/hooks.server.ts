@@ -13,16 +13,19 @@ import { DB } from '$lib/server/db/';
 // import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import '$lib/server/index';
-import { createStructService } from '$lib/server/services/sse';
+import { createStructEventService } from '$lib/server/services/struct-event';
+import { Redis } from '$lib/server/services/redis';
 config();
 
-Struct.each((struct) => {
-	if (!struct.built) {
-		struct.build(DB);
-		// struct.eventHandler(handleEvent(struct));
-		createStructService(struct);
-	}
-});
+(async () => {
+	await Redis.connect().unwrap();
+	Struct.each((struct) => {
+		if (!struct.built) {
+			struct.build(DB);
+			createStructEventService(struct);
+		}
+	});
+})();
 
 // Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 

@@ -18,6 +18,24 @@ permissions:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repository
@@ -38,10 +56,6 @@ jobs:
           echo "Installing dependencies..."
           pnpm install --frozen-lockfile
 
-      - name: Set up Docker Compose
-        run: |
-          docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose.yml
-          sudo chmod +x ./docker-compose.yml
 
       - name: Load .env variables
         run: |
@@ -52,17 +66,8 @@ jobs:
           echo "DB_PASS=postgres" >> .env
           echo "DB_NAME=postgres" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
+          echo "REDIS_NAME=some_name" >> .env
           export $(cat .env | xargs)
-
-      - name: Start database service
-        run: docker compose up -d
-
-      - name: Wait for database
-        run: |
-          until docker exec $(docker ps -q -f name=db) pg_isready -U postgres; do
-            echo "Waiting for database..."
-            sleep 2
-          done
 
       - name: Run migrations
         run: |
@@ -71,7 +76,3 @@ jobs:
 
       - name: Run Vitest tests
         run: npm run test:unit
-
-      - name: Stop database service
-        if: always()
-        run: docker compose down
