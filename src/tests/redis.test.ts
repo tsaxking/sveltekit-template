@@ -75,20 +75,17 @@ describe('Redis namespace', () => {
 
 		const received: number[] = [];
 		const numbers = [1, 2, 3, 4, 5];
-		const promises = numbers.map((num) => {
-			return new Promise<void>((resolve, reject) => {
-				const handler = (data: { number: number }) => {
-					if (data.number === num) {
-						received.push(data.number);
-						service.off('data', handler); // prevent duplicate resolution
-						resolve();
-					}
-				};
-				service.on('data', handler);
-				setTimeout(() => {
-					reject(new Error(`Timeout waiting for number ${num}`));
-				}, 1000);
+		const p = new Promise<void>((res, rej) => {
+			service.on('data', data => {
+				received.push(data.number);
+				if (received.length === numbers.length) {
+					res();
+				}
 			});
+
+			setTimeout(() => {
+				rej();
+			}, 1000); // Allow time for processing
 		});
 
 		service.start();
@@ -97,7 +94,8 @@ describe('Redis namespace', () => {
 			await service.put({ number: num });
 		}
 
-		await Promise.all(promises);
+		await p;
+
 		expect(received).toEqual(numbers);
 	});
 
