@@ -8,7 +8,7 @@ DB="$2"
 PASSWORD="$3"
 
 if [ -z "$USER" ] || [ -z "$DB" ]; then
-   echo "Usage: ./postgres-init.sh <username> <database>"
+   echo "Usage: ./postgres-init.sh <username> <database> [<password>]"
    exit 1
 fi
 

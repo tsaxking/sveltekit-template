@@ -44,7 +44,7 @@ jobs:
           pnpm install --frozen-lockfile
 
       - name: Start database service
-        run: sh ./config/postgres/init.sh
+        run: sh ./config/postgres/init.sh postgres postgres postgres
 
       - name: Load .env variables
         run: |
