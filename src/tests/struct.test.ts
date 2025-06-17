@@ -11,7 +11,6 @@ describe('Run tests on the Test Struct', () => {
 		expect(build.isOk()).toBe(true);
 
 		const clear = await T.clear();
-		console.log(clear);
 		expect(clear.isOk()).toBe(true);
 	});
 

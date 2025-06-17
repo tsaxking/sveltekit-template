@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { uuid } from '../utils/uuid';
 import terminal from '../utils/terminal';
 import type { Stream } from 'ts-utils/stream';
+import { sleep } from 'ts-utils/sleep';
 
 export namespace Redis {
 	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
@@ -15,6 +16,8 @@ export namespace Redis {
 	// export const _pub = createClient();
 	export let _sub: ReturnType<typeof createClient> | undefined;
 	export let _pub: ReturnType<typeof createClient> | undefined;
+	export let _queue: ReturnType<typeof createClient> | undefined;
+
 	_sub?.on('error', (error: Error) => {
 		globalEmitter.emit('sub-error', error);
 	});
@@ -49,8 +52,9 @@ export namespace Redis {
 			}
 			_sub = createClient();
 			_pub = createClient();
+			_queue = createClient();
 
-			await Promise.all([_sub?.connect(), _pub?.connect()]);
+			await Promise.all([_sub.connect(), _pub.connect(), _queue.connect()]);
 			return new Promise<void>((res, rej) => {
 				_sub?.subscribe('discovery:i_am', (message) => {
 					console.log(`Received discovery:iam message: ${message}`);
@@ -78,6 +82,19 @@ export namespace Redis {
 					rej(new Error('Redis connection timed out. Please check your Redis server.'));
 				}, 1000); // Wait for a second to ensure the discovery messages are processed
 			});
+		});
+	};
+
+	export const disconnect = () => {
+		return attemptAsync(async () => {
+			if (_sub) {
+				await _sub.disconnect();
+				_sub = undefined;
+			}
+			if (_pub) {
+				await _pub.disconnect();
+				_pub = undefined;
+			}
 		});
 	};
 
@@ -136,7 +153,7 @@ export namespace Redis {
 			public readonly events: Events
 		) {
 			if (name === REDIS_NAME) {
-				throw new Error(
+				console.warn(
 					`Service name "${name}" cannot be the same as the Redis instance name "${REDIS_NAME}".`
 				);
 			}
@@ -215,7 +232,7 @@ export namespace Redis {
 	export const once = globalEmitter.once.bind(globalEmitter);
 	export const off = globalEmitter.off.bind(globalEmitter);
 
-	export const request = <Req, Res>(
+	export const query = <Req, Res>(
 		service: string,
 		event: string,
 		data: Req,
@@ -233,7 +250,7 @@ export namespace Redis {
 					reject(new Error(`Request timed out after ${timeoutMs}ms`));
 				}, timeoutMs);
 
-				_sub?.subscribe(responseChannel, (message: string) => {
+				const ondata = (message: string) => {
 					try {
 						const parsed = z
 							.object({
@@ -255,7 +272,10 @@ export namespace Redis {
 						clearTimeout(timeout);
 						reject(err);
 					}
-				});
+					_sub?.unsubscribe(responseChannel);
+				};
+
+				_sub?.subscribe(responseChannel, ondata);
 			});
 
 			await _pub?.publish(
@@ -273,21 +293,19 @@ export namespace Redis {
 		});
 	};
 
-
-	type QueryHandler<Req, Res> = (args: {
+	type QueryHandler<Req> = (args: {
 		data: Req;
 		id: number;
 		date: Date;
 		requestId: string;
 		responseChannel: string;
-	}) => Promise<Res> | Res;
+	}) => Promise<unknown> | unknown;
 
-	export const queryListen = <Req, Res>(
+	export const queryListen = <Req>(
 		service: string,
 		event: string,
 		reqSchema: z.ZodType<Req>,
-		resSchema: z.ZodType<Res>,
-		handler: QueryHandler<Req, Res>
+		handler: QueryHandler<Req>
 	) => {
 		const channel = `query:${service}:${event}`;
 
@@ -317,19 +335,10 @@ export namespace Redis {
 					responseChannel: parsed.responseChannel
 				});
 
-				const validatedRes = resSchema.safeParse(responseData);
-				if (!validatedRes.success) {
-					console.error(
-						`[queryListen:${channel}] Handler returned invalid response:`,
-						validatedRes.error
-					);
-					return;
-				}
-
 				await _pub?.publish(
 					parsed.responseChannel,
 					JSON.stringify({
-						data: validatedRes.data,
+						data: responseData,
 						date: new Date().toISOString(),
 						id: messageId++
 					})
@@ -340,22 +349,18 @@ export namespace Redis {
 		});
 	};
 
-	export const enqueue = <T>(queueName: string, task: T, notify = false) => {
+	const enqueue = <T>(queueName: string, task: T, notify = false) => {
 		return attemptAsync(async () => {
 			const serialized = JSON.stringify(task);
-			await _pub?.rPush(`queue:${queueName}`, serialized);
+			await _queue?.rPush(`queue:${queueName}`, serialized);
 			if (notify) await _pub?.publish(`queue:${queueName}`, serialized); // Optional: publish to notify subscribers
 		});
 	};
 
-	export const dequeue = <T>(
-		queueName: string,
-		schema: z.ZodType<T>,
-		timeout = 0
-	) => {
+	const dequeue = <T>(queueName: string, schema: z.ZodType<T>, timeout = 0) => {
 		return attemptAsync<T | null>(async () => {
 			const key = `queue:${queueName}`;
-			const result = await _sub?.blPop(key, timeout);
+			const result = await _queue?.blPop(key, timeout);
 
 			if (!result || !result.element) return null;
 
@@ -369,19 +374,95 @@ export namespace Redis {
 		});
 	};
 
-	export const clearQueue = (queueName: string) => {
+	const clearQueue = (queueName: string) => {
 		return attemptAsync(async () => {
 			const key = `queue:${queueName}`;
-			await _pub?.del(key);
+			await _queue?.del(key);
 		});
 	};
 
-	export const getQueueLength = (queueName: string) => {
+	const getQueueLength = (queueName: string) => {
 		return attemptAsync(async () => {
 			const key = `queue:${queueName}`;
-			const length = await _pub?.lLen(key);
+			const length = await _queue?.lLen(key);
 			return length ?? 0;
 		});
+	};
+
+	class QueueService<T> {
+		private _running = false;
+		private em = new EventEmitter<{
+			data: T;
+			stop: void;
+			error: Error;
+			start: void;
+		}>();
+
+		public on = this.em.on.bind(this.em);
+		public once = this.em.once.bind(this.em);
+		public off = this.em.off.bind(this.em);
+
+		constructor(
+			public readonly name: string,
+			public readonly schema: z.ZodType<T>
+		) {}
+
+		put(data: T, notify = false) {
+			return enqueue(this.name, data, notify);
+		}
+
+		length() {
+			return getQueueLength(this.name);
+		}
+
+		clear() {
+			return clearQueue(this.name);
+		}
+
+		start() {
+			if (this._running) {
+				console.warn(`QueueService "${this.name}" is already running.`);
+				return this.stop.bind(this);
+			}
+
+			this._running = true;
+			const run = async () => {
+				while (this._running) {
+					try {
+						const task = await dequeue(this.name, this.schema, 1000).unwrap();
+						if (task) {
+							this.em.emit('data', task);
+						} else {
+							// No task available, wait a bit before checking again
+							await new Promise((resolve) => setTimeout(resolve, 100));
+						}
+					} catch (err) {
+						console.error(`[QueueService:${this.name}] Error processing task:`, err);
+						this.em.emit('error', err as Error);
+					}
+					await sleep(100); // Prevent tight loop
+				}
+			};
+
+			run().catch((err) => {
+				console.error(`[QueueService:${this.name}] Error in run loop:`, err);
+				this.em.emit('error', err as Error);
+			});
+
+			return this.stop.bind(this);
+		}
+
+		stop() {
+			this._running = false;
+		}
+
+		get running() {
+			return this._running;
+		}
+	}
+
+	export const createQueueService = <T>(queueName: string, schema: z.ZodType<T>) => {
+		return new QueueService(queueName, schema);
 	};
 
 	type StreamData<T> = {
@@ -423,7 +504,9 @@ export namespace Redis {
 				await _pub?.publish(`stream:${streamName}`, serializedEnd);
 			});
 
-			return stream.await().unwrap();
+			return new Promise<void>((res) => {
+				stream.on('end', res);
+			});
 		});
 	};
 

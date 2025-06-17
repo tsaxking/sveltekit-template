@@ -36,3 +36,4 @@ dist/
 # **/entitlements/*.yaml
 
 *.log
+*.search
