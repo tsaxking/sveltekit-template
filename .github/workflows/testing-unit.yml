@@ -18,6 +18,11 @@ permissions:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
 
     steps:
       - name: Checkout repository
@@ -42,11 +47,6 @@ jobs:
         run: |
           docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose.yml
           sudo chmod +x ./docker-compose.yml
-
-      - name: Set up Redis
-        run: |
-          docker pull redis:latest
-          echo "Redis image pulled successfully."
 
       - name: Load .env variables
         run: |
