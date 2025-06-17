@@ -23,6 +23,19 @@ jobs:
         image: redis:latest
         ports:
           - 6379:6379
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repository
@@ -43,8 +56,6 @@ jobs:
           echo "Installing dependencies..."
           pnpm install --frozen-lockfile
 
-      - name: Start database service
-        run: sh ./config/postgres/init.sh postgres postgres postgres
 
       - name: Load .env variables
         run: |
