@@ -5,15 +5,21 @@ set -e
 
 USER="$1"
 DB="$2"
+PASSWORD="$3"
 
 if [ -z "$USER" ] || [ -z "$DB" ]; then
-  echo "Usage: ./postgres-init.sh <username> <database>"
-  exit 1
+   echo "Usage: ./postgres-init.sh <username> <database>"
+   exit 1
 fi
 
-echo -n "Enter password for PostgreSQL user '$USER': "
-read -s PASSWORD
-echo
+if [ -z "$PASSWORD" ]; then
+   echo "No password provided, enter the password for the user '$USER':"
+   read -s PASSWORD
+   if [ -z "$PASSWORD" ]; then
+      echo "Password cannot be empty."
+      exit 1
+   fi
+fi
 
 echo "Updating apt and installing PostgreSQL..."
 sudo apt update

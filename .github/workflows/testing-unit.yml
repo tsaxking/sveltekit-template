@@ -43,10 +43,8 @@ jobs:
           echo "Installing dependencies..."
           pnpm install --frozen-lockfile
 
-      - name: Set up Docker Compose
-        run: |
-          docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose.yml
-          sudo chmod +x ./docker-compose.yml
+      - name: Start database service
+        run: sh ./config/postgres/init.sh
 
       - name: Load .env variables
         run: |
@@ -59,16 +57,6 @@ jobs:
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
           export $(cat .env | xargs)
-
-      - name: Start database service
-        run: docker compose up -d
-
-      - name: Wait for database
-        run: |
-          until docker exec $(docker ps -q -f name=db) pg_isready -U postgres; do
-            echo "Waiting for database..."
-            sleep 2
-          done
 
       - name: Run migrations
         run: |
