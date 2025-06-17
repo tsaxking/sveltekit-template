@@ -5,10 +5,11 @@ import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
 import { uuid } from '../utils/uuid';
 import terminal from '../utils/terminal';
+import type { Stream } from 'ts-utils/stream';
 
 export namespace Redis {
-	const REDIS_NAME = process.env.REDIS_NAME || 'default';
-	let id = -1;
+	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
+	let messageId = -1;
 	export const clientId = uuid();
 	// export const _sub = createClient();
 	// export const _pub = createClient();
@@ -193,7 +194,7 @@ export namespace Redis {
 			event,
 			data,
 			date: new Date(),
-			id: id++
+			id: messageId++
 		});
 	};
 
@@ -213,4 +214,256 @@ export namespace Redis {
 	export const on = globalEmitter.on.bind(globalEmitter);
 	export const once = globalEmitter.once.bind(globalEmitter);
 	export const off = globalEmitter.off.bind(globalEmitter);
+
+	export const request = <Req, Res>(
+		service: string,
+		event: string,
+		data: Req,
+		returnType: z.ZodType<Res>,
+		timeoutMs = 1000
+	) => {
+		return attemptAsync<Res>(async () => {
+			const requestId = uuid();
+			const responseChannel = `response:${service}:${requestId}`;
+			const queryChannel = `query:${service}:${event}`;
+
+			const responsePromise = new Promise<Res>((resolve, reject) => {
+				const timeout = setTimeout(() => {
+					_sub?.unsubscribe(responseChannel);
+					reject(new Error(`Request timed out after ${timeoutMs}ms`));
+				}, timeoutMs);
+
+				_sub?.subscribe(responseChannel, (message: string) => {
+					try {
+						const parsed = z
+							.object({
+								data: z.unknown(),
+								date: z.string().transform((v) => new Date(v)),
+								id: z.number()
+							})
+							.parse(JSON.parse(message));
+
+						const validated = returnType.safeParse(parsed.data);
+						if (!validated.success) {
+							return reject(
+								new Error(`Invalid response data: ${JSON.stringify(validated.error.errors)}`)
+							);
+						}
+						clearTimeout(timeout);
+						resolve(validated.data);
+					} catch (err) {
+						clearTimeout(timeout);
+						reject(err);
+					}
+				});
+			});
+
+			await _pub?.publish(
+				queryChannel,
+				JSON.stringify({
+					data,
+					requestId,
+					responseChannel,
+					date: new Date().toISOString(),
+					id: messageId++
+				})
+			);
+
+			return responsePromise;
+		});
+	};
+
+
+	type QueryHandler<Req, Res> = (args: {
+		data: Req;
+		id: number;
+		date: Date;
+		requestId: string;
+		responseChannel: string;
+	}) => Promise<Res> | Res;
+
+	export const queryListen = <Req, Res>(
+		service: string,
+		event: string,
+		reqSchema: z.ZodType<Req>,
+		resSchema: z.ZodType<Res>,
+		handler: QueryHandler<Req, Res>
+	) => {
+		const channel = `query:${service}:${event}`;
+
+		_sub?.subscribe(channel, async (message: string) => {
+			try {
+				const parsed = z
+					.object({
+						data: z.unknown(),
+						requestId: z.string(),
+						responseChannel: z.string(),
+						date: z.string().transform((v) => new Date(v)),
+						id: z.number()
+					})
+					.parse(JSON.parse(message));
+
+				const validatedReq = reqSchema.safeParse(parsed.data);
+				if (!validatedReq.success) {
+					console.error(`[queryListen:${channel}] Invalid request:`, validatedReq.error);
+					return;
+				}
+
+				const responseData = await handler({
+					data: validatedReq.data,
+					id: parsed.id,
+					date: parsed.date,
+					requestId: parsed.requestId,
+					responseChannel: parsed.responseChannel
+				});
+
+				const validatedRes = resSchema.safeParse(responseData);
+				if (!validatedRes.success) {
+					console.error(
+						`[queryListen:${channel}] Handler returned invalid response:`,
+						validatedRes.error
+					);
+					return;
+				}
+
+				await _pub?.publish(
+					parsed.responseChannel,
+					JSON.stringify({
+						data: validatedRes.data,
+						date: new Date().toISOString(),
+						id: messageId++
+					})
+				);
+			} catch (err) {
+				console.error(`[queryListen:${channel}] Error:`, err);
+			}
+		});
+	};
+
+	export const enqueue = <T>(queueName: string, task: T, notify = false) => {
+		return attemptAsync(async () => {
+			const serialized = JSON.stringify(task);
+			await _pub?.rPush(`queue:${queueName}`, serialized);
+			if (notify) await _pub?.publish(`queue:${queueName}`, serialized); // Optional: publish to notify subscribers
+		});
+	};
+
+	export const dequeue = <T>(
+		queueName: string,
+		schema: z.ZodType<T>,
+		timeout = 0
+	) => {
+		return attemptAsync<T | null>(async () => {
+			const key = `queue:${queueName}`;
+			const result = await _sub?.blPop(key, timeout);
+
+			if (!result || !result.element) return null;
+
+			try {
+				const parsed = JSON.parse(result.element);
+				return schema.parse(parsed);
+			} catch (err) {
+				console.error(`[dequeue:${key}] Failed to parse or validate task`, err);
+				throw err;
+			}
+		});
+	};
+
+	export const clearQueue = (queueName: string) => {
+		return attemptAsync(async () => {
+			const key = `queue:${queueName}`;
+			await _pub?.del(key);
+		});
+	};
+
+	export const getQueueLength = (queueName: string) => {
+		return attemptAsync(async () => {
+			const key = `queue:${queueName}`;
+			const length = await _pub?.lLen(key);
+			return length ?? 0;
+		});
+	};
+
+	type StreamData<T> = {
+		data: T;
+		date: Date;
+		packet: number;
+		id: number;
+	};
+
+	type StreamEnd = {
+		id: number;
+		date: Date;
+	};
+
+	export const emitStream = <T>(streamName: string, stream: Stream<T>) => {
+		return attemptAsync(async () => {
+			const id = messageId++;
+			let packet = 0;
+
+			stream.on('data', async (data) => {
+				const payload: StreamData<T> = {
+					data,
+					date: new Date(),
+					packet: packet++,
+					id
+				};
+
+				const serialized = JSON.stringify(payload);
+				await _pub?.publish(`stream:${streamName}`, serialized);
+			});
+
+			stream.once('end', async () => {
+				const endPayload: StreamEnd = {
+					id,
+					date: new Date()
+				};
+
+				const serializedEnd = JSON.stringify(endPayload);
+				await _pub?.publish(`stream:${streamName}`, serializedEnd);
+			});
+
+			return stream.await().unwrap();
+		});
+	};
+
+	export const listenStream = <T>(
+		streamName: string,
+		schema: z.ZodType<T>,
+		handler: (data: T, date: Date, packet: number, id: number) => void,
+		onEnd?: (id: number, date: Date) => void
+	) => {
+		return attemptAsync<void>(async () => {
+			const streamDataSchema = z.object({
+				data: z.unknown(),
+				date: z.string().transform((v) => new Date(v)),
+				packet: z.number(),
+				id: z.number()
+			});
+
+			const streamEndSchema = z.object({
+				id: z.number(),
+				date: z.string().transform((v) => new Date(v))
+			});
+
+			await _sub?.subscribe(`stream:${streamName}`, (message: string) => {
+				try {
+					const raw = JSON.parse(message);
+
+					// Try parsing as StreamData
+					if ('data' in (raw as any) && 'packet' in (raw as any)) {
+						const parsed = streamDataSchema.parse(raw);
+						const validated = schema.parse(parsed.data);
+						handler(validated, parsed.date, parsed.packet, parsed.id);
+					} else {
+						// Fallback to StreamEnd
+						const parsed = streamEndSchema.parse(raw);
+						onEnd?.(parsed.id, parsed.date);
+					}
+				} catch (err) {
+					console.error(`[listenStream:${streamName}] Invalid stream message:`, err);
+				}
+			});
+		});
+	};
 }

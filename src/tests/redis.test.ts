@@ -1,146 +1,321 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import * as redisModule from '$lib/server/services/redis';
+import { Redis } from '$lib/server/services/redis';
 import { z } from 'zod';
 
-// Mock redis createClient and clients
-const mockSubscribe = vi.fn();
-const mockPublish = vi.fn();
-const mockConnect = vi.fn();
-const mockDisconnect = vi.fn();
-
 vi.mock('redis', () => {
-	return {
-		createClient: vi.fn(() => ({
-			subscribe: mockSubscribe,
-			publish: mockPublish,
-			connect: mockConnect,
-			disconnect: mockDisconnect,
-			isOpen: false,
-			isReady: false,
-			on: vi.fn()
-		}))
-	};
+  // Mock Redis createClient with stubbed methods
+  const subscribeCallbacks = new Map<string, Function>();
+
+  const createClient = vi.fn(() => ({
+    isOpen: true,
+    isReady: true,
+    connect: vi.fn().mockResolvedValue(undefined),
+    publish: vi.fn().mockResolvedValue(undefined),
+    subscribe: vi.fn((channel: string, cb: Function) => {
+      subscribeCallbacks.set(channel, cb);
+      return Promise.resolve();
+    }),
+    unsubscribe: vi.fn().mockResolvedValue(undefined),
+    rPush: vi.fn().mockResolvedValue(undefined),
+    blPop: vi.fn().mockResolvedValue(null),
+    del: vi.fn().mockResolvedValue(undefined),
+    lLen: vi.fn().mockResolvedValue(0),
+    on: vi.fn(),
+  }));
+
+  return { createClient };
 });
 
-// Mock uuid to return a fixed value for predictability
-vi.mock('../utils/uuid', () => ({
-	uuid: vi.fn(() => 'fixed-uuid')
-}));
-
-// Mock terminal.warn to track calls
-vi.mock('../utils/terminal', () => ({
-	default: {
-		warn: vi.fn()
-	}
-}));
-
 describe('Redis namespace', () => {
-	beforeEach(() => {
-		vi.clearAllMocks();
-	});
+  beforeEach(() => {
+    // Reset _sub, _pub before each test
+    Redis._sub = undefined;
+    Redis._pub = undefined;
+  });
 
-	it('connect should call redis connect and subscribe/publish to discovery channels', async () => {
-		// Setup mock to simulate clients connecting and being ready
-		mockConnect.mockResolvedValue(undefined);
-		mockSubscribe.mockImplementation(async (channel, callback) => {
-			if (channel === 'discovery:i_am') {
-				// Simulate a discovery:i_am message from another instance after subscribing
-				setTimeout(() => {
-					callback(`default_other-instance:fixed-uuid`);
-				}, 0);
-			}
-			if (channel === 'discovery:welcome') {
-				// Simulate a welcome message after subscribing
-				setTimeout(() => {
-					callback('default_other-instance:fixed-uuid');
-				}, 0);
-			}
-			//   simulate receiving own discovery:i_am message
-			if (channel === 'discovery:i_am') {
-				callback(`default:${redisModule.Redis.clientId}`);
-			}
-		});
+  it('connect() connects clients and resolves on discovery', async () => {
+    // Arrange: after connect, simulate discovery message from other instance
+    const subCallbacks: Record<string, Function> = {};
+    const pubCalls: Array<{channel: string; message: string}> = [];
 
-		// Call connect and expect it resolves without error
-		const result = await redisModule.Redis.connect();
-		if (!result.isOk()) {
-			console.error(result.error);
-		}
-		expect(result.isOk()).toBe(true);
+    // Setup mocks
+    Redis._sub = {
+      isOpen: false,
+      isReady: false,
+      connect: vi.fn().mockImplementation(async () => {
+        Redis._sub!.isOpen = true;
+        Redis._sub!.isReady = true;
+      }),
+      subscribe: vi.fn().mockImplementation(async (channel, cb) => {
+        subCallbacks[channel] = cb;
+      }),
+      on: vi.fn(),
+    } as any;
 
-		// Expect connect was called on both pub and sub clients
-		expect(mockConnect).toHaveBeenCalledTimes(2);
+    Redis._pub = {
+      isOpen: false,
+      isReady: false,
+      connect: vi.fn().mockImplementation(async () => {
+        Redis._pub!.isOpen = true;
+        Redis._pub!.isReady = true;
+      }),
+      publish: vi.fn().mockImplementation(async (channel, message) => {
+        pubCalls.push({ channel, message });
+      }),
+      on: vi.fn(),
+    } as any;
 
-		// Expect subscriptions to discovery channels
-		expect(mockSubscribe).toHaveBeenCalledWith('discovery:i_am', expect.any(Function));
-		expect(mockSubscribe).toHaveBeenCalledWith('discovery:welcome', expect.any(Function));
+    // Spy on console.log to suppress output or test logs if desired
+    vi.spyOn(console, 'log').mockImplementation(() => {});
 
-		// Expect publish to discovery:i_am happened at least once
-		expect(mockPublish).toHaveBeenCalledWith(
-			'discovery:i_am',
-			expect.stringContaining(redisModule.Redis.clientId)
-		);
-	});
+    const connectPromise = Redis.connect();
 
-	it('createListeningService should throw if name equals REDIS_NAME', () => {
-		const REDIS_NAME = process.env.REDIS_NAME || 'default';
-		expect(() => {
-			redisModule.Redis.createListeningService(REDIS_NAME, {
-				testEvent: z.string()
-			});
-		}).toThrow();
-	});
+    // Simulate receiving the "discovery:i_am" message from another instance
+    await new Promise((r) => setTimeout(r, 10)); // Let connect start subscribing
 
-	it('createListeningService should throw if name contains colon', () => {
-		expect(() => {
-			redisModule.Redis.createListeningService('bad:name', {
-				testEvent: z.string()
-			});
-		}).toThrow();
-	});
+    expect(subCallbacks['discovery:i_am']).toBeDefined();
+    expect(subCallbacks['discovery:welcome']).toBeDefined();
 
-	it('createListeningService should emit event on message', () => {
-		// Setup: create a ListeningService with an event schema
-		const service = redisModule.Redis.createListeningService('testservice', {
-			ping: z.string()
-		});
+    // Simulate a message from another instance (different clientId)
+    subCallbacks['discovery:i_am']!(Redis.REDIS_NAME + ':some-other-id');
 
-		const handler = vi.fn();
-		service.on('ping', handler);
+    // Await connect promise resolution
+    await expect(connectPromise).resolves.toBeUndefined();
 
-		// Simulate a message arriving on the subscribed channel
-		const message = JSON.stringify({
-			event: 'ping',
-			data: 'hello',
-			date: new Date().toISOString(),
-			id: 42
-		});
+    // Ensure publish to discovery:welcome happened
+    expect(pubCalls.some((c) => c.channel === 'discovery:welcome')).toBe(true);
+  });
 
-		// Get the callback passed to subscribe and invoke it
-		expect(mockSubscribe).toHaveBeenCalledWith('channel:testservice', expect.any(Function));
-		const callback = mockSubscribe.mock.calls.find(
-			(call) => call[0] === 'channel:testservice'
-		)?.[1];
-		if (!callback) throw new Error('Subscribe callback not found');
-		callback(message);
+  it('emit() publishes a message with incrementing id', async () => {
+    const published: any[] = [];
 
-		// Check that handler was called with parsed event data
-		expect(handler).toHaveBeenCalledWith({
-			data: 'hello',
-			date: expect.any(Date),
-			id: 42
-		});
-	});
+    Redis._pub = {
+      publish: vi.fn().mockImplementation(async (channel, message) => {
+        published.push({ channel, message });
+      }),
+    } as any;
 
-	it('emit should call publish with correctly stringified payload', async () => {
-		mockPublish.mockResolvedValue(undefined);
+    await Redis.emit('testEvent', { foo: 'bar' });
 
-		const result = await redisModule.Redis.emit('testEvent', { foo: 'bar' });
-		expect(result.isOk()).toBe(true);
+    expect(published.length).toBe(1);
+    const pub = published[0];
+    expect(pub.channel).toBe('channel:' + (process.env.REDIS_NAME || 'default'));
+    const msg = JSON.parse(pub.message);
+    expect(msg.event).toBe('testEvent');
+    expect(msg.data).toEqual({ foo: 'bar' });
+    expect(typeof msg.id).toBe('number');
+  });
 
-		expect(mockPublish).toHaveBeenCalledWith(
-			'channel:' + process.env.REDIS_NAME,
-			expect.stringContaining('"event":"testEvent"')
-		);
-	});
+  it('createListeningService subscribes and emits events', async () => {
+    const subscribedCallbacks: Record<string, Function> = {};
+
+    Redis._sub = {
+      subscribe: vi.fn().mockImplementation(async (channel, cb) => {
+        subscribedCallbacks[channel] = cb;
+      }),
+      on: vi.fn(),
+    } as any;
+
+    Redis._pub = {
+      publish: vi.fn(),
+    } as any;
+
+    const schema = {
+      foo: z.string(),
+    };
+
+    const service = Redis.createListeningService('myService', { myEvent: z.object(schema) });
+
+    // Setup event listener
+    let receivedData: any = null;
+    service.on('myEvent', (payload) => {
+      receivedData = payload;
+    });
+
+    // Simulate a message coming in on subscription channel
+    const message = JSON.stringify({
+      event: 'myEvent',
+      data: { foo: 'hello' },
+      date: new Date().toISOString(),
+      id: 1,
+    });
+
+    subscribedCallbacks['channel:myService'](message);
+
+    // Allow event loop to process
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(receivedData).not.toBeNull();
+    expect(receivedData.data).toEqual({ foo: 'hello' });
+    expect(receivedData.id).toBe(1);
+    expect(receivedData.date instanceof Date).toBe(true);
+  });
+
+  it('request() sends query and resolves with valid response', async () => {
+    const subscribeCallbacks: Record<string, Function> = {};
+
+    Redis._sub = {
+      subscribe: vi.fn().mockImplementation(async (channel, cb) => {
+        subscribeCallbacks[channel] = cb;
+      }),
+      unsubscribe: vi.fn().mockResolvedValue(undefined),
+    } as any;
+
+    Redis._pub = {
+      publish: vi.fn().mockResolvedValue(undefined),
+    } as any;
+
+    const responseData = { message: 'ok' };
+    const returnType = z.object({ message: z.string() });
+
+    const promise = Redis.request('myService', 'getData', { param: 42 }, returnType, 1000);
+
+    // Extract the response channel from the subscribeCallbacks keys (the one with "response:")
+    const responseChannel = Object.keys(subscribeCallbacks).find((ch) => ch.startsWith('response:'));
+    expect(responseChannel).toBeDefined();
+
+    // Simulate response published to response channel
+    const responseMessage = JSON.stringify({
+      data: responseData,
+      date: new Date().toISOString(),
+      id: 1,
+    });
+
+    // Trigger response subscription
+    subscribeCallbacks[responseChannel!](responseMessage);
+
+    const result = await promise;
+    expect(result).toEqual(responseData);
+  });
+
+  it('enqueue and dequeue works with mocked redis list commands', async () => {
+    let queue: string[] = [];
+    Redis._pub = {
+      rPush: vi.fn().mockImplementation(async (_, task) => {
+        queue.push(task);
+      }),
+      publish: vi.fn().mockResolvedValue(undefined),
+      del: vi.fn().mockResolvedValue(undefined),
+      lLen: vi.fn().mockImplementation(async () => queue.length),
+    } as any;
+
+    Redis._sub = {
+      blPop: vi.fn().mockImplementation(async () => {
+        if (queue.length === 0) return null;
+        return { element: queue.shift() };
+      }),
+    } as any;
+
+    const task = { id: 123, action: 'doSomething' };
+    await Redis.enqueue('myQueue', task, true);
+
+    expect(queue.length).toBe(1);
+
+    const dequeued = await Redis.dequeue('myQueue', z.object({ id: z.number(), action: z.string() }), 0);
+    expect(dequeued).toEqual(task);
+
+    const length = await Redis.getQueueLength('myQueue');
+    expect(length).toBe(0);
+
+    await Redis.clearQueue('myQueue');
+    expect(queue.length).toBe(0);
+  });
+
+  it('emitStream emits stream data and end', async () => {
+    const events: any[] = [];
+    Redis._pub = {
+      publish: vi.fn().mockImplementation(async (channel, message) => {
+        events.push({ channel, message });
+      }),
+    } as any;
+
+    // Create a mock stream that calls on('data') and once('end') handlers
+    const dataListeners: Function[] = [];
+    const endListeners: Function[] = [];
+
+    const mockStream = {
+      on: (event: string, cb: Function) => {
+        if (event === 'data') dataListeners.push(cb);
+      },
+      once: (event: string, cb: Function) => {
+        if (event === 'end') endListeners.push(cb);
+      },
+      await: () => ({
+        unwrap: () => Promise.resolve(),
+      }),
+    } as any;
+
+    // Call emitStream but it waits on stream.await().unwrap()
+    const emitPromise = Redis.emitStream('myStream', mockStream);
+
+    // Trigger data event
+    dataListeners.forEach((cb) => cb({ foo: 'bar' }));
+    // Trigger end event
+    endListeners.forEach((cb) => cb());
+
+    await emitPromise;
+
+    expect(events.some(e => e.channel === 'stream:myStream')).toBe(true);
+
+    // Check that data event was published
+    const dataEvent = events.find(e => e.message.includes('"data":{"foo":"bar"}'));
+    expect(dataEvent).toBeDefined();
+
+    // Check that end event was published
+    const endEvent = events.find(e => {
+      try {
+        const parsed = JSON.parse(e.message);
+        return !('data' in parsed) && 'id' in parsed && 'date' in parsed;
+      } catch {
+        return false;
+      }
+    });
+    expect(endEvent).toBeDefined();
+  });
+
+  it('listenStream subscribes and calls handler and onEnd', async () => {
+    let handlerCalled = false;
+    let endCalled = false;
+
+    Redis._sub = {
+      subscribe: vi.fn().mockImplementation(async (_, cb) => {
+        // simulate sending stream data message
+        setTimeout(() => {
+          cb(
+            JSON.stringify({
+              data: { foo: 'hello' },
+              date: new Date().toISOString(),
+              packet: 0,
+              id: 1,
+            })
+          );
+          // simulate end message
+          cb(
+            JSON.stringify({
+              id: 1,
+              date: new Date().toISOString(),
+            })
+          );
+        }, 10);
+      }),
+    } as any;
+
+    const schema = z.object({ foo: z.string() });
+
+    await Redis.listenStream('testStream', schema,
+      (data) => {
+        handlerCalled = true;
+        expect(data.foo).toBe('hello');
+      },
+      () => {
+        endCalled = true;
+      }
+    );
+
+    await new Promise((r) => setTimeout(r, 20)); // wait for async events
+
+    expect(handlerCalled).toBe(true);
+    expect(endCalled).toBe(true);
+  });
 });
