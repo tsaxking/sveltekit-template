@@ -3,41 +3,80 @@ import { createClient } from 'redis';
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
+import { uuid } from '../utils/uuid';
+import terminal from '../utils/terminal';
 
 export namespace Redis {
-	const sub = createClient();
-	const pub = createClient();
-
-	sub.on('error', (error: Error) => {
+	const REDIS_NAME = process.env.REDIS_NAME || 'default';
+	let id = -1;
+	export const clientId = uuid();
+	// export const _sub = createClient();
+	// export const _pub = createClient();
+	export let _sub: ReturnType<typeof createClient> | undefined;
+	export let _pub: ReturnType<typeof createClient> | undefined;
+	_sub?.on('error', (error: Error) => {
 		globalEmitter.emit('sub-error', error);
 	});
 
-	sub.on('connect', () => {
+	_sub?.on('connect', () => {
 		globalEmitter.emit('sub-connect', undefined);
 	});
-	sub.on('disconnect', () => {
+	_sub?.on('disconnect', () => {
 		globalEmitter.emit('sub-disconnect', undefined);
 	});
-	sub.on('reconnect', () => {
+	_sub?.on('reconnect', () => {
 		globalEmitter.emit('sub-reconnect', undefined);
 	});
 
-	pub.on('error', (error: Error) => {
+	_pub?.on('error', (error: Error) => {
 		globalEmitter.emit('pub-error', error);
 	});
-	pub.on('connect', () => {
+	_pub?.on('connect', () => {
 		globalEmitter.emit('pub-connect', undefined);
 	});
-	pub.on('disconnect', () => {
+	_pub?.on('disconnect', () => {
 		globalEmitter.emit('pub-disconnect', undefined);
 	});
-	pub.on('reconnect', () => {
+	_pub?.on('reconnect', () => {
 		globalEmitter.emit('pub-reconnect', undefined);
 	});
 
 	export const connect = (): ResultPromise<void> => {
 		return attemptAsync(async () => {
-			Promise.all([sub.connect(), pub.connect()]);
+			if (_sub?.isOpen && _pub?.isOpen && _sub?.isReady && _pub?.isReady) {
+				return; // Already connected
+			}
+			_sub = createClient();
+			_pub = createClient();
+
+			await Promise.all([_sub?.connect(), _pub?.connect()]);
+			return new Promise<void>((res, rej) => {
+				_sub?.subscribe('discovery:i_am', (message) => {
+					console.log(`Received discovery:iam message: ${message}`);
+					const [name, instanceId] = message.split(':');
+					console.log(`Discovery message from instance: ${name} (${instanceId})`, clientId);
+					if (instanceId === clientId) return res(); // Ignore our own message and resolve. The pub/sub system is working.
+					_pub?.publish('discovery:welcome', REDIS_NAME + ':' + instanceId);
+					console.log(`Discovered instance: ${name} (${instanceId})`);
+				});
+				_sub?.subscribe('discovery:welcome', (message) => {
+					console.log(`Received discovery:welcome message: ${message}`);
+					const [name, instanceId] = message.split(':');
+					if (instanceId === clientId) return; // Ignore our own message
+
+					console.log(`Welcome message from instance: ${name} (${instanceId})`);
+					if (name === REDIS_NAME) {
+						terminal.warn(
+							`Another instance of Redis with name "${REDIS_NAME}" is already running. This may cause conflicts.`
+						);
+						res();
+					}
+				});
+				_pub?.publish('discovery:i_am', REDIS_NAME + ':' + clientId);
+				setTimeout(() => {
+					rej(new Error('Redis connection timed out. Please check your Redis server.'));
+				}, 1000); // Wait for a second to ensure the discovery messages are processed
+			});
 		});
 	};
 
@@ -55,7 +94,7 @@ export namespace Redis {
 				date: message.date.toISOString(),
 				id: message.id
 			});
-			pub.publish(message.event as string, payload);
+			_pub?.publish('channel:' + REDIS_NAME, payload);
 		});
 	};
 
@@ -70,103 +109,93 @@ export namespace Redis {
 		id: number;
 	};
 
-	type RedisCallback<E extends string, Type extends z.ZodType> = (
-		data: z.infer<Type>,
-		metadata: {
-			event: E;
-			date: Date;
-			id: number;
-		}
-	) => void;
-
-	class Channel<
-		From extends {
+	class ListeningService<
+		Events extends {
 			[key: string]: z.ZodType;
 		},
-		To extends {
-			[key: string]: z.ZodType;
-		}
+		Name extends string
 	> {
-		private id = -1;
+		public static services = new Map<string, ListeningService<any, any>>();
+
+		private readonly em = new EventEmitter<{
+			[K in keyof Events]: {
+				date: Date;
+				id: number;
+				data: z.infer<Events[K]>;
+			};
+		}>();
+
+		public on = this.em.on.bind(this.em);
+		public once = this.em.once.bind(this.em);
+		public off = this.em.off.bind(this.em);
+		private emit = this.em.emit.bind(this.em);
 
 		constructor(
-			public readonly channel: string,
-			private readonly fromEvents: From,
-			private readonly toEvents: To
+			public readonly name: Name,
+			public readonly events: Events
 		) {
-			sub.subscribe(channel, (message) => {
+			if (name === REDIS_NAME) {
+				throw new Error(
+					`Service name "${name}" cannot be the same as the Redis instance name "${REDIS_NAME}".`
+				);
+			}
+			if (ListeningService.services.has(this.name)) {
+				throw new Error(`Service with name "${this.name}" already exists.`);
+			}
+
+			_sub?.subscribe('channel:' + this.name, (message: string) => {
 				try {
 					const parsed = z
 						.object({
 							event: z.string(),
 							data: z.unknown(),
-							date: z.string().transform((date) => new Date(date)),
+							date: z.string().transform((v) => new Date(v)),
 							id: z.number()
 						})
 						.parse(JSON.parse(message));
-					const event = parsed.event as keyof From;
-					if (!this.listeners.has(event)) {
-						console.warn(`No listeners for event ${String(event)} in channel ${this.channel}`);
-						return;
-					}
 
-					const data = this.fromEvents[event].parse(parsed.data);
-					const metadata = {
-						event: parsed.event,
-						date: parsed.date,
-						id: parsed.id
-					};
-					const cbs = this.listeners.get(event) || [];
-					for (const cb of cbs) {
-						cb(data, metadata as any);
+					if (parsed.event in this.events) {
+						const event = parsed.event as keyof Events;
+						const dataSchema = this.events[event];
+						const data = dataSchema.parse(parsed.data);
+						this.emit(event, {
+							data,
+							date: parsed.date,
+							id: parsed.id
+						});
 					}
 				} catch (error) {
-					globalEmitter.emit('sub-error', error as Error);
+					console.error(`[Redis:${this.name}] Error parsing message for service:`, error);
 				}
 			});
-		}
 
-		private listeners = new Map<
-			keyof From,
-			RedisCallback<Extract<keyof From, string>, From[keyof From]>[]
-		>();
-
-		send<E extends keyof To>(event: E, data: z.infer<To[E]>) {
-			return attemptAsync(async () => {
-				if (!(event in this.toEvents)) {
-					throw new Error(`Event ${String(event)} is not defined in the channel ${this.channel}`);
-				}
-
-				return send<To>({
-					event,
-					data,
-					date: new Date(),
-					id: this.id++
-				}).unwrap();
-			});
-		}
-
-		on<E extends keyof From>(event: E, cb: RedisCallback<Extract<E, string>, From[E]>) {
-			if (!(event in this.fromEvents)) {
-				throw new Error(`Event ${String(event)} is not defined in the channel ${this.channel}`);
-			}
-
-			if (!this.listeners.has(event)) {
-				this.listeners.set(event, []);
-			}
-			this.listeners.get(event)?.push(cb as any);
-
-			return () => {
-				const cbs = this.listeners.get(event);
-				if (cbs) {
-					this.listeners.set(
-						event,
-						cbs.filter((callback) => callback !== cb)
-					);
-				}
-			};
+			ListeningService.services.set(this.name, this);
 		}
 	}
+
+	export const createListeningService = <
+		E extends {
+			[key: string]: z.ZodType;
+		},
+		Name extends string
+	>(
+		name: Name,
+		events: E
+	) => {
+		if (name.includes(':')) {
+			throw new Error(`Service name "${name}" cannot contain a colon (:) character.`);
+		}
+		return new ListeningService(name, events);
+	};
+
+	export const emit = (event: string, data: unknown) => {
+		return send({
+			event,
+			data,
+			date: new Date(),
+			id: id++
+		});
+	};
 
 	type GlobalEvents = {
 		'pub-error': Error;
@@ -182,21 +211,6 @@ export namespace Redis {
 	const globalEmitter = new EventEmitter<GlobalEvents>();
 
 	export const on = globalEmitter.on.bind(globalEmitter);
-	export const emit = globalEmitter.emit.bind(globalEmitter);
 	export const once = globalEmitter.once.bind(globalEmitter);
 	export const off = globalEmitter.off.bind(globalEmitter);
-	export const createChannel = <
-		From extends {
-			[key: string]: z.ZodType;
-		},
-		To extends {
-			[key: string]: z.ZodType;
-		}
-	>(
-		channel: string,
-		fromEvents: From,
-		toEvents: To
-	) => {
-		return new Channel<From, To>(channel, fromEvents, toEvents);
-	};
 }

@@ -43,6 +43,11 @@ jobs:
           docker compose version || sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose.yml
           sudo chmod +x ./docker-compose.yml
 
+      - name: Set up Redis
+        run: |
+          docker pull redis:latest
+          echo "Redis image pulled successfully."
+
       - name: Load .env variables
         run: |
           touch .env
@@ -52,6 +57,7 @@ jobs:
           echo "DB_PASS=postgres" >> .env
           echo "DB_NAME=postgres" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
+          echo "REDIS_NAME=some_name" >> .env
           export $(cat .env | xargs)
 
       - name: Start database service
