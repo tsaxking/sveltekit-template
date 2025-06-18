@@ -92,6 +92,7 @@
 		"ag-grid-community": "^33.1.1",
 		"bootstrap": "^5.3.3",
 		"busboy": "^1.6.0",
+		"canvas": "git+https://github.com/tsaxking/canvas.git",
 		"chalk": "^5.4.1",
 		"check-password-strength": "^2.0.10",
 		"cli-table": "^0.3.11",
@@ -143,7 +144,8 @@
 			"svelte-preprocess",
 			"ts-utils",
 			"html-constructor",
-			"redis-service"
+			"redis-service",
+			"canvas"
 		]
 	}
 }

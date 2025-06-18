@@ -1,6 +1,5 @@
-
-
 This directory contains:
+
 - [accounts.ts](accounts.ts.md)
 - [colors.ts](colors.ts.md)
 - [index.ts](index.ts.md)

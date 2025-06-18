@@ -17,7 +17,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-
       - name: Generate docs with TypeDoc
         run: npx typedoc --out gh-pages src --tsconfig ./tsconfig.json
 

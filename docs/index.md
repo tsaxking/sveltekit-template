@@ -145,8 +145,8 @@ View [License](./license.md) for full terms and conditions
 
 If you have any questions, feel free to contact me via email at [taylor.reese.king@gmail.com](mailto:taylor.reese.king@gmail.com) or open an issue on GitHub.
 
-
 This directory contains:
+
 - [.git](.git/index.md)
 - [.github](.github/index.md)
 - [cli](cli/index.md)
