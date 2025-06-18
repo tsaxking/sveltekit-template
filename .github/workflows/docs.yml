@@ -1,49 +1,25 @@
-name: Deploy Docs Site
+# docs.yml GitHub Actions example to deploy Docsify site to gh-pages
+name: Deploy Docsify site
 
 on:
   push:
-    branches: [main]   # or your default branch
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  deploy-docs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install Docusaurus CLI
-        run: npm install -g @docusaurus/init
-
-      - name: Create Docusaurus site
-        run: |
-          # Remove old site if exists (for clean fresh)
-          rm -rf docusaurus-site
-          # Create a fresh Docusaurus classic site
-          npx @docusaurus/init@latest init docusaurus-site classic --skip-install
-
-      - name: Copy your docs markdown
-        run: |
-          rm -rf docusaurus-site/docs
-          cp -r docs docusaurus-site/docs
-
+      - uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install
-        working-directory: docusaurus-site
-
-      - name: Build Docusaurus site
-        run: npm run build
-        working-directory: docusaurus-site
-
+        run: npm install docsify-cli -g
+      - name: Build and deploy
+        run: |
+          docsify init ./docs
+          docsify serve ./docs & # run locally for testing
+          docsify build ./docs --dest ./build
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docusaurus-site/build
-          # Optional: customize branch, default is gh-pages
-          # publish_branch: gh-pages
+          publish_dir: ./build

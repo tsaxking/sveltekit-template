@@ -37,6 +37,3 @@ dist/
 
 *.log
 *.search
-
-/gh-pages
-/docusaurus-site
