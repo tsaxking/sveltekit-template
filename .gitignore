@@ -39,3 +39,4 @@ dist/
 *.search
 
 /gh-pages
+/docusaurus-site

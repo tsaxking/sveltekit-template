@@ -49,3 +49,4 @@ docker-compose.yml
 !/src/routes/oauth
 
 /gh-pages
+/docusaurus-site
