@@ -1,5 +1,4 @@
-# docs.yml GitHub Actions example to deploy Docsify site to gh-pages
-name: Deploy Docsify site
+name: Generate and deploy docs
 
 on:
   push:
@@ -7,19 +6,19 @@ on:
       - main
 
 jobs:
-  deploy:
+  docs:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install docsify-cli -g
-      - name: Build and deploy
-        run: |
-          docsify init ./docs
-          docsify serve ./docs & # run locally for testing
-          docsify build ./docs --dest ./build
-      - name: Deploy to GitHub Pages
+        run: npm install
+
+      - name: Generate docs with TypeDoc
+        run: npx typedoc --out gh-pages src
+
+      - name: Deploy docs to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./gh-pages
