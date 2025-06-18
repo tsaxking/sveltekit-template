@@ -1,0 +1,4 @@
+# struct
+
+This directory contains:
+

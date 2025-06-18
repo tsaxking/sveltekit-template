@@ -22,11 +22,28 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Upload `docs` folder as static site
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: v22.12.0
+
+      - name: 'Installing dependencies'
+        run: |
+          pnpm i
+
+      - name: Build documentation
+        run: pnpm script render-docs
+
+      - name: Upload `gh-pages` folder as static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs  # ← the folder you want to serve
+          path: ./gh-pages  # ← the folder you want to serve
 
       - name: Deploy to GitHub Pages
         id: deployment
