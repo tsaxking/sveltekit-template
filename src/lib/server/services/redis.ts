@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// See /diagrams/redis.drawio for the redis diagram
+
 import { createClient } from 'redis';
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { EventEmitter } from 'ts-utils/event-emitter';

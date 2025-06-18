@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// See /diagrams/permissions.drawio for the diagram of this file
+
 import { text } from 'drizzle-orm/pg-core';
 import {
 	DataVersion,

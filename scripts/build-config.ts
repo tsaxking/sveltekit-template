@@ -43,7 +43,7 @@ const nginx = async () => {
 	}
 
 	const template = await fs.readFile(
-		path.join(process.cwd(), 'infrastructure', 'nginx', 'reverse-proxy.conf'),
+		path.join(process.cwd(), 'config', 'nginx.conf'),
 		'utf-8'
 	);
 	const output = replace(template, finalConfig);

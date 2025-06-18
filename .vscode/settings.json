@@ -1,3 +1,46 @@
 {
-	// "github.copilot.nextEditSugestions": "enabled",
+	"colorMyText.configurations": [
+		{
+			"paths": [
+				"*.html",
+				"*.mjml"
+			],
+			"rules": [
+				{
+					"patterns": [
+						// all data in {{ }}
+						"\\{\\{ [^}]+\\}\\}",
+					],
+					"color": "BrightGreen"
+				},
+				{
+					// All <repeat> tags
+					"patterns": [
+						"<repeat[^>]*>",
+						"</repeat>",
+						"<if[^>]*>",
+						"</if>",
+						"<file[^>]*>",
+						"</file>",
+						"<switch[^>]*>",
+						"</switch>",
+					],
+					"color": "Magenta"
+				},
+				{
+					"patterns": [
+						"<case[^>]*>",
+						"</case>",
+						"<default[^>]*>",
+						"</default>",
+						"<else[^>]*>",
+						"</else>",
+						"<elseif[^>]*>",
+						"</elseif>",
+					],
+					"color": "Green"
+				}
+			]
+		}
+	]
 }
