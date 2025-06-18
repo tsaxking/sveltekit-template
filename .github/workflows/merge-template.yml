@@ -88,7 +88,7 @@ jobs:
           echo "Copying changes from template repo"
           # Assuming the GHA starts in the template repo root
           cp -r ../* .    # Don't overwrite .git
-          rm -rf .git .github/workflows/merge-template.yaml
+          rm -rf .git .github/workflows/merge-template.yaml .github/workflows/docs.yaml
 
           echo "Committing and pushing changes"
           git add .
