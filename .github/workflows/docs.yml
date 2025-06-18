@@ -10,9 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
+
 
       - name: Generate docs with TypeDoc
         run: npx typedoc --out gh-pages src
