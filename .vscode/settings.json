@@ -1,15 +1,12 @@
 {
 	"colorMyText.configurations": [
 		{
-			"paths": [
-				"*.html",
-				"*.mjml"
-			],
+			"paths": ["*.html", "*.mjml"],
 			"rules": [
 				{
 					"patterns": [
 						// all data in {{ }}
-						"\\{\\{ [^}]+\\}\\}",
+						"\\{\\{ [^}]+\\}\\}"
 					],
 					"color": "BrightGreen"
 				},
@@ -23,7 +20,7 @@
 						"<file[^>]*>",
 						"</file>",
 						"<switch[^>]*>",
-						"</switch>",
+						"</switch>"
 					],
 					"color": "Magenta"
 				},
@@ -36,7 +33,7 @@
 						"<else[^>]*>",
 						"</else>",
 						"<elseif[^>]*>",
-						"</elseif>",
+						"</elseif>"
 					],
 					"color": "Green"
 				}

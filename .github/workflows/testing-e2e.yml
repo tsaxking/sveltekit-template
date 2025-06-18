@@ -74,7 +74,6 @@ jobs:
           echo "REDIS_NAME=some_name" >> .env
           export $(cat .env | xargs)
 
-
       - name: Run migrations
         run: |
           pnpm run db:migrate

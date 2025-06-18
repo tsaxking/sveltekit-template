@@ -56,7 +56,6 @@ jobs:
           echo "Installing dependencies..."
           pnpm install --frozen-lockfile
 
-
       - name: Load .env variables
         run: |
           touch .env

@@ -42,10 +42,7 @@ const nginx = async () => {
 		finalConfig[key] = value || defaultValue;
 	}
 
-	const template = await fs.readFile(
-		path.join(process.cwd(), 'config', 'nginx.conf'),
-		'utf-8'
-	);
+	const template = await fs.readFile(path.join(process.cwd(), 'config', 'nginx.conf'), 'utf-8');
 	const output = replace(template, finalConfig);
 
 	await fs.writeFile(path.join(process.cwd(), 'dist', `${rawConfig.domain[0]}.conf`), output);
