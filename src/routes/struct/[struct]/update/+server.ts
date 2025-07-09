@@ -17,6 +17,7 @@ export const POST = async (event) => {
 	}
 
 	const body = await event.request.json();
+	const date = new Date(event.request.headers.get('X-Date') || Date.now());
 
 	const safe = z
 		.object({
@@ -109,6 +110,12 @@ export const POST = async (event) => {
 		if (Object.prototype.hasOwnProperty.call(parsedData, key)) {
 			(toUpdate as any)[key] = parsedData[key];
 		}
+	}
+
+	if (date.getTime() < targetData.value.updated.getTime()) {
+		return Errors.outdatedData(
+			`The data you are trying to update is outdated. Please refresh and try again. Current: ${targetData.value.updated.toISOString()}, Your: ${date.toISOString()}`
+		);
 	}
 
 	const res = await targetData.value.update(toUpdate);

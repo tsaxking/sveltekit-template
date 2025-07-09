@@ -19,7 +19,11 @@ export const POST = async (event) => {
 				const res = await event
 					.fetch(`/struct/${item.struct}/${item.type}`, {
 						body: JSON.stringify(item.data),
-						method: 'POST'
+						method: 'POST',
+						headers: {
+							'X-Date': item.date,
+							'Content-Type': 'application/json',
+						}
 					})
 					.then((r) => r.json());
 
