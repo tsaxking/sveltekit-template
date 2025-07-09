@@ -1,6 +1,5 @@
-
-
 This directory contains:
+
 - [+error.svelte](+error.svelte.md)
 - [app.html](app.html.md)
 - [hooks.server.ts](hooks.server.ts.md)
