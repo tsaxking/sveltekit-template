@@ -1,6 +1,12 @@
 import { browser } from '$app/environment';
 import { sse } from '$lib/services/sse';
-import { Struct, StructData, startBatchTest, endBatchTest, startBatchUpdateLoop } from 'drizzle-struct/front-end';
+import {
+	Struct,
+	StructData,
+	startBatchTest,
+	endBatchTest,
+	startBatchUpdateLoop
+} from 'drizzle-struct/front-end';
 import type { Loop } from 'ts-utils/loop';
 import { sleep } from 'ts-utils/sleep';
 
@@ -536,22 +542,24 @@ export namespace Test {
 							endBatchTest(); // resumes sending data through fetch requests
 							loop?.stop();
 						};
-					
-						testData.update(d => ({
-							...d,
-							age: 100,
-						})).then(async r => {
-							if (r.isOk()) {
-								return finish('Update should fail in batch testing mode');
-							}
-							await sleep(100);
-							loop = startBatchUpdateLoop(browser, 500, 0);
 
-							loop.on('error', (error) => {
-								if (error instanceof Error) finish(error.message);
-								else finish('Unknown error');
+						testData
+							.update((d) => ({
+								...d,
+								age: 100
+							}))
+							.then(async (r) => {
+								if (r.isOk()) {
+									return finish('Update should fail in batch testing mode');
+								}
+								await sleep(100);
+								loop = startBatchUpdateLoop(browser, 500, 0);
+
+								loop.on('error', (error) => {
+									if (error instanceof Error) finish(error.message);
+									else finish('Unknown error');
+								});
 							});
-						});
 
 						Test.on('update', (data: TestData) => {
 							if (data.data.age === 100 && data.data.name === uniqueName) {
