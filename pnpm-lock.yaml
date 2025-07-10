@@ -104,6 +104,9 @@ importers:
       filepond-plugin-image-transform:
         specifier: ^3.8.7
         version: 3.8.7(filepond@4.32.8)
+      flatpickr:
+        specifier: ^4.6.13
+        version: 4.6.13
       fuzzy-search:
         specifier: ^3.2.1
         version: 3.2.1
@@ -2953,6 +2956,9 @@ packages:
   flat-cache@4.0.1:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
+
+  flatpickr@4.6.13:
+    resolution: {integrity: sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==}
 
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
@@ -7574,6 +7580,8 @@ snapshots:
     dependencies:
       flatted: 3.3.3
       keyv: 4.5.4
+
+  flatpickr@4.6.13: {}
 
   flatted@3.3.3: {}
 

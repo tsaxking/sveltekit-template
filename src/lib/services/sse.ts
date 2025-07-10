@@ -23,7 +23,7 @@ class SSE {
 	private readonly maxBackoff = 30000; // max 30 seconds
 
 	constructor() {
-		console.log(`SSE constructor called: ${this.uuid}`);
+		// console.log(`SSE constructor called: ${this.uuid}`);
 	}
 
 	init(browser: boolean) {
@@ -58,7 +58,7 @@ class SSE {
 
 	connect() {
 		const connect = () => {
-			console.log('connect.connect()');
+			// console.log('connect.connect()');
 			// this.uuid = Random.uuid();
 			Requests.setMeta('sse', this.uuid);
 			const source = new EventSource(`/sse/init/${this.uuid}`);
@@ -171,12 +171,12 @@ class SSE {
 	}
 
 	private ack(id: number) {
-		console.log(`${this.uuid} Client acknowledging message with ID:`, id);
+		// console.log(`${this.uuid} Client acknowledging message with ID:`, id);
 		fetch(`/sse/ack/${this.uuid}/${id}`);
 	}
 
 	private ping() {
-		console.log('Pinging SSE server...');
+		// console.log('Pinging SSE server...');
 		return fetch(`/sse/ping/${this.uuid}`).then((res) => res.ok);
 	}
 

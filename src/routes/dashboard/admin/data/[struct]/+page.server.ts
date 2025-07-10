@@ -26,6 +26,7 @@ export const load = async (event) => {
 	return {
 		structs: structs.map((s) => s.name),
 		data: data.map((d) => d.safe()),
-		struct: Object.fromEntries(Object.entries(struct.table).map(([k, v]) => [k, v.dataType]))
+		structTypes: Object.fromEntries(Object.entries(struct.table).map(([k, v]) => [k, v.dataType])),
+		struct: struct.data.name,
 	};
 };

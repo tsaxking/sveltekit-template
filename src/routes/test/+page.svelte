@@ -53,6 +53,10 @@
 	</li>
 {/snippet}
 
+<svelte:head>
+	<title>Testing</title>
+</svelte:head>
+
 <div class="container">
 	<div class="row">
 		<h1>Testing</h1>

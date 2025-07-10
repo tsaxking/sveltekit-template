@@ -4,15 +4,18 @@
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
 	import { onMount } from 'svelte';
 	import { Navbar } from '$lib/model/navbar';
+	import { contextmenu } from '$lib/utils/contextmenu';
 
 	Navbar.addSection({
 		name: 'Demo Section',
 		links: [
 			{
-				icon: 'home',
+				icon: {
+					type: 'material-icons',
+					name: 'home',
+				},
 				href: '/home',
 				name: 'Home',
-				type: 'material-icons'
 			}
 		],
 		priority: 1
@@ -87,6 +90,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Dashboard Demo</title>
+</svelte:head>
+
 <DB {dashboard}>
 	{#snippet body()}
 		<Card card={card1}>
@@ -97,7 +104,24 @@
 		</Card>
 		<Card card={card2}>
 			{#snippet body()}
-				<h1>Card 2</h1>
+				<h1
+					oncontextmenu={(e) => {
+						contextmenu(e, {
+						options: [
+							'Test',
+							{
+								icon: {
+									type: 'material-icons',
+									name: 'edit',
+								},
+								name: 'Edit',
+								action: () => console.log('edit'),
+							}
+						],
+						width: '200px',
+					});
+					}}
+				>Card 2</h1>
 				<p>This is the body of card21</p>
 			{/snippet}
 		</Card>

@@ -11,6 +11,10 @@ import terminal from '../utils/terminal';
 import type { Stream } from 'ts-utils/stream';
 import { sleep } from 'ts-utils/sleep';
 
+const log = (...data: unknown[]) => {
+	console.log(`[Redis]`, ...data);
+}
+
 export namespace Redis {
 	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
 	let messageId = -1;
@@ -60,19 +64,19 @@ export namespace Redis {
 			await Promise.all([_sub.connect(), _pub.connect(), _queue.connect()]);
 			return new Promise<void>((res, rej) => {
 				_sub?.subscribe('discovery:i_am', (message) => {
-					console.log(`Received discovery:iam message: ${message}`);
+					log(`Received discovery:iam message: ${message}`);
 					const [name, instanceId] = message.split(':');
-					console.log(`Discovery message from instance: ${name} (${instanceId})`, clientId);
+					log(`Discovery message from instance: ${name} (${instanceId})`, clientId);
 					if (instanceId === clientId) return res(); // Ignore our own message and resolve. The pub/sub system is working.
 					_pub?.publish('discovery:welcome', REDIS_NAME + ':' + instanceId);
-					console.log(`Discovered instance: ${name} (${instanceId})`);
+					log(`Discovered instance: ${name} (${instanceId})`);
 				});
 				_sub?.subscribe('discovery:welcome', (message) => {
-					console.log(`Received discovery:welcome message: ${message}`);
+					log(`Received discovery:welcome message: ${message}`);
 					const [name, instanceId] = message.split(':');
 					if (instanceId === clientId) return; // Ignore our own message
 
-					console.log(`Welcome message from instance: ${name} (${instanceId})`);
+					log(`Welcome message from instance: ${name} (${instanceId})`);
 					if (name === REDIS_NAME) {
 						terminal.warn(
 							`Another instance of Redis with name "${REDIS_NAME}" is already running. This may cause conflicts.`

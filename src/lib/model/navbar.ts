@@ -1,3 +1,4 @@
+import type { Icon } from '$lib/types/icons';
 import { type Writable } from 'svelte/store';
 
 export namespace Navbar {
@@ -5,8 +6,8 @@ export namespace Navbar {
 		name: string;
 		priority: number;
 		links: {
-			icon: string;
-			type: 'material-icons' | 'font-awesome' | 'material-symbols' | 'bootstrap' | 'custom';
+			icon: Icon;
+			// type: 'material-icons' | 'font-awesome' | 'material-symbols' | 'bootstrap' | 'custom';
 			name: string;
 			href: string;
 		}[];
