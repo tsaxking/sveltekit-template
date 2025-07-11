@@ -26,17 +26,18 @@ export const POST = async (event) => {
 						}
 					})
 					.then((r) => r.json())
-					.catch(e => {
+					.catch((e) => {
 						console.error('Error fetching struct data:', e);
 						return { success: false, message: 'Failed to fetch struct data' };
 					});
 
-				const content = z.object({
-					success: z.boolean(),
-					message: z.string().optional(),
-					data: z.unknown().optional()
-				})
-				.safeParse(res);
+				const content = z
+					.object({
+						success: z.boolean(),
+						message: z.string().optional(),
+						data: z.unknown().optional()
+					})
+					.safeParse(res);
 
 				console.log('Response from struct fetch:', content);
 

@@ -78,22 +78,27 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.account = account.value;
 	}
 
-	if (process.env.ENVIRONMENT === 'prod') {
+	PROD: if (process.env.ENVIRONMENT === 'prod') {
 		const isBlocked = await Limiting.isBlocked(event.locals.session, event.locals.account);
 		if (isBlocked.isErr()) {
 			return new Response('Internal Server Error', { status: ServerCode.internalServerError });
 		}
 
 		if (isBlocked.value.blocked) {
-			return new Response(
-				'Forbidden. This client has been permanently blocked due to suspicious activity.',
-				{
-					status: ServerCode.forbidden,
-					headers: {
-						'Content-Type': 'text/plain'
-					}
-				}
+			await sleep(1000); // wait a bit before responding
+			terminal.warn(
+				`Blocked session ${event.locals.session.id} (${event.locals.session.data.ip}) due to suspicious activity.`
 			);
+			break PROD;
+			// return new Response(
+			// 	'Forbidden. This client has been permanently blocked due to suspicious activity.',
+			// 	{
+			// 		status: ServerCode.forbidden,
+			// 		headers: {
+			// 			'Content-Type': 'text/plain'
+			// 		}
+			// 	}
+			// );
 		}
 
 		FP: if (event.locals.session.data.fingerprint) {
@@ -153,7 +158,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		]);
 
 		if (limit.some((l) => l)) {
-			const res = await Limiting.violate(event.locals.session, event.locals.account, 1, 'Rate limit exceeded');
+			const res = await Limiting.violate(
+				event.locals.session,
+				event.locals.account,
+				1,
+				'Rate limit exceeded'
+			);
 			if (res.isOk()) {
 				switch (res.value) {
 					case 'warn':
@@ -166,17 +176,22 @@ export const handle: Handle = async ({ event, resolve }) => {
 							message:
 								'You are sending too many requests, you will experience degraded performance temporarily.'
 						});
+						await sleep(100);
 						break;
 					case 'block':
-						return new Response(
-							'You are being rate limited. If this continues, you will be blocked from our service.',
-							{
-								status: ServerCode.tooManyRequests,
-								headers: {
-									'Content-Type': 'text/plain'
-								}
-							}
+						await sleep(1000); // wait a bit before responding
+						terminal.warn(
+							`Blocked session ${event.locals.session.id} (${event.locals.session.data.ip}) due to rate limiting.`
 						);
+					// return new Response(
+					// 	'You are being rate limited. If this continues, you will be blocked from our service.',
+					// 	{
+					// 		status: ServerCode.tooManyRequests,
+					// 		headers: {
+					// 			'Content-Type': 'text/plain'
+					// 		}
+					// 	}
+					// );
 				}
 			}
 		}

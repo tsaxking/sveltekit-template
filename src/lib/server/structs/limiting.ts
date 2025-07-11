@@ -111,7 +111,7 @@ export namespace Limiting {
 		session: Session.SessionData,
 		account: Account.AccountData | undefined,
 		increment: number,
-		reason: string,
+		reason: string
 	) => {
 		return attemptAsync(async () => {
 			await Promise.all([
