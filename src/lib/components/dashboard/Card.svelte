@@ -62,16 +62,16 @@
 			<div class="d-flex h-100 align-items-center">
 				<div class="card-title h-100 m-0">
 					<div class="d-flex align-items-center h-100">
-						{#if card.config.iconType === 'bi'}
-							<i class="bi bi-{card.config.icon}"></i>
-						{:else if card.config.iconType === 'fa'}
-							<i class="fa fa-{card.config.icon}"></i>
-						{:else if card.config.iconType === 'material-icons'}
-							<i class="material-icons h4 mb-0">{card.config.icon}</i>
-						{:else if card.config.iconType === 'custom'}
-							<img src={card.config.icon} alt={card.config.name} class="icon" />
-						{:else if card.config.iconType === 'material-symbols'}
-							<span class="material-symbols-outlined h4 mb-0">{card.config.icon}</span>
+						{#if card.config.icon.type === 'bootstrap'}
+							<i class="bi bi-{card.config.icon.name}"></i>
+						{:else if card.config.icon.type === 'fontawesome'}
+							<i class="fa fa-{card.config.icon.name}"></i>
+						{:else if card.config.icon.type === 'material-icons'}
+							<i class="material-icons h4 mb-0">{card.config.icon.name}</i>
+						{:else if card.config.icon.type === 'svg'}
+							<img src={card.config.icon.name} alt={card.config.name} class="icon" />
+						{:else if card.config.icon.type === 'material-symbols'}
+							<span class="material-symbols-outlined h4 mb-0">{card.config.icon.name}</span>
 						{/if}
 						<h5 class="ms-3 mb-0">
 							{capitalize(card.config.name)}

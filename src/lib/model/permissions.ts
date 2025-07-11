@@ -2,6 +2,7 @@ import { Account } from './account';
 import { Struct, StructData, DataArr } from 'drizzle-struct/front-end';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
+import { attemptAsync } from 'ts-utils/check';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -63,7 +64,7 @@ export namespace Permissions {
 	export type RoleRulesetDataArr = DataArr<typeof RoleRuleset.data.structure>;
 
 	export const AccountRuleset = new Struct({
-		name: 'account_ruleset',
+		name: 'account_rulesets',
 		structure: {
 			account: 'string',
 			entitlement: 'string',
@@ -104,6 +105,16 @@ export namespace Permissions {
 
 	export const getEntitlements = () => {
 		return Entitlement.all(false);
+	};
+
+	export const getEntitlementGroups = () => {
+		return attemptAsync(async () => {
+			const groups = new Set<string>();
+			await Entitlement.all(true).pipe((e) => {
+				if (e.data.group) groups.add(e.data.group);
+			});
+			return Array.from(groups);
+		});
 	};
 
 	export const grantRolePermission = (

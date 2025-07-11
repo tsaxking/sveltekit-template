@@ -32,10 +32,10 @@ export namespace Session {
 			userAgent: text('user_agent').notNull(),
 			requests: integer('requests').notNull(),
 			prevUrl: text('prev_url').notNull(),
-			fingerprint: text('fingerprint').notNull().default(''),
+			fingerprint: text('fingerprint').notNull().default('')
 		},
 		frontend: false,
-		safes: ['fingerprint'],
+		safes: ['fingerprint']
 	});
 
 	export type SessionData = typeof Session.sample;
@@ -46,17 +46,16 @@ export namespace Session {
 			const id = event.cookies.get('ssid_' + PUBLIC_DOMAIN);
 
 			const create = async () => {
-				const session = await Session
-					.new({
-						accountId: '',
-						ip: '',
-						userAgent: '',
-						requests: 0,
-						prevUrl: '',
-						fingerprint: '',
-					}).unwrap();
+				const session = await Session.new({
+					accountId: '',
+					ip: '',
+					userAgent: '',
+					requests: 0,
+					prevUrl: '',
+					fingerprint: ''
+				}).unwrap();
 
-				event.cookies.set(('ssid_' + PUBLIC_DOMAIN), session.id, {
+				event.cookies.set('ssid_' + PUBLIC_DOMAIN, session.id, {
 					httpOnly: false,
 					domain: PUBLIC_DOMAIN ?? '',
 					path: '/',

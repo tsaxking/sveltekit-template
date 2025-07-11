@@ -31,6 +31,7 @@ export namespace Account {
 			title: 'string',
 			severity: 'string',
 			message: 'string',
+			iconType: 'string',
 			icon: 'string',
 			link: 'string',
 			read: 'boolean'

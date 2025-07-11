@@ -39,22 +39,23 @@
 			limit: limit
 		}).then(async (data) => {
 			if (data.isOk()) {
-				links = await Promise.all(data.value.map(async link => {
-					const res = await getTitle(link.data.url || '');
-					let title: string;
-					
-					if (res.isOk()) title = res.value;
-					else title = link.data.url || 'No Title';
-					return {
-						link,
-						title,
-					}
-				}));
-			}
-			else console.error('Failed to fetch links:', data.error);
+				links = await Promise.all(
+					data.value.map(async (link) => {
+						const res = await getTitle(link.data.url || '');
+						let title: string;
+
+						if (res.isOk()) title = res.value;
+						else title = link.data.url || 'No Title';
+						return {
+							link,
+							title
+						};
+					})
+				);
+			} else console.error('Failed to fetch links:', data.error);
 		});
 
-		Analytics.count().then(res => {
+		Analytics.count().then((res) => {
 			if (res.isOk()) {
 				count = res.value;
 			}
@@ -84,7 +85,13 @@
 	let offcanvas: HTMLDivElement;
 </script>
 
-<div bind:this={offcanvas} class="offcanvas offcanvas-start" tabindex="-1" {id} aria-labelledby="{id}Label">
+<div
+	bind:this={offcanvas}
+	class="offcanvas offcanvas-start"
+	tabindex="-1"
+	{id}
+	aria-labelledby="{id}Label"
+>
 	<div class="offcanvas-header layer-2">
 		<h5 class="offcanvas-title" id="{id}Label">{PUBLIC_APP_NAME}</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -121,18 +128,32 @@
 					<h4 class="text-secondary">Recents ({links.length} / {count})</h4>
 					{#if count > limit}
 						<div class="d-flex">
-							<button class="btn ms-2"
+							<button
+								class="btn ms-2"
 								class:disabled={offset === 0}
-								onclick={() => { offset = Math.max(0, offset - limit); getLinks(); }}
-									disabled={offset === 0} title="Previous Page" aria-label="Previous Page" aria-disabled={offset === 0}
-								>
+								onclick={() => {
+									offset = Math.max(0, offset - limit);
+									getLinks();
+								}}
+								disabled={offset === 0}
+								title="Previous Page"
+								aria-label="Previous Page"
+								aria-disabled={offset === 0}
+							>
 								<i class="material-icons">chevron_left</i>
 							</button>
-							<button 
-								disabled={offset + limit >= count} title="Next Page" aria-label="Next Page" aria-disabled={offset + limit >= count}
+							<button
+								disabled={offset + limit >= count}
+								title="Next Page"
+								aria-label="Next Page"
+								aria-disabled={offset + limit >= count}
 								class:disabled={offset + limit >= count}
-							class="btn ms-2" onclick={() => { offset += limit; getLinks(); }}
-								>
+								class="btn ms-2"
+								onclick={() => {
+									offset += limit;
+									getLinks();
+								}}
+							>
 								<i class="material-icons">chevron_right</i>
 							</button>
 						</div>

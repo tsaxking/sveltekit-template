@@ -3,6 +3,7 @@ import { createStructEventService } from '$lib/server/services/struct-event.js';
 // import { connectionEmitter, handleEvent } from '$lib/server/event-handler';
 import { Test } from '$lib/server/structs/testing';
 import terminal from '$lib/server/utils/terminal';
+import { fail } from '@sveltejs/kit';
 
 if (!Test.Test.built) {
 	Test.Test.build(DB).then((res) => {

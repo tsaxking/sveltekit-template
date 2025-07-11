@@ -15,12 +15,14 @@
 		<p class="m-0">Minimized:</p>
 		{#each $cards.values() as card}
 			<button class="btn btn-small" onclick={() => card.show()}>
-				{#if card.config.iconType === 'bi'}
-					<i class="bi bi-{card.config.icon}"></i>
-				{:else if card.config.iconType === 'fa'}
-					<i class="fa fa-{card.config.icon}"></i>
-				{:else if card.config.iconType === 'material-icons'}
-					<i class="material-icons">{card.config.icon}</i>
+				{#if card.config.icon.type === 'bootstrap'}
+					<i class="bi bi-{card.config.icon.name}"></i>
+				{:else if card.config.icon.type === 'fontawesome'}
+					<i class="fa fa-{card.config.icon.name}"></i>
+				{:else if card.config.icon.type === 'material-icons'}
+					<i class="material-icons">{card.config.icon.name}</i>
+				{:else if card.config.icon.type === 'svg'}
+					<img src={card.config.icon.name} alt="icon" class="icon-svg" />
 				{/if}
 			</button>
 		{/each}

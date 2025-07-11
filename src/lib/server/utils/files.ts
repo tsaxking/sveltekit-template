@@ -118,7 +118,7 @@ export const fileTree = (dir: string) => {
 									name: entry.name,
 									path: path.relative(dir, fullPath),
 									type: 'file' as const,
-									fullPath,
+									fullPath
 								};
 							}
 						})
@@ -129,7 +129,7 @@ export const fileTree = (dir: string) => {
 				children: tree.filter(Boolean) as FileTree[],
 				path: path.relative(dir, subDir),
 				type: 'directory',
-				fullPath: subDir,
+				fullPath: subDir
 			};
 		};
 

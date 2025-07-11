@@ -13,7 +13,7 @@ import { sleep } from 'ts-utils/sleep';
 
 const log = (...data: unknown[]) => {
 	console.log(`[Redis]`, ...data);
-}
+};
 
 export namespace Redis {
 	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
@@ -557,7 +557,6 @@ export namespace Redis {
 		});
 	};
 
-
 	export const setValue = (key: string, value: unknown, ttl?: number) => {
 		return attemptAsync(async () => {
 			const serializedValue = JSON.stringify(value);
@@ -567,7 +566,7 @@ export namespace Redis {
 			}
 			// log(`Set value for key "${key}":`, value);
 		});
-	}
+	};
 
 	export const getValue = (key: string, returnType: z.ZodType) => {
 		return attemptAsync(async () => {
@@ -584,7 +583,7 @@ export namespace Redis {
 				throw new Error(`Invalid value for key "${key}"`);
 			}
 		});
-	}
+	};
 
 	export const getPub = () => {
 		return attempt(() => {
@@ -593,7 +592,7 @@ export namespace Redis {
 			}
 			return _pub;
 		});
-	}
+	};
 
 	export const getSub = () => {
 		return attempt(() => {
@@ -602,18 +601,24 @@ export namespace Redis {
 			}
 			return _sub;
 		});
-	}
+	};
 
 	export const incr = (key: string, increment = 1) => {
 		return attemptAsync(async () => {
 			if (!_pub) {
 				throw new Error('Redis publisher client is not initialized. Call connect() first.');
 			}
+			const has = await _pub.exists(key);
+			if (!has) {
+				// log(`Key "${key}" does not exist. Initializing to 0 before incrementing.`);
+				await _pub.set(key, '0');
+			}
+
 			const count = await _pub.incrBy(key, increment);
 			// log(`Incremented key "${key}" by ${increment}. New value: ${count}`);
 			return count;
 		});
-	}
+	};
 
 	export const expire = (key: string, seconds: number) => {
 		return attemptAsync(async () => {
@@ -628,5 +633,5 @@ export namespace Redis {
 			// }
 			return result;
 		});
-	}
+	};
 }

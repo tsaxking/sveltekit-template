@@ -166,7 +166,7 @@ export const Errors = {
 			{ status: 403 }
 		);
 	},
-	
+
 	outdatedData: (message: string) => {
 		terminal.warn(`Errors.outdatedData: ${message}`);
 		return status(

@@ -8,56 +8,63 @@ class Square extends Drawable {
 	growSize = 0.2; // How much the square grows each tick
 	actualSize = this.growSize;
 
-
 	constructor(
 		public readonly x: number,
 		public readonly y: number,
-		public readonly  size: number,
+		public readonly size: number,
 		public readonly color: string,
 		public lifetime: number // ticks
 	) {
 		super();
 	}
 
-draw(ctx: CanvasRenderingContext2D) {
-	ctx.save();
+	draw(ctx: CanvasRenderingContext2D) {
+		ctx.save();
 
-	const x = this.x * ctx.canvas.width;
-	const y = this.y * ctx.canvas.height;
+		const x = this.x * ctx.canvas.width;
+		const y = this.y * ctx.canvas.height;
 
-	const gradient = ctx.createRadialGradient(x, y, 0, x, y, this.actualSize);
-	gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-	gradient.addColorStop(0.4, this.color);
-	gradient.addColorStop(1, 'transparent');
+		const gradient = ctx.createRadialGradient(x, y, 0, x, y, this.actualSize);
+		gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+		gradient.addColorStop(0.4, this.color);
+		gradient.addColorStop(1, 'transparent');
 
-	// Fill glowing square
-	ctx.fillStyle = gradient;
-	ctx.fillRect(x - this.actualSize / 2, y - this.actualSize / 2, this.actualSize, this.actualSize);
+		// Fill glowing square
+		ctx.fillStyle = gradient;
+		ctx.fillRect(
+			x - this.actualSize / 2,
+			y - this.actualSize / 2,
+			this.actualSize,
+			this.actualSize
+		);
 
-	// Add outer glow with shadow
-	ctx.shadowColor = this.color;
-	ctx.shadowBlur = this.size * 1.2;
-	ctx.fillStyle = 'rgba(0,0,0,0)';
-	ctx.fillRect(x - this.actualSize / 2, y - this.actualSize / 2, this.actualSize, this.actualSize);
+		// Add outer glow with shadow
+		ctx.shadowColor = this.color;
+		ctx.shadowBlur = this.size * 1.2;
+		ctx.fillStyle = 'rgba(0,0,0,0)';
+		ctx.fillRect(
+			x - this.actualSize / 2,
+			y - this.actualSize / 2,
+			this.actualSize,
+			this.actualSize
+		);
 
-	this.lifetime--;
-	ctx.restore();
+		this.lifetime--;
+		ctx.restore();
 
-
-	if (this.lifetime > 0) {
-		this.actualSize += this.growSize;
-		if (this.actualSize > this.size) {
-			this.actualSize = this.size;
-		}
-	} else {
-		this.actualSize -= this.growSize;
-		if (this.actualSize <= 0) {
-			this.actualSize = 0;
-			this.canvas?.remove(this);
+		if (this.lifetime > 0) {
+			this.actualSize += this.growSize;
+			if (this.actualSize > this.size) {
+				this.actualSize = this.size;
+			}
+		} else {
+			this.actualSize -= this.growSize;
+			if (this.actualSize <= 0) {
+				this.actualSize = 0;
+				this.canvas?.remove(this);
+			}
 		}
 	}
-}
-
 }
 
 class CritterPath extends Drawable {
@@ -74,30 +81,32 @@ class CritterPath extends Drawable {
 		this.path.points[this.path.points.length - 1] = pos;
 	}
 
-draw(ctx: CanvasRenderingContext2D) {
-	if (this.path.points.length < 2) return;
+	draw(ctx: CanvasRenderingContext2D) {
+		if (this.path.points.length < 2) return;
 
-	ctx.save();
+		ctx.save();
 
-	const color = this.path.properties.line.color;
-	ctx.lineWidth = 2;
+		const color = this.path.properties.line.color;
+		ctx.lineWidth = 2;
 
-	// Shadow/glow effect
-	ctx.shadowColor = color || 'rgba(0, 0, 255, 0.5)';
-	ctx.shadowBlur = 12;
+		// Shadow/glow effect
+		ctx.shadowColor = color || 'rgba(0, 0, 255, 0.5)';
+		ctx.shadowBlur = 12;
 
-	ctx.strokeStyle = color || 'blue';
-	ctx.beginPath();
-	ctx.moveTo(this.path.points[0][0] * ctx.canvas.width, this.path.points[0][1] * ctx.canvas.height);
-	for (let i = 1; i < this.path.points.length; i++) {
-		const [x, y] = this.path.points[i];
-		ctx.lineTo(x * ctx.canvas.width, y * ctx.canvas.height);
+		ctx.strokeStyle = color || 'blue';
+		ctx.beginPath();
+		ctx.moveTo(
+			this.path.points[0][0] * ctx.canvas.width,
+			this.path.points[0][1] * ctx.canvas.height
+		);
+		for (let i = 1; i < this.path.points.length; i++) {
+			const [x, y] = this.path.points[i];
+			ctx.lineTo(x * ctx.canvas.width, y * ctx.canvas.height);
+		}
+		ctx.stroke();
+
+		ctx.restore();
 	}
-	ctx.stroke();
-
-	ctx.restore();
-}
-
 
 	set() {
 		const last = this.path.points[this.path.points.length - 1];
@@ -161,7 +170,6 @@ class Critter extends Drawable {
 		ctx.restore();
 	}
 
-
 	changeDirection() {
 		if (['up', 'down'].includes(this.config.direction)) {
 			this.config.direction = Random.choose(['left', 'right']);
@@ -219,19 +227,31 @@ export const render = (canvas: HTMLCanvasElement) => {
 			switch (c.config.direction) {
 				case 'up':
 					c.config.y -= c.config.speed / canvas.height;
-					if (c.config.y < 0) {c.config.direction = Random.choose(['left', 'right']); c.path.set(); }
+					if (c.config.y < 0) {
+						c.config.direction = Random.choose(['left', 'right']);
+						c.path.set();
+					}
 					break;
 				case 'down':
 					c.config.y += c.config.speed / canvas.height;
-					if (c.config.y > 1) {c.config.direction = Random.choose(['left', 'right']); c.path.set(); }
+					if (c.config.y > 1) {
+						c.config.direction = Random.choose(['left', 'right']);
+						c.path.set();
+					}
 					break;
 				case 'left':
 					c.config.x -= c.config.speed / canvas.width;
-					if (c.config.x < 0) {c.config.direction = Random.choose(['up', 'down']); c.path.set(); }
+					if (c.config.x < 0) {
+						c.config.direction = Random.choose(['up', 'down']);
+						c.path.set();
+					}
 					break;
 				case 'right':
 					c.config.x += c.config.speed / canvas.width;
-					if (c.config.x > 1) {c.config.direction = Random.choose(['up', 'down']); c.path.set(); }
+					if (c.config.x > 1) {
+						c.config.direction = Random.choose(['up', 'down']);
+						c.path.set();
+					}
 					break;
 			}
 		}

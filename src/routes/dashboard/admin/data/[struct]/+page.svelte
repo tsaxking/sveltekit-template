@@ -11,7 +11,6 @@
 	} from 'ag-grid-community';
 	import Grid from '$lib/components/general/Grid.svelte';
 
-
 	const { data } = $props();
 	const structs = $derived(data.structs);
 	const struct = $derived(data.struct);
@@ -45,7 +44,7 @@
 	</div>
 	<div class="row mb-3">
 		<div class="col">
-			<Grid 
+			<Grid
 				opts={{}}
 				data={d}
 				height="calc(100vh - 200px)"

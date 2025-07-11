@@ -1,10 +1,13 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { Struct } from 'drizzle-struct/back-end';
 import { ServerCode } from 'ts-utils/status';
 import { Account } from '$lib/server/structs/account';
 
 export const load = async (event) => {
-	if (!(await Account.isAdmin(event.locals.account)))
+	if (!event.locals.account) {
+		throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
+	}
+	if (!(await Account.isAdmin(event.locals.account).unwrap()))
 		throw fail(ServerCode.forbidden, {
 			message: 'Only administrators can access this page'
 		});
@@ -33,6 +36,6 @@ export const load = async (event) => {
 		structs: structs.map((s) => s.name),
 		data: data.map((d) => d.safe()),
 		structTypes: Object.fromEntries(Object.entries(struct.table).map(([k, v]) => [k, v.dataType])),
-		struct: struct.data.name,
+		struct: struct.data.name
 	};
 };

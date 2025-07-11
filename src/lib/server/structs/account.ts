@@ -11,6 +11,7 @@ import { sse } from '../services/sse';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 // import { Universes } from './universe';
 import { Email } from './email';
+import type { Icon } from '$lib/types/icons';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -124,6 +125,7 @@ export namespace Account {
 			severity: text('severity').notNull(),
 			message: text('message').notNull(),
 			icon: text('icon').notNull(),
+			iconType: text('icon_type').notNull(),
 			link: text('link').notNull(),
 			read: boolean('read').notNull()
 		}
@@ -260,7 +262,7 @@ export namespace Account {
 	export const sendAccountNotif = (
 		accountId: string,
 		notif: Notification & {
-			icon: string;
+			icon: Icon;
 			link: string;
 		}
 	) => {
@@ -270,7 +272,8 @@ export namespace Account {
 			severity: notif.severity,
 			message: notif.message,
 			accountId: accountId,
-			icon: notif.icon,
+			icon: notif.icon.name,
+			iconType: notif.icon.type,
 			link: notif.link,
 			read: false
 		});
@@ -361,7 +364,10 @@ export namespace Account {
 					title: 'Password Reset Request',
 					message: 'A password reset link has been sent to your email',
 					severity: 'warning',
-					icon: 'info',
+					icon: {
+						name: 'lock',
+						type: 'material-icons'
+					},
 					link: ''
 				})
 			).unwrap();

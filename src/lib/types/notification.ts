@@ -1,4 +1,4 @@
-import { Icon } from './icon';
+import { type Icon } from './icons';
 
 export type Notification = {
 	title: string;

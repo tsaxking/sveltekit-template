@@ -8,7 +8,7 @@
 		themeQuartz,
 		PaginationModule,
 		type GridApi,
-        type Module
+		type Module
 	} from 'ag-grid-community';
 	import { EventEmitter } from 'ts-utils/event-emitter';
 	import type { Readable } from 'svelte/store';
@@ -21,16 +21,21 @@
 		rowNumbers?: boolean;
 		layer?: number;
 		height: string | number;
-        modules?: Module[];
+		modules?: Module[];
 	}
 
-	const { filter, opts, data, style, rowNumbers = false, layer = 1, height, modules = [] }: Props = $props();
+	const {
+		filter,
+		opts,
+		data,
+		style,
+		rowNumbers = false,
+		layer = 1,
+		height,
+		modules = []
+	}: Props = $props();
 
-    ModuleRegistry.registerModules([
-        ...modules,
-		ClientSideRowModelModule,
-		PaginationModule,
-    ]);
+	ModuleRegistry.registerModules([...modules, ClientSideRowModelModule, PaginationModule]);
 
 	const em = new EventEmitter<{
 		filter: T[];

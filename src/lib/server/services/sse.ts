@@ -116,6 +116,12 @@ export class Connection {
 			this.cache = this.cache.filter((e) => now - e.date < 30000 && e.id > this.index - 20);
 		});
 	}
+
+	ping() {
+		this.lastPing = Date.now();
+		// console.log(`Ping received for connection ${this.uuid}`);
+		this.send('ping', null);
+	}
 }
 
 type Events = {
@@ -149,7 +155,7 @@ export class SSE {
 				}
 
 				// Send ping and retry unacked messages
-				connection.send('ping', null);
+				connection.ping();
 				connection.retryCached(now);
 			});
 		}, 10000);
@@ -219,6 +225,7 @@ export class SSE {
 
 		const connection = new Connection(uuid, session, this, controller);
 		this.connections.set(uuid, connection);
+		connection.ping();
 		// console.log(this.connections);
 		return connection;
 	}

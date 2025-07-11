@@ -10,15 +10,15 @@ export default () => {
 				icon: {
 					type: 'material-icons',
 					name: 'format_list_numbered'
-				},
+				}
 			},
 			{
 				name: 'Data',
 				href: '/dashboard/admin/data',
 				icon: {
 					type: 'material-icons',
-					name: 'account_tree',
-				},
+					name: 'account_tree'
+				}
 			},
 			{
 				name: 'Analytics',
@@ -26,7 +26,7 @@ export default () => {
 				icon: {
 					type: 'material-icons',
 					name: 'analytics'
-				},
+				}
 			}
 		],
 		priority: 0
