@@ -147,7 +147,6 @@ if (browser) {
 		].filter(Boolean);
 
 		const key = [...mods, e.key.toLowerCase()].join('+') as KeyCombo;
-		console.log(key);
 		const [fn] = Keyboard.get(key) || [];
 		if (fn) {
 			e.preventDefault();
