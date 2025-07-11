@@ -3,7 +3,7 @@
 // See /diagrams/redis.drawio for the redis diagram
 
 import { createClient } from 'redis';
-import { attemptAsync, type ResultPromise } from 'ts-utils/check';
+import { attemptAsync, type ResultPromise, attempt } from 'ts-utils/check';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
 import { uuid } from '../utils/uuid';
@@ -556,4 +556,77 @@ export namespace Redis {
 			});
 		});
 	};
+
+
+	export const setValue = (key: string, value: unknown, ttl?: number) => {
+		return attemptAsync(async () => {
+			const serializedValue = JSON.stringify(value);
+			await _pub?.set(key, serializedValue);
+			if (ttl) {
+				await _pub?.expire(key, ttl);
+			}
+			// log(`Set value for key "${key}":`, value);
+		});
+	}
+
+	export const getValue = (key: string, returnType: z.ZodType) => {
+		return attemptAsync(async () => {
+			const serializedValue = await _pub?.get(key);
+			if (!serializedValue) {
+				// log(`No value found for key "${key}"`);
+				return null;
+			}
+			try {
+				const parsedValue = JSON.parse(serializedValue);
+				return returnType.parse(parsedValue);
+			} catch (err) {
+				console.error(`Error parsing value for key "${key}":`, err);
+				throw new Error(`Invalid value for key "${key}"`);
+			}
+		});
+	}
+
+	export const getPub = () => {
+		return attempt(() => {
+			if (!_pub) {
+				throw new Error('Redis publisher client is not initialized. Call connect() first.');
+			}
+			return _pub;
+		});
+	}
+
+	export const getSub = () => {
+		return attempt(() => {
+			if (!_sub) {
+				throw new Error('Redis subscriber client is not initialized. Call connect() first.');
+			}
+			return _sub;
+		});
+	}
+
+	export const incr = (key: string, increment = 1) => {
+		return attemptAsync(async () => {
+			if (!_pub) {
+				throw new Error('Redis publisher client is not initialized. Call connect() first.');
+			}
+			const count = await _pub.incrBy(key, increment);
+			// log(`Incremented key "${key}" by ${increment}. New value: ${count}`);
+			return count;
+		});
+	}
+
+	export const expire = (key: string, seconds: number) => {
+		return attemptAsync(async () => {
+			if (!_pub) {
+				throw new Error('Redis publisher client is not initialized. Call connect() first.');
+			}
+			const result = await _pub.expire(key, seconds);
+			// if (result) {
+			// 	log(`Set expiration for key "${key}" to ${seconds} seconds.`);
+			// } else {
+			// 	log(`Failed to set expiration for key "${key}". Key may not exist.`);
+			// }
+			return result;
+		});
+	}
 }

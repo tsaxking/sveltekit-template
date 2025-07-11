@@ -20,6 +20,7 @@ interface RequestEvent {
 			}
 		) => void;
 	};
+	request: Request;
 }
 
 export namespace Session {
@@ -30,9 +31,11 @@ export namespace Session {
 			ip: text('ip').notNull(),
 			userAgent: text('user_agent').notNull(),
 			requests: integer('requests').notNull(),
-			prevUrl: text('prev_url').notNull()
+			prevUrl: text('prev_url').notNull(),
+			fingerprint: text('fingerprint').notNull().default(''),
 		},
-		frontend: false
+		frontend: false,
+		safes: ['fingerprint'],
 	});
 
 	export type SessionData = typeof Session.sample;
@@ -43,15 +46,15 @@ export namespace Session {
 			const id = event.cookies.get('ssid_' + PUBLIC_DOMAIN);
 
 			const create = async () => {
-				const session = (
-					await Session.new({
+				const session = await Session
+					.new({
 						accountId: '',
 						ip: '',
 						userAgent: '',
 						requests: 0,
-						prevUrl: ''
-					})
-				).unwrap();
+						prevUrl: '',
+						fingerprint: '',
+					}).unwrap();
 
 				event.cookies.set(('ssid_' + PUBLIC_DOMAIN), session.id, {
 					httpOnly: false,

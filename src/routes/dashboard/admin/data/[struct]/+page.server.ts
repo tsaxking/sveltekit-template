@@ -1,8 +1,14 @@
 import { fail } from '@sveltejs/kit';
 import { Struct } from 'drizzle-struct/back-end';
 import { ServerCode } from 'ts-utils/status';
+import { Account } from '$lib/server/structs/account';
 
 export const load = async (event) => {
+	if (!(await Account.isAdmin(event.locals.account)))
+		throw fail(ServerCode.forbidden, {
+			message: 'Only administrators can access this page'
+		});
+
 	const limit = Math.abs(parseInt(event.url.searchParams.get('limit') || '100'));
 	let page = Math.abs(parseInt(event.url.searchParams.get('page') || '1'));
 	if (page === 0) page = 1;

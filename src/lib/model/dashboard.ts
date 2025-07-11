@@ -3,6 +3,7 @@ import { writable, type Subscriber, type Unsubscriber, type Writable } from 'sve
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
+import type { Icon } from '$lib/types/icons';
 
 export namespace Dashboard {
 	export const getGridSize = () => {
@@ -130,8 +131,7 @@ export namespace Dashboard {
 		constructor(
 			public readonly config: {
 				name: string;
-				icon: string;
-				iconType: 'bi' | 'fa' | 'material-icons' | 'material-symbols' | 'custom';
+				icon: Icon;
 				id: string;
 				size: {
 					xs?: { width: number; height: number };

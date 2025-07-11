@@ -7,14 +7,26 @@ export default () => {
 			{
 				name: 'Logs',
 				href: '/dashboard/admin/logs',
-				icon: 'format_list_numbered',
-				type: 'material-icons'
+				icon: {
+					type: 'material-icons',
+					name: 'format_list_numbered'
+				},
 			},
 			{
 				name: 'Data',
 				href: '/dashboard/admin/data',
-				icon: 'account_tree',
-				type: 'material-icons'
+				icon: {
+					type: 'material-icons',
+					name: 'account_tree',
+				},
+			},
+			{
+				name: 'Analytics',
+				href: '/dashboard/admin/analytics',
+				icon: {
+					type: 'material-icons',
+					name: 'analytics'
+				},
 			}
 		],
 		priority: 0

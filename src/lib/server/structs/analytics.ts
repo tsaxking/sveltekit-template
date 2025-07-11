@@ -1,11 +1,12 @@
-import { text } from "drizzle-orm/pg-core";
+import { text, integer } from "drizzle-orm/pg-core";
 import { Struct } from "drizzle-struct/back-end";
 import type { Account } from "./account";
 import { attemptAsync } from "ts-utils/check";
 import { DB } from "../db";
 import { Session } from "./session";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import { z } from "zod";
+import { DataAction, PropertyAction } from "drizzle-struct/types";
 
 export namespace Analytics {
     export const Links = new Struct({
@@ -13,10 +14,20 @@ export namespace Analytics {
         structure: {
             session: text('session').notNull(),
             url: text('url').notNull(),
+            duration: integer('duration').notNull(),
+            account: text('account').notNull().default(''),
         },
     });
 
     export type LinkData = typeof Links.sample;
+
+    for (const i of [
+        ...Object.values(DataAction),
+        ...Object.values(PropertyAction),
+    ]) {
+        Links.block(i, () => true, 'Cannot perform this action on analytics links');
+    }
+
 
     Links.queryListen('my-links', async (event, data) => {
         const account = event.locals.account;
@@ -43,7 +54,6 @@ export namespace Analytics {
     });
 
     Links.sendListen('count', async (event) => {
-        console.log('Received count');
         const account = event.locals.account;
         if (!account) {
             const links = await Links.fromProperty('session', event.locals.session.id, {
@@ -65,7 +75,7 @@ export namespace Analytics {
             const res = await DB.select()
                 .from(Links.table)
                 .innerJoin(Session.Session.table, eq(Session.Session.table.accountId, account.id))
-                .where(eq(Session.Session.table.accountId, account.id));
+                .where(or(eq(Session.Session.table.accountId, account.id), eq(Links.table.account, account.id)));
 
             return res
                 .filter((v, i, a) => a.findIndex(v2 => v2.analytics_links.url === v.analytics_links.url) === i)

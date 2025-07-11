@@ -9,6 +9,8 @@ export namespace Analytics {
         structure: {
             session: 'string',
             url: 'string',
+            duration: 'number',
+            account: 'string',
         },
         browser,
         socket: sse,
