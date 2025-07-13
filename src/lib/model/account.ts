@@ -14,7 +14,8 @@ export namespace Account {
 			lastName: 'string',
 			email: 'string',
 			picture: 'string',
-			verified: 'boolean'
+			verified: 'boolean',
+			lastLogin: 'string',
 			// verification: 'string'
 		},
 		socket: sse,

@@ -33,5 +33,7 @@ export const load = async (event) => {
             value.columnType.slice(2).toLowerCase(),
         ])),
         safes: struct.data.safes,
+        limit,
+        page: Math.floor(offset / limit),
     }
 };

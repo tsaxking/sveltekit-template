@@ -36,6 +36,8 @@
     const structData = $derived(data.data);
     const total = $derived(data.total);
     const safes = $derived(data.safes);
+    const page = $state(data.page);
+    const limit = $state(data.limit);
 
     let newData = $state({});
 
@@ -94,7 +96,23 @@
         }
     };
 
+    let distanceToTop = $state(0);
+
+    const next = () => {
+        if (page * limit >= total) return;
+        location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page + 1}&limit=${limit}`;
+    };
+    const prev = () => {
+        if (page > 0) {
+            location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page - 1}&limit=${limit}`;
+        }
+    };
+
     onMount(() => {
+        const rect = gridContainer.getBoundingClientRect();
+        distanceToTop = rect.top;
+
+
         Object.entries(struct.data.structure).map(([key, type]) => {
             (newData as any)[key] = match(type)
                 .case('string', () => '')
@@ -107,7 +125,10 @@
         // setTimeout(() => createModal.show());
 
         // return () => createModal.hide();
+
     });
+
+    let gridContainer: HTMLDivElement;
 </script>
 
 <svelte:head>
@@ -124,9 +145,36 @@
     </div>
     <div class="row mb-3">
         <div class="col-6">
-            <p class="ps-2">
-                Total: {total} rows
-            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="ps-2">
+                    {$structData.length > 0 ? 'Showing' : 'No'} {$structData.length} of {total} rows
+                    <br>
+                    (Page {page + 1})
+                </p>
+                <button type="button" class="btn" onclick={prev} disabled={page <= 0}>
+                    <i class="material-icons">navigate_before</i>
+                </button>
+                <button type="button" class="btn" onclick={next} disabled={page * limit >= total}>
+                    <i class="material-icons">navigate_next</i>
+                </button>
+                <div class="form-floating" style="width: 150px;">
+                    <select name="floating-limit" id="limit" class="form-select" onchange="{(e) => {
+                        const newLimit = parseInt((e.target as HTMLSelectElement).value, 10);
+                        location.href = `/dashboard/admin/data/${data.struct.data.name}?page=0&limit=${newLimit}`;
+                    }}"
+                        value={limit}
+                    >
+                        {#each [
+                            10, 25, 50, 100, 250, 500
+                        ] as lim}
+                            <option value="{lim}">{lim}</option>
+                        {/each}
+                    </select>
+                    <label for="limit">
+                        Rows per page
+                    </label>
+                </div>
+            </div>
         </div>
         <div class="col-6">
             <div class="d-flex w-100 justify-content-end pe-2">
@@ -137,7 +185,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-3" bind:this={gridContainer}>
         <Grid 
             bind:this={grid}
             opts={{
@@ -304,7 +352,7 @@
                 tooltipShowDelay: 1000,
             }}
             data={structData}
-            height="300px"
+            height="calc(100vh - {distanceToTop}px)"
             modules={[
                 NumberEditorModule,
                 CheckboxEditorModule,
@@ -312,7 +360,9 @@
                 CellStyleModule,
                 TooltipModule
             ]}
-            rowNumbers={true}
+            rowNumbers={{
+                start: page * limit + 1,
+            }}
             multiSelect={true}
         />
     </div>

@@ -25,7 +25,8 @@ export namespace Account {
 			email: text('email').notNull().unique(),
 			picture: text('picture').notNull(),
 			verified: boolean('verified').notNull(),
-			verification: text('verification').notNull()
+			verification: text('verification').notNull(),
+			lastLogin: text('last_login').notNull().default(''),
 		},
 		generators: {
 			id: () => (uuid() + uuid() + uuid() + uuid()).replace(/-/g, '')
@@ -218,7 +219,8 @@ export namespace Account {
 						salt: hash.salt,
 						verified: false,
 						verification: verificationId,
-						picture: '/'
+						picture: '/',
+						lastLogin: ''
 					},
 					{
 						static: config?.canUpdate
@@ -316,7 +318,8 @@ export namespace Account {
 					salt: '',
 					verified: false,
 					verification: verificationId,
-					picture
+					picture,
+					lastLogin: ''
 				})
 			).unwrap();
 		});

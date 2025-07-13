@@ -61,11 +61,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (env.AUTO_SIGN_IN) {
 		const a = await Account.Account.fromProperty('username', env.AUTO_SIGN_IN, { type: 'single' });
 		if (a.isOk() && a.value) {
-			const res = await Session.signIn(a.value, session.value);
-			if (res.isErr()) {
-				return new Response('Internal Server Error', { status: ServerCode.internalServerError });
-			}
 			event.locals.account = a.value;
+			Object.assign(event.locals.session.data, {
+				accountId: a.value.id,
+			});
 		}
 	}
 

@@ -8,6 +8,10 @@
     const structs = $state(Array.from(Struct.structs));
 </script>
 
+<svelte:head>
+    <title>Admin Data</title>
+    <meta name="description" content="Manage your data structures and entries in the admin dashboard." />
+</svelte:head>
 
 <div class="container layer-1">
     <div class="row mb-3">

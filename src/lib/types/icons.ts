@@ -8858,7 +8858,10 @@ export type FontAwesomeIcon =
 	| 'stethoscope'
 	| 'user-md'
 	| 'wheelchair'
-	| 'wheelchair-alt';
+	| 'wheelchair-alt'
+	| 'user-tag'
+	| 'user-times'
+	| 'user-check';
 
 export type IconTypes = 'material-icons' | 'material-symbols' | 'bootstrap' | 'svg' | 'fontawesome';
 

@@ -56,7 +56,7 @@ export const contextmenu = (
 
 	const el = create('div');
 	el.style.width = width;
-	el.classList.add('shadow', 'border-0', 'contextmenu', 'rounded');
+	el.classList.add('shadow', 'border-0', 'contextmenu', 'rounded', 'layer-3');
 	el.style.position = 'fixed';
 	el.style.zIndex = '1000';
 	const body = create('div');

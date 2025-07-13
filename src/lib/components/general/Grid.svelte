@@ -15,7 +15,14 @@
 		RowSelectionModule,
 		RenderApiModule,
 		EventApiModule,
-		RowStyleModule
+		RowStyleModule,
+		CellStyleModule,
+
+		type ValueGetterParams,
+
+		type ICellRendererParams
+
+
 	} from 'ag-grid-community';
 	import { EventEmitter } from 'ts-utils/event-emitter';
 	import type { Readable } from 'svelte/store';
@@ -29,7 +36,9 @@
 		opts: Omit<GridOptions<T>, 'rowData'>;
 		data: Readable<T[]>;
 		style?: string;
-		rowNumbers?: boolean;
+		rowNumbers?: boolean | {
+			start: number;
+		};
 		layer?: number;
 		height: string | number;
 		modules?: Module[];
@@ -58,7 +67,8 @@
 		RowSelectionModule,
 		RenderApiModule,
 		EventApiModule,
-		RowStyleModule
+		RowStyleModule,
+		CellStyleModule,
 	]);
 
 	const em = new EventEmitter<{
@@ -84,6 +94,13 @@
 
 		return selected;
 	};
+
+	export const rerender = () => {
+		if (grid) {
+			grid.refreshCells();
+		}
+	}
+
 	// Create a custom dark theme using Theming API
 	const darkTheme = themeQuartz.withParams({
 		backgroundColor: `var(--layer-${layer})`,
@@ -130,14 +147,20 @@
 					? [
 							{
 								headerName: '',
-								valueGetter: 'node.rowIndex + 1',
+								valueGetter: (params: ValueGetterParams<T>) => {
+									if (typeof rowNumbers === 'object') {
+										return rowNumbers.start + (params.node?.rowIndex || 0);
+									} else {
+										return (params.node?.rowIndex || 0) + 1;
+									}
+								},
 								width: 50,
 								suppressMovable: true,
 								cellClass: 'text-center',
 								cellStyle: {
 									backgroundColor: 'var(--ag-chrome-background-color)'
 								},  
-								cellRenderer: (params: any) => {
+								cellRenderer: (params: ICellRendererParams<T>) => {
 									const div = document.createElement('div');
 									div.innerText = String(params.value);
 									div.style.cursor = 'pointer';

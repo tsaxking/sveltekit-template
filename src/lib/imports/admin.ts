@@ -27,6 +27,14 @@ export default () => {
 					type: 'material-icons',
 					name: 'analytics'
 				}
+			},
+			{
+				name: 'Accounts',
+				href: '/dashboard/admin/accounts',
+				icon: {
+					type: 'material-icons',
+					name: 'manage_accounts'
+				}
 			}
 		],
 		priority: 0

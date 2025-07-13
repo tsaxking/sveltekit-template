@@ -21,5 +21,7 @@ export const load = (event) => {
         total: event.data.total,
         structType: event.data.structType,
         safes: event.data.safes,
+        limit: event.data.limit,
+        page: event.data.page,
     }
 }
