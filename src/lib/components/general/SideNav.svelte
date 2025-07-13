@@ -45,7 +45,9 @@
 						let title: string;
 
 						if (res.isOk()) title = res.value;
-						else title = link.data.url || 'No Title';
+						else {
+							title = '';
+						}
 						return {
 							link,
 							title
@@ -161,11 +163,13 @@
 				</div>
 				<ul class="list-unstyled">
 					{#each links as link}
-						<li class="ps-3 mb-2">
-							<a class="text-muted text-decoration-none" href={link.link.data.url} onclick={hide}>
-								<span>{link.title}</span>
-							</a>
-						</li>
+						{#if link.title.length > 0}
+							<li class="ps-3 mb-2">
+								<a class="text-muted text-decoration-none" href={link.link.data.url} onclick={hide}>
+									<span>{link.title}</span>
+								</a>
+							</li>
+						{/if}
 					{/each}
 				</ul>
 			</li>

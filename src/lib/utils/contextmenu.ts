@@ -92,6 +92,7 @@ export const contextmenu = (
 				'p-2',
 				'rounded-0'
 			);
+			button.type = 'button';
 			const icon = create('span');
 			switch (o.icon.type) {
 				case 'bootstrap':

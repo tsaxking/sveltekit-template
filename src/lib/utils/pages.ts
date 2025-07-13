@@ -11,13 +11,19 @@ export const getTitle = (url: string) => {
 			headers: {
 				cache: 'no-cache'
 			}
-		}).then((res) => res.text());
+		});
+
+		if (!res.ok) {
+			throw new Error('Server responded with status: ' + res.status);
+		}
+
+		const text = await res.text();
 
 		const parse = new DOMParser();
-		const doc = parse.parseFromString(res, 'text/html');
+		const doc = parse.parseFromString(text, 'text/html');
 		const tilte = doc.querySelector('title');
 		if (!tilte) {
-			throw new Error('Title not found in the document');
+			return url;
 		}
 		return tilte.textContent || 'No title found';
 	});

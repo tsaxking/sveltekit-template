@@ -4,6 +4,7 @@ import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import terminal from '$lib/server/utils/terminal';
 
 export const POST = async (event) => {
 	if (event.params.struct !== 'test') {
@@ -17,7 +18,7 @@ export const POST = async (event) => {
 	}
 
 	const body = await event.request.json();
-	const date = new Date(event.request.headers.get('X-Date') || Date.now());
+	const date = new Date(Number(event.request.headers.get('X-Date')) || Date.now());
 
 	const safe = z
 		.object({
@@ -43,6 +44,10 @@ export const POST = async (event) => {
 		delete (safe.data as any).lifetime;
 		delete (safe.data as any).canUpdate;
 		delete (safe.data as any).universe;
+
+		for (const key of struct.data.safes || []) {
+			delete (safe.data as any)[key];
+		}
 
 		if (struct.data.safes !== undefined) {
 			for (const key of Object.keys(safe.data as object)) {
@@ -113,7 +118,7 @@ export const POST = async (event) => {
 	}
 
 	if (date.getTime() < targetData.value.updated.getTime()) {
-		return Errors.outdatedData(
+		terminal.warn(
 			`The data you are trying to update is outdated. Please refresh and try again. Current: ${targetData.value.updated.toISOString()}, Your: ${date.toISOString()}`
 		);
 	}

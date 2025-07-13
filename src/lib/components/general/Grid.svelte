@@ -8,10 +8,21 @@
 		themeQuartz,
 		PaginationModule,
 		type GridApi,
-		type Module
+		type Module,
+		ValidationModule,
+		RowApiModule,
+		QuickFilterModule,
+		RowSelectionModule,
+		RenderApiModule,
+		EventApiModule,
+		RowStyleModule
 	} from 'ag-grid-community';
 	import { EventEmitter } from 'ts-utils/event-emitter';
 	import type { Readable } from 'svelte/store';
+	import { 
+		CheckBoxSelectRenderer, 
+		HeaderCheckboxRenderer
+	 } from '$lib/utils/ag-grid/checkbox-select';
 
 	interface Props {
 		filter?: boolean;
@@ -22,6 +33,7 @@
 		layer?: number;
 		height: string | number;
 		modules?: Module[];
+		multiSelect?: boolean;
 	}
 
 	const {
@@ -32,10 +44,22 @@
 		rowNumbers = false,
 		layer = 1,
 		height,
-		modules = []
+		modules = [],
+		multiSelect = false,
 	}: Props = $props();
 
-	ModuleRegistry.registerModules([...modules, ClientSideRowModelModule, PaginationModule]);
+	ModuleRegistry.registerModules([
+		...modules, 
+		ClientSideRowModelModule, 
+		PaginationModule,
+		ValidationModule,
+		RowApiModule,
+		QuickFilterModule,
+		RowSelectionModule,
+		RenderApiModule,
+		EventApiModule,
+		RowStyleModule
+	]);
 
 	const em = new EventEmitter<{
 		filter: T[];
@@ -48,6 +72,18 @@
 
 	export const getGrid = () => grid;
 
+	export const getSelection = (): T[] => {
+		if (!grid) return [];
+		const selected: T[] = [];
+
+		grid.forEachNode((node) => {
+			if ((node as any).checkboxSelected) {
+				if (node.data) selected.push(node.data);
+			}
+		});
+
+		return selected;
+	};
 	// Create a custom dark theme using Theming API
 	const darkTheme = themeQuartz.withParams({
 		backgroundColor: `var(--layer-${layer})`,
@@ -100,12 +136,35 @@
 								cellClass: 'text-center',
 								cellStyle: {
 									backgroundColor: 'var(--ag-chrome-background-color)'
+								},  
+								cellRenderer: (params: any) => {
+									const div = document.createElement('div');
+									div.innerText = String(params.value);
+									div.style.cursor = 'pointer';
+
+									div.onclick = () => {
+										const node = params.node as any;
+										node.checkboxSelected = !node.checkboxSelected;
+										params.api.refreshCells({ rowNodes: [params.node], force: true });
+										params.api.refreshHeader();
+									};
+
+									return div;
 								}
 							}
 						]
 					: []),
+				...(multiSelect ? [{
+					width: 50,
+					cellRenderer: CheckBoxSelectRenderer,
+					headerComponent: HeaderCheckboxRenderer,
+				}] : []),
 				...opts.columnDefs
-			]
+			],
+			getRowClass: (params) => {
+				return (params.node as any).checkboxSelected ? 'row-checked' : '';
+			}
+
 		};
 		grid = createGrid(gridDiv, gridOptions); // Create the grid with custom options
 		em.emit('ready', grid); // Emit the ready event with the grid API

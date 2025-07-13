@@ -1,41 +1,37 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { Account } from '$lib/server/structs/account.js';
+import { redirect, fail } from '@sveltejs/kit';
 import { Struct } from 'drizzle-struct/back-end';
 import { ServerCode } from 'ts-utils/status';
-import { Account } from '$lib/server/structs/account';
 
 export const load = async (event) => {
-	if (!event.locals.account) {
-		throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
-	}
-	if (!(await Account.isAdmin(event.locals.account).unwrap()))
-		throw fail(ServerCode.forbidden, {
-			message: 'Only administrators can access this page'
-		});
+    if (!event.locals.account) throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
 
-	const limit = Math.abs(parseInt(event.url.searchParams.get('limit') || '100'));
-	let page = Math.abs(parseInt(event.url.searchParams.get('page') || '1'));
-	if (page === 0) page = 1;
-	const offset = (page - 1) * limit;
-	const structs = Array.from(Struct.structs.values());
+    if (!(await Account.isAdmin(event.locals.account).unwrap()))
+    throw fail(ServerCode.forbidden, {
+        message: 'Only administrators can access this page'
+    });
 
-	const struct = Struct.structs.get(event.params.struct);
-	if (!struct) {
-		throw fail(ServerCode.notFound, { message: 'No structs found' });
-	}
+    const struct = Struct.structs.get(event.params.struct);
+    if (!struct) throw fail(ServerCode.notFound, { message: 'Struct not found' });
 
-	const data =
-		(
-			await struct.all({
-				type: 'array',
-				limit,
-				offset
-			})
-		).unwrap() || [];
+    const limit = Number(event.url.searchParams.get('limit') || '50');
+    const offset = Number(event.url.searchParams.get('page') || '0') * limit;
 
-	return {
-		structs: structs.map((s) => s.name),
-		data: data.map((d) => d.safe()),
-		structTypes: Object.fromEntries(Object.entries(struct.table).map(([k, v]) => [k, v.dataType])),
-		struct: struct.data.name
-	};
+    const data = await struct.all({
+        type: 'array',
+        limit,
+        offset,
+        includeArchived: true,
+    }).unwrap();
+
+    return {
+        struct: struct.data.name,
+        data: data.map(d => d.safe()),
+        total: await struct.all({ type: 'count' }).unwrap(),
+        structType: Object.fromEntries(Object.entries(struct.table).filter(([k]) => k !== 'enableRLS').map(([key, value]) => [
+            key,
+            value.columnType.slice(2).toLowerCase(),
+        ])),
+        safes: struct.data.safes,
+    }
 };

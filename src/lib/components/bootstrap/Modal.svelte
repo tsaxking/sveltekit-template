@@ -10,7 +10,7 @@
 	interface Props {
 		title: string;
 		body: Snippet;
-		buttons: Snippet;
+		buttons?: Snippet;
 		show?: boolean;
 		size?: 'sm' | 'md' | 'lg' | 'xl';
 	}
@@ -74,9 +74,11 @@
 			<div class="modal-body">
 				{@render body()}
 			</div>
-			<div class="modal-footer">
-				{@render buttons()}
-			</div>
+			{#if buttons}
+				<div class="modal-footer">
+					{@render buttons()}
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>

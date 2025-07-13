@@ -22,7 +22,7 @@ export class EventStack {
 		this.keyboard =
 			typeof keyboard === 'string'
 				? new Keyboard(keyboard)
-				: keyboard ?? new Keyboard('stack-' + Math.random().toString(36).slice(2, 8));
+				: (keyboard ?? new Keyboard('stack-' + Math.random().toString(36).slice(2, 8)));
 	}
 
 	init() {
