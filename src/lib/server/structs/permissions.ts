@@ -14,7 +14,7 @@ import { attempt, attemptAsync, resolveAll } from 'ts-utils/check';
 import { Account } from './account';
 import { PropertyAction, DataAction } from 'drizzle-struct/types';
 import { DB } from '../db';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, ilike } from 'drizzle-orm';
 import type { Entitlement } from '$lib/types/entitlements';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
@@ -49,6 +49,49 @@ export namespace Permissions {
 			parent: text('parent').notNull() // Parent role for hierarchy. A parent role can manage its child roles.
 		}
 	});
+
+	Role.sendListen('search', async (event, data) => {
+		if (!event.locals.account) {
+			throw new Error('Not logged in');
+		}
+
+		const parsed = z.object({
+			searchKey: z.string(),
+			offset: z.number().int(),
+			limit: z.number().int(),
+		}).safeParse(data);
+
+		if (!parsed.success) {
+			terminal.warn('Invalid data: ', parsed.error);
+			throw new Error('Invalid data received');
+		}
+
+		const searched = await searchRoles(parsed.data.searchKey, {
+				offset: parsed.data.offset,
+				limit: parsed.data.limit,
+			}).unwrap();
+
+		if (await Account.isAdmin(event.locals.account)) {
+			return searched.map(s => s.safe());
+		}
+
+		return filterPropertyActionFromAccount(event.locals.account, searched, PropertyAction.Read);
+	});
+
+	const searchRoles = (searchKey: string, config: {
+		offset: number;
+		limit: number;
+	}) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Role.table)
+				.where(ilike(Role.table.name, `%${searchKey}%`))
+				.offset(config.offset)
+				.limit(config.limit);
+
+			return res.map(r => Role.Generator(r));
+		});
+	};
 
 	// Role.callListen('update', async (event, data) => {});
 

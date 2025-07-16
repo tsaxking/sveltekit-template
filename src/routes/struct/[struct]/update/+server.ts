@@ -5,11 +5,18 @@ import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 import terminal from '$lib/server/utils/terminal';
+import { Account } from '$lib/server/structs/account.js';
 
 export const POST = async (event) => {
 	if (event.params.struct !== 'test') {
 		if (!event.locals.account) return Errors.noAccount();
 	}
+
+	let isAdmin = false;
+	if (event.locals.account) { // only will enter if not test struct
+		isAdmin = await Account.isAdmin(event.locals.account).unwrapOr(false);
+	}
+
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
 
@@ -80,7 +87,8 @@ export const POST = async (event) => {
 		return Errors.noAccount(); // Should not happen due to the check above, but just in case and for type safety
 	}
 
-	{
+	BLOCKS: {
+		if (isAdmin) break BLOCKS;
 		const blocks = struct.blocks.get(PropertyAction.Update);
 		if (blocks) {
 			for (const block of blocks) {

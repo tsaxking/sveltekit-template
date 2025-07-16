@@ -3,6 +3,7 @@ import { Struct, StructData, DataArr } from 'drizzle-struct/front-end';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';
+import { z } from 'zod';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -163,4 +164,21 @@ export namespace Permissions {
 			targetAttribute
 		});
 	};
+
+	export const searchRoles = (searchKey: string, config: {
+		offset: number;
+		limit: number;
+	}) => {
+		return attemptAsync(async () => {
+			const res = await Role.send('search', {
+				searchKey,
+				offset: config.offset,
+				limit: config.limit
+			}, z.array(Role.getZodSchema({
+				optionals: Object.keys(Role.data.structure),
+			}))).unwrap();
+
+			return res.map(r => Role.Generator(r));
+		});
+	}
 }

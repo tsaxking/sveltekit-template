@@ -5,6 +5,7 @@ import { Permissions } from '../structs/permissions';
 import { PropertyAction } from 'drizzle-struct/types';
 import { sse } from './sse';
 import { Redis } from './redis';
+import { z } from 'zod';
 
 export const createStructEventService = (struct: Struct<Blank, string>) => {
 	if (struct.data.frontend === false) return;
@@ -14,6 +15,7 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 		event: string,
 		data: StructData<typeof struct.data.structure, typeof struct.data.name>
 	) => {
+		if (!struct.frontend) return;
 		// console.log(sse);
 		sse.each(async (connection) => {
 			if (struct.name === 'test') {
@@ -52,7 +54,6 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 		});
 	};
 
-	if (!struct.frontend) return;
 
 	struct.on('create', (data) => {
 		emitToConnections('create', data);
@@ -89,3 +90,41 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 
 	struct.emit('build');
 };
+
+
+// export const createStructListenerService = (struct: Struct<Blank, string>, targetService: string) => {
+// 	const schema = struct.getZodSchema();
+// 	const service = Redis.createListeningService(targetService, {
+// 		create: schema,
+// 		update: z.object({
+// 			from: schema,
+// 			to: schema,
+// 		}),
+// 		delete: schema,
+// 		archive: schema,
+// 		restore: schema,
+// 	});
+
+// 	service.on('create', (data) => {
+// 		struct.emit('create', struct.Generator(data.data));
+// 	});
+
+// 	service.on('update', (data) => {
+// 		struct.emit('update', {
+// 			from: data.data.from,
+// 			to: struct.Generator(data.data.to),
+// 		});
+// 	});
+
+// 	service.on('delete', (data) => {
+// 		struct.emit('delete', struct.Generator(data.data));
+// 	});
+
+// 	service.on('archive', (data) => {
+// 		struct.emit('archive', struct.Generator(data.data));
+// 	});
+
+// 	service.on('restore', (data) => {
+// 		struct.emit('restore', struct.Generator(data.data));
+// 	});
+// };

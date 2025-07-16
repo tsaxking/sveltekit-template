@@ -33,6 +33,9 @@
 		"backup": "pnpm script backup",
 		"restore": "pnpm script restore"
 	},
+	"engines": {
+		"node": ">=22.12.0"
+	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^3.2.3",
 		"@eslint/compat": "^1.2.4",

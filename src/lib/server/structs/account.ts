@@ -12,6 +12,7 @@ import { DataAction, PropertyAction } from 'drizzle-struct/types';
 // import { Universes } from './universe';
 import { Email } from './email';
 import type { Icon } from '$lib/types/icons';
+import { z } from 'zod';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -41,6 +42,22 @@ export namespace Account {
 			return new Error('Not logged in');
 		}
 		return account.safe();
+	});
+
+	Account.sendListen('username-exists', async (event, data) => {
+		const parsed = z.object({
+			username: z.string().min(1),
+		}).safeParse(data);
+
+		if (!parsed.success) {
+			throw new Error('Invalid data recieved');
+		}
+
+		const account = await Account.fromProperty('username', parsed.data.username, {
+			type: 'count',
+		}).unwrap();
+
+		return account > 0;
 	});
 
 	Account.on('delete', async (a) => {
