@@ -9,7 +9,7 @@
 		"dev": "vite dev",
 		"tools": "node --inspect --env-file=.env ./src/server.js",
 		"route-tree": "pnpm script create-route-tree.ts",
-		"build": "pnpm route-tree && vite build",
+		"build": "pnpm build:email && pnpm route-tree && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

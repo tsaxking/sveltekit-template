@@ -1,0 +1,45 @@
+services:
+  postgres:
+    env_file:
+      - ../.env
+    image: postgres
+    restart: always
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+
+  app:
+    # github action publishes to the ghcr.io registry
+    # always pull from the main branch
+    # main is assumed to be the latest stable release
+    env_file:
+      - ../.env
+    image: ghcr.io/${GITHUB_REPOSITORY}:latest
+    depends_on:
+      - postgres
+    ports:
+      - ${PORT}:8000
+    # command: sleep infinity
+
+volumes:
+  postgres_data:
+    # named volume for postgres data
+    # this is used to persist data across container restarts
+    # and is not removed when the container is stopped
+    # it is also used to share data between containers
+    # in a production environment, you would use a persistent volume
+    # such as an EBS volume or a GCS bucket
+
+    # this can be used to specify a specific location
+    # for the postgres data
+    # otherwise, docker will create a volume in the default location
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: ./postgres
+    #   o: bind
