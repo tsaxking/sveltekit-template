@@ -16,7 +16,7 @@ export namespace Account {
 			email: 'string',
 			picture: 'string',
 			verified: 'boolean',
-			lastLogin: 'string',
+			lastLogin: 'string'
 			// verification: 'string'
 		},
 		socket: sse,
@@ -105,5 +105,5 @@ export namespace Account {
 
 	export const usernameExists = (username: string) => {
 		return Account.send('username-exists', { username }, z.boolean());
-	}
+	};
 }

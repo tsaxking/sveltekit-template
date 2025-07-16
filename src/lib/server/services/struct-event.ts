@@ -54,7 +54,6 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 		});
 	};
 
-
 	struct.on('create', (data) => {
 		emitToConnections('create', data);
 		Redis.emit(`struct:${struct.name}:create`, data);
@@ -90,7 +89,6 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 
 	struct.emit('build');
 };
-
 
 // export const createStructListenerService = (struct: Struct<Blank, string>, targetService: string) => {
 // 	const schema = struct.getZodSchema();

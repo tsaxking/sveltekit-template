@@ -55,11 +55,13 @@ export namespace Permissions {
 			throw new Error('Not logged in');
 		}
 
-		const parsed = z.object({
-			searchKey: z.string(),
-			offset: z.number().int(),
-			limit: z.number().int(),
-		}).safeParse(data);
+		const parsed = z
+			.object({
+				searchKey: z.string(),
+				offset: z.number().int(),
+				limit: z.number().int()
+			})
+			.safeParse(data);
 
 		if (!parsed.success) {
 			terminal.warn('Invalid data: ', parsed.error);
@@ -67,21 +69,24 @@ export namespace Permissions {
 		}
 
 		const searched = await searchRoles(parsed.data.searchKey, {
-				offset: parsed.data.offset,
-				limit: parsed.data.limit,
-			}).unwrap();
+			offset: parsed.data.offset,
+			limit: parsed.data.limit
+		}).unwrap();
 
 		if (await Account.isAdmin(event.locals.account)) {
-			return searched.map(s => s.safe());
+			return searched.map((s) => s.safe());
 		}
 
 		return filterPropertyActionFromAccount(event.locals.account, searched, PropertyAction.Read);
 	});
 
-	const searchRoles = (searchKey: string, config: {
-		offset: number;
-		limit: number;
-	}) => {
+	const searchRoles = (
+		searchKey: string,
+		config: {
+			offset: number;
+			limit: number;
+		}
+	) => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
 				.from(Role.table)
@@ -89,7 +94,7 @@ export namespace Permissions {
 				.offset(config.offset)
 				.limit(config.limit);
 
-			return res.map(r => Role.Generator(r));
+			return res.map((r) => Role.Generator(r));
 		});
 	};
 

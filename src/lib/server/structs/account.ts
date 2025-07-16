@@ -27,7 +27,7 @@ export namespace Account {
 			picture: text('picture').notNull(),
 			verified: boolean('verified').notNull(),
 			verification: text('verification').notNull(),
-			lastLogin: text('last_login').notNull().default(''),
+			lastLogin: text('last_login').notNull().default('')
 		},
 		generators: {
 			id: () => (uuid() + uuid() + uuid() + uuid()).replace(/-/g, '')
@@ -45,16 +45,18 @@ export namespace Account {
 	});
 
 	Account.sendListen('username-exists', async (event, data) => {
-		const parsed = z.object({
-			username: z.string().min(1),
-		}).safeParse(data);
+		const parsed = z
+			.object({
+				username: z.string().min(1)
+			})
+			.safeParse(data);
 
 		if (!parsed.success) {
 			throw new Error('Invalid data recieved');
 		}
 
 		const account = await Account.fromProperty('username', parsed.data.username, {
-			type: 'count',
+			type: 'count'
 		}).unwrap();
 
 		return account > 0;

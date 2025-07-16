@@ -63,7 +63,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (a.isOk() && a.value) {
 			event.locals.account = a.value;
 			Object.assign(event.locals.session.data, {
-				accountId: a.value.id,
+				accountId: a.value.id
 			});
 		}
 	}

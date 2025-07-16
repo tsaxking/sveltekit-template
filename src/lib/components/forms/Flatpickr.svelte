@@ -1,48 +1,44 @@
 <script lang="ts">
-  import flatpickr from 'flatpickr';
-  import { onMount, onDestroy } from 'svelte';
+	import flatpickr from 'flatpickr';
+	import { onMount, onDestroy } from 'svelte';
 
-  interface Props {
-    value?: Date | null;
-    options?: Partial<flatpickr.Options.Options>;
-    className?: string;
-    onChange?: (date: Date) => void;
-  }
+	interface Props {
+		value?: Date | null;
+		options?: Partial<flatpickr.Options.Options>;
+		className?: string;
+		onChange?: (date: Date) => void;
+		id: string;
+	}
 
-  let { value = null, options = {}, className = '', onChange }: Props = $props();
+	let { value = null, options = {}, className = '', onChange, id }: Props = $props();
 
-  let inputEl: HTMLInputElement;
-  let fp: flatpickr.Instance | null = null;
+	let inputEl: HTMLInputElement;
+	let fp: flatpickr.Instance | null = null;
 
-  const handleChange = (selectedDates: Date[]) => {
-    const selected = selectedDates[0] ?? null;
-    value = selected;
-    if (selected && onChange) onChange(selected);
-  };
+	const handleChange = (selectedDates: Date[]) => {
+		const selected = selectedDates[0] ?? null;
+		value = selected;
+		if (selected && onChange) onChange(selected);
+	};
 
-  onMount(() => {
-    fp = flatpickr(inputEl, {
-      ...options,
-      defaultDate: value ?? undefined,
-      onChange: handleChange
-    });
-  });
+	onMount(() => {
+		fp = flatpickr(inputEl, {
+			...options,
+			defaultDate: value ?? undefined,
+			onChange: handleChange
+		});
+	});
 
-  $effect(() => {
-    if (fp && value) {
-      fp.setDate(value, false);
-    }
-  });
+	$effect(() => {
+		if (fp && value) {
+			fp.setDate(value, false);
+		}
+	});
 
-  onDestroy(() => {
-    fp?.destroy();
-    fp = null;
-  });
+	onDestroy(() => {
+		fp?.destroy();
+		fp = null;
+	});
 </script>
 
-<input
-  bind:this={inputEl}
-  class={className}
-  type="text"
-  placeholder="Select date..."
->
+<input {id} bind:this={inputEl} class={className} type="text" placeholder="Select date..." />

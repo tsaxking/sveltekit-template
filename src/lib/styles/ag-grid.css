@@ -1,84 +1,83 @@
 .custom-checkbox-label {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  height: 18px;
-  width: 18px;
-  position: relative;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+	height: 18px;
+	width: 18px;
+	position: relative;
 }
 
 .custom-checkbox-input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  margin: 0;
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
 }
 
 .custom-checkbox-box {
-  width: 18px;
-  height: 18px;
-  background-color: var(--ag-background-color, #222);
-  border: 2px solid var(--ag-border-color, #555);
-  border-radius: 3px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 18px;
+	height: 18px;
+	background-color: var(--ag-background-color, #222);
+	border: 2px solid var(--ag-border-color, #555);
+	border-radius: 3px;
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Show checkmark when checked */
 .custom-checkbox-input:checked + .custom-checkbox-box {
-  background-color: var(--ag-accent-color);
-  border-color: var(--ag-accent-color);
+	background-color: var(--ag-accent-color);
+	border-color: var(--ag-accent-color);
 }
 
 /* Checkmark icon */
 .custom-checkbox-box::after {
-  content: "";
-  display: block;
-  width: 6px;
-  height: 10px;
-  border: solid var(--ag-checkbox-checked-color, white);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  position: relative;
+	content: '';
+	display: block;
+	width: 6px;
+	height: 10px;
+	border: solid var(--ag-checkbox-checked-color, white);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	position: relative;
 }
-
 
 /* Show checkmark on checked */
 .custom-checkbox-input:checked + .custom-checkbox-box::after {
-  opacity: 1;
+	opacity: 1;
 }
 
 /* Focus ring */
 .custom-checkbox-input:focus + .custom-checkbox-box {
-  box-shadow: 0 0 0 2px var(--ag-accent-color);
-  outline: none;
+	box-shadow: 0 0 0 2px var(--ag-accent-color);
+	outline: none;
 }
-
 
 .custom-checkbox-input:indeterminate + .custom-checkbox-box::after {
-  content: "";
-  width: 10px;
-  height: 2px;
-  background-color: var(--ag-checkbox-checked-color, white);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: none;
-  opacity: 1;
-  /* override checkmark style */
-  border-width: 0;
-  transform: translate(-50%, -50%) rotate(0deg);
+	content: '';
+	width: 10px;
+	height: 2px;
+	background-color: var(--ag-checkbox-checked-color, white);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: none;
+	opacity: 1;
+	/* override checkmark style */
+	border-width: 0;
+	transform: translate(-50%, -50%) rotate(0deg);
 }
 
-
 .ag-theme-quartz .row-checked {
-  background-color: var(--ag-selected-row-background-color, #2a2a2a); /* fallback for dark theme */
+	background-color: var(--ag-selected-row-background-color, #2a2a2a); /* fallback for dark theme */
 }

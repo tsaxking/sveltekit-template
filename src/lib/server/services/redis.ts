@@ -18,7 +18,7 @@ export namespace Redis {
 	// Devs can reassign this to a different UUID generator if they want
 	// eslint-disable-next-line prefer-const
 	export let uuid = u;
-	
+
 	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
 	let messageId = -1;
 	export const clientId = uuid();

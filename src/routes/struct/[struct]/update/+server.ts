@@ -13,7 +13,8 @@ export const POST = async (event) => {
 	}
 
 	let isAdmin = false;
-	if (event.locals.account) { // only will enter if not test struct
+	if (event.locals.account) {
+		// only will enter if not test struct
 		isAdmin = await Account.isAdmin(event.locals.account).unwrapOr(false);
 	}
 

@@ -7,162 +7,169 @@
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
 
-    const { data } = $props();
+	const { data } = $props();
 
-    const roles = $derived(data.roles);
+	const roles = $derived(data.roles);
 
-    type Row = {
-        role: Permissions.RoleData;
-        parent: Permissions.RoleData | undefined;
-    }
+	type Row = {
+		role: Permissions.RoleData;
+		parent: Permissions.RoleData | undefined;
+	};
 
-    let gridContainer: HTMLDivElement;
-    let grid: Grid<Row>;
-    let distanceToTop = $state(0);
-    let parent: Permissions.RoleData | undefined = $state(undefined);
+	let gridContainer: HTMLDivElement;
+	let grid: Grid<Row>;
+	let distanceToTop = $state(0);
+	let parent: Permissions.RoleData | undefined = $state(undefined);
 
-    let createRoleData = $state({
-        name: '',
-        description: '',
-    });
+	let createRoleData = $state({
+		name: '',
+		description: ''
+	});
 
-    const startCreateRole = () => {
-        createModal.show();
-    };
+	const startCreateRole = () => {
+		createModal.show();
+	};
 
-    const createRole = () => {
-        createModal.hide();
-        Permissions.Role.new({
-            ...createRoleData,
-            parent: parent?.data.id || '',
-        });
-    };
+	const createRole = () => {
+		createModal.hide();
+		Permissions.Role.new({
+			...createRoleData,
+			parent: parent?.data.id || ''
+		});
+	};
 
-    onMount(() => {
-        const rect = gridContainer.getBoundingClientRect();
-        distanceToTop = rect.top;
+	onMount(() => {
+		const rect = gridContainer.getBoundingClientRect();
+		distanceToTop = rect.top;
 
-        // createModal.show();
+		// createModal.show();
 
-        // return () => createModal.hide();
-    });
+		// return () => createModal.hide();
+	});
 
-    let createModal: Modal;
+	let createModal: Modal;
 </script>
 
 <div class="container-fluid">
-    <div class="row mb-3">
-        <div class="col">
-            <h1>Roles</h1>
-        </div>
-    </div>
+	<div class="row mb-3">
+		<div class="col">
+			<h1>Roles</h1>
+		</div>
+	</div>
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <button type="button" class="btn btn-primary" onclick={startCreateRole}>
-                <i class="material-icons">add</i>
-                Create Role
-            </button>
-        </div>
-    </div>
+	<div class="row mb-3">
+		<div class="col-12">
+			<button type="button" class="btn btn-primary" onclick={startCreateRole}>
+				<i class="material-icons">add</i>
+				Create Role
+			</button>
+		</div>
+	</div>
 
-    <div class="row mb-3">
-        <div class="col-12" bind:this={gridContainer}>
-            <Grid
-                bind:this={grid}
-                data={roles}
-                opts={{
-                    columnDefs: [
-                        {
-                            headerName: 'Role',
-                            field: 'role.data.name',
-                        },
-                        {
-                            headerName: 'Description',
-                            field: 'role.data.description',
-                        },
-                        {
-                            headerName: 'Parent',
-                            // field: 'role.data.parent.data.name',
-                            valueGetter: (params) => {
-                                return params.data?.parent?.data.name || 'No Parent';
-                            }
-                        },
-                        {
-                            headerName: 'Actions',
-                        },
-                    ],
-                    onCellContextMenu: (params) => {
-                        contextmenu(params.event as PointerEvent, {
-                            options: [
-                                {
-                                    action: () => {
-                                        location.href = `/dashboard/admin/role/${params.data?.role.data.id}`;
-                                    },
-                                    name: `View ${params.data?.role.data.name}`,
-                                    icon: {
-                                        type: 'material-icons',
-                                        name: 'visibility',
-                                    }
-                                }
-                            ],
-                            width: '150px',
-                        });
-                    },
-                    preventDefaultOnContextMenu: true,
-                }}
-                height="calc(100vh - {distanceToTop}px)"
-                rowNumbers={true}
-            />
-        </div>
-    </div>
+	<div class="row mb-3">
+		<div class="col-12" bind:this={gridContainer}>
+			<Grid
+				bind:this={grid}
+				data={roles}
+				opts={{
+					columnDefs: [
+						{
+							headerName: 'Role',
+							field: 'role.data.name'
+						},
+						{
+							headerName: 'Description',
+							field: 'role.data.description'
+						},
+						{
+							headerName: 'Parent',
+							// field: 'role.data.parent.data.name',
+							valueGetter: (params) => {
+								return params.data?.parent?.data.name || 'No Parent';
+							}
+						},
+						{
+							headerName: 'Actions'
+						}
+					],
+					onCellContextMenu: (params) => {
+						contextmenu(params.event as PointerEvent, {
+							options: [
+								{
+									action: () => {
+										location.href = `/dashboard/admin/role/${params.data?.role.data.id}`;
+									},
+									name: `View ${params.data?.role.data.name}`,
+									icon: {
+										type: 'material-icons',
+										name: 'visibility'
+									}
+								}
+							],
+							width: '150px'
+						});
+					},
+					preventDefaultOnContextMenu: true
+				}}
+				height="calc(100vh - {distanceToTop}px)"
+				rowNumbers={true}
+			/>
+		</div>
+	</div>
 </div>
 
-
-<Modal
-    bind:this={createModal}
-    title="Create Role"
-    size="lg"
->
-    {#snippet body()}
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="role-name" placeholder="My Role Name" bind:value={createRoleData.name}>
-            <label for="role-name">Role Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="role-description" placeholder="My Role Description" bind:value={createRoleData.description}>
-            <label for="role-description">Description</label>
-        </div>
-        {#if parent}
-            <p>
-                Selected: 
-            </p>
-            <div class="card layer-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-middle">
-                        <h5 class="card-title">
-                            {parent.data.name}
-                        </h5>
-                        <button type="button" class="btn" onclick={() => parent = undefined}>
-                            <i class="material-icons">close</i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        {/if}
-        <RoleSelect onselect={(r) => {
-            if (!r.data.id) {
-                return alert('You cannot read the id property of this role, you cannot create a role with it as its parent.');
-            }
-            parent = r;
-        }} />
-    {/snippet}
-    {#snippet buttons()}
-        <button type="button" class="btn btn-secondary" onclick={() => createModal.hide()}>
-            Cancel
-        </button>
-        <button type="button" class="btn btn-primary" onclick={createRole}>
-            Create Role
-        </button>
-    {/snippet}
+<Modal bind:this={createModal} title="Create Role" size="lg">
+	{#snippet body()}
+		<div class="form-floating mb-3">
+			<input
+				type="text"
+				class="form-control"
+				id="role-name"
+				placeholder="My Role Name"
+				bind:value={createRoleData.name}
+			/>
+			<label for="role-name">Role Name</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input
+				type="text"
+				class="form-control"
+				id="role-description"
+				placeholder="My Role Description"
+				bind:value={createRoleData.description}
+			/>
+			<label for="role-description">Description</label>
+		</div>
+		{#if parent}
+			<p>Selected:</p>
+			<div class="card layer-3">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-middle">
+						<h5 class="card-title">
+							{parent.data.name}
+						</h5>
+						<button type="button" class="btn" onclick={() => (parent = undefined)}>
+							<i class="material-icons">close</i>
+						</button>
+					</div>
+				</div>
+			</div>
+		{/if}
+		<RoleSelect
+			onselect={(r) => {
+				if (!r.data.id) {
+					return alert(
+						'You cannot read the id property of this role, you cannot create a role with it as its parent.'
+					);
+				}
+				parent = r;
+			}}
+		/>
+	{/snippet}
+	{#snippet buttons()}
+		<button type="button" class="btn btn-secondary" onclick={() => createModal.hide()}>
+			Cancel
+		</button>
+		<button type="button" class="btn btn-primary" onclick={createRole}> Create Role </button>
+	{/snippet}
 </Modal>
