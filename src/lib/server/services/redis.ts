@@ -270,7 +270,7 @@ export namespace Redis {
 						const validated = returnType.safeParse(parsed.data);
 						if (!validated.success) {
 							return reject(
-								new Error(`Invalid response data: ${JSON.stringify(validated.error.errors)}`)
+								new Error(`Invalid response data: ${JSON.stringify(validated.error.issues)}`)
 							);
 						}
 						clearTimeout(timeout);

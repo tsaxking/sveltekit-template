@@ -25,3 +25,6 @@ export namespace Support {
 		}
 	});
 }
+
+export const _tickets = Support.Tickets.table;
+export const _reports = Support.Reports.table;

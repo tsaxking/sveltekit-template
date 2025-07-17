@@ -1,7 +1,9 @@
 import { Struct } from 'drizzle-struct/back-end';
 import { Account } from './structs/account';
 import terminal from './utils/terminal';
+import testSchema from '../../../scripts/test-schema';
 
+testSchema('false');
 const postBuild = async () => {
 	const admin = await Account.Account.fromProperty(
 		'username',

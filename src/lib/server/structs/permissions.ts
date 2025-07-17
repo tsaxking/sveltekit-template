@@ -204,7 +204,7 @@ export namespace Permissions {
 		structure: {
 			role: text('role').notNull(),
 			entitlement: text('entitlement').notNull(),
-			target: text('target_attribute').notNull(),
+			targetAttribute: text('target_attribute').notNull(),
 			reason: text('reason').notNull()
 		}
 	});
@@ -399,7 +399,7 @@ export namespace Permissions {
 					and(
 						eq(RoleRuleset.table.role, role.id),
 						eq(RoleRuleset.table.entitlement, entitlement),
-						eq(RoleRuleset.table.target, targetAttribute)
+						eq(RoleRuleset.table.targetAttribute, targetAttribute)
 					)
 				);
 
@@ -442,7 +442,7 @@ export namespace Permissions {
 			return RoleRuleset.new({
 				role: role.id,
 				entitlement,
-				target: targetAttribute,
+				targetAttribute: targetAttribute,
 				reason
 			}).unwrap();
 		});
@@ -522,7 +522,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.target === body.data.targetAttribute
+						r.data.targetAttribute === body.data.targetAttribute
 				)
 			) {
 				return {
@@ -623,7 +623,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.target === body.data.targetAttribute
+						r.data.targetAttribute === body.data.targetAttribute
 				)
 			) {
 				return {
@@ -658,7 +658,7 @@ export namespace Permissions {
 		structure: {
 			account: text('account').notNull(),
 			entitlement: text('entitlement').notNull(),
-			target: text('target_attribute').notNull(),
+			targetAttribute: text('target_attribute').notNull(),
 			reason: text('reason').notNull()
 		}
 	});
@@ -717,7 +717,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.target === body.data.targetAttribute
+						r.data.targetAttribute === body.data.targetAttribute
 				)
 			) {
 				return {
@@ -736,7 +736,7 @@ export namespace Permissions {
 		AccountRuleset.new({
 			account: body.data.account,
 			entitlement: body.data.entitlement,
-			target: body.data.targetAttribute,
+			targetAttribute: body.data.targetAttribute,
 			reason: 'Permission granted via API'
 		}).unwrap();
 
@@ -791,7 +791,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.target === body.data.targetAttribute
+						r.data.targetAttribute === body.data.targetAttribute
 				)
 			) {
 				return {
@@ -813,7 +813,7 @@ export namespace Permissions {
 				and(
 					eq(AccountRuleset.table.account, body.data.account),
 					eq(AccountRuleset.table.entitlement, body.data.entitlement),
-					eq(AccountRuleset.table.target, body.data.targetAttribute)
+					eq(AccountRuleset.table.targetAttribute, body.data.targetAttribute)
 				)
 			);
 
@@ -828,7 +828,7 @@ export namespace Permissions {
 			(r) =>
 				r.account === body.data.account &&
 				r.entitlement === body.data.entitlement &&
-				r.target === body.data.targetAttribute
+				r.targetAttribute === body.data.targetAttribute
 		);
 		if (!ruleset) {
 			return {
@@ -974,7 +974,7 @@ export namespace Permissions {
 			// Check that every attribute is allowed by some matching ruleset+permission
 			for (const attr of attributes) {
 				const isPermitted = rulesets.some((ruleset) => {
-					if (ruleset.data.target !== attr) return false;
+					if (ruleset.data.targetAttribute !== attr) return false;
 
 					const permission = permissionsByName[ruleset.data.entitlement];
 					if (!permission) return false;
@@ -1041,7 +1041,7 @@ export namespace Permissions {
 			return data.map((d) =>
 				res.some((r) => {
 					if (!r.entitlement) return false;
-					return canDo(r.entitlement, r.ruleset.data.target, d, action).unwrap();
+					return canDo(r.entitlement, r.ruleset.data.targetAttribute, d, action).unwrap();
 				})
 			);
 		});
@@ -1072,7 +1072,7 @@ export namespace Permissions {
 			return data.map((d) =>
 				res.some((r) => {
 					if (!r.entitlement) return false;
-					return canDo(r.entitlement, r.ruleset.data.target, d, action).unwrap();
+					return canDo(r.entitlement, r.ruleset.data.targetAttribute, d, action).unwrap();
 				})
 			);
 		});
@@ -1135,7 +1135,7 @@ export namespace Permissions {
 						return false; // no permissions for this action and struct combination
 					}
 
-					return attributes.includes(r.ruleset.data.target);
+					return attributes.includes(r.ruleset.data.targetAttribute);
 				});
 
 				const keys = Object.keys(d.data);
@@ -1241,7 +1241,7 @@ export namespace Permissions {
 				) {
 					return false;
 				}
-				return attributes.includes(r.ruleset.data.target);
+				return attributes.includes(r.ruleset.data.targetAttribute);
 			});
 
 			// Build filtered object

@@ -27,7 +27,7 @@ export namespace Email {
 
 	export const createLink = (link: string, expires?: Date) => {
 		return attemptAsync(async () => {
-			throw new Error('Email functionality is deprectaed')
+			throw new Error('Email functionality is deprectaed');
 			// const l = (
 			// 	await Links.new({
 			// 		link,
@@ -73,7 +73,7 @@ export namespace Email {
 		}[];
 	}) => {
 		return attemptAsync(async () => {
-			throw new Error('Email functionality is deprectaed')
+			throw new Error('Email functionality is deprectaed');
 			// if (!SENDGRID_API_KEY || !SENDGRID_EMAIL) {
 			// 	throw new Error('SENDGRID_API_KEY or SENDGRID_EMAIL not found in environment variables');
 			// }
