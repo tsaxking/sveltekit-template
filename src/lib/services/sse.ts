@@ -182,14 +182,15 @@ class SSE {
 
 	public waitForConnection(timeout: number) {
 		return new Promise<void>((res, rej) => {
+			const t = setTimeout(() => {
+				rej(new Error(`SSE connection timed out after ${timeout}ms`));
+			}, timeout);
 			this.once('connect', () => {
 				console.log(`SSE connection established: ${this.uuid}`);
+				clearTimeout(t);
 				res();
 			});
 
-			setTimeout(() => {
-				rej(new Error(`SSE connection timed out after ${timeout}ms`));
-			}, timeout);
 		});
 	}
 }
