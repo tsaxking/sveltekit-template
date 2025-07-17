@@ -42,8 +42,7 @@ export default async (build: 'true' | 'false' = 'true') => {
 				.replace('Builder', '')
 				.toLowerCase();
 
-
-            // column in program but not in DB
+			// column in program but not in DB
 			const actual = dbColMap.get(toSnakeCase(fromCamelCase(name)));
 			if (!actual) {
 				terminal.warn(`[MISSING COLUMN] ${tableName}.${name} not found in DB`);
@@ -61,20 +60,22 @@ export default async (build: 'true' | 'false' = 'true') => {
 			}
 		}
 
-        // check if there are extra columns in DB not defined in program
-        for (const [name, actual] of dbColMap.entries()) {
-            if (!(toCamelCase(fromSnakeCase(name)) in columns)) {
-                terminal.warn(`[EXTRA COLUMN] ${tableName}.${name} exists in DB but not in program`);
-                success = false;
-            }
-        }
+		// check if there are extra columns in DB not defined in program
+		for (const [name, actual] of dbColMap.entries()) {
+			if (!(toCamelCase(fromSnakeCase(name)) in columns)) {
+				terminal.warn(`[EXTRA COLUMN] ${tableName}.${name} exists in DB but not in program`);
+				success = false;
+			}
+		}
 	}
 
-    if (!success) {
-        terminal.error('Schema test failed. Please check the logs for details. You may need to push your schema changes to the database.');
-        process.exit(1);
-    }
+	if (!success) {
+		terminal.error(
+			'Schema test failed. Please check the logs for details. You may need to push your schema changes to the database.'
+		);
+		process.exit(1);
+	}
 
-    console.log('Schema test passed successfully!');
-    return true;
+	console.log('Schema test passed successfully!');
+	return true;
 };

@@ -83,7 +83,7 @@
 			const res = await Permissions.grantRolePermission(
 				role,
 				entitlement,
-				String(ruleset.data.target)
+				String(ruleset.data.targetAttribute)
 			);
 			return res.isOk();
 		} else {
@@ -97,7 +97,7 @@
 			const res = await Permissions.revokeRolePermission(
 				role,
 				entitlement,
-				String(ruleset.data.target)
+				String(ruleset.data.targetAttribute)
 			);
 			return res.isOk();
 		} else {
