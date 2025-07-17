@@ -54,7 +54,7 @@ export namespace Permissions {
 		structure: {
 			role: 'string',
 			entitlement: 'string',
-			target: 'string',
+			targetAttribute: 'string',
 			reason: 'string'
 		},
 		socket: sse,
@@ -69,7 +69,7 @@ export namespace Permissions {
 		structure: {
 			account: 'string',
 			entitlement: 'string',
-			target: 'string',
+			targetAttribute: 'string',
 			reason: 'string'
 		},
 		socket: sse,
