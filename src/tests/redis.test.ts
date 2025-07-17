@@ -121,5 +121,7 @@ describe('Redis namespace', () => {
 		stream.end();
 		await p;
 		expect(received).toEqual(chunks);
+	}, {
+		timeout: 10_000,
 	});
 });

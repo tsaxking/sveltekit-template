@@ -512,7 +512,7 @@ export namespace Redis {
 			});
 
 			return new Promise<void>((res) => {
-				stream.on('end', res);
+				stream.once('end', res);
 			});
 		});
 	};
