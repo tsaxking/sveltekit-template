@@ -1365,6 +1365,13 @@ export namespace Permissions {
 		}
 
 		const run = async () => {
+			const e = await Entitlement.fromProperty('name', entitlement.name, {
+				type: 'single',
+			}).unwrap();
+			if (e) {
+				// likely a reset of the server
+				return;
+			}
 			await Permissions.Entitlement.new(
 				{
 					name: entitlement.name,

@@ -10,7 +10,9 @@ describe('Redis namespace', () => {
 	}
 
 	beforeEach(async () => {
-		const connectRes = await Redis.connect();
+		const connectRes = await Redis.connect(
+			REDIS_NAME,
+		);
 		if (connectRes.isErr()) {
 			throw new Error(`Redis connect failed: ${connectRes.error}`);
 		}

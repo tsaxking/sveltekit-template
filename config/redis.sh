@@ -3,7 +3,7 @@
 # Install required packages
 $ sudo apt-get install lsb-release curl gpg
 # Add the Redis repository and install Redis
-$ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/$ redis-archive-keyring.gpg
+$ curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 # Add the repository to your sources list
 $ sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg
 # Add the Redis repository to your sources list
