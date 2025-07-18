@@ -40,7 +40,7 @@ export namespace Session {
 	export const getSession = (event: RequestEvent) => {
 		return attemptAsync(async () => {
 			// TODO: will eventually split domain later once we use the same cookie id as session id upon creation
-			const id = event.cookies.get('ssid:' + PUBLIC_DOMAIN);
+			const id = event.cookies.get('ssid_' + PUBLIC_DOMAIN);
 
 			const create = async () => {
 				const session = (
@@ -53,7 +53,7 @@ export namespace Session {
 					})
 				).unwrap();
 
-				event.cookies.set(('ssid_' + PUBLIC_DOMAIN).replace(/./g, '_'), session.id, {
+				event.cookies.set(('ssid_' + PUBLIC_DOMAIN), session.id, {
 					httpOnly: false,
 					domain: PUBLIC_DOMAIN ?? '',
 					path: '/',

@@ -1,7 +1,7 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
+import { Analytics } from '$lib/server/structs/analytics';
 import '$lib/server/structs/permissions';
-// import '$lib/server/structs/universe';
 import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
@@ -10,11 +10,12 @@ import terminal from '$lib/server/utils/terminal';
 import { config } from 'dotenv';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '$lib/server/db/';
-// import { handleEvent, connectionEmitter } from '$lib/server/event-handler';
 import '$lib/server/utils/files';
 import '$lib/server/index';
 import { createStructEventService } from '$lib/server/services/struct-event';
 import { Redis } from '$lib/server/services/redis';
+import ignore from 'ignore';
+
 config();
 
 (async () => {
@@ -27,7 +28,22 @@ config();
 	});
 })();
 
-// Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+// if (env.LOG === 'true') {
+// 	Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
+// }
+
+const ig = ignore();
+ig.add(`
+/account
+/status
+/sse
+/struct
+/test
+/favicon.ico
+/robots.txt
+/oauth
+/email
+`);
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const session = await Session.getSession(event);
@@ -57,23 +73,29 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.account = account.value;
 	}
 
-	if (
-		!event.url.pathname.startsWith('/account') &&
-		!event.url.pathname.startsWith('/status') &&
-		!event.url.pathname.startsWith('/sse') &&
-		!event.url.pathname.startsWith('/struct') &&
-		!event.url.pathname.startsWith('/test') &&
-		!event.url.pathname.startsWith('/favicon.ico') &&
-		!event.url.pathname.startsWith('/robots.txt') &&
-		!event.url.pathname.startsWith('/oauth')
-	) {
+	const notIgnored = () => {
+		if (event.url.pathname === '/') return true;
+		return (
+			!ig.ignores(event.url.pathname.slice(1)) &&
+			!event.url.pathname.startsWith('/.')
+		);
+	}
+
+	if (notIgnored()) {
 		session.value.update({
 			prevUrl: event.url.pathname
 		});
 	}
 
 	try {
-		return resolve(event);
+		const res = await resolve(event);
+		if (notIgnored()) {
+			Analytics.Links.new({
+				session: session.value.id,
+				url: event.url.pathname,
+			});
+		}
+		return res;
 	} catch (error) {
 		terminal.error(error);
 		// redirect to error page

@@ -3,9 +3,9 @@ import { Struct } from 'drizzle-struct/back-end';
 
 export const POST = async (event) => {
 	// console.log('Custom request:', event.params.struct);
-	if (event.params.struct !== 'test') {
-		if (!event.locals.account) return Errors.noAccount();
-	}
+	// if (event.params.struct !== 'test') {
+	// 	if (!event.locals.account) return Errors.noAccount();
+	// }
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) return Errors.noStruct(event.params.struct);
 

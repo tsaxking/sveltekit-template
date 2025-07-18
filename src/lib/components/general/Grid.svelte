@@ -8,45 +8,10 @@
 		themeQuartz,
 		PaginationModule,
 		type GridApi,
-		QuickFilterModule,
-		ValidationModule,
-		RowAutoHeightModule,
-		ColumnAutoSizeModule,
-		TextFilterModule,
-		NumberFilterModule,
-		RowApiModule,
-		NumberEditorModule,
-		RenderApiModule,
-		ScrollApiModule,
-		SelectEditorModule,
-		TextEditorModule,
-		CustomEditorModule,
-		CellStyleModule,
-		DateEditorModule
+        type Module
 	} from 'ag-grid-community';
 	import { EventEmitter } from 'ts-utils/event-emitter';
 	import type { Readable } from 'svelte/store';
-
-	// Register AG Grid Modules
-	ModuleRegistry.registerModules([
-		ClientSideRowModelModule,
-		PaginationModule,
-		QuickFilterModule,
-		ValidationModule,
-		RowAutoHeightModule,
-		ColumnAutoSizeModule,
-		TextFilterModule,
-		NumberFilterModule,
-		RowApiModule,
-		NumberEditorModule,
-		RenderApiModule,
-		ScrollApiModule,
-		SelectEditorModule,
-		TextEditorModule,
-		CustomEditorModule,
-		CellStyleModule,
-		DateEditorModule
-	]);
 
 	interface Props {
 		filter?: boolean;
@@ -55,10 +20,17 @@
 		style?: string;
 		rowNumbers?: boolean;
 		layer?: number;
-		height: number | `${number}${'px' | 'vh' | 'rem' | 'em' | '%'}` | 'auto';
+		height: string | number;
+        modules?: Module[];
 	}
 
-	const { filter, opts, data, style, rowNumbers = false, layer = 1, height }: Props = $props();
+	const { filter, opts, data, style, rowNumbers = false, layer = 1, height, modules = [] }: Props = $props();
+
+    ModuleRegistry.registerModules([
+        ...modules,
+		ClientSideRowModelModule,
+		PaginationModule,
+    ]);
 
 	const em = new EventEmitter<{
 		filter: T[];

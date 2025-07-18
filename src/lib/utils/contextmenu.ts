@@ -1,3 +1,5 @@
+import { type Icon } from '../types/icons';
+
 /**
  * Options for the context menu
  * @date 3/8/2024 - 6:59:48 AM
@@ -9,7 +11,7 @@ export type ContextMenuOptions = (
 	| {
 			action: (e: MouseEvent) => void;
 			name: string;
-			//   class: string;
+			icon: Icon;
 	  }
 	| null
 	| string
@@ -42,8 +44,18 @@ const rightClickContextMenu = (e: MouseEvent, el: HTMLDivElement) => {
  * @param {ContextMenuOptions} options
  * @param {HTMLElement} target
  */
-export const contextmenu = (target: HTMLElement, options: ContextMenuOptions) => {
+export const contextmenu = (
+	event: MouseEvent | PointerEvent,
+	config: {
+		options: ContextMenuOptions;
+		width?: `${number}${'px' | 'rem' | 'em' | '%'}`; // Default width is 200px
+	}
+) => {
+	event.preventDefault();
+	const { options, width = '200px' } = config;
+
 	const el = create('div');
+	el.style.width = width;
 	el.classList.add('shadow', 'border-0', 'contextmenu', 'rounded');
 	el.style.position = 'fixed';
 	el.style.zIndex = '1000';
@@ -65,7 +77,7 @@ export const contextmenu = (target: HTMLElement, options: ContextMenuOptions) =>
 			list.appendChild(hr);
 		} else if (typeof o === 'string') {
 			const p = create('p');
-			p.classList.add('text-muted', 'p-2', 'm-0');
+			p.classList.add('text-muted', 'p-2', 'm-0', 'bg-dark');
 			p.textContent = o;
 			li.appendChild(p);
 			list.appendChild(li);
@@ -80,7 +92,27 @@ export const contextmenu = (target: HTMLElement, options: ContextMenuOptions) =>
 				'p-2',
 				'rounded-0'
 			);
+			const icon = create('span');
+			switch (o.icon.type) {
+				case 'bootstrap':
+					icon.innerHTML = `<i class="bi bi-${o.icon.name}"></i>`;
+					break;
+				case 'fontawesome':
+					icon.innerHTML = `<i class="fa fa-${o.icon.name}"></i>`;
+					break;
+				case 'material-icons':
+					icon.innerHTML = `<span class="material-icons">${o.icon.name}</span>`;
+					break;
+				case 'material-symbols':
+					icon.innerHTML = `<span class="material-symbols-outlined">${o.icon.name}</span>`;
+					break;
+				case 'svg':
+					icon.innerHTML = o.icon.name; // Assuming o.icon.name is an SVG string
+					break;
+			}
+			button.appendChild(icon);
 			const span = create('span');
+			span.classList.add('ms-2');
 			span.textContent = o.name;
 			button.appendChild(span);
 			button.addEventListener('click', o.action);
@@ -89,29 +121,28 @@ export const contextmenu = (target: HTMLElement, options: ContextMenuOptions) =>
 		}
 	}
 
-	const fn = (e: MouseEvent) => {
-		for (const currentMenus of findAll('.contextmenu')) {
-			currentMenus.remove();
-		}
+	// const fn = (e: MouseEvent) => {
+	for (const currentMenus of findAll('.contextmenu')) {
+		currentMenus.remove();
+	}
 
-		e.preventDefault();
-		const pos = rightClickContextMenu(e, el);
-		el.style.left = `${pos.x}px`;
-		el.style.top = `${pos.y}px`;
-		el.style.zIndex = '9000';
-		document.body.appendChild(el);
+	const pos = rightClickContextMenu(event, el);
+	el.style.left = `${pos.x}px`;
+	el.style.top = `${pos.y}px`;
+	el.style.zIndex = '9000';
+	document.body.appendChild(el);
 
-		const rm = () => {
-			el.remove();
-			document.removeEventListener('click', rm);
-		};
-
-		document.addEventListener('click', rm);
+	const rm = () => {
+		el.remove();
+		document.removeEventListener('click', rm);
 	};
 
-	target.addEventListener('contextmenu', fn);
+	document.addEventListener('click', rm);
+	// };
 
-	return () => {
-		target.removeEventListener('contextmenu', fn);
-	};
+	// target.addEventListener('contextmenu', fn);
+
+	// return () => {
+	// 	target.removeEventListener('contextmenu', fn);
+	// };
 };

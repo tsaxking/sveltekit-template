@@ -45,6 +45,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Admin Logs</title>
+</svelte:head>
+
 <div class="container">
 	<div class="row mb-3">
 		<div class="col">
