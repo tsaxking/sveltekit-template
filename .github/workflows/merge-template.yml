@@ -26,7 +26,9 @@ jobs:
             tsaxking/tators-dashboard-kit,
             tsaxking/tators-app-kit,
             4sight-live/4sight-web-server,
-            tsaxking/inventory-kit
+            tsaxking/inventory-kit,
+            tsaxking/sfz-budgeting,
+            4sight-live/streaming-service
           ]
 
     steps:

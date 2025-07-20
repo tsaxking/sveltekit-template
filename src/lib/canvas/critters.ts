@@ -68,6 +68,7 @@ class Square extends Drawable {
 }
 
 class CritterPath extends Drawable {
+	_tailAlpha = 0.1; // Alpha for the tail segments
 	public readonly path = new Path([]);
 
 	constructor(start: [number, number]) {
@@ -81,40 +82,72 @@ class CritterPath extends Drawable {
 		this.path.points[this.path.points.length - 1] = pos;
 	}
 
-	draw(ctx: CanvasRenderingContext2D) {
-		if (this.path.points.length < 2) return;
+	// draw(ctx: CanvasRenderingContext2D) {
+	// 	if (this.path.points.length < 2) return;
 
-		ctx.save();
+	// 	ctx.save();
 
-		const color = this.path.properties.line.color;
-		ctx.lineWidth = 2;
+	// 	const color = this.path.properties.line.color;
+	// 	ctx.lineWidth = 2;
 
-		// Shadow/glow effect
-		ctx.shadowColor = color || 'rgba(0, 0, 255, 0.5)';
+	// 	// Shadow/glow effect
+	// 	ctx.shadowColor = color || 'rgba(0, 0, 255, 0.5)';
+	// 	ctx.shadowBlur = 12;
+
+	// 	ctx.strokeStyle = color || 'blue';
+	// 	ctx.beginPath();
+	// 	ctx.moveTo(
+	// 		this.path.points[0][0] * ctx.canvas.width,
+	// 		this.path.points[0][1] * ctx.canvas.height
+	// 	);
+	// 	for (let i = 1; i < this.path.points.length; i++) {
+	// 		const [x, y] = this.path.points[i];
+	// 		ctx.lineTo(x * ctx.canvas.width, y * ctx.canvas.height);
+	// 	}
+	// 	ctx.stroke();
+
+	// 	ctx.restore();
+	// }
+draw(ctx: CanvasRenderingContext2D) {
+	if (this.path.points.length < 2) return;
+
+	ctx.save();
+	ctx.lineWidth = 2;
+
+	const len = this.path.points.length - 1;
+
+	for (let i = 1; i < this.path.points.length; i++) {
+		const [x1, y1] = this.path.points[i - 1];
+		const [x2, y2] = this.path.points[i];
+
+		// Linear fade: 0 (oldest) → 1 (newest)
+		const alpha = i / len;
+
+		ctx.globalAlpha = alpha;
+		ctx.shadowColor = `rgba(0, 0, 255, ${alpha * 0.5})`;
 		ctx.shadowBlur = 12;
+		ctx.strokeStyle = `rgba(0, 0, 255, ${alpha})`;
 
-		ctx.strokeStyle = color || 'blue';
 		ctx.beginPath();
-		ctx.moveTo(
-			this.path.points[0][0] * ctx.canvas.width,
-			this.path.points[0][1] * ctx.canvas.height
-		);
-		for (let i = 1; i < this.path.points.length; i++) {
-			const [x, y] = this.path.points[i];
-			ctx.lineTo(x * ctx.canvas.width, y * ctx.canvas.height);
-		}
+		ctx.moveTo(x1 * ctx.canvas.width, y1 * ctx.canvas.height);
+		ctx.lineTo(x2 * ctx.canvas.width, y2 * ctx.canvas.height);
 		ctx.stroke();
-
-		ctx.restore();
 	}
+
+	ctx.restore();
+}
+
+
+
+
 
 	set() {
 		const last = this.path.points[this.path.points.length - 1];
 		this.path.points.push(last);
 
-		if (this.path.points.length > 3) {
-			this.path.points.shift();
-		}
+		// if (this.path.points.length > 3) {
+		// 	this.path.points.shift();
+		// }
 	}
 }
 
@@ -156,8 +189,8 @@ class Critter extends Drawable {
 		ctx.fill();
 
 		// Optional additional glow
-		ctx.shadowColor = this.config.color;
-		ctx.shadowBlur = r * 1.5;
+		// ctx.shadowColor = this.config.color;
+		// ctx.shadowBlur = r * 1.5;
 
 		// Refill to apply glow (with transparent fillStyle to prevent re-coloring)
 		ctx.fillStyle = 'rgba(0,0,0,0)';
@@ -181,13 +214,16 @@ class Critter extends Drawable {
 }
 
 export const render = (canvas: HTMLCanvasElement) => {
-	const ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d', {
+		willReadFrequently: false,
+	});
 	if (!ctx) {
 		throw new Error('Failed to get canvas context');
 	}
+	ctx.imageSmoothingEnabled = true;
 	const c = new Canvas(ctx);
 	const critters = Array.from(
-		{ length: 100 },
+		{ length: 20 },
 		(_, i) =>
 			new Critter({
 				x: Math.random(),

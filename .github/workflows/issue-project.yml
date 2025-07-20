@@ -1,0 +1,26 @@
+name: Add New Issue to GitHub Project
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Authenticate gh CLI and add issue to project
+        env:
+          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+        run: |
+          gh auth status
+          gh api graphql -f query='
+            mutation($projectId:ID!, $contentId:ID!) {
+              addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                item {
+                  id
+                }
+              }
+            }' \
+            -f projectId=${{ secrets.GH_PROJECT_ID }} \
+            -f contentId=${{ github.event.issue.node_id }}

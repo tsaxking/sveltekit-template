@@ -55,8 +55,9 @@ export namespace Redis {
 		globalEmitter.emit('pub-reconnect', undefined);
 	});
 
-	export const connect = (): ResultPromise<void> => {
+	export const connect = (redisName?: string): ResultPromise<void> => {
 		return attemptAsync(async () => {
+			if (!redisName) redisName = REDIS_NAME;
 			if (_sub?.isOpen && _pub?.isOpen && _sub?.isReady && _pub?.isReady) {
 				return; // Already connected
 			}
@@ -71,7 +72,7 @@ export namespace Redis {
 					const [name, instanceId] = message.split(':');
 					log(`Discovery message from instance: ${name} (${instanceId})`, clientId);
 					if (instanceId === clientId) return res(); // Ignore our own message and resolve. The pub/sub system is working.
-					_pub?.publish('discovery:welcome', REDIS_NAME + ':' + instanceId);
+					_pub?.publish('discovery:welcome', redisName + ':' + instanceId);
 					log(`Discovered instance: ${name} (${instanceId})`);
 				});
 				_sub?.subscribe('discovery:welcome', (message) => {
@@ -80,14 +81,14 @@ export namespace Redis {
 					if (instanceId === clientId) return; // Ignore our own message
 
 					log(`Welcome message from instance: ${name} (${instanceId})`);
-					if (name === REDIS_NAME) {
+					if (name === redisName) {
 						console.warn(
-							`Another instance of Redis with name "${REDIS_NAME}" is already running. This may cause conflicts.`
+							`Another instance of Redis with name "${redisName}" is already running. This may cause conflicts.`
 						);
 						res();
 					}
 				});
-				_pub?.publish('discovery:i_am', REDIS_NAME + ':' + clientId);
+				_pub?.publish('discovery:i_am', redisName + ':' + clientId);
 				setTimeout(() => {
 					rej(new Error('Redis connection timed out. Please check your Redis server.'));
 				}, 1000); // Wait for a second to ensure the discovery messages are processed
@@ -137,7 +138,7 @@ export namespace Redis {
 		id: number;
 	};
 
-	class ListeningService<
+	export class ListeningService<
 		Events extends {
 			[key: string]: z.ZodType;
 		},
