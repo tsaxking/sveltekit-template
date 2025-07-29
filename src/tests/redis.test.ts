@@ -100,28 +100,32 @@ describe('Redis namespace', () => {
 	// 	expect(received).toEqual(numbers);
 	// });
 
-	it('emitStream emits stream data and end', async () => {
-		const stream = new Stream<number>();
-		Redis.emitStream('testStream', stream);
-		const chunks: number[] = Array.from({ length: 5 }, (_, i) => i + 1);
-		const received: number[] = [];
+	it(
+		'emitStream emits stream data and end',
+		async () => {
+			const stream = new Stream<number>();
+			Redis.emitStream('testStream', stream);
+			const chunks: number[] = Array.from({ length: 5 }, (_, i) => i + 1);
+			const received: number[] = [];
 
-		const p = new Promise<void>((res) => {
-			Redis.listenStream(
-				'testStream',
-				z.number(),
-				(chunk) => received.push(chunk),
-				() => res()
-			);
-		});
+			const p = new Promise<void>((res) => {
+				Redis.listenStream(
+					'testStream',
+					z.number(),
+					(chunk) => received.push(chunk),
+					() => res()
+				);
+			});
 
-		for (const chunk of chunks) {
-			stream.add(chunk);
+			for (const chunk of chunks) {
+				stream.add(chunk);
+			}
+			stream.end();
+			await p;
+			expect(received).toEqual(chunks);
+		},
+		{
+			timeout: 10_000
 		}
-		stream.end();
-		await p;
-		expect(received).toEqual(chunks);
-	}, {
-		timeout: 10_000,
-	});
+	);
 });

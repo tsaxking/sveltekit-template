@@ -38,6 +38,18 @@
 					"color": "Green"
 				}
 			]
+		},
+		{
+			"paths": ["*.pages"],
+			"rules": [
+				{
+					"patterns": [
+						// everything after # is a comment
+						"#.*"
+					],
+					"color": "Green"
+				}
+			]
 		}
 	]
 }

@@ -6,7 +6,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 const ignoreList = await fs
-	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.txt'), 'utf-8')
+	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.pages'), 'utf-8')
 	.catch(() => '');
 
 const ig = ignore();
@@ -35,9 +35,15 @@ export const POST = async (event) => {
 		);
 	}
 
-	if (!ig.ignores(parsed.data.page.slice(1))) {
+	try {
+		if (!ig.ignores(parsed.data.page.slice(1))) {
+			return json({
+				// Page is not in manifest, so we don't log it. However, we still return a success message for security.
+				message: 'Analytics logged successfully'
+			});
+		}
+	} catch (error) {
 		return json({
-			// Page is not in manifest, so we don't log it. However, we still return a success message for security.
 			message: 'Analytics logged successfully'
 		});
 	}

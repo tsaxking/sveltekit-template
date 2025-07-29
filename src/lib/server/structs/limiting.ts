@@ -2,12 +2,104 @@ import { text } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct/back-end';
 import type { Session } from './session';
 import type { Account } from './account';
-import { attemptAsync } from 'ts-utils/check';
+import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
 import { Redis } from '../services/redis';
 import { z } from 'zod';
+import ignore from 'ignore';
+import fs from 'fs';
+import path from 'path';
+import terminal from '../utils/terminal';
 
 export namespace Limiting {
+	const ipLimited = ignore();
+	const blockedPages = ignore();
+
+	try {
+		fs.mkdirSync(path.join(process.cwd(), 'private'), { recursive: true });
+	} catch (error) {
+		// Do nothing
+	}
+
+	try {
+		const ipLimit = fs.readFileSync(
+			path.join(process.cwd(), 'private', 'ip-limited.pages'),
+			'utf-8'
+		);
+
+		ipLimited.add(ipLimit);
+	} catch {
+		fs.writeFileSync(
+			path.join(process.cwd(), 'private', 'ip-limited.pages'),
+			'# Put pages here that you would like to be limited to specifi ips\n'
+		);
+	}
+
+	try {
+		const blockedPageList = fs.readFileSync(
+			path.join(process.cwd(), 'private', 'blocked.pages'),
+			'utf-8'
+		);
+
+		blockedPages.add(blockedPageList);
+	} catch {
+		fs.writeFileSync(
+			path.join(process.cwd(), 'private', 'blocked.pages'),
+			'# Put pages here that you would like to be blocked for all ips\n'
+		);
+	}
+
+	export const PageRuleset = new Struct({
+		name: 'page_ruleset',
+		structure: {
+			ip: text('ip').notNull(),
+			page: text('page').notNull()
+		}
+	});
+
+	// Prevent duplicates
+	PageRuleset.on('create', async (rs) => {
+		const rules = PageRuleset.fromProperty('ip', rs.data.ip, {
+			type: 'stream'
+		});
+
+		rules.pipe((r) => {
+			if (r.data.page === rs.data.page) {
+				rs.delete();
+			}
+		});
+	});
+
+	export const isIpLimitedPage = (page: string) => {
+		return attempt(() => {
+			if (page.startsWith('/')) page = page.slice(1);
+			if (page.length === 0) return false;
+			return ipLimited.ignores(page);
+		});
+	};
+
+	export const isBlockedPage = (page: string) => {
+		return attempt(() => {
+			if (page.startsWith('/')) page = page.slice(1);
+			if (page.length === 0) return false;
+			return blockedPages.ignores(page);
+		});
+	};
+
+	export const isIpAllowed = (ip: string, page: string) => {
+		return attemptAsync(async () => {
+			const rules = PageRuleset.fromProperty('ip', ip, {
+				type: 'stream'
+			});
+
+			let allowed = false;
+			await rules.pipe((r) => {
+				if (r.data.page === page) allowed = true;
+			});
+			return allowed;
+		});
+	};
+
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
 		structure: {
@@ -226,6 +318,7 @@ export namespace Limiting {
 	};
 }
 
+export const _pageRuleset = Limiting.PageRuleset.table;
 export const _blockedIps = Limiting.BlockedIps.table;
 export const _blockedSessions = Limiting.BlockedSessions.table;
 export const _blockedFingerprints = Limiting.BlockedFingerprints.table;

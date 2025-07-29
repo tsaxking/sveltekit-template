@@ -17,6 +17,7 @@ Thumbs.db
 
 # Env
 .env
+*.env
 .env.*
 !.env.example
 !.env.test
@@ -38,4 +39,6 @@ dist/
 *.log
 *.search
 
-route-tree.txt
+route-tree.pages
+ip-limited.pages
+blocked.pages
