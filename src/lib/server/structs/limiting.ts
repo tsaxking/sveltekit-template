@@ -2,12 +2,78 @@ import { text } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct/back-end';
 import type { Session } from './session';
 import type { Account } from './account';
-import { attemptAsync } from 'ts-utils/check';
+import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
 import { Redis } from '../services/redis';
 import { z } from 'zod';
+import ignore from 'ignore';
+import fs from 'fs';
+import path from 'path';
 
 export namespace Limiting {
+	const ig = ignore();
+	ig.add(
+		fs.readFileSync(
+			path.join(
+				process.cwd(),
+				'private',
+				'limited-pages.txt',
+			),
+			'utf-8'
+		)
+	);
+
+
+	export const PageRuleset = new Struct({
+		name: 'page_ruleset',
+		structure: {
+			ip: text('ip').notNull(),
+			url: text('url').notNull(),
+		}
+	});
+
+	// Prevent duplicates
+	PageRuleset.on('create', async (rs) => {
+		const rules = PageRuleset.fromProperty('ip', rs.data.ip, {
+			type: 'stream',
+		});
+
+		rules.pipe(r => {
+			if (r.data.url === rs.data.url) {
+				rs.delete();
+			}
+		});
+	});
+
+	export const isRequiredPage = (page: string) => {
+		return attempt(() => {
+			if (page.length > 1) return false;
+			return ig.ignores(page);
+		});
+	};
+
+	export const isAllowed = (
+		ip: string,
+		url: string,
+	) => {
+		return attemptAsync(async () => {
+			const rules = PageRuleset.fromProperty(
+				'ip',
+				ip,
+				{
+					type: 'stream',
+				}
+			);
+
+			let allowed = false;
+			await rules.pipe(r => {
+				if (r.data.url === url) allowed = true;
+			});
+			return allowed;
+		});
+	}
+
+
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
 		structure: {
@@ -226,6 +292,8 @@ export namespace Limiting {
 	};
 }
 
+
+export const _pageRuleset = Limiting.PageRuleset.table;
 export const _blockedIps = Limiting.BlockedIps.table;
 export const _blockedSessions = Limiting.BlockedSessions.table;
 export const _blockedFingerprints = Limiting.BlockedFingerprints.table;
