@@ -9,7 +9,7 @@ import { Random } from 'ts-utils/math';
 class SSE {
 	public readonly uuid = Random.uuid();
 	public readonly emitter = new EventEmitter();
-	
+
 	private _latency: number[] = [];
 	public on = this.emitter.on.bind(this.emitter);
 	public off = this.emitter.off.bind(this.emitter);
@@ -184,7 +184,7 @@ class SSE {
 			const latency = end - start;
 			try {
 				const data = await res.text();
-				const [,internalLatency] = data.split(':');
+				const [, internalLatency] = data.split(':');
 				if (isNaN(+internalLatency)) throw new Error('Invalid latency data');
 				this._latency.push(latency - Number(internalLatency));
 			} catch {

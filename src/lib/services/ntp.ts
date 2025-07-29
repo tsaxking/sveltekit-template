@@ -36,7 +36,7 @@ export namespace TimeService {
 
 				const { time: ntpTime } = parsed.data;
 
-				time = ntpTime + (sse.latency / 2);
+				time = ntpTime + sse.latency / 2;
 				lastSynced = performance.now();
 
 				em.emit('time', time);
@@ -61,7 +61,7 @@ export namespace TimeService {
 				return time;
 			}
 			const { time: ntpTime } = parsed.data;
-			time = ntpTime + (sse.latency / 2);
+			time = ntpTime + sse.latency / 2;
 			lastSynced = performance.now();
 			em.emit('time', time);
 			return time;
