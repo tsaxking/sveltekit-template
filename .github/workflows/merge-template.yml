@@ -22,7 +22,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        templates: [
+        templates:
+          [
             tsaxking/tators-dashboard-kit,
             tsaxking/tators-app-kit,
             4sight-live/4sight-web-server,

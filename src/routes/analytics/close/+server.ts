@@ -35,20 +35,18 @@ export const POST = async (event) => {
 		);
 	}
 
-try {
+	try {
 		if (!ig.ignores(parsed.data.page.slice(1))) {
 			return json({
 				// Page is not in manifest, so we don't log it. However, we still return a success message for security.
 				message: 'Analytics logged successfully'
 			});
 		}
-} catch (error) {
-	return json(
-		{
-			message: 'Analytics logged successfully',
-		}
-	)
-}
+	} catch (error) {
+		return json({
+			message: 'Analytics logged successfully'
+		});
+	}
 
 	const res = await Analytics.Links.new({
 		session: event.locals.session.id,

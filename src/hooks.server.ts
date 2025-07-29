@@ -63,7 +63,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (Limiting.isIpLimitedPage(event.url.pathname).unwrap()) {
-		const ip = event.request.headers.get('x-forwarded-for') || event.request.headers.get('x-real-ip') || event.request.headers.get('cf-connecting-ip') || event.request.headers.get('remote-addr') || event.request.headers.get('x-client-ip') || event.request.headers.get('x-cluster-client-ip') || event.request.headers.get('x-forwarded-for');
+		const ip =
+			event.request.headers.get('x-forwarded-for') ||
+			event.request.headers.get('x-real-ip') ||
+			event.request.headers.get('cf-connecting-ip') ||
+			event.request.headers.get('remote-addr') ||
+			event.request.headers.get('x-client-ip') ||
+			event.request.headers.get('x-cluster-client-ip') ||
+			event.request.headers.get('x-forwarded-for');
 		if (!ip) {
 			terminal.warn(`No IP address found for request to ${event.url.pathname}`);
 			return new Response('Redirect', {
@@ -73,7 +80,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				}
 			});
 		}
-		if (!await Limiting.isIpAllowed(ip, event.url.pathname).unwrap()) {
+		if (!(await Limiting.isIpAllowed(ip, event.url.pathname).unwrap())) {
 			return new Response('Redirect', {
 				status: ServerCode.seeOther,
 				headers: {
@@ -82,7 +89,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 			});
 		}
 	}
-
 
 	const session = await Session.getSession(event);
 	if (session.isErr()) {
@@ -163,7 +169,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const notIgnored = () => {
 		if (event.url.pathname === '/') return true;
-		return !sessionIgnore.ignores(event.url.pathname.slice(1)) && !event.url.pathname.startsWith('/.');
+		return (
+			!sessionIgnore.ignores(event.url.pathname.slice(1)) && !event.url.pathname.startsWith('/.')
+		);
 	};
 
 	if (notIgnored()) {

@@ -43,22 +43,21 @@ export namespace Limiting {
 		);
 	}
 
-
 	export const PageRuleset = new Struct({
 		name: 'page_ruleset',
 		structure: {
 			ip: text('ip').notNull(),
-			page: text('page').notNull(),
+			page: text('page').notNull()
 		}
 	});
 
 	// Prevent duplicates
 	PageRuleset.on('create', async (rs) => {
 		const rules = PageRuleset.fromProperty('ip', rs.data.ip, {
-			type: 'stream',
+			type: 'stream'
 		});
 
-		rules.pipe(r => {
+		rules.pipe((r) => {
 			if (r.data.page === rs.data.page) {
 				rs.delete();
 			}
@@ -79,29 +78,21 @@ export namespace Limiting {
 			if (page.length === 0) return false;
 			return blockedPages.ignores(page);
 		});
-	}
+	};
 
-	export const isIpAllowed = (
-		ip: string,
-		page: string,
-	) => {
+	export const isIpAllowed = (ip: string, page: string) => {
 		return attemptAsync(async () => {
-			const rules = PageRuleset.fromProperty(
-				'ip',
-				ip,
-				{
-					type: 'stream',
-				}
-			);
+			const rules = PageRuleset.fromProperty('ip', ip, {
+				type: 'stream'
+			});
 
 			let allowed = false;
-			await rules.pipe(r => {
+			await rules.pipe((r) => {
 				if (r.data.page === page) allowed = true;
 			});
 			return allowed;
 		});
-	}
-
+	};
 
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
@@ -320,7 +311,6 @@ export namespace Limiting {
 		});
 	};
 }
-
 
 export const _pageRuleset = Limiting.PageRuleset.table;
 export const _blockedIps = Limiting.BlockedIps.table;
