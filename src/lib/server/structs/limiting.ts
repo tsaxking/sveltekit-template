@@ -9,26 +9,46 @@ import { z } from 'zod';
 import ignore from 'ignore';
 import fs from 'fs';
 import path from 'path';
+import terminal from '../utils/terminal';
 
 export namespace Limiting {
-	const ig = ignore();
-	ig.add(
-		fs.readFileSync(
-			path.join(
-				process.cwd(),
-				'private',
-				'limited-pages.txt',
-			),
+	const ipLimited = ignore();
+	const blockedPages = ignore();
+
+	try {
+		const ipLimit = fs.readFileSync(
+			path.join(process.cwd(), 'private', 'ip-limited.pages'),
 			'utf-8'
-		)
-	);
+		);
+
+		ipLimited.add(ipLimit);
+	} catch {
+		fs.writeFileSync(
+			path.join(process.cwd(), 'private', 'ip-limited.pages'),
+			'# Put pages here that you would like to be limited to specifi ips\n'
+		);
+	}
+
+	try {
+		const blockedPageList = fs.readFileSync(
+			path.join(process.cwd(), 'private', 'blocked.pages'),
+			'utf-8'
+		);
+
+		blockedPages.add(blockedPageList);
+	} catch {
+		fs.writeFileSync(
+			path.join(process.cwd(), 'private', 'blocked.pages'),
+			'# Put pages here that you would like to be blocked for all ips\n'
+		);
+	}
 
 
 	export const PageRuleset = new Struct({
 		name: 'page_ruleset',
 		structure: {
 			ip: text('ip').notNull(),
-			url: text('url').notNull(),
+			page: text('page').notNull(),
 		}
 	});
 
@@ -39,22 +59,31 @@ export namespace Limiting {
 		});
 
 		rules.pipe(r => {
-			if (r.data.url === rs.data.url) {
+			if (r.data.page === rs.data.page) {
 				rs.delete();
 			}
 		});
 	});
 
-	export const isRequiredPage = (page: string) => {
+	export const isIpLimitedPage = (page: string) => {
 		return attempt(() => {
-			if (page.length > 1) return false;
-			return ig.ignores(page);
+			if (page.startsWith('/')) page = page.slice(1);
+			if (page.length === 0) return false;
+			return ipLimited.ignores(page);
 		});
 	};
 
-	export const isAllowed = (
+	export const isBlockedPage = (page: string) => {
+		return attempt(() => {
+			if (page.startsWith('/')) page = page.slice(1);
+			if (page.length === 0) return false;
+			return blockedPages.ignores(page);
+		});
+	}
+
+	export const isIpAllowed = (
 		ip: string,
-		url: string,
+		page: string,
 	) => {
 		return attemptAsync(async () => {
 			const rules = PageRuleset.fromProperty(
@@ -67,7 +96,7 @@ export namespace Limiting {
 
 			let allowed = false;
 			await rules.pipe(r => {
-				if (r.data.url === url) allowed = true;
+				if (r.data.page === page) allowed = true;
 			});
 			return allowed;
 		});

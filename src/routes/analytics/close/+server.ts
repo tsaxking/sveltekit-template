@@ -6,7 +6,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 const ignoreList = await fs
-	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.txt'), 'utf-8')
+	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.pages'), 'utf-8')
 	.catch(() => '');
 
 const ig = ignore();

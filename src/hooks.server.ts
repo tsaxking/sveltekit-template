@@ -1,6 +1,7 @@
 import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
-import { Analytics } from '$lib/server/structs/analytics';
+import '$lib/server/structs/analytics';
+import { Limiting } from '$lib/server/structs/limiting';
 import '$lib/server/structs/permissions';
 import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
@@ -15,10 +16,10 @@ import '$lib/server/index';
 import { createStructEventService } from '$lib/server/services/struct-event';
 import { Redis } from '$lib/server/services/redis';
 import ignore from 'ignore';
-import { Limiting } from '$lib/server/structs/limiting';
 import { sse } from '$lib/server/services/sse';
 import { sleep } from 'ts-utils/sleep';
 import { signFingerprint } from '$lib/server/utils/fingerprint';
+import { fail } from '@sveltejs/kit';
 
 config();
 
@@ -36,8 +37,8 @@ config();
 // 	Struct.setupLogger(path.join(process.cwd(), 'logs', 'structs'));
 // }
 
-const ig = ignore();
-ig.add(`
+const sessionIgnore = ignore();
+sessionIgnore.add(`
 /account
 /status
 /sse
@@ -51,6 +52,38 @@ ig.add(`
 `);
 
 export const handle: Handle = async ({ event, resolve }) => {
+	if (Limiting.isBlockedPage(event.url.pathname).unwrap()) {
+		// Redirect to /status/404
+		return new Response('Redirect', {
+			status: ServerCode.seeOther,
+			headers: {
+				location: `/status/${ServerCode.notFound}`
+			}
+		});
+	}
+
+	if (Limiting.isIpLimitedPage(event.url.pathname).unwrap()) {
+		const ip = event.request.headers.get('x-forwarded-for') || event.request.headers.get('x-real-ip') || event.request.headers.get('cf-connecting-ip') || event.request.headers.get('remote-addr') || event.request.headers.get('x-client-ip') || event.request.headers.get('x-cluster-client-ip') || event.request.headers.get('x-forwarded-for');
+		if (!ip) {
+			terminal.warn(`No IP address found for request to ${event.url.pathname}`);
+			return new Response('Redirect', {
+				status: ServerCode.seeOther,
+				headers: {
+					location: `/status/${ServerCode.forbidden}`
+				}
+			});
+		}
+		if (!await Limiting.isIpAllowed(ip, event.url.pathname).unwrap()) {
+			return new Response('Redirect', {
+				status: ServerCode.seeOther,
+				headers: {
+					location: `/status/${ServerCode.forbidden}`
+				}
+			});
+		}
+	}
+
+
 	const session = await Session.getSession(event);
 	if (session.isErr()) {
 		return new Response('Internal Server Error', { status: ServerCode.internalServerError });
@@ -130,7 +163,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const notIgnored = () => {
 		if (event.url.pathname === '/') return true;
-		return !ig.ignores(event.url.pathname.slice(1)) && !event.url.pathname.startsWith('/.');
+		return !sessionIgnore.ignores(event.url.pathname.slice(1)) && !event.url.pathname.startsWith('/.');
 	};
 
 	if (notIgnored()) {

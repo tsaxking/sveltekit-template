@@ -5,12 +5,12 @@ import { openStructs } from './struct';
 import { Folder } from './utils';
 import accounts from './accounts';
 import serverController from './server-controller';
-// import universe from './universe';
+import pageLimiting from './page-limiting';
 
 export const home = new Folder('Home', 'Root Folder Access', '🏠', [
 	serverController,
-	accounts
-	// universe
+	accounts,
+	pageLimiting
 ]);
 
 Folder.home = home;
