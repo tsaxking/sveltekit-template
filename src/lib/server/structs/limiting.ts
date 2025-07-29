@@ -16,6 +16,12 @@ export namespace Limiting {
 	const blockedPages = ignore();
 
 	try {
+		fs.mkdirSync(path.join(process.cwd(), 'private'), { recursive: true });
+	} catch (error) {
+		// Do nothing
+	}
+
+	try {
 		const ipLimit = fs.readFileSync(
 			path.join(process.cwd(), 'private', 'ip-limited.pages'),
 			'utf-8'
