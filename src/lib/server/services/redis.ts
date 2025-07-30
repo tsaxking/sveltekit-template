@@ -20,6 +20,7 @@ export namespace Redis {
 	export let uuid = u;
 
 	export const REDIS_NAME = process.env.REDIS_NAME || 'default';
+	export const redisUrl = process.env.REDIS_URL || 'redis://redis:6379';
 	let messageId = -1;
 	export const clientId = uuid();
 	// export const _sub = createClient();
@@ -61,9 +62,9 @@ export namespace Redis {
 			if (_sub?.isOpen && _pub?.isOpen && _sub?.isReady && _pub?.isReady) {
 				return; // Already connected
 			}
-			_sub = createClient();
-			_pub = createClient();
-			_queue = createClient();
+			_sub = createClient({ url: redisUrl });
+			_pub = createClient({ url: redisUrl });
+			_queue = createClient({ url: redisUrl });
 
 			await Promise.all([_sub.connect(), _pub.connect(), _queue.connect()]);
 			return new Promise<void>((res, rej) => {
