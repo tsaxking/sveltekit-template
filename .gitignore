@@ -42,3 +42,5 @@ dist/
 route-tree.pages
 ip-limited.pages
 blocked.pages
+
+init.sql
