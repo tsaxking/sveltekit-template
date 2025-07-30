@@ -10,6 +10,7 @@ class SSE {
 	public readonly uuid = Random.uuid();
 	public readonly emitter = new EventEmitter();
 
+	private _latency: number[] = [];
 	public on = this.emitter.on.bind(this.emitter);
 	public off = this.emitter.off.bind(this.emitter);
 	public once = this.emitter.once.bind(this.emitter);
@@ -177,7 +178,21 @@ class SSE {
 
 	private ping() {
 		// console.log('Pinging SSE server...');
-		return fetch(`/sse/ping/${this.uuid}`).then((res) => res.ok);
+		const start = performance.now();
+		return fetch(`/sse/ping/${this.uuid}`).then(async (res) => {
+			const end = performance.now();
+			const latency = end - start;
+			try {
+				const data = await res.text();
+				const [, internalLatency] = data.split(':');
+				if (isNaN(+internalLatency)) throw new Error('Invalid latency data');
+				this._latency.push(latency - Number(internalLatency));
+			} catch {
+				this._latency.push(latency);
+			}
+			if (this._latency.length > 3) this._latency.shift();
+			return res.ok;
+		});
 	}
 
 	public waitForConnection(timeout: number) {
@@ -198,6 +213,11 @@ class SSE {
 				rej(new Error(`SSE connection timed out after ${timeout}ms`));
 			}, timeout);
 		});
+	}
+
+	get latency() {
+		if (this._latency.length === 0) return 0;
+		return this._latency.reduce((a, b) => a + b, 0) / this._latency.length;
 	}
 }
 
