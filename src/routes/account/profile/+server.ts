@@ -19,9 +19,9 @@ export const POST = async (event) => {
 		return error(500, 'Failed to receive file');
 	}
 
-	account.update({
-		picture: res.value.files[0].filePath
-	});
+	// account.update({
+	// 	picture: res.value.files[0].filePath
+	// });
 
 	return new Response('OK');
 };
