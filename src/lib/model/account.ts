@@ -35,10 +35,10 @@ export namespace Account {
 			bio: 'string',
 			website: 'string',
 			socials: 'string',
-			theme: 'string',
+			theme: 'string'
 		},
 		socket: sse,
-		browser,
+		browser
 	});
 
 	export const AccountNotification = new Struct({

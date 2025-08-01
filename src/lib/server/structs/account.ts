@@ -78,13 +78,13 @@ export namespace Account {
 			type: 'stream'
 		}).pipe((a) => a.delete());
 		Session.Session.fromProperty('accountId', a.id, {
-			type: 'stream',
-		}).pipe(s => s.delete());
+			type: 'stream'
+		}).pipe((s) => s.delete());
 		AccountInfo.fromProperty('accountId', a.id, {
 			type: 'stream'
 		}).pipe(async (a) => {
 			const versions = await a.getVersions().unwrapOr([]);
-			await Promise.all(versions.map(v => v.delete()));
+			await Promise.all(versions.map((v) => v.delete()));
 			a.delete();
 		});
 	});
@@ -155,15 +155,15 @@ export namespace Account {
 			bio: text('bio').notNull(),
 			website: text('website').notNull(),
 			socials: text('socials').notNull().default(''),
-			theme: text('theme').notNull().default('default'),
+			theme: text('theme').notNull().default('default')
 		},
 		versionHistory: {
 			type: 'versions',
-			amount: 3,
+			amount: 3
 		},
 		validators: {
 			viewOnline: (e) => typeof e === 'string' && ['all', 'friends', 'none'].includes(e),
-			theme: (e) => typeof e === 'string' && ['default', 'dark', 'light'].includes(e),
+			theme: (e) => typeof e === 'string' && ['default', 'dark', 'light'].includes(e)
 		}
 	});
 
@@ -174,13 +174,12 @@ export namespace Account {
 			to.update({
 				// reset accountId to the one from the struct
 				// you cannot change the accountId of an account info
-				accountId: from.accountId,
+				accountId: from.accountId
 			});
 		}
 	});
 
-
-	Account.on('create', a => {
+	Account.on('create', (a) => {
 		AccountInfo.new({
 			accountId: a.id,
 			viewOnline: 'all',
@@ -188,7 +187,7 @@ export namespace Account {
 			bio: '',
 			website: '',
 			socials: '',
-			theme: 'default',
+			theme: 'default'
 		});
 	});
 
@@ -200,9 +199,9 @@ export namespace Account {
 			if (info.data.viewOnline !== 'all') return false;
 			let isOnline = false;
 			const stream = Session.Session.fromProperty('accountId', accountId, {
-				type: 'stream',
+				type: 'stream'
 			});
-			await stream.pipe(s => {
+			await stream.pipe((s) => {
 				if (s.data.tabs > 0) {
 					isOnline = true;
 					stream.end();
@@ -210,11 +209,13 @@ export namespace Account {
 			});
 			return isOnline;
 		});
-	}
+	};
 
 	export const getAccountInfo = (account: AccountData) => {
 		return attemptAsync(async () => {
-			const info = await AccountInfo.fromProperty('accountId', account.id, { type: 'single', }).unwrap();
+			const info = await AccountInfo.fromProperty('accountId', account.id, {
+				type: 'single'
+			}).unwrap();
 			if (info) return info;
 			return AccountInfo.new({
 				accountId: account.id,
@@ -223,7 +224,7 @@ export namespace Account {
 				bio: '',
 				website: '',
 				socials: '',
-				theme: 'default',
+				theme: 'default'
 			}).unwrap();
 		});
 	};

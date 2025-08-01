@@ -13,6 +13,6 @@ export const load = async (event) => {
 
 	return {
 		account: account.safe(),
-		info: info.safe(),
+		info: info.safe()
 	};
 };

@@ -21,6 +21,6 @@ export const load = async (event) => {
 
 	return {
 		account: accountData,
-		info: accountInfo,
+		info: accountInfo
 	};
 };

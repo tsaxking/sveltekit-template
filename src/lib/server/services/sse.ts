@@ -92,9 +92,12 @@ export class Connection {
 		return attemptAsync(async () => {
 			const session = await this.getSession().unwrap();
 			if (session) {
-			await session.update({
-				tabs: session.data.tabs - 1 > 0 ? session.data.tabs - 1 : 0,
-			}).unwrap();}
+				await session
+					.update({
+						tabs: session.data.tabs - 1 > 0 ? session.data.tabs - 1 : 0
+					})
+					.unwrap();
+			}
 			this.cache = []; // empty cache once closed
 			// console.log('Closing connection', this.uuid);
 			// clearInterval(this.interval);
@@ -175,8 +178,8 @@ export class SSE {
 		return attemptAsync(async () => {
 			const session = event.locals.session;
 			session.update({
-				tabs: session.data.tabs + 1,
-			})
+				tabs: session.data.tabs + 1
+			});
 			let connection: Connection;
 
 			const stream = new ReadableStream({

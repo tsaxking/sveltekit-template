@@ -33,7 +33,7 @@ export namespace Session {
 			requests: integer('requests').notNull(),
 			prevUrl: text('prev_url').notNull(),
 			fingerprint: text('fingerprint').notNull().default(''),
-			tabs: integer('tabs').notNull().default(0),
+			tabs: integer('tabs').notNull().default(0)
 		},
 		frontend: false,
 		safes: ['fingerprint']
@@ -54,7 +54,7 @@ export namespace Session {
 					requests: 0,
 					prevUrl: '',
 					fingerprint: '',
-					tabs: 0,
+					tabs: 0
 				}).unwrap();
 
 				event.cookies.set('ssid_' + PUBLIC_DOMAIN, session.id, {
