@@ -149,7 +149,7 @@ export namespace Account {
 	export const AccountInfo = new Struct({
 		name: 'account_info',
 		structure: {
-			accountId: text('account_id').notNull().unique(),
+			accountId: text('account_id').notNull(),
 			viewOnline: text('view_online').notNull().default('all'), // allow others to see if user is online
 			picture: text('picture').notNull(),
 			bio: text('bio').notNull(),
@@ -168,6 +168,16 @@ export namespace Account {
 	});
 
 	export type AccountInfoData = typeof AccountInfo.sample;
+
+	AccountInfo.on('update', ({ from, to }) => {
+		if (from.accountId !== to.data.accountId) {
+			to.update({
+				// reset accountId to the one from the struct
+				// you cannot change the accountId of an account info
+				accountId: from.accountId,
+			});
+		}
+	});
 
 
 	Account.on('create', a => {
