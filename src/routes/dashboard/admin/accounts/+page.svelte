@@ -65,12 +65,12 @@
 							field: 'account.data.lastName',
 							headerName: 'Last Name'
 						},
-						{
-							headerName: 'Picture',
-							cellRenderer: (params: ICellRendererParams<Row>) => {
-								return `<img src="${params.data?.account.data.picture}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%;">`;
-							}
-						},
+						// {
+						// 	headerName: 'Picture',
+						// 	cellRenderer: (params: ICellRendererParams<Row>) => {
+						// 		return `<img src="${params.data?.account.data.picture}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%;">`;
+						// 	}
+						// },
 						{
 							headerName: 'Verified',
 							cellRenderer: (params: ICellRendererParams<Row>) => {

@@ -99,7 +99,7 @@
 		"ag-grid-community": "^33.3.2",
 		"bootstrap": "^5.3.7",
 		"busboy": "^1.6.0",
-  		"canvas": "git+https://github.com/tsaxking/canvas.git",
+		"canvas": "git+https://github.com/tsaxking/canvas.git",
 		"chalk": "^5.4.1",
 		"chart.js": "^4.5.0",
 		"check-password-strength": "^2.0.10",
