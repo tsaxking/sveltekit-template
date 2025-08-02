@@ -28,6 +28,10 @@ class ConnectionArray {
 	notify(notif: Notification) {
 		return this.send('notification', notif);
 	}
+
+	get length() {
+		return this.connections.length;
+	}
 }
 
 export class Connection {
@@ -85,7 +89,15 @@ export class Connection {
 	}
 
 	close() {
-		return attempt(() => {
+		return attemptAsync(async () => {
+			const session = await this.getSession().unwrap();
+			if (session) {
+				await session
+					.update({
+						tabs: session.data.tabs - 1 > 0 ? session.data.tabs - 1 : 0
+					})
+					.unwrap();
+			}
 			this.cache = []; // empty cache once closed
 			// console.log('Closing connection', this.uuid);
 			// clearInterval(this.interval);
@@ -165,6 +177,9 @@ export class SSE {
 		const me = this;
 		return attemptAsync(async () => {
 			const session = event.locals.session;
+			session.update({
+				tabs: session.data.tabs + 1
+			});
 			let connection: Connection;
 
 			const stream = new ReadableStream({

@@ -24,7 +24,6 @@ export namespace Account {
 			firstName: text('first_name').notNull(),
 			lastName: text('last_name').notNull(),
 			email: text('email').notNull().unique(),
-			picture: text('picture').notNull(),
 			verified: boolean('verified').notNull(),
 			verification: text('verification').notNull(),
 			lastLogin: text('last_login').notNull().default('')
@@ -78,6 +77,16 @@ export namespace Account {
 		PasswordReset.fromProperty('accountId', a.id, {
 			type: 'stream'
 		}).pipe((a) => a.delete());
+		Session.Session.fromProperty('accountId', a.id, {
+			type: 'stream'
+		}).pipe((s) => s.delete());
+		AccountInfo.fromProperty('accountId', a.id, {
+			type: 'stream'
+		}).pipe(async (a) => {
+			const versions = await a.getVersions().unwrapOr([]);
+			await Promise.all(versions.map((v) => v.delete()));
+			a.delete();
+		});
 	});
 
 	export const Admins = new Struct({
@@ -136,6 +145,89 @@ export namespace Account {
 		});
 	};
 	export type AccountData = typeof Account.sample;
+
+	export const AccountInfo = new Struct({
+		name: 'account_info',
+		structure: {
+			accountId: text('account_id').notNull(),
+			viewOnline: text('view_online').notNull().default('all'), // allow others to see if user is online
+			picture: text('picture').notNull(),
+			bio: text('bio').notNull(),
+			website: text('website').notNull(),
+			socials: text('socials').notNull().default(''),
+			theme: text('theme').notNull().default('default')
+		},
+		versionHistory: {
+			type: 'versions',
+			amount: 3
+		},
+		validators: {
+			viewOnline: (e) => typeof e === 'string' && ['all', 'friends', 'none'].includes(e),
+			theme: (e) => typeof e === 'string' && ['default', 'dark', 'light'].includes(e)
+		}
+	});
+
+	export type AccountInfoData = typeof AccountInfo.sample;
+
+	AccountInfo.on('update', ({ from, to }) => {
+		if (from.accountId !== to.data.accountId) {
+			to.update({
+				// reset accountId to the one from the struct
+				// you cannot change the accountId of an account info
+				accountId: from.accountId
+			});
+		}
+	});
+
+	Account.on('create', (a) => {
+		AccountInfo.new({
+			accountId: a.id,
+			viewOnline: 'all',
+			picture: '',
+			bio: '',
+			website: '',
+			socials: '',
+			theme: 'default'
+		});
+	});
+
+	export const isOnline = (accountId: string) => {
+		return attemptAsync(async () => {
+			const account = await Account.fromId(accountId).unwrap();
+			if (!account) throw new Error('Account not found');
+			const info = await getAccountInfo(account).unwrap();
+			if (info.data.viewOnline !== 'all') return false;
+			let isOnline = false;
+			const stream = Session.Session.fromProperty('accountId', accountId, {
+				type: 'stream'
+			});
+			await stream.pipe((s) => {
+				if (s.data.tabs > 0) {
+					isOnline = true;
+					stream.end();
+				}
+			});
+			return isOnline;
+		});
+	};
+
+	export const getAccountInfo = (account: AccountData) => {
+		return attemptAsync(async () => {
+			const info = await AccountInfo.fromProperty('accountId', account.id, {
+				type: 'single'
+			}).unwrap();
+			if (info) return info;
+			return AccountInfo.new({
+				accountId: account.id,
+				viewOnline: 'all',
+				picture: '',
+				bio: '',
+				website: '',
+				socials: '',
+				theme: 'default'
+			}).unwrap();
+		});
+	};
 
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
@@ -238,7 +330,6 @@ export namespace Account {
 						salt: hash.salt,
 						verified: false,
 						verification: verificationId,
-						picture: '/',
 						lastLogin: ''
 					},
 					{
@@ -304,7 +395,6 @@ export namespace Account {
 		email?: string | null;
 		given_name?: string | null;
 		family_name?: string | null;
-		picture?: string | null;
 	}) => {
 		return attemptAsync(async () => {
 			// const oauth2 = google.oauth2({
@@ -315,7 +405,6 @@ export namespace Account {
 			const email = data.email;
 			const firstName = data.given_name;
 			const lastName = data.family_name;
-			const picture = data.picture ?? '/';
 
 			if (!email) throw new Error('No email provided');
 			if (!firstName) throw new Error('No first name provided');
@@ -337,7 +426,6 @@ export namespace Account {
 					salt: '',
 					verified: false,
 					verification: verificationId,
-					picture,
 					lastLogin: ''
 				})
 			).unwrap();
@@ -405,3 +493,5 @@ export const _developersTable = Account.Developers.table;
 export const _accountNotificationTable = Account.AccountNotification.table;
 export const _accountSettings = Account.Settings.table;
 export const _passwordReset = Account.PasswordReset.table;
+export const _accountInfo = Account.AccountInfo.table;
+export const _accountInfoVersionHistory = Account.AccountInfo.versionTable;

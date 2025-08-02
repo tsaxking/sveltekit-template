@@ -14,7 +14,7 @@ export namespace Account {
 			firstName: 'string',
 			lastName: 'string',
 			email: 'string',
-			picture: 'string',
+			// picture: 'string',
 			verified: 'boolean',
 			lastLogin: 'string'
 			// verification: 'string'
@@ -25,6 +25,21 @@ export namespace Account {
 
 	export type AccountData = StructData<typeof Account.data.structure>;
 	export type AccountArr = DataArr<typeof Account.data.structure>;
+
+	export const AccountInfo = new Struct({
+		name: 'account_info',
+		structure: {
+			accountId: 'string',
+			viewOnline: 'string',
+			picture: 'string',
+			bio: 'string',
+			website: 'string',
+			socials: 'string',
+			theme: 'string'
+		},
+		socket: sse,
+		browser
+	});
 
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
@@ -54,7 +69,6 @@ export namespace Account {
 			firstName: 'Guest',
 			lastName: '',
 			email: '',
-			picture: '',
 			verified: false,
 			// verification: '',
 			id: 'guest',

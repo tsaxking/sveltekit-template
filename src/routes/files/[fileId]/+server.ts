@@ -32,7 +32,7 @@ export async function GET({ params }) {
 
 	try {
 		const file = await fs.readFile(filePath);
-		return new Response(file, {
+		return new Response(new Uint8Array(file), {
 			headers: {
 				'Content-Type': 'application/octet-stream',
 				'Content-Disposition': `inline; filename="${fileId}"`
