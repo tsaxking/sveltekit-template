@@ -1,16 +1,14 @@
 import { render } from 'html-constructor';
-import { config } from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
 import { repoName, repoSlug } from '../src/lib/server/utils/git';
 import { sync } from 'glob';
-config();
 
 export default async () => {
 	const html = await fs.readFile(path.join(process.cwd(), 'docs', 'index.template.html'), 'utf-8');
 
 	const renderedHtml = render(html, {
-		projectName: process.env.PUBLIC_APP_NAME || (await repoName().unwrap()),
+		projectName: await repoName().unwrap(),
 		repoSlug: await repoSlug().unwrap()
 	});
 
