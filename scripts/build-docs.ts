@@ -2,7 +2,7 @@ import { render } from 'html-constructor';
 import { config } from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
-import { repoSlug } from '../src/lib/server/utils/git';
+import { repoName, repoSlug } from '../src/lib/server/utils/git';
 import { sync } from 'glob';
 config();
 
@@ -13,7 +13,7 @@ export default async () => {
     );
 
     const renderedHtml = render(html, {
-        projectName: process.env.PUBLIC_APP_NAME,
+        projectName: process.env.PUBLIC_APP_NAME || await repoName().unwrap(),
         repoSlug: await repoSlug().unwrap(),
     });
 
