@@ -84,8 +84,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.9)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: git+https://github.com/tsaxking/drizzle-struct
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ee1d75ef1a389e200c90caa718b496d7a08913e0(@types/node@22.17.0)(@types/pg@8.15.5)(@types/react@19.1.9)(react@19.1.1)(sass-embedded@1.89.2)
+        specifier: github:tsaxking/drizzle-struct
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/3f2009f52b4eb4e231fa4e87fd730e16f5a85c03(@types/node@22.17.0)(@types/pg@8.15.5)(@types/react@19.1.9)(react@19.1.1)(sass-embedded@1.89.2)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.9)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -2620,8 +2620,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ee1d75ef1a389e200c90caa718b496d7a08913e0:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ee1d75ef1a389e200c90caa718b496d7a08913e0}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/3f2009f52b4eb4e231fa4e87fd730e16f5a85c03:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/3f2009f52b4eb4e231fa4e87fd730e16f5a85c03}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -6972,7 +6972,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ee1d75ef1a389e200c90caa718b496d7a08913e0(@types/node@22.17.0)(@types/pg@8.15.5)(@types/react@19.1.9)(react@19.1.1)(sass-embedded@1.89.2):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/3f2009f52b4eb4e231fa4e87fd730e16f5a85c03(@types/node@22.17.0)(@types/pg@8.15.5)(@types/react@19.1.9)(react@19.1.1)(sass-embedded@1.89.2):
     dependencies:
       '@eslint/compat': 1.3.1(eslint@9.32.0)
       '@msgpack/msgpack': 3.0.0-beta3
