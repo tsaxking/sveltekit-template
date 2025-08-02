@@ -42,3 +42,6 @@ dist/
 route-tree.pages
 ip-limited.pages
 blocked.pages
+
+docs/index.html
+docs/search-index.json

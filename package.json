@@ -32,7 +32,8 @@
 		"build:email": "pnpm script mjml-batch",
 		"backup": "pnpm script backup",
 		"restore": "pnpm script restore",
-		"test:schema": "pnpm script test-schema"
+		"test:schema": "pnpm script test-schema",
+		"doc": "pnpm script build-docs"
 	},
 	"engines": {
 		"node": ">=22.12.0"
@@ -118,6 +119,7 @@
 		"filepond-plugin-image-transform": "^3.8.7",
 		"flatpickr": "^4.6.13",
 		"fuzzy-search": "^3.2.1",
+		"glob": "^11.0.3",
 		"google-auth-library": "^9.15.1",
 		"googleapis": "^144.0.0",
 		"halfmoon": "2.0.2",

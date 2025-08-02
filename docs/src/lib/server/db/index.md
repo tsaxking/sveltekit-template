@@ -2,4 +2,4 @@
 
 This directory contains:
 
-- [index.ts](index.ts.md)
+- [index.ts](src/lib/server/db/index.ts)

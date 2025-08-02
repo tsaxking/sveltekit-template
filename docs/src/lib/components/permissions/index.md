@@ -2,4 +2,4 @@
 
 This directory contains:
 
-- [RoleEditor.svelte](RoleEditor.svelte.md)
+- [RoleEditor.svelte](src/lib/components/permissions/RoleEditor.svelte)

@@ -1,12 +1,14 @@
+# lib
+
 This directory contains:
 
-- [components](components/index.md)
-- [imports](imports/index.md)
-- [imports.ts](imports.ts.md)
-- [index.ts](index.ts.md)
-- [model](model/index.md)
-- [server](server/index.md)
-- [services](services/index.md)
-- [styles](styles/index.md)
-- [types](types/index.md)
-- [utils](utils/index.md)
+- [canvas](src/lib/canvas/index)
+- [components](src/lib/components/index)
+- [imports](src/lib/imports/index)
+- [imports.ts](src/lib/imports.ts)
+- [index.ts](src/lib/index.ts)
+- [model](src/lib/model/index)
+- [server](src/lib/server/index)
+- [services](src/lib/services/index)
+- [types](src/lib/types/index)
+- [utils](src/lib/utils/index)

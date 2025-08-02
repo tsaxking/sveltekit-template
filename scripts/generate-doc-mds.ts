@@ -45,29 +45,6 @@ export default async (target: string) => {
 			}
 
 			const indexPath = path.join(nodeTargetDir, 'index.md');
-			//       if (!fs.existsSync(indexPath)) {
-			//         const links = node.children
-			//          .filter(child => {
-			//   const posixChildPath = toPosix(child.path);
-			//   return posixChildPath.length && !ig.ignores(posixChildPath);
-			// })
-			//           .map(child => {
-			//             const from = indexPath;
-			//             const to = child.children
-			//               ? path.join(targetDir, child.path, 'index.md')
-			//               : path.join(targetDir, child.path + '.md');
-
-			//             const relPath = path.relative(path.dirname(from), to);
-			//             return `- [${child.name}](${toPosix(relPath)})`;
-			//           });
-
-			//         // console.log(`Creating index file: ${indexPath}`);
-
-			//         fs.writeFileSync(
-			//           indexPath,
-			//           `# ${node.name}\n\nThis directory contains:\n\n${links.join('\n')}`
-			//         );
-			//       }
 			const existingLinks = fs.existsSync(indexPath)
 				? fs.readFileSync(indexPath, 'utf8').split('\n')
 				: null;
@@ -78,11 +55,11 @@ export default async (target: string) => {
 					return posixChildPath.length && !ig.ignores(posixChildPath);
 				})
 				.map((child) => {
-					const from = indexPath;
-					const to = child.children
-						? path.join(targetDir, child.path, 'index.md')
-						: path.join(targetDir, child.path + '.md');
-					const relPath = toPosix(path.relative(path.dirname(from), to));
+					const filePath = path.join(nodeTargetDir, child.path);
+					const relPath = toPosix(path.relative(nodeTargetDir, filePath));
+					if (child.children) {
+						return `- [${child.name}](${relPath}/index)`;
+					}
 					return `- [${child.name}](${relPath})`;
 				});
 

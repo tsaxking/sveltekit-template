@@ -2,6 +2,7 @@
 
 This directory contains:
 
-- [Navbar.svelte](Navbar.svelte.md)
-- [Notifications.svelte](Notifications.svelte.md)
-- [SideNav.svelte](SideNav.svelte.md)
+- [Grid.svelte](src/lib/components/general/Grid.svelte)
+- [Navbar.svelte](src/lib/components/general/Navbar.svelte)
+- [Notifications.svelte](src/lib/components/general/Notifications.svelte)
+- [SideNav.svelte](src/lib/components/general/SideNav.svelte)

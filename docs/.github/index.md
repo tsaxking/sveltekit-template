@@ -2,7 +2,7 @@
 
 `code-formatter.yml` - Ensure code is formatted correctly
 
-`docs.yml` - Generate documentation using `mdbook`.
+`gh-pages.yml` - Generate documentation using `docsify`.
 
 `merge-template.yml` - Whenever there is a new release, this workflow will create a branch with the latest changes in the sub repositories.
 

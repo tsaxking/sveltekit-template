@@ -2,5 +2,6 @@
 
 This directory contains:
 
-- [Notification.svelte](Notification.svelte.md)
-- [Profile.svelte](Profile.svelte.md)
+- [Notification.svelte](src/lib/components/account/Notification.svelte)
+- [Profile.svelte](src/lib/components/account/Profile.svelte)
+- [UsernameChange.svelte](src/lib/components/account/UsernameChange.svelte)

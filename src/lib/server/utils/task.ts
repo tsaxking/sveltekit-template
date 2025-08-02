@@ -7,17 +7,16 @@ import url from 'url';
 export const runTask = (...args: string[]) => {
 	return attemptAsync(
 		async () =>
-			new Promise<void>((res, rej) =>
-				exec(args.join(' '), (error) => {
+			new Promise<string>((res, rej) =>
+				exec(args.join(' '), (error, stdout) => {
 					if (error) {
 						rej(error);
 					}
-					res();
+					res(stdout.trim());
 				})
 			)
 	);
 };
-
 export const runTs = async (file: string, fn: string, ...params: unknown[]) => {
 	return attemptAsync(async () => {
 		const fullpath = path.join(process.cwd(), file);
