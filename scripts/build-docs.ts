@@ -7,9 +7,14 @@ import { sync } from 'glob';
 export default async () => {
 	const html = await fs.readFile(path.join(process.cwd(), 'docs', 'index.template.html'), 'utf-8');
 
+    const projectName = await repoName().unwrap();
+    const repositorySlug = await repoSlug().unwrap();
+
+    console.log(`Generating documentation for project: ${projectName}, repository: ${repositorySlug}`);
+
 	const renderedHtml = render(html, {
-		projectName: await repoName().unwrap(),
-		repoSlug: await repoSlug().unwrap()
+		projectName,
+		repoSlug: repositorySlug,
 	});
 
 	await fs.writeFile(path.join(process.cwd(), 'docs', 'index.html'), renderedHtml, 'utf-8');
