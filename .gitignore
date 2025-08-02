@@ -45,3 +45,6 @@ blocked.pages
 
 docs/index.html
 docs/search-index.json
+
+**/_sidebar.md
+**/_navbar.md

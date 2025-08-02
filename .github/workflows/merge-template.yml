@@ -24,12 +24,12 @@ jobs:
       matrix:
         templates:
           [
-            tsaxking/tators-dashboard-kit,
-            tsaxking/tators-app-kit,
-            4sight-live/4sight-web-server,
-            tsaxking/inventory-kit,
-            tsaxking/sfz-budgeting,
-            4sight-live/streaming-service
+            git@github.com:tsaxking/tators-dashboard-kit.git,
+            git@github.com:tsaxking/tators-app-kit.git,
+            git@github.com:4sight-live/4sight-web-server.git,
+            git@github.com:tsaxking/inventory-kit.git,
+            git@github.com:tsaxking/sfz-budgeting.git,
+            git@github.com:4sight-live/streaming-service.git
           ]
 
     steps:
@@ -74,8 +74,11 @@ jobs:
           BRANCH_NAME="chore-update-scripts-to-$LATEST_TAG"
           CLONE_DIR="target-repo"
 
+          echo "Running premerge scripts"
+          pnpm script premerge-render premerge ${{ matrix.templates }}
+
           echo "Cloning target repo"
-          git clone git@github.com:$REPOSITORY.git $CLONE_DIR
+          git clone $REPOSITORY $CLONE_DIR
           cd $CLONE_DIR
 
           echo "Configuring Git"

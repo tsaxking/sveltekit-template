@@ -101,10 +101,12 @@
 				loadSidebar: true,
 				loadNavbar: true,
 				subMaxLevel: 2,
-				homepage: 'index.md'
+				homepage: 'index.md',
 			};
 
-			document.addEventListener('DOMContentLoaded', function () {
+			const ghRepo = `https://github.com/{{ repoSlug }}`;
+
+			document.addEventListener('DOMContentLoaded', () => {
 				const scripts = ['//unpkg.com/docsify/lib/docsify.min.js'];
 				scripts.forEach((src) => {
 					const script = document.createElement('script');
