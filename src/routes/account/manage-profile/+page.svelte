@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import UsernameChange from '$lib/components/account/UsernameChange.svelte';
 	import { Account } from '$lib/model/account.js';
 	import { StructDataProxy } from 'drizzle-struct/front-end';
@@ -9,6 +10,7 @@
 	const info = $derived(Account.AccountInfo.Generator(data.info));
 
 	const infoProxy = $derived(
+		//
 		new StructDataProxy(info as any, {
 			static: ['accountId']
 		})

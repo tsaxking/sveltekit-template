@@ -1,6 +1,12 @@
 import { attemptAsync } from 'ts-utils/check';
 import { sse } from '$lib/services/sse';
-import { Struct, StructData, SingleWritable, DataArr, type GlobalCols } from 'drizzle-struct/front-end';
+import {
+	Struct,
+	StructData,
+	SingleWritable,
+	DataArr,
+	type GlobalCols
+} from 'drizzle-struct/front-end';
 import { browser } from '$app/environment';
 import { z } from 'zod';
 
