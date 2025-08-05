@@ -12,7 +12,7 @@ export default async () => {
 
 	const renderedHtml = render(html, {
 		projectName,
-		repoSlug: repositorySlug,
+		repoSlug: repositorySlug
 	});
 
 	await fs.writeFile(path.join(process.cwd(), 'docs', 'index.html'), renderedHtml, 'utf-8');

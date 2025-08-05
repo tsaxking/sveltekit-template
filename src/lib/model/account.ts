@@ -1,6 +1,6 @@
 import { attemptAsync } from 'ts-utils/check';
 import { sse } from '$lib/services/sse';
-import { Struct, StructData, SingleWritable, DataArr } from 'drizzle-struct/front-end';
+import { Struct, StructData, SingleWritable, DataArr, type GlobalCols } from 'drizzle-struct/front-end';
 import { browser } from '$app/environment';
 import { z } from 'zod';
 
@@ -40,6 +40,8 @@ export namespace Account {
 		socket: sse,
 		browser
 	});
+
+	export type AccountInfoData = StructData<typeof AccountInfo.data.structure & GlobalCols>;
 
 	export const AccountNotification = new Struct({
 		name: 'account_notification',

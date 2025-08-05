@@ -22,10 +22,10 @@ const loadIgnore = (root: string) => {
 };
 
 type JsDocTag = {
-  tagName: string;
-  paramName?: string;
-  type?: string;
-  comment?: string;
+	tagName: string;
+	paramName?: string;
+	type?: string;
+	comment?: string;
 };
 
 /**
@@ -37,118 +37,122 @@ export const generateMarkdownFromFile = async (filePath: string): Promise<string
 	if (!filePath.endsWith('.ts')) {
 		return '';
 	}
-  const content = await fs.promises.readFile(filePath, 'utf-8');
-  const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
+	const content = await fs.promises.readFile(filePath, 'utf-8');
+	const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
 
-  let mdContent = `# ${filePath.split('/').pop()}\n\n`;
+	let mdContent = `# ${filePath.split('/').pop()}\n\n`;
 
-  const visit = (node: ts.Node) => {
-    if (ts.canHaveModifiers(node) && ts.getModifiers(node)?.some(mod => mod.kind === ts.SyntaxKind.ExportKeyword)) {
-      const name = (node as any).name?.getText() || '(anonymous)';
+	const visit = (node: ts.Node) => {
+		if (
+			ts.canHaveModifiers(node) &&
+			ts.getModifiers(node)?.some((mod) => mod.kind === ts.SyntaxKind.ExportKeyword)
+		) {
+			const name = (node as any).name?.getText() || '(anonymous)';
 
-      const jsDocs = ts.getJSDocCommentsAndTags(node)
-        .map(doc => doc.getText())
-        .join('\n')
-        .trim();
+			const jsDocs = ts
+				.getJSDocCommentsAndTags(node)
+				.map((doc) => doc.getText())
+				.join('\n')
+				.trim();
 
-      if (jsDocs) {
-        mdContent += `## ${name}\n\n`;
-        mdContent += `\`\`\`ts\n${node.getText()}\n\`\`\`\n\n`;
+			if (jsDocs) {
+				mdContent += `## ${name}\n\n`;
+				mdContent += `\`\`\`ts\n${node.getText()}\n\`\`\`\n\n`;
 
-        // Extract structured tags
-        const structuredTags: JsDocTag[] = [];
-        const jsDocNodes = (node as any).jsDoc || [];
+				// Extract structured tags
+				const structuredTags: JsDocTag[] = [];
+				const jsDocNodes = (node as any).jsDoc || [];
 
-        for (const docNode of jsDocNodes) {
-          if (docNode.tags) {
-            for (const tag of docNode.tags) {
-              const tagName = tag.tagName.escapedText;
-              const paramName = tag.name?.escapedText;
-              const comment = tag.comment;
-              structuredTags.push({ tagName, paramName, comment });
-            }
-          }
-        }
+				for (const docNode of jsDocNodes) {
+					if (docNode.tags) {
+						for (const tag of docNode.tags) {
+							const tagName = tag.tagName.escapedText;
+							const paramName = tag.name?.escapedText;
+							const comment = tag.comment;
+							structuredTags.push({ tagName, paramName, comment });
+						}
+					}
+				}
 
-        // Description (non-tag text)
-        const description = jsDocs.split('@')[0].replace('/**', '').replace('*/', '').trim();
-        if (description) {
-          mdContent += `${description}\n\n`;
-        }
+				// Description (non-tag text)
+				const description = jsDocs.split('@')[0].replace('/**', '').replace('*/', '').trim();
+				if (description) {
+					mdContent += `${description}\n\n`;
+				}
 
-        // Parameters Table
-        const params = structuredTags.filter(t => t.tagName === 'param');
-        if (params.length) {
-          mdContent += `**Parameters:**\n\n| Name | Description |\n|------|-------------|\n`;
-          for (const param of params) {
-            mdContent += `| ${param.paramName} | ${param.comment || ''} |\n`;
-          }
-          mdContent += '\n';
-        }
+				// Parameters Table
+				const params = structuredTags.filter((t) => t.tagName === 'param');
+				if (params.length) {
+					mdContent += `**Parameters:**\n\n| Name | Description |\n|------|-------------|\n`;
+					for (const param of params) {
+						mdContent += `| ${param.paramName} | ${param.comment || ''} |\n`;
+					}
+					mdContent += '\n';
+				}
 
-        // Returns
-        const returns = structuredTags.find(t => t.tagName === 'returns' || t.tagName === 'return');
-        if (returns) {
-          mdContent += `**Returns:**\n\n${returns.comment || ''}\n\n`;
-        }
+				// Returns
+				const returns = structuredTags.find(
+					(t) => t.tagName === 'returns' || t.tagName === 'return'
+				);
+				if (returns) {
+					mdContent += `**Returns:**\n\n${returns.comment || ''}\n\n`;
+				}
 
-        // Example
-        const example = structuredTags.find(t => t.tagName === 'example');
-        if (example) {
-          mdContent += `**Example:**\n\n\`\`\`ts\n${example.comment}\n\`\`\`\n\n`;
-        }
-      }
-    }
+				// Example
+				const example = structuredTags.find((t) => t.tagName === 'example');
+				if (example) {
+					mdContent += `**Example:**\n\n\`\`\`ts\n${example.comment}\n\`\`\`\n\n`;
+				}
+			}
+		}
 
-    ts.forEachChild(node, visit);
-  };
+		ts.forEachChild(node, visit);
+	};
 
-  visit(sourceFile);
+	visit(sourceFile);
 
-  return mdContent;
+	return mdContent;
 };
 
 export const generateMarkdownWithTypeDoc = async (filePath: string): Promise<string> => {
-try {
-	  const app = await Application.bootstrap({
-	    entryPoints: [filePath],
-	    plugin: ['typedoc-plugin-markdown'],
-	    exclude: ['**/*.d.ts'],
-	    excludeExternals: true,
-	    excludePrivate: true,
-	    excludeProtected: true,
-	    // hideBreadcrumbs: true,
-	    // hidePageTitle: true,
-	    logLevel: 'Error',
-	  });
-	
-	  const project = await app.convert();
-	
-	  if (!project) {
-	    throw new Error('TypeDoc failed to parse project.');
-	  }
-	
-	  const outDir = './.tmp-typedoc';
-	  await app.generateDocs(project, outDir);
-	
-	  const mdFiles = await fs.promises.readdir(outDir);
-	  if (mdFiles.length === 0) {
-	    throw new Error('No Markdown files generated.');
-	  }
-	
-	  const mdContent = await fs.promises.readFile(path.join(outDir, mdFiles[0]), 'utf-8');
-	
-	  // Clean up tmp files
-	  await fs.promises.rm(outDir, { recursive: true, force: true });
-	
-	  return mdContent;
-} catch (error) {
-	console.error(error);
-	return '';
-}
+	try {
+		const app = await Application.bootstrap({
+			entryPoints: [filePath],
+			plugin: ['typedoc-plugin-markdown'],
+			exclude: ['**/*.d.ts'],
+			excludeExternals: true,
+			excludePrivate: true,
+			excludeProtected: true,
+			// hideBreadcrumbs: true,
+			// hidePageTitle: true,
+			logLevel: 'Error'
+		});
+
+		const project = await app.convert();
+
+		if (!project) {
+			throw new Error('TypeDoc failed to parse project.');
+		}
+
+		const outDir = './.tmp-typedoc';
+		await app.generateDocs(project, outDir);
+
+		const mdFiles = await fs.promises.readdir(outDir);
+		if (mdFiles.length === 0) {
+			throw new Error('No Markdown files generated.');
+		}
+
+		const mdContent = await fs.promises.readFile(path.join(outDir, mdFiles[0]), 'utf-8');
+
+		// Clean up tmp files
+		await fs.promises.rm(outDir, { recursive: true, force: true });
+
+		return mdContent;
+	} catch (error) {
+		console.error(error);
+		return '';
+	}
 };
-
-
 
 export default async (target: string) => {
 	const rootDir = process.cwd();
@@ -161,7 +165,7 @@ export default async (target: string) => {
 	//   console.log(`Root directory: ${rootDir}`);
 	//   console.log(ig);
 
-	const createFile =async  (node: FileTree) => {
+	const createFile = async (node: FileTree) => {
 		// Skip if node.path matches ignore
 		const posixPath = toPosix(node.path);
 		if (posixPath && ig.ignores(posixPath)) {

@@ -175,7 +175,7 @@ importers:
         version: 0.2.2(filepond@4.32.8)
       ts-utils:
         specifier: github:tsaxking/global-ts-utilities
-        version: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f(@types/node@22.17.0)(sass-embedded@1.89.2)
+        version: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba(@types/node@22.17.0)(sass-embedded@1.89.2)
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -4633,8 +4633,8 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f:
-    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f}
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba:
+    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba}
     version: 1.0.0
 
   tslib@2.8.1:
@@ -6766,7 +6766,7 @@ snapshots:
       colors: https://codeload.github.com/tsaxking/colors/tar.gz/033743f3dc346eb907160d770ba1bced183e4565
       material-icons: 1.13.14
       math: https://codeload.github.com/tsaxking/calculations/tar.gz/6f735b3ade72c81393ee5f07db93647c3d4fff91
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f(@types/node@22.17.0)(sass-embedded@1.89.2)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba(@types/node@22.17.0)(sass-embedded@1.89.2)
       typescript: 5.9.2
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -7113,7 +7113,7 @@ snapshots:
       proper-lockfile: 4.1.2
       svelte: 5.37.3
       ts-node: 10.9.2(@types/node@22.17.0)(typescript@5.9.2)
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f(@types/node@22.17.0)(sass-embedded@1.89.2)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba(@types/node@22.17.0)(sass-embedded@1.89.2)
       typescript: 5.9.2
       uuid: 11.1.0
       zod: 3.25.76
@@ -7945,7 +7945,7 @@ snapshots:
       expr-eval: 2.0.2
       node-html-parser: 7.0.1
       prettier: 3.6.2
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f(@types/node@22.17.0)(sass-embedded@1.89.2)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba(@types/node@22.17.0)(sass-embedded@1.89.2)
       typescript: 5.9.2
       vite-node: 3.2.4(@types/node@22.17.0)(sass-embedded@1.89.2)
       vitest: 2.1.9(@types/node@22.17.0)(sass-embedded@1.89.2)
@@ -9538,7 +9538,7 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/973e7ccf69c90a46c2e9cb8beb86cf1338440c4f(@types/node@22.17.0)(sass-embedded@1.89.2):
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/38a75e3d6de3f86c644fb4a4eb9731f6a23b94ba(@types/node@22.17.0)(sass-embedded@1.89.2):
     dependencies:
       typescript: 5.9.2
       vitest: 3.2.4(@types/node@22.17.0)(sass-embedded@1.89.2)
