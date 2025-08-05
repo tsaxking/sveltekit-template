@@ -1,15 +1,16 @@
 import { Session } from '../structs/session';
-import { Struct, type Blank, StructData } from 'drizzle-struct/back-end';
+import { Struct, type Blank, StructData, type Structable, DataVersion } from 'drizzle-struct/back-end';
 import { Account } from '../structs/account';
 import { Permissions } from '../structs/permissions';
 import { PropertyAction } from 'drizzle-struct/types';
 import { sse } from './sse';
 import { Redis } from './redis';
 import { z } from 'zod';
+import { EventEmitter } from 'ts-utils/event-emitter';
+import { attempt } from 'ts-utils/check';
 
 export const createStructEventService = (struct: Struct<Blank, string>) => {
-	if (struct.data.frontend === false) return;
-
+	const pub = Redis.getPub();
 	// Permission handling
 	const emitToConnections = async (
 		event: string,
@@ -56,73 +57,125 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 
 	struct.on('create', (data) => {
 		emitToConnections('create', data);
-		Redis.emit(`struct:${struct.name}:create`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:create`, JSON.stringify(data.data));
 	});
 
 	struct.on('update', (data) => {
 		emitToConnections('update', data.to);
-		Redis.emit(`struct:${struct.name}:update`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:update`, JSON.stringify({
+			from: data.from,
+			to: data.to.data
+		}));
 	});
 
 	struct.on('archive', (data) => {
 		emitToConnections('archive', data);
-		Redis.emit(`struct:${struct.name}:archive`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:archive`, data.id);
 	});
 
 	struct.on('delete', (data) => {
 		emitToConnections('delete', data);
-		Redis.emit(`struct:${struct.name}:delete`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:delete`, data.id);
 	});
 
 	struct.on('restore', (data) => {
 		emitToConnections('restore', data);
-		Redis.emit(`struct:${struct.name}:restore`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:restore`, data.id);
 	});
 
 	struct.on('delete-version', (data) => {
-		Redis.emit(`struct:${struct.name}:delete-version`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:delete-version`, {
+			vhId: data.vhId,
+			id: data.id,
+		});
 	});
 
 	struct.on('restore-version', (data) => {
-		Redis.emit(`struct:${struct.name}:restore-version`, data);
+		if (pub.isOk()) pub.value.emit(`struct:${struct.name}:restore-version`, {
+			vhId: data.vhId,
+			id: data.id,
+		});
 	});
 
 	struct.emit('build');
 };
 
-// export const createStructListenerService = (struct: Struct<Blank, string>, targetService: string) => {
-// 	const schema = struct.getZodSchema();
-// 	const service = Redis.createListeningService(targetService, {
-// 		create: schema,
-// 		update: z.object({
-// 			from: schema,
-// 			to: schema,
-// 		}),
-// 		delete: schema,
-// 		archive: schema,
-// 		restore: schema,
-// 	});
+export const createStructListenerService = (struct: Struct<Blank, string>) => {
+	return attempt(() => {
+		const sub = Redis.getSub().unwrap();
 
-// 	service.on('create', (data) => {
-// 		struct.emit('create', struct.Generator(data.data));
-// 	});
+		const em = new EventEmitter<{
+			create: StructData<typeof struct.data.structure, typeof struct.data.name>;
+			update: {
+				from: Structable<typeof struct.data.structure>;
+				to: StructData<typeof struct.data.structure, typeof struct.data.name>;
+			};
+			archive: StructData<typeof struct.data.structure, typeof struct.data.name>;
+			delete: StructData<typeof struct.data.structure, typeof struct.data.name>;
+			restore: StructData<typeof struct.data.structure, typeof struct.data.name>;
+			'delete-version': DataVersion<typeof struct.data.structure, typeof struct.data.name>;
+			'restore-version': DataVersion<typeof struct.data.structure, typeof struct.data.name>;
+		}>();
 
-// 	service.on('update', (data) => {
-// 		struct.emit('update', {
-// 			from: data.data.from,
-// 			to: struct.Generator(data.data.to),
-// 		});
-// 	});
+		const listeningTo = new Set<string>();
 
-// 	service.on('delete', (data) => {
-// 		struct.emit('delete', struct.Generator(data.data));
-// 	});
+		const listenTo = (event: 'create' | 'update' | 'archive' | 'delete' | 'restore' | 'delete-version' | 'restore-version') => () => {
+			if (listeningTo.has(event)) return;
+			listeningTo.add(event);
 
-// 	service.on('archive', (data) => {
-// 		struct.emit('archive', struct.Generator(data.data));
-// 	});
-
-// 	service.on('restore', (data) => {
-// 		struct.emit('restore', struct.Generator(data.data));
-// 	});
-// };
+			sub.on(`struct:${struct.name}:${event}`, async (data: string) => {
+				switch (event) {
+					case 'archive':
+					case 'delete':
+					case 'restore':
+						{
+							const res = await struct.fromId(data);
+							if (res.isOk() && res.value) {
+								em.emit(event, res.value);
+							}
+						}
+						break;
+					case 'create':
+						{
+							const parsed = struct.getZodSchema().safeParse(JSON.parse(data));
+							if (parsed.success) {
+								// eslint-disable-next-line @typescript-eslint/no-explicit-any
+								em.emit(event, struct.Generator(parsed.data as any));
+							}
+						}
+						break;
+					case 'update':
+						{
+							const parsed = z.object({
+								from: struct.getZodSchema(),
+								to: struct.getZodSchema(),
+							}).safeParse(JSON.parse(data));
+							if (parsed.success) {
+								em.emit(event, {
+									from: parsed.data.from,
+									// eslint-disable-next-line @typescript-eslint/no-explicit-any
+									to: struct.Generator(parsed.data.to as any),
+								});
+							}
+						}
+						break;
+					case 'delete-version':
+					case 'restore-version':
+						{
+							const version = await struct.fromVhId(data);
+							if (version.isOk() && version.value) {
+								em.emit(event, version.value);
+							}
+						}
+						break;
+				}
+			});
+		};
+		
+		em.onceListen('create', listenTo('create'));
+		em.onceListen('update', listenTo('update'));
+		em.onceListen('archive', listenTo('archive'));
+		em.onceListen('delete', listenTo('delete'));
+		em.onceListen('restore', listenTo('restore'));
+	});
+};

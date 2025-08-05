@@ -140,7 +140,7 @@
 		"range-slider-input": "^2.4.4",
 		"redis": "^5.7.0",
 		"svelte-filepond": "^0.2.2",
-		"ts-utils": "git+https://github.com/tsaxking/global-ts-utilities",
+		"ts-utils": "github:tsaxking/global-ts-utilities",
 		"uuid": "^11.1.0",
 		"vite-node": "^3.2.4",
 		"yaml": "^2.8.0",
