@@ -10,7 +10,7 @@ const CACHE_TTL = 30000;
 const PING_INTERVAL = 10000;
 const DISCONNECT_TIMEOUT = 35000;
 
-class Connection {
+export class Connection {
 	public lastPing = Date.now();
 	private cache: {
 		event: string;
