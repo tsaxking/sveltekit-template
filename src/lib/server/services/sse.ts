@@ -28,6 +28,10 @@ export class Connection {
 		private readonly onClose: (conn: Connection) => void
 	) {}
 
+	get connected() {
+		return this.controller.desiredSize !== null;
+	}
+
 	send(event: string, data: unknown) {
 		return attempt(() => {
 			const id = this.idCounter++;
@@ -65,6 +69,9 @@ export class Connection {
 			this.send('close', null);
 			this.controller.close();
 			this.onClose(this);
+			for (const listener of this.closeListeners) {
+				listener();
+			}
 		});
 	}
 
@@ -74,6 +81,13 @@ export class Connection {
 
 	getSession() {
 		return Session.Session.fromId(this.sessionId);
+	}
+
+	private readonly closeListeners = new Set<() => void>();
+
+	once(event: 'close', listener: () => void) {
+		if (event !== 'close') throw new Error(`Unsupported event: ${event}`);
+		this.closeListeners.add(listener);
 	}
 }
 
