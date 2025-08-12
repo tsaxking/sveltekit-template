@@ -10,7 +10,6 @@
 	const info = $derived(Account.AccountInfo.Generator(data.info));
 
 	const infoProxy = $derived(
-		//
 		new StructDataProxy(info as any, {
 			static: ['accountId']
 		})
