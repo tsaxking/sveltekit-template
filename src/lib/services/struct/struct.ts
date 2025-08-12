@@ -8,7 +8,7 @@ import { type ColType, DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 import { v4 as uuid } from 'uuid';
 import { StructDataVersion } from './data-version';
-import { saveStructUpdate, deleteStructUpdate } from './batching';
+import { saveStructUpdate, deleteStructUpdate, type BatchUpdate } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr } from './data-arr';
@@ -651,21 +651,29 @@ export class Struct<T extends Blank> {
 	 * Creates a new data point, if permitted
 	 *
 	 * @param {Structable<T>} data
+	 * @param {string[]} [attributes=[]] Array of attributes to assign
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	new(data: Structable<T>, attributes: string[] = []) {
-		return attemptAsync<StatusMessage>(async () => {
+	new(data: Structable<T>, attributes: string[] = [], batch: boolean = false) {
+		return attemptAsync<StatusMessage | BatchUpdate>(async () => {
+			const postResult = (await this.post(DataAction.Create, {
+				data,
+				attributes
+			}, undefined, batch)).unwrap();
+
+			// If batch mode, return the BatchUpdate object
+			if (batch) {
+				return postResult as BatchUpdate;
+			}
+
+			// Normal mode - process the response
 			return z
 				.object({
 					success: z.boolean(),
 					message: z.string().optional()
 				})
-				.parse(
-					await this.post(DataAction.Create, {
-						data,
-						attributes
-					}).then((r) => r.unwrap().json())
-				);
+				.parse(await (postResult as Response).json());
 		});
 	}
 
@@ -917,19 +925,34 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Sends a post request to the server
+	 * Sends a post request to the server or returns a BatchUpdate if in batch mode
 	 *
 	 * @param {(DataAction | PropertyAction)} action
 	 * @param {unknown} data
+	 * @param {Date} [date] Optional date for the request
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	post(action: DataAction | PropertyAction | string, data: unknown, date?: Date) {
+	post(action: DataAction | PropertyAction | string, data: unknown, date?: Date, batch: boolean = false) {
 		return attemptAsync(async () => {
 			if (!this.data.browser)
 				throw new StructError(
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 			const id = uuid();
+			const batchUpdate: BatchUpdate = {
+				struct: this.data.name,
+				data,
+				id,
+				type: action,
+				date: new Date(date?.getTime() || Struct.getDate()).toISOString()
+			};
+
+			// If batch mode is enabled, return the BatchUpdate object
+			if (batch) {
+				return batchUpdate;
+			}
+
 			if (
 				![
 					PropertyAction.Read,
