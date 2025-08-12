@@ -36,7 +36,7 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 			const a = account.value;
 			if (!a) return;
 
-			if ((await Account.isAdmin(account.value)).unwrap()) {
+			if (await Account.isAdmin(account.value).unwrap()) {
 				connection.send(`struct:${struct.name}`, {
 					event,
 					data: data.safe()

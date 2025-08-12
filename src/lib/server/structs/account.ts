@@ -35,8 +35,8 @@ export namespace Account {
 	});
 
 	Account.sendListen('self', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
+		const session = await Session.getSession(event).unwrap();
+		const account = await Session.getAccount(session).unwrap();
 		if (!account) {
 			return new Error('Not logged in');
 		}
@@ -247,8 +247,8 @@ export namespace Account {
 	AccountNotification.bypass(PropertyAction.Update, (a, b) => a.id === b?.accountId);
 	AccountNotification.bypass(PropertyAction.Read, (a, b) => a.id === b?.accountId);
 	AccountNotification.queryListen('get-own-notifs', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
+		const session = await Session.getSession(event).unwrap();
+		const account = await Session.getAccount(session).unwrap();
 
 		if (!account) {
 			return new Error('Not logged in');

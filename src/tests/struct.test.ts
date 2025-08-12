@@ -73,8 +73,8 @@ describe('Run tests on the Test Struct', () => {
 			})
 		).unwrap();
 
-		(await create.setArchive(true)).unwrap();
-		(await create.setArchive(false)).unwrap();
+		await create.setArchive(true).unwrap();
+		await create.setArchive(false).unwrap();
 
 		expect(
 			T.all({

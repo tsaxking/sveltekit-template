@@ -9,7 +9,7 @@ import backup from './backup';
 
 export default async (file?: string) => {
 	await backup();
-	(await openStructs()).unwrap();
+	await openStructs().unwrap();
 
 	if (!file) {
 		const files = fs.readdirSync(BACKUP_DIR).filter((f) => f.endsWith('.zip'));

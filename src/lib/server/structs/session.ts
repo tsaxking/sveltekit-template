@@ -45,7 +45,6 @@ export namespace Session {
 		return attemptAsync(async () => {
 			// TODO: will eventually split domain later once we use the same cookie id as session id upon creation
 			const id = event.cookies.get('ssid_' + PUBLIC_DOMAIN);
-
 			const create = async () => {
 				const session = await Session.new({
 					accountId: '',
@@ -71,7 +70,7 @@ export namespace Session {
 				return create();
 			}
 
-			const s = (await Session.fromId(id)).unwrap();
+			const s = await Session.fromId(id).unwrap();
 
 			if (!s) {
 				return create();
@@ -83,7 +82,7 @@ export namespace Session {
 
 	export const getAccount = (session: SessionData) => {
 		return attemptAsync(async () => {
-			const s = (await Account.Account.fromId(session.data.accountId)).unwrap();
+			const s = await Account.Account.fromId(session.data.accountId).unwrap();
 			return s;
 		});
 	};
@@ -98,17 +97,6 @@ export namespace Session {
 			await account.update({
 				lastLogin: new Date().toISOString()
 			});
-
-			// const universes = (await Universes.getUniverses(account)).unwrap();
-
-			// for (let i = 0; i < universes.length; i++) {
-			// 	event.cookies.set(`universe-${i}`, universes[i].id, {
-			// 		httpOnly: true,
-			// 		domain: DOMAIN ?? '',
-			// 		path: '/',
-			// 		// expires: new Date(Date.now() + parseInt(SESSION_DURATION ?? '0'))
-			// 	});
-			// }
 
 			return {
 				session

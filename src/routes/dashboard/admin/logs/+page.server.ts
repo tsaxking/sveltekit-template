@@ -8,7 +8,7 @@ export const load = async (event) => {
 	if (!event.locals.account) {
 		throw redirect(ServerCode.temporaryRedirect, '/account/sign-in');
 	}
-	if (!(await Account.isAdmin(event.locals.account)).unwrap())
+	if (!(await Account.isAdmin(event.locals.account).unwrap()))
 		throw fail(ServerCode.forbidden, {
 			message: 'Only administrators can access this page'
 		});
@@ -44,7 +44,7 @@ export const load = async (event) => {
 		logs: await Promise.all(
 			logs.logs.map(async (l) => {
 				const log = l.safe();
-				const account = (await Account.Account.fromId(log.accountId)).unwrap();
+				const account = await Account.Account.fromId(log.accountId).unwrap();
 				const res = await Struct.structs.get(log.struct)?.fromId(log.dataId);
 				return {
 					...log,

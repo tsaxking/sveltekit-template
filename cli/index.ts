@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { DB } from '../src/lib/server/db/index';
 import { Struct } from 'drizzle-struct/back-end';
 import { openStructs } from './struct';
@@ -18,7 +18,7 @@ Folder.home = home;
 openStructs().then(async (s) => {
 	s.unwrap();
 	await import('../src/lib/server/index');
-	(await Struct.buildAll(DB as any)).unwrap();
+	await Struct.buildAll(DB).unwrap();
 	// structsPipe();
 	home.action();
 });

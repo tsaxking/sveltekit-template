@@ -17,7 +17,7 @@ export default async () => {
 	}
 
 	await openStructs().unwrap();
-	(await Struct.buildAll(DB)).unwrap();
+	await Struct.buildAll(DB).unwrap();
 
 	const name =
 		(

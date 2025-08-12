@@ -91,7 +91,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${account.data.username} is now verified`);
 	}),
 	new Action('Unverify', 'Unverify an account', '🔓', async () => {
-		const account = (await selectAccount((account) => account.data.verified)).unwrap();
+		const account = await selectAccount((account) => account.data.verified).unwrap();
 		if (!account) return terminal.log('Invalid account');
 		const confirmed = await confirm({
 			message: `Unverify ${account.data.username}?`
@@ -118,10 +118,10 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${account.data.username} is now unverified`);
 	}),
 	new Action('Make Admin', 'Make an account an admin', '👑', async () => {
-		const account = (await selectAccount()).unwrap();
+		const account = await selectAccount().unwrap();
 		if (!account) return terminal.log('Invalid account');
 
-		const isAdmin = await (await Account.isAdmin(account)).unwrap();
+		const isAdmin = await Account.isAdmin(account).unwrap();
 		if (isAdmin) return terminal.log('Account is already an admin');
 		const confirmed = await confirm({
 			message: `Make ${account.data.username} an admin?`
@@ -148,7 +148,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${account.data.username} is now an admin`);
 	}),
 	new Action('Remove Admin', 'Remove an account as an admin', '🚫', async () => {
-		const admins = (await Account.getAdmins()).unwrap();
+		const admins = await Account.getAdmins().unwrap();
 
 		const a = (
 			await selectData(admins as any, 'Select an account to remove as an admin', {
@@ -174,7 +174,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 
 		if (!confirmed) return terminal.log('Cancelled');
 
-		(await adminData.delete()).unwrap();
+		await adminData.delete().unwrap();
 
 		(
 			await Logs.log({
@@ -220,7 +220,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${account.data.username} is now a developer`);
 	}),
 	new Action('Remove developer', 'Remove an account as a developer', '🚫', async () => {
-		const developers = (await Account.getDevelopers()).unwrap();
+		const developers = await Account.getDevelopers().unwrap();
 
 		const a = (
 			await selectData(developers as any, 'Select an account to remove as a developer', {
@@ -246,7 +246,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 
 		if (!confirmed) return terminal.log('Cancelled');
 
-		(await developerData.delete()).unwrap();
+		await developerData.delete().unwrap();
 
 		(
 			await Logs.log({
@@ -261,7 +261,7 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		return terminal.log(`Account ${developer.data.username} is no longer a developer`);
 	}),
 	new Action('View Account Logs', 'View the logs of an account', '📜', async () => {
-		const account = (await selectAccount()).unwrap();
+		const account = await selectAccount().unwrap();
 		if (!account) return terminal.log('Invalid account');
 
 		const logs = (

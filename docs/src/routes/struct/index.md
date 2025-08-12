@@ -1,4 +1,3 @@
 # struct
 
 This directory contains:
-

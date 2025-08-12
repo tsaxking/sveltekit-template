@@ -111,7 +111,7 @@ export const selectDataPipe = <S extends Struct>(
 	}
 ) =>
 	attemptAsync(async () => {
-		const res = (await selectData(data, `Select from ${struct.name}`, options)).unwrap();
+		const res = await selectData(data, `Select from ${struct.name}`, options).unwrap();
 		if (res === undefined) {
 			return doNext('No data selected', undefined, next);
 		}
@@ -174,7 +174,7 @@ otherwise dates will not work.
 				terminal.error(res.error);
 				return async () => {
 					terminal.log('Failed to create new data');
-					const confirmed = (await confirm({ message: 'Try again?' })).unwrap();
+					const confirmed = await confirm({ message: 'Try again?' }).unwrap();
 					if (confirmed) {
 						await structActions.new(struct);
 					} else {
@@ -307,7 +307,7 @@ otherwise dates will not work.
 		}),
 	clear: async <T extends Struct>(struct: T, next?: Next) =>
 		attemptAsync(async () => {
-			if ((await confirm({ message: 'Are you sure you want to clear all data?' })).unwrap()) {
+			if (await confirm({ message: 'Are you sure you want to clear all data?' }).unwrap()) {
 				const res = await struct.clear();
 				if (res.isErr()) {
 					terminal.error(res.error);
@@ -368,7 +368,7 @@ export const dataActions = {
 				terminal.error(res.error);
 				return async () => {
 					terminal.log('Failed to update data');
-					const confirmed = (await confirm({ message: 'Try again?' })).unwrap();
+					const confirmed = await confirm({ message: 'Try again?' }).unwrap();
 					if (confirmed) {
 						await dataActions.update(data);
 					} else {
@@ -391,7 +391,7 @@ export const dataActions = {
 		}),
 	delete: async (data: StructData, next?: Next) =>
 		attemptAsync(async () => {
-			if ((await confirm({ message: 'Are you sure you want to delete this data?' })).unwrap()) {
+			if (await confirm({ message: 'Are you sure you want to delete this data?' }).unwrap()) {
 				const res = await data.delete();
 				if (res.isErr()) {
 					terminal.error(res.error);
@@ -415,7 +415,7 @@ export const dataActions = {
 		}),
 	archive: async (data: StructData, next?: Next) =>
 		attemptAsync(async () => {
-			if ((await confirm({ message: 'Are you sure you want to archive this data?' })).unwrap()) {
+			if (await confirm({ message: 'Are you sure you want to archive this data?' }).unwrap()) {
 				const res = await data.setArchive(true);
 				if (res.isErr()) {
 					terminal.error(res.error);
@@ -439,7 +439,7 @@ export const dataActions = {
 		}),
 	restore: async (data: StructData, next?: Next) =>
 		attemptAsync(async () => {
-			if ((await confirm({ message: 'Are you sure you want to restore this data?' })).unwrap()) {
+			if (await confirm({ message: 'Are you sure you want to restore this data?' }).unwrap()) {
 				const res = await data.setArchive(false);
 				if (res.isErr()) {
 					terminal.error(res.error);
@@ -463,7 +463,7 @@ export const dataActions = {
 		}),
 	versionHistory: async (data: StructData, next?: Next) =>
 		attemptAsync(async () => {
-			const versions = (await data.getVersions()).unwrap();
+			const versions = await data.getVersions().unwrap();
 			return selectVersionPipe(versions, next);
 		}),
 	addAttributes: async (data: StructData, next?: Next) =>
@@ -740,23 +740,10 @@ export const selectVersionAction = (version: DataVersion<Blank, string>, next?: 
 
 export const selectVersionPipe = (versions: DataVersion<Blank, string>[], next?: Next) =>
 	attemptAsync(async () => {
-		const res = (await selectVersion(versions)).unwrap();
+		const res = await selectVersion(versions).unwrap();
 		if (res === undefined) {
 			return doNext('No version selected', undefined, next);
 		}
 
 		return selectVersionAction(versions[res], next);
 	});
-
-// export const structsPipe = () => attemptAsync(async () => {
-//     const structs = (await openStructs()).unwrap();
-//     const selected = (await selectStruct(structs)).unwrap();
-//     if (!selected) {
-//         return console.log('No struct selected');
-//     }
-//     (await selectStuctAction(selected, (message, err) => {
-//         if (err) throw err;
-//         console.log(message);
-//         structsPipe();
-//     })).unwrap();
-// });
