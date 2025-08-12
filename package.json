@@ -35,6 +35,7 @@
 		"test:schema": "pnpm script test-schema",
 		"doc": "pnpm script build-docs"
 	},
+  	"packageManager": "pnpm@10.13.1",
 	"engines": {
 		"node": ">=22.12.0"
 	},
@@ -111,7 +112,7 @@
 		"colors": "git+https://github.com/tsaxking/colors",
 		"dotenv": "^16.6.1",
 		"drizzle-orm": "^0.38.4",
-		"drizzle-struct": "github:tsaxking/drizzle-struct",
+		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.1",
 		"drizzle-zod": "^0.6.1",
 		"express": "^5.1.0",
 		"filepond": "^4.32.8",
@@ -132,6 +133,7 @@
 		"jsoneditor": "^10.3.0",
 		"markdown-it": "^14.1.0",
 		"math": "git+https://github.com/tsaxking/calculations",
+		"redis-utils": "git+https://github.com/tsaxking/redis#v1.0.1",
 		"mime-types": "^3.0.1",
 		"mjml": "^4.15.3",
 		"multiparty": "^4.2.3",
