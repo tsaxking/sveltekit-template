@@ -2,7 +2,7 @@
 	import '$lib/model/account';
 	import '$lib/model/analytics';
 	import '$lib/model/permissions';
-	import { Struct } from 'drizzle-struct/front-end';
+	import { Struct } from '$lib/services/struct';
 	import { capitalize, fromSnakeCase } from 'ts-utils/text';
 
 	const structs = $state(Array.from(Struct.structs));

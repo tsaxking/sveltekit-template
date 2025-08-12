@@ -6,7 +6,7 @@ import {
 	startBatchTest,
 	endBatchTest,
 	startBatchUpdateLoop
-} from 'drizzle-struct/front-end';
+} from '$lib/services/struct';
 import type { Loop } from 'ts-utils/loop';
 import { sleep } from 'ts-utils/sleep';
 

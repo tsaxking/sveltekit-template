@@ -1,5 +1,5 @@
 <script>
-	import { Struct } from 'drizzle-struct/front-end';
+	import { Struct } from '$lib/services/struct';
 	import { browser } from '$app/environment';
 	import '$lib/index';
 

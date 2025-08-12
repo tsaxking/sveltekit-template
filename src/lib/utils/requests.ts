@@ -3,7 +3,7 @@ import { attemptAsync, type Result } from 'ts-utils/check';
 import { Stream } from 'ts-utils/stream';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
-import { Struct } from 'drizzle-struct/front-end';
+import { Struct } from '$lib/services/struct';
 
 export namespace Requests {
 	export const metadata: Record<string, string> = {};

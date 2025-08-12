@@ -2,7 +2,7 @@
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import UsernameChange from '$lib/components/account/UsernameChange.svelte';
 	import { Account } from '$lib/model/account.js';
-	import { StructDataProxy } from 'drizzle-struct/front-end';
+	import { StructDataProxy } from '$lib/services/struct';
 
 	const { data } = $props();
 
