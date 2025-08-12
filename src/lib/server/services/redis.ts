@@ -61,9 +61,11 @@ export namespace Redis {
 			if (_sub?.isOpen && _pub?.isOpen && _sub?.isReady && _pub?.isReady) {
 				return; // Already connected
 			}
-			_sub = createClient();
-			_pub = createClient();
-			_queue = createClient();
+			
+			const redisUrl = process.env.REDIS_URL || `redis://${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}`;
+			_sub = createClient({ url: redisUrl });
+			_pub = createClient({ url: redisUrl });
+			_queue = createClient({ url: redisUrl });
 
 			await Promise.all([_sub.connect(), _pub.connect(), _queue.connect()]);
 			return new Promise<void>((res, rej) => {

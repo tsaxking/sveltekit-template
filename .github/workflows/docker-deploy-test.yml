@@ -1,0 +1,82 @@
+name: Docker Deployment Test
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - '*'
+      - '!deploy'
+      - '!gh-pages'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  docker-build-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build development Docker image
+        run: |
+          docker build --target development -t sveltekit-dev .
+
+      - name: Build production Docker image
+        run: |
+          docker build --target production -t sveltekit-prod .
+
+      - name: Test development environment with Docker Compose
+        run: |
+          # Create a test .env file
+          cp .env.example .env
+          echo "DB_HOST=db" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "DB_USER=postgres" >> .env
+          echo "DB_PASS=postgres" >> .env
+          echo "DB_NAME=test_db" >> .env
+          echo "REDIS_HOST=redis" >> .env
+          echo "REDIS_PORT=6379" >> .env
+          echo "REDIS_NAME=docker_test" >> .env
+          echo "PUBLIC_APP_NAME=Docker Test" >> .env
+          echo "PORT=5173" >> .env
+          
+          # Start services in detached mode
+          docker compose -f docker-compose.dev.yml up -d db redis
+          
+          # Wait for services to be ready
+          sleep 10
+          
+          # Check if PostgreSQL is ready
+          docker compose -f docker-compose.dev.yml exec -T db pg_isready -U postgres
+          
+          # Check if Redis is ready
+          docker compose -f docker-compose.dev.yml exec -T redis redis-cli ping
+          
+          # Clean up
+          docker compose -f docker-compose.dev.yml down
+
+      - name: Test production environment build
+        run: |
+          # Create a production test .env file
+          cp .env.example .env
+          echo "DB_HOST=external-db" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "DB_USER=prod_user" >> .env
+          echo "DB_PASS=prod_pass" >> .env
+          echo "DB_NAME=prod_db" >> .env
+          echo "REDIS_HOST=external-redis" >> .env
+          echo "REDIS_PORT=6379" >> .env
+          echo "REDIS_NAME=prod_instance" >> .env
+          echo "PUBLIC_APP_NAME=Production Test" >> .env
+          echo "PORT=3000" >> .env
+          
+          # Test production compose file syntax
+          docker compose -f docker-compose.prod.yml config
