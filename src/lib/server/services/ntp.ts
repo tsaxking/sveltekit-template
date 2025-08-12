@@ -1,5 +1,5 @@
 import { sse } from './sse';
-import { Redis } from './redis';
+import { Redis } from 'redis-utils';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
 
@@ -12,7 +12,6 @@ export namespace TimeService {
 		return attemptAsync(async () => {
 			if (initialized) return;
 			initialized = true;
-			await Redis.connect();
 
 			const service = Redis.createListeningService(
 				process.env.NTP_REDIS_NAME || 'ntp_server_name',

@@ -174,6 +174,8 @@ export interface Socket {
 	on(event: string, lisener: (data: unknown) => void): void;
 }
 
+type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+
 /**
  * Generates a type from a column type
  *
@@ -182,6 +184,32 @@ export interface Socket {
  * @template {ColType} t
  */
 export type ColTsType<t extends ColType> = t extends 'string'
+	? string
+	: t extends 'number'
+		? number
+		: t extends 'boolean'
+			? boolean
+			: t extends 'array'
+				? unknown[]
+				: t extends 'json'
+					? unknown
+					: t extends 'date'
+						? Date
+						: t extends 'bigint'
+							? bigint
+							: t extends 'custom'
+								? unknown
+								: t extends 'buffer'
+									? Buffer
+									: never;
+/**
+ * Generates a safe type from a column type
+ *
+ * @export
+ * @typedef {ColTsType}
+ * @template {ColType} t
+ */
+export type SafeColTsType<t extends ColType> = t extends 'string'
 	? string
 	: t extends 'number'
 		? number
@@ -251,6 +279,10 @@ export type StructBuilder<T extends Blank> = {
  */
 export type PartialStructable<T extends Blank> = {
 	[K in keyof T]?: ColTsType<T[K]>;
+};
+
+export type SafePartialStructable<T extends Blank> = {
+	[K in keyof T]?: SafeColTsType<T[K]>;
 };
 
 /**
@@ -752,29 +784,10 @@ export class Struct<T extends Blank> {
 	/**
 	 * Generates a StructData object from the given data, or returns the cached version if it exists.
 	 *
-	 * @param {(PartialStructable<T & GlobalCols>)} data
+	 * @param {(SafePartialStructable<T & GlobalCols>)} data
 	 * @returns {StructData<T>}
 	 */
-	Generator(data: PartialStructable<T & GlobalCols>): StructData<T>;
-	/**
-	 * Generates an array of StructData from an array of data, or returns the cached versions if they exist
-	 *
-	 * @param {PartialStructable<T & GlobalCols>[]} data
-	 * @returns {StructData<T>[]}
-	 */
-	Generator(data: PartialStructable<T & GlobalCols>[]): StructData<T>[];
-	/**
-	 * Generates a StructData object or an array of StructData from the given data.
-	 *
-	 * @param {(PartialStructable<T & GlobalCols> | PartialStructable<T & GlobalCols>[])} data
-	 * @returns {(StructData<T> | StructData<T>[])}
-	 */
-	Generator(
-		data: PartialStructable<T & GlobalCols> | PartialStructable<T & GlobalCols>[]
-	): StructData<T> | StructData<T>[] {
-		if (Array.isArray(data)) {
-			return data.map((d) => this.Generator(d)) as StructData<T>[];
-		}
+	Generator(data: SafePartialStructable<T & GlobalCols>): StructData<T> {
 		if (Object.hasOwn(data, 'id')) {
 			const id = (data as { id: string }).id;
 			if (this.cache.has(id)) {
@@ -782,13 +795,33 @@ export class Struct<T extends Blank> {
 			}
 		}
 
-		const d = new StructData(this, data);
+		const assembled: PartialStructable<T & GlobalCols> = {};
+		const structure = {
+			...this.data.structure,
+			id: 'string',
+			created: 'date',
+			updated: 'date',
+			archived: 'boolean',
+			attributes: 'string',
+			lifetime: 'number',
+			canUpdate: 'boolean'
+		};
+
+		for (const [key, value] of Object.entries(data)) {
+			if (structure[key] === 'date') {
+				(assembled as any)[key] = new Date(value) as any; // convert string to Date
+			} else {
+				(assembled as any)[key] = value as any; // keep the value as is
+			}
+		}
+
+		const d = new StructData(this, assembled);
 
 		if (Object.hasOwn(data, 'id')) {
 			this.cache.set(data.id as string, d as any);
 		}
 
-		const res = this.getZodSchema().safeParse(data);
+		const res = this.getZodSchema().safeParse(assembled);
 		if (!res.success) {
 			console.warn(`Data does not match ${this.data.name}'s schema:`, res.error, d);
 		}
@@ -868,7 +901,7 @@ export class Struct<T extends Blank> {
 						case 'json':
 							return createSchema(key as any, z.string());
 						case 'date':
-							return createSchema(key as any, z.string());
+							return createSchema(key as any, z.date());
 						case 'bigint':
 							return createSchema(key as any, z.bigint());
 						case 'custom':
@@ -1367,7 +1400,7 @@ export class Struct<T extends Blank> {
 				id
 			});
 			const data = await res.unwrap().json();
-			return this.Generator(data as PartialStructable<T & GlobalCols>);
+			return this.Generator(data as SafePartialStructable<T & GlobalCols>);
 		});
 	}
 
@@ -1608,26 +1641,5 @@ export class Struct<T extends Blank> {
 		}
 
 		return arr;
-	}
-
-	/**
-	 * Creates a new DataArr instance with the given data array.
-	 * @deprecated Use `arr` instead with the `Generator` method.
-	 *
-	 * @param {Structable<T & GlobalCols>[]} dataArray
-	 * @returns {DataArr<T>}
-	 */
-	arrGenerator(dataArray: Structable<T & GlobalCols>[]) {
-		const w = new DataArr(
-			this,
-			dataArray.map((d) => this.Generator(d))
-		);
-		setTimeout(() => {
-			this.writables.set('all', w);
-		});
-		w.onAllUnsubscribe(() => {
-			this.writables.delete('all');
-		});
-		return w;
 	}
 }

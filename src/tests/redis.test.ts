@@ -1,16 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { Redis } from '$lib/server/services/redis';
+import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import { Stream } from 'ts-utils/stream';
 
 describe('Redis namespace', () => {
-	const REDIS_NAME = process.env.REDIS_NAME;
+	const REDIS_NAME = process.env.REDIS_NAME || 'default';
 	if (!REDIS_NAME) {
 		throw new Error('REDIS_NAME environment variable is not set');
 	}
 
 	beforeEach(async () => {
-		const connectRes = await Redis.connect();
+		const connectRes = await Redis.connect({
+			name: REDIS_NAME
+		});
 		if (connectRes.isErr()) {
 			throw new Error(`Redis connect failed: ${connectRes.error}`);
 		}

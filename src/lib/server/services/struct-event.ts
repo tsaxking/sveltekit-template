@@ -10,7 +10,7 @@ import { Account } from '../structs/account';
 import { Permissions } from '../structs/permissions';
 import { PropertyAction } from 'drizzle-struct/types';
 import { sse } from './sse';
-import { Redis } from './redis';
+import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import terminal from '../utils/terminal';

@@ -1,4 +1,4 @@
-import { Redis } from './redis';
+import { Redis } from 'redis-utils';
 import { z } from 'zod';
 
 class UUIDService {
