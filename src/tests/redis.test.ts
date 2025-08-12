@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import { Stream } from 'ts-utils/stream';
