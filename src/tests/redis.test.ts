@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { Stream } from 'ts-utils/stream';
 
 describe('Redis namespace', () => {
-	const REDIS_NAME = process.env.REDIS_NAME || 'default';
+	const REDIS_NAME = process.env.REDIS_NAME;
 	if (!REDIS_NAME) {
 		throw new Error('REDIS_NAME environment variable is not set');
 	}
