@@ -1,5 +1,5 @@
 import { Account } from './account';
-import { Struct, StructData, DataArr } from 'drizzle-struct/front-end';
+import { Struct, StructData, DataArr } from '$lib/services/struct/index';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';

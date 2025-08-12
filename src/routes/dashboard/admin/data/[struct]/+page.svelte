@@ -19,7 +19,7 @@
 	import { copy } from '$lib/utils/clipboard.js';
 	import { useCommandStack } from '$lib/services/event-stack.js';
 	import { onDestroy, onMount } from 'svelte';
-	import { StructData, type Blank } from 'drizzle-struct/front-end';
+	import { StructData, type Blank } from '$lib/services/struct';
 	import { confirm, notify } from '$lib/utils/prompts.js';
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
 	import { match } from 'ts-utils/match';

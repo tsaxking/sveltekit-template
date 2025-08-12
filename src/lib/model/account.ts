@@ -6,7 +6,7 @@ import {
 	SingleWritable,
 	DataArr,
 	type GlobalCols
-} from 'drizzle-struct/front-end';
+} from '$lib/services/struct/index';
 import { browser } from '$app/environment';
 import { z } from 'zod';
 
@@ -80,12 +80,13 @@ export namespace Account {
 			verified: false,
 			// verification: '',
 			id: 'guest',
-			updated: '0',
-			created: '0',
+			updated: new Date().toISOString(),
+			created: new Date().toISOString(),
 			archived: false,
 			attributes: '[]',
 			lifetime: 0,
-			canUpdate: false
+			canUpdate: false,
+			lastLogin: new Date().toISOString()
 		})
 	);
 

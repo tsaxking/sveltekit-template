@@ -1,4 +1,4 @@
-import { Struct } from 'drizzle-struct/front-end';
+import { Struct } from '$lib/services/struct';
 import '$lib/model/account';
 import '$lib/model/analytics';
 import '$lib/model/permissions';

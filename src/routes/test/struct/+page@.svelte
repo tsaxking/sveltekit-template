@@ -6,7 +6,7 @@
 
 	// Insert all other structs here
 
-	import { type Blank, Struct } from 'drizzle-struct/front-end';
+	import { type Blank, Struct } from '$lib/services/struct';
 	import { capitalize, fromSnakeCase } from 'ts-utils/text';
 
 	const structs = writable<[Struct<Blank>, 'connecting...' | 'connected' | string][]>([]);

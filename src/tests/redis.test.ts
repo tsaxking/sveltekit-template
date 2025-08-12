@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { Redis } from '$lib/server/services/redis';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import { Stream } from 'ts-utils/stream';
 
@@ -10,7 +10,9 @@ describe('Redis namespace', () => {
 	}
 
 	beforeEach(async () => {
-		const connectRes = await Redis.connect();
+		const connectRes = await Redis.connect({
+			name: REDIS_NAME
+		});
 		if (connectRes.isErr()) {
 			throw new Error(`Redis connect failed: ${connectRes.error}`);
 		}
