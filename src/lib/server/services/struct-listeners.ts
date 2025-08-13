@@ -178,7 +178,7 @@ class ListenerBase<Event extends string, DataType, ReturnType> {
 			terminal.error(error);
 			return {
 				success: false,
-				message: 'Internal server errror'
+				message: 'Internal server error'
 			};
 		}
 	}
