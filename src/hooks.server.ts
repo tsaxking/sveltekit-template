@@ -24,7 +24,8 @@ config();
 
 (async () => {
 	await Redis.connect({
-		name: process.env.REDIS_NAME || 'default'
+		name: process.env.REDIS_NAME || 'default',
+		redisUrl: process.env.REDIS_URL
 	}).unwrap();
 	Struct.each((struct) => {
 		if (!struct.built) {
