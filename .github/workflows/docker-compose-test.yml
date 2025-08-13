@@ -47,7 +47,7 @@ jobs:
 
       - name: Set up Postgres
         run: |
-          docker compose --project-name test up db
+          docker compose --project-name test up -d db
           until [ "$(docker inspect -f '{{.State.Running}}' db 2>/dev/null)" = "true" ]; do
               sleep 1
           done
