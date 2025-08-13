@@ -1,16 +1,20 @@
 FROM node:22.12.0-bullseye
 
-RUN npm install -g pnpm@latest
-RUN npm install -g typescript
+# Install global dependencies first (rarely changes)
+RUN npm install -g pnpm@latest typescript
 
 WORKDIR /app
 
-COPY pnpm-lock.yaml package.json ./
-RUN pnpm install
+# Copy only the files needed for install first, to cache dependencies better
+COPY package.json pnpm-lock.yaml ./
 
+RUN pnpm install --frozen-lockfile
+
+# Then copy the rest of your source code
 COPY . .
-RUN cp .docker.env .env
 
+# Copy env file and build
+RUN cp .docker.env .env
 RUN pnpm build
 
 EXPOSE 3000
