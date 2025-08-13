@@ -24,6 +24,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Start Docker build in background
+        run: docker compose --project-name test build app &
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -85,7 +88,7 @@ jobs:
 
       - name: Start App
         run: |
-          docker compose --project-name test up -d app redis --build
+          docker compose --project-name test up -d app redis
           pnpm test:integration
 
       - name: Stop Application
