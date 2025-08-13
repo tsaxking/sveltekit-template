@@ -50,9 +50,9 @@ jobs:
           docker compose --project-name test up -d db
           sleep 5
           docker ps
-          docker compose exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
-          docker compose exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
-          docker compose exec db psql -U admin -c "GRANT admin TO test_user;"
+          docker compose exec -it db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
+          docker compose exec -it db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
+          docker compose exec -it db psql -U admin -c "GRANT admin TO test_user;"
           # pnpm db:migrate
           # pnpm db:push --force
           docker compose stop
