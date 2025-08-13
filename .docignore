@@ -1,9 +1,8 @@
 /docs
-.env
 .env.example
 .gitignore
 .npmignore
-.prettierignore
+*.env
 .prettierrc
 .npmrc
 docker-compose.yml
@@ -14,7 +13,8 @@ docker-compose.yml
 *.md
 *.json
 *.mjs
-
+.git/
+.prettierignore
 
 /.github/workflows
 /.vscode
@@ -31,7 +31,7 @@ docker-compose.yml
 /static
 /logs
 /e2e
-
+/backups
 
 .docignore
 
@@ -50,3 +50,5 @@ docker-compose.yml
 
 /gh-pages
 /docusaurus-site
+/src/lib/styles
+private/emails

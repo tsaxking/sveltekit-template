@@ -2,6 +2,7 @@
 
 This directory contains:
 
-- [email.ts](email.ts.md)
-- [entitlements.ts](entitlements.ts.md)
-- [notification.ts](notification.ts.md)
+- [email.ts](src/lib/types/email.ts)
+- [entitlements.ts](src/lib/types/entitlements.ts)
+- [icons.ts](src/lib/types/icons.ts)
+- [notification.ts](src/lib/types/notification.ts)

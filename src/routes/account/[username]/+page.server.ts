@@ -14,10 +14,13 @@ export const load = async (event) => {
 	}
 
 	// business logic for filtering the params the user can view
+	const accountInfo = await Account.getAccountInfo(account).unwrap();
 
-	const data = account.safe();
+	const accountData = account.safe();
+	const accountInfoData = accountInfo.safe();
 
 	return {
-		account: data
+		account: accountData,
+		info: accountInfoData
 	};
 };

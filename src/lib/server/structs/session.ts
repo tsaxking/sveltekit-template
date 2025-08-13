@@ -32,7 +32,8 @@ export namespace Session {
 			userAgent: text('user_agent').notNull(),
 			requests: integer('requests').notNull(),
 			prevUrl: text('prev_url').notNull(),
-			fingerprint: text('fingerprint').notNull().default('')
+			fingerprint: text('fingerprint').notNull().default(''),
+			tabs: integer('tabs').notNull().default(0)
 		},
 		frontend: false,
 		safes: ['fingerprint']
@@ -52,7 +53,8 @@ export namespace Session {
 					userAgent: '',
 					requests: 0,
 					prevUrl: '',
-					fingerprint: ''
+					fingerprint: '',
+					tabs: 0
 				}).unwrap();
 
 				event.cookies.set('ssid_' + PUBLIC_DOMAIN, session.id, {

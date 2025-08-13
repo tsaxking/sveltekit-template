@@ -2,7 +2,7 @@
 
 This directory contains:
 
-- [assets](assets/index.md)
-- [oauth](oauth/index.md)
-- [struct](struct/index.md)
-- [test](test/index.md)
+- [assets](src/routes/assets/index)
+- [oauth](src/routes/oauth/index)
+- [struct](src/routes/struct/index)
+- [test](src/routes/test/index)

@@ -8,70 +8,74 @@ import { Random } from 'ts-utils/math';
 
 class SSE {
 	public readonly uuid = Random.uuid();
-	public readonly emitter = new EventEmitter();
+	private readonly emitter = new EventEmitter();
+	private _latency: number[] = [];
+	private lastAckedId = 0;
+	private isDisconnected = false;
+	private isReconnecting = false;
+	private disconnect: () => void = () => {};
+	private reconnectAttempt = 0;
+	private readonly maxBackoff = 30000;
+	private pingFailures = 0;
 
 	public on = this.emitter.on.bind(this.emitter);
 	public off = this.emitter.off.bind(this.emitter);
 	public once = this.emitter.once.bind(this.emitter);
-	private emit = this.emitter.emit.bind(this.emitter);
 
-	private isDisconnected = false;
-	private isReconnecting = false;
-	private disconnect: () => void = () => {};
-
-	private reconnectAttempt = 0;
-	private readonly maxBackoff = 30000; // max 30 seconds
-
-	constructor() {
-		// console.log(`SSE constructor called: ${this.uuid}`);
-	}
-
-	init(browser: boolean) {
-		if (!browser) return;
-
+	init(enable: boolean) {
+		if (!enable) return;
 		this.connect();
 
-		const events = ['mousedown', 'mouseover', 'touch', 'scroll'];
+		const userActivityEvents = ['mousedown', 'mouseover', 'touchstart', 'scroll'];
+		let inactivityTimeout: ReturnType<typeof setTimeout>;
 
-		let timeout: ReturnType<typeof setTimeout>;
-
-		const onEvent = () => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(
+		const resetInactivityTimer = () => {
+			if (inactivityTimeout) clearTimeout(inactivityTimeout);
+			inactivityTimeout = setTimeout(
 				() => {
 					this.disconnect();
 					this.isDisconnected = true;
 				},
 				1000 * 60 * 5
-			); // 5 minutes
-
+			); // 5 mins
 			if (this.isDisconnected) {
 				this.isDisconnected = false;
 				this.disconnect = this.connect();
 			}
 		};
 
-		for (const event of events) {
-			document.addEventListener(event, onEvent);
-		}
+		userActivityEvents.forEach((event) => document.addEventListener(event, resetInactivityTimer));
+
+		document.addEventListener('visibilitychange', () => {
+			if (document.hidden) {
+				setTimeout(() => {
+					if (document.hidden) {
+						this.disconnect();
+						this.isDisconnected = true;
+					}
+				}, 1000 * 60);
+			} else if (this.isDisconnected) {
+				this.isDisconnected = false;
+				this.disconnect = this.connect();
+			}
+		});
 	}
 
 	connect() {
-		const connect = () => {
-			// console.log('connect.connect()');
-			// this.uuid = Random.uuid();
+		const establishConnection = () => {
 			Requests.setMeta('sse', this.uuid);
-			const source = new EventSource(`/sse/init/${this.uuid}`);
+			const source = new EventSource(`/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
 
-			const onConnect = () => {
-				console.log(`SSE connection established: ${this.uuid}`);
-				this.emit('connect', undefined);
-				this.reconnectAttempt = 0; // reset backoff on successful connect
+			const handleConnect = () => {
+				console.log(`SSE connected: ${this.uuid}`);
+				this.emitter.emit('connect', undefined);
+				this.reconnectAttempt = 0;
+				this.pingFailures = 0;
 			};
 
-			const onMessage = (event: MessageEvent) => {
+			const handleMessage = (event: MessageEvent) => {
 				try {
-					const e = z
+					const parsed = z
 						.object({
 							id: z.number(),
 							event: z.string(),
@@ -79,91 +83,78 @@ class SSE {
 						})
 						.parse(JSON.parse(decode(event.data)));
 
-					if (!Object.hasOwn(e, 'event')) {
-						return console.error('Invalid event (missing .event)', e);
-					}
-					if (!Object.hasOwn(e, 'data')) {
-						return console.error('Invalid data (missing .data)', e);
-					}
-
-					if (e.event === 'close') {
+					if (parsed.event === 'close') {
 						source.close();
-					}
-
-					if (e.event === 'notification') {
-						const parsed = z
-							.object({
-								title: z.string(),
-								message: z.string(),
-								severity: z.enum(['info', 'warning', 'danger', 'success'])
-							})
-							.safeParse(e.data);
-
-						if (parsed.success) {
+					} else if (parsed.event === 'notification') {
+						const notifSchema = z.object({
+							title: z.string(),
+							message: z.string(),
+							severity: z.enum(['info', 'warning', 'danger', 'success'])
+						});
+						const notif = notifSchema.safeParse(parsed.data);
+						if (notif.success) {
 							notify({
-								color: parsed.data.severity,
-								title: parsed.data.title,
-								message: parsed.data.message,
+								color: notif.data.severity,
+								title: notif.data.title,
+								message: notif.data.message,
 								autoHide: 5000
 							});
 						}
-						return;
+					} else if (parsed.event !== 'ping') {
+						this.emitter.emit(parsed.event, parsed.data);
 					}
 
-					if (!['close', 'ping'].includes(e.event)) {
-						this.emit(e.event, e.data);
-					}
-
-					this.ack(e.id);
-				} catch (error) {
-					console.error(error);
+					this.ack(parsed.id);
+				} catch (err) {
+					console.error('Failed to parse SSE event:', err);
 				}
 			};
 
-			const onError = () => {
-				console.warn('SSE connection lost. Attempting reconnect.');
+			const handleError = () => {
+				console.warn('SSE connection lost, retrying...');
 				source.close();
-
 				if (!this.isReconnecting) {
 					this.isReconnecting = true;
-
 					const backoff = Math.min(1000 * 2 ** this.reconnectAttempt, this.maxBackoff);
 					this.reconnectAttempt++;
-
 					setTimeout(() => {
-						this.disconnect = connect();
+						this.disconnect = establishConnection();
 						this.isReconnecting = false;
 					}, backoff);
 				}
 			};
 
-			source.addEventListener('open', onConnect);
-			source.addEventListener('message', onMessage);
-			source.addEventListener('error', onError);
+			source.addEventListener('open', handleConnect);
+			source.addEventListener('message', handleMessage);
+			source.addEventListener('error', handleError);
 
-			const close = () => {
+			const closeConnection = () => {
 				source.close();
-				source.removeEventListener('open', onConnect);
-				source.removeEventListener('message', onMessage);
-				source.removeEventListener('error', onError);
+				source.removeEventListener('open', handleConnect);
+				source.removeEventListener('message', handleMessage);
+				source.removeEventListener('error', handleError);
+				window.removeEventListener('beforeunload', closeConnection);
 			};
 
-			window.addEventListener('beforeunload', close);
+			window.addEventListener('beforeunload', closeConnection);
 
-			return () => {
-				close();
-				window.removeEventListener('beforeunload', close);
-			};
+			return () => closeConnection();
 		};
 
 		this.disconnect();
-		this.disconnect = connect();
+		this.disconnect = establishConnection();
 
-		const interval = setInterval(async () => {
-			if (this.isDisconnected) return clearInterval(interval);
-			if (!(await this.ping())) {
-				this.disconnect();
-				this.disconnect = connect();
+		const pingInterval = setInterval(async () => {
+			if (this.isDisconnected) return clearInterval(pingInterval);
+			const success = await this.ping();
+			if (!success) {
+				this.pingFailures++;
+				if (this.pingFailures >= 3) {
+					this.disconnect();
+					this.disconnect = establishConnection();
+				}
+			} else {
+				this.pingFailures = 0;
 			}
 		}, 5000);
 
@@ -171,33 +162,53 @@ class SSE {
 	}
 
 	private ack(id: number) {
-		// console.log(`${this.uuid} Client acknowledging message with ID:`, id);
+		this.lastAckedId = id;
 		fetch(`/sse/ack/${this.uuid}/${id}`);
 	}
 
-	private ping() {
-		// console.log('Pinging SSE server...');
-		return fetch(`/sse/ping/${this.uuid}`).then((res) => res.ok);
+	private async ping() {
+		const start = performance.now();
+		try {
+			const res = await fetch(`/sse/ping/${this.uuid}`);
+			const end = performance.now();
+			const latency = end - start;
+			const text = await res.text();
+			const [, serverLatency] = text.split(':');
+			if (!isNaN(+serverLatency)) {
+				this._latency.push(latency - +serverLatency);
+			} else {
+				this._latency.push(latency);
+			}
+			if (this._latency.length > 3) this._latency.shift();
+			return res.ok;
+		} catch {
+			return false;
+		}
 	}
 
 	public waitForConnection(timeout: number) {
-		return new Promise<void>((res, rej) => {
+		return new Promise<void>((resolve, reject) => {
 			let settled = false;
 			if (!this.isDisconnected) {
-				return res();
+				return resolve();
 			}
 			this.once('connect', () => {
 				if (settled) return;
 				settled = true;
-				clearTimeout(t);
-				res();
+				clearTimeout(timer);
+				resolve();
 			});
-			const t = setTimeout(() => {
+			const timer = setTimeout(() => {
 				if (settled) return;
 				settled = true;
-				rej(new Error(`SSE connection timed out after ${timeout}ms`));
+				reject(new Error(`SSE connection timed out after ${timeout}ms`));
 			}, timeout);
 		});
+	}
+
+	get latency() {
+		if (this._latency.length === 0) return 0;
+		return this._latency.reduce((a, b) => a + b, 0) / this._latency.length;
 	}
 }
 

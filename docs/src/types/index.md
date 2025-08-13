@@ -1,5 +1,7 @@
+# types
+
 This directory contains:
 
-- [app.d.ts](app.d.ts.md)
-- [document-extended.d.ts](document-extended.d.ts.md)
-- [svelte-filepond.d.ts](svelte-filepond.d.ts.md)
+- [app.d.ts](src/types/app.d.ts)
+- [document-extended.d.ts](src/types/document-extended.d.ts)
+- [svelte-filepond.d.ts](src/types/svelte-filepond.d.ts)

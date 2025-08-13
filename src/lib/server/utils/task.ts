@@ -4,21 +4,34 @@ import path from 'path';
 // import * as tsNode from 'ts-node';
 import url from 'url';
 
+/**
+ * Runs a shell command and returns the output.
+ *
+ * @param {...string[]} args
+ * @returns {*}
+ */
 export const runTask = (...args: string[]) => {
 	return attemptAsync(
 		async () =>
-			new Promise<void>((res, rej) =>
-				exec(args.join(' '), (error) => {
+			new Promise<string>((res, rej) =>
+				exec(args.join(' '), (error, stdout) => {
 					if (error) {
 						rej(error);
 					}
-					res();
+					res(stdout.trim());
 				})
 			)
 	);
 };
-
-export const runTs = async (file: string, fn: string, ...params: unknown[]) => {
+/**
+ * Runs a TypeScript file and calls a specific function with parameters.
+ *
+ * @param {string} file
+ * @param {string} fn
+ * @param {...unknown[]} params
+ * @returns {*}
+ */
+export const runTs = (file: string, fn: string, ...params: unknown[]) => {
 	return attemptAsync(async () => {
 		const fullpath = path.join(process.cwd(), file);
 

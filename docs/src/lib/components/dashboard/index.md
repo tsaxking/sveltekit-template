@@ -2,6 +2,6 @@
 
 This directory contains:
 
-- [Card.svelte](Card.svelte.md)
-- [Dashboard.svelte](Dashboard.svelte.md)
-- [MinimizedCards.svelte](MinimizedCards.svelte.md)
+- [Card.svelte](src/lib/components/dashboard/Card.svelte)
+- [Dashboard.svelte](src/lib/components/dashboard/Dashboard.svelte)
+- [MinimizedCards.svelte](src/lib/components/dashboard/MinimizedCards.svelte)

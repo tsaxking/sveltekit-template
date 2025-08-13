@@ -1,9 +1,12 @@
+# cli
+
 This directory contains:
 
-- [accounts.ts](accounts.ts.md)
-- [colors.ts](colors.ts.md)
-- [index.ts](index.ts.md)
-- [logs.ts](logs.ts.md)
-- [server-controller.ts](server-controller.ts.md)
-- [struct.ts](struct.ts.md)
-- [utils.ts](utils.ts.md)
+- [accounts.ts](cli/accounts.ts)
+- [colors.ts](cli/colors.ts)
+- [index.ts](cli/index.ts)
+- [logs.ts](cli/logs.ts)
+- [page-limiting.ts](cli/page-limiting.ts)
+- [server-controller.ts](cli/server-controller.ts)
+- [struct.ts](cli/struct.ts)
+- [utils.ts](cli/utils.ts)

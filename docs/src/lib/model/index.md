@@ -2,8 +2,9 @@
 
 This directory contains:
 
-- [account.ts](account.ts.md)
-- [dashboard.ts](dashboard.ts.md)
-- [navbar.ts](navbar.ts.md)
-- [permissions.ts](permissions.ts.md)
-- [testing.svelte.ts](testing.svelte.ts.md)
+- [account.ts](src/lib/model/account.ts)
+- [analytics.ts](src/lib/model/analytics.ts)
+- [dashboard.ts](src/lib/model/dashboard.ts)
+- [navbar.ts](src/lib/model/navbar.ts)
+- [permissions.ts](src/lib/model/permissions.ts)
+- [testing.svelte.ts](src/lib/model/testing.svelte.ts)

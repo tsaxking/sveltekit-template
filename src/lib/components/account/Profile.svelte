@@ -8,4 +8,4 @@
 	const { account }: Props = $props();
 </script>
 
-<img src={$account.picture} alt="{$account.username}'s Profile Picture" srcset="" />
+<!-- <img src={$account.picture} alt="{$account.username}'s Profile Picture" srcset="" /> -->

@@ -1,11 +1,11 @@
 {
 	"colorMyText.configurations": [
 		{
-			"paths": ["*.html", "*.mjml"],
+			"paths": ["*.html", "*.mjml", "*.md"],
 			"rules": [
 				{
 					"patterns": [
-						// all data in {{ }}
+						// all data in {{ }}, but not including the {{ }}
 						"\\{\\{ [^}]+\\}\\}"
 					],
 					"color": "BrightGreen"
@@ -51,5 +51,6 @@
 				}
 			]
 		}
-	]
+	],
+	"liveServer.settings.port": 5501
 }

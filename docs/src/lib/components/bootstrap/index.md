@@ -2,8 +2,8 @@
 
 This directory contains:
 
-- [Alert.svelte](Alert.svelte.md)
-- [ButtonGroup.svelte](ButtonGroup.svelte.md)
-- [Card.svelte](Card.svelte.md)
-- [Modal.svelte](Modal.svelte.md)
-- [Toast.svelte](Toast.svelte.md)
+- [Alert.svelte](src/lib/components/bootstrap/Alert.svelte)
+- [ButtonGroup.svelte](src/lib/components/bootstrap/ButtonGroup.svelte)
+- [Card.svelte](src/lib/components/bootstrap/Card.svelte)
+- [Modal.svelte](src/lib/components/bootstrap/Modal.svelte)
+- [Toast.svelte](src/lib/components/bootstrap/Toast.svelte)

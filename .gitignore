@@ -43,4 +43,8 @@ route-tree.pages
 ip-limited.pages
 blocked.pages
 
-init.sql
+docs/index.html
+docs/search-index.json
+
+**/_sidebar.md
+**/_navbar.md

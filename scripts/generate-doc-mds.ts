@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs';
 import path from 'path';
 import ignore from 'ignore';
 import { fileTree, type FileTree } from '../src/lib/server/utils/files';
+import ts from 'typescript';
+import { Application, TSConfigReader, TypeDocReader } from 'typedoc';
 
 const toPosix = (p: string) => p.split(path.sep).join('/');
 
@@ -18,6 +21,139 @@ const loadIgnore = (root: string) => {
 	return ig;
 };
 
+type JsDocTag = {
+	tagName: string;
+	paramName?: string;
+	type?: string;
+	comment?: string;
+};
+
+/**
+ * Extracts Markdown documentation from a TypeScript file's JSDoc comments.
+ * @param filePath Full path to the .ts file.
+ * @returns Markdown string.
+ */
+export const generateMarkdownFromFile = async (filePath: string): Promise<string> => {
+	if (!filePath.endsWith('.ts')) {
+		return '';
+	}
+	const content = await fs.promises.readFile(filePath, 'utf-8');
+	const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
+
+	let mdContent = `# ${filePath.split('/').pop()}\n\n`;
+
+	const visit = (node: ts.Node) => {
+		if (
+			ts.canHaveModifiers(node) &&
+			ts.getModifiers(node)?.some((mod) => mod.kind === ts.SyntaxKind.ExportKeyword)
+		) {
+			const name = (node as any).name?.getText() || '(anonymous)';
+
+			const jsDocs = ts
+				.getJSDocCommentsAndTags(node)
+				.map((doc) => doc.getText())
+				.join('\n')
+				.trim();
+
+			if (jsDocs) {
+				mdContent += `## ${name}\n\n`;
+				mdContent += `\`\`\`ts\n${node.getText()}\n\`\`\`\n\n`;
+
+				// Extract structured tags
+				const structuredTags: JsDocTag[] = [];
+				const jsDocNodes = (node as any).jsDoc || [];
+
+				for (const docNode of jsDocNodes) {
+					if (docNode.tags) {
+						for (const tag of docNode.tags) {
+							const tagName = tag.tagName.escapedText;
+							const paramName = tag.name?.escapedText;
+							const comment = tag.comment;
+							structuredTags.push({ tagName, paramName, comment });
+						}
+					}
+				}
+
+				// Description (non-tag text)
+				const description = jsDocs.split('@')[0].replace('/**', '').replace('*/', '').trim();
+				if (description) {
+					mdContent += `${description}\n\n`;
+				}
+
+				// Parameters Table
+				const params = structuredTags.filter((t) => t.tagName === 'param');
+				if (params.length) {
+					mdContent += `**Parameters:**\n\n| Name | Description |\n|------|-------------|\n`;
+					for (const param of params) {
+						mdContent += `| ${param.paramName} | ${param.comment || ''} |\n`;
+					}
+					mdContent += '\n';
+				}
+
+				// Returns
+				const returns = structuredTags.find(
+					(t) => t.tagName === 'returns' || t.tagName === 'return'
+				);
+				if (returns) {
+					mdContent += `**Returns:**\n\n${returns.comment || ''}\n\n`;
+				}
+
+				// Example
+				const example = structuredTags.find((t) => t.tagName === 'example');
+				if (example) {
+					mdContent += `**Example:**\n\n\`\`\`ts\n${example.comment}\n\`\`\`\n\n`;
+				}
+			}
+		}
+
+		ts.forEachChild(node, visit);
+	};
+
+	visit(sourceFile);
+
+	return mdContent;
+};
+
+export const generateMarkdownWithTypeDoc = async (filePath: string): Promise<string> => {
+	try {
+		const app = await Application.bootstrap({
+			entryPoints: [filePath],
+			plugin: ['typedoc-plugin-markdown'],
+			exclude: ['**/*.d.ts'],
+			excludeExternals: true,
+			excludePrivate: true,
+			excludeProtected: true,
+			// hideBreadcrumbs: true,
+			// hidePageTitle: true,
+			logLevel: 'Error'
+		});
+
+		const project = await app.convert();
+
+		if (!project) {
+			throw new Error('TypeDoc failed to parse project.');
+		}
+
+		const outDir = './.tmp-typedoc';
+		await app.generateDocs(project, outDir);
+
+		const mdFiles = await fs.promises.readdir(outDir);
+		if (mdFiles.length === 0) {
+			throw new Error('No Markdown files generated.');
+		}
+
+		const mdContent = await fs.promises.readFile(path.join(outDir, mdFiles[0]), 'utf-8');
+
+		// Clean up tmp files
+		await fs.promises.rm(outDir, { recursive: true, force: true });
+
+		return mdContent;
+	} catch (error) {
+		console.error(error);
+		return '';
+	}
+};
+
 export default async (target: string) => {
 	const rootDir = process.cwd();
 	const targetDir = path.join(rootDir, target);
@@ -29,7 +165,7 @@ export default async (target: string) => {
 	//   console.log(`Root directory: ${rootDir}`);
 	//   console.log(ig);
 
-	const createFile = (node: FileTree) => {
+	const createFile = async (node: FileTree) => {
 		// Skip if node.path matches ignore
 		const posixPath = toPosix(node.path);
 		if (posixPath && ig.ignores(posixPath)) {
@@ -45,29 +181,6 @@ export default async (target: string) => {
 			}
 
 			const indexPath = path.join(nodeTargetDir, 'index.md');
-			//       if (!fs.existsSync(indexPath)) {
-			//         const links = node.children
-			//          .filter(child => {
-			//   const posixChildPath = toPosix(child.path);
-			//   return posixChildPath.length && !ig.ignores(posixChildPath);
-			// })
-			//           .map(child => {
-			//             const from = indexPath;
-			//             const to = child.children
-			//               ? path.join(targetDir, child.path, 'index.md')
-			//               : path.join(targetDir, child.path + '.md');
-
-			//             const relPath = path.relative(path.dirname(from), to);
-			//             return `- [${child.name}](${toPosix(relPath)})`;
-			//           });
-
-			//         // console.log(`Creating index file: ${indexPath}`);
-
-			//         fs.writeFileSync(
-			//           indexPath,
-			//           `# ${node.name}\n\nThis directory contains:\n\n${links.join('\n')}`
-			//         );
-			//       }
 			const existingLinks = fs.existsSync(indexPath)
 				? fs.readFileSync(indexPath, 'utf8').split('\n')
 				: null;
@@ -78,11 +191,11 @@ export default async (target: string) => {
 					return posixChildPath.length && !ig.ignores(posixChildPath);
 				})
 				.map((child) => {
-					const from = indexPath;
-					const to = child.children
-						? path.join(targetDir, child.path, 'index.md')
-						: path.join(targetDir, child.path + '.md');
-					const relPath = toPosix(path.relative(path.dirname(from), to));
+					const filePath = path.join(nodeTargetDir, child.path);
+					const relPath = toPosix(path.relative(nodeTargetDir, filePath));
+					if (child.children) {
+						return `- [${child.name}](${relPath}/index)`;
+					}
 					return `- [${child.name}](${relPath})`;
 				});
 
@@ -112,9 +225,10 @@ export default async (target: string) => {
 				}
 			}
 
-			for (const child of node.children) {
-				createFile(child);
-			}
+			// for (const child of node.children) {
+			// 	await createFile(child);
+			// }
+			return Promise.all(node.children.map(createFile));
 		} else {
 			const fileDir = path.join(targetDir, path.dirname(node.path));
 			const filePath = path.join(fileDir, path.basename(node.path) + '.md');
@@ -125,11 +239,12 @@ export default async (target: string) => {
 			}
 
 			if (!fs.existsSync(filePath)) {
+				// const jsdoc = await generateMarkdownWithTypeDoc(node.fullPath);
 				// console.log(`Creating file: ${filePath}`);
-				fs.writeFileSync(filePath, `# ${node.name}\n\nThis is a file located at ${node.path}.`);
+				fs.writeFileSync(filePath, `# ${node.name}\n\nThis is a file located at ${node.path}.\n\n`);
 			}
 		}
 	};
 
-	createFile(tree);
+	await createFile(tree);
 };

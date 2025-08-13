@@ -1,6 +1,12 @@
 import { attemptAsync } from 'ts-utils/check';
 import { sse } from '$lib/services/sse';
-import { Struct, StructData, SingleWritable, DataArr } from 'drizzle-struct/front-end';
+import {
+	Struct,
+	StructData,
+	SingleWritable,
+	DataArr,
+	type GlobalCols
+} from '$lib/services/struct/index';
 import { browser } from '$app/environment';
 import { z } from 'zod';
 
@@ -14,7 +20,7 @@ export namespace Account {
 			firstName: 'string',
 			lastName: 'string',
 			email: 'string',
-			picture: 'string',
+			// picture: 'string',
 			verified: 'boolean',
 			lastLogin: 'string'
 			// verification: 'string'
@@ -25,6 +31,23 @@ export namespace Account {
 
 	export type AccountData = StructData<typeof Account.data.structure>;
 	export type AccountArr = DataArr<typeof Account.data.structure>;
+
+	export const AccountInfo = new Struct({
+		name: 'account_info',
+		structure: {
+			accountId: 'string',
+			viewOnline: 'string',
+			picture: 'string',
+			bio: 'string',
+			website: 'string',
+			socials: 'string',
+			theme: 'string'
+		},
+		socket: sse,
+		browser
+	});
+
+	export type AccountInfoData = StructData<typeof AccountInfo.data.structure & GlobalCols>;
 
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
@@ -54,16 +77,16 @@ export namespace Account {
 			firstName: 'Guest',
 			lastName: '',
 			email: '',
-			picture: '',
 			verified: false,
 			// verification: '',
 			id: 'guest',
-			updated: '0',
-			created: '0',
+			updated: new Date().toISOString(),
+			created: new Date().toISOString(),
 			archived: false,
 			attributes: '[]',
 			lifetime: 0,
-			canUpdate: false
+			canUpdate: false,
+			lastLogin: new Date().toISOString()
 		})
 	);
 

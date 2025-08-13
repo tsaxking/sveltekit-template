@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
-	import { DataArr } from 'drizzle-struct/front-end';
 	import { onMount } from 'svelte';
 	import { capitalize, fromSnakeCase } from 'ts-utils/text';
 
@@ -10,9 +9,9 @@
 
 	const { role }: Props = $props();
 
-	let currentPermissions = $state(new DataArr(Permissions.RoleRuleset, []));
-	let availablePermissions = $state(new DataArr(Permissions.RoleRuleset, []));
-	let entitlements = $state(new DataArr(Permissions.Entitlement, []));
+	let currentPermissions = $state(Permissions.RoleRuleset.arr());
+	let availablePermissions = $state(Permissions.RoleRuleset.arr());
+	let entitlements = $state(Permissions.Entitlement.arr());
 	let groups = $state<{
 		[key: string]: {
 			ruleset: Permissions.RoleRulesetData | undefined;

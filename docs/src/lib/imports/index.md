@@ -2,4 +2,4 @@
 
 This directory contains:
 
-- [admin.ts](admin.ts.md)
+- [admin.ts](src/lib/imports/admin.ts)

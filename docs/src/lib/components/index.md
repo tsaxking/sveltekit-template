@@ -2,9 +2,10 @@
 
 This directory contains:
 
-- [account](account/index.md)
-- [bootstrap](bootstrap/index.md)
-- [dashboard](dashboard/index.md)
-- [forms](forms/index.md)
-- [general](general/index.md)
-- [permissions](permissions/index.md)
+- [account](src/lib/components/account/index)
+- [bootstrap](src/lib/components/bootstrap/index)
+- [dashboard](src/lib/components/dashboard/index)
+- [forms](src/lib/components/forms/index)
+- [general](src/lib/components/general/index)
+- [permissions](src/lib/components/permissions/index)
+- [roles](src/lib/components/roles/index)

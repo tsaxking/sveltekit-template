@@ -2,8 +2,9 @@
 
 This directory contains:
 
-- [DateInput.svelte](DateInput.svelte.md)
-- [FileUploader.svelte](FileUploader.svelte.md)
-- [FloatingInput.svelte](FloatingInput.svelte.md)
-- [Password.svelte](Password.svelte.md)
-- [Select.svelte](Select.svelte.md)
+- [DateInput.svelte](src/lib/components/forms/DateInput.svelte)
+- [FileUploader.svelte](src/lib/components/forms/FileUploader.svelte)
+- [Flatpickr.svelte](src/lib/components/forms/Flatpickr.svelte)
+- [FloatingInput.svelte](src/lib/components/forms/FloatingInput.svelte)
+- [Password.svelte](src/lib/components/forms/Password.svelte)
+- [Select.svelte](src/lib/components/forms/Select.svelte)

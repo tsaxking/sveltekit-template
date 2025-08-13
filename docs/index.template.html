@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{{ projectName }} Docs</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Docsify Dark Theme -->
+		<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dark.css" />
+
+		<!-- Custom Styles -->
+		<style>
+			#search-container {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 500px;
+				max-width: 90%;
+				z-index: 9999;
+				background: rgba(30, 30, 30, 0.98);
+				border: 1px solid #444;
+				border-radius: 12px;
+				padding: 2rem;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+			}
+
+			.hidden {
+				display: none !important;
+			}
+
+			#search-close-btn {
+				position: absolute;
+				top: 0.5rem;
+				right: 0.5rem;
+				background: transparent;
+				border: none;
+				color: #fff;
+				font-size: 1.5rem;
+				cursor: pointer;
+			}
+
+			#search-input {
+				width: 100%;
+				padding: 0.75rem 1rem;
+				border: none;
+				border-radius: 6px;
+				background: #222;
+				color: #eee;
+				font-size: 1.1rem;
+				margin-top: 1rem;
+			}
+
+			#search-results {
+				list-style: none;
+				padding: 0;
+				margin: 1rem 0 0 0;
+				max-height: 300px;
+				overflow-y: auto;
+			}
+
+			#search-results li {
+				margin-bottom: 0.5rem;
+			}
+
+			#search-results a {
+				color: #80cbc4;
+				text-decoration: none;
+			}
+
+			#search-results a:hover {
+				text-decoration: underline;
+			}
+
+			#search-toggle-btn {
+				position: fixed;
+				top: 1rem;
+				right: 10%;
+				z-index: 10000;
+				background: #444;
+				color: #fff;
+				border: none;
+				padding: 0.5rem 0.75rem;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 1rem;
+				transition: background 0.3s;
+				box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+			}
+
+			#search-toggle-btn:hover {
+				background: #666;
+			}
+		</style>
+
+		<!-- Docsify Configuration -->
+		<script>
+			window.$docsify = {
+				name: '{{ projectName }}',
+				repo: 'https://github.com/{{ repoSlug }}',
+				loadSidebar: true,
+				loadNavbar: true,
+				subMaxLevel: 2,
+				homepage: 'index.md'
+			};
+
+			const ghRepo = `https://github.com/{{ repoSlug }}`;
+
+			document.addEventListener('DOMContentLoaded', () => {
+				const scripts = ['//unpkg.com/docsify/lib/docsify.min.js'];
+				scripts.forEach((src) => {
+					const script = document.createElement('script');
+					script.src = src;
+					document.head.appendChild(script);
+				});
+			});
+		</script>
+	</head>
+	<body data-bs-theme="dark">
+		<button id="search-toggle-btn">🔍 Search</button>
+		<!-- Search Panel -->
+		<div id="search-container" class="hidden">
+			<button id="search-close-btn">✖</button>
+			<input type="text" id="search-input" placeholder="Search docs..." />
+			<ul id="search-results"></ul>
+		</div>
+
+		<!-- Docsify Content -->
+		<div id="app"></div>
+
+		<!-- Search Logic -->
+		<script>
+			let searchIndex = [];
+
+			fetch('search-index.json')
+				.then((res) => res.json())
+				.then((data) => {
+					searchIndex = data;
+				});
+
+			const searchContainer = document.getElementById('search-container');
+			const searchInput = document.getElementById('search-input');
+			const searchResults = document.getElementById('search-results');
+			const searchToggleBtn = document.getElementById('search-toggle-btn');
+			const searchCloseBtn = document.getElementById('search-close-btn');
+
+			function openSearch() {
+				searchContainer.classList.remove('hidden');
+				searchInput.focus();
+			}
+
+			function closeSearch() {
+				searchContainer.classList.add('hidden');
+				searchInput.value = '';
+				searchResults.innerHTML = '';
+			}
+
+			// Toggle Button
+			searchToggleBtn.addEventListener('click', openSearch);
+
+			// Close Button inside Search Panel
+			searchCloseBtn.addEventListener('click', closeSearch);
+
+			// Close when clicking outside
+			document.addEventListener('click', function (event) {
+				if (!searchContainer.contains(event.target) && event.target !== searchToggleBtn) {
+					closeSearch();
+				}
+			});
+
+			// Open search when typing
+			document.addEventListener('keydown', function (event) {
+				// Ignore if focused in input/textarea/select
+				if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+				if (event.key === '/') {
+					event.preventDefault();
+					openSearch();
+				} else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+					openSearch();
+					searchInput.value = event.key;
+					searchInput.dispatchEvent(new Event('input'));
+				}
+			});
+
+			// Handle Escape Key to close
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape') {
+					closeSearch();
+				}
+			});
+
+			// Search input listener
+			searchInput.addEventListener('input', function () {
+				const query = this.value.toLowerCase();
+				let results = searchIndex.filter(
+					(entry) =>
+						entry.title.toLowerCase().includes(query) || entry.content.toLowerCase().includes(query)
+				);
+
+				results = results.slice(0, 10);
+
+				searchResults.innerHTML = results
+					.map((r) => `<li><a href="#/${r.path}">${r.title}</a></li>`)
+					.join('');
+			});
+
+			// Clear search when clicking a result
+			searchResults.addEventListener('click', function (event) {
+				if (event.target.tagName === 'A') {
+					closeSearch();
+				}
+			});
+		</script>
+	</body>
+</html>
