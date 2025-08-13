@@ -24,7 +24,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-        
       - name: Initialize .docker.env
         run: |
           echo "DB_USER=test_user" > .docker.env
@@ -57,7 +56,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
-
 
       - name: Set up Postgres
         run: |

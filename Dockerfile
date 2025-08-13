@@ -14,7 +14,6 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Copy env file and build
-RUN cp .docker.env .env
 RUN pnpm build
 
 EXPOSE 3000

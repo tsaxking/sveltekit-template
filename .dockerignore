@@ -2,3 +2,5 @@ node_modules
 .git
 logs
 dist
+.env
+.docker.env
