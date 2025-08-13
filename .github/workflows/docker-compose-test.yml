@@ -49,13 +49,13 @@ jobs:
 
       - name: Set up Postgres
         run: |
-          docker-compose up -d db
+          docker compose up -d db
           docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
           docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
           pnpm db:migrate
           pnpm db:push --force
-          docker-compose stop
+          docker compose stop
 
       - name: Reinitialize .docker.env for cross-docker communication
         run: |
@@ -74,9 +74,9 @@ jobs:
 
       - name: Start App
         run: |
-          docker-compose up -d app
-          docker-compose logs -f app
+          docker compose up -d app
+          docker compose logs -f app
           pnpm test:integration
 
       - name: Stop Application
-        run: docker-compose down -v
+        run: docker compose down -v
