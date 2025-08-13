@@ -62,7 +62,7 @@ jobs:
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
           pnpm db:migrate
           pnpm db:push --force
-          docker compose stop
+          docker compose down
 
       - name: Reinitialize .docker.env for cross-docker communication
         run: |
