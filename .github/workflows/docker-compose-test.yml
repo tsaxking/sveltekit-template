@@ -48,10 +48,7 @@ jobs:
       - name: Set up Postgres
         run: |
           docker compose --project-name test up -d db
-          until [ "$(docker inspect -f '{{.State.Running}}' db 2>/dev/null)" = "true" ]; do
-              sleep 1
-          done
-          docker compose exec -T db bash -c "until pg_isready -U admin; do sleep 1; done"
+          sleep 10
           docker compose exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
           docker compose exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
           docker compose exec db psql -U admin -c "GRANT admin TO test_user;"
