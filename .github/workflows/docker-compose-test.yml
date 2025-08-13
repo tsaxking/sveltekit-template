@@ -71,12 +71,12 @@ jobs:
           echo "DB_NAME=test" >> .docker.env
           echo "DB_HOST=db" >> .docker.env
           echo "DB_PORT=5432" >> .docker.env
-          echo "DB_HOST=localhost" >> .env
-          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
-          echo "PUBLIC_APP_NAME=test" >> .env
-          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
-          echo "PUBLIC_APP_NAME=test" >> .env
-          echo "REDIS_NAME=some_name" >> .env
+          echo "DB_HOST=localhost" >> .docker.env
+          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .docker.env
+          echo "PUBLIC_APP_NAME=test" >> .docker.env
+          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .docker.env
+          echo "PUBLIC_APP_NAME=test" >> .docker.env
+          echo "REDIS_NAME=some_name" >> .docker.env
 
       - name: Start App
         run: |
