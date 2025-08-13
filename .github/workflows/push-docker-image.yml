@@ -1,0 +1,36 @@
+name: 'Push Docker Image'
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  format:
+    uses: ./.github/workflows/code-formatter.yml
+  unit-tests:
+    uses: ./.github/workflows/testing-unit.yml
+  E2E:
+    uses: ./.github/workflows/testing-e2e.yml
+  check:
+    uses: ./.github/workflows/testing-svelte-check.yml
+
+  push-docker-image:
+    runs-on: ubuntu-latest
+    needs: [format, unit-tests, E2E, check]
+
+    steps:
+      - name: Retrieve credentials
+        run: |
+          CREDENTIALS = ${{ secrets.credentials }}
+          # Credentials look like USER=<user>\nPASSWORD=<password>\nURL=<url>
+          USER=$(echo "$CREDENTIALS" | grep USER | cut -d= -f2)
+          PASSWORD=$(echo "$CREDENTIALS" | grep PASSWORD | cut -d= -f2)
+          URL=$(echo "$CREDENTIALS" | grep URL | cut -d= -f2)
+          # Get tag from github
+          TAG=${GITHUB_REF#refs/tags/}
+
+          docker login -u $USER -p $PASSWORD $URL
+          docker build -t my-image:latest .
+          docker tag my-image:latest $URL/my-image:$TAG
+          docker push $URL/my-image:$TAG
