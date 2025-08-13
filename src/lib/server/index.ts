@@ -5,6 +5,11 @@ import testSchema from '../../../scripts/test-schema';
 
 testSchema('false');
 const postBuild = async () => {
+	const loop = Struct.generateLifetimeLoop(
+		1000 * 60 * 10, // run loop every 10 minutes
+	);
+	loop.start();
+
 	const admin = await Account.Account.fromProperty(
 		'username',
 		process.env.ADMIN_USERNAME || 'admin',
