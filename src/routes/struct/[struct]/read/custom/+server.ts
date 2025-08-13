@@ -1,4 +1,5 @@
-import { Errors, EventSuccessCode, status } from '$lib/server/event-handler.js';
+import { Errors, EventErrorCode, EventSuccessCode, status } from '$lib/server/event-handler.js';
+import { QueryListener } from '$lib/server/services/struct-listeners';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { z } from 'zod';
 
@@ -15,6 +16,24 @@ export const POST = async (event) => {
 	}
 
 	const body = await event.request.json();
+
+	const res = await QueryListener.run(event, struct, body);
+	if (res.isErr()) {
+		return Errors.internalError(res.error);
+	} else {
+		// call listener was found
+		if (res.value) {
+			return status(
+				{
+					...res.value,
+					code: res.value.success ? EventSuccessCode.OK : EventErrorCode.Unknown
+				},
+				{
+					status: res.value.success ? 200 : 400
+				}
+			);
+		}
+	}
 
 	const safe = z
 		.object({

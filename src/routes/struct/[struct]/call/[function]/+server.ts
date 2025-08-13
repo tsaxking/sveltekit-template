@@ -1,4 +1,5 @@
 import { Errors, EventErrorCode, EventSuccessCode, status } from '$lib/server/event-handler.js';
+import { CallListener } from '$lib/server/services/struct-listeners';
 import { Struct } from 'drizzle-struct/back-end';
 
 export const POST = async (event) => {
@@ -12,8 +13,27 @@ export const POST = async (event) => {
 	if (!struct.frontend) {
 		return Errors.noFrontend(struct.name);
 	}
-
 	const body = await event.request.json();
+
+	const res = await CallListener.run(event, struct, event.params.function, body);
+	if (res.isErr()) {
+		return Errors.internalError(res.error);
+	} else {
+		// call listener was found
+		if (res.value) {
+			return status(
+				{
+					...res.value,
+					code: res.value.success ? EventSuccessCode.OK : EventErrorCode.Unknown
+				},
+				{
+					status: res.value.success ? 200 : 400
+				}
+			);
+		}
+	}
+
+	// call listener was not found, use old api
 	const listener = struct.callListeners.get(event.params.function);
 	if (!listener) {
 		return Errors.invalidAction(
