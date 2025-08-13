@@ -21,7 +21,7 @@ export const POST = async (event) => {
 	} else {
 		// call listener was found
 		if (res.value) {
-			status(
+			return status(
 				{
 					...res.value,
 					code: res.value.success ? EventSuccessCode.OK : EventErrorCode.Unknown
