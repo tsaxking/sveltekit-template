@@ -13,10 +13,9 @@ RUN pnpm install --frozen-lockfile
 # Then copy the rest of your source code
 COPY . .
 
-# Copy env file and build
-RUN pnpm build
 
 RUN echo "PUBLIC_APP_NAME=Docker App Default" > .env
+RUN pnpm build
 
 EXPOSE 3000
 CMD ["pnpm", "start"]
