@@ -339,7 +339,7 @@ export class QueryListener<
 				};
 			}
 
-			const listener = CallListener.listeners.get(parsed.data.query);
+			const listener = QueryListener.listeners.get(parsed.data.query);
 			if (!listener) {
 				return {
 					success: false,
@@ -396,7 +396,7 @@ export class SendListener<
 		data: unknown
 	) {
 		return attemptAsync<ListenerStatus<SendReturnType>>(async () => {
-			const listener = CallListener.listeners.get(fn);
+			const listener = SendListener.listeners.get(fn);
 			if (!listener) {
 				return {
 					success: false,
