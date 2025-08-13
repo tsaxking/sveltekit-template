@@ -12,7 +12,7 @@ services:
       - db
       - redis
     ports:
-      - '10000:10000'
+      - '${PORT}:${PORT}'
   db:
     image: postgres:16
     container_name: db
