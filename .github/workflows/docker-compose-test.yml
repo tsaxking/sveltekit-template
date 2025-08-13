@@ -18,6 +18,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Engine
+        uses: docker/setup-docker@v3
+
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -34,13 +40,13 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Initialize .env
+      - name: Initialize .docker.env
         run: |
-          echo "DB_USER=test_user" > .env
-          echo "DB_PASS=test" >> .env
-          echo "DB_NAME=test" >> .env
-          echo "DB_HOST=localhost" >> .env
-          echo "DB_PORT=5432" >> .env
+          echo "DB_USER=test_user" > .docker.env
+          echo "DB_PASS=test" >> .docker.env
+          echo "DB_NAME=test" >> .docker.env
+          echo "DB_HOST=localhost" >> .docker.env
+          echo "DB_PORT=5432" >> .docker.env
 
       - name: Set up Postgres
         run: |
@@ -51,6 +57,21 @@ jobs:
           pnpm db:migrate
           pnpm db:push --force
           docker-compose stop
+
+      - name: Reinitialize .docker.env for cross-docker communication
+        run: |
+          rm .docker.env
+          echo "DB_USER=test_user" > .docker.env
+          echo "DB_PASS=test" >> .docker.env
+          echo "DB_NAME=test" >> .docker.env
+          echo "DB_HOST=db" >> .docker.env
+          echo "DB_PORT=5432" >> .docker.env
+          echo "DB_HOST=localhost" >> .env
+          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "REDIS_NAME=some_name" >> .env
 
       - name: Start App
         run: |
