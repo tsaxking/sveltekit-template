@@ -58,9 +58,9 @@ jobs:
             sleep 1
           done
           docker ps
-          docker exec -it db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
-          docker exec -it db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
-          docker exec -it db psql -U admin -c "GRANT admin TO test_user;"
+          docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
+          docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
+          docker exec db psql -U admin -c "GRANT admin TO test_user;"
           # pnpm db:migrate
           # pnpm db:push --force
           docker compose stop
