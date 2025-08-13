@@ -1,8 +1,8 @@
 import { integer, text } from "drizzle-orm/pg-core";
 import { Struct } from "drizzle-struct/back-end";
-import { RedisStructProxyServer } from 'drizzle-struct/proxy';
 import { Redis } from "redis-utils";
 import z from "zod";
+import { proxyServer } from '../services/struct-proxy';
 
 export namespace FileUploads {
     export const Tokens = new Struct({
@@ -14,6 +14,7 @@ export namespace FileUploads {
             fileSize: integer('file_size').notNull(),
         },
         lifetime: 1000 * 60 * 60, // 1 hour
+        proxyServer
     });
 
     export const init = (targetService: string) => {
