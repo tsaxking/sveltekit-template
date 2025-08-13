@@ -16,5 +16,7 @@ COPY . .
 # Copy env file and build
 RUN pnpm build
 
+RUN echo "PUBLIC_APP_NAME=Docker App Default" > .env
+
 EXPOSE 3000
 CMD ["pnpm", "start"]
