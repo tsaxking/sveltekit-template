@@ -24,18 +24,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: v22.12.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: v22.12.0
 
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v4
-      #   with:
-          # version: 10.13.1
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
 
-      # - name: Install Dependencies
-      #   run: pnpm i
+      - name: Install Dependencies
+        run: pnpm i
 
       - name: Initialize .docker.env
         run: |
@@ -59,30 +59,30 @@ jobs:
           docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
           docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
-          # pnpm db:migrate
-          # pnpm db:push --force
+          pnpm db:migrate
+          pnpm db:push --force
           docker compose stop
 
-      # - name: Reinitialize .docker.env for cross-docker communication
-      #   run: |
-      #     rm .docker.env
-      #     echo "DB_USER=test_user" > .docker.env
-      #     echo "DB_PASS=test" >> .docker.env
-      #     echo "DB_NAME=test" >> .docker.env
-      #     echo "DB_HOST=db" >> .docker.env
-      #     echo "DB_PORT=5432" >> .docker.env
-      #     echo "DB_HOST=localhost" >> .env
-      #     echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
-      #     echo "PUBLIC_APP_NAME=test" >> .env
-      #     echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
-      #     echo "PUBLIC_APP_NAME=test" >> .env
-      #     echo "REDIS_NAME=some_name" >> .env
+      - name: Reinitialize .docker.env for cross-docker communication
+        run: |
+          rm .docker.env
+          echo "DB_USER=test_user" > .docker.env
+          echo "DB_PASS=test" >> .docker.env
+          echo "DB_NAME=test" >> .docker.env
+          echo "DB_HOST=db" >> .docker.env
+          echo "DB_PORT=5432" >> .docker.env
+          echo "DB_HOST=localhost" >> .env
+          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "REDIS_NAME=some_name" >> .env
 
-      # - name: Start App
-      #   run: |
-      #     docker compose up -d app
-      #     docker compose logs -f app
-      #     pnpm test:integration
+      - name: Start App
+        run: |
+          docker compose up -d app
+          docker compose logs -f app
+          pnpm test:integration
 
-      # - name: Stop Application
-      #   run: docker compose down -v
+      - name: Stop Application
+        run: docker compose down -v
