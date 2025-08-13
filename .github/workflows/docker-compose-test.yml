@@ -78,6 +78,8 @@ jobs:
           echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .docker.env
           echo "PUBLIC_APP_NAME=test" >> .docker.env
           echo "REDIS_NAME=some_name" >> .docker.env
+          echo "REDIS_URL=redis://redis:6379" >> .docker.env
+          echo "PORT=3000" >> .docker.env
 
       - name: Start App
         run: |
