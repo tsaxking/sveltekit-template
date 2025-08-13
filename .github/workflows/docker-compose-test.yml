@@ -85,6 +85,9 @@ jobs:
           rm .cp
           echo "DB_HOST=db" >> .env
 
+      - name: Wait for build to finish
+        run: wait
+
       - name: Start App
         run: |
           docker compose --project-name test up -d app redis
