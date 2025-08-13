@@ -48,11 +48,19 @@ jobs:
       - name: Set up Postgres
         run: |
           docker compose --project-name test up -d db
-          sleep 5
+          for i in {1..10}; do
+            state=$(docker compose --project-name test ps --services --filter "status=running" | grep -w db)
+            if [ "$state" = "db" ]; then
+              echo "db service is running"
+              break
+            fi
+            echo "Waiting for db service to be running ($i/10)..."
+            sleep 1
+          done
           docker ps
-          docker compose exec -it db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
-          docker compose exec -it db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
-          docker compose exec -it db psql -U admin -c "GRANT admin TO test_user;"
+          docker exec -it db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
+          docker exec -it db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
+          docker exec -it db psql -U admin -c "GRANT admin TO test_user;"
           # pnpm db:migrate
           # pnpm db:push --force
           docker compose stop
