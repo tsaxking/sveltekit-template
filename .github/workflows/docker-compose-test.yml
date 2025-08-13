@@ -44,6 +44,7 @@ jobs:
           echo "DB_NAME=test" >> .docker.env
           echo "DB_HOST=localhost" >> .docker.env
           echo "DB_PORT=5432" >> .docker.env
+          echo "PORT=3000" >> .docker.env
           cp .docker.env .env
 
       - name: Set up Postgres
