@@ -15,6 +15,7 @@ services:
       - '10000:10000'
   db:
     image: postgres:16
+    container_name: db
     restart: always
     env_file:
       - .docker.env
