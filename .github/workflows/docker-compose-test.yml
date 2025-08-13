@@ -80,6 +80,7 @@ jobs:
           echo "REDIS_NAME=some_name" >> .docker.env
           echo "REDIS_URL=redis://redis:6379" >> .docker.env
           echo "PORT=3000" >> .docker.env
+          cp .docker.env .env # for script
 
       - name: Start App
         run: |
