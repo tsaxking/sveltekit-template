@@ -93,6 +93,37 @@
 			}
 		</style>
 
+		<style>
+			#open-in-github {
+				z-index: 10000;
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+			}
+
+			#open-in-github-btn {
+				background: #444;
+				opacity: 0.8;
+				color: #fff;
+				border: none;
+				padding: 0.5rem 0.75rem;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 1rem;
+				transition: opacity 0.3s;
+				box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+			}
+
+			#open-in-github-btn:hover {
+				opacity: 1;
+				background: #666;
+			}
+
+			#app {
+				z-index: 0;
+			}
+		</style>
+
 		<!-- Docsify Configuration -->
 		<script>
 			window.$docsify = {
@@ -113,6 +144,14 @@
 					script.src = src;
 					document.head.appendChild(script);
 				});
+
+				const btn = document.querySelector('#open-in-github-btn');
+				if (btn) {
+					btn.onclick = () => {
+						const path = window.location.href.split('#')[1]?.replace('index', '');
+						window.open(ghRepo.replace('.git', '') + '/tree/main' + path, '_blank');
+					};
+				}
 			});
 		</script>
 	</head>
@@ -123,6 +162,10 @@
 			<button id="search-close-btn">✖</button>
 			<input type="text" id="search-input" placeholder="Search docs..." />
 			<ul id="search-results"></ul>
+		</div>
+
+		<div id="open-in-github">
+			<button type="button" id="open-in-github-btn">Open in Github</button>
 		</div>
 
 		<!-- Docsify Content -->

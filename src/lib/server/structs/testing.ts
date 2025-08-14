@@ -2,6 +2,7 @@ import { text } from 'drizzle-orm/pg-core';
 import { integer } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct/back-end';
 import terminal from '../utils/terminal';
+import { DB } from '../db';
 
 terminal.log(
 	`This file ('./struct/testing') should only be used for unit tests. If you are seeing this outside of a unit testing environment, there is an issue with the program.`

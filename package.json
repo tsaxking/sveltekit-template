@@ -33,7 +33,8 @@
 		"route-tree": "pnpm script create-route-tree.ts",
 		"backup": "pnpm script backup",
 		"restore": "pnpm script restore",
-		"doc": "pnpm script build-docs"
+		"deploy:docs": "pnpm script build-docs",
+		"build:docs": "pnpm script generate-doc-mds"
 	},
 	"packageManager": "pnpm@10.13.1",
 	"engines": {
@@ -112,7 +113,7 @@
 		"colors": "git+https://github.com/tsaxking/colors",
 		"dotenv": "^16.6.1",
 		"drizzle-orm": "^0.38.4",
-		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.11",
+		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.14",
 		"drizzle-zod": "^0.6.1",
 		"express": "^5.1.0",
 		"filepond": "^4.32.8",

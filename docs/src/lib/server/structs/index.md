@@ -1,5 +1,7 @@
 # structs
 
+Structs are wrappers around drizzle-orm interacting with a postgres table. Each struct interacts with a single table in the database. These structs are quite feature-rich, you can read about them [here](https://tsaxking.github.io/drizzle-struct/)
+
 This directory contains:
 
 - [account.ts](src/lib/server/structs/account.ts)
