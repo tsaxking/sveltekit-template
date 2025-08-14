@@ -4,7 +4,7 @@ import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
-import { Redis } from '../services/redis';
+import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import ignore from 'ignore';
 import fs from 'fs';

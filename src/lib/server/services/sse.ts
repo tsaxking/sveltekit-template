@@ -10,7 +10,7 @@ const CACHE_TTL = 30000;
 const PING_INTERVAL = 10000;
 const DISCONNECT_TIMEOUT = 35000;
 
-class Connection {
+export class Connection {
 	public lastPing = Date.now();
 	private cache: {
 		event: string;
@@ -27,6 +27,10 @@ class Connection {
 		private readonly controller: ReadableStreamDefaultController<string>,
 		private readonly onClose: (conn: Connection) => void
 	) {}
+
+	get connected() {
+		return this.controller.desiredSize !== null;
+	}
 
 	send(event: string, data: unknown) {
 		return attempt(() => {
@@ -65,6 +69,9 @@ class Connection {
 			this.send('close', null);
 			this.controller.close();
 			this.onClose(this);
+			for (const listener of this.closeListeners) {
+				listener();
+			}
 		});
 	}
 
@@ -74,6 +81,13 @@ class Connection {
 
 	getSession() {
 		return Session.Session.fromId(this.sessionId);
+	}
+
+	private readonly closeListeners = new Set<() => void>();
+
+	once(event: 'close', listener: () => void) {
+		if (event !== 'close') throw new Error(`Unsupported event: ${event}`);
+		this.closeListeners.add(listener);
 	}
 }
 

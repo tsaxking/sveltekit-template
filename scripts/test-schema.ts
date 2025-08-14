@@ -50,12 +50,19 @@ export default async (build: 'true' | 'false' = 'true') => {
 				continue;
 			}
 
+			if (actual.data_type === 'timestamp with time zone' && expectedPgType === 'timestamp') {
+				// all is good, we allow timestamp to match timestamp with time zone
+				continue;
+			}
+
 			// You may want to normalize here to match 'character varying' with 'varchar' etc
 			const matchesType = actual.data_type === expectedPgType;
 			// const matchesNull = (actual.is_nullable === 'YES') === nullable;
 
 			if (!matchesType) {
-				terminal.warn(`[SCHEMA MISMATCH] ${tableName}.${name}:`);
+				terminal.warn(
+					`[SCHEMA MISMATCH] ${tableName}.${name}: expected ${expectedPgType}, got ${actual.data_type}`
+				);
 				success = false;
 			}
 		}

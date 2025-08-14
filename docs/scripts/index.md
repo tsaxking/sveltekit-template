@@ -1,10 +1,10 @@
 # Scripts
+
 This is the entry point for all scripts in the project. To create a new script, add a new file in the directory and export a default function with optional string parameters.
 
 ## Execution
+
 To run any script, run `pnpm script` and then find the script you want to run, enter the paramters, and it will execute. Or, you can run `pnpm scripts <script-name>` to run a specific script directly. If you run one directly, you will not be prompted to enter parameters.
-
-
 
 This directory contains:
 

@@ -1,18 +1,31 @@
 import fs from 'fs/promises';
 import path from 'path';
+import mime from 'mime-types';
 
 export const GET = async (event) => {
-	// File path cannot escape the 'static' directory
-	if (!event.params.filepath || event.params.filepath.includes('..')) {
+	const staticDir = path.join(process.cwd(), 'static');
+	const requestedPath = path.normalize(path.join(staticDir, event.params.filepath));
+
+	// Ensure path stays within 'static' directory
+	if (!requestedPath.startsWith(staticDir)) {
 		return new Response('File not found', { status: 404 });
 	}
 
-	const file = await fs.readFile(path.join(process.cwd(), 'static', event.params.filepath));
+	let file: Buffer;
+	try {
+		file = await fs.readFile(requestedPath);
+	} catch {
+		return new Response('File not found', { status: 404 });
+	}
 
-	return new Response(new Uint8Array(file), {
+	const contentType = mime.lookup(requestedPath) || 'application/octet-stream';
+	const safeFilename = path.basename(requestedPath);
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return new Response(file as any, {
 		headers: {
-			'Content-Type': 'application/octet-stream',
-			'Content-Disposition': `inline; filename="${event.params.filepath}"`
+			'Content-Type': contentType,
+			'Content-Disposition': `inline; filename="${safeFilename}"`
 		}
 	});
 };

@@ -4,7 +4,6 @@ import { ServerCode } from 'ts-utils/status';
 import { z } from 'zod';
 import { passwordStrength } from 'check-password-strength';
 import { OAuth2Client } from 'google-auth-library';
-import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
 import terminal from '$lib/server/utils/terminal.js';
 import { Logs } from '$lib/server/structs/log.js';
 
@@ -149,8 +148,8 @@ export const actions = {
 	},
 	OAuth2: async () => {
 		const client = new OAuth2Client({
-			clientSecret: SECRET_OAUTH2_CLIENT_SECRET,
-			clientId: SECRET_OAUTH2_CLIENT_ID,
+			clientSecret: String(process.env.SECRET_OAUTH2_CLIENT_SECRET),
+			clientId: String(process.env.SECRET_OAUTH2_CLIENT_ID),
 			redirectUri: 'http://localhost:5173/oauth/sign-up'
 		});
 		// log(client);

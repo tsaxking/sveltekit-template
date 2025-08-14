@@ -1,4 +1,4 @@
-import { Struct } from 'drizzle-struct/front-end';
+import { Struct } from '$lib/services/struct/index';
 import { browser } from '$app/environment';
 import { sse } from '$lib/services/sse';
 import { z } from 'zod';

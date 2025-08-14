@@ -1,6 +1,6 @@
 import { attemptAsync } from 'ts-utils/check';
 import { type Email } from '../../types/email';
-import { Redis } from './redis';
+import { Redis } from 'redis-utils';
 
 /**
  *
