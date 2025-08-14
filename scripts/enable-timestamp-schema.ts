@@ -3,20 +3,19 @@ import { DB } from '../src/lib/server/db';
 import { z } from 'zod';
 
 const updateTable = async (tableName: string) => {
-
-    const columns = await DB.execute(sql`
+	const columns = await DB.execute(sql`
         SELECT column_name
         FROM information_schema.columns
         WHERE table_name = ${tableName};  
     `);
 
-    const isVersionTable = columns.find(c => c.column_name === 'vh_created');
+	const isVersionTable = columns.find((c) => c.column_name === 'vh_created');
 
-    const data = isVersionTable ?
-        await DB.execute(sql`
+	const data = isVersionTable
+		? await DB.execute(sql`
             SELECT id, vh_created, created, updated FROM ${sql.identifier(tableName)};
         `)
-    :await DB.execute(sql`
+		: await DB.execute(sql`
         SELECT id, created, updated FROM ${sql.identifier(tableName)};
     `);
 
@@ -33,29 +32,29 @@ const updateTable = async (tableName: string) => {
         ADD COLUMN updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW();
     `);
 
-    if (isVersionTable) {
-        await DB.execute(sql`
+	if (isVersionTable) {
+		await DB.execute(sql`
             ALTER TABLE ${sql.identifier(tableName)}
             ADD COLUMN vh_created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW();
         `);
-    }
+	}
 
 	await Promise.all(
 		data.map(async (row) => {
-            await DB.execute(sql`
+			await DB.execute(sql`
                 UPDATE ${sql.identifier(tableName)}
                 SET created = ${new Date(String(row.created)).toISOString()},
                     updated = ${new Date(String(row.updated)).toISOString()}
                 WHERE id = ${row.id};
             `);
 
-            if (isVersionTable) {
-                await DB.execute(sql`
+			if (isVersionTable) {
+				await DB.execute(sql`
                     UPDATE ${sql.identifier(tableName)}
                     SET vh_created = ${new Date(String(row.vh_created)).toISOString()}
                     WHERE id = ${row.id};
                 `);
-            }
+			}
 		})
 	);
 };
