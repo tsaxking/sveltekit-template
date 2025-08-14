@@ -6,37 +6,41 @@ import path from 'path';
 
 export default async (...args: string[]) => {
 	if (!args.includes('--force')) {
-	    const answer = await select({
-	        message: 'This script will cause many changes to your repository to prepare for merging into its sub repositories. Are you sure you want to proceed?',
-	        options: [
-	            {
-	                name: 'No - exit',
-	                value: 'no',
-	            },
-	            {
-	                name: 'Yes - proceed',
-	                value: 'yes',
-	            }
-	        ]
-	    }).unwrap();
-	    if (answer === 'no' || !answer) {
-	        console.log('Exiting script');
-	        return;
-	    }
+		const answer = await select({
+			message:
+				'This script will cause many changes to your repository to prepare for merging into its sub repositories. Are you sure you want to proceed?',
+			options: [
+				{
+					name: 'No - exit',
+					value: 'no'
+				},
+				{
+					name: 'Yes - proceed',
+					value: 'yes'
+				}
+			]
+		}).unwrap();
+		if (answer === 'no' || !answer) {
+			console.log('Exiting script');
+			return;
+		}
 	} else {
-	    console.clear();
-	    console.log('Running with --force, I sure hope you know what you are doing! You have a few seconds to cancel this script before it runs.');
-	    await sleep(3000);
-
+		console.clear();
+		console.log(
+			'Running with --force, I sure hope you know what you are doing! You have a few seconds to cancel this script before it runs.'
+		);
+		await sleep(3000);
 	}
 	const count = [5, 4, 3, 2, 1];
 	for (const i of count) {
-	    console.clear();
-	    console.log('You should only run this script if you REALLY know what you are doing.');
-	    console.log(`Running in ${i} seconds... (You have time to cancel)`);
-	    await sleep(1000);
+		console.clear();
+		console.log('You should only run this script if you REALLY know what you are doing.');
+		console.log(`Running in ${i} seconds... (You have time to cancel)`);
+		await sleep(1000);
 	}
-	console.log('You have chosen to run the premerge script, this will make many changes to your repository to prepare it for merging into its sub repositories.');
+	console.log(
+		'You have chosen to run the premerge script, this will make many changes to your repository to prepare it for merging into its sub repositories.'
+	);
 	await sleep(3000);
 
 	args = args.filter((arg) => !arg.startsWith('--'));
@@ -59,7 +63,11 @@ export default async (...args: string[]) => {
 
 	const owner = regex.exec(target)?.[2];
 	const repoName = regex.exec(target)?.[3];
-	const domain = regex.exec(target)?.[1].replace(/:$/, '').replace('https://', '').replace('git@', '');
+	const domain = regex
+		.exec(target)?.[1]
+		.replace(/:$/, '')
+		.replace('https://', '')
+		.replace('git@', '');
 
 	const slug = `${owner}/${repoName}`;
 
@@ -69,7 +77,7 @@ export default async (...args: string[]) => {
 	console.log('Repository Name:', repoName);
 	console.log('Slug:', slug);
 
-	// let readme = await fs.readFile(path.resolve(process.cwd(), 'README.md'), 'utf-8');
-	// readme = readme.replaceAll('tsaxking/sveltekit-template', slug);
-	// await fs.writeFile(path.resolve(process.cwd(), 'README.md'), readme);
+	let readme = await fs.readFile(path.resolve(process.cwd(), 'README.md'), 'utf-8');
+	readme = readme.replaceAll('tsaxking/sveltekit-template', slug);
+	await fs.writeFile(path.resolve(process.cwd(), 'README.md'), readme);
 };

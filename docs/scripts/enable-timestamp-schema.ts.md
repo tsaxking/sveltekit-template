@@ -7,6 +7,7 @@ It will not cause data loss as it caches the data before it does any column migr
 ## Usage
 
 If you want to add more columns into this script, run
+
 ```sh
 pnpm script enable-timestamp-schema table_name:column_name table_name_2:column_name ...
 ```
