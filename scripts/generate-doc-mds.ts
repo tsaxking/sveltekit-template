@@ -154,17 +154,14 @@ export const generateMarkdownWithTypeDoc = async (filePath: string): Promise<str
 	}
 };
 
-export default async () => {
+export default async (...args: string[]) => {
+	const doAppend = args.includes('--append');
 	const target = 'docs';
 	const rootDir = process.cwd();
 	const targetDir = path.join(rootDir, target);
 	const tree = await fileTree(rootDir).unwrap();
 
 	const ig = loadIgnore(rootDir);
-	//   console.log(`Generating documentation in: ${targetDir}`);
-	//   console.log(`Ignoring files based on .docignore in: ${rootDir}`);
-	//   console.log(`Root directory: ${rootDir}`);
-	//   console.log(ig);
 
 	const createFile = async (node: FileTree) => {
 		// Skip if node.path matches ignore
@@ -208,7 +205,7 @@ export default async () => {
 			} else {
 				// Index exists – append missing links if needed
 				const missingLinks = newLinks.filter((link) => !existingLinks?.includes(link));
-				if (missingLinks.length > 0) {
+				if (missingLinks.length > 0 && doAppend) {
 					console.log(
 						`Appending ${missingLinks.length} new links to: ${indexPath}. Please check the file for updates so you can review them.`
 					);
