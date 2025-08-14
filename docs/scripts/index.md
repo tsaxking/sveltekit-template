@@ -7,6 +7,7 @@ This is the entry point for all scripts in the project. To create a new script, 
 To run any script, run `pnpm script` and then find the script you want to run, enter the parameters, and it will execute. Or, you can run `pnpm scripts <script-name>` to run a specific script directly. If you run one directly, you will not be prompted to enter parameters.
 
 This directory contains:
+
 - [enable-timestamp-schema.ts](scripts/enable-timestamp-schema.ts)
 - [premerge-render.ts](scripts/premerge-render.ts)
 - [test-integration.ts](scripts/test-integration.ts)

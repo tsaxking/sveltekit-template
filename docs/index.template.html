@@ -93,7 +93,7 @@
 			}
 		</style>
 
-				<style>
+		<style>
 			#open-in-github {
 				z-index: 10000;
 				position: fixed;
@@ -150,7 +150,7 @@
 					btn.onclick = () => {
 						const path = window.location.href.split('#')[1]?.replace('index', '');
 						window.open(ghRepo.replace('.git', '') + '/tree/main' + path, '_blank');
-					}
+					};
 				}
 			});
 		</script>
@@ -165,11 +165,8 @@
 		</div>
 
 		<div id="open-in-github">
-			<button type="button" id="open-in-github-btn">
-				Open in Github
-			</button>
+			<button type="button" id="open-in-github-btn">Open in Github</button>
 		</div>
-
 
 		<!-- Docsify Content -->
 		<div id="app"></div>
