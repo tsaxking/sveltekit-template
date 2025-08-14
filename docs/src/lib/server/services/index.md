@@ -1,6 +1,7 @@
 # services
 
 This directory contains:
+- [struct-listeners.ts](src/lib/server/services/struct-listeners.ts)
 
 - [email.ts](src/lib/server/services/email.ts)
 - [env.ts](src/lib/server/services/env.ts)

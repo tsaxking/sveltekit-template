@@ -1,6 +1,9 @@
 # scripts
 
 This directory contains:
+- [enable-timestamp-schema.ts](scripts/enable-timestamp-schema.ts)
+- [premerge-render.ts](scripts/premerge-render.ts)
+- [test-integration.ts](scripts/test-integration.ts)
 
 - [backup.ts](scripts/backup.ts)
 - [build-config.ts](scripts/build-config.ts)

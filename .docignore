@@ -6,6 +6,8 @@
 .prettierrc
 .npmrc
 docker-compose.yml
+.dockerignore.md
+Dockerfile
 *.config.ts
 *.config.js
 *.yaml

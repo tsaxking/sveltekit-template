@@ -75,7 +75,7 @@ jobs:
           CLONE_DIR="target-repo"
 
           echo "Running premerge scripts"
-          pnpm script premerge-render premerge ${{ matrix.templates }}
+          pnpm script premerge-render ${{ matrix.templates }} --force
 
           echo "Cloning target repo"
           git clone $REPOSITORY $CLONE_DIR
