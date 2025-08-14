@@ -281,6 +281,7 @@
 						}))
 				],
 				onCellContextMenu: (params) => {
+					return;
 					contextmenu(params.event as PointerEvent, {
 						options: [
 							'Cell Actions',
@@ -351,7 +352,7 @@
 						width: '200px'
 					});
 				},
-				preventDefaultOnContextMenu: true,
+				// preventDefaultOnContextMenu: true,
 				onRowDataUpdated: (params) => console.log('Row data updated:', params),
 				tooltipMouseTrack: true,
 				tooltipShowDelay: 1000

@@ -9,7 +9,7 @@ export class CheckBoxSelectRenderer<T> implements ICellRendererComp {
 	init(params: ICellRendererParams<T>): void {
 		this.params = params;
 
-		this.eGui = document.createElement('label');
+		this.eGui = document.createElement('div');
 		this.eGui.className = 'custom-checkbox-label';
 
 		this.input = document.createElement('input');

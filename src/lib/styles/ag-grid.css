@@ -1,11 +1,11 @@
 .custom-checkbox-label {
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	cursor: pointer;
 	user-select: none;
-	height: 18px;
-	width: 18px;
 	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
 .custom-checkbox-input {
