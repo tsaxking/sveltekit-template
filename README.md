@@ -104,3 +104,7 @@ pnpm db:studio
 - `pnpm start` - Start production server
 - `pnpm cli` - Run CLI tools
 - `pnpm script <script-name>` - Run custom scripts from `/scripts` directory
+
+## Docs
+
+Go to documentation: [Docs](https://tsaxking.github.io/sveltekit-template/#)
