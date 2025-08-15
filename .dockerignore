@@ -4,3 +4,47 @@ logs
 dist
 .env
 .docker.env
+
+# Build artifacts
+.svelte-kit/output
+build/
+dist/
+
+# Development files
+.vscode/
+.github/
+*.md
+docs/
+diagrams/
+e2e/
+coverage/
+
+# Test files
+*.test.*
+**/*.test.*
+**/__tests__/
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Development environment
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
+# Editor directories and files
+.idea/
+*.swp
+*.swo
+*~

@@ -2,12 +2,14 @@ services:
   app:
     pull_policy: never
     container_name: myapp_container
+    image: test_app:production
     env_file:
       - .docker.env
     restart: always
     build:
       context: .
       dockerfile: Dockerfile
+      target: production
     depends_on:
       - db
       - redis
