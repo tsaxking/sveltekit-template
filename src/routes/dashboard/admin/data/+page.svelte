@@ -19,9 +19,12 @@
 <div class="container layer-1">
 	<div class="row">
 		{#each structs as [name]}
-			<div class="col-md-3" style="
+			<div
+				class="col-md-3"
+				style="
 				padding: 10px;
-			">
+			"
+			>
 				<a href="/dashboard/admin/data/{name}" class="text-reset text-decoration-none">
 					<div
 						class="card layer-2"
