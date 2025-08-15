@@ -20,6 +20,17 @@ jobs:
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            image=moby/buildkit:v0.12.0
+
+      - name: Set up Docker layer caching
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -43,8 +54,13 @@ jobs:
 
       - name: Start Docker build in background
         run: |
-          # Build with cache mounts for faster dependency installation
-          DOCKER_BUILDKIT=1 docker compose --project-name test build app &
+          # Build with cache and faster parallel builds
+          DOCKER_BUILDKIT=1 docker buildx build \
+            --target production \
+            --cache-from type=local,src=/tmp/.buildx-cache \
+            --cache-to type=local,dest=/tmp/.buildx-cache-new,mode=max \
+            --load \
+            -t test_app:latest . &
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -86,10 +102,16 @@ jobs:
           echo "DB_HOST=db" >> .env
 
       - name: Wait for build to finish
-        run: wait
+        run: |
+          wait
+          # Move cache to avoid growing cache size
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache || true
 
       - name: Start App
         run: |
+          # Use the pre-built image in docker-compose
+          docker tag test_app:latest test_app:production
           docker compose --project-name test up -d app redis
           pnpm test:integration
 
