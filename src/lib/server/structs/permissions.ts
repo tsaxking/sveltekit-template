@@ -1233,7 +1233,7 @@ export namespace Permissions {
 
 			const attributes = data.getAttributes().unwrap();
 			const structName = data.struct.name;
-			const keys = Object.keys(data.data);
+			const keys = Object.keys(data.safe());
 
 			// Filter applicable rulesets for this data instance
 			const matching = allRulesets.filter((r) => {
