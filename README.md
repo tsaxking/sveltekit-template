@@ -36,21 +36,25 @@ pnpm tools
 This project uses pnpm as the package manager. Key commands include:
 
 ### Development
+
 - `pnpm dev` - Start development server
 - `pnpm tools` - Start server with Node.js inspection for debugging
 - `pnpm debug` - Start Vite in debug mode
 
 ### Building
+
 - `pnpm build` - Create production build (includes route tree generation)
 - `pnpm preview` - Preview production build
 
 ### Code Quality
+
 - `pnpm lint` - Format and lint code
 - `pnpm format` - Format code with Prettier
 - `pnpm check` - Run Svelte type checking
 - `pnpm check:watch` - Run Svelte type checking in watch mode
 
 ### Testing
+
 - `pnpm test` - Run all tests (schema, unit, e2e)
 - `pnpm test:unit` - Run unit tests
 - `pnpm test:e2e` - Run end-to-end tests
@@ -65,6 +69,7 @@ pnpm build
 ```
 
 The build process includes:
+
 1. Route tree generation
 2. Vite production build
 3. SvelteKit adapter compilation
@@ -94,6 +99,7 @@ pnpm db:studio
 ```
 
 ### Database Setup
+
 1. Ensure Docker is installed and running
 2. Copy `.env.example` to `.env` and configure database settings
 3. Start the database: `pnpm db:start`
