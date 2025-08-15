@@ -25,6 +25,8 @@
 	import { match } from 'ts-utils/match';
 	import Flatpickr from '$lib/components/forms/Flatpickr.svelte';
 	import nav from '$lib/imports/admin';
+	import { v4 as uuid } from 'uuid';
+	import { StructDataStage } from '$lib/services/struct';
 
 	nav();
 
@@ -60,9 +62,29 @@
 
 	let grid: Grid<StructData<Blank>>;
 	let createModal: Modal;
+	let editModal: Modal;
+	// svelte-ignore state_referenced_locally
+	let editStage: StructDataStage<Blank> = $state(new StructDataStage(struct.Generator({}) as any));
 
 	const newItem = () => {
 		createModal.show();
+	};
+
+	const edit = (data: StructData<Blank>) => {
+		editModal.show();
+		editStage = new StructDataStage(data as any);
+	};
+
+	const saveEdit = () => {
+		editStage.save('force');
+	};
+
+	const resetEdit = () => {
+		editStage = new StructDataStage(struct.Generator({}) as any);
+	};
+
+	const genUUID = () => {
+		copy(uuid(), true);
 	};
 
 	const create = async () => {
@@ -281,6 +303,7 @@
 						}))
 				],
 				onCellContextMenu: (params) => {
+					// return;
 					contextmenu(params.event as PointerEvent, {
 						options: [
 							'Cell Actions',
@@ -301,6 +324,16 @@
 								icon: {
 									type: 'material-icons',
 									name: 'add'
+								}
+							},
+							{
+								name: 'Edit',
+								action: () => {
+									if (params.data) edit(params.data);
+								},
+								icon: {
+									type: 'material-icons',
+									name: 'edit'
 								}
 							},
 							{
@@ -449,6 +482,10 @@
 	{/snippet}
 
 	{#snippet buttons()}
+		<button type="button" class="btn btn-secondary" onclick={genUUID}>
+			<i class="material-icons">content_copy</i>
+			Generate Id
+		</button>
 		<button
 			type="button"
 			class="btn btn-secondary"
@@ -460,5 +497,110 @@
 			Cancel
 		</button>
 		<button class="btn btn-primary" onclick={create}> Create </button>
+	{/snippet}
+</Modal>
+
+<Modal bind:this={editModal} title="Edit Item" size="lg">
+	{#snippet body()}
+		<div class="container-fluid">
+			{#key editStage}
+				{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value]}
+					<div class="row mb-3">
+						{#if value === 'text'}
+							<div class="form-floating">
+								<input
+									type="text"
+									class="form-control"
+									id="create-{key}"
+									placeholder="Placeholder"
+									bind:value={editStage.data[key]}
+								/>
+								<label for="create-{key}" class="ms-3">
+									{capitalize(fromCamelCase(key))}
+								</label>
+							</div>
+						{:else if value === 'date'}
+							<div class="form-floating">
+								<Flatpickr
+									value={editStage.data[key] as Date}
+									onChange={(date) => {
+										(editStage.data as any)[key] = date;
+									}}
+									className="form-control"
+									options={{ dateFormat: 'Y-m-d' }}
+									id="create-{key}"
+								/>
+								<label for="create-{key}" class="ms-3">{capitalize(fromCamelCase(key))}</label>
+							</div>
+						{:else if value === 'number'}
+							<div class="form-floating">
+								<input
+									type="number"
+									class="form-control"
+									id="create-{key}"
+									placeholder="Placeholder"
+									bind:value={editStage.data[key]}
+								/>
+								<label for="create-{key}" class="ms-3">
+									{capitalize(fromCamelCase(key))}
+								</label>
+							</div>
+						{:else if value === 'boolean'}
+							<div class="form-label mb-2">{capitalize(fromCamelCase(key))}</div>
+							<div class="btn-group" role="group" aria-label="Boolean toggle">
+								<input
+									type="radio"
+									class="btn-check"
+									name="btnradio-{key}"
+									id="btnradio-{key}-true"
+									autocomplete="off"
+									checked={(editStage.data as any)[key] === true}
+									onchange={() => ((editStage.data as any)[key] = true)}
+								/>
+								<label class="btn btn-outline-primary" for="btnradio-{key}-true">True</label>
+
+								<input
+									type="radio"
+									class="btn-check"
+									name="btnradio-{key}"
+									id="btnradio-{key}-false"
+									autocomplete="off"
+									checked={(editStage.data as any)[key] === false}
+									onchange={() => ((editStage.data as any)[key] = false)}
+								/>
+								<label class="btn btn-outline-primary" for="btnradio-{key}-false">False</label>
+							</div>
+						{/if}
+					</div>
+				{/each}
+			{/key}
+		</div>
+	{/snippet}
+
+	{#snippet buttons()}
+		<button type="button" class="btn btn-secondary" onclick={genUUID}>
+			<i class="material-icons">content_copy</i>
+			Generate Id
+		</button>
+		<button
+			type="button"
+			class="btn btn-warning"
+			onclick={() => {
+				editStage.rollback();
+			}}
+		>
+			Restore
+		</button>
+		<button
+			type="button"
+			class="btn btn-secondary"
+			onclick={() => {
+				resetEdit();
+				editModal.hide();
+			}}
+		>
+			Cancel
+		</button>
+		<button class="btn btn-primary" onclick={saveEdit}> Save </button>
 	{/snippet}
 </Modal>

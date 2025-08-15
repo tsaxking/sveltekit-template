@@ -77,7 +77,11 @@ export namespace Permissions {
 			return searched.map((s) => s.safe());
 		}
 
-		return filterPropertyActionFromAccount(event.locals.account, searched, PropertyAction.Read);
+		return filterPropertyActionFromAccount(
+			event.locals.account,
+			searched as any,
+			PropertyAction.Read
+		);
 	});
 
 	const searchRoles = (
@@ -166,7 +170,7 @@ export namespace Permissions {
 		});
 	});
 
-	block(Role);
+	block(Role as any);
 
 	export type RoleData = typeof Role.sample;
 
@@ -178,7 +182,7 @@ export namespace Permissions {
 		}
 	});
 
-	block(RoleAccount);
+	block(RoleAccount as any);
 
 	export type RoleAccountData = typeof RoleAccount.sample;
 
@@ -195,7 +199,7 @@ export namespace Permissions {
 
 	Entitlement.bypass(PropertyAction.Read, () => true); // Allow reading entitlements without permission checks
 
-	block(Entitlement);
+	block(Entitlement as any);
 
 	export type EntitlementData = typeof Entitlement.sample;
 
@@ -209,7 +213,7 @@ export namespace Permissions {
 		}
 	});
 
-	block(RoleRuleset);
+	block(RoleRuleset as any);
 
 	RoleRuleset.queryListen('my-permissions', async (event) => {
 		if (!event.locals.account) {
@@ -844,7 +848,7 @@ export namespace Permissions {
 		};
 	});
 
-	block(AccountRuleset);
+	block(AccountRuleset as any);
 
 	export type AccountRulesetData = typeof AccountRuleset.sample;
 
@@ -1138,7 +1142,7 @@ export namespace Permissions {
 					return attributes.includes(r.ruleset.data.targetAttribute);
 				});
 
-				const keys = Object.keys(d.data);
+				const keys = Object.keys(d.safe());
 
 				return Object.fromEntries(
 					keys
@@ -1229,7 +1233,7 @@ export namespace Permissions {
 
 			const attributes = data.getAttributes().unwrap();
 			const structName = data.struct.name;
-			const keys = Object.keys(data.data);
+			const keys = Object.keys(data.safe());
 
 			// Filter applicable rulesets for this data instance
 			const matching = allRulesets.filter((r) => {
