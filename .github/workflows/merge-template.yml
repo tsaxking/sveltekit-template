@@ -14,10 +14,12 @@ jobs:
     uses: ./.github/workflows/testing-e2e.yml
   check:
     uses: ./.github/workflows/testing-svelte-check.yml
+  docker-compose:
+    uses: ./.github/workflows/docker-compose-test.yml
 
   merge-template:
     runs-on: ubuntu-latest
-    needs: [format, unit-tests, E2E, check]
+    needs: [format, unit-tests, E2E, check, docker-compose]
 
     strategy:
       fail-fast: false
