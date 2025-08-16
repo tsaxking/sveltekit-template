@@ -6,43 +6,16 @@ on:
       - '*'
 
 jobs:
-  pre-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Ensure on deploy or main
-        run: |
-          git fetch origin deploy
-          git fetch origin main
-
-          if git merge-base --is-ancestor $GITHUB_SHA origin/deploy || \
-            git merge-base --is-ancestor $GITHUB_SHA origin/main; then
-            echo "Commit is on deploy or main — continuing"
-          else
-            echo "Commit is not on deploy or main — exiting"
-            exit 1
-          fi
-
   format:
-    needs: pre-check
     uses: ./.github/workflows/code-formatter.yml
   unit-tests:
-    needs: pre-check
     uses: ./.github/workflows/testing-unit.yml
   E2E:
-    needs: pre-check
     uses: ./.github/workflows/testing-e2e.yml
   check:
-    needs: pre-check
     uses: ./.github/workflows/testing-svelte-check.yml
   docker-compose:
-    needs: pre-check
     uses: ./.github/workflows/docker-compose-test.yml
-
-
   push-docker-image:
     runs-on: ubuntu-latest
     needs: [format, unit-tests, E2E, check, docker-compose]
@@ -50,16 +23,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check if on deploy
+      - name: Retrieve credentials and push image
         run: |
           git fetch origin deploy
           if ! git merge-base --is-ancestor $GITHUB_SHA origin/deploy; then
             echo "Not a deploy tag — exiting"
             exit 0
           fi
-
-      - name: Retrieve credentials and push image
-        run: |
           TAG=${GITHUB_REF#refs/tags/}
           NAME=$(basename $GITHUB_REPOSITORY)
 
@@ -93,15 +63,6 @@ jobs:
           ref: ${{ github.ref }}
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Check if on main
-        # if not, cancel workflow
-        run: |
-          git fetch origin main
-          if ! git merge-base --is-ancestor $GITHUB_SHA origin/main; then
-            echo "Not a main tag — exiting"
-            exit 0
-          fi
-
       - name: 'Setup ssh-agent'
         uses: 'webfactory/ssh-agent@v0.5.0'
         with:
@@ -117,12 +78,15 @@ jobs:
         with:
           node-version: v22.12.0
 
-      - name: 'Installing dependencies'
-        run: |
-          pnpm i
-
       - name: Send pull-request
         run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor $GITHUB_SHA origin/main; then
+            echo "Not a main tag — exiting"
+            exit 0
+          fi
+
+          pnpm i
           echo "Creating variables"
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
           LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
