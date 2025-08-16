@@ -57,6 +57,6 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           NAME=$(basename $GITHUB_REPOSITORY)
 
-          docker build -t $NAME:latest .
-          docker tag $NAME:latest ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
+          docker build -t ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:latest .
+          docker tag ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:latest ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
           docker push ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
