@@ -6,15 +6,31 @@ on:
       - '*'
 
 jobs:
+  pre-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Skip if tag is not on main
+      run: |
+        git fetch origin main
+        if ! git merge-base --is-ancestor $GITHUB_SHA origin/main; then
+          echo "Tag is not on main. Skipping workflow."
+          exit 1
+        fi
+
   format:
+    needs: pre-check
     uses: ./.github/workflows/code-formatter.yml
   unit-tests:
+    needs: pre-check
     uses: ./.github/workflows/testing-unit.yml
   E2E:
+    needs: pre-check
     uses: ./.github/workflows/testing-e2e.yml
   check:
+    needs: pre-check
     uses: ./.github/workflows/testing-svelte-check.yml
   docker-compose:
+    needs: pre-check
     uses: ./.github/workflows/docker-compose-test.yml
 
   merge-template:
