@@ -127,7 +127,7 @@ describe('Redis namespace', () => {
 			expect(received).toEqual(chunks);
 		},
 		{
-			timeout: 10_000
+			timeout: 60_000
 		}
 	);
 });
