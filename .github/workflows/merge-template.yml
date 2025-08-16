@@ -5,15 +5,37 @@ on:
     types: [published]
 
 jobs:
+  pre-check:
+    runs-on: ubuntu-latest
+    outputs:
+      run_pipeline: ${{ steps.check.outputs.run_pipeline }}
+    steps:
+      - id: check
+        run: |
+          if [[ "${{ github.event.release.name }}" == *deploy* ]]; then
+            echo "run_pipeline=false" >> $GITHUB_OUTPUT
+          else
+            echo "run_pipeline=true" >> $GITHUB_OUTPUT
+          fi
   format:
+    needs: pre-check
+    if: needs.pre-check.outputs.run_pipeline == 'true'
     uses: ./.github/workflows/code-formatter.yml
   unit-tests:
+    needs: pre-check
+    if: needs.pre-check.outputs.run_pipeline == 'true'
     uses: ./.github/workflows/testing-unit.yml
   E2E:
+    needs: pre-check
+    if: needs.pre-check.outputs.run_pipeline == 'true'
     uses: ./.github/workflows/testing-e2e.yml
   check:
+    needs: pre-check
+    if: needs.pre-check.outputs.run_pipeline == 'true'
     uses: ./.github/workflows/testing-svelte-check.yml
   docker-compose:
+    needs: pre-check
+    if: needs.pre-check.outputs.run_pipeline == 'true'
     uses: ./.github/workflows/docker-compose-test.yml
 
   merge-template:
