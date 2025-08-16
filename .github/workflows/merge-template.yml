@@ -9,6 +9,10 @@ jobs:
   pre-check:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Ensure on deploy or main
         run: |
           git fetch origin deploy
