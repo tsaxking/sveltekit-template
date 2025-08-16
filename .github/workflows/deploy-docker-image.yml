@@ -42,6 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [format, unit-tests, E2E, check, docker-compose]
     steps:
+      - name: Log in to Gitea Registry
+        uses: docker/login-action@v3.5.0
+        with:
+          registry: ${{ secrets.GITEA_REGISTRY_URL }}
+          username: ${{ secrets.GITEA_REGISTRY_USER }}
+          password: ${{ secrets.GITEA_REGISTRY_PWD }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -50,7 +57,6 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           NAME=$(basename $GITHUB_REPOSITORY)
 
-          echo ${{ secrets.GITEA_REGISTRY_PWD }} | docker login ${{ secrets.GITEA_REGISTRY_URL }} -u ${{ secrets.GITEA_REGISTRY_USER }} --password-stdin
           docker build -t my-image:latest .
           docker tag my-image:latest ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
           docker push ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
