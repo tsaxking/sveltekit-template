@@ -55,8 +55,19 @@ jobs:
       - name: Retrieve credentials and push image
         run: |
           TAG=${GITHUB_REF#refs/tags/}
-          NAME=$(basename $GITHUB_REPOSITORY)
+          REPOSITORY_NAME=$(basename $GITHUB_REPOSITORY)
+          IMAGE_NAME=${{ secrets.GITEA_REGISTRY_URL }}/$REPOSITORY_NAME
 
-          docker build -t ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:latest .
-          docker tag ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:latest ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
-          docker push ${{ secrets.GITEA_REGISTRY_URL }}/$NAME:$TAG
+          echo "TAG is '$TAG'"
+
+          echo "Building image..."
+          docker build -t $IMAGE_NAME:latest .
+
+          echo "Tagging image with release tag..."
+          docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+
+          echo "Pushing latest tag..."
+          docker push $IMAGE_NAME:latest
+
+          echo "Pushing release tag..."
+          docker push $IMAGE_NAME:$TAG
