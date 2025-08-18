@@ -84,7 +84,12 @@ jobs:
           echo "DB_HOST=db" >> .env
 
       - name: Wait for build to finish
-        run: wait
+        run: wait      
+        
+      - name: Scan Docker image with Trivy
+        run: |
+          IMAGE_NAME=$(docker compose --project-name test images -q app)
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image $IMAGE_NAME
 
       - name: Start App
         run: |
