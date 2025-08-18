@@ -42,7 +42,7 @@ jobs:
           echo "DB_HOST=db" >> .docker.env
 
       - name: Start Docker build in background
-        run: docker compose --project-name test build app &
+        run: docker compose --project-name test build app
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -83,9 +83,6 @@ jobs:
           rm .cp
           echo "DB_HOST=db" >> .env
 
-
-      - name: Wait for build to finish
-        run: wait
 
       - name: Debug Docker images
         run: |
