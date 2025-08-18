@@ -105,7 +105,7 @@ jobs:
 
       - name: Scan Docker image with Trivy
         run: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image my-app:trivy-scan
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image my-app:latest
 
       - name: Start App
         run: |
