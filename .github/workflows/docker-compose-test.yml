@@ -83,13 +83,32 @@ jobs:
           rm .cp
           echo "DB_HOST=db" >> .env
 
+
       - name: Wait for build to finish
-        run: wait      
-        
+        run: wait
+
+      - name: Debug Docker images
+        run: |
+          echo "Listing all docker images:"
+          docker images
+          echo "Compose images for project 'test':"
+          docker compose --project-name test images
+          echo "Compose ps for project 'test':"
+          docker compose --project-name test ps
+
+      - name: Tag built image for Trivy (if needed)
+        run: |
+          IMAGE_ID=$(docker compose --project-name test images -q app)
+          if [ -n "$IMAGE_ID" ]; then
+            docker tag $IMAGE_ID my-app:trivy-scan
+          else
+            echo "ERROR: Could not find built image for app service."
+            exit 1
+          fi
+
       - name: Scan Docker image with Trivy
         run: |
-          IMAGE_NAME=$(docker compose --project-name test images -q app)
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image $IMAGE_NAME
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image my-app:trivy-scan
 
       - name: Start App
         run: |
