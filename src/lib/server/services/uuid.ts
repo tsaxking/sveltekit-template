@@ -1,5 +1,7 @@
-import { Redis } from 'redis-utils';
 import { z } from 'zod';
+import redis from './redis';
+
+const redisService = redis.createQueue('uuid', z.string(), 10);
 
 class UUIDService {
 	private readonly cache: string[] = [];
@@ -14,14 +16,7 @@ class UUIDService {
 	}
 
 	async request() {
-		const res = await Redis.query(
-			process.env.UUID_SERVICE_NAME || 'uuidServiceQueue',
-			'reserve',
-			{
-				count: this.maxSize
-			},
-			z.array(z.string())
-		);
+		const res = await redisService.pop();
 		if (res.isErr()) {
 			console.error('Error reserving UUIDs:', res.error);
 			return;

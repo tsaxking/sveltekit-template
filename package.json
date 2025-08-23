@@ -144,7 +144,7 @@
 		"proper-lockfile": "^4.1.2",
 		"range-slider-input": "^2.4.4",
 		"redis": "^5.7.0",
-		"redis-utils": "git+https://github.com/tsaxking/redis#v2.0.1",
+		"redis-utils": "github:tsaxking/redis#v2.0.4",
 		"svelte-filepond": "^0.2.2",
 		"ts-utils": "github:tsaxking/global-ts-utilities#v1.0.0",
 		"uuid": "^11.1.0",
@@ -154,6 +154,7 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
+			"@parcel/watcher",
 			"@sveltejs/kit",
 			"canvas",
 			"colors",
@@ -163,10 +164,7 @@
 			"math",
 			"redis-service",
 			"svelte-preprocess",
-			"ts-utils",
-			"html-constructor",
-			"redis-service",
-			"canvas"
+			"ts-utils"
 		]
 	}
 }
