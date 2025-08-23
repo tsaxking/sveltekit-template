@@ -84,8 +84,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.10)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#v1.0.16
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ded808365160d81377fae4e8617a2814ab67e016(@types/node@22.17.1)(@types/pg@8.15.5)(@types/react@19.1.10)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0)
+        specifier: github:tsaxking/drizzle-struct#2025-08-22-TK-RestructureRedis
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/1dbd53d5ebed4d3f4ccaf69ac23459d33f8b7f99(@types/node@22.17.1)(@types/pg@8.15.5)(@types/react@19.1.10)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.10)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -174,8 +174,8 @@ importers:
         specifier: ^5.7.0
         version: 5.8.1
       redis-utils:
-        specifier: git+https://github.com/tsaxking/redis#v1.0.1
-        version: redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/41d069066dc21a02a1bca8e9d1896ce13c7b5b79(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0)
+        specifier: git+https://github.com/tsaxking/redis#v2.0.1
+        version: redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/3eb64c03fbe2978b4058268679bad69440cd6f92(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0)
       svelte-filepond:
         specifier: ^0.2.2
         version: 0.2.2(filepond@4.32.8)
@@ -2771,8 +2771,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ded808365160d81377fae4e8617a2814ab67e016:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ded808365160d81377fae4e8617a2814ab67e016}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/1dbd53d5ebed4d3f4ccaf69ac23459d33f8b7f99:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/1dbd53d5ebed4d3f4ccaf69ac23459d33f8b7f99}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -4217,8 +4217,8 @@ packages:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
 
-  redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/41d069066dc21a02a1bca8e9d1896ce13c7b5b79:
-    resolution: {tarball: https://codeload.github.com/tsaxking/redis/tar.gz/41d069066dc21a02a1bca8e9d1896ce13c7b5b79}
+  redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/3eb64c03fbe2978b4058268679bad69440cd6f92:
+    resolution: {tarball: https://codeload.github.com/tsaxking/redis/tar.gz/3eb64c03fbe2978b4058268679bad69440cd6f92}
     version: 1.0.0
     engines: {node: v22.12.0}
 
@@ -7283,7 +7283,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/ded808365160d81377fae4e8617a2814ab67e016(@types/node@22.17.1)(@types/pg@8.15.5)(@types/react@19.1.10)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/1dbd53d5ebed4d3f4ccaf69ac23459d33f8b7f99(@types/node@22.17.1)(@types/pg@8.15.5)(@types/react@19.1.10)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.33.0)
       '@msgpack/msgpack': 3.0.0-beta3
@@ -7305,6 +7305,7 @@ snapshots:
       prettier-plugin-svelte: 3.4.0(prettier@3.6.2)(svelte@5.38.1)
       proper-lockfile: 4.1.2
       redis: 5.8.1
+      redis-utils: redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/3eb64c03fbe2978b4058268679bad69440cd6f92(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0)
       svelte: 5.38.1
       ts-node: 10.9.2(@types/node@22.17.1)(typescript@5.9.2)
       ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/41d2ddec9d5552a057d4272e57805283a2e580b4(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0)
@@ -9198,7 +9199,7 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
-  redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/41d069066dc21a02a1bca8e9d1896ce13c7b5b79(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0):
+  redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/3eb64c03fbe2978b4058268679bad69440cd6f92(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0):
     dependencies:
       redis: 5.8.1
       ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/41d2ddec9d5552a057d4272e57805283a2e580b4(@types/node@22.17.1)(sass-embedded@1.90.0)(sass@1.90.0)
