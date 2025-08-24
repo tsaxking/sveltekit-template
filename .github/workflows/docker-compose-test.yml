@@ -85,7 +85,7 @@ jobs:
 
       - name: Start App
         run: |
-          docker compose up -d
+          docker compose --project-name test up -d app redis
           pnpm test:integration
 
       - name: Stop Application
