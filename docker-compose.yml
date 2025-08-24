@@ -13,6 +13,8 @@ services:
       - redis
     ports:
       - '${PORT}:${PORT}'
+    volumes:
+      - appdata:/app
   db:
     image: postgres:16
     container_name: db
@@ -38,3 +40,4 @@ services:
 volumes:
   pgdata:
   redisdata:
+  appdata:

@@ -1,21 +1,26 @@
 FROM node:22.12.0-alpine
 
-# Install global dependencies first (rarely changes)
-RUN npm install -g pnpm@latest typescript
+# Install pnpm globally
+RUN npm install -g pnpm@latest
 
 WORKDIR /app
 
-# Copy only the files needed for install first, to cache dependencies better
+# Copy only package files first for caching
 COPY package.json pnpm-lock.yaml ./
-
-RUN pnpm install --frozen-lockfile
-
-# Then copy the rest of your source code
-COPY . .
+RUN pnpm install --prod --frozen-lockfile
 
 
-RUN echo "PUBLIC_APP_NAME=Docker App Default" > .env
-RUN pnpm build
+COPY ./build ./build
+COPY ./.svelte-kit ./.svelte-kit
+COPY ./cli ./cli
+COPY ./config ./config
+COPY ./drizzle ./drizzle
+COPY ./mjml ./mjml
+COPY ./private ./private
+COPY ./scripts ./scripts
+COPY ./src ./src
+COPY ./static ./static
+
 
 EXPOSE 3000
 CMD ["pnpm", "start"]
