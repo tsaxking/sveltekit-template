@@ -86,7 +86,7 @@ jobs:
 
       - name: Start App
         run: |
-          docker compose -d up
+          docker compose up -d
           pnpm test:integration
 
       - name: Stop Application
