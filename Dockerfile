@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Copy only package files first for caching
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --prod --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 
 COPY ./build ./build
