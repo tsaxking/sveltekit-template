@@ -108,8 +108,7 @@ jobs:
 
       - name: Start App
         run: |
-          docker compose --project-name test up -d
-          sleep 10
+          docker compose --project-name test up 
           pnpm test:integration
 
       - name: Stop Application
