@@ -19,10 +19,12 @@ import { sse } from '$lib/server/services/sse';
 import { sleep } from 'ts-utils/sleep';
 import { signFingerprint } from '$lib/server/utils/fingerprint';
 import redis from '$lib/server/services/redis';
+import { building } from '$app/environment';
 
 config();
 
 (async () => {
+	if (building) return;
 	await redis.init().unwrap();
 	Struct.each((struct) => {
 		if (!struct.built) {
