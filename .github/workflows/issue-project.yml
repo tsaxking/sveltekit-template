@@ -7,14 +7,24 @@ on:
 jobs:
   add-to-projects:
     runs-on: ubuntu-latest
+    permissions:
+      issues: read
+      contents: read
+      projects: write
 
     steps:
       - name: Add issue to all linked projects
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Get repo projects
-          projects=$(gh api graphql -f query='
+          set -e
+
+          echo "Issue Node ID: ${{ github.event.issue.node_id }}"
+          echo "Repository: ${{ github.repository_owner }}/${{ github.event.repository.name }}"
+
+          # Get both repository and organization projects
+          echo "Fetching repository projects..."
+          repo_projects=$(gh api graphql -f query='
             query($owner:String!, $repo:String!) {
               repository(owner: $owner, name: $repo) {
                 projectsV2(first: 20) {
@@ -24,17 +34,48 @@ jobs:
                   }
                 }
               }
-            }' -f owner=${{ github.repository_owner }} -f repo=${{ github.event.repository.name }} --jq '.data.repository.projectsV2.nodes[].id')
+            }' -f owner=${{ github.repository_owner }} -f repo=${{ github.event.repository.name }} --jq '.data.repository.projectsV2.nodes[]' 2>/dev/null || echo "[]")
+
+          echo "Fetching organization projects..."
+          org_projects=$(gh api graphql -f query='
+            query($owner:String!) {
+              organization(login: $owner) {
+                projectsV2(first: 20) {
+                  nodes {
+                    id
+                    title
+                  }
+                }
+              }
+            }' -f owner=${{ github.repository_owner }} --jq '.data.organization.projectsV2.nodes[]' 2>/dev/null || echo "[]")
+
+          # Combine and extract project IDs
+          all_projects=$(echo "$repo_projects $org_projects" | jq -r '.id' 2>/dev/null | grep -v '^null$' | sort -u || true)
+
+          echo "Found projects: $all_projects"
+
+          if [ -z "$all_projects" ] || [ "$all_projects" = "" ]; then
+            echo "No projects found to add issue to"
+            exit 0
+          fi
 
           # Add issue to each project
-          for project_id in $projects; do
-            echo "Adding issue to project $project_id"
-            gh api graphql -f query='
-              mutation($projectId:ID!, $contentId:ID!) {
-                addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
-                  item { id }
-                }
-              }' \
-              -f projectId="$project_id" \
-              -f contentId="${{ github.event.issue.node_id }}"
+          for project_id in $all_projects; do
+            if [ -n "$project_id" ] && [ "$project_id" != "null" ]; then
+              echo "Adding issue to project $project_id"
+              result=$(gh api graphql -f query='
+                mutation($projectId:ID!, $contentId:ID!) {
+                  addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                    item { id }
+                  }
+                }' \
+                -f projectId="$project_id" \
+                -f contentId="${{ github.event.issue.node_id }}" 2>&1)
+              
+              if echo "$result" | grep -q "item"; then
+                echo "✓ Successfully added issue to project $project_id"
+              else
+                echo "✗ Failed to add issue to project $project_id: $result"
+              fi
+            fi
           done
