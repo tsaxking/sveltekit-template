@@ -83,6 +83,9 @@ jobs:
       - name: Wait for build to finish
         run: wait
 
+      - name: Build app
+        run: pnpm build
+
       - name: Start App
         run: |
           docker compose --project-name test up -d app redis
