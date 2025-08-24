@@ -91,7 +91,7 @@ jobs:
       - name: Set up Redis
         run: |
           docker compose --project-name test up -d redis
-          docker exec test-redis-1 bash -c '
+          docker exec redis bash -c '
             for i in $(seq 1 15); do
               redis-cli ping && exit 0
               sleep 1
