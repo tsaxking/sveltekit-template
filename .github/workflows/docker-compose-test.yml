@@ -50,7 +50,7 @@ jobs:
           echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
-          echo "REDIS_URL=redis://localhost:6379" >> .env
+          echo "REDIS_URL=redis://redis:6379" >> .env
           echo "ENVIRONMENT=test" >> .env
           echo "PORT=3000" >> .env
           echo "DB_HOST=localhost" >> .env
@@ -84,15 +84,9 @@ jobs:
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
 
           cp .env .cp
-          echo "DB_HOST=localhost" >> .env
 
           pnpm db:migrate
           pnpm db:push --force
-
-          rm .env
-          cp .cp .env
-          rm .cp
-          echo "DB_HOST=db" >> .env
 
       - name: Wait for build to finish
         run: wait
