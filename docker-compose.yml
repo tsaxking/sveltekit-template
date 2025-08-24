@@ -30,6 +30,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   redis:
+    container_name: redis
     image: redis:7
     restart: always
     ports:
