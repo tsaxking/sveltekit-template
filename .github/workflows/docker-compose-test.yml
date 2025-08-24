@@ -42,9 +42,6 @@ jobs:
           cp .docker.env .env
           echo "DB_HOST=db" >> .docker.env
 
-      - name: Start Docker build in background
-        run: docker compose --project-name test build app &
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -89,8 +86,8 @@ jobs:
 
       - name: Start App
         run: |
-          docker compose --project-name test up -d app redis
+          docker compose -d up
           pnpm test:integration
 
       - name: Stop Application
-        run: docker compose --project-name test down -v
+        run: docker compose down
