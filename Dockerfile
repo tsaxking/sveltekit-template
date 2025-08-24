@@ -7,9 +7,8 @@ WORKDIR /app
 
 # Copy only package files first for caching
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
 
-
+COPY ./node_modules ./node_modules
 COPY ./build ./build
 COPY ./.svelte-kit ./.svelte-kit
 COPY ./cli ./cli
