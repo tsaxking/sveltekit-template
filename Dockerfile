@@ -21,6 +21,8 @@ COPY ./scripts ./scripts
 COPY ./src ./src
 COPY ./static ./static
 
+RUN touch .env
+
 
 EXPOSE 3000
 CMD ["pnpm", "start"]
