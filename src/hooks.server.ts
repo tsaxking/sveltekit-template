@@ -14,19 +14,17 @@ import { DB } from '$lib/server/db/';
 import '$lib/server/utils/files';
 import '$lib/server/index';
 import { createStructEventService } from '$lib/server/services/struct-event';
-import { Redis } from 'redis-utils';
 import ignore from 'ignore';
 import { sse } from '$lib/server/services/sse';
 import { sleep } from 'ts-utils/sleep';
 import { signFingerprint } from '$lib/server/utils/fingerprint';
+import redis from '$lib/server/services/redis';
+// import { building } from '$app/environment';
 
 config();
 
 (async () => {
-	await Redis.connect({
-		name: process.env.REDIS_NAME || 'default',
-		redisUrl: process.env.REDIS_URL
-	}).unwrap();
+	await redis.init().unwrap();
 	Struct.each((struct) => {
 		if (!struct.built) {
 			struct.build(DB);
