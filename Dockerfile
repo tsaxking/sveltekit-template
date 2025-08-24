@@ -2,6 +2,7 @@ FROM node:22.12.0-alpine
 
 # Install pnpm globally
 RUN npm install -g pnpm@latest
+RUN npm install -g typescript@latest
 
 WORKDIR /app
 
