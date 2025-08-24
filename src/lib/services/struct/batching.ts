@@ -205,34 +205,108 @@ export const clearStructUpdates = () => {
 /**
  * Batch update type - used for custom batches
  *
+ * @export
  * @typedef {BatchUpdate}
- * @template {DataAction | PropertyAction} T
  */
-type BatchUpdate<T extends DataAction | PropertyAction> = {
+export type BatchUpdate = {
 	struct: string;
-	type: DataAction | PropertyAction;
+	type: string;
 	data: unknown;
 	id: string;
 	date: string;
 };
 
 /**
- * This isn't currently implemented, but this is a placeholder for a batch send function, rather than just storing it all in cache
- * @deprecated
- * @param {{
- * 	struct: string;
- * 	type: DataAction | PropertyAction;
- * 	data: unknown;
- * 	id: string;
- * 	date: string;
- * }[]} data
+ * Sends a batch of struct updates directly to the server without using localStorage cache
+ * 
+ * @param {BatchUpdate[]} data Array of batch updates to send
+ * @returns {Promise<Result<unknown[], Error>>} Result containing server responses
  */
-export const sendBatch = (
-	data: {
-		struct: string;
-		type: DataAction | PropertyAction;
-		data: unknown;
-		id: string;
-		date: string;
-	}[]
-) => {};
+export const sendBatch = (data: BatchUpdate[]) => {
+	return attemptAsync(async () => {
+		if (!data.length) return [];
+
+		const res = await fetch('/struct/batch', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data)
+		}).then((r) => r.json());
+
+		// Parse server response
+		const parsed = z
+			.array(
+				z.object({
+					id: z.string(),
+					success: z.boolean(),
+					message: z.string().optional(),
+					data: z.unknown().optional()
+				})
+			)
+			.safeParse(res);
+
+		if (!parsed.success) {
+			throw new Error('Invalid server response for batch updates: ' + JSON.stringify(res));
+		}
+
+		return parsed.data;
+	});
+};
+
+/**
+ * Creates a new batch collector for accumulating multiple struct updates
+ * 
+ * @returns {object} Batch collector with methods to add updates and send batch
+ */
+export const createBatchCollector = () => {
+	const updates: BatchUpdate[] = [];
+
+	return {
+		/**
+		 * Add a BatchUpdate to the collection
+		 * 
+		 * @param {BatchUpdate} update The batch update to add
+		 */
+		add: (update: BatchUpdate) => {
+			updates.push(update);
+		},
+
+		/**
+		 * Get all collected updates
+		 * 
+		 * @returns {BatchUpdate[]} Array of collected updates
+		 */
+		getUpdates: () => [...updates],
+
+		/**
+		 * Clear all collected updates
+		 */
+		clear: () => {
+			updates.length = 0;
+		},
+
+		/**
+		 * Send all collected updates as a batch
+		 * 
+		 * @returns {Promise<Result<unknown[], Error>>} Result containing server responses
+		 */
+		send: () => sendBatch([...updates]),
+
+		/**
+		 * Send all collected updates and clear the collection
+		 * 
+		 * @returns {Promise<Result<unknown[], Error>>} Result containing server responses
+		 */
+		sendAndClear: async () => {
+			const result = await sendBatch([...updates]);
+			updates.length = 0;
+			return result;
+		},
+
+		/**
+		 * Get the number of updates in the collection
+		 * 
+		 * @returns {number} Number of collected updates
+		 */
+		size: () => updates.length
+	};
+};

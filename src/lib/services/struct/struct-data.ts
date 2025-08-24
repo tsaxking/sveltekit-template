@@ -13,6 +13,7 @@ import { type Writable, type Readable } from 'svelte/store';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 import { StructDataVersion, type VersionStructable } from './data-version';
+import { type BatchUpdate } from './batching';
 
 /**
  * Struct data for a single data point
@@ -80,6 +81,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	 * @param {(value: PartialStructable<T & GlobalCols>) => PartialStructable<T & {
 	 *         id: 'string';
 	 *     }>} fn
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {(PartialStructable<T & { id: "string"; }>) => unknown)}
 	 */
 	public async update(
@@ -87,7 +89,8 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 			T & {
 				id: 'string';
 			}
-		>
+		>,
+		batch: boolean = false
 	) {
 		return attemptAsync(async () => {
 			if (!this.data.id) throw new StructError('Unable to update data, no id found');
@@ -102,15 +105,25 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 			delete result.attributes;
 			delete result.canUpdate;
 
-			const res = (
+			const postResult = (
 				await this.struct.post(PropertyAction.Update, {
 					data: result,
 					id: this.data.id
-				})
+				}, undefined, batch)
 			).unwrap();
+
+			// If batch mode, return the BatchUpdate object
+			if (batch) {
+				return {
+					batchUpdate: postResult as BatchUpdate,
+					undo: () => this.update(() => prev, batch)
+				};
+			}
+
+			// Normal mode - process the response
 			return {
-				result: (await res.json()) as StatusMessage,
-				undo: () => this.update(() => prev)
+				result: (await (postResult as Response).json()) as StatusMessage,
+				undo: () => this.update(() => prev, batch)
 			};
 		});
 	}
@@ -118,22 +131,28 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	/**
 	 * Delete the data
 	 *
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	delete() {
-		return attemptAsync<StatusMessage>(async () => {
+	delete(batch: boolean = false) {
+		return attemptAsync<StatusMessage | BatchUpdate>(async () => {
+			const postResult = (await this.struct
+				.post(DataAction.Delete, {
+					id: this.data.id
+				}, undefined, batch)).unwrap();
+
+			// If batch mode, return the BatchUpdate object
+			if (batch) {
+				return postResult as BatchUpdate;
+			}
+
+			// Normal mode - process the response
 			return z
 				.object({
 					success: z.boolean(),
 					message: z.string().optional()
 				})
-				.parse(
-					await this.struct
-						.post(DataAction.Delete, {
-							id: this.data.id
-						})
-						.then((r) => r.unwrap().json())
-				);
+				.parse(await (postResult as Response).json());
 		});
 	}
 
@@ -141,36 +160,48 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	 * Archive or restore the data
 	 *
 	 * @param {boolean} archive
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	setArchive(archive: boolean) {
-		return attemptAsync<StatusMessage>(async () => {
+	setArchive(archive: boolean, batch: boolean = false) {
+		return attemptAsync<StatusMessage | BatchUpdate>(async () => {
 			if (archive) {
+				const postResult = (await this.struct
+					.post(DataAction.Archive, {
+						id: this.data.id
+					}, undefined, batch)).unwrap();
+
+				// If batch mode, return the BatchUpdate object
+				if (batch) {
+					return postResult as BatchUpdate;
+				}
+
+				// Normal mode - process the response
 				return z
 					.object({
 						success: z.boolean(),
 						message: z.string().optional()
 					})
-					.parse(
-						await this.struct
-							.post(DataAction.Archive, {
-								id: this.data.id
-							})
-							.then((r) => r.unwrap().json())
-					);
+					.parse(await (postResult as Response).json());
 			}
+
+			const postResult = (await this.struct
+				.post(DataAction.RestoreArchive, {
+					id: this.data.id
+				}, undefined, batch)).unwrap();
+
+			// If batch mode, return the BatchUpdate object
+			if (batch) {
+				return postResult as BatchUpdate;
+			}
+
+			// Normal mode - process the response
 			return z
 				.object({
 					success: z.boolean(),
 					message: z.string().optional()
 				})
-				.parse(
-					await this.struct
-						.post(DataAction.RestoreArchive, {
-							id: this.data.id
-						})
-						.then((r) => r.unwrap().json())
-				);
+				.parse(await (postResult as Response).json());
 		});
 	}
 
@@ -242,9 +273,10 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	 * Sets the attributes of the data, this will overwrite any existing attributes.
 	 *
 	 * @param {string[]} attributes
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	setAttributes(attributes: string[]) {
+	setAttributes(attributes: string[], batch: boolean = false) {
 		return attemptAsync(async () => {
 			if (!this.data.id) throw new StructError('Unable to set attributes, no id found');
 			if (!Array.isArray(attributes)) {
@@ -254,13 +286,19 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 				throw new DataError('Attributes must be an array of strings');
 			}
 
-			const res = await this.struct
+			const postResult = (await this.struct
 				.post(PropertyAction.SetAttributes, {
 					id: this.data.id,
 					attributes
-				})
-				.unwrap();
+				}, undefined, batch)).unwrap();
 
+			// If batch mode, return the BatchUpdate object
+			if (batch) {
+				return postResult as BatchUpdate;
+			}
+
+			// Normal mode - process the response
+			const res = postResult as Response;
 			const result = (await res.json()) as StatusMessage<string[]>;
 			if (!result.success) {
 				throw new DataError(result.message || 'Failed to set attributes');
@@ -275,26 +313,28 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	 * Adds new attributes to the data, this will not overwrite existing attributes.
 	 *
 	 * @param {...string[]} attributes
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	addAttributes(...attributes: string[]) {
+	addAttributes(attributes: string[], batch: boolean = false) {
 		return attemptAsync(async () => {
 			const current = this.getAttributes().unwrap();
-			return this.setAttributes(Array.from(new Set([...current, ...attributes]))).unwrap();
+			return this.setAttributes(Array.from(new Set([...current, ...attributes])), batch).unwrap();
 		});
 	}
 
 	/**
 	 * Removes attributes from the data, this will not throw an error if the attribute does not exist.
 	 *
-	 * @param {...string[]} attributes
+	 * @param {string[]} attributes
+	 * @param {boolean} [batch=false] If true, returns BatchUpdate instead of sending request
 	 * @returns {*}
 	 */
-	removeAttributes(...attributes: string[]) {
+	removeAttributes(attributes: string[], batch: boolean = false) {
 		return attemptAsync(async () => {
 			const current = this.getAttributes().unwrap();
 			const newAttributes = current.filter((a) => !attributes.includes(a));
-			return this.setAttributes(newAttributes).unwrap();
+			return this.setAttributes(newAttributes, batch).unwrap();
 		});
 	}
 
