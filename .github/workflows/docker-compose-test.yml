@@ -99,6 +99,8 @@ jobs:
           docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
           docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
+          pnpm db:migrate
+          pnpm db:push --force
 
 
       - name: Build app
@@ -106,11 +108,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t test .
-
-      - name: Run Migrations
-        run: |
-          pnpm db:migrate
-          pnpm db:push --force
 
       - name: Debug Docker images
         run: |
