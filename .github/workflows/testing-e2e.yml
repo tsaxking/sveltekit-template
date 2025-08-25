@@ -72,6 +72,7 @@ jobs:
           echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
+          echo "REDIS_URL=redis://localhost:6379" >> .env
           export $(cat .env | xargs)
 
       - name: Run migrations
@@ -83,11 +84,3 @@ jobs:
         run: |
           echo "Running e2e tests..."
           pnpm run test:e2e
-
-      - name: Upload Playwright Report
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30

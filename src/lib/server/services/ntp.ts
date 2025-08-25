@@ -1,7 +1,7 @@
 import { sse } from './sse';
-import { Redis } from 'redis-utils';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
+import redis from './redis';
 
 export namespace TimeService {
 	let time = Date.now();
@@ -13,15 +13,12 @@ export namespace TimeService {
 			if (initialized) return;
 			initialized = true;
 
-			const service = Redis.createListeningService(
-				process.env.NTP_REDIS_NAME || 'ntp_server_name',
-				{
-					time: z.object({
-						time: z.number(),
-						date: z.number()
-					})
-				}
-			);
+			const service = redis.createListener(process.env.NTP_REDIS_NAME || 'ntp_server_name', {
+				time: z.object({
+					time: z.number(),
+					date: z.number()
+				})
+			});
 
 			service.on('time', (data) => {
 				lastSynced = performance.now();

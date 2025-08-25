@@ -38,11 +38,22 @@ jobs:
           echo "REDIS_URL=redis://redis:6379" >> .docker.env
           echo "ENVIRONMENT=test" >> .docker.env
           echo "PORT=3000" >> .docker.env
-          cp .docker.env .env
           echo "DB_HOST=db" >> .docker.env
 
-      - name: Start Docker build in background
-        run: docker compose --project-name test build app &
+
+          echo "DB_USER=test_user" > .env
+          echo "DB_PASS=test" >> .env
+          echo "DB_NAME=test" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echo "PUBLIC_APP_NAME=test" >> .env
+          echo "REDIS_NAME=some_name" >> .env
+          echo "REDIS_URL=redis://localhost:6379" >> .env
+          echo "ENVIRONMENT=test" >> .env
+          echo "PORT=3000" >> .env
+          echo "DB_HOST=localhost" >> .env
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -73,23 +84,32 @@ jobs:
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
 
           cp .env .cp
-          echo "DB_HOST=localhost" >> .env
 
           pnpm db:migrate
           pnpm db:push --force
 
-          rm .env
-          cp .cp .env
-          rm .cp
-          echo "DB_HOST=db" >> .env
+      - name: Set up Redis
+        run: |
+          docker compose --project-name test up -d redis
+          docker exec redis bash -c '
+            for i in $(seq 1 15); do
+              redis-cli ping && exit 0
+              sleep 1
+            done
+            echo "Redis did not become ready in time" >&2
+            exit 1
+          '
 
       - name: Wait for build to finish
         run: wait
 
+      - name: Build app
+        run: pnpm build
+
       - name: Start App
         run: |
-          docker compose --project-name test up -d app redis
+          docker compose --project-name test up -d app
           pnpm test:integration
 
       - name: Stop Application
-        run: docker compose --project-name test down -v
+        run: docker compose down
