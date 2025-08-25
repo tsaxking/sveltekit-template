@@ -121,7 +121,8 @@ jobs:
 
       - name: Scan Docker image with Trivy
         run: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image test:latest
+          docker build -t test .
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image test
 
       - name: Stop Application
         run: docker compose down
