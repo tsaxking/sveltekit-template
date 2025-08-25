@@ -3,6 +3,7 @@
 	import type { BootstrapColor } from 'colors/color';
 	import { onMount, type Snippet } from 'svelte';
 	import { sleep } from 'ts-utils/sleep';
+	import Portal from 'svelte-portal';
 
 	interface Props {
 		title: string;
@@ -86,20 +87,22 @@
 	onMount(() => show());
 </script>
 
-<div
-	bind:this={alert}
-	class="alert alert-{color} alert-dismissible fade p-3"
-	role="alert"
-	class:show={doShow}
-	aria-atomic="true"
-	aria-live="assertive"
->
-	{@render icon?.()}
-	<div class="d-flex justify-content-between">
-		<h5 class="alert-heading">{title}</h5>
-		<small style="padding-right: 32px;">{time}</small>
-		<button type="button" class="btn-close px-3 py-4" aria-label="Close" onclick={hide}></button>
+<Portal target="body">
+	<div
+		bind:this={alert}
+		class="alert alert-{color} alert-dismissible fade p-3"
+		role="alert"
+		class:show={doShow}
+		aria-atomic="true"
+		aria-live="assertive"
+	>
+		{@render icon?.()}
+		<div class="d-flex justify-content-between">
+			<h5 class="alert-heading">{title}</h5>
+			<small style="padding-right: 32px;">{time}</small>
+			<button type="button" class="btn-close px-3 py-4" aria-label="Close" onclick={hide}></button>
+		</div>
+		<hr class="my-1" />
+		<p class="mb-1">{message}</p>
 	</div>
-	<hr class="my-1" />
-	<p class="mb-1">{message}</p>
-</div>
+</Portal>

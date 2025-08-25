@@ -3,6 +3,7 @@
 	import type { BootstrapColor } from 'colors/color';
 	import { onMount, type Snippet } from 'svelte';
 	import { sleep } from 'ts-utils/sleep';
+	import Portal from 'svelte-portal';
 
 	interface Props {
 		title: string;
@@ -115,26 +116,28 @@
 	onMount(() => show());
 </script>
 
-<div
-	bind:this={toast}
-	class="toast"
-	role="alert"
-	class:show={doShow}
-	aria-atomic="true"
-	aria-live="assertive"
->
-	<div class="toast-header bg-dark border-0 text-{color}">
-		<strong class="me-auto">{title}</strong>
-		<small>{time}</small>
-		<button
-			class="btn-close btn-close-white"
-			aria-label="Close"
-			data-bs-dismiss="toast"
-			type="button"
-			onclick={() => hide()}
-		></button>
+<Portal target="body">
+	<div
+		bind:this={toast}
+		class="toast"
+		role="alert"
+		class:show={doShow}
+		aria-atomic="true"
+		aria-live="assertive"
+	>
+		<div class="toast-header bg-dark border-0 text-{color}">
+			<strong class="me-auto">{title}</strong>
+			<small>{time}</small>
+			<button
+				class="btn-close btn-close-white"
+				aria-label="Close"
+				data-bs-dismiss="toast"
+				type="button"
+				onclick={() => hide()}
+			></button>
+		</div>
+		<div class="toast-body bg-{color} text-{textColorProxy}">
+			{message}
+		</div>
 	</div>
-	<div class="toast-body bg-{color} text-{textColorProxy}">
-		{message}
-	</div>
-</div>
+</Portal>
