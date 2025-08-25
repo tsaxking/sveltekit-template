@@ -84,8 +84,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.11)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#2025-08-22-TK-RestructureRedis
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/b80a4fb347269afae4080d21b7fa5dc00741020b(@types/node@22.17.2)(@types/pg@8.15.5)(@types/react@19.1.11)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0)
+        specifier: github:tsaxking/drizzle-struct#v1.0.17
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c661c4b983705ad0c6704e84cca89150280f1df8(@types/node@22.17.2)(@types/pg@8.15.5)(@types/react@19.1.11)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.11)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -3059,8 +3059,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/b80a4fb347269afae4080d21b7fa5dc00741020b:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/b80a4fb347269afae4080d21b7fa5dc00741020b}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c661c4b983705ad0c6704e84cca89150280f1df8:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c661c4b983705ad0c6704e84cca89150280f1df8}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -8213,7 +8213,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/b80a4fb347269afae4080d21b7fa5dc00741020b(@types/node@22.17.2)(@types/pg@8.15.5)(@types/react@19.1.11)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c661c4b983705ad0c6704e84cca89150280f1df8(@types/node@22.17.2)(@types/pg@8.15.5)(@types/react@19.1.11)(react@19.1.1)(sass-embedded@1.90.0)(sass@1.90.0):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.34.0)
       '@msgpack/msgpack': 3.0.0-beta3
