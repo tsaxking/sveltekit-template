@@ -4,12 +4,11 @@ import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
-import { Redis } from 'redis-utils';
 import { z } from 'zod';
 import ignore from 'ignore';
 import fs from 'fs';
 import path from 'path';
-import terminal from '../utils/terminal';
+import redis from '../services/redis';
 
 export namespace Limiting {
 	const ipLimited = ignore();
@@ -182,21 +181,20 @@ export namespace Limiting {
 		return createHash('sha256').update(raw).digest('hex');
 	};
 
+	const limitService = redis.createItemGroup('rate_limit', 'number');
+
 	export const rateLimit = async (key: string) => {
-		const limit = parseInt(process.env.REQUEST_LIMIT ?? '1000', 10);
-		const windowSec = parseInt(process.env.REQUEST_LIMIT_WINDOW ?? '60000', 10) / 1000; // Convert milliseconds to seconds
-		const redisRes = Redis.getPub();
-		if (redisRes.isErr()) {
-			console.error('Failed to get Redis client for rate limiting:', redisRes.error);
-			return false;
-		}
-		const count = await redisRes.value.incr(key);
+		return attemptAsync(async () => {
+			const limit = parseInt(process.env.REQUEST_LIMIT ?? '1000', 10);
+			const windowSec = parseInt(process.env.REQUEST_LIMIT_WINDOW ?? '60000', 10) / 1000; // Convert milliseconds to seconds
+			const count = await limitService.incr(key).unwrap();
 
-		if (count === 1) {
-			await redisRes.value.expire(key, windowSec);
-		}
+			if (count === 1) {
+				await limitService.expire(key, windowSec).unwrap();
+			}
 
-		return count > limit;
+			return count > limit;
+		});
 	};
 
 	export const violate = async (
@@ -207,26 +205,28 @@ export namespace Limiting {
 	) => {
 		return attemptAsync(async () => {
 			await Promise.all([
-				Redis.incr(`violation_ip:${session.data.ip}`, increment),
-				Redis.incr(`violation_session:${session.id}`, increment),
-				Redis.incr(`violation_fingerprint:${session.data.fingerprint}`, increment),
-				account ? Redis.incr(`violation_account:${account.id}`, increment) : Promise.resolve()
+				limitService.incr(`violation_ip:${session.data.ip}`, increment).unwrap(),
+				limitService.incr(`violation_session:${session.id}`, increment).unwrap(),
+				limitService.incr(`violation_fingerprint:${session.data.fingerprint}`, increment).unwrap(),
+				account
+					? limitService.incr(`violation_account:${account.id}`, increment).unwrap()
+					: Promise.resolve()
 			]);
 			await Promise.all([
-				Redis.expire(`violation_ip:${session.data.ip}`, 60 * 60 * 24),
-				Redis.expire(`violation_session:${session.id}`, 60 * 60 * 24),
-				Redis.expire(`violation_fingerprint:${session.data.fingerprint}`, 60 * 60 * 24),
-				account ? Redis.expire(`violation_account:${account.id}`, 60 * 60 * 24) : Promise.resolve()
+				limitService.expire(`violation_ip:${session.data.ip}`, 60 * 60 * 24),
+				limitService.expire(`violation_session:${session.id}`, 60 * 60 * 24),
+				limitService.expire(`violation_fingerprint:${session.data.fingerprint}`, 60 * 60 * 24),
+				account
+					? limitService.expire(`violation_account:${account.id}`, 60 * 60 * 24)
+					: Promise.resolve()
 			]);
 
 			const score = Math.max(
 				...(await Promise.all([
-					Redis.getValue(`violation_ip:${session.data.ip}`, z.number()),
-					Redis.getValue(`violation_session:${session.id}`, z.number()),
-					Redis.getValue(`violation_fingerprint:${session.data.fingerprint}`, z.number()),
-					account
-						? Redis.getValue(`violation_account:${account.id}`, z.number())
-						: Promise.resolve('0')
+					limitService.getItem(`violation_ip:${session.data.ip}`),
+					limitService.getItem(`violation_session:${session.id}`),
+					limitService.getItem(`violation_fingerprint:${session.data.fingerprint}`),
+					account ? limitService.getItem(`violation_account:${account.id}`) : Promise.resolve('0')
 				]).then((res) => res.map(Number)))
 			);
 
@@ -297,20 +297,19 @@ export namespace Limiting {
 		account?: Account.AccountData
 	) => {
 		return attemptAsync(async () => {
-			const ipScore = await Redis.getValue(`violation_ip:${session.data.ip}`, z.number()).then(
-				(res) => Number(res) || 0
-			);
-			const sessionScore = await Redis.getValue(`violation_session:${session.id}`, z.number()).then(
-				(res) => Number(res) || 0
-			);
-			const fingerprintScore = await Redis.getValue(
-				`violation_fingerprint:${session.data.fingerprint}`,
-				z.number()
-			).then((res) => Number(res) || 0);
+			const ipScore = await limitService
+				.getItem(`violation_ip:${session.data.ip}`)
+				.then((res) => Number(res) || 0);
+			const sessionScore = await limitService
+				.getItem(`violation_session:${session.id}`)
+				.then((res) => Number(res) || 0);
+			const fingerprintScore = await limitService
+				.getItem(`violation_fingerprint:${session.data.fingerprint}`)
+				.then((res) => Number(res) || 0);
 			const accountScore = account
-				? await Redis.getValue(`violation_account:${account.id}`, z.number()).then(
-						(res) => Number(res) || 0
-					)
+				? await limitService
+						.getItem(`violation_account:${account.id}`)
+						.then((res) => Number(res) || 0)
 				: 0;
 
 			return Math.max(ipScore, sessionScore, fingerprintScore, accountScore);

@@ -114,7 +114,7 @@
 		"colors": "git+https://github.com/tsaxking/colors#v1.0.0",
 		"dotenv": "^16.6.1",
 		"drizzle-orm": "^0.38.4",
-		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.16",
+		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.17",
 		"drizzle-zod": "^0.6.1",
 		"express": "^5.1.0",
 		"filepond": "^4.32.8",
@@ -144,7 +144,7 @@
 		"proper-lockfile": "^4.1.2",
 		"range-slider-input": "^2.4.4",
 		"redis": "^5.7.0",
-		"redis-utils": "git+https://github.com/tsaxking/redis#v1.0.1",
+		"redis-utils": "github:tsaxking/redis#v2.0.5",
 		"svelte-filepond": "^0.2.2",
 		"ts-utils": "github:tsaxking/global-ts-utilities#v1.0.0",
 		"uuid": "^11.1.0",
@@ -154,6 +154,7 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
+			"@parcel/watcher",
 			"@sveltejs/kit",
 			"canvas",
 			"colors",

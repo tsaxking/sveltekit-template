@@ -1,6 +1,26 @@
 import { attemptAsync } from 'ts-utils/check';
 import { type Email } from '../../types/email';
-import { Redis } from 'redis-utils';
+import redis from './redis';
+import { z } from 'zod';
+
+const emailService = redis.createQueue(
+	'email',
+	z.object({
+		type: z.string(),
+		data: z.any(),
+		to: z.union([z.string(), z.array(z.string())]),
+		subject: z.string(),
+		attachments: z
+			.array(
+				z.object({
+					filename: z.string(),
+					path: z.string() // full path
+				})
+			)
+			.optional()
+	}),
+	Number(process.env.MAX_EMAIL_QUEUE) || 100
+);
 
 /**
  *
@@ -37,8 +57,6 @@ export const sendEmail = <T extends keyof Email>(
 			targetService = process.env.EMAIL_MICROSERVICE_NAME;
 		}
 
-		const pub = Redis.getPub().unwrap();
-
 		// Compose the job payload
 		const job = {
 			type: config.type,
@@ -50,11 +68,7 @@ export const sendEmail = <T extends keyof Email>(
 			timestamp: Date.now()
 		};
 
-		// Push the job as a JSON string to a Redis list keyed by the targetService
-		// e.g. "emailServiceQueue"
-
-		// Use LPUSH to add a job to the head of the queue
-		await pub.lPush(targetService, JSON.stringify(job));
+		await emailService.add(job).unwrap();
 
 		return {
 			success: true,
