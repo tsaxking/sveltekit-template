@@ -14,7 +14,7 @@ permissions:
 jobs:
   docker-compose-tests:
     # this has a chance of infinite loop if we write a test wrong, timeout should catch it eventually.
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
@@ -24,36 +24,39 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Initialize .docker.env
+      - name: Initialize .docker.env and .env
         run: |
-          echo "DB_USER=test_user" > .docker.env
-          echo "DB_PASS=test" >> .docker.env
-          echo "DB_NAME=test" >> .docker.env
-          echo "DB_PORT=5432" >> .docker.env
-          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .docker.env
-          echo "PUBLIC_APP_NAME=test" >> .docker.env
-          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .docker.env
-          echo "PUBLIC_APP_NAME=test" >> .docker.env
-          echo "REDIS_NAME=some_name" >> .docker.env
-          echo "REDIS_URL=redis://redis:6379" >> .docker.env
-          echo "ENVIRONMENT=test" >> .docker.env
-          echo "PORT=3000" >> .docker.env
-          echo "DB_HOST=db" >> .docker.env
+          # .docker.env for Docker Compose (container values)
+          cat <<EOF > .docker.env
+          DB_USER=test_user
+          DB_PASS=test
+          DB_NAME=test
+          DB_PORT=5432
+          SECRET_OAUTH2_CLIENT_ID=1234567890
+          PUBLIC_APP_NAME=test
+          SECRET_OAUTH2_CLIENT_SECRET=1234567890
+          REDIS_NAME=some_name
+          REDIS_URL=redis://redis:6379
+          ENVIRONMENT=test
+          PORT=3000
+          DB_HOST=db
+          EOF
 
-
-          echo "DB_USER=test_user" > .env
-          echo "DB_PASS=test" >> .env
-          echo "DB_NAME=test" >> .env
-          echo "DB_PORT=5432" >> .env
-          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
-          echo "PUBLIC_APP_NAME=test" >> .env
-          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
-          echo "PUBLIC_APP_NAME=test" >> .env
-          echo "REDIS_NAME=some_name" >> .env
-          echo "REDIS_URL=redis://localhost:6379" >> .env
-          echo "ENVIRONMENT=test" >> .env
-          echo "PORT=3000" >> .env
-          echo "DB_HOST=localhost" >> .env
+          # .env for local app (host values)
+          cat <<EOF > .env
+          DB_USER=test_user
+          DB_PASS=test
+          DB_NAME=test
+          DB_PORT=5432
+          SECRET_OAUTH2_CLIENT_ID=1234567890
+          PUBLIC_APP_NAME=test
+          SECRET_OAUTH2_CLIENT_SECRET=1234567890
+          REDIS_NAME=some_name
+          REDIS_URL=redis://localhost:6379
+          ENVIRONMENT=test
+          PORT=3000
+          DB_HOST=localhost
+          EOF
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -68,48 +71,60 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Set up Postgres
+
+      - name: Start Postgres and Redis in background
         run: |
-          docker compose --project-name test up -d db
-          docker exec db bash -c '
-            for i in $(seq 1 15); do
-              pg_isready -U admin && exit 0
-              sleep 1
-            done
-            echo "Postgres did not become ready in time" >&2
-            exit 1
-          '
+          docker compose --project-name test up -d db redis
+
+      - name: Wait for Postgres
+        run: |
+          for i in $(seq 1 15); do
+            docker exec db pg_isready -U admin && exit 0
+            sleep 1
+          done
+          echo "Postgres did not become ready in time" >&2
+          exit 1
+
+      - name: Wait for Redis
+        run: |
+          for i in $(seq 1 15); do
+            docker exec redis redis-cli ping && exit 0
+            sleep 1
+          done
+          echo "Redis did not become ready in time" >&2
+          exit 1
+
+      - name: Setup Database Roles
+        run: |
           docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
           docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
           docker exec db psql -U admin -c "GRANT admin TO test_user;"
-
-          cp .env .cp
-
           pnpm db:migrate
           pnpm db:push --force
 
-      - name: Set up Redis
-        run: |
-          docker compose --project-name test up -d redis
-          docker exec redis bash -c '
-            for i in $(seq 1 15); do
-              redis-cli ping && exit 0
-              sleep 1
-            done
-            echo "Redis did not become ready in time" >&2
-            exit 1
-          '
-
-      - name: Wait for build to finish
-        run: wait
 
       - name: Build app
         run: pnpm build
 
-      - name: Start App
-        run: |
-          docker compose --project-name test up -d app
-          pnpm test:integration
+      - name: Build Docker image
+        run: docker build -t my-app:latest .
 
-      - name: Stop Application
-        run: docker compose down
+      - name: Debug Docker images
+        run: |
+          echo "Listing all docker images:"
+          docker images
+          echo "Compose images for project 'test':"
+          docker compose --project-name test images
+          echo "Compose ps for project 'test':"
+          docker compose --project-name test ps
+
+
+      - name: Start App
+        run: docker compose --project-name test up -d app
+
+      - name: Run Integration Tests
+        run: pnpm test:integration
+
+      - name: Scan Docker image with Trivy
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image my-app:latest
