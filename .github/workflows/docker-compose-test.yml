@@ -14,7 +14,7 @@ permissions:
 jobs:
   docker-compose-tests:
     # this has a chance of infinite loop if we write a test wrong, timeout should catch it eventually.
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
@@ -107,7 +107,7 @@ jobs:
         run: pnpm build
 
       - name: Build Docker image
-        run: docker build -t test .
+        run: docker build -t my-app:latest .
 
       - name: Debug Docker images
         run: |
@@ -127,5 +127,4 @@ jobs:
 
       - name: Scan Docker image with Trivy
         run: |
-          docker build -t test .
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image test
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image my-app:latest
