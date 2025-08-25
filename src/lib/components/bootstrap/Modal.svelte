@@ -4,7 +4,6 @@
 	import { SimpleEventEmitter } from 'ts-utils/event-emitter';
 
 	const id = Random.uuid();
-
 	const em = new SimpleEventEmitter<'hide' | 'show'>();
 
 	interface Props {
@@ -16,13 +15,11 @@
 	}
 
 	let self: HTMLDivElement;
-
 	const { title, body, buttons, show: doShow, size = 'md' }: Props = $props();
 
 	const getModal = async () => {
-		return import('bootstrap').then((bs) => {
-			return bs.Modal.getInstance(self) || new bs.Modal(self);
-		});
+		const bs = await import('bootstrap');
+		return bs.Modal.getInstance(self) || new bs.Modal(self);
 	};
 
 	export const on = em.on.bind(em);
@@ -30,31 +27,46 @@
 
 	export const show = async () => {
 		em.emit('show');
+		history.pushState({ modalId: id }, '');
 		const modal = await getModal();
 		modal.show();
+
+		console.log('Pushed state', history.state);
 	};
 
 	export const hide = async () => {
 		em.emit('hide');
 		const modal = await getModal();
 		modal.hide();
+		// Only go back if this modal created the history entry
+		console.log('Current state', history.state.modalId);
+		if (history.state?.modalId === id) {
+			history.back();
+			console.log('Popped state', history.state);
+		}
 	};
 
 	onMount(() => {
+		// const onPopState = (e: PopStateEvent) => {
+		// 	if (history.state?.modalId === id) {
+		// 		hide();
+		// 	}
+		// };
+
+		// window.addEventListener('popstate', onPopState);
+
 		const onshow = () => em.emit('show');
 		const onhide = () => em.emit('hide');
 
+		self.addEventListener('shown.bs.modal', onshow);
 		self.addEventListener('hidden.bs.modal', onhide);
 
-		self.addEventListener('shown.bs.modal', onshow);
-
-		if (doShow) {
-			show();
-		}
+		if (doShow) show();
 
 		return () => {
-			self.removeEventListener('hidden.bs.modal', onhide);
 			self.removeEventListener('shown.bs.modal', onshow);
+			self.removeEventListener('hidden.bs.modal', onhide);
+			// window.removeEventListener('popstate', onPopState);
 		};
 	});
 </script>
