@@ -1,5 +1,6 @@
 services:
   app:
+    image: my-app:latest
     pull_policy: never
     container_name: myapp_container
     env_file:
@@ -13,6 +14,8 @@ services:
       - redis
     ports:
       - '${PORT}:${PORT}'
+    volumes:
+      - appdata:/app
   db:
     image: postgres:16
     container_name: db
@@ -28,6 +31,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   redis:
+    container_name: redis
     image: redis:7
     restart: always
     ports:
@@ -38,3 +42,4 @@ services:
 volumes:
   pgdata:
   redisdata:
+  appdata:

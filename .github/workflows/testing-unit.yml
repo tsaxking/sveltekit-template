@@ -66,6 +66,7 @@ jobs:
           echo "DB_NAME=postgres" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
+          echo "REDIS_URL=redis://localhost:6379" >> .env
           export $(cat .env | xargs)
 
       - name: Run migrations
