@@ -52,6 +52,7 @@ sessionIgnore.add(`
 `);
 
 export const handle: Handle = async ({ event, resolve }) => {
+	event.tracing.root.setAttribute('userId', 'fuck');
 	event.locals.start = performance.now();
 	if (Limiting.isBlockedPage(event.url.pathname).unwrap()) {
 		// Redirect to /status/404
