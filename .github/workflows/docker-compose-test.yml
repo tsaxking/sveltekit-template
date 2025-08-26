@@ -71,7 +71,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-
       - name: Start Postgres and Redis in background
         run: |
           docker compose --project-name test up -d db redis
@@ -102,7 +101,6 @@ jobs:
           pnpm db:migrate
           pnpm db:push --force
 
-
       - name: Build app
         run: pnpm build
 
@@ -117,7 +115,6 @@ jobs:
           docker compose --project-name test images
           echo "Compose ps for project 'test':"
           docker compose --project-name test ps
-
 
       - name: Start App
         run: docker compose --project-name test up -d app
