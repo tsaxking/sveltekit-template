@@ -1,4 +1,3 @@
-import { repoSlug } from '../src/lib/server/utils/git';
 import { select } from '../cli/utils';
 import { sleep } from 'ts-utils/sleep';
 import fs from 'fs/promises';

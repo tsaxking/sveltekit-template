@@ -141,7 +141,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 	 * @param {StructData<T>} b
 	 * @returns {number}
 	 */
-	private _sort: (a: StructData<T>, b: StructData<T>) => number = (a, b) => 0;
+	private _sort: (a: StructData<T>, b: StructData<T>) => number = (_a, _b) => 0;
 
 	/**
 	 * Sets a custom sorting function for the data array.

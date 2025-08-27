@@ -208,7 +208,7 @@ export const clearStructUpdates = () => {
  * @typedef {BatchUpdate}
  * @template {DataAction | PropertyAction} T
  */
-type BatchUpdate<T extends DataAction | PropertyAction> = {
+export type BatchUpdate<_T extends DataAction | PropertyAction> = {
 	struct: string;
 	type: DataAction | PropertyAction;
 	data: unknown;
@@ -228,7 +228,7 @@ type BatchUpdate<T extends DataAction | PropertyAction> = {
  * }[]} data
  */
 export const sendBatch = (
-	data: {
+	_data: {
 		struct: string;
 		type: DataAction | PropertyAction;
 		data: unknown;

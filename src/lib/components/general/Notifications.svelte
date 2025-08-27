@@ -9,8 +9,8 @@
 		notifs: number;
 	}
 
-	let limit = $state(10);
-	let page = $state(0);
+	let _limit = $state(10);
+	let _page = $state(0);
 	let { notifs = $bindable() }: Props = $props();
 
 	let notifications = $state(

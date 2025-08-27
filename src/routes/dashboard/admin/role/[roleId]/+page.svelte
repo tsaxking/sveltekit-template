@@ -5,8 +5,8 @@
 	const role = $derived(data.role);
 	const parent = $derived(data.parent);
 	const children = $derived(data.children);
-	const avaliableRulesets = $derived(data.avaliableRulesets);
-	const rulesets = $derived(data.rulesets);
+	const _avaliableRulesets = $derived(data.avaliableRulesets);
+	const _rulesets = $derived(data.rulesets);
 </script>
 
 <div class="container layer-1">

@@ -1,6 +1,5 @@
 import { Canvas } from 'canvas/canvas';
 import { Drawable } from 'canvas/drawable';
-import { Random } from 'ts-utils/math';
 import { Color } from 'colors/color';
 import { Circle } from 'canvas/circle';
 

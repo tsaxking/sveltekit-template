@@ -4,7 +4,6 @@ import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
-import { z } from 'zod';
 import ignore from 'ignore';
 import fs from 'fs';
 import path from 'path';
@@ -16,7 +15,7 @@ export namespace Limiting {
 
 	try {
 		fs.mkdirSync(path.join(process.cwd(), 'private'), { recursive: true });
-	} catch (error) {
+	} catch {
 		// Do nothing
 	}
 
