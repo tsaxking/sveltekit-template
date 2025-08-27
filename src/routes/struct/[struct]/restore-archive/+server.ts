@@ -1,5 +1,5 @@
 import { Errors } from '$lib/server/event-handler.js';
-import { CRUD } from '$lib/server/structs/crud-permissions.js';
+import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { DataAction } from 'drizzle-struct/types';
 import { z } from 'zod';
@@ -59,7 +59,7 @@ export const POST = async (event) => {
 			// Bypass permissions
 			break PERMIT;
 		}
-		const canDo = await CRUD.accountCanDo(
+		const canDo = await Permissions.accountCanDo(
 			event.locals.account,
 			[data.value],
 			DataAction.RestoreArchive

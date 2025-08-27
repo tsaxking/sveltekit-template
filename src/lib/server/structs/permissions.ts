@@ -21,7 +21,7 @@ import terminal from '../utils/terminal';
 import path from 'path';
 import fs from 'fs';
 
-export namespace CRUD {
+export namespace Permissions {
 	/**
 	 * Blocks all edit on a struct.
 	 * @param struct The struct to block actions on.
@@ -1269,7 +1269,7 @@ export namespace CRUD {
 	 * @returns A promise that resolves to an array of all entitlements.
 	 */
 	export const getEntitlements = async () => {
-		return CRUD.Entitlement.all({ type: 'all' });
+		return Permissions.Entitlement.all({ type: 'all' });
 	};
 
 	export class CombinedEntitlementPermission {
@@ -1417,7 +1417,7 @@ export namespace CRUD {
 		}
 
 		const run = async () => {
-			await CRUD.Entitlement.new(
+			await Permissions.Entitlement.new(
 				{
 					name: entitlement.name,
 					group: entitlement.group,
@@ -1436,16 +1436,16 @@ export namespace CRUD {
 			});
 		};
 
-		if (CRUD.Entitlement.built) {
+		if (Permissions.Entitlement.built) {
 			await run();
 		} else {
 			entitlementCache.toBuilds?.push(run);
 		}
 	};
 
-	CRUD.Entitlement.once('build', onceBuild);
+	Permissions.Entitlement.once('build', onceBuild);
 
-	CRUD.createEntitlement({
+	Permissions.createEntitlement({
 		name: 'view-roles',
 		structs: [Role],
 		permissions: ['role:read:name', 'role:read:description'],
@@ -1455,8 +1455,8 @@ export namespace CRUD {
 }
 
 // for drizzle
-export const _role = CRUD.Role.table;
-export const _roleAccount = CRUD.RoleAccount.table;
-export const _entitlement = CRUD.Entitlement.table;
-export const _roleRuleset = CRUD.RoleRuleset.table;
-export const _accountRuleset = CRUD.AccountRuleset.table;
+export const _role = Permissions.Role.table;
+export const _roleAccount = Permissions.RoleAccount.table;
+export const _entitlement = Permissions.Entitlement.table;
+export const _roleRuleset = Permissions.RoleRuleset.table;
+export const _accountRuleset = Permissions.AccountRuleset.table;

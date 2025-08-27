@@ -1,5 +1,5 @@
 import { Errors } from '$lib/server/event-handler.js';
-import { CRUD } from '$lib/server/structs/crud-permissions.js';
+import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
@@ -53,7 +53,7 @@ export const POST = async (event) => {
 				}
 			}
 		}
-		const res = await CRUD.filterPropertyActionFromAccount(
+		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
 			versions.value,
 			PropertyAction.ReadVersionHistory

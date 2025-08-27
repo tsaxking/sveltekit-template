@@ -1,5 +1,5 @@
 import { Errors, EventSuccessCode, status } from '$lib/server/event-handler.js';
-import { CRUD } from '$lib/server/structs/crud-permissions.js';
+import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { z } from 'zod';
 import { DataAction } from 'drizzle-struct/types';
@@ -54,7 +54,7 @@ export const POST = async (event) => {
 			break PERMIT;
 		}
 
-		const canDo = await CRUD.canCreate(event.locals.account, struct, safe.data.attributes);
+		const canDo = await Permissions.canCreate(event.locals.account, struct, safe.data.attributes);
 
 		if (canDo.isErr()) {
 			return Errors.internalError(canDo.error);
