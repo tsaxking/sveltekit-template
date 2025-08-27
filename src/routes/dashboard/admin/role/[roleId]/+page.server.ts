@@ -1,7 +1,7 @@
 import { redirect, fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { Account } from '$lib/server/structs/account';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 
 export const load = async (event) => {
 	if (!event.locals.account) {
@@ -14,22 +14,22 @@ export const load = async (event) => {
 		});
 	}
 
-	const role = await Permissions.Role.fromId(event.params.roleId).unwrap();
+	const role = await CRUD.Role.fromId(event.params.roleId).unwrap();
 	if (!role) {
 		throw fail(ServerCode.notFound, {
 			message: 'Role not found'
 		});
 	}
 
-	const currentRulesets = await Permissions.getRulesetsFromRole(role).unwrap();
+	const currentRulesets = await CRUD.getRulesetsFromRole(role).unwrap();
 
-	const parent = await Permissions.Role.fromId(role.data.parent).unwrap();
-	let availableRulesets: Permissions.RoleRulesetData[] = [];
+	const parent = await CRUD.Role.fromId(role.data.parent).unwrap();
+	let availableRulesets: CRUD.RoleRulesetData[] = [];
 	if (parent) {
-		availableRulesets = await Permissions.getRulesetsFromRole(parent).unwrap();
+		availableRulesets = await CRUD.getRulesetsFromRole(parent).unwrap();
 	}
 
-	const children = await Permissions.getChildren(role).unwrap();
+	const children = await CRUD.getChildren(role).unwrap();
 
 	return {
 		role: role.safe(),

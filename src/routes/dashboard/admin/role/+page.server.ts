@@ -1,5 +1,5 @@
 import { Account } from '$lib/server/structs/account.js';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 
@@ -17,7 +17,7 @@ export const load = async (event) => {
 	const page = parseInt(event.url.searchParams.get('page') || '0');
 	const limit = parseInt(event.url.searchParams.get('limit') || '50');
 
-	const roles = await Permissions.Role.all({
+	const roles = await CRUD.Role.all({
 		type: 'array',
 		offset: page * limit,
 		limit
@@ -28,7 +28,7 @@ export const load = async (event) => {
 			roles.map(async (r) => {
 				return {
 					role: r.safe(),
-					parent: (await Permissions.Role.fromId(r.data.parent).unwrapOr(undefined))?.safe()
+					parent: (await CRUD.Role.fromId(r.data.parent).unwrapOr(undefined))?.safe()
 				};
 			})
 		)

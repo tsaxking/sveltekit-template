@@ -7,7 +7,7 @@ import {
 	DataVersion
 } from 'drizzle-struct/back-end';
 import { Account } from '../structs/account';
-import { Permissions } from '../structs/permissions';
+import { CRUD } from '../structs/crud-permissions';
 import { PropertyAction } from 'drizzle-struct/types';
 import { sse } from './sse';
 import { z } from 'zod';
@@ -84,7 +84,7 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 				return;
 			}
 
-			const res = await Permissions.filterPropertyActionFromAccount(a, [data], PropertyAction.Read);
+			const res = await CRUD.filterPropertyActionFromAccount(a, [data], PropertyAction.Read);
 			if (res.isErr()) return console.error(res.error);
 			const [result] = res.value;
 			connection.send(`struct:${struct.name}`, {

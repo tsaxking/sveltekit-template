@@ -2,7 +2,7 @@ import { Account } from '$lib/server/structs/account';
 import { Session } from '$lib/server/structs/session';
 import '$lib/server/structs/analytics';
 import { Limiting } from '$lib/server/structs/limiting';
-import '$lib/server/structs/permissions';
+import '$lib/server/structs/crud-permissions';
 import '$lib/server/structs/log';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';

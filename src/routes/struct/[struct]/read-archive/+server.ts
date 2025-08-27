@@ -1,5 +1,5 @@
 import { Errors } from '$lib/server/event-handler.js';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 
@@ -39,7 +39,7 @@ export const POST = async (event) => {
 				}
 			}
 		}
-		const res = await Permissions.filterPropertyActionFromAccount(
+		const res = await CRUD.filterPropertyActionFromAccount(
 			event.locals.account,
 			data.value,
 			PropertyAction.ReadArchive

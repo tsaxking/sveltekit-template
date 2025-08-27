@@ -1,5 +1,5 @@
 import { Account } from '$lib/server/structs/account.js';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 import { redirect, fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 
@@ -24,7 +24,7 @@ export const load = async (event) => {
 	return {
 		accounts: await Promise.all(
 			accounts.map(async (a) => {
-				const roles = await Permissions.getRolesFromAccount(a).unwrap();
+				const roles = await CRUD.getRolesFromAccount(a).unwrap();
 				return {
 					account: a.safe(),
 					roles: roles.map((r) => r.safe())

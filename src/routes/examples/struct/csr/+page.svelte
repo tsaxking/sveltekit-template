@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { Test } from "$lib/model/testing.svelte";
-	import { onMount } from "svelte";
+	import { Test } from '$lib/model/testing.svelte';
+	import { onMount } from 'svelte';
 
+	let data = $state(Test.Test.arr());
 
-    let data = $state(Test.Test.arr());
-
-    onMount(() => {
-        data = Test.Test.all(false);
-    });
+	onMount(() => {
+		data = Test.Test.all(false);
+	});
 </script>
 
 {#each $data as item}
-    <p>{item.data.name} | {item.data.age}</p>
+	<p>{item.data.name} | {item.data.age}</p>
 {/each}

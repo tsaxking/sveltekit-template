@@ -1,5 +1,5 @@
 import { Errors } from '$lib/server/event-handler.js';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 import terminal from '$lib/server/utils/terminal.js';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
@@ -121,7 +121,7 @@ export const POST = async (event) => {
 		if (!event.locals.account) {
 			return Errors.noAccount();
 		}
-		const res = await Permissions.filterPropertyActionFromAccount(
+		const res = await CRUD.filterPropertyActionFromAccount(
 			event.locals.account,
 			data,
 			PropertyAction.Read

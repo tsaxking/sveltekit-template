@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// See /diagrams/permissions.drawio for the diagram of this file
+// See /diagrams/permissions.excalidraw for the diagram of this file
 
 import { text } from 'drizzle-orm/pg-core';
 import {
@@ -21,7 +21,7 @@ import terminal from '../utils/terminal';
 import path from 'path';
 import fs from 'fs';
 
-export namespace Permissions {
+export namespace CRUD {
 	/**
 	 * Blocks all edit on a struct.
 	 * @param struct The struct to block actions on.
@@ -1269,7 +1269,7 @@ export namespace Permissions {
 	 * @returns A promise that resolves to an array of all entitlements.
 	 */
 	export const getEntitlements = async () => {
-		return Permissions.Entitlement.all({ type: 'all' });
+		return CRUD.Entitlement.all({ type: 'all' });
 	};
 
 	export class CombinedEntitlementPermission {
@@ -1417,7 +1417,7 @@ export namespace Permissions {
 		}
 
 		const run = async () => {
-			await Permissions.Entitlement.new(
+			await CRUD.Entitlement.new(
 				{
 					name: entitlement.name,
 					group: entitlement.group,
@@ -1436,16 +1436,16 @@ export namespace Permissions {
 			});
 		};
 
-		if (Permissions.Entitlement.built) {
+		if (CRUD.Entitlement.built) {
 			await run();
 		} else {
 			entitlementCache.toBuilds?.push(run);
 		}
 	};
 
-	Permissions.Entitlement.once('build', onceBuild);
+	CRUD.Entitlement.once('build', onceBuild);
 
-	Permissions.createEntitlement({
+	CRUD.createEntitlement({
 		name: 'view-roles',
 		structs: [Role],
 		permissions: ['role:read:name', 'role:read:description'],
@@ -1455,8 +1455,8 @@ export namespace Permissions {
 }
 
 // for drizzle
-export const _role = Permissions.Role.table;
-export const _roleAccount = Permissions.RoleAccount.table;
-export const _entitlement = Permissions.Entitlement.table;
-export const _roleRuleset = Permissions.RoleRuleset.table;
-export const _accountRuleset = Permissions.AccountRuleset.table;
+export const _role = CRUD.Role.table;
+export const _roleAccount = CRUD.RoleAccount.table;
+export const _entitlement = CRUD.Entitlement.table;
+export const _roleRuleset = CRUD.RoleRuleset.table;
+export const _accountRuleset = CRUD.AccountRuleset.table;

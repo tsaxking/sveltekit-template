@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Errors } from '$lib/server/event-handler.js';
-import { Permissions } from '$lib/server/structs/permissions.js';
+import { CRUD } from '$lib/server/structs/crud-permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
@@ -102,7 +102,7 @@ export const POST = async (event) => {
 		}
 	}
 
-	const filtered = await Permissions.filterPropertyActionFromAccount(
+	const filtered = await CRUD.filterPropertyActionFromAccount(
 		event.locals.account,
 		[targetData.value],
 		PropertyAction.Update
