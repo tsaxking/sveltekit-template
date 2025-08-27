@@ -66,7 +66,7 @@ type MergeStatus =
  * @template {Blank} T
  * @template {keyof T} K
  */
-interface MergeState<T extends Blank, K extends keyof T> {
+interface MergeState<T extends Blank, _K extends keyof T> {
 	/**
 	 * Status of the merge operation, indicating the relationship between local, remote, and base data.
 	 *

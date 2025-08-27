@@ -439,7 +439,7 @@ type Attributes = {
 
 type Actions = DataAction | PropertyAction | 'set-attributes';
 
-type ActionDataType<
+type _ActionDataType<
 	Action extends Actions,
 	_S extends Blank,
 	ReadType extends ReadTypes
@@ -467,15 +467,15 @@ type ActionDataType<
 											? Attributes
 											: never;
 type BypassDataConfig<
-	Action extends Actions,
+	_Action extends Actions,
 	_S extends Blank,
-	ReadType extends ReadTypes = ReadTypes
+	_ReadType extends ReadTypes = ReadTypes
 > = unknown;
-type BypassFn<Action extends Actions, _S extends Blank, R extends ReadTypes> = (
+type BypassFn<Action extends Actions, _S extends Blank, _R extends ReadTypes> = (
 	request: RequestEvent,
 	data: BypassDataConfig<Action, _S>
 ) => boolean | Promise<boolean>;
-type BypassException<Action extends Actions, _S extends Blank, R extends ReadTypes> = (
+type BypassException<Action extends Actions, _S extends Blank, _R extends ReadTypes> = (
 	request: RequestEvent,
 	data: BypassDataConfig<Action, _S>
 ) => boolean | Promise<boolean>;

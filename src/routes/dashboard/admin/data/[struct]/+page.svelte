@@ -230,7 +230,7 @@
 					},
 					...Object.entries(structType)
 						.filter(([k]) => !safes?.includes(k))
-						.map(([key, value]) => ({
+						.map(([key, _value]) => ({
 							field: ('data.' + key) as any,
 							headerName: capitalize(fromCamelCase(key)),
 							valueGetter: ['created', 'updated'].includes(key)

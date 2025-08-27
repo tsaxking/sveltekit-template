@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Account } from '$lib/model/account';
-	import { z } from 'zod';
 
 	interface Props {
 		account: Account.AccountData;
@@ -27,7 +26,7 @@
 						usernameState = 'available';
 					}
 				})
-				.catch((err) => {
+				.catch((_err) => {
 					usernameState = 'error';
 				});
 		}, 500);

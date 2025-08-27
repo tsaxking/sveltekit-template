@@ -9,7 +9,7 @@
 
 	const { role }: Props = $props();
 
-	let currentPermissions = $state(Permissions.RoleRuleset.arr());
+	let _currentPermissions = $state(Permissions.RoleRuleset.arr());
 	let availablePermissions = $state(Permissions.RoleRuleset.arr());
 	let entitlements = $state(Permissions.Entitlement.arr());
 	let groups = $state<{
@@ -22,7 +22,7 @@
 	onMount(() => {
 		let staging: Permissions.RoleRulesetData[] | undefined = [];
 		let entitlementsDone = false;
-		currentPermissions = Permissions.getRolePermissions(role);
+		_currentPermissions = Permissions.getRolePermissions(role);
 		availablePermissions = Permissions.getAvailableRolePermissions(role);
 		entitlements = Permissions.getEntitlements();
 
@@ -76,7 +76,7 @@
 		};
 	});
 
-	const grant = async (ruleset: Permissions.RoleRulesetData) => {
+	const _grant = async (ruleset: Permissions.RoleRulesetData) => {
 		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
 		if (entitlement) {
 			const res = await Permissions.grantRolePermission(
@@ -90,7 +90,7 @@
 		}
 	};
 
-	const revoke = async (ruleset: Permissions.RoleRulesetData) => {
+	const _revoke = async (ruleset: Permissions.RoleRulesetData) => {
 		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
 		if (entitlement) {
 			const res = await Permissions.revokeRolePermission(

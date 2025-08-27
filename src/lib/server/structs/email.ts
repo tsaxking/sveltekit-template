@@ -2,12 +2,12 @@ import { Struct } from 'drizzle-struct/back-end';
 import { boolean, text } from 'drizzle-orm/pg-core';
 import { type Email as E } from '../../types/email';
 import { attemptAsync } from 'ts-utils/check';
-import { render } from 'html-constructor';
-import fs from 'fs';
-import path from 'path';
-import nodemailer from 'nodemailer';
-import { sgTransport } from '@neoxia-js/nodemailer-sendgrid-transport';
-import terminal from '../utils/terminal';
+// import { render } from 'html-constructor';
+// import fs from 'fs';
+// import path from 'path';
+// import nodemailer from 'nodemailer';
+// import { sgTransport } from '@neoxia-js/nodemailer-sendgrid-transport';
+// import terminal from '../utils/terminal';
 
 export namespace Email {
 	// const { SENDGRID_API_KEY, SENDGRID_EMAIL, PUBLIC_DOMAIN, HTTPS } = process.env;
@@ -25,7 +25,7 @@ export namespace Email {
 		}
 	});
 
-	export const createLink = (link: string, expires?: Date) => {
+	export const createLink = (_link: string, _expires?: Date) => {
 		return attemptAsync(async () => {
 			throw new Error('Email functionality is deprectaed');
 			// const l = (
@@ -62,7 +62,7 @@ export namespace Email {
 	// 	})
 	// );
 
-	export const send = <T extends keyof E>(config: {
+	export const send = <T extends keyof E>(_config: {
 		type: T;
 		data: E[T];
 		to: string | string[];

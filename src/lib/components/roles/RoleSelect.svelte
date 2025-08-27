@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
-	import { onMount } from 'svelte';
 
 	interface Props {
 		onselect: (role: Permissions.RoleData) => void;

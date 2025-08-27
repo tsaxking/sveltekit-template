@@ -5,7 +5,7 @@
 		account: Account.AccountData;
 	}
 
-	const { account }: Props = $props();
+	const { account: _account }: Props = $props();
 </script>
 
 <!-- <img src={$account.picture} alt="{$account.username}'s Profile Picture" srcset="" /> -->

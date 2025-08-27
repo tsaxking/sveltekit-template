@@ -75,5 +75,5 @@ export default async () => {
 		)
 		.parse(result);
 
-	const res = await Promise.all(typed.map((t) => updateTable(t.table_name)));
+	await Promise.all(typed.map((t) => updateTable(t.table_name)));
 };

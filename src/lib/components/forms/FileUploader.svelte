@@ -80,7 +80,7 @@
 				return () => {};
 			},
 
-			load: (source, load, error, progress, abort) => {
+			load: (source, load, error, _progress, _abort) => {
 				fetch(`/static/uploads/${source}`)
 					.then((response) => {
 						if (!response.ok) throw new Error('Failed to load file');

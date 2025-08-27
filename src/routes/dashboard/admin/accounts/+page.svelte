@@ -10,9 +10,9 @@
 
 	const { data } = $props();
 	const accounts = $derived(writable(data.accounts));
-	const total = $derived(data.total);
-	const page = $derived(data.page);
-	const limit = $derived(data.limit);
+	const _total = $derived(data.total);
+	const _page = $derived(data.page);
+	const _limit = $derived(data.limit);
 
 	type Row = {
 		account: Account.AccountData;
@@ -22,7 +22,7 @@
 	let grid: Grid<Row>;
 	let gridContainer: HTMLDivElement;
 
-	const rerender = () => grid.rerender();
+	const _rerender = () => grid.rerender();
 
 	let distanceToTop = $state(0);
 

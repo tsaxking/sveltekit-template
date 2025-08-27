@@ -220,7 +220,7 @@ export const render = (canvas: HTMLCanvasElement) => {
 	const c = new Canvas(ctx);
 	const critters = Array.from(
 		{ length: 20 },
-		(_, i) =>
+		(_, _i) =>
 			new Critter({
 				x: Math.random(),
 				y: Math.random(),

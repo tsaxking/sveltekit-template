@@ -2,7 +2,6 @@ import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account';
 import { Analytics } from '$lib/server/structs/analytics';
 import { ServerCode } from 'ts-utils/status';
-import { url } from 'inspector';
 
 export const load = async (event) => {
 	if (!event.locals.account) {

@@ -7,12 +7,12 @@
 		ruleset: Permissions.RoleRulesetData;
 	}
 
-	const { role, ruleset }: Props = $props();
+	const { role, ruleset: _ruleset }: Props = $props();
 
-	let roleRulesets = $state(Permissions.RoleRuleset.arr());
+	let _roleRulesets = $state(Permissions.RoleRuleset.arr());
 
 	onMount(() => {
-		roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), false);
+		_roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), false);
 	});
 </script>
 

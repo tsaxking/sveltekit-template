@@ -4,6 +4,7 @@ import { z } from 'zod';
 import ignore from 'ignore';
 import fs from 'fs/promises';
 import path from 'path';
+import terminal from '$lib/server/utils/terminal.js';
 
 const ignoreList = await fs
 	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.pages'), 'utf-8')
@@ -43,6 +44,7 @@ export const POST = async (event) => {
 			});
 		}
 	} catch (error) {
+		terminal.error('Failed to check ignore list for analytics', error);
 		return json({
 			message: 'Analytics logged successfully'
 		});

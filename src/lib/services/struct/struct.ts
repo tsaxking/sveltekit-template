@@ -174,8 +174,6 @@ export interface Socket {
 	on(event: string, lisener: (data: unknown) => void): void;
 }
 
-type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
-
 /**
  * Generates a type from a column type
  *
@@ -1149,7 +1147,7 @@ export class Struct<T extends Blank> {
 		const remove = (d: StructData<T>) => {
 			newArr.remove(d);
 		};
-		const update = (d: StructData<T>) => {
+		const update = (_d: StructData<T>) => {
 			newArr.inform();
 		};
 		this.on('new', add);
@@ -1209,7 +1207,7 @@ export class Struct<T extends Blank> {
 		const remove = (d: StructData<T>) => {
 			newArr.remove(d);
 		};
-		const update = (d: StructData<T>) => {
+		const update = (_d: StructData<T>) => {
 			newArr.inform();
 		};
 		this.on('delete', remove);
@@ -1361,7 +1359,7 @@ export class Struct<T extends Blank> {
 			arr.remove(d);
 		};
 
-		const update = (d: StructData<T>) => {
+		const update = (_d: StructData<T>) => {
 			arr.inform();
 		};
 

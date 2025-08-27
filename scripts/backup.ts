@@ -6,8 +6,6 @@ import { Struct } from 'drizzle-struct/back-end';
 import AdmZip from 'adm-zip';
 import { prompt } from '../cli/utils';
 import { toSnakeCase } from 'ts-utils/text';
-import { resolveAll } from 'ts-utils/check';
-import { Test } from '../src/lib/server/structs/testing';
 
 export const BACKUP_DIR = path.join(process.cwd(), 'backups');
 
