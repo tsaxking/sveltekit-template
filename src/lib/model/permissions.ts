@@ -118,50 +118,42 @@ export namespace Permissions {
 		});
 	};
 
-	export const grantRolePermission = (
+	export const grantRuleset = (
 		role: RoleData,
-		entitlement: EntitlementData,
-		targetAttribute: string
+		ruleset: RoleRulesetData,
 	) => {
 		return RoleRuleset.call('grant-permission', {
 			role: role.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id,
 		});
 	};
 
 	export const revokeRolePermission = (
-		role: RoleData,
-		entitlement: EntitlementData,
-		targetAttribute: string
+		ruleset: RoleRulesetData
 	) => {
 		return RoleRuleset.call('revoke-permission', {
-			role: role.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id,
 		});
 	};
 
 	export const grantAccountPermission = (
 		account: Account.AccountData,
 		entitlement: EntitlementData,
-		targetAttribute: string
+		targetAttribute: string,
+		featureScopes?: string[]
 	) => {
 		return AccountRuleset.call('grant-permission', {
 			account: account.data.id,
 			entitlement: entitlement.data.name,
-			targetAttribute
+			targetAttribute,
+			featureScopes: featureScopes || []
 		});
 	};
 	export const revokeAccountPermission = (
-		account: Account.AccountData,
-		entitlement: EntitlementData,
-		targetAttribute: string
+		ruleset: AccountRulesetData
 	) => {
 		return AccountRuleset.call('revoke-permission', {
-			account: account.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id,
 		});
 	};
 

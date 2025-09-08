@@ -15,7 +15,7 @@ import { Account } from './account';
 import { PropertyAction, DataAction } from 'drizzle-struct/types';
 import { DB } from '../db';
 import { and, eq, ilike } from 'drizzle-orm';
-import type { Entitlement } from '$lib/types/entitlements';
+import type { Entitlement, Features } from '$lib/types/entitlements';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
 import path from 'path';
@@ -193,7 +193,9 @@ export namespace Permissions {
 			description: text('description').notNull().default(''),
 			structs: text('structs').notNull().default('[]'), // JSON string of struct names
 			permissions: text('permissions').notNull().default('[]'), // JSON string of permissions
-			group: text('group').notNull() // Group name for UI organization
+			group: text('group').notNull(), // Group name for UI organization
+			features: text('features').notNull().default('[]'), // JSON string of features that this entitlement enables
+			defaultFeatureScopes: text('default_feature_scope').notNull().default('[]'), // Default feature scope for this entitlement
 		}
 	});
 
@@ -209,7 +211,8 @@ export namespace Permissions {
 			role: text('role').notNull(),
 			entitlement: text('entitlement').notNull(),
 			targetAttribute: text('target_attribute').notNull(),
-			reason: text('reason').notNull()
+			reason: text('reason').notNull(),
+			featureScopes: text('feature_scope').notNull().default('[]'),
 		}
 	});
 
@@ -436,7 +439,8 @@ export namespace Permissions {
 		role: RoleData,
 		entitlement: Entitlement,
 		targetAttribute: string,
-		reason: string
+		reason: string,
+		featureScopes: string[],
 	) => {
 		return attemptAsync(async () => {
 			const rs = await getRoleRuleset(role, entitlement, targetAttribute).unwrap();
@@ -447,7 +451,8 @@ export namespace Permissions {
 				role: role.id,
 				entitlement,
 				targetAttribute: targetAttribute,
-				reason
+				reason,
+				featureScopes: JSON.stringify(featureScopes),
 			}).unwrap();
 		});
 	};
@@ -468,8 +473,7 @@ export namespace Permissions {
 		const body = z
 			.object({
 				role: z.string(),
-				entitlement: z.string(),
-				targetAttribute: z.string()
+				ruleset: z.string(),
 			})
 			.safeParse(data);
 
@@ -489,12 +493,20 @@ export namespace Permissions {
 			};
 		}
 
+		const ruleset = await RoleRuleset.fromId(body.data.ruleset).unwrap();
+		if (!ruleset) {
+			return {
+				success: false,
+				message: 'Ruleset not found',
+			}
+		}
+
 		PERMIT: if (event.locals.account) {
 			if (await Account.isAdmin(event.locals.account)) {
 				break PERMIT;
 			}
 
-			const entitlement = await Entitlement.fromProperty('name', body.data.entitlement, {
+			const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
 				type: 'single'
 			}).unwrap();
 			if (!entitlement) {
@@ -526,7 +538,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === body.data.targetAttribute
+						r.data.targetAttribute === ruleset.data.targetAttribute
 				)
 			) {
 				return {
@@ -539,7 +551,7 @@ export namespace Permissions {
 			const existing = await getRoleRuleset(
 				role,
 				entitlement.data.name,
-				body.data.targetAttribute
+				ruleset.data.targetAttribute
 			).unwrap();
 			if (existing) {
 				return {
@@ -558,9 +570,10 @@ export namespace Permissions {
 		}
 		grantRoleRuleset(
 			role,
-			body.data.entitlement as Entitlement,
-			body.data.targetAttribute,
-			'Permission granted via API'
+			ruleset.data.entitlement as Entitlement,
+			ruleset.data.targetAttribute,
+			'Permission granted via API',
+			JSON.parse(ruleset.data.featureScopes) as string[] || [],
 		);
 
 		return {
@@ -572,9 +585,7 @@ export namespace Permissions {
 	RoleRuleset.callListen('revoke-permission', async (event, data) => {
 		const body = z
 			.object({
-				role: z.string(),
-				entitlement: z.string(),
-				targetAttribute: z.string()
+				ruleset: z.string(),
 			})
 			.safeParse(data);
 
@@ -586,7 +597,15 @@ export namespace Permissions {
 			};
 		}
 
-		const role = await Role.fromId(body.data.role).unwrap();
+		const ruleset = await RoleRuleset.fromId(body.data.ruleset).unwrap();
+		if (!ruleset) {
+			return {
+				success: false,
+				message: 'Ruleset not found',
+			}
+		}
+
+		const role = await Role.fromId(ruleset.data.role).unwrap();
 		if (!role) {
 			return {
 				success: false,
@@ -594,7 +613,7 @@ export namespace Permissions {
 			};
 		}
 
-		const entitlement = await Entitlement.fromProperty('name', body.data.entitlement, {
+		const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
 			type: 'single'
 		}).unwrap();
 		if (!entitlement) {
@@ -627,7 +646,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === body.data.targetAttribute
+						r.data.targetAttribute === ruleset.data.targetAttribute
 				)
 			) {
 				return {
@@ -646,7 +665,7 @@ export namespace Permissions {
 		await revokeRoleRuleset(
 			role,
 			entitlement.data.name as Entitlement,
-			body.data.targetAttribute
+			ruleset.data.targetAttribute
 		).unwrap();
 
 		return {
@@ -663,7 +682,8 @@ export namespace Permissions {
 			account: text('account').notNull(),
 			entitlement: text('entitlement').notNull(),
 			targetAttribute: text('target_attribute').notNull(),
-			reason: text('reason').notNull()
+			reason: text('reason').notNull(),
+			featureScopes: text('feature_scopes').notNull().default('[]'),
 		}
 	});
 
@@ -681,7 +701,8 @@ export namespace Permissions {
 			.object({
 				account: z.string(),
 				entitlement: z.string(),
-				targetAttribute: z.string()
+				targetAttribute: z.string(),
+				featureScopes: z.array(z.string())
 			})
 			.safeParse(data);
 
@@ -741,7 +762,8 @@ export namespace Permissions {
 			account: body.data.account,
 			entitlement: body.data.entitlement,
 			targetAttribute: body.data.targetAttribute,
-			reason: 'Permission granted via API'
+			reason: 'Permission granted via API',
+			featureScopes: JSON.stringify(body.data.featureScopes),
 		}).unwrap();
 
 		return {
@@ -753,9 +775,7 @@ export namespace Permissions {
 	AccountRuleset.callListen('revoke-permission', async (event, data) => {
 		const body = z
 			.object({
-				account: z.string(),
-				entitlement: z.string(),
-				targetAttribute: z.string()
+				ruleset: z.string(),
 			})
 			.safeParse(data);
 
@@ -767,7 +787,15 @@ export namespace Permissions {
 			};
 		}
 
-		const entitlement = await Entitlement.fromProperty('name', body.data.entitlement, {
+		const ruleset = await AccountRuleset.fromId(body.data.ruleset).unwrap();
+		if (!ruleset) {
+			return {
+				success: false,
+				message: 'Ruleset not found',
+			}
+		}
+
+		const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
 			type: 'single'
 		}).unwrap();
 		if (!entitlement) {
@@ -777,7 +805,7 @@ export namespace Permissions {
 			};
 		}
 
-		const account = await Account.Account.fromId(body.data.account).unwrap();
+		const account = await Account.Account.fromId(ruleset.data.account).unwrap();
 		if (!account) {
 			return {
 				success: false,
@@ -795,7 +823,7 @@ export namespace Permissions {
 				!rulesets.some(
 					(r) =>
 						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === body.data.targetAttribute
+						r.data.targetAttribute === ruleset.data.targetAttribute
 				)
 			) {
 				return {
@@ -811,29 +839,6 @@ export namespace Permissions {
 			};
 		}
 
-		const existing = await DB.select()
-			.from(AccountRuleset.table)
-			.where(
-				and(
-					eq(AccountRuleset.table.account, body.data.account),
-					eq(AccountRuleset.table.entitlement, body.data.entitlement),
-					eq(AccountRuleset.table.targetAttribute, body.data.targetAttribute)
-				)
-			);
-
-		if (existing.length === 0) {
-			return {
-				success: false,
-				message: 'This account does not have this permission'
-			};
-		}
-
-		const ruleset = existing.find(
-			(r) =>
-				r.account === body.data.account &&
-				r.entitlement === body.data.entitlement &&
-				r.targetAttribute === body.data.targetAttribute
-		);
 		if (!ruleset) {
 			return {
 				success: false,
@@ -841,7 +846,7 @@ export namespace Permissions {
 			};
 		}
 
-		await AccountRuleset.Generator(ruleset).delete().unwrap();
+		await ruleset.delete().unwrap();
 		return {
 			success: true,
 			message: 'Permission revoked successfully'
@@ -1357,8 +1362,11 @@ export namespace Permissions {
 		await fs.promises.writeFile(
 			ENTITLEMENT_FILE,
 			`
-	export type Entitlement = \n    ${entitlements.value.map((e) => `'${e.data.name}'`).join('\n  | ')};
-	export type Group = \n    ${Array.from(new Set(entitlements.value.map((e) => `'${e.data.group}'`))).join('\n  | ')};
+export type Entitlement = \n    ${entitlements.value.map((e) => `'${e.data.name}'`).join('\n  | ') || 'string'};
+export type Group = \n    ${Array.from(new Set(entitlements.value.map((e) => `'${e.data.group}'`))).join('\n  | ') || 'string'};
+export type Features = \n	${Array.from(new Set(entitlements.value.flatMap((e) => JSON.parse(e.data.features) as string[]))).map(
+				(f) => `'${f}'`
+			).join('\n  | ') || 'string'};
 			`.trim()
 		);
 	};
@@ -1409,6 +1417,8 @@ export namespace Permissions {
 		description: string;
 		structs: S;
 		permissions: Permission<S>[]; // Now supports multiple structs
+		features: string[];
+		defaultFeatureScopes?: string[];
 	}) => {
 		if (!/[a-z0-9-]+/.test(entitlement.name)) {
 			throw new Error(
@@ -1423,7 +1433,9 @@ export namespace Permissions {
 					group: entitlement.group,
 					structs: JSON.stringify(entitlement.structs.map((s) => s.data.name)),
 					permissions: JSON.stringify(entitlement.permissions),
-					description: entitlement.description
+					description: entitlement.description,
+					features: JSON.stringify(entitlement.features),
+					defaultFeatureScopes: JSON.stringify(entitlement.defaultFeatureScopes || []),
 				},
 				{
 					static: true
@@ -1443,6 +1455,39 @@ export namespace Permissions {
 		}
 	};
 
+	export const canDoFeature = (
+		account: Account.AccountData,
+		feature: Features,
+		scope?: string
+	) => {
+		return attemptAsync(async () => {
+			const rulesets = await getRulesetsFromAccount(account).unwrap();
+			if (rulesets.length === 0) return false;
+			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+			if (entitlements.length === 0) return false;
+			const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
+
+			const entitlementsByName = Object.fromEntries(entitlements.map((e) => [e.data.name, e]));
+			const permissionsByName = Object.fromEntries(permissions.map((p) => [p.name, p]));
+
+			for (const ruleset of rulesets) {
+				const entitlement = entitlementsByName[ruleset.data.entitlement];
+				if (!entitlement) continue;
+				const entitlementScopes = JSON.parse(entitlement.data.defaultFeatureScopes) as string[];
+				const permission = permissionsByName[ruleset.data.entitlement];
+				if (!permission) continue;
+				const features = JSON.parse(entitlement.data.features) as string[];
+				if (!features.includes(feature)) continue;
+				if (entitlement.data.defaultFeatureScopes.includes('*')) return true;
+				if (scope && entitlementScopes.includes(scope)) return true;
+
+				// all entitlement feature scopes must be present in the ruleset feature scopes
+			}
+
+			return false;
+		});
+	};
+
 	Permissions.Entitlement.once('build', onceBuild);
 
 	Permissions.createEntitlement({
@@ -1450,7 +1495,8 @@ export namespace Permissions {
 		structs: [Role],
 		permissions: ['role:read:name', 'role:read:description'],
 		group: 'Roles',
-		description: 'Allows viewing roles and their details.'
+		description: 'Allows viewing roles and their details.',
+		features: [],
 	});
 }
 
