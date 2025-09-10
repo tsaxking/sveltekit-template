@@ -1431,7 +1431,8 @@ export namespace Permissions {
 						})
 						.filter(Boolean)
 				) as Partial<Structable<T>>;
-			});
+			})
+			.filter(d => Object.keys(d).length > 0); // filter out empty objects
 		});
 	};
 
@@ -1535,7 +1536,8 @@ export namespace Permissions {
 					.filter(Boolean)
 			) as Partial<Structable<T>>;
 
-			callback(filtered);
+			// Only run callback if there's at least one property
+			if (Object.keys(filtered).length > 0) callback(filtered);
 		};
 	};
 
