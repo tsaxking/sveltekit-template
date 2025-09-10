@@ -1,7 +1,8 @@
 export type Entitlement = 
-    'create-roles'
-  | 'view-roles';
+    'view-roles'
+  | 'manage-members'
+  | 'manage-roles';
 export type Group = 
     'Roles';
 export type Features = 
-	string;
+	'manage-roles';

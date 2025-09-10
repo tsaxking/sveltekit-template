@@ -225,4 +225,18 @@ export namespace Permissions {
 			}).unwrap();
 		});
 	};
+
+	export const addToRole = (role: RoleData, account: Account.AccountData) => {
+		return RoleAccount.call('add-to-role', {
+			role: role.data.id,
+			account: account.data.id
+		});
+	};
+
+	export const removeFromRole = (role: RoleData, account: Account.AccountData) => {
+		return RoleAccount.call('remove-from-role', {
+			role: role.data.id,
+			account: account.data.id
+		});
+	}
 }

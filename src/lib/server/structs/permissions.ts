@@ -14,7 +14,7 @@ import { attempt, attemptAsync, resolveAll } from 'ts-utils/check';
 import { Account } from './account';
 import { PropertyAction, DataAction } from 'drizzle-struct/types';
 import { DB } from '../db';
-import { and, eq, ilike } from 'drizzle-orm';
+import { and, eq, ilike, inArray } from 'drizzle-orm';
 import type { Entitlement, Features } from '$lib/types/entitlements';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
@@ -26,6 +26,7 @@ import {
 	QueryListener,
 	SendListener
 } from '../services/struct-listeners';
+import type { RequestEvent } from '@sveltejs/kit';
 
 export namespace Permissions {
 	/**
@@ -292,6 +293,149 @@ export namespace Permissions {
 
 	export type RoleAccountData = typeof RoleAccount.sample;
 
+	const manageMemberAuth = async (
+		event: RequestEvent,
+		data: { role: string; account: string }
+	) => {
+		if (!event.locals.account) {
+			return 'Not logged in';
+		}
+
+		if (await Account.isAdmin(event.locals.account)) {
+			return true;
+		}
+
+		const role = await Role.fromId(data.role).unwrap();
+
+		if (!role) {
+			return 'Role not found';
+		}
+
+		// account should be in the role or higher and be granted permission to manage members
+		const hierarchy = await getUpperHierarchy(role, true).unwrap();
+		const accountRoles = await getRolesFromAccountWithinHierarchy(event.locals.account, hierarchy).unwrap();
+		if (accountRoles.length === 0) {
+			return 'You are not a member of a parent role or the role itself, you cannot manage its membership';
+		}
+
+		const rulesets = await getRulesetsfromRoles(accountRoles).unwrap();
+		if (!rulesets.some(r => r.data.entitlement === 'manage-members')) {
+			return 'You do not have permission to manage members of this role';
+		}
+
+		return true;
+	};
+
+	CallListener.on(
+		'add-to-role',
+		RoleAccount,
+		z.object({
+			role: z.string(),
+			account: z.string(),
+		}),
+		async (event, data) => {
+			if (!event.locals.account) {
+				throw new Error('Not logged in'); // should be handled by auth already
+			}
+
+			const role = await Role.fromId(data.role).unwrap();
+			if (!role) {
+				throw new Error('Role not found'); // should be handled by auth already
+			}
+
+			const accountToAdd = await Account.Account.fromId(data.account).unwrap();
+			if (!accountToAdd) {
+				return {
+					success: false,
+					message: 'Account to add not found'
+				}
+			}
+
+			console.log(
+				event.locals.account?.id,
+				accountToAdd.id,
+			)
+
+			const isInRole = await Permissions.isInRole(role, accountToAdd).unwrap();
+
+			if (isInRole) {
+				return {
+					success: false,
+					message: 'Account is already in role'
+				}
+			}
+
+			await RoleAccount.new({
+				role: role.id,
+				account: accountToAdd.id
+			}).unwrap();
+
+			return {
+				success: true,
+			}
+		},
+	)
+	.auth(manageMemberAuth);
+
+	CallListener.on(
+		'remove-from-role',
+		RoleAccount,
+		z.object({
+			role: z.string(),
+			account: z.string(),
+		}),
+		async (event, data) => {
+			const res = await DB.select()
+				.from(RoleAccount.table)
+				.where(and(eq(RoleAccount.table.role, data.role), eq(RoleAccount.table.account, data.account)))
+				.limit(1);
+			
+			if (res.length === 0) {
+				return {
+					success: false,
+					message: 'Account is not in role'
+				}
+			}
+
+
+			const ra = RoleAccount.Generator(res[0]);
+
+			if (ra.data.account === event.locals.account?.data.id) {
+				const role = await Role.fromId(data.role).unwrap();
+				if (!role) {
+					return {
+						success: false,
+						message: 'Role not found'
+					};
+				}
+
+				const upper = await getUpperHierarchy(role, false).unwrap();
+				if (upper.length === 0) {
+					return {
+						success: false,
+						message: 'You cannot remove yourself from this role because you are a top-level role. You can only be removed by another member of the role or a parent role.'
+					};
+				}
+
+				const inHigherRoles = await getRolesFromAccountWithinHierarchy(event.locals.account, upper).unwrap();
+				if (inHigherRoles.length === 0) {
+					return {
+						success: false,
+						message: 'You cannot remove yourself from this role because you are a member of a top-level role. You can only be removed by another member of the role or a parent role.'
+					}
+				}
+			}
+
+			await ra.delete().unwrap();
+			return {
+				success: true,
+			}
+		}
+	)
+	.auth(manageMemberAuth);
+
+
+
 	export const Entitlement = new Struct({
 		name: 'entitlements',
 		structure: {
@@ -495,6 +639,17 @@ export namespace Permissions {
 				hierarchy = hierarchy.filter((r) => r.id !== role.id); // Remove the role itself if not inclusive
 			}
 			return hierarchy; // Return from top to bottom
+		});
+	};
+
+	export const isInRole = (role: RoleData, account: Account.AccountData) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(RoleAccount.table)
+				.where(and(eq(RoleAccount.table.role, role.id), eq(RoleAccount.table.account, account.id)))
+				.limit(1);
+
+			return !!res[0];
 		});
 	};
 
@@ -1588,6 +1743,32 @@ export type Features = \n	${
 		}
 	};
 
+	export const getRolesFromAccountWithinHierarchy = (account: Account.AccountData, hierarchy: RoleData[]) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Role.table)
+				.innerJoin(RoleAccount.table, eq(RoleAccount.table.role, Role.table.id))
+				.where(
+					and(
+						eq(RoleAccount.table.account, account.id),
+						inArray(RoleAccount.table.role, hierarchy.map((r) => r.id))
+					)
+				);
+
+			return res.map((r) => Role.Generator(r.role));
+		});
+	};
+
+	export const getRulesetsfromRoles = (roles: RoleData[]) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(RoleRuleset.table)
+				.where(inArray(RoleRuleset.table.role, roles.map((r) => r.id)));
+
+			return res.map((r) => RoleRuleset.Generator(r));
+		});
+	};
+
 	export const canDoFeature = (account: Account.AccountData, feature: Features, scope?: string) => {
 		return attemptAsync(async () => {
 			const rulesets = await getRulesetsFromAccount(account).unwrap();
@@ -1636,11 +1817,13 @@ export type Features = \n	${
 				color: '#ff0000'
 			}).unwrap();
 
-			// await Role.new({
-			// 	name: name + ' - Base',
-			// 	description,
-			// 	parent: localAdmin.id
-			// }).unwrap();
+			rulesets.push({
+				entitlement: 'manage-roles',
+				targetAttribute: localAdmin.data.id,
+				featureScopes: [],
+				name: 'Manage Roles',
+				description: 'Allows managing roles and their permissions.',
+			});
 
 			const granted = await Promise.all(
 				rulesets.map((rs) =>
@@ -1659,6 +1842,25 @@ export type Features = \n	${
 				role: localAdmin,
 				rulesets: granted
 			};
+		});
+	};
+
+	export const createChildRole = (
+		config: {
+			parent: RoleData;
+			name: string;
+			description: string;
+			color?: string;
+		}
+	) => {
+		return attemptAsync(async () => {
+			const role = await  Role.new({
+				name: config.name,
+				description: config.description,
+				parent: config.parent.id,
+				color: config.color || '#ffffff'
+			}).unwrap();
+			return role;
 		});
 	};
 
@@ -1688,12 +1890,27 @@ export type Features = \n	${
 	});
 
 	Permissions.createEntitlement({
-		name: 'create-roles',
+		name: 'manage-roles',
 		structs: [Role],
-		permissions: ['role:create', 'role:read:name', 'role:read:description'],
+		permissions: [
+			'role:create', 
+			'role:read:name', 
+			'role:read:description',
+		],
 		group: 'Roles',
-		description: 'Allows creating new roles.',
-		features: []
+		description: 'Allows creating new roles, deleting roles, and updating existing roles.',
+		features: [
+			'manage-roles'
+		]
+	});
+
+	Permissions.createEntitlement({
+		name: 'manage-members',
+		structs: [],
+		permissions: [],
+		group: 'Roles',
+		description: 'Allows granting roles to accounts.',
+		features: [],
 	});
 }
 

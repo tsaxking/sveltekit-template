@@ -4,6 +4,10 @@
 	import Grid from '$lib/components/general/Grid.svelte';
 	import RoleEditor from '$lib/components/roles/RoleRulesetEditor.svelte';
 	import { Permissions } from '$lib/model/permissions';
+	import Modal from '$lib/components/bootstrap/Modal.svelte';
+	import { Account } from '$lib/model/account.js';
+	import { contextmenu } from '$lib/utils/contextmenu.js';
+	import { alert } from '$lib/utils/prompts.js';
 
 	nav();
 
@@ -12,6 +16,9 @@
 	const parent = $derived(data.parent);
 	const children = $derived(data.children);
 	const members = $derived(data.members);
+
+
+	let accountSearchModal: Modal;
 </script>
 
 <div class="container layer-1 mb-5 pb-3">
@@ -194,8 +201,63 @@
 					headerName: 'Date Joined',
 					field: 'roleAccount.data.created',
 					cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
-				}]
+				}],
+				preventDefaultOnContextMenu: true,
+				onCellContextMenu: (params) => {
+					contextmenu(
+						params.event as MouseEvent,
+						{
+							options: [
+								{
+									name: 'Remove from Role',
+									action: async () => {
+										if (params.data) {
+											const res = await Permissions.removeFromRole(role, params.data.account);
+											if (res.isErr()) {
+												console.error('Failed to remove member from role:', res.error);
+												return;
+											}
+
+											if (!res.value.success) {
+												console.error('Failed to remove member from role:', res.value.message);
+												return alert('Error: ' + res.value.message || 'Failed to remove member from role');
+											}
+										}
+									},
+									icon: {
+										type: 'material-icons',
+										name: 'remove_circle',
+									}
+								}
+							],
+							width: '200px',
+						}
+					)
+				}
 			}}
 		/>
+	</div>
+	<div class="row mb-3">
+		<div class="col">
+			<button type="button" class="btn btn-primary" onclick={async () => {
+				const account = await Account.searchAccountsModal({
+					filter: (account) => !$members.find(m => m.account.data.id === account.data.id)
+				});
+				if (!account) return;
+				const res = await Permissions.addToRole(role, account);
+				if (res.isErr()) {
+					console.error('Failed to add member to role:', res.error);
+					return;
+				}
+
+				if (!res.value.success) {
+					console.error('Failed to add member to role:', res.value.message);
+					return alert('Error: ' + res.value.message || 'Failed to add member to role');
+				}
+			}}>
+				<i class="material-icons">add</i>
+				Add Member
+			</button>
+		</div>
 	</div>
 </div>
