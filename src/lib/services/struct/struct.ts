@@ -1323,7 +1323,7 @@ export class Struct<T extends Blank> {
 		// Register with centralized event system using a satisfy function
 		this.registerDataArray('archived', newArr, (data) => {
 			// Only archived data satisfies the 'archived' condition
-			return data.data.archived;
+			return !!data.data.archived;
 		}, true); // includeArchived = true for archived data arrays
 
 		// Load initial data from stream
