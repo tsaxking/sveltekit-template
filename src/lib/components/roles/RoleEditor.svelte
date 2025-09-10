@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 	import { onMount } from 'svelte';
-	import { capitalize, fromSnakeCase } from 'ts-utils/text';
+	import RulesetSwitch from './RulesetSwitch.svelte';
 
 	interface Props {
 		role: Permissions.RoleData;
+		saveOnChange: boolean;
 	}
 
-	const { role }: Props = $props();
+	const { role, saveOnChange }: Props = $props();
 
-	let _currentPermissions = $state(Permissions.RoleRuleset.arr());
 	let availablePermissions = $state(Permissions.RoleRuleset.arr());
 	let entitlements = $state(Permissions.Entitlement.arr());
 	let groups = $state<{
 		[key: string]: {
 			ruleset: Permissions.RoleRulesetData | undefined;
 			entitlement: Permissions.EntitlementData;
+			switch: RulesetSwitch | undefined;
 		};
 	}>({});
 
 	onMount(() => {
 		let staging: Permissions.RoleRulesetData[] | undefined = [];
 		let entitlementsDone = false;
-		_currentPermissions = Permissions.getRolePermissions(role);
 		availablePermissions = Permissions.getAvailableRolePermissions(role);
 		entitlements = Permissions.getEntitlements();
 
@@ -39,7 +39,7 @@
 			staging = undefined;
 		};
 
-		const apUnsub = availablePermissions.subscribe((p) => {
+		const availableUnsub = availablePermissions.subscribe((p) => {
 			if (!entitlementsDone) {
 				// Groups are not created yet, so we can only collect rulesets
 				return (staging = p);
@@ -48,7 +48,7 @@
 			// Groups are created so we can assign rulesets to groups
 			assign(p);
 		});
-		const etUnsub = entitlements.subscribe((e) => {
+		const entitlementUnsub = entitlements.subscribe((e) => {
 			if (entitlementsDone) return;
 			entitlementsDone = true;
 
@@ -56,7 +56,8 @@
 				if (!groups[String(entitlement.data.name)]) {
 					groups[String(entitlement.data.name)] = {
 						ruleset: undefined,
-						entitlement: entitlement
+						entitlement: entitlement,
+						switch: undefined
 					};
 				} else {
 					console.warn(`Entitlement ${entitlement.data.name} already exists in groups, skipping.`);
@@ -71,36 +72,14 @@
 		});
 
 		return () => {
-			apUnsub();
-			etUnsub();
+			availableUnsub();
+			entitlementUnsub();
 		};
 	});
 
-	const _grant = async (ruleset: Permissions.RoleRulesetData) => {
-		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
-		if (entitlement) {
-			const res = await Permissions.grantRolePermission(
-				role,
-				entitlement,
-				String(ruleset.data.targetAttribute)
-			);
-			return res.isOk();
-		} else {
-			console.error(`Entitlement ${ruleset.data.entitlement} not found`);
-		}
-	};
-
-	const _revoke = async (ruleset: Permissions.RoleRulesetData) => {
-		const entitlement = $entitlements.find((e) => e.data.name === ruleset.data.entitlement);
-		if (entitlement) {
-			const res = await Permissions.revokeRolePermission(
-				role,
-				entitlement,
-				String(ruleset.data.targetAttribute)
-			);
-			return res.isOk();
-		} else {
-			console.error(`Entitlement ${ruleset.data.entitlement} not found`);
+	export const save = () => {
+		for (const group of Object.keys(groups)) {
+			groups[group].switch?.save();
 		}
 	};
 </script>
@@ -114,26 +93,12 @@
 			<ul class="list-group">
 				{#each Object.keys(groups) as group}
 					{#if groups[group].ruleset}
-						<li class="list-group-item">
-							<div class="form-check form-switch">
-								<input
-									class="form-check-input"
-									type="checkbox"
-									role="switch"
-									id="switch-check-{groups[group].entitlement.data.name}"
-								/>
-								<label
-									class="form-check-label"
-									for="switch-check-{groups[group].entitlement.data.name}"
-									>{capitalize(
-										fromSnakeCase(String(groups[group].entitlement.data.name), '-')
-									)}</label
-								>
-							</div>
-							<small class="text-muted">
-								{groups[group].entitlement.data.description || 'No description available.'}
-							</small>
-						</li>
+						<RulesetSwitch
+							bind:this={groups[group].switch}
+							{role}
+							ruleset={groups[group].ruleset}
+							{saveOnChange}
+						/>
 					{/if}
 				{/each}
 			</ul>

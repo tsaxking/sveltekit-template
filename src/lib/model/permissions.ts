@@ -40,7 +40,9 @@ export namespace Permissions {
 			description: 'string',
 			structs: 'string',
 			permissions: 'string',
-			group: 'string'
+			group: 'string',
+			defaultFeatureScopes: 'string',
+			features: 'string'
 		},
 		socket: sse,
 		browser
@@ -55,7 +57,10 @@ export namespace Permissions {
 			role: 'string',
 			entitlement: 'string',
 			targetAttribute: 'string',
-			reason: 'string'
+			parent: 'string',
+			name: 'string',
+			description: 'string',
+			featureScopes: 'string'
 		},
 		socket: sse,
 		browser
@@ -70,7 +75,7 @@ export namespace Permissions {
 			account: 'string',
 			entitlement: 'string',
 			targetAttribute: 'string',
-			reason: 'string'
+			featureScopes: 'string'
 		},
 		socket: sse,
 		browser
@@ -118,21 +123,16 @@ export namespace Permissions {
 		});
 	};
 
-	export const grantRuleset = (
-		role: RoleData,
-		ruleset: RoleRulesetData,
-	) => {
+	export const grantRuleset = (role: RoleData, ruleset: RoleRulesetData) => {
 		return RoleRuleset.call('grant-permission', {
 			role: role.data.id,
-			ruleset: ruleset.data.id,
+			ruleset: ruleset.data.id
 		});
 	};
 
-	export const revokeRolePermission = (
-		ruleset: RoleRulesetData
-	) => {
+	export const revokeRolePermission = (ruleset: RoleRulesetData) => {
 		return RoleRuleset.call('revoke-permission', {
-			ruleset: ruleset.data.id,
+			ruleset: ruleset.data.id
 		});
 	};
 
@@ -149,11 +149,9 @@ export namespace Permissions {
 			featureScopes: featureScopes || []
 		});
 	};
-	export const revokeAccountPermission = (
-		ruleset: AccountRulesetData
-	) => {
+	export const revokeAccountPermission = (ruleset: AccountRulesetData) => {
 		return AccountRuleset.call('revoke-permission', {
-			ruleset: ruleset.data.id,
+			ruleset: ruleset.data.id
 		});
 	};
 
@@ -180,6 +178,14 @@ export namespace Permissions {
 			).unwrap();
 
 			return res.map((r) => Role.Generator(r));
+		});
+	};
+
+	export const createRole = (parent: RoleData, config: { name: string; description: string }) => {
+		return Role.call('create-role', {
+			parent: parent.data.id,
+			name: config.name,
+			description: config.description
 		});
 	};
 }

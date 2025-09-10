@@ -7,6 +7,7 @@
  */
 import { type RequestEvent } from '@sveltejs/kit';
 import {
+	DataVersion,
 	StructStream,
 	type Blank,
 	type Struct,
@@ -18,6 +19,7 @@ import { z } from 'zod';
 import { attemptAsync } from 'ts-utils/check';
 import terminal from '../utils/terminal';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
+import { Account } from '../structs/account';
 
 /**
  * Callback type for listener handlers.
@@ -187,7 +189,7 @@ class ListenerBase<Event extends string, DataType, ReturnType> {
 /**
  * Return type for call listeners (void).
  */
-type CallReturnType = void;
+type CallReturnType = unknown;
 
 /**
  * Listener for function calls from the frontend (no return value).
@@ -214,11 +216,11 @@ export class CallListener<
 		schema: z.ZodType<DataType>,
 		cb: CB<DataType, ReturnType>
 	) {
-		if (CallListener.listeners.has(event)) {
-			throw new Error('Listener already exists for event: ' + event);
+		if (CallListener.listeners.has(struct.name + ':' + event)) {
+			throw new Error('Listener already exists for event: ' + struct.name + ':' + event);
 		}
 		const listener = new CallListener(event, struct, cb, schema);
-		CallListener.listeners.set(event, listener);
+		CallListener.listeners.set(struct.name + ':' + event, listener);
 		return listener;
 	}
 
@@ -294,8 +296,8 @@ export class QueryListener<
 		schema: z.ZodType<DataType>,
 		cb: QueryCBType<DataType, StructType, Name>
 	) {
-		if (QueryListener.listeners.has(event)) {
-			throw new Error('Listener already exists for event: ' + event);
+		if (QueryListener.listeners.has(struct.name + ':' + event)) {
+			throw new Error('Listener already exists for event: ' + struct.name + ':' + event);
 		}
 		const listener = new QueryListener(
 			event,
@@ -316,7 +318,7 @@ export class QueryListener<
 			},
 			schema
 		);
-		QueryListener.listeners.set(event, listener);
+		QueryListener.listeners.set(struct.name + ':' + event, listener);
 		return listener;
 	}
 
@@ -381,11 +383,11 @@ export class SendListener<
 		schema: z.ZodType<DataType>,
 		cb: CB<DataType, ReturnType>
 	) {
-		if (SendListener.listeners.has(event)) {
-			throw new Error('Listener already exists for event: ' + event);
+		if (SendListener.listeners.has(struct.name + ':' + event)) {
+			throw new Error('Listener already exists for event: ' + struct.name + ':' + event);
 		}
 		const listener = new SendListener(event, struct, cb, schema);
-		SendListener.listeners.set(event, listener);
+		SendListener.listeners.set(struct.name + ':' + event, listener);
 		return listener;
 	}
 
@@ -480,6 +482,11 @@ type BypassException<Action extends Actions, _S extends Blank, _R extends ReadTy
 	data: BypassDataConfig<Action, _S>
 ) => boolean | Promise<boolean>;
 
+type AccountBypassFn<StructType extends Blank, Name extends string> = (
+	account: Account.AccountData,
+	data: StructData<StructType, Name> | DataVersion<StructType, Name>
+) => boolean | Promise<boolean>;
+
 // const getDataZodType = <_S extends Blank, _N extends string, Action extends Actions, ReadType extends ReadTypes>(
 //     config: {
 //         struct: Struct<_S, _N>,
@@ -544,6 +551,35 @@ type BypassException<Action extends Actions, _S extends Blank, _R extends ReadTy
 //     throw new Error(`No schema for action: ${String(action)}`);
 // };
 
+class AccountBypass<Action extends Actions, StructType extends Blank, Name extends string> {
+	public static readonly listeners = new Set<AccountBypass<Actions, any, string>>();
+
+	public static on<Action extends Actions, StructType extends Blank, Name extends string>(
+		action: Action,
+		struct: Struct<StructType, Name>,
+		cb: AccountBypassFn<StructType, Name>
+	) {
+		const listener = new AccountBypass(action, struct, cb);
+		AccountBypass.listeners.add(listener as any);
+		return listener;
+	}
+
+	constructor(
+		public readonly action: Action,
+		public readonly struct: Struct<StructType, Name>,
+		public readonly cb: AccountBypassFn<StructType, Name>
+	) {}
+
+	run(
+		account: Account.AccountData,
+		data: StructData<StructType, Name> | DataVersion<StructType, Name>
+	) {
+		return attemptAsync(async () => {
+			return this.cb(account, data);
+		});
+	}
+}
+
 export class ActionBypass<Action extends Actions, StructType extends Blank, Name extends string> {
 	public static readonly listeners = new Set<ActionBypass<Actions, any, string>>();
 
@@ -556,6 +592,8 @@ export class ActionBypass<Action extends Actions, StructType extends Blank, Name
 		ActionBypass.listeners.add(listener as any);
 		return listener;
 	}
+
+	public static account = AccountBypass.on.bind(AccountBypass);
 
 	constructor(
 		public readonly action: Action,
@@ -582,5 +620,95 @@ export class ActionBypass<Action extends Actions, StructType extends Blank, Name
 
 			return this.cb(request, res);
 		});
+	}
+
+	async runWithAccount(
+		account: Account.AccountData,
+		data: StructData<StructType, Name> | DataVersion<StructType, Name>
+	) {
+		return attemptAsync(async () => {
+			return Array.from(AccountBypass.listeners).some(async (b) =>
+				b.run(account, data as any).unwrap()
+			);
+		});
+	}
+}
+
+type AccountBlockFn = (account: Account.AccountData) => boolean | Promise<boolean>;
+
+class AccountBlock<Action extends Actions, StructType extends Blank, Name extends string> {
+	public static readonly listeners = new Set<AccountBlock<Actions, any, string>>();
+
+	public static on<Action extends Actions, StructType extends Blank, Name extends string>(
+		action: Action,
+		struct: Struct<StructType, Name>,
+		cb: AccountBlockFn
+	) {
+		const listener = new AccountBlock(action, struct, cb);
+		AccountBlock.listeners.add(listener as any);
+		return listener;
+	}
+
+	constructor(
+		public readonly action: Action,
+		public readonly struct: Struct<StructType, Name>,
+		public readonly cb: AccountBlockFn
+	) {}
+
+	run(account: Account.AccountData) {
+		return attemptAsync(async () => {
+			return this.cb(account);
+		});
+	}
+}
+
+export type BlockCB<Action extends Actions, StructType extends Blank, _Name extends string> = (
+	request: RequestEvent,
+	action: Action,
+	data: _ActionDataType<Action, StructType, ReadTypes>
+) => boolean | Promise<boolean>;
+
+export class Block<Action extends Actions, StructType extends Blank, Name extends string> {
+	public static readonly blocks = new Set<Block<Actions, any, string>>();
+
+	public static on<Action extends Actions, StructType extends Blank, Name extends string>(
+		action: Action,
+		struct: Struct<StructType, Name>,
+		cb: BlockCB<Action, StructType, Name>
+	) {
+		const block = new Block(action, struct, cb);
+		Block.blocks.add(block as any);
+		return block;
+	}
+
+	public static account = AccountBlock.on.bind(AccountBlock);
+
+	constructor(
+		public readonly action: Action,
+		public readonly struct: Struct<StructType, Name>,
+		public readonly cb: BlockCB<Action, StructType, Name>
+	) {}
+
+	public run(
+		request: RequestEvent,
+		action: Action,
+		data: _ActionDataType<Action, StructType, ReadTypes>
+	) {
+		return attemptAsync(async () => {
+			return this.cb(request, action, data);
+		});
+	}
+
+	public async runWithAccount(account: Account.AccountData) {
+		return attemptAsync(async () => {
+			return Array.from(AccountBlock.listeners).some(async (b) => b.run(account).unwrap());
+		});
+	}
+
+	public exceptions = new Set<BlockCB<Action, StructType, Name>>();
+
+	except(cb: BlockCB<Action, StructType, Name>) {
+		this.exceptions.add(cb);
+		return this;
 	}
 }

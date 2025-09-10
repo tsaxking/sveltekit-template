@@ -13,7 +13,8 @@ export default async (roleName: string) => {
 			Permissions.Role.build(DB),
 			Permissions.RoleRuleset.build(DB),
 			Permissions.RoleAccount.build(DB),
-			Account.Account.build(DB)
+			Account.Account.build(DB),
+			Permissions.Entitlement.build(DB)
 		])
 	).unwrap();
 
@@ -28,31 +29,24 @@ export default async (roleName: string) => {
 	const account = await selectAccount().unwrap();
 	if (!account) throw new Error('No account selected');
 
-	const roleData = await Permissions.Role.new({
-		name: roleName,
-		description: `Test role for ${account.data.username}`,
-		parent: 'default',
-		lifetime: 1000 * 60 * 60 * 24 // 1 day
-	}).unwrap();
+	const roleData = await Permissions.startHierarchy(
+		`Test Role: ${roleName}`,
+		`Description: ${roleName}`,
+		[
+			{
+				name: 'Test Ruleset',
+				description: 'Test Ruleset Description',
+				entitlement: 'view-roles',
+				targetAttribute: 'test-role',
+				featureScopes: ['test-scope']
+			}
+		]
+	).unwrap();
 
 	await Permissions.RoleAccount.new({
-		role: roleData.id,
+		role: roleData.role.id,
 		account: account.data.id
 	}).unwrap();
 
 	console.log(`Role "${roleName}" created for account "${account.data.username}".`);
-
-	await Permissions.grantRoleRuleset(
-		roleData,
-		'manage-roles',
-		'test',
-		'Test role ruleset for ' + roleName
-	).unwrap();
-
-	await Permissions.grantRoleRuleset(
-		roleData,
-		'view-roles',
-		'test',
-		'Test role ruleset for ' + roleName
-	).unwrap();
 };

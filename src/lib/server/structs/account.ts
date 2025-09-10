@@ -13,6 +13,7 @@ import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { Email } from './email';
 import type { Icon } from '$lib/types/icons';
 import { z } from 'zod';
+import { Permissions } from './permissions';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -87,6 +88,12 @@ export namespace Account {
 			await Promise.all(versions.map((v) => v.delete()));
 			a.delete();
 		});
+		Permissions.RoleAccount.fromProperty('account', a.id, {
+			type: 'stream'
+		}).pipe((ra) => ra.delete());
+		Permissions.AccountRuleset.fromProperty('account', a.id, {
+			type: 'stream'
+		}).pipe((ar) => ar.delete());
 	});
 
 	export const Admins = new Struct({

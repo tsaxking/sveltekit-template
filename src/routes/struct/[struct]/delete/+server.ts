@@ -57,7 +57,11 @@ export const POST = async (event) => {
 		) {
 			break PERMIT;
 		}
-		const canDo = await Permissions.accountCanDo(event.locals.account, [data.value], DataAction.Archive);
+		const canDo = await Permissions.accountCanDo(
+			event.locals.account,
+			[data.value],
+			DataAction.Archive
+		);
 
 		if (canDo.isErr()) {
 			return Errors.internalError(canDo.error);

@@ -1,5 +1,6 @@
 export type Entitlement = 
-    'view-roles';
+    'view-roles'
+  | 'create-roles';
 export type Group = 
     'Roles';
 export type Features = 
