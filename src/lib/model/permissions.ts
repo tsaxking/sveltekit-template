@@ -4,6 +4,7 @@ import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
+import { Form } from '$lib/utils/form';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -186,6 +187,39 @@ export namespace Permissions {
 			parent: parent.data.id,
 			name: config.name,
 			description: config.description
+		});
+	};
+
+	export const createChildRolePopup = async (parent: RoleData) => {
+		return attemptAsync(async () => {
+			const res = await new Form()
+				.input('name', {
+					label: 'Role Name',
+					placeholder: 'Enter role name',
+					required: true,
+					type: 'text',
+				})
+				.input('description', {
+					label: 'Description',
+					placeholder: 'Enter role description',
+					required: true,
+					type: 'text',
+					value: '',
+				})
+				.prompt(
+					{
+						send: false,
+						title: `Create Child Role for ${parent.data.name}`,
+					}
+				)
+				.unwrap();
+
+			if (!res.value.name || !res.value.description) throw new Error('Name and description are required');
+
+			return createRole(parent, {
+				name: res.value.name,
+				description: res.value.description,
+			}).unwrap();
 		});
 	};
 }

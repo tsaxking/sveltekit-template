@@ -24,7 +24,7 @@ import redis from '$lib/server/services/redis';
 config();
 
 (async () => {
-	await redis.init().unwrap();
+	await redis.init();
 	Struct.each((struct) => {
 		if (!struct.built) {
 			struct.build(DB);

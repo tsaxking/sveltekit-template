@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+	const id = Math.random().toString(36).substring(2, 15);
+
 	interface Props {
 		role: Permissions.RoleData;
 		ruleset: Permissions.RoleRulesetData;
@@ -16,12 +18,13 @@
 
 	let isOn = $state(false);
 	let unsaved = $state(false);
+	let disabled = $state(false);
 
 	export const hasUnsaved = writable(false);
 
-	$effect(() => {
-		hasUnsaved.set(unsaved);
-	});
+	// $effect(() => {
+	// 	hasUnsaved.set(unsaved);
+	// });
 
 	export const save = async () => {
 		if (isOn) {
@@ -29,14 +32,14 @@
 			const res = await Permissions.grantRuleset(role, parentRuleset);
 			if (res.isErr()) {
 				console.error('Failed to grant ruleset:', res.error);
-				return;
 			}
 		} else {
 			if (!ruleset) return; // already revoked
 			const res = await Permissions.revokeRolePermission(ruleset);
 			if (res.isErr()) {
 				console.error('Failed to revoke ruleset:', res.error);
-				return;
+			} else {
+				ruleset = undefined;
 			}
 		}
 		unsaved = false;
@@ -53,27 +56,36 @@
 			);
 		}
 
+		if (role.data.parent === '') {
+			isOn = true;
+			disabled = true;
+			return;
+		}
+
 		roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), false);
 
 		return roleRulesets.subscribe((v) => {
-			isOn = v.some((r) => r.data.parent === parentRuleset.data.id);
+			const rs = v.find((r) => r.data.parent === parentRuleset.data.id);
+			ruleset = rs;
+			isOn = !!rs;
 		});
 	});
 </script>
 
 <div class="form-check form-switch">
 	<input
+		{disabled}
 		class="form-check-input"
 		type="checkbox"
 		role="switch"
-		id="switchCheckDefault"
+		id="switch-{id}"
 		bind:checked={isOn}
 		onchange={() => {
 			unsaved = true;
 			if (saveOnChange) save();
 		}}
 	/>
-	<label class="form-check-label" for="switchCheckDefault">
+	<label class="form-check-label" for="switch-{id}">
 		{$parentRuleset.name}
 		{#if $parentRuleset.description}
 			- <small class="text-muted">{$parentRuleset.description}</small>

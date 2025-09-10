@@ -12,7 +12,7 @@ import {
 	type Blank,
 	type Struct,
 	type Structable,
-	type StructData,
+	StructData,
 	type TsType
 } from 'drizzle-struct/back-end';
 import { z } from 'zod';
@@ -231,7 +231,7 @@ export class CallListener<
 		data: unknown
 	) {
 		return attemptAsync<ListenerStatus<CallReturnType>>(async () => {
-			const listener = CallListener.listeners.get(fn);
+			const listener = CallListener.listeners.get(struct.name + ':' + fn);
 			if (!listener) {
 				return {
 					success: false,
@@ -248,7 +248,7 @@ export class CallListener<
  */
 type QueryReturnType<StructType extends Blank, Name extends string> =
 	| StructData<StructType, Name>[]
-	| Promise<StructData<StructType, Name>[]>;
+	| StructStream<StructType, Name>;
 
 /**
  * Callback type for query listeners.
@@ -284,7 +284,7 @@ export class QueryListener<
 	 */
 	public static readonly listeners = new Map<
 		string,
-		QueryListener<string, Blank, string, any, any>
+		QueryListener<string, Blank, string, any, QueryReturnType<Blank, string>>
 	>();
 
 	/**
@@ -327,11 +327,13 @@ export class QueryListener<
 		struct: Struct<StructType, Name>,
 		data: unknown
 	) {
-		return attemptAsync<ListenerStatus<QueryReturnType<StructType, Name>>>(async () => {
+		return attemptAsync<ListenerStatus<StructData<StructType, Name>['data'][]>>(async () => {
 			const parsed = z
 				.object({
-					query: z.string(),
-					data: z.unknown()
+					args: z.object({
+						query: z.string(),
+						data: z.unknown()
+					}),
 				})
 				.safeParse(data);
 			if (!parsed.success) {
@@ -341,14 +343,36 @@ export class QueryListener<
 				};
 			}
 
-			const listener = QueryListener.listeners.get(parsed.data.query);
+			const listener = QueryListener.listeners.get(struct.name + ':' + parsed.data.args.query);
 			if (!listener) {
 				return {
 					success: false,
 					message: 'Listener not found'
 				};
 			}
-			return listener.run(request, parsed.data.data);
+			const res = await listener.run(request, parsed.data.args.data);
+			if (res.success) {
+				if (res.data instanceof StructStream) {
+					return {
+						...res,
+						data: (await res.data.await().unwrap()).map(r => r.safe()) as any,
+					}
+				} else if (Array.isArray(res.data)) {
+					return {
+						...res,
+						data: res.data.map(r => r.safe()) as any,
+					};
+				} else {
+					return {
+						success: false,
+						message: 'Invalid return type from listener',
+					}
+				}
+			}
+			return {
+				success: res.success,
+				message: res.message,
+			};
 		});
 	}
 }

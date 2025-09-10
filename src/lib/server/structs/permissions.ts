@@ -384,6 +384,8 @@ export namespace Permissions {
 				throw new Error('No Authenticated account found');
 			}
 
+			if (!role.data.parent) return getRulesetsFromRole(role).unwrap();
+
 			const parent = await getParent(role).unwrap();
 			if (!parent) {
 				throw new Error('No parent role found for this role');
@@ -1036,12 +1038,7 @@ export namespace Permissions {
 	 * @returns A promise that resolves to an array of rulesets associated with the role.
 	 */
 	export const getRulesetsFromRole = (role: RoleData) => {
-		return attemptAsync(async () => {
-			const res = await DB.select()
-				.from(RoleRuleset.table)
-				.where(eq(RoleRuleset.table.role, role.id));
-			return res.map((r) => RoleRuleset.Generator(r));
-		});
+		return RoleRuleset.fromProperty('role', role.id, { type: 'all' });
 	};
 
 	/**
@@ -1628,10 +1625,16 @@ export type Features = \n	${
 	) => {
 		return attemptAsync(async () => {
 			const localAdmin = await Role.new({
-				name,
+				name: name + ' - Admin',
 				description,
 				parent: ''
 			}).unwrap();
+
+			// await Role.new({
+			// 	name: name + ' - Base',
+			// 	description,
+			// 	parent: localAdmin.id
+			// }).unwrap();
 
 			const granted = await Promise.all(
 				rulesets.map((rs) =>
@@ -1650,6 +1653,17 @@ export type Features = \n	${
 				role: localAdmin,
 				rulesets: granted
 			};
+		});
+	};
+
+	export const getAccountsFromRole = (role: RoleData) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(Account.Account.table)
+				.innerJoin(RoleAccount.table, eq(RoleAccount.table.account, Account.Account.table.id))
+				.where(eq(RoleAccount.table.role, role.id));
+
+			return res.map((r) => Account.Account.Generator(r.account));
 		});
 	};
 

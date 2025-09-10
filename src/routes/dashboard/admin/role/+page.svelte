@@ -6,6 +6,9 @@
 	import { contextmenu } from '$lib/utils/contextmenu.js';
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
+	import nav from '$lib/imports/admin.js';
+
+	nav();
 
 	const { data } = $props();
 
@@ -106,10 +109,13 @@
 									}
 								}
 							],
-							width: '150px'
+							width: '300px'
 						});
 					},
-					preventDefaultOnContextMenu: true
+					preventDefaultOnContextMenu: true,
+					onRowDoubleClicked: (params) => {
+						location.href = `/dashboard/admin/role/${params.data?.role.data.id}`;
+					}
 				}}
 				height="calc(100vh - {distanceToTop}px)"
 				rowNumbers={true}

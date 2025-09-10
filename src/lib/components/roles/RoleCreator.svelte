@@ -12,7 +12,7 @@
 	let name = $state('');
 	let description = $state('');
 
-	const save = async () => {
+	export const save = async () => {
 		if (!name) return alert('Role name is required');
 
 		const res = await Permissions.createRole(parent, {
