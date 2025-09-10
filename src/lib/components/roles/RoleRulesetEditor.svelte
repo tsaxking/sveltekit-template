@@ -17,7 +17,7 @@
 			ruleset: Permissions.RoleRulesetData | undefined;
 			entitlement: Permissions.EntitlementData;
 			switch: RulesetSwitch | undefined;
-		};
+		}[];
 	}>({});
 
 	$inspect(groups);
@@ -30,16 +30,30 @@
 			console.log('Assigning rulesets to groups', availablePermissions.data, entitlements.data);
 			for (const entitlement of entitlements.data) {
 				if (!groups[String(entitlement.data.group)]) {
-					groups[String(entitlement.data.group)] = {
-						ruleset: undefined,
-						entitlement,
-						switch: undefined
-					};
+					groups[String(entitlement.data.group)] = [
+						{
+							ruleset: undefined,
+							entitlement: entitlement,
+							switch: undefined
+						}
+					]
 				}
 
 				const matched = availablePermissions.data.find((r) => r.data.entitlement === entitlement.data.name);
 				if (matched) {
-					groups[String(entitlement.data.group)].ruleset = matched;
+					const group = groups[String(entitlement.data.group)];
+					if (group) {
+						const item = group.find((g) => g.entitlement.data.name === entitlement.data.name);
+						if (item) {
+							item.ruleset = matched;
+						} else {
+							group.push({
+								ruleset: matched,
+								entitlement: entitlement,
+								switch: undefined
+							});
+						}
+					}
 				}
 			}
 			// remove from memory because we don't need it anymore.
@@ -61,7 +75,9 @@
 
 	export const save = () => {
 		for (const group of Object.keys(groups)) {
-			groups[group].switch?.save();
+			for (const item of groups[group]) {
+				item.switch?.save();
+			}
 		}
 	};
 </script>
@@ -75,14 +91,13 @@
 		<div class="row mb-3">
 			<div class="col-12">
 				<ul class="list-group">
-					{#if group.ruleset}
-						<RulesetSwitch
-							bind:this={group.switch}
-							{role}
-							ruleset={group.ruleset}
-							{saveOnChange}
-						/>
-					{/if}
+					{#each group as item}
+						{#if item.ruleset}
+							<li class="list-group-item">
+								<RulesetSwitch bind:this={item.switch} ruleset={item.ruleset} {role} {saveOnChange} />
+							</li>
+						{/if}
+					{/each}
 				</ul>
 			</div>
 		</div>

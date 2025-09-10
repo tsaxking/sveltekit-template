@@ -3,6 +3,7 @@ import { DB } from '../src/lib/server/db';
 import { resolveAll } from 'ts-utils/check';
 import { selectAccount } from '../cli/accounts';
 import { Account } from '../src/lib/server/structs/account';
+import { Test } from '../src/lib/server/structs/testing';
 
 export default async (roleName: string) => {
 	if (!roleName) {
@@ -14,7 +15,9 @@ export default async (roleName: string) => {
 			Permissions.RoleRuleset.build(DB),
 			Permissions.RoleAccount.build(DB),
 			Account.Account.build(DB),
-			Permissions.Entitlement.build(DB)
+			Permissions.Entitlement.build(DB),
+			Test.TestPermissions.build(DB),
+			Test.Test.build(DB),
 		])
 	).unwrap();
 
@@ -39,6 +42,20 @@ export default async (roleName: string) => {
 				entitlement: 'view-roles',
 				targetAttribute: 'test-role',
 				featureScopes: ['test-scope']
+			},
+			{
+				name: 'View Test Data',
+				description: 'Can view test data',
+				entitlement: 'test-permission-view',
+				targetAttribute: 'test-role',
+				featureScopes: ['test-scope']
+			},
+			{
+				name: 'Manage Test Data',
+				description: 'Can manage test data',
+				entitlement: 'test-permission-manage',
+				targetAttribute: 'test-role',
+				featureScopes: ['test-scope']
 			}
 		]
 	).unwrap();
@@ -49,4 +66,22 @@ export default async (roleName: string) => {
 	}).unwrap();
 
 	console.log(`Role "${roleName}" created for account "${account.data.username}".`);
+
+	await Test.TestPermissions.clear().unwrap();
+
+	// create 10 test entries
+	await Promise.all(
+		Array.from({ length: 10 }).map(async (_, i) =>
+		{	
+			const data = await Test.TestPermissions.new({
+				name: `Test Entry ${i + 1}`,
+				age: Math.floor(Math.random() * 100)
+			}).unwrap();
+
+			data.setAttributes([
+				'test-role',
+			]);
+		}
+		)
+	);
 };

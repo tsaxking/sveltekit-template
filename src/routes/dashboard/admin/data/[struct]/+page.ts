@@ -2,6 +2,7 @@ import { Struct } from '$lib/services/struct';
 import '$lib/model/account';
 import '$lib/model/analytics';
 import '$lib/model/permissions';
+import '$lib/model/testing.svelte.js';
 
 export const load = (event) => {
 	const struct = Struct.structs.get(event.params.struct);

@@ -2,6 +2,7 @@
 	import '$lib/model/account';
 	import '$lib/model/analytics';
 	import '$lib/model/permissions';
+	import '$lib/model/testing.svelte';
 	import { writable } from 'svelte/store';
 
 	// Insert all other structs here

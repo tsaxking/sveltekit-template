@@ -948,6 +948,7 @@ export class Struct<T extends Blank> {
 			if (BATCH_TEST) {
 				throw new Error('Batch test is enabled, will not run a fetch request');
 			}
+			this.log('POST:', action, data, date);
 			const res = await fetch(`/struct/${this.data.name}/${action}`, {
 				method: 'POST',
 				headers: {
@@ -1639,5 +1640,10 @@ export class Struct<T extends Blank> {
 		}
 
 		return arr;
+	}
+
+	clear() {
+		this.log('Clearing all data from struct (admin only)');
+		return this.post(DataAction.Clear, {});
 	}
 }
