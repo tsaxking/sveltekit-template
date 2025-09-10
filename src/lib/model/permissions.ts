@@ -12,7 +12,8 @@ export namespace Permissions {
 		structure: {
 			name: 'string',
 			description: 'string',
-			parent: 'string'
+			parent: 'string',
+			color: 'string',
 		},
 		socket: sse,
 		browser
@@ -182,11 +183,12 @@ export namespace Permissions {
 		});
 	};
 
-	export const createRole = (parent: RoleData, config: { name: string; description: string }) => {
+	export const createRole = (parent: RoleData, config: { name: string; description: string; color: string; }) => {
 		return Role.call('create-role', {
 			parent: parent.data.id,
 			name: config.name,
-			description: config.description
+			description: config.description,
+			color: config.color
 		});
 	};
 
@@ -219,6 +221,7 @@ export namespace Permissions {
 			return createRole(parent, {
 				name: res.value.name,
 				description: res.value.description,
+				color: '#000000'
 			}).unwrap();
 		});
 	};

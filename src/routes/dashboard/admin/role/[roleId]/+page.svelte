@@ -17,7 +17,12 @@
 <div class="container layer-1 mb-5 pb-3">
 	<div class="row mb-3">
 		<div class="col">
-			<h1>Role: {$role.name}</h1>
+			<h1>
+				<i class="material-icons" style="color: {$role.color};">
+					person
+				</i>
+				Role: {$role.name}
+			</h1>
 			<p class="text-muted">
 				View and manage the details of this role.
 			</p>
@@ -53,6 +58,21 @@
 			/>
 		</div>
 	</div>
+	<div class="row mb-3">
+		<div class="col">
+			<label for="role-color" class="form-label">Color</label>
+			<input
+				type="color"
+				name="role-color"
+				id="role-color"
+				value={$role.color}
+				class="form-control form-control-color"
+				onchange={(e) => {
+					role.update((d) => ({ ...d, color: e.currentTarget.value }));
+				}}
+			/>
+		</div>
+	</div>
 	{#if $role.parent !== ''}
 		<div class="row mb-3">
 			<div class="col">
@@ -83,13 +103,25 @@
 			<Grid 
 				data={children}
 				height="400px"
+				rowNumbers={true}
 				opts={{
 					columnDefs: [{
+						cellRenderer: (params: any) => `<i class="material-icons" style="color: ${params.data?.data.color};">person</i>`,
+						width: 60,
+					}, {
 						headerName: 'Name',
 						field: 'data.name',
 					}, {
 						headerName: 'Description',
 						field: 'data.description',
+					}, {
+						headerName: 'Created',
+						field: 'data.created',
+						cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
+					}, {
+						headerName: 'Updated',
+						field: 'data.updated',
+						cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
 					}],
 					onRowDoubleClicked: (params) => {
 						window.location.href = `/dashboard/admin/role/${params.data?.data.id}`;
@@ -144,19 +176,24 @@
 		<Grid 
 			data={members}
 			height="400px"
+			rowNumbers={true}
 			opts={{
 				columnDefs: [{
 					headerName: 'Username',
-					field: 'data.username',
+					field: 'account.data.username',
 				}, {
 					headerName: 'Email',
-					field: 'data.email',
+					field: 'account.data.email',
 				}, {
 					headerName: 'First Name',
-					field: 'data.firstName',
+					field: 'account.data.firstName',
 				}, {
 					headerName: 'Last Name',
-					field: 'data.lastName',
+					field: 'account.data.lastName',
+				}, {
+					headerName: 'Date Joined',
+					field: 'roleAccount.data.created',
+					cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
 				}]
 			}}
 		/>

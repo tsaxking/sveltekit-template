@@ -52,7 +52,8 @@ export namespace Permissions {
 		structure: {
 			name: text('name').notNull(),
 			description: text('description').notNull(),
-			parent: text('parent').notNull() // Parent role for hierarchy. A parent role can manage its child roles.
+			parent: text('parent').notNull(), // Parent role for hierarchy. A parent role can manage its child roles.
+			color: text('color').notNull().default('#000000'), // Color for UI purposes
 		}
 	});
 
@@ -106,7 +107,10 @@ export namespace Permissions {
 		z.object({
 			name: z.string(),
 			description: z.string(),
-			parent: z.string()
+			parent: z.string(),
+			color: z.string().refine((val) => /^#([0-9A-F]{3}){1,2}$/i.test(val), {
+				message: 'Invalid color format'
+			}),
 		}),
 		async (event, data) => {
 			if (!event.locals.account) {
@@ -174,7 +178,8 @@ export namespace Permissions {
 			await Role.new({
 				name: data.name,
 				description: data.description,
-				parent: data.parent
+				parent: data.parent,
+				color: data.color,
 			}).unwrap();
 
 			return {
@@ -1627,7 +1632,8 @@ export type Features = \n	${
 			const localAdmin = await Role.new({
 				name: name + ' - Admin',
 				description,
-				parent: ''
+				parent: '',
+				color: '#ff0000'
 			}).unwrap();
 
 			// await Role.new({
@@ -1663,7 +1669,10 @@ export type Features = \n	${
 				.innerJoin(RoleAccount.table, eq(RoleAccount.table.account, Account.Account.table.id))
 				.where(eq(RoleAccount.table.role, role.id));
 
-			return res.map((r) => Account.Account.Generator(r.account));
+			return res.map((r) => ({
+				account: Account.Account.Generator(r.account),
+				roleAccount: RoleAccount.Generator(r.role_account)
+			}));
 		});
 	};
 
