@@ -585,11 +585,14 @@ export class Struct<T extends Blank> {
 	 * @readonly
 	 * @type {*}
 	 */
-	private readonly dataArrayRegistry = new Map<string, {
-		dataArr: DataArr<T>;
-		satisfies: (data: StructData<T>) => boolean;
-		includeArchived?: boolean;
-	}>();
+	private readonly dataArrayRegistry = new Map<
+		string,
+		{
+			dataArr: DataArr<T>;
+			satisfies: (data: StructData<T>) => boolean;
+			includeArchived?: boolean;
+		}
+	>();
 
 	/**
 	 * Flag to track if centralized listeners have been set up
@@ -724,14 +727,16 @@ export class Struct<T extends Blank> {
 			data: StructData<T>
 		) => {
 			this.log(`Centralized ${eventType} event:`, data.data);
-			
+
 			// Update all registered data arrays based on their satisfy functions
 			for (const [key, { dataArr, satisfies, includeArchived = false }] of this.dataArrayRegistry) {
 				const shouldInclude = satisfies(data);
 				const isCurrentlyIncluded = dataArr.data.includes(data);
 				const isArchived = data.data.archived;
 
-				this.log(`Checking data array ${key}: shouldInclude=${shouldInclude}, isCurrentlyIncluded=${isCurrentlyIncluded}, isArchived=${isArchived}, includeArchived=${includeArchived}`);
+				this.log(
+					`Checking data array ${key}: shouldInclude=${shouldInclude}, isCurrentlyIncluded=${isCurrentlyIncluded}, isArchived=${isArchived}, includeArchived=${includeArchived}`
+				);
 
 				switch (eventType) {
 					case 'new':
@@ -741,7 +746,7 @@ export class Struct<T extends Blank> {
 							dataArr.add(data);
 						}
 						break;
-					
+
 					case 'update':
 						if (shouldInclude && !isCurrentlyIncluded && (!isArchived || includeArchived)) {
 							this.log(`Adding updated data to ${key}`);
@@ -754,14 +759,14 @@ export class Struct<T extends Blank> {
 							dataArr.inform();
 						}
 						break;
-					
+
 					case 'delete':
 						if (isCurrentlyIncluded) {
 							this.log(`Removing deleted data from ${key}`);
 							dataArr.remove(data);
 						}
 						break;
-					
+
 					case 'archive':
 						if (isCurrentlyIncluded && !includeArchived) {
 							this.log(`Removing archived data from ${key}`);
@@ -802,7 +807,7 @@ export class Struct<T extends Blank> {
 		includeArchived?: boolean
 	) {
 		this.setupCentralizedListeners();
-		
+
 		this.dataArrayRegistry.set(key, {
 			dataArr,
 			satisfies,
@@ -1270,10 +1275,10 @@ export class Struct<T extends Blank> {
 	all(asStream: boolean) {
 		const getStream = () => this.getStream('all', undefined);
 		if (asStream) return getStream();
-		
+
 		const arr = this.writables.get('all');
 		if (arr) return arr;
-		
+
 		const newArr = new DataArr(this, [...this.cache.values()]);
 		this.writables.set('all', newArr);
 
@@ -1287,7 +1292,7 @@ export class Struct<T extends Blank> {
 		const stream = getStream();
 		stream.once('data', (data) => newArr.set([data]));
 		stream.pipe((data) => newArr.add(data));
-		
+
 		return newArr;
 	}
 
@@ -1314,10 +1319,10 @@ export class Struct<T extends Blank> {
 	archived(asStream: boolean) {
 		const getStream = () => this.getStream('archived', undefined);
 		if (asStream) return getStream();
-		
+
 		const arr = this.writables.get('archived');
 		if (arr) return arr;
-		
+
 		const newArr = new DataArr(
 			this,
 			[...this.cache.values()].filter((d) => d.data.archived)
@@ -1325,10 +1330,15 @@ export class Struct<T extends Blank> {
 		this.writables.set('archived', newArr);
 
 		// Register with centralized event system using a satisfy function
-		this.registerDataArray('archived', newArr, (data) => {
-			// Only archived data satisfies the 'archived' condition
-			return !!data.data.archived;
-		}, true); // includeArchived = true for archived data arrays
+		this.registerDataArray(
+			'archived',
+			newArr,
+			(data) => {
+				// Only archived data satisfies the 'archived' condition
+				return !!data.data.archived;
+			},
+			true
+		); // includeArchived = true for archived data arrays
 
 		// Load initial data from stream
 		const stream = getStream();
@@ -1379,9 +1389,10 @@ export class Struct<T extends Blank> {
 	) {
 		const getStream = () => this.getStream('property', { key: String(key), value });
 		if (asStream) return getStream();
-		
+
 		const cacheKey = `property:${String(key)}:${JSON.stringify(value)}`;
-		const arr = this.writables.get(cacheKey) ||
+		const arr =
+			this.writables.get(cacheKey) ||
 			new DataArr(
 				this,
 				[...this.cache.values()].filter((d) => d.data[key] === value && !d.data.archived)
@@ -1398,7 +1409,7 @@ export class Struct<T extends Blank> {
 		const stream = getStream();
 		stream.once('data', (data) => arr.set([data]));
 		stream.pipe((data) => arr.add(data));
-		
+
 		return arr;
 	}
 
@@ -1428,12 +1439,15 @@ export class Struct<T extends Blank> {
 	fromUniverse(universe: string, asStream: boolean) {
 		const getStream = () => this.getStream('universe', universe);
 		if (asStream) return getStream();
-		
+
 		const cacheKey = `universe:${universe}`;
-		const arr = this.writables.get(cacheKey) ||
+		const arr =
+			this.writables.get(cacheKey) ||
 			new DataArr(
 				this,
-				[...this.cache.values()].filter((d) => (d.data as any).universe === universe && !d.data.archived)
+				[...this.cache.values()].filter(
+					(d) => (d.data as any).universe === universe && !d.data.archived
+				)
 			);
 		this.writables.set(cacheKey, arr);
 
@@ -1547,7 +1561,7 @@ export class Struct<T extends Blank> {
 			});
 		};
 		if (config.asStream) return get();
-		
+
 		const cacheKey = `custom:${query}:${JSON.stringify(data)}`;
 		const exists = this.writables.get(cacheKey);
 		if (exists) return exists;
@@ -1563,12 +1577,17 @@ export class Struct<T extends Blank> {
 		this.writables.set(cacheKey, arr);
 
 		// Register with centralized event system using the provided satisfy function
-		this.registerDataArray(cacheKey, arr, (data) => {
-			if (!config.satisfies) return false;
-			const satisfies = config.satisfies(data);
-			const includeArchived = config.includeArchive || false;
-			return satisfies && (!data.data.archived || includeArchived);
-		}, config.includeArchive);
+		this.registerDataArray(
+			cacheKey,
+			arr,
+			(data) => {
+				if (!config.satisfies) return false;
+				const satisfies = config.satisfies(data);
+				const includeArchived = config.includeArchive || false;
+				return satisfies && (!data.data.archived || includeArchived);
+			},
+			config.includeArchive
+		);
 
 		// Load initial data from stream
 		const res = get();
@@ -1646,7 +1665,7 @@ export class Struct<T extends Blank> {
 		if (satisfies) {
 			// Generate a unique key for this data array
 			const arrKey = `arr:${Date.now()}:${Math.random()}`;
-			
+
 			// Register with centralized event system using the provided satisfy function
 			this.registerDataArray(arrKey, arr, (data) => {
 				// Use the provided satisfies function and exclude archived data by default

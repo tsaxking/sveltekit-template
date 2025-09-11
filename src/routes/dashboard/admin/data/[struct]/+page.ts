@@ -8,13 +8,10 @@ export const load = (event) => {
 	const struct = Struct.structs.get(event.params.struct);
 	if (!struct) throw new Error('Struct not found');
 
-	const arr = struct.arr(event.data.data.map((d) => struct.Generator(d)));
-
-	struct.on('archive', () => arr.inform());
-	struct.on('update', () => arr.inform());
-	struct.on('new', () => arr.inform());
-	struct.on('delete', () => arr.inform());
-	struct.on('restore', () => arr.inform());
+	const arr = struct.arr(
+		event.data.data.map((d) => struct.Generator(d)),
+		() => true
+	);
 
 	return {
 		struct,
