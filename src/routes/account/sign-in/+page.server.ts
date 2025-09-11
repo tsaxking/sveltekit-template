@@ -4,7 +4,7 @@ import { Session } from '$lib/server/structs/session.js';
 import { ServerCode } from 'ts-utils/status';
 import { z } from 'zod';
 import { OAuth2Client } from 'google-auth-library';
-// import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
+import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
 import terminal from '$lib/server/utils/terminal';
 
 // const log = (...args: unknown[]) => console.log('[oauth/sign-in]', ...args);
@@ -22,6 +22,7 @@ export const actions = {
 				password: data.get('password')
 			});
 		if (!res.success) {
+			terminal.error(res.error);
 			return fail(ServerCode.badRequest, {
 				message: 'Invalid form data',
 				user: data.get('user')
@@ -31,7 +32,7 @@ export const actions = {
 		let account: Account.AccountData | undefined;
 
 		ACCOUNT: {
-			const user = await Account.Account.fromProperty('username', res.data.username.toLowerCase(), {
+			const user = await Account.Account.fromProperty('username', res.data.username, {
 				type: 'single'
 			});
 			if (user.isErr()) {
@@ -43,7 +44,7 @@ export const actions = {
 			account = user.value;
 			if (account) break ACCOUNT;
 
-			const email = await Account.Account.fromProperty('email', res.data.username.toLowerCase(), {
+			const email = await Account.Account.fromProperty('email', res.data.username, {
 				type: 'single'
 			});
 			if (email.isErr()) {
@@ -55,15 +56,24 @@ export const actions = {
 			account = email.value;
 			if (account) break ACCOUNT;
 
-			return fail(ServerCode.notFound, {
+			return fail(ServerCode.badRequest, {
 				user: res.data.username,
-				message: 'User not found'
+				message: 'Invalid username or email'
+			});
+		}
+
+		const pass = Account.hash(res.data.password, account.data.salt);
+		if (pass.isErr()) {
+			terminal.error(pass.error);
+			return fail(ServerCode.internalServerError, {
+				user: res.data.username,
+				message: 'Failed to hash password'
 			});
 		}
 
 		const sessionRes = await Session.signIn(account, event.locals.session);
 		if (sessionRes.isErr()) {
-			console.error(sessionRes.error);
+			terminal.error(sessionRes.error);
 			return fail(ServerCode.internalServerError, {
 				user: res.data.username,
 				message: 'Failed to sign in'
@@ -78,10 +88,15 @@ export const actions = {
 		};
 	},
 	OAuth2: async () => {
+		const domain = String(process.env.PUBLIC_DOMAIN).includes('localhost')
+			? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
+			: process.env.PUBLIC_DOMAIN;
+		const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
+		const redirectUri = `${protocol}${domain}/oauth/sign-in`;
 		const client = new OAuth2Client({
-			clientSecret: String(process.env.SECRET_OAUTH2_CLIENT_SECRET),
-			clientId: String(process.env.SECRET_OAUTH2_CLIENT_ID),
-			redirectUri: 'http://localhost:5173/oauth/sign-in'
+			clientSecret: SECRET_OAUTH2_CLIENT_SECRET,
+			clientId: SECRET_OAUTH2_CLIENT_ID,
+			redirectUri
 		});
 		// log(client);
 		const authorizeUrl = client.generateAuthUrl({

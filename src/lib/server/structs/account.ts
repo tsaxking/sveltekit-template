@@ -21,7 +21,7 @@ export namespace Account {
 		name: 'account',
 		structure: {
 			username: text('username').notNull().unique(),
-			key: text('key').notNull().unique(),
+			key: text('key').notNull(),
 			salt: text('salt').notNull(),
 			firstName: text('first_name').notNull(),
 			lastName: text('last_name').notNull(),
@@ -266,7 +266,7 @@ export namespace Account {
 			severity: text('severity').notNull(),
 			message: text('message').notNull(),
 			icon: text('icon').notNull(),
-			iconType: text('icon_type').notNull(),
+			iconType: text('icon_type').notNull().default(''),
 			link: text('link').notNull(),
 			read: boolean('read').notNull()
 		}
