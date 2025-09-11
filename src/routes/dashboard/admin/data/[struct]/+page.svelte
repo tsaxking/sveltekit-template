@@ -20,7 +20,7 @@
 	import { useCommandStack } from '$lib/services/event-stack.js';
 	import { onDestroy, onMount } from 'svelte';
 	import { StructData, type Blank } from '$lib/services/struct';
-	import { confirm, notify } from '$lib/utils/prompts.js';
+	import { confirm, notify, prompt } from '$lib/utils/prompts.js';
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
 	import { match } from 'ts-utils/match';
 	import Flatpickr from '$lib/components/forms/Flatpickr.svelte';
@@ -130,6 +130,18 @@
 		}
 	};
 
+	const clearTable = async () => {
+		const res = await prompt(
+			`This will delete all data in this table. Type ${struct.data.name} to confirm.`
+		);
+
+		console.log(res, struct.data.name, res === struct.data.name);
+
+		if (res === struct.data.name) {
+			struct.clear();
+		}
+	};
+
 	onMount(() => {
 		const rect = gridContainer.getBoundingClientRect();
 		distanceToTop = rect.top;
@@ -164,7 +176,7 @@
 		</div>
 	</div>
 	<div class="row mb-3">
-		<div class="col-6">
+		<div class="col-4">
 			<div class="d-flex justify-content-between align-items-center">
 				<p class="ps-2">
 					{$structData.length > 0 ? 'Showing' : 'No'}
@@ -197,11 +209,19 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6">
+		<div class="col-4">
 			<div class="d-flex w-100 justify-content-end pe-2">
 				<button type="button" class="btn btn-primary" onclick={newItem}>
 					<i class="material-icons">add</i>
 					New
+				</button>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="d-flex w-100 justify-content-end pe-2">
+				<button type="button" class="btn btn-danger" onclick={clearTable}>
+					<i class="material-icons">delete_sweep</i>
+					Clear Table
 				</button>
 			</div>
 		</div>

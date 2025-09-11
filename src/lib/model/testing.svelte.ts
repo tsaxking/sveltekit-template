@@ -594,4 +594,18 @@ export namespace Test {
 		});
 		return tests;
 	};
+
+	export const TestPermissions = new Struct({
+		name: 'test_permissions',
+		structure: {
+			name: 'string',
+			age: 'number'
+		},
+		socket: sse,
+		browser,
+		log: true
+	});
+
+	export type TestPermissionsData = typeof TestPermissions.sample;
+	export type TestPermissionsArr = ReturnType<typeof TestPermissions.arr>;
 }

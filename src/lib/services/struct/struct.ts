@@ -949,7 +949,9 @@ export class Struct<T extends Blank> {
 			this.cache.set(data.id as string, d as any);
 		}
 
-		const res = this.getZodSchema().safeParse(assembled);
+		const res = this.getZodSchema({
+			optionals: Object.keys(structure)
+		}).safeParse(assembled);
 		if (!res.success) {
 			console.warn(`Data does not match ${this.data.name}'s schema:`, res.error, d);
 		}
@@ -1053,6 +1055,7 @@ export class Struct<T extends Blank> {
 	 */
 	post(action: DataAction | PropertyAction | string, data: unknown, date?: Date) {
 		return attemptAsync(async () => {
+			this.log('Post Action:', action, data);
 			if (!this.data.browser)
 				throw new StructError(
 					'Currently not in a browser environment. Will not run a fetch request'
@@ -1078,6 +1081,7 @@ export class Struct<T extends Blank> {
 			if (BATCH_TEST) {
 				throw new Error('Batch test is enabled, will not run a fetch request');
 			}
+			this.log('POST:', action, data, date);
 			const res = await fetch(`/struct/${this.data.name}/${action}`, {
 				method: 'POST',
 				headers: {
@@ -1651,5 +1655,10 @@ export class Struct<T extends Blank> {
 		}
 
 		return arr;
+	}
+
+	clear() {
+		this.log('Clearing all data from struct (admin only)');
+		return this.post('clear', {});
 	}
 }

@@ -4,6 +4,7 @@ import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
+import { Form } from '$lib/utils/form';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -11,7 +12,8 @@ export namespace Permissions {
 		structure: {
 			name: 'string',
 			description: 'string',
-			parent: 'string'
+			parent: 'string',
+			color: 'string'
 		},
 		socket: sse,
 		browser
@@ -40,7 +42,9 @@ export namespace Permissions {
 			description: 'string',
 			structs: 'string',
 			permissions: 'string',
-			group: 'string'
+			group: 'string',
+			defaultFeatureScopes: 'string',
+			features: 'string'
 		},
 		socket: sse,
 		browser
@@ -55,7 +59,10 @@ export namespace Permissions {
 			role: 'string',
 			entitlement: 'string',
 			targetAttribute: 'string',
-			reason: 'string'
+			parent: 'string',
+			name: 'string',
+			description: 'string',
+			featureScopes: 'string'
 		},
 		socket: sse,
 		browser
@@ -70,7 +77,7 @@ export namespace Permissions {
 			account: 'string',
 			entitlement: 'string',
 			targetAttribute: 'string',
-			reason: 'string'
+			featureScopes: 'string'
 		},
 		socket: sse,
 		browser
@@ -118,50 +125,35 @@ export namespace Permissions {
 		});
 	};
 
-	export const grantRolePermission = (
-		role: RoleData,
-		entitlement: EntitlementData,
-		targetAttribute: string
-	) => {
+	export const grantRuleset = (role: RoleData, ruleset: RoleRulesetData) => {
 		return RoleRuleset.call('grant-permission', {
 			role: role.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id
 		});
 	};
 
-	export const revokeRolePermission = (
-		role: RoleData,
-		entitlement: EntitlementData,
-		targetAttribute: string
-	) => {
+	export const revokeRolePermission = (ruleset: RoleRulesetData) => {
 		return RoleRuleset.call('revoke-permission', {
-			role: role.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id
 		});
 	};
 
 	export const grantAccountPermission = (
 		account: Account.AccountData,
 		entitlement: EntitlementData,
-		targetAttribute: string
+		targetAttribute: string,
+		featureScopes?: string[]
 	) => {
 		return AccountRuleset.call('grant-permission', {
 			account: account.data.id,
 			entitlement: entitlement.data.name,
-			targetAttribute
+			targetAttribute,
+			featureScopes: featureScopes || []
 		});
 	};
-	export const revokeAccountPermission = (
-		account: Account.AccountData,
-		entitlement: EntitlementData,
-		targetAttribute: string
-	) => {
+	export const revokeAccountPermission = (ruleset: AccountRulesetData) => {
 		return AccountRuleset.call('revoke-permission', {
-			account: account.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute
+			ruleset: ruleset.data.id
 		});
 	};
 
@@ -188,6 +180,65 @@ export namespace Permissions {
 			).unwrap();
 
 			return res.map((r) => Role.Generator(r));
+		});
+	};
+
+	export const createRole = (
+		parent: RoleData,
+		config: { name: string; description: string; color: string }
+	) => {
+		return Role.call('create-role', {
+			parent: parent.data.id,
+			name: config.name,
+			description: config.description,
+			color: config.color
+		});
+	};
+
+	export const createChildRolePopup = async (parent: RoleData) => {
+		return attemptAsync(async () => {
+			const res = await new Form()
+				.input('name', {
+					label: 'Role Name',
+					placeholder: 'Enter role name',
+					required: true,
+					type: 'text'
+				})
+				.input('description', {
+					label: 'Description',
+					placeholder: 'Enter role description',
+					required: true,
+					type: 'text',
+					value: ''
+				})
+				.prompt({
+					send: false,
+					title: `Create Child Role for ${parent.data.name}`
+				})
+				.unwrap();
+
+			if (!res.value.name || !res.value.description)
+				throw new Error('Name and description are required');
+
+			return createRole(parent, {
+				name: res.value.name,
+				description: res.value.description,
+				color: '#000000'
+			}).unwrap();
+		});
+	};
+
+	export const addToRole = (role: RoleData, account: Account.AccountData) => {
+		return RoleAccount.call('add-to-role', {
+			role: role.data.id,
+			account: account.data.id
+		});
+	};
+
+	export const removeFromRole = (role: RoleData, account: Account.AccountData) => {
+		return RoleAccount.call('remove-from-role', {
+			role: role.data.id,
+			account: account.data.id
 		});
 	};
 }

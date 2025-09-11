@@ -4,6 +4,7 @@ import '$lib/server/structs/analytics';
 import { Limiting } from '$lib/server/structs/limiting';
 import '$lib/server/structs/permissions';
 import '$lib/server/structs/log';
+import '$lib/server/structs/testing';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { env } from '$env/dynamic/private';
@@ -24,7 +25,7 @@ import redis from '$lib/server/services/redis';
 config();
 
 (async () => {
-	await redis.init().unwrap();
+	await redis.init();
 	Struct.each((struct) => {
 		if (!struct.built) {
 			struct.build(DB);

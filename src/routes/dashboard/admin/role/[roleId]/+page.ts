@@ -1,4 +1,6 @@
 import { Permissions } from '$lib/model/permissions.js';
+import { Account } from '$lib/model/account.js';
+import { writable } from 'svelte/store';
 
 export const load = (event) => {
 	return {
@@ -10,6 +12,12 @@ export const load = (event) => {
 		),
 		rulesets: Permissions.RoleRuleset.arr(
 			event.data.currentRulesets.map((r) => Permissions.RoleRuleset.Generator(r))
+		),
+		members: writable(
+			event.data.members.map((m) => ({
+				account: Account.Account.Generator(m.account),
+				roleAccount: Permissions.RoleAccount.Generator(m.roleAccount)
+			}))
 		)
 	};
 };

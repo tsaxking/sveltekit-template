@@ -35,6 +35,14 @@ export default () => {
 					type: 'material-icons',
 					name: 'manage_accounts'
 				}
+			},
+			{
+				name: 'Roles',
+				href: '/dashboard/admin/role',
+				icon: {
+					type: 'material-icons',
+					name: 'security'
+				}
 			}
 		],
 		priority: 0
