@@ -135,8 +135,6 @@
 			`This will delete all data in this table. Type ${struct.data.name} to confirm.`
 		);
 
-		console.log(res, struct.data.name, res === struct.data.name);
-
 		if (res === struct.data.name) {
 			struct.clear();
 		}
