@@ -71,36 +71,6 @@ export const actions = {
 			});
 		}
 
-		HASH: if (pass.value !== account.data.key) {
-			const success = await Account.externalHash({
-				user: res.data.username,
-				pass: res.data.password
-			});
-
-			if (success.isOk() && success.value) {
-				// Update the password in this database
-				const newHash = Account.newHash(res.data.password);
-				if (newHash.isErr()) {
-					terminal.error(newHash.error);
-					return fail(ServerCode.internalServerError, {
-						user: res.data.username,
-						message: 'Failed to hash password'
-					});
-				}
-
-				account.update({
-					key: newHash.value.hash,
-					salt: newHash.value.salt
-				});
-				break HASH;
-			}
-
-			return fail(ServerCode.unauthorized, {
-				user: res.data.username,
-				message: 'Invalid username or password'
-			});
-		}
-
 		const sessionRes = await Session.signIn(account, event.locals.session);
 		if (sessionRes.isErr()) {
 			terminal.error(sessionRes.error);

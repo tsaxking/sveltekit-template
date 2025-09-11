@@ -1,19 +1,26 @@
+import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';
 import { redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import { ServerCode } from 'ts-utils/status';
+
 // const log = (...args: unknown[]) => console.log('[oauth/sign-in]', ...args);
 
 export const GET = async (event) => {
 	const code = event.url.searchParams.get('code');
 	if (!code) throw redirect(ServerCode.temporaryRedirect, '/account/sign-up');
+	const domain = String(process.env.PUBLIC_DOMAIN).includes('localhost')
+		? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
+		: process.env.PUBLIC_DOMAIN;
+	const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
+	const redirectUri = `${protocol}${domain}/oauth/sign-in`;
 	// try {
 	const client = new OAuth2Client({
-		clientId: String(process.env.SECRET_OAUTH2_CLIENT_ID),
-		clientSecret: String(process.env.SECRET_OAUTH2_CLIENT_SECRET),
-		redirectUri: 'http://localhost:5173/oauth/sign-in'
+		clientId: SECRET_OAUTH2_CLIENT_ID,
+		clientSecret: SECRET_OAUTH2_CLIENT_SECRET,
+		redirectUri
 	});
 	// log('CLIENT:', client);
 
