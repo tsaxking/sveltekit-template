@@ -31,11 +31,17 @@ export const load = async (event) => {
 
 	const children = await Permissions.getChildren(role).unwrap();
 
+	const members = await Permissions.getAccountsFromRole(role).unwrap();
+
 	return {
 		role: role.safe(),
 		parent: parent?.safe(),
 		children: children.map((c) => c.safe()),
 		currentRulesets: currentRulesets.map((r) => r.safe()),
-		availableRulesets: availableRulesets.map((r) => r.safe())
+		availableRulesets: availableRulesets.map((r) => r.safe()),
+		members: members.map((m) => ({
+			account: m.account.safe(),
+			roleAccount: m.roleAccount.safe()
+		}))
 	};
 };

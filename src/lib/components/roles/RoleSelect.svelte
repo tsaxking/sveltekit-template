@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 
+	const id = Math.random().toString(36).substring(2, 15);
+
 	interface Props {
 		onselect: (role: Permissions.RoleData) => void;
 	}
@@ -39,13 +41,13 @@
 <div>
 	<div class="form-floating mb-3">
 		<input
-			type="email"
+			type="text"
 			class="form-control"
-			id="role-search-{Math.random()}"
-			placeholder="johndoe53"
+			id="role-search-{id}"
+			placeholder="ex: Viewer"
 			oninput={search}
 		/>
-		<label for="role-search-{Math.random()}">Search Roles</label>
+		<label for="role-search-{id}">Search Roles</label>
 	</div>
 	<ul class="list-group">
 		{#each roles as role}

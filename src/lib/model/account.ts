@@ -9,6 +9,9 @@ import {
 } from '$lib/services/struct/index';
 import { browser } from '$app/environment';
 import { z } from 'zod';
+import { modalTarget, rawModal } from '$lib/utils/prompts';
+import { mount } from 'svelte';
+import AccountSearch from '$lib/components/account/AccountSearch.svelte';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -128,5 +131,48 @@ export namespace Account {
 
 	export const usernameExists = (username: string) => {
 		return Account.send('username-exists', { username }, z.boolean());
+	};
+
+	export const search = (
+		query: string,
+		config: {
+			limit: number;
+			offset: number;
+		} = {
+			limit: 25,
+			offset: 0
+		}
+	) => {
+		return Account.query(
+			'search',
+			{
+				query,
+				...config
+			},
+			{
+				asStream: false,
+				satisfies: () => false
+			}
+		);
+	};
+
+	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {
+		return new Promise<AccountData | null>((resolve, reject) => {
+			if (!modalTarget) return reject('Cannot show prompt in non-browser environment');
+
+			const modal = rawModal('Select Account', [], (target) =>
+				mount(AccountSearch, {
+					target,
+					props: {
+						onselect: (account) => {
+							resolve(account);
+							modal.hide();
+						},
+						filter: config?.filter
+					}
+				})
+			);
+			modal.show();
+		});
 	};
 }

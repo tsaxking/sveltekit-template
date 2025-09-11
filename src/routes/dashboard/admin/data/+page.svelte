@@ -2,6 +2,7 @@
 	import '$lib/model/account';
 	import '$lib/model/analytics';
 	import '$lib/model/permissions';
+	import '$lib/model/testing.svelte';
 	import { Struct } from '$lib/services/struct';
 	import { capitalize, fromSnakeCase } from 'ts-utils/text';
 

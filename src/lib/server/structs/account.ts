@@ -4,7 +4,7 @@ import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
 import { DB } from '../db';
-import { sql, eq } from 'drizzle-orm';
+import { eq, or, ilike } from 'drizzle-orm';
 import type { Notification } from '$lib/types/notification';
 import { Session } from './session';
 import { sse } from '../services/sse';
@@ -13,6 +13,8 @@ import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { Email } from './email';
 import type { Icon } from '$lib/types/icons';
 import { z } from 'zod';
+import { Permissions } from './permissions';
+import { QueryListener } from '../services/struct-listeners';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -33,6 +35,27 @@ export namespace Account {
 		},
 		safes: ['key', 'salt', 'verification']
 	});
+
+	QueryListener.on(
+		'search',
+		Account,
+		z.object({
+			query: z.string().min(1).max(255),
+			limit: z.number().min(1).max(100).default(10),
+			offset: z.number().min(0).default(0)
+		}),
+		async (event, data) => {
+			if (!event.locals.account) {
+				throw new Error('Not logged in');
+			}
+
+			return searchAccounts(data.query, {
+				type: 'array',
+				limit: data.limit || 10,
+				offset: data.offset || 0
+			}).unwrap();
+		}
+	);
 
 	Account.sendListen('self', async (event) => {
 		const session = (await Session.getSession(event)).unwrap();
@@ -87,6 +110,12 @@ export namespace Account {
 			await Promise.all(versions.map((v) => v.delete()));
 			a.delete();
 		});
+		Permissions.RoleAccount.fromProperty('account', a.id, {
+			type: 'stream'
+		}).pipe((ra) => ra.delete());
+		Permissions.AccountRuleset.fromProperty('account', a.id, {
+			type: 'stream'
+		}).pipe((ar) => ar.delete());
 	});
 
 	export const Admins = new Struct({
@@ -355,7 +384,12 @@ export namespace Account {
 		return attemptAsync(async () => {
 			const res = await DB.select()
 				.from(Account.table)
-				.where(sql`${Account.table.username} LIKE ${query} OR ${Account.table.email} LIKE ${query}`)
+				.where(
+					or(
+						ilike(Account.table.username, `%${query.toLowerCase()}%`),
+						ilike(Account.table.email, `%${query.toLowerCase()}%`)
+					)
+				)
 				.limit(config.limit)
 				.offset(config.offset);
 

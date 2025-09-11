@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
 	import Grid from '$lib/components/general/Grid.svelte';
 	import RoleSelect from '$lib/components/roles/RoleSelect.svelte';
@@ -6,6 +7,15 @@
 	import { contextmenu } from '$lib/utils/contextmenu.js';
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
+	import nav from '$lib/imports/admin.js';
+	import {
+		TextFilterModule,
+		NumberFilterModule,
+		DateFilterModule,
+		CustomFilterModule
+	} from 'ag-grid-community';
+
+	nav();
 
 	const { data } = $props();
 
@@ -23,7 +33,8 @@
 
 	let createRoleData = $state({
 		name: '',
-		description: ''
+		description: '',
+		color: '#000000'
 	});
 
 	const startCreateRole = () => {
@@ -71,25 +82,38 @@
 			<Grid
 				bind:this={grid}
 				data={roles}
+				modules={[TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterModule]}
 				opts={{
 					columnDefs: [
 						{
 							headerName: 'Role',
-							field: 'role.data.name'
+							field: 'role.data.name',
+							filter: true
 						},
 						{
 							headerName: 'Description',
-							field: 'role.data.description'
+							field: 'role.data.description',
+							filter: true
 						},
 						{
 							headerName: 'Parent',
 							// field: 'role.data.parent.data.name',
 							valueGetter: (params) => {
 								return params.data?.parent?.data.name || 'No Parent';
-							}
+							},
+							filter: true
 						},
 						{
-							headerName: 'Actions'
+							headerName: 'Created',
+							field: 'role.data.created',
+							cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
+							filter: true
+						},
+						{
+							headerName: 'Updated',
+							field: 'role.data.updated',
+							cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
+							filter: true
 						}
 					],
 					onCellContextMenu: (params) => {
@@ -106,10 +130,13 @@
 									}
 								}
 							],
-							width: '150px'
+							width: '300px'
 						});
 					},
-					preventDefaultOnContextMenu: true
+					preventDefaultOnContextMenu: true,
+					onRowDoubleClicked: (params) => {
+						location.href = `/dashboard/admin/role/${params.data?.role.data.id}`;
+					}
 				}}
 				height="calc(100vh - {distanceToTop}px)"
 				rowNumbers={true}
