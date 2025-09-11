@@ -26,40 +26,28 @@ export namespace Test {
 		name: 'test_permissions',
 		structure: {
 			name: text('name').notNull(),
-			age: integer('age').notNull(),
-		},
+			age: integer('age').notNull()
+		}
 	});
 
 	if (!String(process.env.ENVIRONMENT).toLowerCase().includes('prod')) {
-		Permissions.createEntitlement(
-			{
-				name: 'test-permission-view',
-				description: 'Permission to view test entries',
-				structs: [
-					TestPermissions
-				],
-				permissions: [
-					'test_permissions:read:*'
-				],
-				features: [],
-				group: 'Testing',
-			}
-		);
+		Permissions.createEntitlement({
+			name: 'test-permission-view',
+			description: 'Permission to view test entries',
+			structs: [TestPermissions],
+			permissions: ['test_permissions:read:*'],
+			features: [],
+			group: 'Testing'
+		});
 
-		Permissions.createEntitlement(
-			{
-				name: 'test-permission-manage',
-				description: 'Permission to manage test entries',
-				structs: [
-					TestPermissions
-				],
-				permissions: [
-					'test_permissions:*:*'
-				],
-				features: [],
-				group: 'Testing',
-			}
-		);
+		Permissions.createEntitlement({
+			name: 'test-permission-manage',
+			description: 'Permission to manage test entries',
+			structs: [TestPermissions],
+			permissions: ['test_permissions:*:*'],
+			features: [],
+			group: 'Testing'
+		});
 	}
 }
 

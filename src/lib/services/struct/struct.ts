@@ -820,7 +820,7 @@ export class Struct<T extends Blank> {
 		}
 
 		const res = this.getZodSchema({
-			optionals: Object.keys(structure),
+			optionals: Object.keys(structure)
 		}).safeParse(assembled);
 		if (!res.success) {
 			console.warn(`Data does not match ${this.data.name}'s schema:`, res.error, d);

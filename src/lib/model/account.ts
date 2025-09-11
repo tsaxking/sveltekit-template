@@ -133,18 +133,21 @@ export namespace Account {
 		return Account.send('username-exists', { username }, z.boolean());
 	};
 
-	export const search = (query: string, config: {
-		limit: number;
-		offset: number;
-	} = {
-		limit: 25,
-		offset: 0
-	}) => {
+	export const search = (
+		query: string,
+		config: {
+			limit: number;
+			offset: number;
+		} = {
+			limit: 25,
+			offset: 0
+		}
+	) => {
 		return Account.query(
 			'search',
 			{
 				query,
-				...config,
+				...config
 			},
 			{
 				asStream: false,
@@ -153,27 +156,23 @@ export namespace Account {
 		);
 	};
 
-	export const searchAccountsModal = (config?: {
-		filter: (account: AccountData) => boolean;
-	}) => {
+	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {
 		return new Promise<AccountData | null>((resolve, reject) => {
 			if (!modalTarget) return reject('Cannot show prompt in non-browser environment');
-			
-			const modal = rawModal(
-				'Select Account',
-				[],
-				(target) => mount(AccountSearch, {
+
+			const modal = rawModal('Select Account', [], (target) =>
+				mount(AccountSearch, {
 					target,
 					props: {
 						onselect: (account) => {
 							resolve(account);
 							modal.hide();
 						},
-						filter: config?.filter,
+						filter: config?.filter
 					}
-				}),
+				})
 			);
 			modal.show();
 		});
-	}
+	};
 }

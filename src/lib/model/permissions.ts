@@ -13,7 +13,7 @@ export namespace Permissions {
 			name: 'string',
 			description: 'string',
 			parent: 'string',
-			color: 'string',
+			color: 'string'
 		},
 		socket: sse,
 		browser
@@ -183,7 +183,10 @@ export namespace Permissions {
 		});
 	};
 
-	export const createRole = (parent: RoleData, config: { name: string; description: string; color: string; }) => {
+	export const createRole = (
+		parent: RoleData,
+		config: { name: string; description: string; color: string }
+	) => {
 		return Role.call('create-role', {
 			parent: parent.data.id,
 			name: config.name,
@@ -199,24 +202,23 @@ export namespace Permissions {
 					label: 'Role Name',
 					placeholder: 'Enter role name',
 					required: true,
-					type: 'text',
+					type: 'text'
 				})
 				.input('description', {
 					label: 'Description',
 					placeholder: 'Enter role description',
 					required: true,
 					type: 'text',
-					value: '',
+					value: ''
 				})
-				.prompt(
-					{
-						send: false,
-						title: `Create Child Role for ${parent.data.name}`,
-					}
-				)
+				.prompt({
+					send: false,
+					title: `Create Child Role for ${parent.data.name}`
+				})
 				.unwrap();
 
-			if (!res.value.name || !res.value.description) throw new Error('Name and description are required');
+			if (!res.value.name || !res.value.description)
+				throw new Error('Name and description are required');
 
 			return createRole(parent, {
 				name: res.value.name,
@@ -238,5 +240,5 @@ export namespace Permissions {
 			role: role.data.id,
 			account: account.data.id
 		});
-	}
+	};
 }

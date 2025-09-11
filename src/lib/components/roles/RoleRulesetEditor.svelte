@@ -36,10 +36,12 @@
 							entitlement: entitlement,
 							switch: undefined
 						}
-					]
+					];
 				}
 
-				const matched = availablePermissions.data.find((r) => r.data.entitlement === entitlement.data.name);
+				const matched = availablePermissions.data.find(
+					(r) => r.data.entitlement === entitlement.data.name
+				);
 				if (matched) {
 					const group = groups[String(entitlement.data.group)];
 					if (group) {
@@ -60,10 +62,10 @@
 			groups = { ...groups };
 		};
 
-		const availableUnsub = availablePermissions.subscribe((p) => {
+		const availableUnsub = availablePermissions.subscribe(() => {
 			assign();
 		});
-		const entitlementUnsub = entitlements.subscribe((e) => {
+		const entitlementUnsub = entitlements.subscribe(() => {
 			assign();
 		});
 
@@ -84,7 +86,7 @@
 
 <div class="container">
 	{#each Object.entries(groups) as [name, group]}
-		<hr>
+		<hr />
 		<div class="row mb-3">
 			<h4>{name}</h4>
 		</div>
@@ -94,7 +96,12 @@
 					{#each group as item}
 						{#if item.ruleset}
 							<li class="list-group-item">
-								<RulesetSwitch bind:this={item.switch} ruleset={item.ruleset} {role} {saveOnChange} />
+								<RulesetSwitch
+									bind:this={item.switch}
+									ruleset={item.ruleset}
+									{role}
+									{saveOnChange}
+								/>
 							</li>
 						{/if}
 					{/each}
@@ -104,7 +111,8 @@
 	{/each}
 	{#if $role.parent === ''}
 		<div class="alert alert-info">
-			This role is a local admin role, it defines the permissions for its system. You cannot modify its permissions.
+			This role is a local admin role, it defines the permissions for its system. You cannot modify
+			its permissions.
 		</div>
 	{/if}
 </div>

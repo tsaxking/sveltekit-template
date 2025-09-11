@@ -17,7 +17,7 @@ export default async (roleName: string) => {
 			Account.Account.build(DB),
 			Permissions.Entitlement.build(DB),
 			Test.TestPermissions.build(DB),
-			Test.Test.build(DB),
+			Test.Test.build(DB)
 		])
 	).unwrap();
 
@@ -71,17 +71,13 @@ export default async (roleName: string) => {
 
 	// create 10 test entries
 	await Promise.all(
-		Array.from({ length: 10 }).map(async (_, i) =>
-		{	
+		Array.from({ length: 10 }).map(async (_, i) => {
 			const data = await Test.TestPermissions.new({
 				name: `Test Entry ${i + 1}`,
 				age: Math.floor(Math.random() * 100)
 			}).unwrap();
 
-			data.setAttributes([
-				'test-role',
-			]);
-		}
-		)
+			data.setAttributes(['test-role']);
+		})
 	);
 };

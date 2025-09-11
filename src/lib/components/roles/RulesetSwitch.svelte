@@ -91,4 +91,7 @@
 			- <small class="text-muted">{$parentRuleset.description}</small>
 		{/if}
 	</label>
+	{#if unsaved}
+		<span class="badge bg-warning text-dark ms-2">Unsaved</span>
+	{/if}
 </div>

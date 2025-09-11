@@ -176,7 +176,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 	 * Informs the array to emit updates without any local changes
 	 */
 	inform() {
-		this.subscribers.forEach(s => s(this.data));
+		this.subscribers.forEach((s) => s(this.data));
 	}
 
 	/**

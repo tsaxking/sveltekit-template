@@ -13,9 +13,11 @@ export const load = (event) => {
 		rulesets: Permissions.RoleRuleset.arr(
 			event.data.currentRulesets.map((r) => Permissions.RoleRuleset.Generator(r))
 		),
-		members: writable(event.data.members.map(m => ({
-			account: Account.Account.Generator(m.account),
-			roleAccount: Permissions.RoleAccount.Generator(m.roleAccount),
-		}))),
+		members: writable(
+			event.data.members.map((m) => ({
+				account: Account.Account.Generator(m.account),
+				roleAccount: Permissions.RoleAccount.Generator(m.roleAccount)
+			}))
+		)
 	};
 };

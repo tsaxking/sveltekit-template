@@ -17,7 +17,8 @@
 
 		const res = await Permissions.createRole(parent, {
 			name,
-			description
+			description,
+			color: '#000000'
 		});
 
 		if (res.isErr()) {

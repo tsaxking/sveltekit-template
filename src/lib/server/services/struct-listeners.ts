@@ -333,7 +333,7 @@ export class QueryListener<
 					args: z.object({
 						query: z.string(),
 						data: z.unknown()
-					}),
+					})
 				})
 				.safeParse(data);
 			if (!parsed.success) {
@@ -355,23 +355,23 @@ export class QueryListener<
 				if (res.data instanceof StructStream) {
 					return {
 						...res,
-						data: (await res.data.await().unwrap()).map(r => r.safe()) as any,
-					}
+						data: (await res.data.await().unwrap()).map((r) => r.safe()) as any
+					};
 				} else if (Array.isArray(res.data)) {
 					return {
 						...res,
-						data: res.data.map(r => r.safe()) as any,
+						data: res.data.map((r) => r.safe()) as any
 					};
 				} else {
 					return {
 						success: false,
-						message: 'Invalid return type from listener',
-					}
+						message: 'Invalid return type from listener'
+					};
 				}
 			}
 			return {
 				success: res.success,
-				message: res.message,
+				message: res.message
 			};
 		});
 	}

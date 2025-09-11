@@ -54,7 +54,7 @@ export namespace Permissions {
 			name: text('name').notNull(),
 			description: text('description').notNull(),
 			parent: text('parent').notNull(), // Parent role for hierarchy. A parent role can manage its child roles.
-			color: text('color').notNull().default('#000000'), // Color for UI purposes
+			color: text('color').notNull().default('#000000') // Color for UI purposes
 		}
 	});
 
@@ -111,7 +111,7 @@ export namespace Permissions {
 			parent: z.string(),
 			color: z.string().refine((val) => /^#([0-9A-F]{3}){1,2}$/i.test(val), {
 				message: 'Invalid color format'
-			}),
+			})
 		}),
 		async (event, data) => {
 			if (!event.locals.account) {
@@ -180,7 +180,7 @@ export namespace Permissions {
 				name: data.name,
 				description: data.description,
 				parent: data.parent,
-				color: data.color,
+				color: data.color
 			}).unwrap();
 
 			return {
@@ -293,10 +293,7 @@ export namespace Permissions {
 
 	export type RoleAccountData = typeof RoleAccount.sample;
 
-	const manageMemberAuth = async (
-		event: RequestEvent,
-		data: { role: string; account: string }
-	) => {
+	const manageMemberAuth = async (event: RequestEvent, data: { role: string; account: string }) => {
 		if (!event.locals.account) {
 			return 'Not logged in';
 		}
@@ -313,13 +310,16 @@ export namespace Permissions {
 
 		// account should be in the role or higher and be granted permission to manage members
 		const hierarchy = await getUpperHierarchy(role, true).unwrap();
-		const accountRoles = await getRolesFromAccountWithinHierarchy(event.locals.account, hierarchy).unwrap();
+		const accountRoles = await getRolesFromAccountWithinHierarchy(
+			event.locals.account,
+			hierarchy
+		).unwrap();
 		if (accountRoles.length === 0) {
 			return 'You are not a member of a parent role or the role itself, you cannot manage its membership';
 		}
 
 		const rulesets = await getRulesetsfromRoles(accountRoles).unwrap();
-		if (!rulesets.some(r => r.data.entitlement === 'manage-members')) {
+		if (!rulesets.some((r) => r.data.entitlement === 'manage-members')) {
 			return 'You do not have permission to manage members of this role';
 		}
 
@@ -331,7 +331,7 @@ export namespace Permissions {
 		RoleAccount,
 		z.object({
 			role: z.string(),
-			account: z.string(),
+			account: z.string()
 		}),
 		async (event, data) => {
 			if (!event.locals.account) {
@@ -348,13 +348,10 @@ export namespace Permissions {
 				return {
 					success: false,
 					message: 'Account to add not found'
-				}
+				};
 			}
 
-			console.log(
-				event.locals.account?.id,
-				accountToAdd.id,
-			)
+			console.log(event.locals.account?.id, accountToAdd.id);
 
 			const isInRole = await Permissions.isInRole(role, accountToAdd).unwrap();
 
@@ -362,7 +359,7 @@ export namespace Permissions {
 				return {
 					success: false,
 					message: 'Account is already in role'
-				}
+				};
 			}
 
 			await RoleAccount.new({
@@ -371,32 +368,32 @@ export namespace Permissions {
 			}).unwrap();
 
 			return {
-				success: true,
-			}
-		},
-	)
-	.auth(manageMemberAuth);
+				success: true
+			};
+		}
+	).auth(manageMemberAuth);
 
 	CallListener.on(
 		'remove-from-role',
 		RoleAccount,
 		z.object({
 			role: z.string(),
-			account: z.string(),
+			account: z.string()
 		}),
 		async (event, data) => {
 			const res = await DB.select()
 				.from(RoleAccount.table)
-				.where(and(eq(RoleAccount.table.role, data.role), eq(RoleAccount.table.account, data.account)))
+				.where(
+					and(eq(RoleAccount.table.role, data.role), eq(RoleAccount.table.account, data.account))
+				)
 				.limit(1);
-			
+
 			if (res.length === 0) {
 				return {
 					success: false,
 					message: 'Account is not in role'
-				}
+				};
 			}
-
 
 			const ra = RoleAccount.Generator(res[0]);
 
@@ -413,28 +410,30 @@ export namespace Permissions {
 				if (upper.length === 0) {
 					return {
 						success: false,
-						message: 'You cannot remove yourself from this role because you are a top-level role. You can only be removed by another member of the role or a parent role.'
+						message:
+							'You cannot remove yourself from this role because you are a top-level role. You can only be removed by another member of the role or a parent role.'
 					};
 				}
 
-				const inHigherRoles = await getRolesFromAccountWithinHierarchy(event.locals.account, upper).unwrap();
+				const inHigherRoles = await getRolesFromAccountWithinHierarchy(
+					event.locals.account,
+					upper
+				).unwrap();
 				if (inHigherRoles.length === 0) {
 					return {
 						success: false,
-						message: 'You cannot remove yourself from this role because you are a member of a top-level role. You can only be removed by another member of the role or a parent role.'
-					}
+						message:
+							'You cannot remove yourself from this role because you are a member of a top-level role. You can only be removed by another member of the role or a parent role.'
+					};
 				}
 			}
 
 			await ra.delete().unwrap();
 			return {
-				success: true,
-			}
+				success: true
+			};
 		}
-	)
-	.auth(manageMemberAuth);
-
-
+	).auth(manageMemberAuth);
 
 	export const Entitlement = new Struct({
 		name: 'entitlements',
@@ -1387,52 +1386,53 @@ export namespace Permissions {
 				permissions: permissionsByName[r.data.entitlement]
 			}));
 
-			return data.map((d) => {
-				if (
-					Array.from(ActionBypass.listeners).some((b) => {
-						if (action !== b.action) return false;
-						if (b.struct.name !== struct.name) return false;
-						return b.runWithAccount(account, d);
-					})
-				) {
-					return d.data;
-				}
-				// if (struct.bypasses.some((b) => b.action === action && b.condition(account, d.data))) {
-				// 	return d.data;
-				// }
-
-				// Array.from(ActionBypass.listeners).some(b => b.run())
-
-				const attributes = d.getAttributes().unwrap();
-				// all rulsets that match the action, struct, and target attribute
-				const rulesets = res.filter((r) => {
-					if (!r.entitlement) return false;
-					if (!r.permissions) return false;
+			return data
+				.map((d) => {
 					if (
-						!r.permissions.permissions.find(
-							(p) => p.action === action && (p.struct === d.struct.name || p.struct === '*')
-						)
-					) {
-						return false; // no permissions for this action and struct combination
-					}
-
-					return attributes.includes(r.ruleset.data.targetAttribute);
-				});
-
-				const keys = Object.keys(d.safe());
-
-				return Object.fromEntries(
-					keys
-						.map((key) => {
-							if (rulesets.some((r) => r.permissions?.test(d, action, key).unwrap())) {
-								return [key, d.data[key]];
-							}
-							return false;
+						Array.from(ActionBypass.listeners).some((b) => {
+							if (action !== b.action) return false;
+							if (b.struct.name !== struct.name) return false;
+							return b.runWithAccount(account, d);
 						})
-						.filter(Boolean)
-				) as Partial<Structable<T>>;
-			})
-			.filter(d => Object.keys(d).length > 0); // filter out empty objects
+					) {
+						return d.data;
+					}
+					// if (struct.bypasses.some((b) => b.action === action && b.condition(account, d.data))) {
+					// 	return d.data;
+					// }
+
+					// Array.from(ActionBypass.listeners).some(b => b.run())
+
+					const attributes = d.getAttributes().unwrap();
+					// all rulsets that match the action, struct, and target attribute
+					const rulesets = res.filter((r) => {
+						if (!r.entitlement) return false;
+						if (!r.permissions) return false;
+						if (
+							!r.permissions.permissions.find(
+								(p) => p.action === action && (p.struct === d.struct.name || p.struct === '*')
+							)
+						) {
+							return false; // no permissions for this action and struct combination
+						}
+
+						return attributes.includes(r.ruleset.data.targetAttribute);
+					});
+
+					const keys = Object.keys(d.safe());
+
+					return Object.fromEntries(
+						keys
+							.map((key) => {
+								if (rulesets.some((r) => r.permissions?.test(d, action, key).unwrap())) {
+									return [key, d.data[key]];
+								}
+								return false;
+							})
+							.filter(Boolean)
+					) as Partial<Structable<T>>;
+				})
+				.filter((d) => Object.keys(d).length > 0); // filter out empty objects
 		});
 	};
 
@@ -1745,7 +1745,10 @@ export type Features = \n	${
 		}
 	};
 
-	export const getRolesFromAccountWithinHierarchy = (account: Account.AccountData, hierarchy: RoleData[]) => {
+	export const getRolesFromAccountWithinHierarchy = (
+		account: Account.AccountData,
+		hierarchy: RoleData[]
+	) => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
 				.from(Role.table)
@@ -1753,7 +1756,10 @@ export type Features = \n	${
 				.where(
 					and(
 						eq(RoleAccount.table.account, account.id),
-						inArray(RoleAccount.table.role, hierarchy.map((r) => r.id))
+						inArray(
+							RoleAccount.table.role,
+							hierarchy.map((r) => r.id)
+						)
 					)
 				);
 
@@ -1765,7 +1771,12 @@ export type Features = \n	${
 		return attemptAsync(async () => {
 			const res = await DB.select()
 				.from(RoleRuleset.table)
-				.where(inArray(RoleRuleset.table.role, roles.map((r) => r.id)));
+				.where(
+					inArray(
+						RoleRuleset.table.role,
+						roles.map((r) => r.id)
+					)
+				);
 
 			return res.map((r) => RoleRuleset.Generator(r));
 		});
@@ -1824,7 +1835,7 @@ export type Features = \n	${
 				targetAttribute: localAdmin.data.id,
 				featureScopes: [],
 				name: 'Manage Roles',
-				description: 'Allows managing roles and their permissions.',
+				description: 'Allows managing roles and their permissions.'
 			});
 
 			const granted = await Promise.all(
@@ -1847,16 +1858,14 @@ export type Features = \n	${
 		});
 	};
 
-	export const createChildRole = (
-		config: {
-			parent: RoleData;
-			name: string;
-			description: string;
-			color?: string;
-		}
-	) => {
+	export const createChildRole = (config: {
+		parent: RoleData;
+		name: string;
+		description: string;
+		color?: string;
+	}) => {
 		return attemptAsync(async () => {
-			const role = await  Role.new({
+			const role = await Role.new({
 				name: config.name,
 				description: config.description,
 				parent: config.parent.id,
@@ -1894,16 +1903,10 @@ export type Features = \n	${
 	Permissions.createEntitlement({
 		name: 'manage-roles',
 		structs: [Role],
-		permissions: [
-			'role:create', 
-			'role:read:name', 
-			'role:read:description',
-		],
+		permissions: ['role:create', 'role:read:name', 'role:read:description'],
 		group: 'Roles',
 		description: 'Allows creating new roles, deleting roles, and updating existing roles.',
-		features: [
-			'manage-roles'
-		]
+		features: ['manage-roles']
 	});
 
 	Permissions.createEntitlement({
@@ -1912,7 +1915,7 @@ export type Features = \n	${
 		permissions: [],
 		group: 'Roles',
 		description: 'Allows granting roles to accounts.',
-		features: [],
+		features: []
 	});
 }
 

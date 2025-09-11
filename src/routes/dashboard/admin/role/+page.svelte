@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
 	import Grid from '$lib/components/general/Grid.svelte';
 	import RoleSelect from '$lib/components/roles/RoleSelect.svelte';
@@ -7,7 +8,12 @@
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
 	import nav from '$lib/imports/admin.js';
-import { TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterModule } from 'ag-grid-community'; 
+	import {
+		TextFilterModule,
+		NumberFilterModule,
+		DateFilterModule,
+		CustomFilterModule
+	} from 'ag-grid-community';
 
 	nav();
 
@@ -82,12 +88,12 @@ import { TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterMod
 						{
 							headerName: 'Role',
 							field: 'role.data.name',
-							filter: true,
+							filter: true
 						},
 						{
 							headerName: 'Description',
 							field: 'role.data.description',
-							filter: true,
+							filter: true
 						},
 						{
 							headerName: 'Parent',
@@ -95,7 +101,7 @@ import { TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterMod
 							valueGetter: (params) => {
 								return params.data?.parent?.data.name || 'No Parent';
 							},
-							filter: true,
+							filter: true
 						},
 						{
 							headerName: 'Created',
@@ -107,7 +113,7 @@ import { TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterMod
 							headerName: 'Updated',
 							field: 'role.data.updated',
 							cellRenderer: (params: any) => new Date(params.value).toLocaleString(),
-							filter: true,
+							filter: true
 						}
 					],
 					onCellContextMenu: (params) => {

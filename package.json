@@ -114,7 +114,7 @@
 		"colors": "git+https://github.com/tsaxking/colors#v1.0.0",
 		"dotenv": "^16.6.1",
 		"drizzle-orm": "^0.38.4",
-		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.17",
+		"drizzle-struct": "github:tsaxking/drizzle-struct#v1.0.19",
 		"drizzle-zod": "^0.6.1",
 		"express": "^5.1.0",
 		"filepond": "^4.32.8",

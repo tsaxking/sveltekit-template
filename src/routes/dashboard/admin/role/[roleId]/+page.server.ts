@@ -39,9 +39,9 @@ export const load = async (event) => {
 		children: children.map((c) => c.safe()),
 		currentRulesets: currentRulesets.map((r) => r.safe()),
 		availableRulesets: availableRulesets.map((r) => r.safe()),
-		members: members.map(m => ({
+		members: members.map((m) => ({
 			account: m.account.safe(),
 			roleAccount: m.roleAccount.safe()
-		})),
+		}))
 	};
 };

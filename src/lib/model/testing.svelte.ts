@@ -599,7 +599,7 @@ export namespace Test {
 		name: 'test_permissions',
 		structure: {
 			name: 'string',
-			age: 'number',
+			age: 'number'
 		},
 		socket: sse,
 		browser,

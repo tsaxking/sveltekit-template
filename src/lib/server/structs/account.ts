@@ -4,7 +4,7 @@ import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
 import { DB } from '../db';
-import { sql, eq, or, ilike } from 'drizzle-orm';
+import { eq, or, ilike } from 'drizzle-orm';
 import type { Notification } from '$lib/types/notification';
 import { Session } from './session';
 import { sse } from '../services/sse';
@@ -49,13 +49,12 @@ export namespace Account {
 				throw new Error('Not logged in');
 			}
 
-
 			return searchAccounts(data.query, {
 				type: 'array',
 				limit: data.limit || 10,
 				offset: data.offset || 0
 			}).unwrap();
-		},
+		}
 	);
 
 	Account.sendListen('self', async (event) => {
@@ -388,7 +387,7 @@ export namespace Account {
 				.where(
 					or(
 						ilike(Account.table.username, `%${query.toLowerCase()}%`),
-						ilike(Account.table.email, `%${query.toLowerCase()}%`),
+						ilike(Account.table.email, `%${query.toLowerCase()}%`)
 					)
 				)
 				.limit(config.limit)
