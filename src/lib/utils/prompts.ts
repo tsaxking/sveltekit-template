@@ -265,12 +265,37 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 
 type ChooseConfig<A, B> = {
 	title?: string;
-	renderA?: (value: A) => string;
-	renderB?: (value: B) => string;
 };
-export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseConfig<A, B>) => {
+
+type ChooseOption<Value> = {
+	value: Value;
+	text: string;
+} | Value;
+
+const renderer = (option: ChooseOption<unknown>, which: 'A' | 'B'): string => {
+	if (typeof option === 'string') return option;
+	if (typeof option === 'object' && option !== null) {
+		if (Object.keys(option).length === 2 && 'value' in option && 'text' in option && typeof option.text === 'string') {
+			return option.text;
+		}
+	}
+	return which;
+};
+
+const valueGetter = <Value>(option: ChooseOption<Value>): Value => {
+	if (typeof option === 'object' && option !== null) {
+		if (Object.keys(option).length === 2 && 'value' in option && 'text' in option) {
+			return option.value;
+		}
+	}
+	return option as Value;
+}
+
+export const choose = async <A, B>(message: string, A: ChooseOption<A>, B: ChooseOption<B>, config?: ChooseConfig<A, B>) => {
 	return new Promise<A | B | null>((res, rej) => {
 		if (!modalTarget) return rej('Cannot show choose in non-browser environment');
+
+
 
 		const modal = mount(Modal, {
 			target: modalTarget,
@@ -287,18 +312,18 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 						}
 					},
 					{
-						text: config?.renderA ? config.renderA(A) : 'A',
+						text: renderer(A, 'A'),
 						color: 'primary',
 						onClick: () => {
-							res(A);
+							res(valueGetter(A));
 							modal.hide();
 						}
 					},
 					{
-						text: config?.renderB ? config.renderB(B) : 'B',
+						text: renderer(B, 'B'),
 						color: 'primary',
 						onClick: () => {
-							res(B);
+							res(valueGetter(B));
 							modal.hide();
 						}
 					}
@@ -314,12 +339,12 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 			}
 			if (e.key === '1' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
 				e.preventDefault();
-				res(A);
+				res(valueGetter(A));
 				return modal.hide();
 			}
 			if (e.key === '2' || e.key === 'ArrowRight' || e.key === 'b' || e.key === 'B') {
 				e.preventDefault();
-				res(B);
+				res(valueGetter(B));
 				return modal.hide();
 			}
 		};

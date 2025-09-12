@@ -36,7 +36,7 @@
 				type="button"
 				class="btn btn-primary"
 				onclick={async () => {
-					const result = await choose('This is a choose', 'Yes', 'No');
+					const result = await choose('This is a choose', 'Option A', 'Option B');
 					alert(`You selected: ${result}`);
 				}}
 			>
