@@ -3,6 +3,17 @@ import fs from 'fs/promises';
 import path from 'path';
 config();
 
+const keys = new Map<
+	string,
+	{
+		required: boolean;
+		default?: unknown;
+		type?: string;
+	}
+>();
+
+const cache = new Map<string, unknown>();
+
 export class EnvironmentError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -57,16 +68,6 @@ function generateExample()  {
 	}, 1000);
 };
 
-const keys = new Map<
-	string,
-	{
-		required: boolean;
-		default?: unknown;
-		type?: string;
-	}
->();
-
-const cache = new Map<string, unknown>();
 
 // Overloads for get()
 export function get<T = string>(key: string, config: EnvConfig<T> & { required: true }): T;
