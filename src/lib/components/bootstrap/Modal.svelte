@@ -41,6 +41,8 @@
 		modal.hide();
 	};
 
+	export const off = em.off.bind(em);
+
 	onMount(() => {
 		const onshow = () => em.emit('show');
 		const onhide = () => em.emit('hide');
