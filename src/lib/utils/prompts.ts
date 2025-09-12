@@ -157,7 +157,7 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 
 		const onshow = () => {
 			input?.focus();
-		}
+		};
 
 		modal.on('show', onshow);
 
@@ -208,7 +208,7 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 							input.addEventListener('change', onchange);
 							return () => {
 								input?.removeEventListener('change', onchange);
-							}
+							};
 						}
 					}
 				})),
@@ -246,7 +246,7 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 					modal.hide();
 				}
 			}
-		}
+		};
 
 		document.addEventListener('keydown', onkeydown);
 
@@ -306,31 +306,30 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 			}
 		});
 		modal.show();
-					const onkeydown = (e: KeyboardEvent) => {
-						if (e.key === 'Escape') {
-							e.preventDefault();
-							res(null);
-							return modal.hide();
-						}
-						if (e.key === '1' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-							e.preventDefault();
-							res(A);
-							return modal.hide();
-						}
-						if (e.key === '2' || e.key === 'ArrowRight' || e.key === 'b' || e.key === 'B') {
-							e.preventDefault();
-							res(B);
-							return modal.hide();
-						}
-					};
+		const onkeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				res(null);
+				return modal.hide();
+			}
+			if (e.key === '1' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+				e.preventDefault();
+				res(A);
+				return modal.hide();
+			}
+			if (e.key === '2' || e.key === 'ArrowRight' || e.key === 'b' || e.key === 'B') {
+				e.preventDefault();
+				res(B);
+				return modal.hide();
+			}
+		};
 
-					document.addEventListener('keydown', onkeydown);
+		document.addEventListener('keydown', onkeydown);
 
 		modal.once('hide', () => {
 			res(null);
 			clearModals();
-						document.removeEventListener('keydown', onkeydown);
-
+			document.removeEventListener('keydown', onkeydown);
 		});
 	});
 };
@@ -368,32 +367,29 @@ export const confirm = async (message: string, config?: ConfirmConfig) => {
 					}
 				]),
 				setup: () => {
-
-					return () => {
-					}
+					return () => {};
 				}
 			}
 		});
 		modal.show();
-					const onkeydown = (e: KeyboardEvent) => {
-						if (e.key === 'Escape') {
-							e.preventDefault();
-							res(false);
-							return modal.hide();
-						}
-						if (e.key === 'Enter') {
-							e.preventDefault();
-							res(true);
-							return modal.hide();
-						}
-					};
+		const onkeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				res(false);
+				return modal.hide();
+			}
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				res(true);
+				return modal.hide();
+			}
+		};
 
-					document.addEventListener('keydown', onkeydown);
+		document.addEventListener('keydown', onkeydown);
 		modal.once('hide', () => {
 			res(false);
 			clearModals();
-						document.removeEventListener('keydown', onkeydown);
-
+			document.removeEventListener('keydown', onkeydown);
 		});
 	});
 };
@@ -417,21 +413,20 @@ export const alert = async (message: string, config?: AlertConfig) => {
 						modal.hide();
 						res();
 					}
-				}),
+				})
 			}
 		});
 		modal.show();
 
-							const onkeydown = (e: KeyboardEvent) => {
-						if (e.key === 'Escape' || e.key === 'Enter') {
-							e.preventDefault();
-							res();
-							return modal.hide();
-						}
-					};
+		const onkeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape' || e.key === 'Enter') {
+				e.preventDefault();
+				res();
+				return modal.hide();
+			}
+		};
 
-					document.addEventListener('keydown', onkeydown);
-
+		document.addEventListener('keydown', onkeydown);
 
 		modal.once('hide', () => {
 			res();
@@ -480,7 +475,7 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 
 							return () => {
 								input?.removeEventListener('input', oninput);
-							}
+							};
 						}
 					}
 				})),
@@ -511,23 +506,23 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 
 		modal.show();
 
-							const onkeydown = (e: KeyboardEvent) => {
-								if (e.key === 'Enter') {
-									e.preventDefault();
-									if (selected) {
-										res(selected);
-										modal.hide();
-									}
-								} else if (e.key === 'Escape') {
-									e.preventDefault();
-									modal.hide();
-									res(null);
-								}
-							};
-							document.addEventListener('keydown', onkeydown);
+		const onkeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				if (selected) {
+					res(selected);
+					modal.hide();
+				}
+			} else if (e.key === 'Escape') {
+				e.preventDefault();
+				modal.hide();
+				res(null);
+			}
+		};
+		document.addEventListener('keydown', onkeydown);
 
 		modal.once('hide', () => {
-								document.removeEventListener('keydown', onkeydown);
+			document.removeEventListener('keydown', onkeydown);
 			res(null);
 			clearModals();
 		});
@@ -614,7 +609,7 @@ export const rawModal = (
 
 					return () => {
 						document.removeEventListener('keydown', onkeydown);
-					}
+					};
 				}
 			})),
 			buttons: createButtons(buttons)
