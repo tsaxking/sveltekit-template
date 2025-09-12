@@ -2,15 +2,6 @@
 	import { prompt, alert, confirm, choose, select, colorPicker, notify } from '$lib/utils/prompts';
 </script>
 
-<style>
-    button {
-        margin-right: 10px;
-        margin-bottom: 10px;
-        height: 150px;
-        width: 150px;
-    }
-</style>
-
 <div class="container">
 	<div class="row mb-3">
 		<div class="col">
@@ -93,3 +84,12 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	button {
+		margin-right: 10px;
+		margin-bottom: 10px;
+		height: 150px;
+		width: 150px;
+	}
+</style>

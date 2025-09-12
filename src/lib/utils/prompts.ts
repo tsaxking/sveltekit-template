@@ -596,21 +596,7 @@ export const rawModal = (
 		props: {
 			title,
 			body: createRawSnippet(() => ({
-				render: () => `<div class="body-content"></div>`,
-				setup: () => {
-					const onkeydown = (e: KeyboardEvent) => {
-						if (e.key === 'Escape') {
-							e.preventDefault();
-							return modal.hide();
-						}
-					};
-
-					document.addEventListener('keydown', onkeydown);
-
-					return () => {
-						document.removeEventListener('keydown', onkeydown);
-					};
-				}
+				render: () => `<div class="body-content"></div>`
 			})),
 			buttons: createButtons(buttons)
 		}
@@ -621,7 +607,16 @@ export const rawModal = (
 
 	onMount(body as HTMLDivElement);
 
+	const onkeydown = (e: KeyboardEvent) => {
+		if (e.key === 'Escape') {
+			e.preventDefault();
+			return modal.hide();
+		}
+	};
+
+	document.addEventListener('keydown', onkeydown);
 	modal.on('hide', () => {
+		document.removeEventListener('keydown', onkeydown);
 		clearModals();
 	});
 
