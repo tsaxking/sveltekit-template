@@ -38,7 +38,7 @@ afterAll(async () => {
 
 describe('Account Sign Up', () => {
 	test('Accounts', async ({ page }) => {
-        logging(page);
+		logging(page);
 		{
 			await page.goto('/account/sign-up');
 
@@ -91,11 +91,7 @@ describe('Account Sign Up', () => {
 		expect(account.data.lastName).toBe('User');
 		expect(account.data.verified).toBe(false);
 		{
-			await signIn(
-                page,
-                'testuser',
-                'TestPassword123!',
-            );
+			await signIn(page, 'testuser', 'TestPassword123!');
 
 			await page.goto('/test/account');
 			const accountInfo = await page.locator('#accountInfo').elementHandle();
@@ -111,7 +107,7 @@ describe('Account Sign Up', () => {
 
 describe('Account Request Password Reset', () => {
 	test('Request Password Reset', async ({ page }) => {
-        logging(page);
+		logging(page);
 		const _account = await Account.createAccount({
 			username: 'testuser2',
 			email: 'testuser2@example.com',
@@ -122,7 +118,5 @@ describe('Account Request Password Reset', () => {
 
 		// TODO: Implement password reset test when email sending is set up
 		expect(true).toBe(true);
-
-        
 	});
 });
