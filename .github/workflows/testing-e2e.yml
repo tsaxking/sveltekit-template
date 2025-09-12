@@ -76,6 +76,7 @@ jobs:
           echo "PORT=4173" >> .env
           echo "PUBLIC_DOMAIN=localhost" >> .env
           echo "HTTPS=false" >> .env
+          echo "SESSION_DURATION=10000000" >> .env
           export $(cat .env | xargs)
 
       - name: Run migrations
