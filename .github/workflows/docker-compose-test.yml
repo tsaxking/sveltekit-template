@@ -32,9 +32,9 @@ jobs:
           DB_PASS=test
           DB_NAME=test
           DB_PORT=5432
-          SECRET_OAUTH2_CLIENT_ID=1234567890
+          OAUTH2_CLIENT_ID=1234567890
           PUBLIC_APP_NAME=test
-          SECRET_OAUTH2_CLIENT_SECRET=1234567890
+          OAUTH2_CLIENT_SECRET=1234567890
           REDIS_NAME=some_name
           REDIS_URL=redis://redis:6379
           ENVIRONMENT=test
@@ -48,9 +48,9 @@ jobs:
           DB_PASS=test
           DB_NAME=test
           DB_PORT=5432
-          SECRET_OAUTH2_CLIENT_ID=1234567890
+          OAUTH2_CLIENT_ID=1234567890
           PUBLIC_APP_NAME=test
-          SECRET_OAUTH2_CLIENT_SECRET=1234567890
+          OAUTH2_CLIENT_SECRET=1234567890
           REDIS_NAME=some_name
           REDIS_URL=redis://localhost:6379
           ENVIRONMENT=test

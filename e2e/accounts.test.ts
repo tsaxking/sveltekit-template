@@ -2,10 +2,8 @@ import * as testing from '@playwright/test';
 import { Account } from '../src/lib/server/structs/account';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '../src/lib/server/db';
-import { config } from 'dotenv';
 import { signIn, logging } from './test-utils';
-
-config();
+import { str } from '../src/lib/server/utils/env';
 
 const expect = testing.expect;
 const test = testing.test;
@@ -14,7 +12,8 @@ const afterAll = testing.default.afterAll;
 const beforeAll = testing.default.beforeAll;
 beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
-	if (process.env.AUTO_SIGN_IN) {
+	const signIn = str('AUTO_SIGN_IN', false);
+	if (signIn) {
 		throw new Error('AUTO_SIGN_IN is set. Please unset it for e2e tests.');
 	}
 });

@@ -1,25 +1,29 @@
-import { SECRET_OAUTH2_CLIENT_ID, SECRET_OAUTH2_CLIENT_SECRET } from '$env/static/private';
 import { Account } from '$lib/server/structs/account.js';
-import { Session } from '$lib/server/structs/session.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import { ServerCode } from 'ts-utils/status';
+import { domain, str } from '$lib/server/utils/env.js';
 
 // const log = (...args: unknown[]) => console.log('[oauth/sign-up]', ...args);
 
 export const GET = async (event) => {
 	const code = event.url.searchParams.get('code');
 	if (!code) throw redirect(ServerCode.temporaryRedirect, '/account/sign-up');
-	const domain = String(process.env.PUBLIC_DOMAIN).includes('localhost')
-		? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
-		: process.env.PUBLIC_DOMAIN;
-	const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
-	const redirectUri = `${protocol}${domain}/oauth/sign-in`;
+	// const domain = String(process.env.PUBLIC_DOMAIN).includes('localhost')
+	// 	? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
+	// 	: process.env.PUBLIC_DOMAIN;
+	// const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
+	// const redirectUri = `${protocol}${domain}/oauth/sign-in`;
+	const url = domain({
+		port: false,
+		protocol: true
+	});
+	const redirectUri = `${url}/oauth/sign-up`;
 	try {
 		const client = new OAuth2Client({
-			clientId: SECRET_OAUTH2_CLIENT_ID,
-			clientSecret: SECRET_OAUTH2_CLIENT_SECRET,
+			clientId: str('OAUTH2_CLIENT_ID', true),
+			clientSecret: str('OAUTH2_CLIENT_SECRET', true),
 			redirectUri
 		});
 		// log(client);
@@ -65,7 +69,7 @@ export const GET = async (event) => {
 		//         });
 		//     }, 1000);
 		// }
-	} catch (err) {
+	} catch {
 		// log(err);
 	}
 

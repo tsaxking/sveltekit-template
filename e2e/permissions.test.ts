@@ -4,12 +4,10 @@ import { Permissions } from '../src/lib/server/structs/permissions';
 import { Test } from '../src/lib/server/structs/testing';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '../src/lib/server/db';
-import { config } from 'dotenv';
 import { logging, signIn } from './test-utils';
 import { v4 as uuid } from 'uuid';
 import { sleep } from 'ts-utils/sleep';
-
-config();
+import { str } from '../src/lib/server/utils/env';
 
 const expect = testing.expect;
 const test = testing.test;
@@ -28,7 +26,8 @@ const id = uuid();
 
 beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
-	if (process.env.AUTO_SIGN_IN) {
+	const signIn = str('AUTO_SIGN_IN', false);
+	if (signIn) {
 		throw new Error('AUTO_SIGN_IN is set. Please unset it for e2e tests.');
 	}
 
