@@ -62,12 +62,16 @@ const keys = new Map<
 	}
 >();
 
+const cache = new Map<string, unknown>();
+
 // Overloads for get()
 export function get<T = string>(key: string, config: EnvConfig<T> & { required: true }): T;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined {
+    if (cache.has(key)) return cache.get(key) as T;
 	key = key.toUpperCase();
-	const gen = () => {
+	const gen = (data: T) => {
+        cache.set(key, data);
         if (env === 'prod') return; // Don't change git-tracked files in production
 		if (!keys.has(key)) {
 			keys.set(key, {
@@ -106,16 +110,16 @@ export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefin
 				`Env var "${key}" has a different type than the provided default/devDefault`
 			);
 		}
-		gen();
+		gen(actual);
 		return actual;
 	}
 
 	if (process.env.NODE_ENV === 'development' && config?.devDefault !== undefined) {
-		gen();
+		gen(config.devDefault);
 		return config.devDefault;
 	}
 
-	gen();
+	gen(config?.default as T);
 	return config?.default;
 }
 
