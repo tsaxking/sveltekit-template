@@ -63,9 +63,7 @@ beforeAll(async () => {
 				age: Math.floor(Math.random() * 100)
 			}).unwrap();
 
-			await res.setAttributes([
-				id,
-			]).unwrap();
+			await res.setAttributes([id]).unwrap();
 		})
 	);
 });

@@ -25,20 +25,13 @@ const emailService = redis.createQueue(
 	Number(process.env.MAX_EMAIL_QUEUE) || 100
 );
 
-const openEmail = (
-	name: keyof Email
-) => {
-		return attemptAsync(async () => {
-			const filepath = path.join(
-				process.cwd(),
-				'private',
-				'emails',
-				name + '.html',
-			);
+const openEmail = (name: keyof Email) => {
+	return attemptAsync(async () => {
+		const filepath = path.join(process.cwd(), 'private', 'emails', name + '.html');
 
-			return fs.readFile(filepath, 'utf-8');
-		});
-	}
+		return fs.readFile(filepath, 'utf-8');
+	});
+};
 
 /**
  *
@@ -78,10 +71,7 @@ export const sendEmail = <T extends keyof Email>(
 		const html = await openEmail(config.type).unwrap();
 
 		const job = {
-			html: render(
-				html,
-				config.data,
-			),
+			html: render(html, config.data),
 			to: config.to,
 			subject: config.subject,
 			attachments: config.attachments ?? [],
