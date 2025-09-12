@@ -748,6 +748,29 @@ export namespace Permissions {
 		});
 	};
 
+	export const grantRole = (role: RoleData, account: Account.AccountData) => {
+		return RoleAccount.new({
+			role: role.id,
+			account: account.id
+		});
+	};
+
+	export const revokeRole = (role: RoleData, account: Account.AccountData) => {
+		return attemptAsync(async () => {
+			const res = await DB.select()
+				.from(RoleAccount.table)
+				.where(and(eq(RoleAccount.table.role, role.id), eq(RoleAccount.table.account, account.id)))
+				.limit(1);
+
+			if (!res) {
+				throw new Error('Role account not found');
+			}
+
+			const ra = RoleAccount.Generator(res[0]);
+			await ra.delete().unwrap();
+		});
+	};
+
 	export const revokeRoleRuleset = (
 		role: RoleData,
 		entitlement: Entitlement,
@@ -1687,7 +1710,6 @@ export type Features = \n	${
 		if (entitlementCache.toBuilds === undefined) return; // Already built
 		if (entitlementCache.built) return; // Already built
 		entitlementCache.built = true; // Mark as built to prevent multiple builds
-		await Entitlement.clear().unwrap();
 		await Promise.all(entitlementCache.toBuilds.map((f) => f()));
 		delete entitlementCache.toBuilds; // Clear the toBuilds array
 	};
@@ -1717,6 +1739,28 @@ export type Features = \n	${
 		}
 
 		const run = async () => {
+			const e = await Permissions.Entitlement.fromProperty('name', entitlement.name, {
+				type: 'single'
+			}).unwrap();
+
+			if (e) {
+				terminal.log('Updating entitlement: ', entitlement.name);
+				await e.setStatic(false).unwrap();
+				await e
+					.update({
+						group: entitlement.group,
+						structs: JSON.stringify(entitlement.structs.map((s) => s.data.name)),
+						permissions: JSON.stringify(entitlement.permissions),
+						description: entitlement.description,
+						features: JSON.stringify(entitlement.features),
+						defaultFeatureScopes: JSON.stringify(entitlement.defaultFeatureScopes || [])
+					})
+					.unwrap();
+				await e.setStatic(true).unwrap();
+				return;
+			}
+
+			terminal.log('Creating entitlement: ', entitlement.name);
 			await Permissions.Entitlement.new(
 				{
 					name: entitlement.name, // this will fail if the entitlement already exists considering the name is unique

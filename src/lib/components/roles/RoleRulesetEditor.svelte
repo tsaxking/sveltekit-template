@@ -27,7 +27,6 @@
 		entitlements = Permissions.getEntitlements();
 
 		const assign = () => {
-			console.log('Assigning rulesets to groups', availablePermissions.data, entitlements.data);
 			for (const entitlement of entitlements.data) {
 				if (!groups[String(entitlement.data.group)]) {
 					groups[String(entitlement.data.group)] = [
@@ -85,7 +84,7 @@
 </script>
 
 <div class="container">
-	{#each Object.entries(groups) as [name, group]}
+	{#each Object.entries(groups).filter(([,g]) => g.filter(i => i.ruleset).length) as [name, group]}
 		<hr />
 		<div class="row mb-3">
 			<h4>{name}</h4>

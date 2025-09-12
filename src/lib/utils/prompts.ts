@@ -267,15 +267,22 @@ type ChooseConfig = {
 	title?: string;
 };
 
-type ChooseOption<Value> = {
-	value: Value;
-	text: string;
-} | Value;
+type ChooseOption<Value> =
+	| {
+			value: Value;
+			text: string;
+	  }
+	| Value;
 
 const renderer = (option: ChooseOption<unknown>, which: 'A' | 'B'): string => {
 	if (typeof option === 'string') return option;
 	if (typeof option === 'object' && option !== null) {
-		if (Object.keys(option).length === 2 && 'value' in option && 'text' in option && typeof option.text === 'string') {
+		if (
+			Object.keys(option).length === 2 &&
+			'value' in option &&
+			'text' in option &&
+			typeof option.text === 'string'
+		) {
 			return option.text;
 		}
 	}
@@ -289,13 +296,16 @@ const valueGetter = <Value>(option: ChooseOption<Value>): Value => {
 		}
 	}
 	return option as Value;
-}
+};
 
-export const choose = async <A, B>(message: string, A: ChooseOption<A>, B: ChooseOption<B>, config?: ChooseConfig) => {
+export const choose = async <A, B>(
+	message: string,
+	A: ChooseOption<A>,
+	B: ChooseOption<B>,
+	config?: ChooseConfig
+) => {
 	return new Promise<A | B | null>((res, rej) => {
 		if (!modalTarget) return rej('Cannot show choose in non-browser environment');
-
-
 
 		const modal = mount(Modal, {
 			target: modalTarget,

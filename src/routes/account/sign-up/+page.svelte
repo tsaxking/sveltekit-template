@@ -44,13 +44,15 @@
 		</div>
 		<div class="row mb-3">
 			<form action="?/register" method="post">
-				{#if form?.message}
-					{#if form.message === 'Account created'}
-						<p class="text-success">Account created successfully</p>
-					{:else}
-						<p class="text-danger">{form.message}</p>
+				<div id="formMessage" class:d-none={!form?.message}>
+					{#if form?.message}
+						{#if form.message === 'Account created'}
+							<p class="text-success">Account created successfully</p>
+						{:else}
+							<p class="text-danger">{form.message}</p>
+						{/if}
 					{/if}
-				{/if}
+				</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
@@ -113,6 +115,7 @@
 								floatingLabel={true}
 								label="Password"
 								buttonColor="primary"
+								id="password"
 							/>
 						</div>
 						<div class="col-md-6">
@@ -123,6 +126,7 @@
 								floatingLabel={true}
 								label="Confirm Password"
 								buttonColor="primary"
+								id="confirmPassword"
 							/>
 						</div>
 					</div>
@@ -169,8 +173,7 @@
 						</div>
 					</div>
 				</div>
-
-				<button type="submit" class="btn btn-primary"> Sign Up </button>
+				<button type="submit" class="btn btn-primary" id="signUpButton"> Sign Up </button>
 			</form>
 		</div>
 		<div class="row mb-3">
