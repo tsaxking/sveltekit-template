@@ -15,12 +15,12 @@ export const load = async (event) => {
 
 	if (!pr.value) {
 		terminal.log('No password reset found');
-		throw redirect(ServerCode.permanentRedirect, `/status/404?url=${event.request.url}`);
+		throw fail(ServerCode.notFound);
 	}
 
 	if (new Date(pr.value.data.expires) < new Date()) {
 		terminal.log('Password reset expired');
-		throw redirect(ServerCode.permanentRedirect, `/status/404?url=${event.request.url}`);
+		throw fail(ServerCode.gone);
 	}
 
 	const account = await Account.Account.fromId(pr.value.data.accountId);
@@ -31,7 +31,7 @@ export const load = async (event) => {
 
 	if (!account.value) {
 		terminal.log('No account found');
-		throw redirect(ServerCode.permanentRedirect, `/status/404?url=${event.request.url}`);
+		throw fail(ServerCode.notFound);
 	}
 
 	return {
@@ -43,7 +43,7 @@ export const actions = {
 	reset: async (event) => {
 		const pr = await Account.PasswordReset.fromId(event.params.id);
 
-		const notFound = () => redirect(ServerCode.seeOther, `/status/404?url=${event.request.url}`);
+		const notFound = () => fail(ServerCode.notFound);
 
 		if (pr.isErr()) {
 			terminal.error(pr.error);
