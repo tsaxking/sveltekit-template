@@ -21,7 +21,11 @@ type EnvConfig<T> = {
 
 let timeout: ReturnType<typeof setTimeout>;
 
-const generateExample = () => {
+export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
+	values: ['dev', 'prod', 'test'],
+	required: true
+});
+function generateExample()  {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
 		const filepath = path.join(process.cwd(), '.env.example');
@@ -173,12 +177,8 @@ export function str(key: string, required: boolean): string | undefined {
 	return get<string>(key, { required: required ?? false });
 }
 
-export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
-	values: ['dev', 'prod', 'test'],
-	required: true
-});
 
-export const domain = (config: { port: boolean; protocol: boolean }) => {
+export function domain(config: { port: boolean; protocol: boolean }) {
 	const host = str('PUBLIC_DOMAIN', true);
 	const port = num('PORT', true);
 	const protocol = bool('HTTPS', true) ? 'https://' : 'http://';
