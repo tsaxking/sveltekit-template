@@ -22,7 +22,6 @@ type EnvConfig<T> = {
 let timeout: ReturnType<typeof setTimeout>;
 
 const generateExample = () => {
-    if (env === 'prod') return; // Don't change git-tracked files in production
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
 		const filepath = path.join(process.cwd(), '.env.example');
@@ -69,6 +68,7 @@ export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefin
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined {
 	key = key.toUpperCase();
 	const gen = () => {
+        if (env === 'prod') return; // Don't change git-tracked files in production
 		if (!keys.has(key)) {
 			keys.set(key, {
 				required: config?.required ?? false,
