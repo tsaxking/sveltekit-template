@@ -263,7 +263,7 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 	});
 };
 
-type ChooseConfig<A, B> = {
+type ChooseConfig = {
 	title?: string;
 };
 
@@ -291,7 +291,7 @@ const valueGetter = <Value>(option: ChooseOption<Value>): Value => {
 	return option as Value;
 }
 
-export const choose = async <A, B>(message: string, A: ChooseOption<A>, B: ChooseOption<B>, config?: ChooseConfig<A, B>) => {
+export const choose = async <A, B>(message: string, A: ChooseOption<A>, B: ChooseOption<B>, config?: ChooseConfig) => {
 	return new Promise<A | B | null>((res, rej) => {
 		if (!modalTarget) return rej('Cannot show choose in non-browser environment');
 
