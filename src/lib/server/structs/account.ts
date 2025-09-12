@@ -10,7 +10,7 @@ import { Session } from './session';
 import { sse } from '../services/sse';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 // import { Universes } from './universe';
-import { Email } from './email';
+import { sendEmail } from '../services/email';
 import type { Icon } from '../../types/icons';
 import { z } from 'zod';
 import { Permissions } from './permissions';
@@ -485,23 +485,17 @@ export namespace Account {
 				})
 			).unwrap();
 
-			const link = (
-				await Email.createLink(`/account/password-reset/${pr.id}`, new Date(pr.data.expires))
-			).unwrap();
-
 			const email = account.data.email;
 
-			(
-				await Email.send({
-					type: 'forgot-password',
-					to: email,
-					data: {
-						link,
-						supportEmail: process.env.SUPPORT_EMAIL || ''
-					},
-					subject: 'Password Reset Request'
-				})
-			).unwrap();
+			sendEmail({
+				type: 'forgot-password',
+				to: email,
+				data: {
+					link: `/account/password-reset/${pr.id}`,
+					supportEmail: process.env.SUPPORT_EMAIL || ''
+				},
+				subject: 'Password Reset Request'
+			}).unwrap();
 
 			(
 				await sendAccountNotif(account.id, {

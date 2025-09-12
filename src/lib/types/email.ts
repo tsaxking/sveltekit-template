@@ -3,10 +3,6 @@ export type Email = {
 		link: string;
 		supportEmail: string;
 	};
-	'new-user': {
-		username: string;
-		verification: string;
-	};
 	test: {
 		service: string;
 		link: string;

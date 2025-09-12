@@ -4,7 +4,6 @@
 
 	let arr = $state(Test.TestPermissions.arr());
 
-
 	onMount(() => {
 		arr = Test.TestPermissions.all(false);
 	});

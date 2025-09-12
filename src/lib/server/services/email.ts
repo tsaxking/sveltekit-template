@@ -2,12 +2,15 @@ import { attemptAsync } from 'ts-utils/check';
 import { type Email } from '../../types/email';
 import redis from './redis';
 import { z } from 'zod';
+import { render } from 'html-constructor';
+import fs from 'fs/promises';
+import path from 'path';
 
 const emailService = redis.createQueue(
 	'email',
 	z.object({
-		type: z.string(),
-		data: z.any(),
+		html: z.string().optional(),
+		text: z.string().optional(),
 		to: z.union([z.string(), z.array(z.string())]),
 		subject: z.string(),
 		attachments: z
@@ -21,6 +24,14 @@ const emailService = redis.createQueue(
 	}),
 	Number(process.env.MAX_EMAIL_QUEUE) || 100
 );
+
+const openEmail = (name: keyof Email) => {
+	return attemptAsync(async () => {
+		const filepath = path.join(process.cwd(), 'private', 'emails', name + '.html');
+
+		return fs.readFile(filepath, 'utf-8');
+	});
+};
 
 /**
  *
@@ -57,14 +68,13 @@ export const sendEmail = <T extends keyof Email>(
 			targetService = process.env.EMAIL_MICROSERVICE_NAME;
 		}
 
-		// Compose the job payload
+		const html = await openEmail(config.type).unwrap();
+
 		const job = {
-			type: config.type,
-			data: config.data,
+			html: render(html, config.data),
 			to: config.to,
 			subject: config.subject,
 			attachments: config.attachments ?? [],
-			// Optionally add a timestamp or jobId here
 			timestamp: Date.now()
 		};
 

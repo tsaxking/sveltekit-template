@@ -84,7 +84,7 @@
 </script>
 
 <div class="container">
-	{#each Object.entries(groups).filter(([,g]) => g.filter(i => i.ruleset).length) as [name, group]}
+	{#each Object.entries(groups).filter(([, g]) => g.filter((i) => i.ruleset).length) as [name, group]}
 		<hr />
 		<div class="row mb-3">
 			<h4>{name}</h4>

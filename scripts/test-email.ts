@@ -1,11 +1,13 @@
-import { Email } from '../src/lib/server/structs/email';
+import { sendEmail } from '../src/lib/server/services/email';
+import redis from '../src/lib/server/services/redis';
 
 export default async (email: string) => {
 	if (!email) throw new Error('Email must be provided');
 	if (!email.includes('@')) throw new Error('Email must be valid');
+	await redis.init(1000);
 
 	(
-		await Email.send({
+		await sendEmail({
 			type: 'test',
 			data: {
 				link: 'http://localhost:5173',
