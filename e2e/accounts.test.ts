@@ -91,7 +91,9 @@ describe('Account Sign Up', () => {
 		expect(account.data.lastName).toBe('User');
 		expect(account.data.verified).toBe(false);
 		{
+			console.log('Cookies before sign-in:', await page.context().cookies());
 			await signIn(page, 'testuser', 'TestPassword123!');
+			console.log('Cookies after sign-in:', await page.context().cookies());
 
 			await page.goto('/test/account');
 			const accountInfo = await page.locator('#accountInfo').elementHandle();
