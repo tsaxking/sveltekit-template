@@ -79,6 +79,7 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 
 		let value = '';
 		let valid = true;
+		let input: HTMLInputElement | HTMLTextAreaElement | null = null;
 
 		const modal = mount(Modal, {
 			target: modalTarget,
@@ -96,42 +97,40 @@ export const prompt = async (message: string, config?: PromptConfig) => {
                         </div>
                     `,
 					setup: (el) => {
-						const input = el.querySelector('input') || el.querySelector('textarea');
+						input = el.querySelector('input') || el.querySelector('textarea');
 						if (config?.default && input) {
 							input.value = config.default;
 							config.default = undefined;
 						}
 
 						if (input) {
-						const oninput = () => {
-							value = input.value;
-							valid = !config?.validate || config.validate(value);
-							input?.classList.toggle('is-invalid', !valid);
+							const oninput = () => {
+								if (input) value = input.value;
+								valid = !config?.validate || config.validate(value);
+								input?.classList.toggle('is-invalid', !valid);
+							};
+
+							input.addEventListener('input', oninput);
+
+							const onkeydown = (e: KeyboardEvent) => {
+								if (e.key === 'Enter' && !e.shiftKey && !config?.multiline) {
+									e.preventDefault();
+									if (!valid) return;
+									res(config?.parser ? config.parser(value.trim()) : value.trim());
+									modal.hide();
+								} else if (e.key === 'Escape') {
+									e.preventDefault();
+									modal.hide();
+									res(null);
+								}
+							};
+
+							document.addEventListener('keydown', onkeydown);
+							return () => {
+								input?.removeEventListener('input', oninput);
+								document.removeEventListener('keydown', onkeydown);
+							};
 						}
-
-						input.addEventListener('input', oninput);
-
-						const onkeydown = (e: KeyboardEvent) => {
-							if (e.key === 'Enter' && !e.shiftKey && !config?.multiline) {
-								e.preventDefault();
-								if (!valid) return;
-								res(config?.parser ? config.parser(value.trim()) : value.trim());
-								modal.hide();
-							} else if (e.key === 'Escape') {
-								e.preventDefault();
-								modal.hide();
-								res(null);
-							}
-						}
-
-						document.addEventListener('keydown', onkeydown);
-						modal.once('hide', () => {
-							input.removeEventListener('input', oninput);
-							document.removeEventListener('keydown', onkeydown);
-						});
-						}
-
-
 					}
 				})),
 				buttons: createButtons([
@@ -156,11 +155,17 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 			}
 		});
 
-		modal.show();
+		const onshow = () => {
+			input?.focus();
+		}
 
+		modal.on('show', onshow);
+
+		modal.show();
 		modal.once('hide', () => {
 			res(null);
 			clearModals();
+			modal.off('show', onshow);
 		});
 	});
 };
@@ -174,6 +179,7 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 		if (!modalTarget) return rej('Cannot show select in non-browser environment');
 
 		let selected: T | null = null;
+		let input: HTMLSelectElement | null = null;
 
 		const modal = mount(Modal, {
 			target: modalTarget,
@@ -192,16 +198,17 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
                         </div>
                     `,
 					setup: (el) => {
-						const input = el.querySelector('select');
+						input = el.querySelector('select');
 						if (input) {
 							const onchange = () => {
-								selected = options[parseInt(input.value)];
-							}
+								const int = parseInt(input!.value);
+								if (!isNaN(int)) selected = options[int];
+							};
 
 							input.addEventListener('change', onchange);
-							modal.once('hide', () => {
-								input.removeEventListener('change', onchange);
-							});
+							return () => {
+								input?.removeEventListener('change', onchange);
+							}
 						}
 					}
 				})),
@@ -226,8 +233,33 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
 			}
 		});
 
+		const onkeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				modal.hide();
+				res(null);
+			}
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				if (selected) {
+					res(selected);
+					modal.hide();
+				}
+			}
+		}
+
+		document.addEventListener('keydown', onkeydown);
+
+		modal.on('show', () => {
+			input?.focus();
+		});
+
 		modal.show();
-		modal.once('hide', clearModals);
+		modal.once('hide', () => {
+			res(null);
+			clearModals();
+			document.removeEventListener('keydown', onkeydown);
+		});
 	});
 };
 
@@ -237,7 +269,7 @@ type ChooseConfig<A, B> = {
 	renderB?: (value: B) => string;
 };
 export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseConfig<A, B>) => {
-	return new Promise<boolean | null>((res, rej) => {
+	return new Promise<A | B | null>((res, rej) => {
 		if (!modalTarget) return rej('Cannot show choose in non-browser environment');
 
 		const modal = mount(Modal, {
@@ -245,22 +277,6 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 			props: {
 				title: config?.title || 'Choose',
 				body: createModalBody(message),
-				setup: () => {
-					const onkeydown = (
-						e: KeyboardEvent
-					) => {
-						if (e.key === 'Escape') {
-							e.preventDefault();
-							res(null);
-							return modal.hide();
-						}
-					};
-
-					document.addEventListener('keydown', onkeydown);
-					modal.once('hide', () => {
-						document.removeEventListener('keydown', onkeydown);
-					});
-				},
 				buttons: createButtons([
 					{
 						text: 'Cancel',
@@ -274,7 +290,7 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 						text: config?.renderA ? config.renderA(A) : 'A',
 						color: 'primary',
 						onClick: () => {
-							res(true);
+							res(A);
 							modal.hide();
 						}
 					},
@@ -282,7 +298,7 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 						text: config?.renderB ? config.renderB(B) : 'B',
 						color: 'primary',
 						onClick: () => {
-							res(false);
+							res(B);
 							modal.hide();
 						}
 					}
@@ -290,10 +306,31 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 			}
 		});
 		modal.show();
+					const onkeydown = (e: KeyboardEvent) => {
+						if (e.key === 'Escape') {
+							e.preventDefault();
+							res(null);
+							return modal.hide();
+						}
+						if (e.key === '1' || e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+							e.preventDefault();
+							res(A);
+							return modal.hide();
+						}
+						if (e.key === '2' || e.key === 'ArrowRight' || e.key === 'b' || e.key === 'B') {
+							e.preventDefault();
+							res(B);
+							return modal.hide();
+						}
+					};
+
+					document.addEventListener('keydown', onkeydown);
 
 		modal.once('hide', () => {
-			res(false);
+			res(null);
 			clearModals();
+						document.removeEventListener('keydown', onkeydown);
+
 		});
 	});
 };
@@ -331,6 +368,13 @@ export const confirm = async (message: string, config?: ConfirmConfig) => {
 					}
 				]),
 				setup: () => {
+
+					return () => {
+					}
+				}
+			}
+		});
+		modal.show();
 					const onkeydown = (e: KeyboardEvent) => {
 						if (e.key === 'Escape') {
 							e.preventDefault();
@@ -345,17 +389,11 @@ export const confirm = async (message: string, config?: ConfirmConfig) => {
 					};
 
 					document.addEventListener('keydown', onkeydown);
-					modal.once('hide', () => {
-						document.removeEventListener('keydown', onkeydown);
-					});
-				}
-			}
-		});
-		modal.show();
-
 		modal.once('hide', () => {
 			res(false);
 			clearModals();
+						document.removeEventListener('keydown', onkeydown);
+
 		});
 	});
 };
@@ -380,8 +418,11 @@ export const alert = async (message: string, config?: AlertConfig) => {
 						res();
 					}
 				}),
-				setup: () => {
-					const onkeydown = (e: KeyboardEvent) => {
+			}
+		});
+		modal.show();
+
+							const onkeydown = (e: KeyboardEvent) => {
 						if (e.key === 'Escape' || e.key === 'Enter') {
 							e.preventDefault();
 							res();
@@ -390,17 +431,12 @@ export const alert = async (message: string, config?: AlertConfig) => {
 					};
 
 					document.addEventListener('keydown', onkeydown);
-					modal.once('hide', () => {
-						document.removeEventListener('keydown', onkeydown);
-					});
-				}
-			}
-		});
-		modal.show();
+
 
 		modal.once('hide', () => {
 			res();
 			clearModals();
+			document.removeEventListener('keydown', onkeydown);
 		});
 	});
 };
@@ -414,6 +450,7 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 		if (!modalTarget) return rej('Cannot show color picker in non-browser environment');
 
 		let selected: string | null = null;
+		let input: HTMLInputElement | null = null;
 
 		const modal = mount(Modal, {
 			target: modalTarget,
@@ -427,7 +464,7 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
                         </div>
                     `,
 					setup: (el) => {
-						const input = el.querySelector('input');
+						input = el.querySelector('input');
 						if (input) {
 							if (config?.default) {
 								input.setAttribute('value', config.default);
@@ -436,30 +473,14 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 							}
 
 							const oninput = () => {
-								selected = input.value;
-							};
-
-							const onkeydown = (e: KeyboardEvent) => {
-								if (e.key === 'Enter') {
-									e.preventDefault();
-									if (selected) {
-										res(selected);
-										modal.hide();
-									}
-								} else if (e.key === 'Escape') {
-									e.preventDefault();
-									modal.hide();
-									res(null);
-								}
+								selected = input!.value;
 							};
 
 							input.addEventListener('input', oninput);
-							document.addEventListener('keydown', onkeydown);
 
-							modal.once('hide', () => {
-								input.removeEventListener('input', oninput);
-								document.removeEventListener('keydown', onkeydown);
-							});
+							return () => {
+								input?.removeEventListener('input', oninput);
+							}
 						}
 					}
 				})),
@@ -484,9 +505,32 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 			}
 		});
 
+		// modal.on('show', () => {
+		// 	input?.focus();
+		// });
+
 		modal.show();
 
-		modal.once('hide', () => clearModals());
+							const onkeydown = (e: KeyboardEvent) => {
+								if (e.key === 'Enter') {
+									e.preventDefault();
+									if (selected) {
+										res(selected);
+										modal.hide();
+									}
+								} else if (e.key === 'Escape') {
+									e.preventDefault();
+									modal.hide();
+									res(null);
+								}
+							};
+							document.addEventListener('keydown', onkeydown);
+
+		modal.once('hide', () => {
+								document.removeEventListener('keydown', onkeydown);
+			res(null);
+			clearModals();
+		});
 	});
 };
 
@@ -564,16 +608,16 @@ export const rawModal = (
 							e.preventDefault();
 							return modal.hide();
 						}
-					}
+					};
 
 					document.addEventListener('keydown', onkeydown);
 
-					modal.once('hide', () => {
+					return () => {
 						document.removeEventListener('keydown', onkeydown);
-					});
+					}
 				}
 			})),
-			buttons: createButtons(buttons),
+			buttons: createButtons(buttons)
 		}
 	});
 
