@@ -17,6 +17,7 @@
 			| 'light'
 			| 'dark'
 			| 'link';
+		id?: string;
 	}
 
 	let {
@@ -27,10 +28,15 @@
 		name,
 		floatingLabel,
 		label,
-		buttonColor
+		buttonColor,
+		id
 	}: Props = $props();
 
 	let type: 'text' | 'password' = $state('password');
+
+	if (!id) {
+		id = name;
+	}
 
 	const toggle = () => {
 		type = type === 'text' ? 'password' : 'text';
@@ -50,6 +56,7 @@
 		class="form-control"
 		oninput={(e) => onInput?.(e.currentTarget.value)}
 		onchange={(e) => onChange?.(e.currentTarget.value)}
+		{id}
 	/>
 {/snippet}
 
@@ -58,13 +65,13 @@
 		{#if floatingLabel}
 			<div class="form-floating">
 				{@render password()}
-				<label for={name}>
+				<label for={id ?? name} class="form-label">
 					{label}
 				</label>
 			</div>
 		{:else}
 			{@render password()}
-			<label for={name}>
+			<label for={id ?? name} class="form-label">
 				{label}
 			</label>
 		{/if}

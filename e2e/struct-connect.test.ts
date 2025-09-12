@@ -1,12 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { logging } from './test-utils';
 
-test('Front end data management', async ({ page }) => {
+test('Struct connections', async ({ page }) => {
 	await page.goto('/test/struct');
-	page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
-	page.on('pageerror', (err) => console.error('PAGE ERROR:', err));
-	page.on('requestfailed', (request) => {
-		console.error('Request failed:', request.url(), request.failure());
-	});
+	logging(page);
 
 	const status = await page.locator('#status').elementHandle();
 	if (!status) {

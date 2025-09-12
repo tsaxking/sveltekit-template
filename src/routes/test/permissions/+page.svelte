@@ -9,6 +9,13 @@
 	});
 </script>
 
-{#each $arr as data}
-	<div>{data.data.name} - {data.data.age}</div>
+<ul
+	class="list-group"
+>
+	{#each $arr as data}
+	<li
+		class="p-3 mb-2 bg-light border list-group-item"
+	>{data.data.name} - {data.data.age}</li>
 {/each}
+
+</ul>
