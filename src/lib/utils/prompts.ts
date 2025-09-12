@@ -101,11 +101,37 @@ export const prompt = async (message: string, config?: PromptConfig) => {
 							input.value = config.default;
 							config.default = undefined;
 						}
-						input?.addEventListener('input', (e) => {
-							value = (e.target as HTMLInputElement).value;
+
+						if (input) {
+						const oninput = () => {
+							value = input.value;
 							valid = !config?.validate || config.validate(value);
-							input.classList.toggle('is-invalid', !valid);
+							input?.classList.toggle('is-invalid', !valid);
+						}
+
+						input.addEventListener('input', oninput);
+
+						const onkeydown = (e: KeyboardEvent) => {
+							if (e.key === 'Enter' && !e.shiftKey && !config?.multiline) {
+								e.preventDefault();
+								if (!valid) return;
+								res(config?.parser ? config.parser(value.trim()) : value.trim());
+								modal.hide();
+							} else if (e.key === 'Escape') {
+								e.preventDefault();
+								modal.hide();
+								res(null);
+							}
+						}
+
+						document.addEventListener('keydown', onkeydown);
+						modal.once('hide', () => {
+							input.removeEventListener('input', oninput);
+							document.removeEventListener('keydown', onkeydown);
 						});
+						}
+
+
 					}
 				})),
 				buttons: createButtons([
@@ -166,9 +192,17 @@ export const select = async <T>(message: string, options: T[], config?: SelectCo
                         </div>
                     `,
 					setup: (el) => {
-						el.querySelector('select')?.addEventListener('change', (e) => {
-							selected = options[parseInt((e.target as HTMLSelectElement).value)];
-						});
+						const input = el.querySelector('select');
+						if (input) {
+							const onchange = () => {
+								selected = options[parseInt(input.value)];
+							}
+
+							input.addEventListener('change', onchange);
+							modal.once('hide', () => {
+								input.removeEventListener('change', onchange);
+							});
+						}
 					}
 				})),
 				buttons: createButtons([
@@ -211,6 +245,22 @@ export const choose = async <A, B>(message: string, A: A, B: B, config?: ChooseC
 			props: {
 				title: config?.title || 'Choose',
 				body: createModalBody(message),
+				setup: () => {
+					const onkeydown = (
+						e: KeyboardEvent
+					) => {
+						if (e.key === 'Escape') {
+							e.preventDefault();
+							res(null);
+							return modal.hide();
+						}
+					};
+
+					document.addEventListener('keydown', onkeydown);
+					modal.once('hide', () => {
+						document.removeEventListener('keydown', onkeydown);
+					});
+				},
 				buttons: createButtons([
 					{
 						text: 'Cancel',
@@ -279,7 +329,26 @@ export const confirm = async (message: string, config?: ConfirmConfig) => {
 							modal.hide();
 						}
 					}
-				])
+				]),
+				setup: () => {
+					const onkeydown = (e: KeyboardEvent) => {
+						if (e.key === 'Escape') {
+							e.preventDefault();
+							res(false);
+							return modal.hide();
+						}
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							res(true);
+							return modal.hide();
+						}
+					};
+
+					document.addEventListener('keydown', onkeydown);
+					modal.once('hide', () => {
+						document.removeEventListener('keydown', onkeydown);
+					});
+				}
 			}
 		});
 		modal.show();
@@ -310,7 +379,21 @@ export const alert = async (message: string, config?: AlertConfig) => {
 						modal.hide();
 						res();
 					}
-				})
+				}),
+				setup: () => {
+					const onkeydown = (e: KeyboardEvent) => {
+						if (e.key === 'Escape' || e.key === 'Enter') {
+							e.preventDefault();
+							res();
+							return modal.hide();
+						}
+					};
+
+					document.addEventListener('keydown', onkeydown);
+					modal.once('hide', () => {
+						document.removeEventListener('keydown', onkeydown);
+					});
+				}
 			}
 		});
 		modal.show();
@@ -344,14 +427,40 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
                         </div>
                     `,
 					setup: (el) => {
-						if (config?.default) {
-							el.querySelector('input')?.setAttribute('value', config.default);
-							selected = config.default;
-							config.default = undefined;
+						const input = el.querySelector('input');
+						if (input) {
+							if (config?.default) {
+								input.setAttribute('value', config.default);
+								selected = config.default;
+								config.default = undefined;
+							}
+
+							const oninput = () => {
+								selected = input.value;
+							};
+
+							const onkeydown = (e: KeyboardEvent) => {
+								if (e.key === 'Enter') {
+									e.preventDefault();
+									if (selected) {
+										res(selected);
+										modal.hide();
+									}
+								} else if (e.key === 'Escape') {
+									e.preventDefault();
+									modal.hide();
+									res(null);
+								}
+							};
+
+							input.addEventListener('input', oninput);
+							document.addEventListener('keydown', onkeydown);
+
+							modal.once('hide', () => {
+								input.removeEventListener('input', oninput);
+								document.removeEventListener('keydown', onkeydown);
+							});
 						}
-						el.querySelector('input')?.addEventListener('input', (e) => {
-							selected = (e.target as HTMLInputElement).value;
-						});
 					}
 				})),
 				buttons: createButtons([
@@ -448,9 +557,23 @@ export const rawModal = (
 		props: {
 			title,
 			body: createRawSnippet(() => ({
-				render: () => `<div class="body-content"></div>`
+				render: () => `<div class="body-content"></div>`,
+				setup: () => {
+					const onkeydown = (e: KeyboardEvent) => {
+						if (e.key === 'Escape') {
+							e.preventDefault();
+							return modal.hide();
+						}
+					}
+
+					document.addEventListener('keydown', onkeydown);
+
+					modal.once('hide', () => {
+						document.removeEventListener('keydown', onkeydown);
+					});
+				}
 			})),
-			buttons: createButtons(buttons)
+			buttons: createButtons(buttons),
 		}
 	});
 
