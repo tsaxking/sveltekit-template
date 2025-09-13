@@ -41,7 +41,8 @@ export namespace Session {
 			tabs: integer('tabs').notNull().default(0)
 		},
 		frontend: false,
-		safes: ['fingerprint']
+		safes: ['fingerprint'],
+		lifetime: SESSION_DURATION,
 	});
 
 	export type SessionData = typeof Session.sample;

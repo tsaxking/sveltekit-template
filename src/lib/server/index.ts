@@ -6,6 +6,12 @@ import { str } from './utils/env';
 
 testSchema('false');
 export const postBuild = async () => {
+	const lifetimeLoop = Struct.generateLifetimeLoop(
+		1000 * 60 * 60 * 24 * 7, // 1 week
+	);
+	lifetimeLoop.start();
+
+
 	const ADMIN_USERNAME = str('ADMIN_USERNAME', false) || 'admin';
 	const ADMIN_EMAIL = str('ADMIN_EMAIL', false) || 'admin@admin.admin';
 	const ADMIN_PASSWORD = str('ADMIN_PASSWORD', false) || 'Admin!123';
