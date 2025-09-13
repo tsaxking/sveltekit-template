@@ -115,10 +115,6 @@ jobs:
           echo "Running premerge scripts"
           pnpm script premerge-render ${{ matrix.templates }} --force
 
-          echo "Cloning target repo"
-          git clone $REPOSITORY $CLONE_DIR
-          cd $CLONE_DIR
-
           echo "Configuring Git"
           git config user.email "taylorking206@u.boisestate.edu"
           git config user.name "Sveltekit Bot"
@@ -126,7 +122,7 @@ jobs:
 
           # Change the remote to the repository we want to push to.
           git remote rm origin
-          git remote add origin git@github.com:${{ matrix.templates }}.git
+          git remote add origin ${{ matrix.templates }}
 
           echo "Checking out Branch: $BRANCH_NAME"
           # Create a new feature branch for the changes.
