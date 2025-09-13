@@ -33,7 +33,12 @@ type EnvConfig<T> = {
 let timeout: ReturnType<typeof setTimeout>;
 
 const filepath = path.join(process.cwd(), '.env.example');
-const current = fs.readFileSync(filepath, 'utf-8');
+let current = ''; 
+try {
+	current = fs.readFileSync(filepath, 'utf-8');
+} catch {
+	console.log('.env.example does not exist, will create it automatically');
+}
 
 export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 	values: ['dev', 'prod', 'test'],

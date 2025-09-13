@@ -125,7 +125,7 @@ jobs:
           docker compose --project-name test ps
 
       - name: Start App
-        run: docker compose --project-name test up
+        run: docker compose --project-name test up -d app
 
       - name: Run Integration Tests
         run: pnpm test:integration
