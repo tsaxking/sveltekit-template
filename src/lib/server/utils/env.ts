@@ -77,7 +77,7 @@ export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefin
 	key = key.toUpperCase();
 	const gen = (data: T) => {
         cache.set(key, data);
-        if (env === 'prod') return; // Don't change git-tracked files in production
+        if (process.env.ENVIRONMENT === 'prod') return; // Don't change git-tracked files in production
 		if (!keys.has(key)) {
 			keys.set(key, {
 				required: config?.required ?? false,
