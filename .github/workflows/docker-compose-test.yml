@@ -32,12 +32,15 @@ jobs:
           DB_PASS=test
           DB_NAME=test
           DB_PORT=5432
+          HTTPS=false
           OAUTH2_CLIENT_ID=1234567890
+          PUBLIC_DOMAIN=localhost
           PUBLIC_APP_NAME=test
           OAUTH2_CLIENT_SECRET=1234567890
           REDIS_NAME=some_name
           REDIS_URL=redis://redis:6379
           ENVIRONMENT=test
+          FINGERPRINT_SECRET=some_secret
           PORT=3000
           DB_HOST=db
           EOF
@@ -48,12 +51,15 @@ jobs:
           DB_PASS=test
           DB_NAME=test
           DB_PORT=5432
+          HTTPS=false
           OAUTH2_CLIENT_ID=1234567890
           PUBLIC_APP_NAME=test
+          PUBLIC_DOMAIN=localhost
           OAUTH2_CLIENT_SECRET=1234567890
           REDIS_NAME=some_name
           REDIS_URL=redis://localhost:6379
           ENVIRONMENT=test
+          FINGERPRINT_SECRET=some_secret
           PORT=3000
           DB_HOST=localhost
           EOF
