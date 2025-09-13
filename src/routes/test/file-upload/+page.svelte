@@ -8,7 +8,8 @@
 </script>
 
 <FileUploaderComponent
-	{uploader}
 	multiple={false}
 	message="Drag and drop your files or click here to browse"
+	endpoint="/test/upload"
+	usage="images"
 />

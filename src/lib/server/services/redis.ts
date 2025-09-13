@@ -7,6 +7,6 @@ export default (() => {
 
 	return new Redis({
 		name,
-		url,
+		url
 	});
 })();

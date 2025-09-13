@@ -36,7 +36,7 @@ export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 	values: ['dev', 'prod', 'test'],
 	required: true
 });
-function generateExample()  {
+function generateExample() {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
 		const filepath = path.join(process.cwd(), '.env.example');
@@ -66,18 +66,17 @@ function generateExample()  {
 
 		keys.clear();
 	}, 1000);
-};
-
+}
 
 // Overloads for get()
 export function get<T = string>(key: string, config: EnvConfig<T> & { required: true }): T;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined {
-    if (cache.has(key)) return cache.get(key) as T;
+	if (cache.has(key)) return cache.get(key) as T;
 	key = key.toUpperCase();
 	const gen = (data: T) => {
-        cache.set(key, data);
-        if (process.env.ENVIRONMENT === 'prod') return; // Don't change git-tracked files in production
+		cache.set(key, data);
+		if (process.env.ENVIRONMENT === 'prod') return; // Don't change git-tracked files in production
 		if (!keys.has(key)) {
 			keys.set(key, {
 				required: config?.required ?? false,
@@ -154,20 +153,7 @@ export function bool(key: string, required: boolean): boolean | undefined {
 		required: required ?? false,
 		parser: (val) => ['true', 'y', '1'].includes(val.toLowerCase()),
 		type: 'y/n, true/false, 1/0',
-        values: [
-            'y',
-            'n',
-            'Y',
-            'N',
-            'true',
-            'false',
-            'TRUE',
-            'FALSE',
-            'True',
-            'False',
-            '1',
-            '0'
-        ]
+		values: ['y', 'n', 'Y', 'N', 'true', 'false', 'TRUE', 'FALSE', 'True', 'False', '1', '0']
 	});
 }
 
@@ -178,11 +164,10 @@ export function str(key: string, required: boolean): string | undefined {
 	return get<string>(key, { required: required ?? false });
 }
 
-
 export function domain(config: { port: boolean; protocol: boolean }) {
 	const host = str('PUBLIC_DOMAIN', true);
 	const port = num('PORT', true);
 	const protocol = bool('HTTPS', true) ? 'https://' : 'http://';
 
 	return `${config.protocol ? protocol : ''}${host}${config.port ? `:${port}` : ''}`;
-};
+}

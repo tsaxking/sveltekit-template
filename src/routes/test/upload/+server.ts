@@ -1,31 +1,31 @@
-import { FileReceiver } from '$lib/server/utils/files.js';
-import { error } from '@sveltejs/kit';
+import { json, fail } from '@sveltejs/kit';
+import fs from 'fs/promises';
+import path from 'path';
 import { ServerCode } from 'ts-utils/status';
-import terminal from '$lib/server/utils/terminal';
+import { FileUploader } from '$lib/server/services/file-upload';
 
-export const POST = async (event) => {
-	terminal.log('Received file upload request');
+const UPLOAD_DIR = path.resolve(process.cwd(), './static/uploads');
+const fileUploader = new FileUploader(UPLOAD_DIR);
 
-	const fr = new FileReceiver({
-		maxFiles: 1,
-		maxFileSize: 1 * 1024 * 1024
-	});
+export async function POST(event) {
+	const request = event.request;
+	const formData = await request.formData();
+	const file = formData.get('file'); // Assuming 'files[]' is the field name used
 
-	const res = await fr.receive(event);
-	if (res.isErr()) {
-		terminal.error(res.error);
-		return error(ServerCode.internalServerError, 'Failed to receive file');
-	}
+	await fs.mkdir(UPLOAD_DIR, { recursive: true });
 
-	return new Response(
-		JSON.stringify({
-			fileId: res.value.files[0].filePath
-		}),
-		{
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			status: 200
+	if (file instanceof File) {
+		if (!event.locals.account) {
+			throw fail(ServerCode.unauthorized);
 		}
-	);
-};
+		try {
+			const result = await fileUploader.receiveFile(file, event.locals.account);
+			return json(result);
+		} catch (err) {
+			console.error(`Error uploading file: ${err instanceof Error ? err.message : String(err)}`);
+			return json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 });
+		}
+	} else {
+		return json({ error: 'Invalid file uploaded' }, { status: 400 });
+	}
+}
