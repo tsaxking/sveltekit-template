@@ -42,7 +42,7 @@ export namespace Session {
 		},
 		frontend: false,
 		safes: ['fingerprint'],
-		lifetime: SESSION_DURATION,
+		lifetime: SESSION_DURATION
 	});
 
 	export type SessionData = typeof Session.sample;

@@ -2,8 +2,8 @@
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import type { BootstrapColor } from 'colors/color';
 	import { onMount, type Snippet } from 'svelte';
-	import { sleep } from 'ts-utils/sleep';
-	import Portal from 'svelte-portal';
+	import { notifs } from '$lib/utils/prompts';
+	import { fade } from 'svelte/transition';
 
 	interface Props {
 		title: string;
@@ -11,15 +11,17 @@
 		color: BootstrapColor;
 		autoHide: number; // ms
 		icon?: Snippet; // svg
-		animate: boolean;
 		onHide?: () => void;
 		onShow?: () => void;
 	}
 
-	const { title, message, color, autoHide = 5000, icon, animate, onHide, onShow }: Props = $props();
+	const id = Math.random();
+
+	const { title, message, color, autoHide = 5000, icon, onHide, onShow }: Props = $props();
 
 	const start = Date.now();
 	let time = $state('Just now');
+
 	const interval: any = setInterval(() => {
 		switch (true) {
 			case Date.now() - start < 1000:
@@ -59,50 +61,55 @@
 	let doShow = $state(false);
 
 	export const hide = async () => {
-		if (animate) {
-			alert.classList.add('animate__animated', 'animate__slideOutRight');
-			await sleep(1000);
-			doShow = false;
-			setTimeout(() => {
-				alert.classList.remove('animate__animated', 'animate__slideOutRight');
-			}, 1000);
-		} else {
-			doShow = false;
-		}
+		doShow = false;
 		onHide?.();
+		notifs.update((n) => n.filter((i) => i !== id));
 	};
 	export const show = async () => {
-		if (animate) {
-			alert.classList.add('animate__animated', 'animate__slideInRight');
-			doShow = true;
-			await sleep(2000);
-			alert.classList.remove('animate__animated', 'animate__slideInRight');
-		} else {
-			doShow = true;
-		}
+		doShow = true;
 		onShow?.();
+		notifs.update((n) => [...n, id]);
 	};
 	let alert: HTMLDivElement;
 
-	onMount(() => show());
+	onMount(() => {
+		show();
+	});
 </script>
 
-<Portal target="body">
-	<div
-		bind:this={alert}
-		class="alert alert-{color} alert-dismissible fade p-3"
-		role="alert"
-		class:show={doShow}
-		aria-atomic="true"
-		aria-live="assertive"
-	>
-		{@render icon?.()}
-		<div class="d-flex justify-content-between">
-			<h5 class="alert-heading">{title}</h5>
-			<small style="padding-right: 32px;">{time}</small>
-			<button type="button" class="btn-close px-3 py-4" aria-label="Close" onclick={hide}></button>
+<div
+	bind:this={alert}
+	class="alert alert-{color} alert-dismissible p-3"
+	role="alert"
+	aria-atomic="true"
+	aria-live="assertive"
+	style="
+		position: fixed;
+		width: 300px;
+		right: 20px;
+		top: {$notifs.indexOf(id) * 80 + 20}px;
+		transition: all 0.2s ease-in-out;
+		display: {doShow ? 'block' : 'none'};
+	"
+	transition:fade={{ duration: 200 }}
+>
+	{@render icon?.()}
+	<div class="d-flex justify-content-between">
+		<h5 class="alert-heading">{title}</h5>
+		<div
+			class="
+				d-flex
+				justify-content-between
+				align-items-center
+				h-100
+			"
+		>
+			<small>{time}</small>
+			<button type="button" class="btn px-3 py-0 my-0" aria-label="Close" onclick={hide}>
+				<i class="material-icons">close</i>
+			</button>
 		</div>
-		<hr class="my-1" />
-		<p class="mb-1">{message}</p>
 	</div>
-</Portal>
+	<hr class="my-1" />
+	<p class="mb-1">{message}</p>
+</div>

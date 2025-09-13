@@ -1,8 +1,9 @@
 import { browser } from '$app/environment';
 import { type BootstrapColor } from 'colors/color';
 import Modal from '../components/bootstrap/Modal.svelte';
-import { createRawSnippet, mount } from 'svelte';
+import { createRawSnippet, mount, unmount } from 'svelte';
 import Alert from '$lib/components/bootstrap/Alert.svelte';
+import { writable } from 'svelte/store';
 
 export const modalTarget = (() => {
 	if (browser) {
@@ -563,26 +564,6 @@ export const colorPicker = async (message: string, config?: ColorPickerConfig) =
 		});
 	});
 };
-
-const notificationContainer = (() => {
-	if (browser) {
-		const container = document.createElement('div');
-		container.classList.add(
-			'notification-container',
-			'position-fixed',
-			'top-0',
-			'end-0',
-			'd-flex',
-			'justify-content-end',
-			'flex-column'
-		);
-		container.style.zIndex = '0';
-		document.body.appendChild(container);
-		return container;
-	}
-	return null;
-})();
-
 type NotificationConfig = {
 	title: string;
 	message: string;
@@ -590,34 +571,25 @@ type NotificationConfig = {
 	autoHide?: number;
 	textColor?: BootstrapColor;
 };
-
-const createNotif = () => {
-	if (!browser) return;
-	const notif = document.createElement('div');
-	notif.classList.add('notification');
-	// notif.style.width = '300px';
-	// notif.style.maxWidth = '100% !important';
-	if (notificationContainer) notificationContainer.appendChild(notif);
-	return notif;
-};
-
 export const notify = (config: NotificationConfig) => {
-	const notif = createNotif();
-	if (!notif) return;
-	return mount(Alert, {
-		target: notif,
+	if (!browser) throw new Error('Cannot show notification in non-browser environment');
+
+	// const notif = createNotif();
+	// if (!notif) return;
+	const mounted = mount(Alert, {
+		target: document.body,
 		props: {
 			title: config.title,
 			message: config.message,
-			animate: true,
 			color: config.color,
 			autoHide: config.autoHide ?? 0,
 			textColor: config.textColor,
 			onHide: () => {
-				notif.remove();
+				unmount(mounted);
 			}
 		}
 	});
+	return mounted;
 };
 
 export const rawModal = (
@@ -662,3 +634,5 @@ export const rawModal = (
 		on: modal.on.bind(modal)
 	};
 };
+
+export const notifs = writable<number[]>([]);
