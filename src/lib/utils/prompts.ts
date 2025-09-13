@@ -576,7 +576,7 @@ export const notify = (config: NotificationConfig) => {
 
 	// const notif = createNotif();
 	// if (!notif) return;
-	const mounted =  mount(Alert, {
+	const mounted = mount(Alert, {
 		target: document.body,
 		props: {
 			title: config.title,
@@ -634,6 +634,5 @@ export const rawModal = (
 		on: modal.on.bind(modal)
 	};
 };
-
 
 export const notifs = writable<number[]>([]);

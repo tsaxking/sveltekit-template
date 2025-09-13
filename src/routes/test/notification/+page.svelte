@@ -6,7 +6,7 @@
 		notify({
 			color: 'success',
 			message: 'Test Message',
-			title: 'Test title',
+			title: 'Test title'
 		});
 
 	// onMount(() => addNotif());

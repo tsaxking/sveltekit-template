@@ -63,12 +63,12 @@
 	export const hide = async () => {
 		doShow = false;
 		onHide?.();
-		notifs.update(n => n.filter((i) => i !== id));
+		notifs.update((n) => n.filter((i) => i !== id));
 	};
 	export const show = async () => {
 		doShow = true;
 		onShow?.();
-		notifs.update(n => [...n, id]);
+		notifs.update((n) => [...n, id]);
 	};
 	let alert: HTMLDivElement;
 
@@ -91,7 +91,7 @@
 		transition: all 0.2s ease-in-out;
 		display: {doShow ? 'block' : 'none'};
 	"
-	transition:fade="{{ duration: 200 }}"
+	transition:fade={{ duration: 200 }}
 >
 	{@render icon?.()}
 	<div class="d-flex justify-content-between">

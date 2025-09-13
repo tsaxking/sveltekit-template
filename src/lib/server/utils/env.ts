@@ -33,7 +33,7 @@ type EnvConfig<T> = {
 let timeout: ReturnType<typeof setTimeout>;
 
 const filepath = path.join(process.cwd(), '.env.example');
-let current = ''; 
+let current = '';
 try {
 	current = fs.readFileSync(filepath, 'utf-8');
 } catch {
