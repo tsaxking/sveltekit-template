@@ -17,58 +17,76 @@ const updateTable = async (tableName: string) => {
 	const columnRows = Array.isArray(columns) ? columns : ((columns as any).rows ?? []);
 	const isVersionTable = columnRows.some((c: any) => c.column_name === 'vh_created');
 
-	// Drop and re-add the timestamp columns
+	// Rename old columns to temp columns if they exist
 	await DB.execute(sql`
 		ALTER TABLE ${sql.identifier(tableName)}
-		DROP COLUMN IF EXISTS updated,
-		DROP COLUMN IF EXISTS created,
-		DROP COLUMN IF EXISTS vh_created;
-	`);
-
+		RENAME COLUMN created TO created_old;
+	`).catch(() => {});
 	await DB.execute(sql`
 		ALTER TABLE ${sql.identifier(tableName)}
-		ADD COLUMN created TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-		ADD COLUMN updated TIMESTAMPTZ NOT NULL DEFAULT NOW();
-	`);
-
+		RENAME COLUMN updated TO updated_old;
+	`).catch(() => {});
 	if (isVersionTable) {
 		await DB.execute(sql`
 			ALTER TABLE ${sql.identifier(tableName)}
-			ADD COLUMN vh_created TIMESTAMPTZ NOT NULL DEFAULT NOW();
+			RENAME COLUMN vh_created TO vh_created_old;
+		`).catch(() => {});
+	}
+
+	// Add new columns
+	await DB.execute(sql`
+		ALTER TABLE ${sql.identifier(tableName)}
+		ADD COLUMN IF NOT EXISTS created TIMESTAMPTZ,
+		ADD COLUMN IF NOT EXISTS updated TIMESTAMPTZ;
+	`);
+	if (isVersionTable) {
+		await DB.execute(sql`
+			ALTER TABLE ${sql.identifier(tableName)}
+			ADD COLUMN IF NOT EXISTS vh_created TIMESTAMPTZ;
 		`);
 	}
 
-	// Stream/batch rows
+	// Paginate over rows and cast temp columns to timestamptz
 	let offset = 0;
 	while (true) {
 		const rows: any[] = await DB.execute(sql`
-			SELECT id, created, updated ${isVersionTable ? sql`, vh_created` : sql``}
+			SELECT id, created_old, updated_old${isVersionTable ? sql`, vh_created_old` : sql``}
 			FROM ${sql.identifier(tableName)}
 			ORDER BY id
 			LIMIT ${BATCH_SIZE} OFFSET ${offset};
 		`);
-
 		const typedRows = Array.isArray(rows) ? rows : ((rows as any).rows ?? []);
 		if (typedRows.length === 0) break;
 
 		for (const row of typedRows) {
 			await DB.execute(sql`
 				UPDATE ${sql.identifier(tableName)}
-				SET created = ${row.created ? new Date(String(row.created)).toISOString() : new Date().toISOString()},
-					updated = ${row.updated ? new Date(String(row.updated)).toISOString() : new Date().toISOString()}
+				SET created = ${row.created_old ? new Date(String(row.created_old)).toISOString() : null},
+					updated = ${row.updated_old ? new Date(String(row.updated_old)).toISOString() : null}
 				WHERE id = ${row.id};
 			`);
-
-			if (isVersionTable && row.vh_created) {
+			if (isVersionTable && row.vh_created_old) {
 				await DB.execute(sql`
 					UPDATE ${sql.identifier(tableName)}
-					SET vh_created = ${new Date(String(row.vh_created)).toISOString()}
+					SET vh_created = ${new Date(String(row.vh_created_old)).toISOString()}
 					WHERE id = ${row.id};
 				`);
 			}
 		}
-
 		offset += BATCH_SIZE;
+	}
+
+	// Drop temp columns after conversion
+	await DB.execute(sql`
+		ALTER TABLE ${sql.identifier(tableName)}
+		DROP COLUMN IF EXISTS created_old,
+		DROP COLUMN IF EXISTS updated_old;
+	`);
+	if (isVersionTable) {
+		await DB.execute(sql`
+			ALTER TABLE ${sql.identifier(tableName)}
+			DROP COLUMN IF EXISTS vh_created_old;
+		`);
 	}
 };
 

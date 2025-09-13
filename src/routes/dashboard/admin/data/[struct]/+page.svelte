@@ -65,6 +65,8 @@
 	let editModal: Modal;
 	// svelte-ignore state_referenced_locally
 	let editStage: StructDataStage<Blank> = $state(new StructDataStage(struct.Generator({}) as any));
+	let query = $state('');
+	let column = $state<string | null>(null);
 
 	const newItem = () => {
 		createModal.show();
@@ -140,6 +142,26 @@
 		}
 	};
 
+	const search = (
+		query: string,
+		column: string | null,
+	) => {
+		const url = new URL(location.href);
+		url.searchParams.set('page', '0');
+		if (query.trim() === '') {
+			url.searchParams.delete('search');
+			url.searchParams.delete('column');
+		} else {
+			url.searchParams.set('search', query);
+			if (column) {
+				url.searchParams.set('column', column);
+			} else {
+				url.searchParams.delete('column');
+			}
+		}
+		location.href = url.toString();
+	};
+
 	onMount(() => {
 		const rect = gridContainer.getBoundingClientRect();
 		distanceToTop = rect.top;
@@ -153,6 +175,14 @@
 				.exec()
 				.unwrap();
 		});
+
+		const url = new URL(location.href);
+		if (url.searchParams.get('search')) {
+			query = url.searchParams.get('search') || '';
+		}
+		if (url.searchParams.get('column')) {
+			column = url.searchParams.get('column') || null;
+		}
 		// setTimeout(() => createModal.show());
 
 		// return () => createModal.hide();
@@ -180,7 +210,7 @@
 					{$structData.length > 0 ? 'Showing' : 'No'}
 					{$structData.length} of {total} rows
 					<br />
-					(Page {page + 1})
+					(Page {page + 1} / {Math.ceil(total / limit) || 1})
 				</p>
 				<button type="button" class="btn" onclick={prev} disabled={page <= 0}>
 					<i class="material-icons">navigate_before</i>
@@ -220,6 +250,45 @@
 				<button type="button" class="btn btn-danger" onclick={clearTable}>
 					<i class="material-icons">delete_sweep</i>
 					Clear Table
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col">
+			<div class="input-group">
+				<div class="form-floating" style="width: 200px;">
+					<select
+						name="floating-column"
+						id="column"
+						class="form-select"
+						bind:value={column}
+					>
+						<option value="" selected>All Columns</option>
+						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value]}
+							<option value={key}>{capitalize(fromCamelCase(key))}</option>
+						{/each}
+					</select>
+					<label for="column"> Column </label>
+				</div>
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Search..."
+					aria-label="Search"
+					bind:value={query}
+					onkeydown={(e) => {
+						if (e.key === 'Enter') {
+							search(query, column);
+						}
+					}}
+				/>
+				<button
+					class="btn btn-outline-secondary"
+					type="button"
+					onclick={() => search(query, column)}
+				>
+					<i class="material-icons">search</i>
 				</button>
 			</div>
 		</div>

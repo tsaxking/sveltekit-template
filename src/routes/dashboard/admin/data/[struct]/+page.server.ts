@@ -1,5 +1,7 @@
+import { DB } from '$lib/server/db/index.js';
 import { Account } from '$lib/server/structs/account.js';
 import { redirect, fail } from '@sveltejs/kit';
+import { count, ilike } from 'drizzle-orm';
 import { Struct } from 'drizzle-struct/back-end';
 import { ServerCode } from 'ts-utils/status';
 
@@ -16,20 +18,50 @@ export const load = async (event) => {
 
 	const limit = Number(event.url.searchParams.get('limit') || '50');
 	const offset = Number(event.url.searchParams.get('page') || '0') * limit;
+	const search = event.url.searchParams.get('search');
+	const column = event.url.searchParams.get('column');
 
-	const data = await struct
-		.all({
-			type: 'array',
-			limit,
-			offset,
-			includeArchived: true
+	const data = await DB
+		.select()
+		.from(struct.table)
+		.where(
+			search && column && struct.table[column] ?
+			ilike(struct.table[column], `%${search}%`) :
+			search ?
+			Object.values(struct.table).find((col) => col.columnType === 'string') ?
+			ilike(
+				Object.values(struct.table).find((col) => col.columnType === 'string')!,
+				`%${search}%`
+			) :
+			undefined :
+			undefined
+		)
+		.orderBy(struct.table.created)
+		.offset(offset)
+		.limit(limit);
+
+	const total = await DB
+		.select({
+			count: count(),
 		})
-		.unwrap();
-
+		.from(struct.table)
+		.where(
+			search && column && struct.table[column] ?
+			ilike(struct.table[column], `%${search}%`) :
+			search ?
+			Object.values(struct.table).find((col) => col.columnType === 'string') ?
+			ilike(
+				Object.values(struct.table).find((col) => col.columnType === 'string')!,
+				`%${search}%`
+			) :
+			undefined :
+			undefined
+		);
 	return {
 		struct: struct.data.name,
-		data: data.map((d) => d.safe()),
-		total: await struct.all({ type: 'count' }).unwrap(),
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		data: data.map((d) => struct.Generator(d as any).safe()),
+		total: total[0]?.count || 0,
 		structType: Object.fromEntries(
 			Object.entries(struct.table)
 				.filter(([k]) => k !== 'enableRLS')
