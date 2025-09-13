@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { bool, str } from './env';
 
-const doLog = bool('LOG', true);
-const LOG_FILE = str('LOG_FILE', true);
+const doLog = bool('LOG', false) || true;
+const LOG_FILE = str('LOG_FILE', false) || 'logs/stdout';
 
 const getCallsite = () => {
 	const stack = new Error().stack;
