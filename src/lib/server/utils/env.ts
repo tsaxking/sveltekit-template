@@ -32,10 +32,8 @@ type EnvConfig<T> = {
 
 let timeout: ReturnType<typeof setTimeout>;
 
-
 const filepath = path.join(process.cwd(), '.env.example');
 const current = fs.readFileSync(filepath, 'utf-8');
-
 
 export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 	values: ['dev', 'prod', 'test'],
@@ -44,7 +42,6 @@ export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 function generateExample() {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
-
 		const currentLines = current.split('\n').map((l) => l.trim());
 
 		if (currentLines.length === 1 && currentLines[0] === '') {
