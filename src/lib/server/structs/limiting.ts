@@ -8,6 +8,7 @@ import ignore from 'ignore';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
+import { num, str } from '../utils/env';
 
 export namespace Limiting {
 	const ipLimited = ignore();
@@ -175,7 +176,9 @@ export namespace Limiting {
 		const accept = request.headers.get('accept') ?? '';
 		const language = request.headers.get('accept-language') ?? '';
 
-		const raw = `${ip}|${ua}|${accept}|${language}|${process.env.FINGERPRINT_SALT ?? ''}`;
+		const salt = str('FINGERPRINT_SALT', false) || '';
+
+		const raw = `${ip}|${ua}|${accept}|${language}|${salt}`;
 
 		return createHash('sha256').update(raw).digest('hex');
 	};
@@ -184,8 +187,8 @@ export namespace Limiting {
 
 	export const rateLimit = async (key: string) => {
 		return attemptAsync(async () => {
-			const limit = parseInt(process.env.REQUEST_LIMIT ?? '1000', 10);
-			const windowSec = parseInt(process.env.REQUEST_LIMIT_WINDOW ?? '60000', 10) / 1000; // Convert milliseconds to seconds
+			const limit = num('REQUEST_LIMIT', false) || 1000;
+			const windowSec = num('REQUEST_LIMIT_WINDOW', false) || 60000;
 			const count = await limitService.incr(key).unwrap();
 
 			if (count === 1) {

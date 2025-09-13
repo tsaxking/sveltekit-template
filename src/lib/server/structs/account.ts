@@ -15,6 +15,7 @@ import type { Icon } from '../../types/icons';
 import { z } from 'zod';
 import { Permissions } from './permissions';
 import { QueryListener } from '../services/struct-listeners';
+import { str, num } from '../utils/env';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -299,8 +300,7 @@ export namespace Account {
 
 	Settings.bypass('*', (account, setting) => account.id === setting?.accountId);
 
-	const PASSWORD_REQUEST_LIFETIME =
-		parseInt(String(process.env.PASSWORD_REQUEST_LIFETIME)) || 1000 * 60 * 30;
+	const PASSWORD_REQUEST_LIFETIME = num('PASSWORD_REQUEST_LIFETIME', false) || 1000 * 60 * 30;
 
 	export const PasswordReset = new Struct({
 		name: 'password_reset',
@@ -492,7 +492,7 @@ export namespace Account {
 				to: email,
 				data: {
 					link: `/account/password-reset/${pr.id}`,
-					supportEmail: process.env.SUPPORT_EMAIL || ''
+					supportEmail: str('SUPPORT_EMAIL', false) || ''
 				},
 				subject: 'Password Reset Request'
 			}).unwrap();

@@ -1,13 +1,12 @@
-import { config } from 'dotenv';
 import { sleep } from 'ts-utils/sleep';
+import { num } from '../src/lib/server/utils/env';
 
 export default async () => {
-	config();
 	let tries = 0;
 
 	const run = async () => {
 		try {
-			await fetch(`http://localhost:${process.env.PORT}`);
+			await fetch(`http://localhost:${num('PORT', true)}`);
 			console.log('Server is up!');
 		} catch (error) {
 			console.error('Error occurred while checking server status:', error);

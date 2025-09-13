@@ -7,9 +7,7 @@ import '$lib/server/structs/log';
 import '$lib/server/structs/testing';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
-import { env } from '$env/dynamic/private';
 import terminal from '$lib/server/utils/terminal';
-import { config } from 'dotenv';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '$lib/server/db/';
 import '$lib/server/utils/files';
@@ -20,9 +18,7 @@ import { sse } from '$lib/server/services/sse';
 import { sleep } from 'ts-utils/sleep';
 import { signFingerprint } from '$lib/server/utils/fingerprint';
 import redis from '$lib/server/services/redis';
-// import { building } from '$app/environment';
-
-config();
+import { env, str } from '$lib/server/utils/env';
 
 (async () => {
 	await redis.init();
@@ -99,8 +95,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event.locals.session = session.value;
 
-	if (env.AUTO_SIGN_IN) {
-		const a = await Account.Account.fromProperty('username', env.AUTO_SIGN_IN, { type: 'single' });
+	const autoSignIn = str('AUTO_SIGN_IN', false);
+
+	if (autoSignIn && env !== 'prod') {
+		const a = await Account.Account.fromProperty('username', autoSignIn, { type: 'single' });
 		if (a.isOk() && a.value) {
 			event.locals.account = a.value;
 			Object.assign(event.locals.session.data, {
@@ -118,7 +116,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.account = account.value;
 	}
 
-	PROD: if (process.env.ENVIRONMENT === 'prod') {
+	PROD: if (env === 'prod') {
 		const isBlocked = await Limiting.isBlocked(event.locals.session, event.locals.account);
 		if (isBlocked.isErr()) {
 			return new Response('Internal Server Error', { status: ServerCode.internalServerError });

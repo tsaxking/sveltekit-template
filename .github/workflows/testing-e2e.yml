@@ -62,14 +62,16 @@ jobs:
       - name: Load .env variables
         run: |
           touch .env
+          echo "ENVIRONMENT=test" >> .env
+          echo "FINGERPRINT_SECRET=some_secret" >> .env
           echo "DB_HOST=localhost" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DB_USER=postgres" >> .env
           echo "DB_PASS=postgres" >> .env
           echo "DB_NAME=postgres" >> .env
-          echo "SECRET_OAUTH2_CLIENT_ID=1234567890" >> .env
+          echo "OAUTH2_CLIENT_ID=1234567890" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
-          echo "SECRET_OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echo "OAUTH2_CLIENT_SECRET=1234567890" >> .env
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
           echo "REDIS_URL=redis://localhost:6379" >> .env

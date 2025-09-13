@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 import { z } from 'zod';
 import { signFingerprint } from '$lib/server/utils/fingerprint';
 import { sleep } from 'ts-utils/sleep';
+import { domain } from '$lib/server/utils/env.js';
 
 export const POST = async (event) => {
 	const body = await event.request.json();
@@ -36,7 +37,11 @@ export const POST = async (event) => {
 		}).unwrap(),
 		{
 			httpOnly: true,
-			domain: process.env.PUBLIC_DOMAIN ?? '',
+			domain:
+				domain({
+					port: false,
+					protocol: false
+				}) ?? '',
 			path: '/'
 		}
 	);

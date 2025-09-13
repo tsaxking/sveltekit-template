@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { render } from 'html-constructor';
 import fs from 'fs/promises';
 import path from 'path';
+import { num, str } from '../utils/env';
 
 const emailService = redis.createQueue(
 	'email',
@@ -22,7 +23,7 @@ const emailService = redis.createQueue(
 			)
 			.optional()
 	}),
-	Number(process.env.MAX_EMAIL_QUEUE) || 100
+	num('MAX_EMAIL_QUEUE', false) || 100
 );
 
 const openEmail = (name: keyof Email) => {
@@ -60,12 +61,7 @@ export const sendEmail = <T extends keyof Email>(
 ) => {
 	return attemptAsync(async () => {
 		if (!targetService) {
-			if (!process.env.EMAIL_MICROSERVICE_NAME) {
-				throw new Error(
-					'EMAIL_MICROSERVICE_NAME environment variable is not set. Please set it to the name of your email service.'
-				);
-			}
-			targetService = process.env.EMAIL_MICROSERVICE_NAME;
+			targetService = str('EMAIL_MICROSERVICE_NAME', true);
 		}
 
 		const html = await openEmail(config.type).unwrap();

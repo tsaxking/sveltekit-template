@@ -3,6 +3,7 @@ import { integer } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct/back-end';
 import terminal from '../utils/terminal';
 import { Permissions } from './permissions';
+import { env } from '../utils/env';
 
 terminal.log(
 	`This file ('./struct/testing') should only be used for unit tests. If you are seeing this outside of a unit testing environment, there is an issue with the program.`
@@ -30,7 +31,7 @@ export namespace Test {
 		}
 	});
 
-	if (!String(process.env.ENVIRONMENT).toLowerCase().includes('prod')) {
+	if (env !== 'prod') {
 		Permissions.createEntitlement({
 			name: 'test-permission-view',
 			description: 'Permission to view test entries',

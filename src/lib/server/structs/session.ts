@@ -2,8 +2,7 @@ import { attemptAsync } from 'ts-utils/check';
 import { Struct } from 'drizzle-struct/back-end';
 import { integer, text } from 'drizzle-orm/pg-core';
 import { Account } from './account';
-
-const { PUBLIC_DOMAIN, SESSION_DURATION } = process.env;
+import { domain, num } from '../utils/env';
 
 interface RequestEvent {
 	cookies: {
@@ -24,6 +23,12 @@ interface RequestEvent {
 }
 
 export namespace Session {
+	const PUBLIC_DOMAIN = domain({
+		port: false,
+		protocol: false
+	});
+	const SESSION_DURATION = num('SESSION_DURATION', true);
+
 	export const Session = new Struct({
 		name: 'session',
 		structure: {
@@ -61,7 +66,7 @@ export namespace Session {
 					httpOnly: false,
 					domain: PUBLIC_DOMAIN ?? '',
 					path: '/',
-					expires: new Date(Date.now() + parseInt(SESSION_DURATION ?? '0'))
+					expires: new Date(Date.now() + SESSION_DURATION)
 				});
 
 				return session;
