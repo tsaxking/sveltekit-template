@@ -1,99 +1,92 @@
 <script lang="ts">
-	import 'filepond/dist/filepond.css';
-	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	import FilePond, { registerPlugin, type FilePondFile } from 'svelte-filepond';
-
-	import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-	import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-	import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
-	import FilePondPluginImageResize from 'filepond-plugin-image-resize';
-	import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+	import Uppy from '@uppy/core';
+	import Dashboard from '@uppy/svelte/dashboard';
+	import XHRUpload from '@uppy/xhr-upload';
 	import { EventEmitter } from 'ts-utils/event-emitter';
-	import { FileUploader } from '$lib/utils/files';
+	import { z } from 'zod';
 
-	interface Props {
-		multiple: boolean;
-		uploader: FileUploader;
-		message: string;
-		quality?: number;
-	}
-
-	const { multiple, uploader, message, quality = 100 }: Props = $props();
+	import '@uppy/core/css/style.min.css';
+	import '@uppy/dashboard/css/style.min.css';
+	import '@uppy/image-editor/css/style.min.css';
+	import { error } from '@sveltejs/kit';
+	import Modal from '../bootstrap/Modal.svelte';
 
 	const emitter = new EventEmitter<{
-		init: void;
-		addFile: FilePondFile;
-		error: Error;
+		load: string;
+		error: string;
 	}>();
 
+	// listen to the 'load' event for the picture to be received
 	export const on = emitter.on.bind(emitter);
+	interface Props {
+		multiple?: boolean;
+		message?: string;
+		endpoint: string;
+		usage: 'images' | 'general';
+		allowLocal?: boolean;
+	}
 
-	// Register the plugins
-	registerPlugin(
-		FilePondPluginImageExifOrientation,
-		FilePondPluginImagePreview,
-		FilePondPluginImageCrop,
-		FilePondPluginImageResize,
-		FilePondPluginImageTransform
-	);
+	const {
+		multiple = true,
+		message = 'Upload Files',
+		endpoint,
+		usage = 'images',
+		allowLocal = true
+	}: Props = $props();
 
-	// a reference to the component, used to call FilePond methods
-	let pond: FilePond;
+	const allowedFileTypes = usage === 'images' ? ['image/*'] : ['*'];
 
-	// pond.getFiles() will return the active files
+	export const uppy = new Uppy({
+		debug: false,
+		allowMultipleUploads: multiple,
+		restrictions: { allowedFileTypes }
+	});
 
-	// the name to use for the internal file input
-	let name = 'filepond';
+	uppy.use(XHRUpload, {
+		endpoint,
+		onAfterResponse(xhr) {
+			console.log(xhr.responseText);
 
-	// handle filepond events
-	const handleInit = () => {
-		emitter.emit('init', undefined);
-	};
+			if (xhr.status >= 200 && xhr.status < 300) {
+				emitter.emit(
+					'load',
+					z
+						.object({
+							url: z.string()
+						})
+						.parse(JSON.parse(xhr.responseText)).url
+				);
+				modal.hide();
+			} else {
+				console.error(xhr.responseText);
+				emitter.emit('error', 'Failed to upload file.');
+				error(500, 'Failed to upload file.');
+			}
+		}
+	});
+
+	let modal: Modal;
 </script>
 
-<div class="app">
-	<FilePond
-		bind:this={pond}
-		{name}
-		allowMultiple={multiple}
-		labelIdle={message}
-		oninit={handleInit}
-		allowImageTransform={true}
-		imageTransformOutputQuality={quality}
-		imageTransformOutputMimeType="image/jpeg"
-		server={{
-			process: async (fieldName, file, _, load, error) => {
-				const f = new File([file], file.name, { type: file.type });
+<button type="button" class="btn btn-primary" onclick={() => modal.show()}>
+	<i class="material-icons">add</i>
+	{message}
+</button>
 
-				const res = await uploader.sendFile(f, fieldName);
-
-				if (res.isOk()) {
-					res.value.on('load', load);
-					res.value.on('error', error);
-
-					return res.value.abort;
-				} else {
-					console.error(res.error);
-					error('Failed to upload file');
-				}
-
-				return () => {};
-			},
-
-			load: (source, load, error, _progress, _abort) => {
-				fetch(`/static/uploads/${source}`)
-					.then((response) => {
-						if (!response.ok) throw new Error('Failed to load file');
-						return response.blob();
-					})
-					.then((blob) => {
-						load(blob);
-					})
-					.catch((err) => {
-						console.error(err);
-						error('Failed to load file.');
-					});
-			}
-		}}
-	/>
-</div>
+<Modal title={message} size="lg" bind:this={modal}>
+	{#snippet body()}
+		<div class="container-fluid">
+			<Dashboard
+				{uppy}
+				props={{
+					theme: 'dark',
+					proudlyDisplayPoweredByUppy: false,
+					inline: true,
+					autoOpen: 'imageEditor',
+					disableLocalFiles: !allowLocal
+				}}
+			/>
+		</div>
+	{/snippet}
+	{#snippet buttons()}{/snippet}
+</Modal>
