@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 config();
 
@@ -32,6 +32,14 @@ type EnvConfig<T> = {
 
 let timeout: ReturnType<typeof setTimeout>;
 
+const filepath = path.join(process.cwd(), '.env.example');
+let current = ''; 
+try {
+	current = fs.readFileSync(filepath, 'utf-8');
+} catch {
+	console.log('.env.example does not exist, will create it automatically');
+}
+
 export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 	values: ['dev', 'prod', 'test'],
 	required: true
@@ -39,9 +47,6 @@ export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
 function generateExample() {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
-		const filepath = path.join(process.cwd(), '.env.example');
-		const current = await fs.readFile(filepath, 'utf-8').catch(() => '');
-
 		const currentLines = current.split('\n').map((l) => l.trim());
 
 		if (currentLines.length === 1 && currentLines[0] === '') {
@@ -62,7 +67,7 @@ function generateExample() {
 
 			currentLines.push(`${key}="${def ?? `some_${key.toLowerCase()}`}" ${comment}`);
 		}
-		fs.writeFile(filepath, currentLines.join('\n'));
+		fs.writeFileSync(filepath, currentLines.join('\n'));
 
 		keys.clear();
 	}, 1000);

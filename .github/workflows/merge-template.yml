@@ -71,7 +71,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.13.1
+          version: 10.16.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -131,5 +131,5 @@ jobs:
           echo "Committing"
           # Commit the changes and push the feature branch to origin
           git add .
-          git commit -m "chore: update scripts to $LATEST_TAG"
+          git commit --allow-empty -m "chore: update scripts to $LATEST_TAG"
           git push origin --set-upstream $BRANCH_NAME

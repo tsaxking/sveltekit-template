@@ -1,9 +1,10 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-const { LOG, LOG_FILE } = process.env;
+import { bool, str } from './env';
 
-const doLog = ['true', 'y', 'yes', 't'].includes(LOG?.toLowerCase() || 'false');
+const doLog = bool('LOG', false) || true;
+const LOG_FILE = str('LOG_FILE', false) || 'logs/stdout';
 
 const getCallsite = () => {
 	const stack = new Error().stack;
