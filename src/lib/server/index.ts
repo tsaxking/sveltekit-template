@@ -5,7 +5,7 @@ import testSchema from '../../../scripts/test-schema';
 import { str } from './utils/env';
 
 testSchema('false');
-const postBuild = async () => {
+export const postBuild = async () => {
 	const ADMIN_USERNAME = str('ADMIN_USERNAME', false) || 'admin';
 	const ADMIN_EMAIL = str('ADMIN_EMAIL', false) || 'admin@admin.admin';
 	const ADMIN_PASSWORD = str('ADMIN_PASSWORD', false) || 'Admin!123';
