@@ -18,19 +18,25 @@ const updateTable = async (tableName: string) => {
 	const isVersionTable = columnRows.some((c: any) => c.column_name === 'vh_created');
 
 	// Rename old columns to temp columns if they exist
-	await DB.execute(sql`
+	await DB.execute(
+		sql`
 		ALTER TABLE ${sql.identifier(tableName)}
 		RENAME COLUMN created TO created_old;
-	`).catch(() => {});
-	await DB.execute(sql`
+	`
+	).catch(() => {});
+	await DB.execute(
+		sql`
 		ALTER TABLE ${sql.identifier(tableName)}
 		RENAME COLUMN updated TO updated_old;
-	`).catch(() => {});
+	`
+	).catch(() => {});
 	if (isVersionTable) {
-		await DB.execute(sql`
+		await DB.execute(
+			sql`
 			ALTER TABLE ${sql.identifier(tableName)}
 			RENAME COLUMN vh_created TO vh_created_old;
-		`).catch(() => {});
+		`
+		).catch(() => {});
 	}
 
 	// Add new columns

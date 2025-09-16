@@ -142,10 +142,7 @@
 		}
 	};
 
-	const search = (
-		query: string,
-		column: string | null,
-	) => {
+	const search = (query: string, column: string | null) => {
 		const url = new URL(location.href);
 		url.searchParams.set('page', '0');
 		if (query.trim() === '') {
@@ -258,12 +255,7 @@
 		<div class="col">
 			<div class="input-group">
 				<div class="form-floating" style="width: 200px;">
-					<select
-						name="floating-column"
-						id="column"
-						class="form-select"
-						bind:value={column}
-					>
+					<select name="floating-column" id="column" class="form-select" bind:value={column}>
 						<option value="" selected>All Columns</option>
 						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value]}
 							<option value={key}>{capitalize(fromCamelCase(key))}</option>

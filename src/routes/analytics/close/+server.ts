@@ -5,7 +5,6 @@ import terminal from '$lib/server/utils/terminal.js';
 import { getManifesto } from '$lib/server/utils/manifesto.js';
 import ignore from 'ignore';
 
-
 export const POST = async (event) => {
 	const ig = ignore();
 	ig.add(getManifesto());

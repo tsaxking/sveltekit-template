@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { notify } from '$lib/utils/prompts';
-	import { onMount } from 'svelte';
 
 	const addNotif = () =>
 		notify({

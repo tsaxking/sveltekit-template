@@ -116,8 +116,7 @@
 
 <DB {dashboard}>
 	{#snippet body()}
-		<Card card={chartCard}
-		>
+		<Card card={chartCard}>
 			{#snippet body()}
 				<canvas bind:this={canvas}></canvas>
 			{/snippet}
@@ -125,7 +124,8 @@
 		<Card card={filter}>
 			{#snippet body()}
 				<!-- Checkboxes to remove from items -->
-				<ul class="list-group list-group-flush"
+				<ul
+					class="list-group list-group-flush"
 					style="
 						max-height: 100%;
 						overflow-y: scroll;

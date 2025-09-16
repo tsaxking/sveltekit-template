@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account';
 import { Analytics } from '$lib/server/structs/analytics';
 import { ServerCode } from 'ts-utils/status';
-import { getManifesto, getManifestoInstance } from '$lib/server/utils/manifesto.js';
+import { getManifestoInstance } from '$lib/server/utils/manifesto.js';
 
 export const load = async (event) => {
 	if (!event.locals.account) {
@@ -12,7 +12,6 @@ export const load = async (event) => {
 		throw fail(ServerCode.forbidden, {
 			message: 'Only administrators can access this page'
 		});
-
 
 	const pages: Record<
 		string,

@@ -16,7 +16,7 @@ import { createStructEventService } from '$lib/server/services/struct-event';
 import ignore from 'ignore';
 import { sse } from '$lib/server/services/sse';
 import { sleep } from 'ts-utils/sleep';
-import { signFingerprint } from '$lib/server/utils/fingerprint';
+// import { signFingerprint } from '$lib/server/utils/fingerprint';
 import redis from '$lib/server/services/redis';
 import { env, str } from '$lib/server/utils/env';
 
