@@ -46,6 +46,7 @@ sessionIgnore.add(`
 /oauth
 /email
 /analytics
+/fp
 `);
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -116,56 +117,56 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.locals.account = account.value;
 	}
 
-	PROD: if (env === 'prod') {
-		const isBlocked = await Limiting.isBlocked(event.locals.session, event.locals.account);
-		if (isBlocked.isErr()) {
-			return new Response('Internal Server Error', { status: ServerCode.internalServerError });
-		}
+	// PROD: if (env === 'prod') {
+	// 	const isBlocked = await Limiting.isBlocked(event.locals.session, event.locals.account);
+	// 	if (isBlocked.isErr()) {
+	// 		return new Response('Internal Server Error', { status: ServerCode.internalServerError });
+	// 	}
 
-		if (isBlocked.value.blocked) {
-			await sleep(1000); // wait a bit before responding
-			terminal.warn(
-				`Blocked session ${event.locals.session.id} (${event.locals.session.data.ip}) due to suspicious activity.`
-			);
-			break PROD;
-			// return new Response(
-			// 	'Forbidden. This client has been permanently blocked due to suspicious activity.',
-			// 	{
-			// 		status: ServerCode.forbidden,
-			// 		headers: {
-			// 			'Content-Type': 'text/plain'
-			// 		}
-			// 	}
-			// );
-		}
+	// 	if (isBlocked.value.blocked) {
+	// 		await sleep(1000); // wait a bit before responding
+	// 		terminal.warn(
+	// 			`Blocked session ${event.locals.session.id} (${event.locals.session.data.ip}) due to suspicious activity.`
+	// 		);
+	// 		break PROD;
+	// 		// return new Response(
+	// 		// 	'Forbidden. This client has been permanently blocked due to suspicious activity.',
+	// 		// 	{
+	// 		// 		status: ServerCode.forbidden,
+	// 		// 		headers: {
+	// 		// 			'Content-Type': 'text/plain'
+	// 		// 		}
+	// 		// 	}
+	// 		// );
+	// 	}
 
-		FP: if (event.locals.session.data.fingerprint) {
-			const fpid = await event.cookies.get('fpid');
-			if (!fpid) break FP; // not set yet. skip verification process. This shouldn't happen because if the session has it, it's been signed.
-			if (
-				fpid !==
-				(await signFingerprint({
-					fingerprint: event.locals.session.data.fingerprint,
-					userAgent: event.request.headers.get('user-agent') || '',
-					language: event.request.headers.get('accept-language') || ''
-				}).unwrap())
-			) {
-				// Fingerprint mismatch, rate limit
-				terminal.warn(`Fingerprint mismatch for session. Incrementing violation count.`);
-				Limiting.violate(event.locals.session, event.locals.account, 1, 'Fingerprint mismatch');
-				sse.fromSession(event.locals.session.id).notify({
-					title: 'Fingerprint Mismatch',
-					severity: 'warning',
-					message:
-						'Your fingerprint does not match the one we have stored. This may indicate suspicious activity. Please contact support if you believe this is an error.'
-				});
-			}
-		} else {
-			// If no fingerprint, assume it's a little suspicious and wait a bit.
-			// This should only happen on the inital load of the app, not subsequent requests.
-			await sleep(100);
-		}
-	}
+	// 	FP: if (event.locals.session.data.fingerprint) {
+	// 		const fpid = await event.cookies.get('fpid');
+	// 		if (!fpid) break FP; // not set yet. skip verification process. This shouldn't happen because if the session has it, it's been signed.
+	// 		if (
+	// 			fpid !==
+	// 			(await signFingerprint({
+	// 				fingerprint: event.locals.session.data.fingerprint,
+	// 				userAgent: event.request.headers.get('user-agent') || '',
+	// 				language: event.request.headers.get('accept-language') || ''
+	// 			}).unwrap())
+	// 		) {
+	// 			// Fingerprint mismatch, rate limit
+	// 			terminal.warn(`Fingerprint mismatch for session. Incrementing violation count.`);
+	// 			Limiting.violate(event.locals.session, event.locals.account, 1, 'Fingerprint mismatch');
+	// 			sse.fromSession(event.locals.session.id).notify({
+	// 				title: 'Fingerprint Mismatch',
+	// 				severity: 'warning',
+	// 				message:
+	// 					'Your fingerprint does not match the one we have stored. This may indicate suspicious activity. Please contact support if you believe this is an error.'
+	// 			});
+	// 		}
+	// 	} else {
+	// 		// If no fingerprint, assume it's a little suspicious and wait a bit.
+	// 		// This should only happen on the inital load of the app, not subsequent requests.
+	// 		await sleep(100);
+	// 	}
+	// }
 
 	const notIgnored = () => {
 		if (event.url.pathname === '/') return true;

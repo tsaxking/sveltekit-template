@@ -1,19 +1,15 @@
 import { Analytics } from '$lib/server/structs/analytics.js';
 import { json } from '@sveltejs/kit';
 import { z } from 'zod';
-import ignore from 'ignore';
-import fs from 'fs/promises';
-import path from 'path';
 import terminal from '$lib/server/utils/terminal.js';
+import { getManifesto } from '$lib/server/utils/manifesto.js';
+import ignore from 'ignore';
 
-const ignoreList = await fs
-	.readFile(path.resolve(process.cwd(), 'private', 'route-tree.pages'), 'utf-8')
-	.catch(() => '');
-
-const ig = ignore();
-ig.add(ignoreList);
 
 export const POST = async (event) => {
+	const ig = ignore();
+	ig.add(getManifesto());
+
 	const body = await event.request.json();
 	const parsed = z
 		.object({

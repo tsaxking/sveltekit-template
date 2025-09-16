@@ -14,7 +14,7 @@ export const load = async (event) => {
 		});
 
 	const struct = Struct.structs.get(event.params.struct);
-	if (!struct) throw fail(ServerCode.notFound, { message: 'Struct not found' });
+	if (!struct) throw fail(ServerCode.notFound, { message: `Struct not found: ${event.params.struct}` });
 
 	const limit = Number(event.url.searchParams.get('limit') || '50');
 	const offset = Number(event.url.searchParams.get('page') || '0') * limit;

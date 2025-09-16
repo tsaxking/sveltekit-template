@@ -116,15 +116,21 @@
 
 <DB {dashboard}>
 	{#snippet body()}
-		<Card card={chartCard}>
+		<Card card={chartCard}
+		>
 			{#snippet body()}
-				<canvas bind:this={canvas} style="width: 100%; height: 300px;"></canvas>
+				<canvas bind:this={canvas}></canvas>
 			{/snippet}
 		</Card>
 		<Card card={filter}>
 			{#snippet body()}
 				<!-- Checkboxes to remove from items -->
-				<ul class="list-group list-group-flush">
+				<ul class="list-group list-group-flush"
+					style="
+						max-height: 100%;
+						overflow-y: scroll;
+					"
+				>
 					{#each Object.keys(pages) as item}
 						<li class="list-group-item d-flex align-items-centent ws-nowrap">
 							<input

@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account';
 import { Analytics } from '$lib/server/structs/analytics';
 import { ServerCode } from 'ts-utils/status';
+import { getManifesto, getManifestoInstance } from '$lib/server/utils/manifesto.js';
 
 export const load = async (event) => {
 	if (!event.locals.account) {
@@ -11,6 +12,7 @@ export const load = async (event) => {
 		throw fail(ServerCode.forbidden, {
 			message: 'Only administrators can access this page'
 		});
+
 
 	const pages: Record<
 		string,
@@ -23,19 +25,23 @@ export const load = async (event) => {
 
 	await Analytics.Links.all({
 		type: 'stream'
-	}).pipe((l) => {
-		if (pages[l.data.url]) {
-			pages[l.data.url].views++;
-			pages[l.data.url].retention += l.data.duration;
-			pages[l.data.url].uniqueVisitors.add(l.data.account);
+	}).pipe(async (l) => {
+		const pattern = getManifestoInstance(l.data.url) || '/';
+		console.log('Pattern for', l.data.url, 'is', pattern);
+		if (pages[pattern]) {
+			pages[pattern].views++;
+			pages[pattern].retention += l.data.duration;
+			pages[pattern].uniqueVisitors.add(l.data.account);
 		} else {
-			pages[l.data.url] = {
+			pages[pattern] = {
 				views: 1,
 				retention: l.data.duration,
 				uniqueVisitors: new Set([l.data.account])
 			};
 		}
 	});
+
+	console.log('Done');
 
 	return {
 		pages: Object.fromEntries(

@@ -10,9 +10,10 @@
 	interface Props {
 		body: Snippet;
 		card: Dashboard.Card;
+		style?: string;
 	}
 
-	let { body, card }: Props = $props();
+	let { body, card, style = '' }: Props = $props();
 
 	let height = $state(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
 
@@ -56,6 +57,7 @@
 			grid-column: span {$card.width};
 			grid-row: span {$card.height};
 			height: {height}px;
+			{style}
 		"
 	>
 		<div class="card-header px-2">
