@@ -7,6 +7,8 @@
 	import { Permissions } from '$lib/model/permissions.js';
 	import { writable } from 'svelte/store';
 	import { contextmenu } from '$lib/utils/contextmenu.js';
+	import nav from '$lib/imports/admin.js';
+	nav();
 
 	const { data } = $props();
 	const accounts = $derived(writable(data.accounts));
