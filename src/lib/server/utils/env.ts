@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import { attemptAsync } from 'ts-utils/check';
 config();
 
 const keys = new Map<
@@ -176,8 +177,6 @@ export function domain(config: { port: boolean; protocol: boolean }) {
 
 	return `${config.protocol ? protocol : ''}${host}${config.port ? `:${port}` : ''}`;
 }
-<<<<<<< Updated upstream
-=======
 
 export const getPublicIp = () => {
 	return attemptAsync(async () => {
@@ -192,4 +191,3 @@ export const getPublicIp = () => {
 			.parse(await res.json()).ip;
 	});
 };
->>>>>>> Stashed changes

@@ -5,6 +5,7 @@ import Table from 'cli-table';
 import { Colors } from './colors';
 import terminal from '../src/lib/server/utils/terminal';
 import chalk from 'chalk';
+import { getPublicIp } from '$lib/server/utils/env';
 
 type GlobalConfig = {
 	message: string;
@@ -397,8 +398,6 @@ export class Action {
 		return this._action();
 	}
 }
-<<<<<<< Updated upstream
-=======
 
 export const promptIp = (message: string) => {
 	return attemptAsync<string>(async () => {
@@ -419,4 +418,3 @@ export const promptIp = (message: string) => {
 		return res;
 	});
 };
->>>>>>> Stashed changes
