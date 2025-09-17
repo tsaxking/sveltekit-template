@@ -53,10 +53,18 @@ export namespace Session {
 			const id = event.cookies.get('ssid_' + PUBLIC_DOMAIN);
 
 			const create = async () => {
+				const ip =
+					event.request.headers.get('Client-IP') ??
+					event.request.headers.get('X-Forwarded-For') ??
+					event.request.headers.get('X-Real-IP') ??
+					'';
+
+				const userAgent = event.request.headers.get('User-Agent') ?? '';
+
 				const session = await Session.new({
 					accountId: '',
-					ip: '',
-					userAgent: '',
+					ip,
+					userAgent,
 					requests: 0,
 					prevUrl: '',
 					fingerprint: '',

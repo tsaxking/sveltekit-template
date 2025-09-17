@@ -101,8 +101,9 @@
 							options: [
 								`Manage ${params.data?.account.data.username}`,
 								{
-									action: () => {},
-									name: 'Change Roles',
+									action: () =>
+										(location.href = `/dashboard/admin/account/${params.data?.account.data.id}`),
+									name: 'Open Manager',
 									icon: {
 										type: 'material-icons',
 										name: 'manage_accounts'
@@ -132,7 +133,10 @@
 							width: '150px'
 						});
 					},
-					preventDefaultOnContextMenu: true
+					preventDefaultOnContextMenu: true,
+					onRowDoubleClicked: (params) => {
+						location.href = `/dashboard/admin/account/${params.data?.account.data.id}`;
+					},
 				}}
 				data={accounts}
 				height="calc(100vh - {distanceToTop}px)"

@@ -175,4 +175,28 @@ export namespace Account {
 			modal.show();
 		});
 	};
+
+	export const signOut = () => {
+		return attemptAsync(async () => {
+			return fetch('/account/sign-out', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: '{}'
+			});
+		});
+	};
+
+	export const signOutOfSession = (sessionId: string) => {
+		return attemptAsync(async () => {
+			return fetch('/account/sign-out', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ sessionId })
+			});
+		});
+	};
 }

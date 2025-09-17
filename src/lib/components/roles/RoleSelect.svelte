@@ -10,8 +10,6 @@
 	const { onselect }: Props = $props();
 
 	let roles: Permissions.RoleData[] = $state([]);
-	$inspect(roles);
-
 	let searchKey = $state('');
 
 	let offset = $state(0);
