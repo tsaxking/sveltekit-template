@@ -399,17 +399,14 @@ export class Action {
 	}
 }
 
-
-export const promptIp = (
-	message: string,
-) => {
-	return attemptAsync<string>(async () => 
-		{
-			const res = await repeatPrompt({
+export const promptIp = (message: string) => {
+	return attemptAsync<string>(async () => {
+		const res = await repeatPrompt({
 			message: message + '(Leave empty to use public IP)',
 			validate: (input) => {
 				// Simple IP address regex (IPv4)
-				const ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+				const ipRegex =
+					/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 				return ipRegex.test(input);
 			},
 			allowBlank: true

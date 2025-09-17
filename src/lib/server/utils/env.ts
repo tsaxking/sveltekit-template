@@ -179,15 +179,16 @@ export function domain(config: { port: boolean; protocol: boolean }) {
 	return `${config.protocol ? protocol : ''}${host}${config.port ? `:${port}` : ''}`;
 }
 
-
 export const getPublicIp = () => {
 	return attemptAsync(async () => {
 		const res = await fetch('https://api.ipify.org?format=json');
 		if (!res.ok) throw new Error('Failed to fetch public IP');
-		return z.object({ 
-			ip: z.string().ip({
-				version: 'v4',
-			}),
-		}).parse(await res.json()).ip;
+		return z
+			.object({
+				ip: z.string().ip({
+					version: 'v4'
+				})
+			})
+			.parse(await res.json()).ip;
 	});
-}
+};

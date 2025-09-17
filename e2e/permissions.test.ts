@@ -27,7 +27,6 @@ beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
 	process.env.AUTO_SIGN_IN = undefined; // disable auto sign in for this test
 
-
 	account = await Account.createAccount({
 		username: 'testuserpermissions',
 		email: 'testuser.permissions@example.com',

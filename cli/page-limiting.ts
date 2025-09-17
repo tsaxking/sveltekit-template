@@ -334,11 +334,11 @@ export default new Folder(
 				const page = await select({
 					message: 'Select a page to create a ruleset for',
 					options: pages
-					.filter(p => p.trim().startsWith('/'))
-					.map((p) => ({
-						name: p,
-						value: p
-					}))
+						.filter((p) => p.trim().startsWith('/'))
+						.map((p) => ({
+							name: p,
+							value: p
+						}))
 				}).unwrap();
 
 				if (!page) {
@@ -348,9 +348,7 @@ export default new Folder(
 					});
 				}
 
-				const ip = await promptIp(
-					'Enter the IP address to allow access to this page',
-				).unwrap();
+				const ip = await promptIp('Enter the IP address to allow access to this page').unwrap();
 
 				if (
 					await confirm({
