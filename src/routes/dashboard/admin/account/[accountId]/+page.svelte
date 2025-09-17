@@ -53,10 +53,8 @@
 						}
 					],
 					onCellContextMenu: (params) => {
-						contextmenu(
-							params.event as MouseEvent,
-							{
-								options: [
+						contextmenu(params.event as MouseEvent, {
+							options: [
 								{
 									name: 'Copy IP',
 									action: () => {
@@ -66,7 +64,8 @@
 										type: 'material-icons',
 										name: 'content_copy'
 									}
-								}, {
+								},
+								{
 									name: 'Sign Out',
 									action: async () => {
 										if (params.data?.id) Account.signOutOfSession(params.data.id);
@@ -78,10 +77,9 @@
 								}
 							],
 							width: '150px'
-							}
-						)
+						});
 					},
-					preventDefaultOnContextMenu: true,
+					preventDefaultOnContextMenu: true
 				}}
 				rowNumbers={true}
 				height="600px"

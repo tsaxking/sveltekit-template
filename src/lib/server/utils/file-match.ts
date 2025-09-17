@@ -28,46 +28,46 @@ export const pathMatch = (lines: string) => {
 		.filter((line) => line && !line.startsWith('#'));
 
 	return {
-        test: (target: string) => {
-            let ignored = false;
-            for (const pattern of patterns) {
-                let pat = pattern;
-                let negated = false;
-                if (pat.startsWith('!')) {
-                    negated = true;
-                    pat = pat.slice(1).trim();
-                }
-                if (!pat) continue;
-                const regex = patternToRegExp(pat);
-                if (regex.test(target)) {
-                    ignored = !negated;
-                }
-            }
-            return ignored;
-        },
-        getPattern: (url: string) => {
-            // return all patterns that match the url
-            const segments = url.split('/').filter(Boolean);
-            const matchedPatterns = patterns.filter((pattern) => {
-                let pat = pattern;
-                if (pat.startsWith('!')) {
-                    pat = pat.slice(1).trim();
-                }
-                if (!pat) return false;
-                const patternSegments = pat.split('/').filter(Boolean);
-                if (patternSegments.length !== segments.length) return false;
+		test: (target: string) => {
+			let ignored = false;
+			for (const pattern of patterns) {
+				let pat = pattern;
+				let negated = false;
+				if (pat.startsWith('!')) {
+					negated = true;
+					pat = pat.slice(1).trim();
+				}
+				if (!pat) continue;
+				const regex = patternToRegExp(pat);
+				if (regex.test(target)) {
+					ignored = !negated;
+				}
+			}
+			return ignored;
+		},
+		getPattern: (url: string) => {
+			// return all patterns that match the url
+			const segments = url.split('/').filter(Boolean);
+			const matchedPatterns = patterns.filter((pattern) => {
+				let pat = pattern;
+				if (pat.startsWith('!')) {
+					pat = pat.slice(1).trim();
+				}
+				if (!pat) return false;
+				const patternSegments = pat.split('/').filter(Boolean);
+				if (patternSegments.length !== segments.length) return false;
 
-                let isMatch = true;
-                for (let i = 0; i < patternSegments.length; i++) {
-                    if (patternSegments[i] === '*') continue;
-                    if (patternSegments[i] !== segments[i]) {
-                        isMatch = false;
-                        break;
-                    }
-                }
-                return isMatch;
-            });
-            return matchedPatterns;
-        },
-    }
+				let isMatch = true;
+				for (let i = 0; i < patternSegments.length; i++) {
+					if (patternSegments[i] === '*') continue;
+					if (patternSegments[i] !== segments[i]) {
+						isMatch = false;
+						break;
+					}
+				}
+				return isMatch;
+			});
+			return matchedPatterns;
+		}
+	};
 };

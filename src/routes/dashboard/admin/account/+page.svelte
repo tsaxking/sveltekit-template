@@ -138,7 +138,7 @@
 					preventDefaultOnContextMenu: true,
 					onRowDoubleClicked: (params) => {
 						location.href = `/dashboard/admin/account/${params.data?.account.data.id}`;
-					},
+					}
 				}}
 				data={accounts}
 				height="calc(100vh - {distanceToTop}px)"

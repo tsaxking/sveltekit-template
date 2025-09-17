@@ -8,8 +8,6 @@ import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
 import { num, str } from '../utils/env';
-import { DB } from '../db';
-import { and, eq, inArray } from 'drizzle-orm';
 import { pathMatch } from '../utils/file-match';
 
 export namespace Limiting {
@@ -21,7 +19,7 @@ export namespace Limiting {
 
 	export const limits = {
 		ip: pathMatch(''),
-		blocked: pathMatch(''),
+		blocked: pathMatch('')
 	};
 
 	try {
@@ -87,9 +85,9 @@ export namespace Limiting {
 		return attemptAsync(async () => {
 			const manifest = limits.ip.getPattern(page);
 			const rules = await PageRuleset.fromProperty('ip', ip, {
-				type: 'all',
+				type: 'all'
 			}).unwrap();
-			return !!rules.find(r => manifest.includes(r.data.page));
+			return !!rules.find((r) => manifest.includes(r.data.page));
 		});
 	};
 
