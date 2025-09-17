@@ -12,10 +12,7 @@ const afterAll = testing.default.afterAll;
 const beforeAll = testing.default.beforeAll;
 beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
-	const signIn = str('AUTO_SIGN_IN', false);
-	if (signIn) {
-		throw new Error('AUTO_SIGN_IN is set. Please unset it for e2e tests.');
-	}
+	process.env.AUTO_SIGN_IN = undefined; // disable auto sign in for this test
 });
 
 afterAll(async () => {
