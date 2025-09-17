@@ -7,7 +7,6 @@ import { DB } from '../src/lib/server/db';
 import { logging, signIn } from './test-utils';
 import { v4 as uuid } from 'uuid';
 import { sleep } from 'ts-utils/sleep';
-import { str } from '../src/lib/server/utils/env';
 
 const expect = testing.expect;
 const test = testing.test;

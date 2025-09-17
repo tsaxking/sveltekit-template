@@ -3,7 +3,6 @@ import { Account } from '../src/lib/server/structs/account';
 import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '../src/lib/server/db';
 import { signIn, logging } from './test-utils';
-import { str } from '../src/lib/server/utils/env';
 
 const expect = testing.expect;
 const test = testing.test;
