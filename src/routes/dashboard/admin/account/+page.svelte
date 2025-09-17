@@ -7,6 +7,8 @@
 	import { Permissions } from '$lib/model/permissions.js';
 	import { writable } from 'svelte/store';
 	import { contextmenu } from '$lib/utils/contextmenu.js';
+	import nav from '$lib/imports/admin.js';
+	nav();
 
 	const { data } = $props();
 	const accounts = $derived(writable(data.accounts));
@@ -101,8 +103,9 @@
 							options: [
 								`Manage ${params.data?.account.data.username}`,
 								{
-									action: () => {},
-									name: 'Change Roles',
+									action: () =>
+										(location.href = `/dashboard/admin/account/${params.data?.account.data.id}`),
+									name: 'Open Manager',
 									icon: {
 										type: 'material-icons',
 										name: 'manage_accounts'
@@ -132,7 +135,10 @@
 							width: '150px'
 						});
 					},
-					preventDefaultOnContextMenu: true
+					preventDefaultOnContextMenu: true,
+					onRowDoubleClicked: (params) => {
+						location.href = `/dashboard/admin/account/${params.data?.account.data.id}`;
+					}
 				}}
 				data={accounts}
 				height="calc(100vh - {distanceToTop}px)"

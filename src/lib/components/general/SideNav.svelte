@@ -18,8 +18,6 @@
 		title: string;
 	}[] = $state([]);
 
-	$inspect(links);
-
 	export const hide = () => {
 		import('bootstrap').then((bs) => {
 			document.querySelectorAll('.offcanvas').forEach((oc) => {

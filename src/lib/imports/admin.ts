@@ -30,7 +30,7 @@ export default () => {
 			},
 			{
 				name: 'Accounts',
-				href: '/dashboard/admin/accounts',
+				href: '/dashboard/admin/account',
 				icon: {
 					type: 'material-icons',
 					name: 'manage_accounts'

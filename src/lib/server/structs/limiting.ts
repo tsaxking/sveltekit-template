@@ -4,29 +4,30 @@ import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { createHash } from 'crypto';
-import ignore from 'ignore';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
 import { num, str } from '../utils/env';
+import { pathMatch } from '../utils/file-match';
 
 export namespace Limiting {
-	const ipLimited = ignore();
-	const blockedPages = ignore();
-
 	try {
 		fs.mkdirSync(path.join(process.cwd(), 'private'), { recursive: true });
 	} catch {
 		// Do nothing
 	}
 
+	export const limits = {
+		ip: pathMatch(''),
+		blocked: pathMatch('')
+	};
+
 	try {
 		const ipLimit = fs.readFileSync(
 			path.join(process.cwd(), 'private', 'ip-limited.pages'),
 			'utf-8'
 		);
-
-		ipLimited.add(ipLimit);
+		limits.ip = pathMatch(ipLimit);
 	} catch {
 		fs.writeFileSync(
 			path.join(process.cwd(), 'private', 'ip-limited.pages'),
@@ -39,8 +40,7 @@ export namespace Limiting {
 			path.join(process.cwd(), 'private', 'blocked.pages'),
 			'utf-8'
 		);
-
-		blockedPages.add(blockedPageList);
+		limits.blocked = pathMatch(blockedPageList);
 	} catch {
 		fs.writeFileSync(
 			path.join(process.cwd(), 'private', 'blocked.pages'),
@@ -71,31 +71,23 @@ export namespace Limiting {
 
 	export const isIpLimitedPage = (page: string) => {
 		return attempt(() => {
-			if (page.startsWith('/')) page = page.slice(1);
-			if (page.length === 0) return false;
-			return ipLimited.ignores(page);
+			return limits.ip.test(page);
 		});
 	};
 
 	export const isBlockedPage = (page: string) => {
 		return attempt(() => {
-			if (page.startsWith('/')) page = page.slice(1);
-			if (page.length === 0) return false;
-			return blockedPages.ignores(page);
+			return limits.blocked.test(page);
 		});
 	};
 
 	export const isIpAllowed = (ip: string, page: string) => {
 		return attemptAsync(async () => {
-			const rules = PageRuleset.fromProperty('ip', ip, {
-				type: 'stream'
-			});
-
-			let allowed = false;
-			await rules.pipe((r) => {
-				if (r.data.page === page) allowed = true;
-			});
-			return allowed;
+			const manifest = limits.ip.getPattern(page);
+			const rules = await PageRuleset.fromProperty('ip', ip, {
+				type: 'all'
+			}).unwrap();
+			return !!rules.find((r) => manifest.includes(r.data.page));
 		});
 	};
 

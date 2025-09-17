@@ -24,9 +24,11 @@ export const POST = async (event) => {
 
 	await sleep(1000); // Simulate processing delay
 
-	event.locals.session.update({
-		fingerprint: parsed.data.fingerprint
-	});
+	await event.locals.session
+		.update({
+			fingerprint: parsed.data.fingerprint
+		})
+		.unwrap();
 
 	event.cookies.set(
 		'fpid',

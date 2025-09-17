@@ -20,9 +20,6 @@
 	const count = $derived(data.count);
 	const total = $derived(data.total);
 
-	// $inspect(logs);
-	// $inspect(structs);
-
 	const search = (config: {
 		accountId: string | undefined | null;
 		type: string | undefined | null;

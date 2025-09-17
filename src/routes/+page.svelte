@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/components/bootstrap/Card.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import '$lib/index';
 </script>
 
 <svelte:head>

@@ -20,8 +20,6 @@
 		}[];
 	}>({});
 
-	$inspect(groups);
-
 	onMount(() => {
 		availablePermissions = Permissions.getAvailableRolePermissions(role);
 		entitlements = Permissions.getEntitlements();

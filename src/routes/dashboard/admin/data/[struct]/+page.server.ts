@@ -18,6 +18,9 @@ export const load = async (event) => {
 		throw fail(ServerCode.notFound, { message: `Struct not found: ${event.params.struct}` });
 
 	const limit = Number(event.url.searchParams.get('limit') || '50');
+	if (limit > 1000) {
+		throw fail(ServerCode.badRequest, { message: 'Limit cannot exceed 1000' });
+	}
 	const offset = Number(event.url.searchParams.get('page') || '0') * limit;
 	const search = event.url.searchParams.get('search');
 	const column = event.url.searchParams.get('column');

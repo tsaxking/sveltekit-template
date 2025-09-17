@@ -23,5 +23,6 @@ export const fingerprint = () => {
 		if (!res.ok) {
 			throw new Error('Failed to send fingerprint to server');
 		}
+		return fingerprint;
 	});
 };
