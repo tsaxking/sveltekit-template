@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Folder, Action, alert, select, prompt, confirm } from './utils';
+import { Folder, Action, alert, select, prompt, confirm, promptIp } from './utils';
 import routeTree from '../scripts/create-route-tree';
 import fs from 'fs';
 import path from 'path';
-import { z } from 'zod';
 import { Limiting } from '../src/lib/server/structs/limiting';
 import { selectData } from './struct';
 import { globalCols } from 'drizzle-struct/back-end';
@@ -334,10 +333,12 @@ export default new Folder(
 
 				const page = await select({
 					message: 'Select a page to create a ruleset for',
-					options: pages.map((p) => ({
-						name: p,
-						value: p
-					}))
+					options: pages
+						.filter((p) => p.trim().startsWith('/'))
+						.map((p) => ({
+							name: p,
+							value: p
+						}))
 				}).unwrap();
 
 				if (!page) {
@@ -347,32 +348,7 @@ export default new Folder(
 					});
 				}
 
-				const ip = await prompt({
-					message: 'Enter the IP address for the ruleset',
-					clear: true
-				}).unwrap();
-
-				if (!ip) {
-					await alert({
-						message: 'No IP address entered.',
-						clear: true
-					});
-					return;
-				}
-
-				const valid = z
-					.string()
-					.ip({
-						version: 'v4'
-					})
-					.safeParse(ip);
-				if (!valid.success) {
-					await alert({
-						message: 'Invalid IP address format.',
-						clear: true
-					});
-					return;
-				}
+				const ip = await promptIp('Enter the IP address to allow access to this page').unwrap();
 
 				if (
 					await confirm({
@@ -405,26 +381,9 @@ export default new Folder(
 		),
 		new Folder('Delete IP Page Ruleset', 'Delete an existing IP-based page ruleset', '🗑️', [
 			new Action('Delete IP', 'Delete all rulesets for a specific IP address', '🗑️', async () => {
-				const ip = await prompt({
-					message: 'Enter the IP address to delete rulesets for',
-					clear: true
-				}).unwrap();
+				const ip = await promptIp('Enter the IP address to delete rulesets for').unwrap();
 
-				const valid = z
-					.string()
-					.ip({
-						version: 'v4'
-					})
-					.safeParse(ip);
-				if (!valid.success) {
-					await alert({
-						message: 'Invalid IP address format.',
-						clear: true
-					});
-					return;
-				}
-
-				const count = await Limiting.PageRuleset.fromProperty('ip', valid.data, {
+				const count = await Limiting.PageRuleset.fromProperty('ip', ip, {
 					type: 'count'
 				});
 
@@ -446,15 +405,15 @@ export default new Folder(
 
 				if (
 					await confirm({
-						message: `Are you sure you want to delete ${count.value} rulesets for IP ${valid.data}?`
+						message: `Are you sure you want to delete ${count.value} rulesets for IP ${ip}?`
 					}).unwrap()
 				) {
-					await Limiting.PageRuleset.fromProperty('ip', valid.data, {
+					await Limiting.PageRuleset.fromProperty('ip', ip, {
 						type: 'stream',
 						includeArchived: true
 					}).pipe((rs) => rs.delete());
 					await alert({
-						message: `Deleted ${count.value} rulesets for IP ${valid.data}.`,
+						message: `Deleted ${count.value} rulesets for IP ${ip}.`,
 						clear: true
 					});
 				} else {
@@ -591,40 +550,15 @@ export default new Folder(
 				}
 			),
 			new Action('Search Rulesets by IP', 'Search for rulesets by IP address', '🔍', async () => {
-				const ip = await prompt({
-					message: 'Enter the IP address to search rulesets for',
-					clear: true
-				}).unwrap();
+				const ip = await promptIp('Enter the IP address to search rulesets for').unwrap();
 
-				if (!ip) {
-					await alert({
-						message: 'No IP address entered.',
-						clear: true
-					});
-					return;
-				}
-
-				const valid = z
-					.string()
-					.ip({
-						version: 'v4'
-					})
-					.safeParse(ip);
-				if (!valid.success) {
-					await alert({
-						message: 'Invalid IP address format.',
-						clear: true
-					});
-					return;
-				}
-
-				const rules = await Limiting.PageRuleset.fromProperty('ip', valid.data, {
+				const rules = await Limiting.PageRuleset.fromProperty('ip', ip, {
 					type: 'all'
 				});
 
 				if (rules.isErr()) {
 					await alert({
-						message: `Failed to search rulesets for IP ${valid.data}: ${rules.error.message}`,
+						message: `Failed to search rulesets for IP ${ip}: ${rules.error.message}`,
 						clear: true
 					});
 					return;
@@ -632,7 +566,7 @@ export default new Folder(
 
 				if (rules.value.length === 0) {
 					await alert({
-						message: `No rulesets found for IP ${valid.data}.`,
+						message: `No rulesets found for IP ${ip}.`,
 						clear: true
 					});
 					return;

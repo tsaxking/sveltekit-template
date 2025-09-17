@@ -5,6 +5,7 @@ import Table from 'cli-table';
 import { Colors } from './colors';
 import terminal from '../src/lib/server/utils/terminal';
 import chalk from 'chalk';
+import { getPublicIp } from '$lib/server/utils/env';
 
 type GlobalConfig = {
 	message: string;
@@ -397,3 +398,23 @@ export class Action {
 		return this._action();
 	}
 }
+
+export const promptIp = (message: string) => {
+	return attemptAsync<string>(async () => {
+		const res = await repeatPrompt({
+			message: message + '(Leave empty to use public IP)',
+			validate: (input) => {
+				// Simple IP address regex (IPv4)
+				const ipRegex =
+					/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+				return ipRegex.test(input);
+			},
+			allowBlank: true
+		}).unwrap();
+
+		if (!res) {
+			return getPublicIp().unwrap();
+		}
+		return res;
+	});
+};
