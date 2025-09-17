@@ -334,10 +334,19 @@ export default new Folder(
 
 				const page = await select({
 					message: 'Select a page to create a ruleset for',
+<<<<<<< Updated upstream
 					options: pages.map((p) => ({
 						name: p,
 						value: p
 					}))
+=======
+					options: pages
+						.filter((p) => p.trim().startsWith('/'))
+						.map((p) => ({
+							name: p,
+							value: p
+						}))
+>>>>>>> Stashed changes
 				}).unwrap();
 
 				if (!page) {
@@ -347,6 +356,7 @@ export default new Folder(
 					});
 				}
 
+<<<<<<< Updated upstream
 				const ip = await prompt({
 					message: 'Enter the IP address for the ruleset',
 					clear: true
@@ -373,6 +383,9 @@ export default new Folder(
 					});
 					return;
 				}
+=======
+				const ip = await promptIp('Enter the IP address to allow access to this page').unwrap();
+>>>>>>> Stashed changes
 
 				if (
 					await confirm({
