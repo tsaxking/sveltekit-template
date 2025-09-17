@@ -3,7 +3,6 @@ import { Folder, Action, alert, select, prompt, confirm } from './utils';
 import routeTree from '../scripts/create-route-tree';
 import fs from 'fs';
 import path from 'path';
-import { z } from 'zod';
 import { Limiting } from '../src/lib/server/structs/limiting';
 import { selectData } from './struct';
 import { globalCols } from 'drizzle-struct/back-end';
