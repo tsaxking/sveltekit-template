@@ -30,7 +30,7 @@ export const copyCanvas = (canvas: HTMLCanvasElement, notify: boolean) => {
 			});
 		}
 	});
-}
+};
 
 export const copyImage = (img: HTMLImageElement | string, notify: boolean) => {
 	return attemptAsync(async () => {
@@ -63,4 +63,4 @@ export const copyImage = (img: HTMLImageElement | string, notify: boolean) => {
 			});
 		}
 	});
-}
+};
