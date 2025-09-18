@@ -79,7 +79,7 @@
 
 <div
 	bind:this={alert}
-	class="alert alert-{color} alert-dismissible p-3"
+	class="alert alert-{color} alert-dismissible p-3 text-white shadow"
 	role="alert"
 	aria-atomic="true"
 	aria-live="assertive"
@@ -90,6 +90,8 @@
 		top: {$notifs.indexOf(id) * 80 + 20}px;
 		transition: all 0.2s ease-in-out;
 		display: {doShow ? 'block' : 'none'};
+		z-index: 1050;
+  		background: color-mix(in srgb, var(--bg-{color}) 50%, transparent);
 	"
 	transition:fade={{ duration: 200 }}
 >
