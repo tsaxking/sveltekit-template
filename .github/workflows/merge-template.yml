@@ -101,6 +101,7 @@ jobs:
           echo "PUBLIC_DOMAIN=localhost" >> .env
           echo "HTTPS=false" >> .env
           echo "SESSION_DURATION=10000000" >> .env
+          echo "EMAIL_QUEUE_NAME=my_email_queue_name" >> .env
           export $(cat .env | xargs)
 
       - name: Send pull-request

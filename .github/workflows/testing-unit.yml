@@ -73,7 +73,7 @@ jobs:
           echo "PUBLIC_APP_NAME=test" >> .env
           echo "REDIS_NAME=some_name" >> .env
           echo "REDIS_URL=redis://localhost:6379" >> .env
-          echo "EMAIL_MICROSERVICE_NAME=my_email_microservice_name" >> .env
+          echo "EMAIL_QUEUE_NAME=my_email_queue_name" >> .env
           export $(cat .env | xargs)
 
       - name: Run migrations

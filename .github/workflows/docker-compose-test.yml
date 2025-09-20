@@ -44,7 +44,7 @@ jobs:
           PORT=3000
           SESSION_DURATION=10000000
           DB_HOST=db
-          EMAIL_MICROSERVICE_NAME=my_email_microservice_name
+          EMAIL_QUEUE_NAME=my_email_queue_name
           EOF
 
           # .env for local app (host values)
@@ -65,7 +65,7 @@ jobs:
           SESSION_DURATION=10000000
           PORT=3000
           DB_HOST=localhost
-          EMAIL_MICROSERVICE_NAME=my_email_microservice_name
+          EMAIL_QUEUE_NAME=my_email_queue_name
           EOF
 
       - name: Setup Node.js

@@ -8,7 +8,7 @@ import path from 'path';
 import { num, str } from '../utils/env';
 
 const emailService = redis.createQueue(
-	str('EMAIL_MICROSERVICE_NAME', true),
+	str('EMAIL_QUEUE_NAME', true),
 	z.object({
 		html: z.string().optional(),
 		text: z.string().optional(),
