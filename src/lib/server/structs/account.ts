@@ -493,7 +493,7 @@ export namespace Account {
 				data: {
 					link: `${domain({
 						port: false,
-						protocol: true,
+						protocol: true
 					})}/account/password-reset/${pr.id}`,
 					supportEmail: str('SUPPORT_EMAIL', false) || ''
 				},
