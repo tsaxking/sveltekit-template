@@ -46,20 +46,17 @@ const openEmail = (name: keyof Email) => {
  * @param targetService - The name of the target service queue to which the email job will be pushed. Defaults to the value of EMAIL_MICROSERVICE_NAME environment variable or 'emailServiceQueue'.
  * @returns
  */
-export const sendEmail = <T extends keyof Email>(
-	config: {
-		type: T;
-		data: Email[T];
-		to: string | string[];
-		subject: string;
-		attachments?: {
-			filename: string;
-			path: string; // fullpath
-		}[];
-	},
-) => {
+export const sendEmail = <T extends keyof Email>(config: {
+	type: T;
+	data: Email[T];
+	to: string | string[];
+	subject: string;
+	attachments?: {
+		filename: string;
+		path: string; // fullpath
+	}[];
+}) => {
 	return attemptAsync(async () => {
-
 		const html = await openEmail(config.type).unwrap();
 
 		const job = {
