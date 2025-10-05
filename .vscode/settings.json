@@ -55,7 +55,7 @@
 	"liveServer.settings.port": 5501,
 	"json.schemas": [
 		{
-			"fileMatch": ["config.json", "config.example.json"],
+			"fileMatch": ["config.json", "config.example.json", "config.docker.json"],
 			"url": "./config/config.schema.json"
 		}
 	]

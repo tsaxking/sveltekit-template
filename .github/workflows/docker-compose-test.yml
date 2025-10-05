@@ -28,44 +28,14 @@ jobs:
         run: |
           # .docker.env for Docker Compose (container values)
           cat <<EOF > .docker.env
-          DB_USER=test_user
-          DB_PASS=test
-          DB_NAME=test
-          DB_PORT=5432
-          HTTPS=false
           OAUTH2_CLIENT_ID=1234567890
-          PUBLIC_DOMAIN=localhost
-          PUBLIC_APP_NAME=test
           OAUTH2_CLIENT_SECRET=1234567890
-          REDIS_NAME=some_name
-          REDIS_URL=redis://redis:6379
-          ENVIRONMENT=test
-          FINGERPRINT_SECRET=some_secret
-          PORT=3000
-          SESSION_DURATION=10000000
-          DB_HOST=db
-          EMAIL_QUEUE_NAME=my_email_queue_name
           EOF
 
           # .env for local app (host values)
           cat <<EOF > .env
-          DB_USER=test_user
-          DB_PASS=test
-          DB_NAME=test
-          DB_PORT=5432
-          HTTPS=false
           OAUTH2_CLIENT_ID=1234567890
-          PUBLIC_APP_NAME=test
-          PUBLIC_DOMAIN=localhost
           OAUTH2_CLIENT_SECRET=1234567890
-          REDIS_NAME=some_name
-          REDIS_URL=redis://localhost:6379
-          ENVIRONMENT=test
-          FINGERPRINT_SECRET=some_secret
-          SESSION_DURATION=10000000
-          PORT=3000
-          DB_HOST=localhost
-          EMAIL_QUEUE_NAME=my_email_queue_name
           EOF
 
       - name: Setup Node.js
@@ -105,9 +75,9 @@ jobs:
 
       - name: Setup Database Roles
         run: |
-          docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
-          docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
-          docker exec db psql -U admin -c "GRANT admin TO test_user;"
+          docker exec db psql -U admin -c "CREATE ROLE username WITH LOGIN PASSWORD 'password';"
+          docker exec db psql -U admin -c "CREATE DATABASE db WITH OWNER username;"
+          docker exec db psql -U admin -c "GRANT admin TO username;"
           pnpm db:migrate
           pnpm db:push --force
 
