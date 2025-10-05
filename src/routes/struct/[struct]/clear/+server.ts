@@ -4,7 +4,7 @@ import { Struct } from 'drizzle-struct/back-end';
 import { DataAction } from 'drizzle-struct/types';
 
 export const POST = async (event) => {
-	console.log('Clear struct request received');
+	// console.log('Clear struct request received');
 	if (!event.locals.account) {
 		return Errors.noAccount();
 	}
@@ -17,8 +17,6 @@ export const POST = async (event) => {
 	if (!structName) {
 		return Errors.noStruct(structName);
 	}
-
-	console.log('Attempting to clear struct:', structName);
 
 	const struct = Struct.structs.get(structName);
 	if (!struct) {

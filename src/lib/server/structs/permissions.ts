@@ -351,8 +351,6 @@ export namespace Permissions {
 				};
 			}
 
-			console.log(event.locals.account?.id, accountToAdd.id);
-
 			const isInRole = await Permissions.isInRole(role, accountToAdd).unwrap();
 
 			if (isInRole) {

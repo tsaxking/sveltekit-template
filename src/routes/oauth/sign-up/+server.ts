@@ -5,8 +5,6 @@ import { google } from 'googleapis';
 import { ServerCode } from 'ts-utils/status';
 import { domain, str } from '$lib/server/utils/env.js';
 
-// const log = (...args: unknown[]) => console.log('[oauth/sign-up]', ...args);
-
 export const GET = async (event) => {
 	const code = event.url.searchParams.get('code');
 	if (!code) throw redirect(ServerCode.temporaryRedirect, '/account/sign-up');

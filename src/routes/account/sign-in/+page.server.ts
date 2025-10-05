@@ -7,8 +7,6 @@ import { OAuth2Client } from 'google-auth-library';
 import terminal from '$lib/server/utils/terminal';
 import { domain, str } from '$lib/server/utils/env';
 
-// const log = (...args: unknown[]) => console.log('[oauth/sign-in]', ...args);
-
 export const actions = {
 	login: async (event) => {
 		const data = await event.request.formData();
