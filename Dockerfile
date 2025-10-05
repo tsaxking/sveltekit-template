@@ -23,8 +23,5 @@ COPY ./src ./src
 COPY ./static ./static
 COPY ./config.docker.json ./config.json
 
-RUN touch .env
-
-
 EXPOSE 3000
 CMD ["pnpm", "start"]

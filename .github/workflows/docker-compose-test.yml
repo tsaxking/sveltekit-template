@@ -103,7 +103,16 @@ jobs:
           docker compose --project-name test ps
 
       - name: Start App
-        run: docker compose --project-name test up app
+        run: docker compose --project-name test up -d app
+
+      - name: Debug container state
+        run: |
+          echo "Container status:"
+          docker compose --project-name test ps
+          echo "App logs:"
+          docker compose --project-name test logs app --tail=50
+          echo "Port bindings:"
+          docker port $(docker compose --project-name test ps -q app) || true
 
       - name: Run Integration Tests
         run: pnpm test:integration
