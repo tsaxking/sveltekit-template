@@ -28,6 +28,8 @@ jobs:
         run: |
           # .docker.env for Docker Compose (container values)
           cp config.example.json config.docker.json
+          # Replace database values
+          jq '.database.host = "db"' config.docker.json > tmp.json && mv tmp.json config.docker.json
           cat <<EOF > .docker.env
           PORT=3000
           OAUTH2_CLIENT_ID=1234567890
