@@ -113,9 +113,6 @@ jobs:
           docker compose --project-name test logs app --tail=50
           echo "Port bindings:"
           docker port $(docker compose --project-name test ps -q app) || true
-          echo "App failed to start within timeout!"
-          echo "Final app logs:"
-          docker compose --project-name test logs app --tail=20
 
       - name: Wait for app startup
         run: |
