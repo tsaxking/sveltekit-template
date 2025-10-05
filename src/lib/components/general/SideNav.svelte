@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { Navbar } from '$lib/model/navbar';
 	import { onMount } from 'svelte';
 	import { Analytics } from '$lib/model/analytics';
@@ -93,7 +92,7 @@
 	aria-labelledby="{id}Label"
 >
 	<div class="offcanvas-header layer-2">
-		<h5 class="offcanvas-title" id="{id}Label">{PUBLIC_APP_NAME}</h5>
+		<h5 class="offcanvas-title" id="{id}Label">{__APP_ENV__.name}</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	</div>
 	<div class="offcanvas-body layer-2">

@@ -1,10 +1,10 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import { bool, str } from './env';
+import { config } from './env';
 
-const doLog = bool('LOG', false) || true;
-const LOG_FILE = str('LOG_FILE', false) || 'logs/stdout';
+const doLog = config.logs.enabled;
+const LOG_DIR = config.logs.outdir;
 
 const getCallsite = () => {
 	const stack = new Error().stack;
@@ -19,18 +19,17 @@ const getCallsite = () => {
 };
 
 export const save = (callsite: string, type: string, ...args: unknown[]) => {
-	if (LOG_FILE) {
+	if (LOG_DIR) {
 		// if dir does not exist, create it
-		const logDir = path.dirname(path.join(process.cwd(), LOG_FILE));
-		if (!fs.existsSync(logDir)) {
-			fs.mkdirSync(logDir, { recursive: true });
+		if (!fs.existsSync(LOG_DIR)) {
+			fs.mkdirSync(LOG_DIR, { recursive: true });
 		}
-		if (!fs.existsSync(path.join(process.cwd(), LOG_FILE) + '.log')) {
-			fs.writeFileSync(path.join(process.cwd(), LOG_FILE) + '.log', '');
+		if (!fs.existsSync(path.join(process.cwd(), LOG_DIR, type) + '.log')) {
+			fs.writeFileSync(path.join(process.cwd(), LOG_DIR, type) + '.log', '');
 		}
 		return fs.promises.appendFile(
-			path.join(process.cwd(), LOG_FILE) + '.log',
-			`${new Date().toISOString()} [${callsite}] (${type}) ${args.join(' ')}\n`,
+			path.join(process.cwd(), LOG_DIR, type) + '.log',
+			`${new Date().toISOString()} [${callsite}] ${args.join(' ')}\n`,
 			{ flag: 'a' }
 		);
 	}
@@ -40,7 +39,7 @@ export const log = (...args: unknown[]) => {
 	const callsite = getCallsite();
 	if (doLog) console.log(new Date().toISOString(), chalk.blue(`[${callsite}]`), '(LOG)', ...args);
 
-	return save(callsite, 'LOG', ...args);
+	return save(callsite, 'info', ...args);
 };
 
 export const error = (...args: unknown[]) => {
@@ -48,7 +47,7 @@ export const error = (...args: unknown[]) => {
 	if (doLog)
 		console.error(new Date().toISOString(), chalk.red(`[${callsite}]`), '(ERROR)', ...args);
 
-	return save(callsite, 'ERROR', ...args);
+	return save(callsite, 'error', ...args);
 };
 
 export const warn = (...args: unknown[]) => {
@@ -56,7 +55,7 @@ export const warn = (...args: unknown[]) => {
 	if (doLog)
 		console.warn(new Date().toISOString(), chalk.yellow(`[${callsite}]`), '(WARN)', ...args);
 
-	return save(callsite, 'WARN', ...args);
+	return save(callsite, 'warning', ...args);
 };
 
 export default {

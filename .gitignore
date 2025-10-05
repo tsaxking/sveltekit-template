@@ -48,3 +48,6 @@ docs/search-index.json
 
 **/_sidebar.md
 **/_navbar.md
+
+config.json
+config.docker.json

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '$lib/styles/gsi.css';
-	import { env } from '$env/dynamic/public';
 	import type { ActionData } from './$types';
 	import Password from '$lib/components/forms/Password.svelte';
 	import { goto } from '$app/navigation';
@@ -46,7 +45,7 @@
 	<div class="container pt-5">
 		<div class="row">
 			<h1>
-				{env.PUBLIC_APP_NAME}: Sign In
+				{__APP_ENV__.name}: Sign In
 			</h1>
 		</div>
 		<div class="row mb-3">

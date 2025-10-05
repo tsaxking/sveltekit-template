@@ -1,0 +1,51 @@
+{
+	"environment": "dev",
+	"app_name": "Your App Name",
+	"network": {
+		"host": "localhost",
+		"port": 3000,
+		"protocol": "http"
+	},
+	"database": {
+		"port": 5432,
+		"host": "localhost",
+		"user": "username",
+		"pass": "password",
+		"name": "db"
+	},
+	"sessions": {
+		"auto_sign_in": "username",
+		"duration": 604800000,
+		"password_request_lifetime": 3600000,
+		"fingerprint_secret": "your_fingerprint_secret"
+	},
+	"redis": {
+		"url": "redis://localhost:6379",
+		"name": "your_redis_name"
+	},
+	"logs": {
+		"enabled": true,
+		"outdir": "logs",
+		"level": ["info", "error", "warn"]
+	},
+	"admin": {
+		"user": "admin_username",
+		"pass": "admin_password",
+		"email": "admin_email@example.com",
+		"first_name": "Admin",
+		"last_name": "User"
+	},
+	"email": {
+		"queue_name": "email_queue",
+		"max_size": 100,
+		"support_email": "someemail@email.com"
+	},
+	"ntp": {
+		"server": "ntp_server_name"
+	},
+	"limiting": {
+		"enabled": true,
+		"requests": 100,
+		"window": 600
+	}
+}

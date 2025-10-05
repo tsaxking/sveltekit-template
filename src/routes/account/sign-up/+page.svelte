@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '$lib/styles/gsi.css';
-	import { env } from '$env/dynamic/public';
 	import { passwordStrength } from 'check-password-strength';
 	import type { ActionData } from './$types';
 	import Password from '$lib/components/forms/Password.svelte';
@@ -36,7 +35,7 @@
 	<div class="container pt-5">
 		<div class="row">
 			<h1>
-				{env.PUBLIC_APP_NAME}: Sign Up
+				{__APP_ENV__.name}: Sign Up
 			</h1>
 		</div>
 		<div class="row mb-3">

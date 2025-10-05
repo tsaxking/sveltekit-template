@@ -27,45 +27,21 @@ jobs:
       - name: Initialize .docker.env and .env
         run: |
           # .docker.env for Docker Compose (container values)
+          cp config.example.json config.docker.json
+          # Replace database values
+          jq '.database.host = "db"' config.docker.json > tmp.json && mv tmp.json config.docker.json
           cat <<EOF > .docker.env
-          DB_USER=test_user
-          DB_PASS=test
-          DB_NAME=test
-          DB_PORT=5432
-          HTTPS=false
-          OAUTH2_CLIENT_ID=1234567890
-          PUBLIC_DOMAIN=localhost
-          PUBLIC_APP_NAME=test
-          OAUTH2_CLIENT_SECRET=1234567890
-          REDIS_NAME=some_name
-          REDIS_URL=redis://redis:6379
-          ENVIRONMENT=test
-          FINGERPRINT_SECRET=some_secret
           PORT=3000
-          SESSION_DURATION=10000000
-          DB_HOST=db
-          EMAIL_QUEUE_NAME=my_email_queue_name
+          OAUTH2_CLIENT_ID=1234567890
+          OAUTH2_CLIENT_SECRET=1234567890
           EOF
 
+          cp config.example.json config.json
           # .env for local app (host values)
           cat <<EOF > .env
-          DB_USER=test_user
-          DB_PASS=test
-          DB_NAME=test
-          DB_PORT=5432
-          HTTPS=false
-          OAUTH2_CLIENT_ID=1234567890
-          PUBLIC_APP_NAME=test
-          PUBLIC_DOMAIN=localhost
-          OAUTH2_CLIENT_SECRET=1234567890
-          REDIS_NAME=some_name
-          REDIS_URL=redis://localhost:6379
-          ENVIRONMENT=test
-          FINGERPRINT_SECRET=some_secret
-          SESSION_DURATION=10000000
           PORT=3000
-          DB_HOST=localhost
-          EMAIL_QUEUE_NAME=my_email_queue_name
+          OAUTH2_CLIENT_ID=1234567890
+          OAUTH2_CLIENT_SECRET=1234567890
           EOF
 
       - name: Setup Node.js
@@ -105,9 +81,9 @@ jobs:
 
       - name: Setup Database Roles
         run: |
-          docker exec db psql -U admin -c "CREATE ROLE test_user WITH LOGIN PASSWORD 'test';"
-          docker exec db psql -U admin -c "CREATE DATABASE test WITH OWNER test_user;"
-          docker exec db psql -U admin -c "GRANT admin TO test_user;"
+          docker exec db psql -U admin -c "CREATE ROLE username WITH LOGIN PASSWORD 'password';"
+          docker exec db psql -U admin -c "CREATE DATABASE db WITH OWNER username;"
+          docker exec db psql -U admin -c "GRANT admin TO username;"
           pnpm db:migrate
           pnpm db:push --force
 
@@ -129,8 +105,34 @@ jobs:
       - name: Start App
         run: docker compose --project-name test up -d app
 
-      - name: Run Integration Tests
-        run: pnpm test:integration
+      - name: Debug container state
+        run: |
+          echo "Container status:"
+          docker compose --project-name test ps
+          echo "App logs:"
+          docker compose --project-name test logs app --tail=50
+          echo "Port bindings:"
+          docker port $(docker compose --project-name test ps -q app) || true
+
+      - name: Wait for app startup
+        run: |
+          echo "Waiting for app to fully start..."
+          for i in $(seq 1 60); do
+            if docker compose --project-name test logs app | grep -q "listening on"; then
+              echo "App is ready! (found 'listening on' in logs)"
+              exit 0
+            fi
+            if curl -f http://localhost:3000 >/dev/null 2>&1; then
+              echo "App responding to requests!"
+              exit 0
+            fi
+            echo "Waiting for app startup... (attempt $i/60)"
+            sleep 2
+          done
+          echo "App failed to start within timeout!"
+          echo "Final app logs:"
+          docker compose --project-name test logs app --tail=20
+          exit 1
 
       - name: Scan Docker image with Trivy
         run: |

@@ -2,7 +2,7 @@ import { sse } from './sse';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
 import redis from './redis';
-import { str } from '../utils/env';
+import { config } from '../utils/env';
 
 export namespace TimeService {
 	let time = Date.now();
@@ -14,7 +14,7 @@ export namespace TimeService {
 			if (initialized) return;
 			initialized = true;
 
-			const name = str('NTP_REDIS_NAME', false);
+			const name = config.ntp.server;
 
 			const service = redis.createListener(name || 'ntp_server_name', {
 				time: z.object({

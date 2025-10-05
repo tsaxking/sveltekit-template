@@ -15,11 +15,25 @@ export default ts.config(
 	prettier,
 	...svelte.configs['flat/prettier'],
 	{
+		files: ['**/*.ts', '**/*.d.ts'],
+		languageOptions: {
+			parser: ts.parser
+		}
+	},
+	{
 		languageOptions: {
 			globals: {
 				...globals.browser,
-				...globals.node
+				...globals.node,
+				__APP_ENV__: 'readonly',
+				create: 'readonly'
 			}
+		}
+	},
+	{
+		files: ['**/*.d.ts'],
+		languageOptions: {
+			parser: ts.parser
 		}
 	},
 	{
