@@ -28,12 +28,14 @@ jobs:
         run: |
           # .docker.env for Docker Compose (container values)
           cat <<EOF > .docker.env
+          PORT=3000
           OAUTH2_CLIENT_ID=1234567890
           OAUTH2_CLIENT_SECRET=1234567890
           EOF
 
           # .env for local app (host values)
           cat <<EOF > .env
+          PORT=3000
           OAUTH2_CLIENT_ID=1234567890
           OAUTH2_CLIENT_SECRET=1234567890
           EOF
