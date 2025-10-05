@@ -77,6 +77,8 @@ export default async (...args: string[]) => {
 	console.log('Slug:', slug);
 
 	let readme = await fs.readFile(path.resolve(process.cwd(), 'README.md'), 'utf-8');
-	readme = readme.replaceAll('tsaxking/sveltekit-template', slug);
+	readme = readme
+		.replaceAll('tsaxking/sveltekit-template', slug)
+		.replaceAll('/sveltekit-template', `/${repoName}`);
 	await fs.writeFile(path.resolve(process.cwd(), 'README.md'), readme);
 };
