@@ -104,8 +104,6 @@ export namespace Test {
 				await sse.waitForConnection(10_000);
 
 				const uniqueName = Math.random().toString(36).substring(7);
-				console.log('uniqueName', uniqueName);
-
 				const connect = async () => {
 					tests.connect.update('in progress');
 					const res = await Test.connect();
@@ -156,7 +154,6 @@ export namespace Test {
 							name: uniqueName,
 							age: 20
 						}).then((r) => {
-							console.log(r);
 							if (r.isErr()) {
 								return tests.new.update('failure', r.error.message);
 							}

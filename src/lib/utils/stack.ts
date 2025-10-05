@@ -24,7 +24,7 @@ export class Stack {
 
 	public static use(stack: Stack) {
 		Stack.current?.clear();
-		console.log('Now using stack', stack.name);
+		// console.log('Now using stack', stack.name);
 		Stack.current = stack;
 	}
 
@@ -38,7 +38,7 @@ export class Stack {
 	}
 
 	push(state: State) {
-		console.log('push', state.name);
+		// console.log('push', state.name);
 		this.items.splice(this.index + 1);
 		this.items.push(state);
 		this.index++;
@@ -46,7 +46,7 @@ export class Stack {
 
 	undo() {
 		if (this.index >= 0) {
-			console.log('undo', this.items[this.index].name);
+			// console.log('undo', this.items[this.index].name);
 			this.items[this.index].undo();
 			this.index--;
 		}
@@ -55,7 +55,7 @@ export class Stack {
 	redo() {
 		if (this.index < this.items.length - 1) {
 			this.index++;
-			console.log('redo', this.items[this.index].name);
+			// console.log('redo', this.items[this.index].name);
 			this.items[this.index].redo();
 		}
 	}

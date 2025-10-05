@@ -26,7 +26,6 @@ export const load = async (event) => {
 		type: 'stream'
 	}).pipe(async (l) => {
 		const pattern = getManifestoInstance(l.data.url) || '/';
-		console.log('Pattern for', l.data.url, 'is', pattern);
 		if (pages[pattern]) {
 			pages[pattern].views++;
 			pages[pattern].retention += l.data.duration;
@@ -39,8 +38,6 @@ export const load = async (event) => {
 			};
 		}
 	});
-
-	console.log('Done');
 
 	return {
 		pages: Object.fromEntries(

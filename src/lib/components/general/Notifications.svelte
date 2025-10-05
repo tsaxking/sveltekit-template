@@ -38,7 +38,6 @@
 		notifications = Account.getNotifs(/*limit, page*/);
 
 		const unsub = notifications.subscribe((d) => {
-			console.log(d);
 			notifs = d.filter((n) => !n.data.read).length;
 		});
 

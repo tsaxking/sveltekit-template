@@ -67,7 +67,6 @@ class SSE {
 			const source = new EventSource(`/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
 
 			const handleConnect = () => {
-				console.log(`SSE connected: ${this.uuid}`);
 				this.emitter.emit('connect', undefined);
 				this.reconnectAttempt = 0;
 				this.pingFailures = 0;

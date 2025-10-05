@@ -52,7 +52,7 @@ export class FileUploader extends EventEmitter<{
 		const filePath = path.join(this.uploadDir, fileId);
 
 		await fs.writeFile(filePath, buffer);
-		console.log(`Saved file to ${filePath}`);
+		// console.log(`Saved file to ${filePath}`);
 
 		this.emit('load', fileId);
 		return { url: fileId };

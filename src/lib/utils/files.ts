@@ -14,7 +14,6 @@ export class FileUploader {
 
 	sendFile(file: File, fieldName: string) {
 		return attemptAsync(async () => {
-			console.log('Sending file...');
 			const xhr = new XMLHttpRequest();
 			xhr.open(this.config.method, this.endpoint);
 
@@ -25,7 +24,6 @@ export class FileUploader {
 
 			// Handle successful upload
 			xhr.onload = (event) => {
-				console.log(event);
 				if (xhr.status >= 200 && xhr.status < 300) {
 					emitter.emit(
 						'load',
