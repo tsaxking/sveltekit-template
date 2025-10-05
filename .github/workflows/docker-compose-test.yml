@@ -113,24 +113,29 @@ jobs:
           docker compose --project-name test logs app --tail=50
           echo "Port bindings:"
           docker port $(docker compose --project-name test ps -q app) || true
+          echo "App failed to start within timeout!"
+          echo "Final app logs:"
+          docker compose --project-name test logs app --tail=20
 
       - name: Wait for app startup
         run: |
           echo "Waiting for app to fully start..."
           for i in $(seq 1 60); do
             if docker compose --project-name test logs app | grep -q "listening on"; then
-              echo "App is ready!"
-              break
+              echo "App is ready! (found 'listening on' in logs)"
+              exit 0
             fi
             if curl -f http://localhost:3000 >/dev/null 2>&1; then
               echo "App responding to requests!"
-              break
+              exit 0
             fi
             echo "Waiting for app startup... (attempt $i/60)"
             sleep 2
           done
+          echo "App failed to start within timeout!"
           echo "Final app logs:"
           docker compose --project-name test logs app --tail=20
+          exit 1
 
       - name: Scan Docker image with Trivy
         run: |
