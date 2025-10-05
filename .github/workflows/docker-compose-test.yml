@@ -34,6 +34,7 @@ jobs:
           OAUTH2_CLIENT_SECRET=1234567890
           EOF
 
+          cp config.example.json config.json
           # .env for local app (host values)
           cat <<EOF > .env
           PORT=3000
