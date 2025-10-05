@@ -19,7 +19,7 @@ declare global {
 
 	const __APP_ENV__: {
 		name: string;
-	}
+	};
 }
 
 export {};
