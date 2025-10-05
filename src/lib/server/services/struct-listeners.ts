@@ -324,50 +324,52 @@ export class QueryListener<
 		struct: Struct<StructType, Name>,
 		data: unknown
 	) {
-		return attemptAsync<ListenerStatus<StructData<StructType, Name>['data'][]> | undefined>(async () => {
-			const parsed = z
-				.object({
-					args: z.object({
-						query: z.string(),
-						data: z.unknown()
+		return attemptAsync<ListenerStatus<StructData<StructType, Name>['data'][]> | undefined>(
+			async () => {
+				const parsed = z
+					.object({
+						args: z.object({
+							query: z.string(),
+							data: z.unknown()
+						})
 					})
-				})
-				.safeParse(data);
-			if (!parsed.success) {
-				return {
-					success: false,
-					message: 'Invalid body'
-				};
-			}
-
-			const listener = QueryListener.listeners.get(struct.name + ':' + parsed.data.args.query);
-			if (!listener) {
-				return undefined;
-			}
-			const res = await listener.run(request, parsed.data.args.data);
-			if (res.success) {
-				if (res.data instanceof StructStream) {
-					return {
-						...res,
-						data: (await res.data.await().unwrap()).map((r) => r.safe()) as any
-					};
-				} else if (Array.isArray(res.data)) {
-					return {
-						...res,
-						data: res.data.map((r) => r.safe()) as any
-					};
-				} else {
+					.safeParse(data);
+				if (!parsed.success) {
 					return {
 						success: false,
-						message: 'Invalid return type from listener'
+						message: 'Invalid body'
 					};
 				}
+
+				const listener = QueryListener.listeners.get(struct.name + ':' + parsed.data.args.query);
+				if (!listener) {
+					return undefined;
+				}
+				const res = await listener.run(request, parsed.data.args.data);
+				if (res.success) {
+					if (res.data instanceof StructStream) {
+						return {
+							...res,
+							data: (await res.data.await().unwrap()).map((r) => r.safe()) as any
+						};
+					} else if (Array.isArray(res.data)) {
+						return {
+							...res,
+							data: res.data.map((r) => r.safe()) as any
+						};
+					} else {
+						return {
+							success: false,
+							message: 'Invalid return type from listener'
+						};
+					}
+				}
+				return {
+					success: res.success,
+					message: res.message
+				};
 			}
-			return {
-				success: res.success,
-				message: res.message
-			};
-		});
+		);
 	}
 }
 
