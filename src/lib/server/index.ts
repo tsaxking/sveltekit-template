@@ -12,10 +12,10 @@ export const postBuild = async () => {
 	lifetimeLoop.start();
 
 	const ADMIN_USERNAME = config.admin.user;
-	const ADMIN_EMAIL = config.admin.email || 'admin@admin.admin';
-	const ADMIN_PASSWORD = config.admin.pass || 'Admin!123';
-	const ADMIN_FIRST_NAME = config.admin.first_name || 'Admin';
-	const ADMIN_LAST_NAME = config.admin.last_name || 'User';
+	const ADMIN_EMAIL = config.admin.email;
+	const ADMIN_PASSWORD = config.admin.pass;
+	const ADMIN_FIRST_NAME = config.admin.first_name;
+	const ADMIN_LAST_NAME = config.admin.last_name;
 
 	const admin = await Account.Account.fromProperty('username', ADMIN_USERNAME, { type: 'single' });
 	if (admin.isErr()) {
