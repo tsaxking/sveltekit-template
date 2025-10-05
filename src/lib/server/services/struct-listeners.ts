@@ -230,13 +230,10 @@ export class CallListener<
 		fn: string,
 		data: unknown
 	) {
-		return attemptAsync<ListenerStatus<CallReturnType>>(async () => {
+		return attemptAsync<ListenerStatus<CallReturnType> | undefined>(async () => {
 			const listener = CallListener.listeners.get(struct.name + ':' + fn);
 			if (!listener) {
-				return {
-					success: false,
-					message: 'Listener not found'
-				};
+				return undefined;
 			}
 			return listener.run(request, data);
 		});
@@ -327,7 +324,7 @@ export class QueryListener<
 		struct: Struct<StructType, Name>,
 		data: unknown
 	) {
-		return attemptAsync<ListenerStatus<StructData<StructType, Name>['data'][]>>(async () => {
+		return attemptAsync<ListenerStatus<StructData<StructType, Name>['data'][]> | undefined>(async () => {
 			const parsed = z
 				.object({
 					args: z.object({
@@ -345,10 +342,7 @@ export class QueryListener<
 
 			const listener = QueryListener.listeners.get(struct.name + ':' + parsed.data.args.query);
 			if (!listener) {
-				return {
-					success: false,
-					message: 'Listener not found'
-				};
+				return undefined;
 			}
 			const res = await listener.run(request, parsed.data.args.data);
 			if (res.success) {
@@ -421,13 +415,10 @@ export class SendListener<
 		fn: string,
 		data: unknown
 	) {
-		return attemptAsync<ListenerStatus<SendReturnType>>(async () => {
+		return attemptAsync<ListenerStatus<SendReturnType> | undefined>(async () => {
 			const listener = SendListener.listeners.get(fn);
 			if (!listener) {
-				return {
-					success: false,
-					message: 'Listener not found'
-				};
+				return undefined;
 			}
 			return listener.run(request, data);
 		});
