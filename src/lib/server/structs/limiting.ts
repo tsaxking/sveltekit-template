@@ -7,7 +7,7 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
-import { num, str } from '../utils/env';
+import { config } from '../utils/env';
 import { pathMatch } from '../utils/file-match';
 
 export namespace Limiting {
@@ -63,7 +63,7 @@ export namespace Limiting {
 		});
 
 		rules.pipe((r) => {
-			if (r.data.page === rs.data.page) {
+			if (r.data.page === rs.data.page && r.id !== rs.id) {
 				rs.delete();
 			}
 		});
@@ -168,7 +168,7 @@ export namespace Limiting {
 		const accept = request.headers.get('accept') ?? '';
 		const language = request.headers.get('accept-language') ?? '';
 
-		const salt = str('FINGERPRINT_SALT', false) || '';
+		const salt = config.sessions.fingerprint_secret;
 
 		const raw = `${ip}|${ua}|${accept}|${language}|${salt}`;
 
@@ -179,8 +179,9 @@ export namespace Limiting {
 
 	export const rateLimit = async (key: string) => {
 		return attemptAsync(async () => {
-			const limit = num('REQUEST_LIMIT', false) || 1000;
-			const windowSec = num('REQUEST_LIMIT_WINDOW', false) || 60000;
+			if (!config.limiting.enabled) return false;
+			const limit = config.limiting.requests;
+			const windowSec = config.limiting.window;
 			const count = await limitService.incr(key).unwrap();
 
 			if (count === 1) {

@@ -362,7 +362,7 @@ export default new Folder(
 
 					if (res.isOk()) {
 						await alert({
-							message: `Ruleset created for IP ${ip} on page ${page}.`,
+							message: `Ruleset created for IP ${res.value.data.ip} on page ${res.value.data.page}.`,
 							clear: true
 						});
 					} else {

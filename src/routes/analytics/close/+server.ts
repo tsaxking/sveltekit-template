@@ -1,7 +1,6 @@
 import { Analytics } from '$lib/server/structs/analytics.js';
 import { json } from '@sveltejs/kit';
 import { z } from 'zod';
-import terminal from '$lib/server/utils/terminal.js';
 import { getManifesto } from '$lib/server/utils/manifesto.js';
 import ignore from 'ignore';
 
@@ -38,8 +37,8 @@ export const POST = async (event) => {
 				message: 'Analytics logged successfully'
 			});
 		}
-	} catch (error) {
-		terminal.error('Failed to check ignore list for analytics', error);
+	} catch {
+		// terminal.error('Failed to check ignore list for analytics', error);
 		return json({
 			message: 'Analytics logged successfully'
 		});

@@ -5,10 +5,10 @@ import { z } from 'zod';
 import { render } from 'html-constructor';
 import fs from 'fs/promises';
 import path from 'path';
-import { num, str } from '../utils/env';
+import { config } from '../utils/env';
 
 const emailService = redis.createQueue(
-	str('EMAIL_QUEUE_NAME', true),
+	config.email.queue_name,
 	z.object({
 		html: z.string().optional(),
 		text: z.string().optional(),
@@ -23,7 +23,7 @@ const emailService = redis.createQueue(
 			)
 			.optional()
 	}),
-	num('MAX_EMAIL_QUEUE', false) || 100
+	config.email.max_size
 );
 
 const openEmail = (name: keyof Email) => {

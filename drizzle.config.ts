@@ -1,15 +1,15 @@
 import { defineConfig } from 'drizzle-kit';
-import { str, num } from './src/lib/server/utils/env';
+import { config } from './src/lib/server/utils/env';
 
 export default defineConfig({
 	schema: './src/lib/server/structs/*.ts',
 
 	dbCredentials: {
-		host: str('DB_HOST', true),
-		port: num('DB_PORT', true),
-		database: str('DB_NAME', true),
-		user: str('DB_USER', true),
-		password: str('DB_PASS', true),
+		host: config.database.host,
+		port: config.database.port,
+		user: config.database.user,
+		password: config.database.pass,
+		database: config.database.name,
 		ssl: false
 	},
 

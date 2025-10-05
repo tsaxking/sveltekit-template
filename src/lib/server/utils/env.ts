@@ -1,9 +1,10 @@
-import { config } from 'dotenv';
+import { config as dotenv } from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { attemptAsync } from 'ts-utils/check';
 import z from 'zod';
-config();
+import configSchema from './config';
+dotenv();
 
 const keys = new Map<
 	string,
@@ -22,6 +23,14 @@ export class EnvironmentError extends Error {
 		this.name = 'EnvironmentError';
 	}
 }
+
+export const config = (() => {
+	if (!fs.existsSync(path.join(process.cwd(), 'config.json'))) {
+		throw new EnvironmentError('config.json does not exist');
+	}
+	const json = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8');
+	return configSchema.parse(JSON.parse(json));
+})();
 
 type EnvConfig<T> = {
 	required?: boolean;
@@ -42,10 +51,8 @@ try {
 	console.log('.env.example does not exist, will create it automatically');
 }
 
-export const env = get<'dev' | 'prod' | 'test'>('ENVIRONMENT', {
-	values: ['dev', 'prod', 'test'],
-	required: true
-});
+export const env = config.environment;
+
 function generateExample() {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
@@ -171,12 +178,12 @@ export function str(key: string, required: boolean): string | undefined {
 	return get<string>(key, { required: required ?? false });
 }
 
-export function domain(config: { port: boolean; protocol: boolean }) {
-	const host = str('PUBLIC_DOMAIN', true);
-	const port = num('PORT', true);
-	const protocol = bool('HTTPS', true) ? 'https://' : 'http://';
+export function domain(domainConfig: { port: boolean; protocol: boolean }) {
+	const host = config.network.host;
+	const port = config.network.port;
+	const protocol = config.network.protocol + '://';
 
-	return `${config.protocol ? protocol : ''}${host}${config.port ? `:${port}` : ''}`;
+	return `${domainConfig.protocol ? protocol : ''}${host}${domainConfig.port ? `:${port}` : ''}`;
 }
 
 export const getPublicIp = () => {
