@@ -24,11 +24,11 @@ export const save = (callsite: string, type: string, ...args: unknown[]) => {
 		if (!fs.existsSync(LOG_DIR)) {
 			fs.mkdirSync(LOG_DIR, { recursive: true });
 		}
-		if (!fs.existsSync(path.join(process.cwd(), type) + '.log')) {
-			fs.writeFileSync(path.join(process.cwd(), type) + '.log', '');
+		if (!fs.existsSync(path.join(process.cwd(), LOG_DIR, type) + '.log')) {
+			fs.writeFileSync(path.join(process.cwd(), LOG_DIR, type) + '.log', '');
 		}
 		return fs.promises.appendFile(
-			path.join(process.cwd(), type) + '.log',
+			path.join(process.cwd(), LOG_DIR, type) + '.log',
 			`${new Date().toISOString()} [${callsite}] ${args.join(' ')}\n`,
 			{ flag: 'a' }
 		);

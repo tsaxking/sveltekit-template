@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Card from '$lib/components/bootstrap/Card.svelte';
-	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import '$lib/index';
 </script>
 
 <svelte:head>
-	<title>{PUBLIC_APP_NAME}</title>
+	<title>{__APP_ENV__.name}</title>
 </svelte:head>
 
 <div class="container mt-5">
