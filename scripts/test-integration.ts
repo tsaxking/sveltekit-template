@@ -1,12 +1,12 @@
 import { sleep } from 'ts-utils/sleep';
-import { num } from '../src/lib/server/utils/env';
+import { config } from '../src/lib/server/utils/env';
 
 export default async () => {
 	let tries = 0;
 
 	const run = async () => {
 		try {
-			await fetch(`http://localhost:${num('PORT', true)}`);
+			await fetch(`http://localhost:${config.network.port}`);
 			console.log('Server is up!');
 		} catch (error) {
 			console.error('Error occurred while checking server status:', error);
