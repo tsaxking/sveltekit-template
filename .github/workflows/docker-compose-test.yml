@@ -27,6 +27,7 @@ jobs:
       - name: Initialize .docker.env and .env
         run: |
           # .docker.env for Docker Compose (container values)
+          cp config.example.json config.docker.json
           cat <<EOF > .docker.env
           PORT=3000
           OAUTH2_CLIENT_ID=1234567890
