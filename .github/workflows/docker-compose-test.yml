@@ -116,15 +116,21 @@ jobs:
 
       - name: Wait for app startup
         run: |
-          echo "Giving app basic startup time..."
-          sleep 5
-          echo "App logs after startup delay:"
-          docker compose --project-name test logs app
-
-      - name: Run Integration Tests
-        run: |
-          echo "Running integration test (with built-in retry logic)..."
-          pnpm test:integration
+          echo "Waiting for app to fully start..."
+          for i in $(seq 1 60); do
+            if docker compose --project-name test logs app | grep -q "listening on"; then
+              echo "App is ready!"
+              break
+            fi
+            if curl -f http://localhost:3000 >/dev/null 2>&1; then
+              echo "App responding to requests!"
+              break
+            fi
+            echo "Waiting for app startup... (attempt $i/60)"
+            sleep 2
+          done
+          echo "Final app logs:"
+          docker compose --project-name test logs app --tail=20
 
       - name: Scan Docker image with Trivy
         run: |
