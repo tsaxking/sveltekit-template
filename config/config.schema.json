@@ -4,7 +4,7 @@
 	"properties": {
 		"environment": {
 			"type": "string",
-			"enum": ["dev", "production", "test"],
+			"enum": ["dev", "prod", "test"],
 			"description": "Application environment"
 		},
 		"app_name": {
