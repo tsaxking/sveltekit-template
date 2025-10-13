@@ -19,6 +19,13 @@ declare global {
 
 	const __APP_ENV__: {
 		name: string;
+		struct_batching: {
+			enabled: boolean;
+			interval: number;
+			timeout: number;
+			limit: number;
+			batchSize: number;
+		}
 	};
 }
 

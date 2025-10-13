@@ -217,6 +217,28 @@
 			},
 			"required": ["enabled", "requests", "window"],
 			"additionalProperties": false
+		},
+		"struct_batching": {
+			"description": "Batching configuration",
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Whether batching is enabled"
+				},
+				"max_size": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Maximum batch size"
+				},
+				"timeout": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Batch timeout in milliseconds"
+				}
+			},
+			"required": ["enabled", "max_size", "timeout"],
+			"additionalProperties": false
 		}
 	},
 	"required": [

@@ -4,6 +4,7 @@ import path from 'path';
 import { attemptAsync } from 'ts-utils/check';
 import z from 'zod';
 import configSchema from './config';
+import { stripJsonComments } from './files';
 dotenv();
 
 const keys = new Map<
@@ -28,7 +29,8 @@ export const config = (() => {
 	if (!fs.existsSync(path.join(process.cwd(), 'config.json'))) {
 		throw new EnvironmentError('config.json does not exist');
 	}
-	const json = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8');
+	let json = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8');
+	json = stripJsonComments(json);
 	return configSchema.parse(JSON.parse(json));
 })();
 

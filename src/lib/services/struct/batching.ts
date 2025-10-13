@@ -3,6 +3,23 @@ import { attempt, attemptAsync } from 'ts-utils/check';
 import { Struct } from './index';
 import { type DataAction, type PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { Batch } from 'ts-utils/batch';
+
+const batcher = new Batch(async (
+	data: {
+		struct: string;
+		type: string;
+		data: unknown;
+		id: string;
+		date: string;
+	}[]
+) => {
+	return [];
+}, {
+	...__APP_ENV__.struct_batching,
+});
+
+export const add = batcher.add.bind(batcher);
 
 /**
  * The current version for struct updates stored in localStorage

@@ -47,5 +47,10 @@
 		"enabled": true,
 		"requests": 100,
 		"window": 600
+	},
+	"struct_batching": {
+		"enabled": true,
+		"max_size": 10,
+		"timeout": 500
 	}
 }

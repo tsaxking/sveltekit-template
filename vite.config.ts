@@ -21,7 +21,8 @@ export default defineConfig({
 	},
 	define: {
 		__APP_ENV__: JSON.stringify({
-			name: config.app_name
+			name: config.app_name,
+			svelte_batching: config.struct_batching,
 		})
 	}
 });
