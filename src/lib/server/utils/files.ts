@@ -353,7 +353,6 @@ export const renderSearchResultHtml = (
 	return output;
 };
 
-
 export const stripJsonComments = (json: string) => {
 	let inString = false;
 	let inSingleLineComment = false;

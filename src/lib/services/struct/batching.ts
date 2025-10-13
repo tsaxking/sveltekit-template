@@ -1,23 +1,54 @@
-import { Loop } from 'ts-utils/loop';
-import { attempt, attemptAsync } from 'ts-utils/check';
+import { attempt } from 'ts-utils/check';
 import { Struct } from './index';
 import { type DataAction, type PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 import { Batch } from 'ts-utils/batch';
 
-const batcher = new Batch(async (
-	data: {
-		struct: string;
-		type: string;
-		data: unknown;
-		id: string;
-		date: string;
-	}[]
-) => {
-	return [];
-}, {
-	...__APP_ENV__.struct_batching,
-});
+const batcher = new Batch(
+	async (
+		data: {
+			struct: string;
+			type: string;
+			data: unknown;
+			id: string;
+			date: string;
+		}[]
+	) => {
+		// Send batch to server
+		try {
+			const res = await fetch('/struct/batch', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			}).then((r) => r.json());
+
+			// Parse server response
+			const parsed = z
+				.array(
+					z.object({
+						id: z.string(),
+						success: z.boolean(),
+						message: z.string().optional(),
+						data: z.unknown().optional()
+					})
+				)
+				.safeParse(res);
+
+			if (!parsed.success) {
+				console.warn('Invalid server response for struct updates:', res);
+				return [];
+			}
+
+			return parsed.data;
+		} catch (err) {
+			console.warn('struct update send failed', err);
+			return [];
+		}
+	},
+	{
+		...__APP_ENV__.struct_batching
+	}
+);
 
 export const add = batcher.add.bind(batcher);
 
@@ -74,7 +105,7 @@ export const getStructUpdates = () => {
 };
 
 /**
- * Saves a struct update to localStorage, this will not send the update to the server
+ * Saves a struct update using the batcher (will automatically batch and send to server)
  *
  * @param {{
  * 	struct: string;
@@ -91,22 +122,15 @@ export const saveStructUpdate = (data: {
 	id: string;
 }) => {
 	return attempt(() => {
-		const now = Date.now();
-		const DAY_MS = 1000 * 60 * 60 * 24;
-
-		// Get and prune expired updates first
-		const arr = getStructUpdates()
-			.unwrap()
-			.filter((u) => now - new Date(u.date).getTime() <= DAY_MS);
-
-		// Add new update
-		arr.push({
+		const updateData = {
 			...data,
 			date: new Date(Struct.getDate()).toISOString()
-		});
+		};
 
-		window.localStorage.setItem(`struct-updates-v${STRUCT_UPDATE_VERSION}`, JSON.stringify(arr));
-		return arr;
+		// Add to batcher which will handle batching and sending automatically
+		batcher.add(updateData);
+
+		return updateData;
 	});
 };
 
@@ -128,83 +152,24 @@ export const deleteStructUpdate = (id: string) => {
 };
 
 /**
- * Sends all updates that are due to the server in a batch operation, this will not save them to localStorage
+ * Manually flush the batcher (force send all pending items)
  *
- * @param {boolean} browser
- * @param {number} threshold
- * @returns {*}
+ * @returns {Promise<unknown[]>}
  */
-export const sendUpdates = (browser: boolean, threshold: number) => {
-	return attemptAsync(async () => {
-		if (!browser) return;
-
-		const all = getStructUpdates().unwrap();
-		if (!all.length) return [];
-
-		const due = all.filter((u) => Struct.getDate() - new Date(u.date).getTime() >= threshold);
-		if (!due.length) return [];
-
-		let res: unknown;
-		try {
-			res = await fetch('/struct/batch', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(due)
-			}).then((r) => r.json());
-		} catch (err) {
-			// Network failure – keep everything
-			console.warn('struct update send failed, keeping all local data', err);
-			return [];
-		}
-
-		// Parse server response (optional: validate here)
-		const parsed = z
-			.array(
-				z.object({
-					id: z.string(),
-					success: z.boolean(),
-					message: z.string().optional(),
-					data: z.unknown().optional()
-				})
-			)
-			.safeParse(res);
-
-		if (!parsed.success) {
-			console.warn('Invalid server response for struct updates:', res);
-			return [];
-		}
-
-		// Remove all items that were sent, regardless of server result
-		const remaining = all.filter((a) => !due.find((d) => d.id === a.id));
-		window.localStorage.setItem(
-			`struct-updates-v${STRUCT_UPDATE_VERSION}`,
-			JSON.stringify(remaining)
-		);
-
-		return parsed.data;
-	});
+export const sendUpdates = () => {
+	return batcher.flush();
 };
 
 /**
- * Starts a loop that sends updates to the server at a specified interval
+ * Starts the batcher (no need for manual loop since Batch class handles timing)
  *
- * @param {boolean} browser
- * @param {number} interval
- * @param {number} threshold
- * @returns {*}
+ * @param {boolean} browser - Whether we're in browser environment
+ * @returns {void}
  */
-export const startBatchUpdateLoop = (browser: boolean, interval: number, threshold: number) => {
-	const l = new Loop<{
-		error: Error;
-	}>(async () => {
-		const res = await sendUpdates(browser, threshold);
-		if (res.isErr()) {
-			console.error(res.error);
-			l.emit('error', res.error);
-		}
-	}, interval);
-	l.start();
-	return l;
+export const startBatchUpdateLoop = (browser: boolean) => {
+	if (browser) {
+		batcher.start();
+	}
 };
 
 /**

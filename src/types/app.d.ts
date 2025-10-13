@@ -25,7 +25,7 @@ declare global {
 			timeout: number;
 			limit: number;
 			batchSize: number;
-		}
+		};
 	};
 }
 

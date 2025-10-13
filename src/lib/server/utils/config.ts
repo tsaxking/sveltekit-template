@@ -58,6 +58,6 @@ export default z.object({
 		interval: z.number().min(1),
 		timeout: z.number().min(1),
 		limit: z.number().min(1),
-		batchSize: z.number().min(1),
+		batch_size: z.number().min(1)
 	})
 });

@@ -7,7 +7,6 @@ import {
 	endBatchTest,
 	startBatchUpdateLoop
 } from '$lib/services/struct/index';
-import type { Loop } from 'ts-utils/loop';
 import { sleep } from 'ts-utils/sleep';
 
 export namespace Test {
@@ -529,7 +528,6 @@ export namespace Test {
 					return new Promise<void>((res) => {
 						tests.batch.update('in progress');
 						let resolved = false;
-						let loop: Loop | undefined;
 						startBatchTest(); // stops sending data through fetch requests
 						const finish = (error?: string) => {
 							if (!resolved) res();
@@ -540,7 +538,6 @@ export namespace Test {
 								tests.batch.update('success');
 							}
 							endBatchTest(); // resumes sending data through fetch requests
-							loop?.stop();
 						};
 
 						testData
@@ -553,12 +550,7 @@ export namespace Test {
 									return finish('Update should fail in batch testing mode');
 								}
 								await sleep(100);
-								loop = startBatchUpdateLoop(browser, 500, 0);
-
-								loop.on('error', (error) => {
-									if (error instanceof Error) finish(error.message);
-									else finish('Unknown error');
-								});
+								startBatchUpdateLoop(browser);
 							});
 
 						Test.on('update', (data: TestData) => {
