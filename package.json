@@ -165,7 +165,7 @@
 		"redis-utils": "github:tsaxking/redis#v2.0.7",
 		"svelte-filepond": "^0.2.2",
 		"svelte-portal": "^2.2.1",
-		"ts-utils": "github:tsaxking/global-ts-utilities#v1.0.0",
+		"ts-utils": "github:tsaxking/global-ts-utilities#v1.0.5",
 		"uuid": "^11.1.0",
 		"vite-node": "^3.2.4",
 		"yaml": "^2.8.0",
