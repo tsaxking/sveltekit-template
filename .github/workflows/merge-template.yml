@@ -52,7 +52,9 @@ jobs:
             git@github.com:4sight-live/4sight-web-server.git,
             git@github.com:tsaxking/inventory-kit.git,
             git@github.com:tsaxking/sfz-budgeting.git,
-            git@github.com:4sight-live/streaming-service.git
+            git@github.com:4sight-live/streaming-service.git,
+            git@github.com:lordbagel42/better-fundraising.git,
+            git@github.com:Ansodo-SophieH/tracker-app.git
           ]
 
     steps:
@@ -95,7 +97,7 @@ jobs:
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
           LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           REPOSITORY="${{ matrix.templates }}"
-          BRANCH_NAME="chore-update-scripts-to-$LATEST_TAG"
+          BRANCH_NAME="update-template-to-$LATEST_TAG"
           CLONE_DIR="target-repo"
 
           echo "Running premerge scripts"
@@ -117,5 +119,5 @@ jobs:
           echo "Committing"
           # Commit the changes and push the feature branch to origin
           git add .
-          git commit --allow-empty -m "chore: update scripts to $LATEST_TAG"
+          git commit --allow-empty -m "Update Template to $LATEST_TAG"
           git push origin --set-upstream $BRANCH_NAME
