@@ -51,6 +51,7 @@
 					onclick={() => {
 						infoProxy.save({
 							strategy: 'preferLocal',
+							createIfDeleted: false,
 						});
 					}}
 				>
