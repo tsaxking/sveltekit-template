@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Navbar } from '$lib/model/navbar';
 	import { onMount } from 'svelte';
-	import { Analytics } from '$lib/model/analytics';
-	import { getTitle } from '$lib/utils/pages';
+	// import { Analytics } from '$lib/model/analytics';
+	// import { getTitle } from '$lib/utils/pages';
 
 	interface Props {
 		id: string;
@@ -11,11 +11,6 @@
 	const { id }: Props = $props();
 
 	const sections = Navbar.getSections();
-
-	let links: {
-		link: Analytics.LinkData;
-		title: string;
-	}[] = $state([]);
 
 	export const hide = () => {
 		import('bootstrap').then((bs) => {
@@ -26,53 +21,12 @@
 		});
 	};
 
-	let limit = $state(10);
-	let count = $state(0);
-	let offset = $state(0);
-
-	const getLinks = async () => {
-		Analytics.myLinks({
-			offset: offset,
-			limit: limit
-		}).then(async (data) => {
-			if (data.isOk()) {
-				links = await Promise.all(
-					data.value.map(async (link) => {
-						const res = await getTitle(link.data.url || '');
-						let title: string;
-
-						if (res.isOk()) title = res.value;
-						else {
-							title = '';
-						}
-						return {
-							link,
-							title
-						};
-					})
-				);
-			} else console.error('Failed to fetch links:', data.error);
-		});
-
-		Analytics.count().then((res) => {
-			if (res.isOk()) {
-				count = res.value;
-			}
-		});
-	};
-
-	$effect(() => {
-		if (!isNaN(limit) && !isNaN(offset)) {
-			getLinks();
-		}
-	});
+	// let limit = $state(10);
+	// let count = $state(0);
+	// let offset = $state(0);
 
 	onMount(() => {
-		getLinks();
-
-		const onHide = () => {
-			getLinks();
-		};
+		const onHide = () => {};
 
 		offcanvas.addEventListener('hide.bs.offcanvas', onHide);
 
@@ -122,54 +76,6 @@
 					</ul>
 				</li>
 			{/each}
-			<li class="mb-3 no-select">
-				<div class="d-flex align-items-center justify-content-between">
-					<h4 class="text-secondary">Recents ({links.length} / {count})</h4>
-					{#if count > limit}
-						<div class="d-flex">
-							<button
-								class="btn ms-2"
-								class:disabled={offset === 0}
-								onclick={() => {
-									offset = Math.max(0, offset - limit);
-									getLinks();
-								}}
-								disabled={offset === 0}
-								title="Previous Page"
-								aria-label="Previous Page"
-								aria-disabled={offset === 0}
-							>
-								<i class="material-icons">chevron_left</i>
-							</button>
-							<button
-								disabled={offset + limit >= count}
-								title="Next Page"
-								aria-label="Next Page"
-								aria-disabled={offset + limit >= count}
-								class:disabled={offset + limit >= count}
-								class="btn ms-2"
-								onclick={() => {
-									offset += limit;
-									getLinks();
-								}}
-							>
-								<i class="material-icons">chevron_right</i>
-							</button>
-						</div>
-					{/if}
-				</div>
-				<ul class="list-unstyled">
-					{#each links as link}
-						{#if link.title.length > 0}
-							<li class="ps-3 mb-2">
-								<a class="text-muted text-decoration-none" href={link.link.data.url} onclick={hide}>
-									<span>{link.title}</span>
-								</a>
-							</li>
-						{/if}
-					{/each}
-				</ul>
-			</li>
 		</ul>
 	</div>
 </div>

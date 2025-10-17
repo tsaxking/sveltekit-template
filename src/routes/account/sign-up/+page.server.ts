@@ -6,8 +6,6 @@ import { passwordStrength } from 'check-password-strength';
 import { OAuth2Client } from 'google-auth-library';
 import { domain, str } from '$lib/server/utils/env';
 
-// const log = (...args: unknown[]) => console.log('[oauth/sign-up]', ...args);
-
 export const actions = {
 	register: async (event) => {
 		const data = await event.request.formData();

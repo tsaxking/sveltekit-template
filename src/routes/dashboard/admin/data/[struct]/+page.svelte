@@ -78,7 +78,10 @@
 	};
 
 	const saveEdit = () => {
-		editStage.save('force');
+		editStage.save({
+			strategy: 'force',
+			createIfDeleted: false
+		});
 	};
 
 	const resetEdit = () => {
@@ -327,7 +330,6 @@
 								return true;
 							},
 							valueSetter: (params: ValueSetterParams<StructData<Blank>>) => {
-								console.log('Value set:', params);
 								const isStatic = ['id', 'created', 'updated'].includes(key);
 								if (isStatic) return false;
 
@@ -347,7 +349,6 @@
 											);
 											return;
 										}
-										console.log('Updating:', params.data.data.id, key, params.newValue);
 										params.data.update((d) => ({
 											...d,
 											[key]: params.newValue
@@ -362,7 +363,6 @@
 											);
 											return;
 										}
-										console.log('Reverting update:', params.data.data.id, key, params.oldValue);
 										params.data.update((d) => ({
 											...d,
 											[key]: params.oldValue
@@ -422,11 +422,9 @@
 											cs.execute({
 												label: 'Unarchive ' + params.data?.data.id,
 												do: () => {
-													console.log('Unarchiving:', params.data?.data.id);
 													params.data?.setArchive(false);
 												},
 												undo: () => {
-													console.log('Re-archiving:', params.data?.data.id);
 													params.data?.setArchive(true);
 												}
 											});
@@ -435,11 +433,9 @@
 											cs.execute({
 												label: 'Archive ' + params.data?.data.id,
 												do: () => {
-													console.log('Archiving:', params.data?.data.id);
 													params.data?.setArchive(true);
 												},
 												undo: () => {
-													console.log('Re-archiving:', params.data?.data.id);
 													params.data?.setArchive(false);
 												}
 											});

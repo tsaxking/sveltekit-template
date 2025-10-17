@@ -21,7 +21,6 @@
 			results = Account.search(query);
 			if (filter) results.filter(filter);
 			if (onsearch) onsearch(results.data);
-			results.subscribe(console.log);
 		}, 300);
 	};
 
