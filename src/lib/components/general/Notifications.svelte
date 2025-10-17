@@ -72,16 +72,22 @@
 				<Notification {notification} />
 			{/each}
 			<li class="w-100">
-				<button type="button" class="btn btn-secondary w-100" onclick={() => {
-					const m = rawModal('Popup History', [], (body) => mount(NotificationHistory, {
-						target: body,
-						props: {
-							test: true,
-						}
-					}));
+				<button
+					type="button"
+					class="btn btn-secondary w-100"
+					onclick={() => {
+						const m = rawModal('Popup History', [], (body) =>
+							mount(NotificationHistory, {
+								target: body,
+								props: {
+									test: false
+								}
+							})
+						);
 
-					m.show();
-				}}>
+						m.show();
+					}}
+				>
 					<i class="material-icons">visibility</i> View Popup History
 				</button>
 			</li>
