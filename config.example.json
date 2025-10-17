@@ -56,19 +56,22 @@
 			"enabled": true,
 			"duration": 3600000,
 			"limit": 10,
-			"assets": ["/*"]
+			"assets": [
+				"/static/*",
+				"/assets/*"
+			]
 		},
 		"api": {
 			"enabled": true,
 			"duration": 3600000,
 			"limit": 10,
-			"assets": ["/*"]
+			"assets": ["/api/*", "/struct/*"]
 		},
 		"pages": {
 			"enabled": true,
 			"duration": 3600000,
 			"limit": 10,
-			"assets": ["/*"]
+			"assets": []
 		}
 	}
 }
