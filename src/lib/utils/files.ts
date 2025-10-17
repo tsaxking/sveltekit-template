@@ -23,7 +23,7 @@ export class FileUploader {
 			}>();
 
 			// Handle successful upload
-			xhr.onload = (event) => {
+			xhr.onload = (_event) => {
 				if (xhr.status >= 200 && xhr.status < 300) {
 					emitter.emit(
 						'load',
