@@ -4,6 +4,7 @@ import { Session } from '../structs/session';
 import { encode } from 'ts-utils/text';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import type { Notification } from '$lib/types/notification';
+import { toByteString } from 'ts-utils/text';
 
 /** Maximum number of cached messages per connection */
 const CACHE_LIMIT = 50;
@@ -477,18 +478,36 @@ export class SSE {
 	getStats() {
 		const connections = this.connections.size;
 		let totalCacheSize = 0;
+		let totalCachedMessages = 0;
 		let oldestConnection = Date.now();
-
+		let newestConnection = 0;
+		
 		for (const conn of this.connections.values()) {
-			totalCacheSize += conn['cache'].length; // Access private cache property
+			const cache = conn['cache']; // Access private cache property
+			totalCachedMessages += cache.length;
+			
+			// Estimate memory per cached message (JSON + metadata)
+			for (const msg of cache) {
+				const msgSize = JSON.stringify({ event: msg.event, data: msg.data, id: msg.id }).length;
+				totalCacheSize += msgSize + 64; // Add overhead for timestamp, retries, etc.
+			}
+			
 			oldestConnection = Math.min(oldestConnection, conn.lastPing);
+			newestConnection = Math.max(newestConnection, conn.lastPing);
 		}
-
+		
+		// Rough estimate of base memory per connection (not counting cache)
+		const baseMemoryPerConnection = 1024; // ~1KB for connection object, event listeners, etc.
+		const estimatedMemoryBytes = (connections * baseMemoryPerConnection) + totalCacheSize;
+		
 		return {
 			activeConnections: connections,
-			totalCacheSize,
+			totalCachedMessages,
 			oldestConnectionAge: connections > 0 ? Date.now() - oldestConnection : 0,
-			memoryEstimate: `${Math.round((connections * 50 + totalCacheSize * 2) / 1024)}KB` // Rough estimate
+			newestConnectionAge: connections > 0 ? Date.now() - newestConnection : 0,
+			avgMessagesPerConnection: connections > 0 ? Math.round(totalCachedMessages / connections) : 0,
+			estimatedMemoryBytes,
+			memoryEstimate: toByteString(estimatedMemoryBytes)
 		};
 	}
 
