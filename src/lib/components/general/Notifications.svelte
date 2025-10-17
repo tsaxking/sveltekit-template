@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Account } from '$lib/model/account';
-	import { onMount } from 'svelte';
+	import { mount, onMount } from 'svelte';
 	import Notification from '../account/Notification.svelte';
+	import { rawModal } from '$lib/utils/prompts';
+	import NotificationHistory from '../account/NotificationHistory.svelte';
 
 	const id = 'notifications';
 
@@ -69,6 +71,26 @@
 			{#each $notifications as notification}
 				<Notification {notification} />
 			{/each}
+			<li class="w-100">
+				<button
+					type="button"
+					class="btn btn-secondary w-100"
+					onclick={() => {
+						const m = rawModal('Popup History', [], (body) =>
+							mount(NotificationHistory, {
+								target: body,
+								props: {
+									test: false
+								}
+							})
+						);
+
+						m.show();
+					}}
+				>
+					<i class="material-icons">visibility</i> View Popup History
+				</button>
+			</li>
 		</ul>
 	</div>
 	<!-- <button type="button" class="btn btn-success" onclick={test}> Create Test Notification </button> -->
