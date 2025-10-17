@@ -12,12 +12,10 @@
 
 import { build, files, version } from '$service-worker';
 
-import { browser } from '$app/environment';
-
 // This gives `self` the correct types
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
 
-if (browser && __APP_ENV__.cache_get_requests) {
+if (__APP_ENV__.cache_get_requests) {
 	// Create a unique cache name for this deployment
 	const CACHE = `cache-${version}`;
 
