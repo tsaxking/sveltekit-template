@@ -218,9 +218,131 @@
 			"required": ["enabled", "requests", "window"],
 			"additionalProperties": false
 		},
-		"cache_get_requests": {
-			"type": "boolean",
-			"description": "Whether to cache GET requests"
+		"cache": {
+			"description": "Cache configuration",
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Whether caching is enabled"
+				},
+				"debug": {
+					"type": "boolean",
+					"description": "Whether to enable cache debugging logs"
+				},
+				"version": {
+					"type": "integer",
+					"description": "Cache version identifier"
+				},
+				"static": {
+					"type": "object",
+					"description": "Static cache settings",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"description": "Whether static caching is enabled"
+						},
+						"duration": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Static cache duration in milliseconds"
+						},
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Maximum number of static cache entries"
+						},
+						"assets": {
+							"type": "array",
+							"description": "List of static asset paths to cache",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"required": [
+						"enabled",
+						"duration",
+						"limit",
+						"assets"
+					]
+				},
+				"api": {
+					"type": "object",
+					"description": "Static cache settings",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"description": "Whether static caching is enabled"
+						},
+						"duration": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Static cache duration in milliseconds"
+						},
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Maximum number of static cache entries"
+						},
+						"assets": {
+							"type": "array",
+							"description": "List of static asset paths to cache",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"required": [
+						"enabled",
+						"duration",
+						"limit",
+						"assets"
+					]
+				},
+				"pages": {
+					"type": "object",
+					"description": "Static cache settings",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"description": "Whether static caching is enabled"
+						},
+						"duration": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Static cache duration in milliseconds"
+						},
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Maximum number of static cache entries"
+						},
+						"assets": {
+							"type": "array",
+							"description": "List of static asset paths to cache",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"required": [
+						"enabled",
+						"duration",
+						"limit",
+						"assets"
+					]
+				}
+			},
+			"required": [
+				"enabled",
+				"static",
+				"api",
+				"pages",
+				"version",
+				"debug"
+			],
+			"additionalProperties": false
 		}
 	},
 	"required": [
@@ -235,7 +357,7 @@
 		"email",
 		"ntp",
 		"limiting",
-		"cache_get_requests"
+		"cache"
 	],
 	"additionalProperties": false
 }
