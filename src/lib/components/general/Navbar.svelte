@@ -36,12 +36,12 @@
 			>
 		</div>
 		<div class="end d-flex align-items-center">
-				<button type="button" class="btn stack-btn" disabled={!$prev} onclick={() => Stack.undo()}>
-					<i class="material-icons">undo</i>
-				</button>
-				<button type="button" class="btn stack-btn" disabled={!$next} onclick={() => Stack.redo()}>
-					<i class="material-icons">redo</i>
-				</button>
+			<button type="button" class="btn stack-btn" disabled={!$prev} onclick={() => Stack.undo()}>
+				<i class="material-icons">undo</i>
+			</button>
+			<button type="button" class="btn stack-btn" disabled={!$next} onclick={() => Stack.redo()}>
+				<i class="material-icons">redo</i>
+			</button>
 			<div class="dropdown">
 				<button
 					class="btn dropdown-toggle px-2"
