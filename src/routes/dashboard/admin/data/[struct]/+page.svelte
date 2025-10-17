@@ -78,7 +78,9 @@
 	};
 
 	const saveEdit = () => {
-		editStage.save('force');
+		editStage.save({
+			strategy: 'force',
+		});
 	};
 
 	const resetEdit = () => {

@@ -38,16 +38,16 @@ type FullConflictResolver<T extends Blank> = (args: {
  * @template {Blank} T
  */
 type SaveStrategy<T extends Blank> = {
-	strategy: 
-	| 'ifClean'
-	| 'force'
-	| 'preferLocal'
-	| 'preferRemote'
-	| 'mergeClean'
-	| 'manual'
-	| FullConflictResolver<T>;
+	strategy:
+		| 'ifClean'
+		| 'force'
+		| 'preferLocal'
+		| 'preferRemote'
+		| 'mergeClean'
+		| 'manual'
+		| FullConflictResolver<T>;
 	createIfDeleted: boolean;
-}
+};
 
 /**
  * Status of a merge operation, this is used to determine the state of the local and remote data in relation to the base data.
@@ -358,8 +358,8 @@ export class StructDataStage<T extends Blank>
 	 *
 	 * @param config
 	 * @param config.strategy - Determines how to handle differences and conflicts:
-	 * @param config.createIfDeleted - 
-	 * 
+	 * @param config.createIfDeleted -
+	 *
 	 *  - `"ifClean"`:
 	 *      - Only saves if remote is identical to base.
 	 *      - Throws if any remote change is detected.

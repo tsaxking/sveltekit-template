@@ -49,7 +49,9 @@
 					type="button"
 					class="btn btn-success"
 					onclick={() => {
-						infoProxy.save('preferLocal');
+						infoProxy.save({
+							strategy: 'preferLocal',
+						});
 					}}
 				>
 					<i class="material-icons">save</i>
