@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Navbar } from '$lib/model/navbar';
 	import { onMount } from 'svelte';
+	// import { Analytics } from '$lib/model/analytics';
+	// import { getTitle } from '$lib/utils/pages';
 
 	interface Props {
 		id: string;
@@ -18,6 +20,10 @@
 			});
 		});
 	};
+
+	// let limit = $state(10);
+	// let count = $state(0);
+	// let offset = $state(0);
 
 	onMount(() => {
 		const onHide = () => {};
