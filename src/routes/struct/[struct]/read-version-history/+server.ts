@@ -4,7 +4,7 @@ import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 
-export const POST = async (event) => {
+export const GET = async (event) => {
 	// console.log('Read version history request for struct:', event.params.struct);
 	if (event.params.struct !== 'test') {
 		if (!event.locals.account) return Errors.noAccount();
@@ -16,7 +16,8 @@ export const POST = async (event) => {
 		return Errors.noFrontend(struct.name);
 	}
 
-	const body = await event.request.json();
+	const body = JSON.parse(event.request.headers.get('X-Body') || '{}');
+
 	const safe = z
 		.object({
 			id: z.string()
