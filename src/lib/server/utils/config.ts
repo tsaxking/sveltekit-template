@@ -75,5 +75,5 @@ export default z.object({
 			limit: z.number().min(1),
 			assets: z.array(z.string())
 		})
-	}),
+	})
 });

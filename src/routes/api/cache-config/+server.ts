@@ -7,11 +7,11 @@ import type { RequestHandler } from './$types';
  * Returns the cache configuration for the service worker
  */
 export const GET: RequestHandler = async () => {
-    return json(config.cache, {
-        headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-        }
-    });
+	return json(config.cache, {
+		headers: {
+			'Cache-Control': 'no-cache, no-store, must-revalidate',
+			Pragma: 'no-cache',
+			Expires: '0'
+		}
+	});
 };

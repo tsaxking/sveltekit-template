@@ -2,7 +2,7 @@ import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 
 /**
  * E2E tests for Service Worker caching functionality
- * 
+ *
  * Tests cover:
  * - Service worker registration and activation
  * - Cache configuration loading
@@ -29,7 +29,7 @@ test.describe('Service Worker Caching', () => {
 
 	test('should register service worker and load cache config', async ({ page }) => {
 		await page.goto('/');
-		
+
 		// Wait for service worker registration
 		const swRegistration = await page.evaluate(async () => {
 			// Wait for service worker to register and activate
@@ -66,14 +66,18 @@ test.describe('Service Worker Caching', () => {
 		});
 
 		expect(cacheInfo.cacheCount).toBeGreaterThan(0);
-	});	test('should cache static assets with cache-first strategy', async () => {
+	});
+	test('should cache static assets with cache-first strategy', async () => {
 		await page.goto('/');
 
 		// Wait for service worker to be ready
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active && registration.active.state === 'activated';
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active && registration.active.state === 'activated';
+			},
+			{ timeout: 15000 }
+		);
 
 		// Wait for caches to be created
 		await page.waitForTimeout(3000);
@@ -83,11 +87,11 @@ test.describe('Service Worker Caching', () => {
 			return await caches.keys();
 		});
 
-		expect(cacheNames.some(name => name.startsWith('static-'))).toBe(true);
+		expect(cacheNames.some((name) => name.startsWith('static-'))).toBe(true);
 
 		// Test static asset caching
 		const staticAssetUrl = '/favicon.png';
-		
+
 		// First request - should hit network and cache
 		const response1 = await page.goto(staticAssetUrl);
 		expect(response1?.ok()).toBe(true);
@@ -98,10 +102,10 @@ test.describe('Service Worker Caching', () => {
 		// Check if asset was cached
 		const isCached = await page.evaluate(async (url) => {
 			const cacheNames = await caches.keys();
-			const staticCache = cacheNames.find(name => name.startsWith('static-'));
-			
+			const staticCache = cacheNames.find((name) => name.startsWith('static-'));
+
 			if (!staticCache) return false;
-			
+
 			const cache = await caches.open(staticCache);
 			const cachedResponse = await cache.match(url);
 			return !!cachedResponse;
@@ -112,7 +116,7 @@ test.describe('Service Worker Caching', () => {
 
 	test('should cache API endpoints with network-first strategy', async () => {
 		await page.goto('/');
-		
+
 		// Wait for service worker to be ready
 		await page.waitForTimeout(1000);
 
@@ -123,13 +127,13 @@ test.describe('Service Worker Caching', () => {
 		// Check if API response was cached (might not be immediately due to network-first)
 		const isAPICached = await page.evaluate(async () => {
 			const cacheNames = await caches.keys();
-			const apiCache = cacheNames.find(name => name.startsWith('api-'));
-			
+			const apiCache = cacheNames.find((name) => name.startsWith('api-'));
+
 			if (!apiCache) return false;
-			
+
 			const cache = await caches.open(apiCache);
 			const requests = await cache.keys();
-			return requests.some(req => req.url.includes('/api/cache-config'));
+			return requests.some((req) => req.url.includes('/api/cache-config'));
 		});
 
 		// Note: This might be false if the endpoint has no-cache headers
@@ -139,12 +143,15 @@ test.describe('Service Worker Caching', () => {
 
 	test('should handle offline scenarios with cached content', async () => {
 		await page.goto('/');
-		
+
 		// Wait for service worker to be active and caches to be populated
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active && registration.active.state === 'activated';
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active && registration.active.state === 'activated';
+			},
+			{ timeout: 15000 }
+		);
 
 		// Wait for initial caching
 		await page.waitForTimeout(5000);
@@ -162,11 +169,11 @@ test.describe('Service Worker Caching', () => {
 
 		// Try to navigate to a page that should be cached
 		try {
-			const response = await page.goto('/', { 
+			const response = await page.goto('/', {
 				waitUntil: 'domcontentloaded',
-				timeout: 10000 
+				timeout: 10000
 			});
-			
+
 			// Page should still load from cache or show offline page
 			expect(response?.status()).toBeLessThan(400);
 
@@ -182,24 +189,27 @@ test.describe('Service Worker Caching', () => {
 	test('should implement stale-while-revalidate for pages', async () => {
 		// Clear any existing route handlers
 		await page.unroute('**/*');
-		
+
 		await page.goto('/');
-		
+
 		// Wait for service worker to be ready
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active && registration.active.state === 'activated';
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active && registration.active.state === 'activated';
+			},
+			{ timeout: 15000 }
+		);
 
 		await page.waitForTimeout(3000);
 
 		// Check page caching
 		const isPageCached = await page.evaluate(async () => {
 			const cacheNames = await caches.keys();
-			const pagesCache = cacheNames.find(name => name.startsWith('pages-'));
-			
+			const pagesCache = cacheNames.find((name) => name.startsWith('pages-'));
+
 			if (!pagesCache) return false;
-			
+
 			const cache = await caches.open(pagesCache);
 			const cachedResponse = await cache.match('/');
 			return !!cachedResponse;
@@ -211,12 +221,15 @@ test.describe('Service Worker Caching', () => {
 
 	test('should clean up old caches when version changes', async () => {
 		await page.goto('/');
-		
+
 		// Wait for service worker to be ready
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active && registration.active.state === 'activated';
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active && registration.active.state === 'activated';
+			},
+			{ timeout: 15000 }
+		);
 
 		await page.waitForTimeout(3000);
 
@@ -245,7 +258,7 @@ test.describe('Service Worker Caching', () => {
 		const cleanupResult = await page.evaluate(async () => {
 			const cacheNames = await caches.keys();
 			let deletedCount = 0;
-			
+
 			// Delete caches with version 999 (simulating old cache cleanup)
 			for (const name of cacheNames) {
 				if (name.includes('-999')) {
@@ -253,7 +266,7 @@ test.describe('Service Worker Caching', () => {
 					deletedCount++;
 				}
 			}
-			
+
 			return deletedCount;
 		});
 
@@ -264,29 +277,32 @@ test.describe('Service Worker Caching', () => {
 			return await caches.keys();
 		});
 
-		const hasOldCaches = finalCaches.some(cache => cache.includes('-999'));
+		const hasOldCaches = finalCaches.some((cache) => cache.includes('-999'));
 		expect(hasOldCaches).toBe(false);
 	});
 
 	test('should respect cache configuration patterns', async () => {
 		await page.goto('/');
-		
+
 		// Wait for service worker to be ready
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active;
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active;
+			},
+			{ timeout: 15000 }
+		);
 
 		// Wait longer for cache configuration to load and caches to be created
 		await page.waitForTimeout(8000);
 
 		// Get the cache configuration
-		const config = await page.request.get('/api/cache-config').then(r => r.json());
+		const config = await page.request.get('/api/cache-config').then((r) => r.json());
 
 		// Trigger some requests to ensure caches are created
 		await page.goto('/api/user');
 		await page.waitForTimeout(2000);
-		
+
 		await page.goto('/');
 		await page.waitForTimeout(2000);
 
@@ -294,7 +310,7 @@ test.describe('Service Worker Caching', () => {
 		if (config.static?.enabled) {
 			const staticCacheExists = await page.evaluate(async () => {
 				const cacheNames = await caches.keys();
-				return cacheNames.some(name => name.startsWith('static-'));
+				return cacheNames.some((name) => name.startsWith('static-'));
 			});
 			expect(staticCacheExists).toBe(true);
 		}
@@ -302,9 +318,9 @@ test.describe('Service Worker Caching', () => {
 		if (config.api?.enabled) {
 			// Give API cache more time and flexibility
 			const apiCacheExists = await page.evaluate(async () => {
-				await new Promise(resolve => setTimeout(resolve, 3000));
+				await new Promise((resolve) => setTimeout(resolve, 3000));
 				const cacheNames = await caches.keys();
-				return cacheNames.some(name => name.startsWith('api-'));
+				return cacheNames.some((name) => name.startsWith('api-'));
 			});
 			// API cache might not be created if no matching requests were made
 			expect(typeof apiCacheExists).toBe('boolean');
@@ -313,7 +329,7 @@ test.describe('Service Worker Caching', () => {
 		if (config.pages?.enabled) {
 			const pagesCacheExists = await page.evaluate(async () => {
 				const cacheNames = await caches.keys();
-				return cacheNames.some(name => name.startsWith('pages-'));
+				return cacheNames.some((name) => name.startsWith('pages-'));
 			});
 			expect(pagesCacheExists).toBe(true);
 		}
@@ -331,12 +347,12 @@ test.describe('Service Worker Caching', () => {
 		await page.waitForTimeout(1000);
 
 		// Get cache configuration to check limits
-		const config = await page.request.get('/api/cache-config').then(r => r.json());
+		const config = await page.request.get('/api/cache-config').then((r) => r.json());
 
 		// Test API cache limit by making multiple requests
 		if (config.api.enabled && config.api.limit > 0) {
 			// Make requests to fill up the cache
-			const requests = Array.from({ length: config.api.limit + 5 }, (_, i) => 
+			const requests = Array.from({ length: config.api.limit + 5 }, (_, i) =>
 				page.request.get(`/api/cache-config?test=${i}`)
 			);
 
@@ -346,10 +362,10 @@ test.describe('Service Worker Caching', () => {
 			// Check that cache doesn't exceed limit
 			const cacheSize = await page.evaluate(async () => {
 				const cacheNames = await caches.keys();
-				const apiCache = cacheNames.find(name => name.startsWith('api-'));
-				
+				const apiCache = cacheNames.find((name) => name.startsWith('api-'));
+
 				if (!apiCache) return 0;
-				
+
 				const cache = await caches.open(apiCache);
 				const requests = await cache.keys();
 				return requests.length;
@@ -364,31 +380,38 @@ test.describe('Service Worker Caching', () => {
 
 		// Capture console logs
 		page.on('console', (msg) => {
-			if (msg.type() === 'log' && (msg.text().includes('Service Worker') || msg.text().includes('SW:'))) {
+			if (
+				msg.type() === 'log' &&
+				(msg.text().includes('Service Worker') || msg.text().includes('SW:'))
+			) {
 				consoleLogs.push(msg.text());
 			}
 		});
 
 		await page.goto('/');
-		
+
 		// Wait for service worker to be ready and generate logs
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active;
-		}, { timeout: 15000 });
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active;
+			},
+			{ timeout: 15000 }
+		);
 
 		await page.waitForTimeout(5000);
 
 		// Check for expected service worker logs
-		const hasActivationLog = consoleLogs.some(log => 
-			log.includes('Service Worker') && (log.includes('activating') || log.includes('activated'))
+		const hasActivationLog = consoleLogs.some(
+			(log) =>
+				log.includes('Service Worker') && (log.includes('activating') || log.includes('activated'))
 		);
-		const hasConfigLog = consoleLogs.some(log => 
-			log.includes('cache config') || log.includes('Cache config')
+		const hasConfigLog = consoleLogs.some(
+			(log) => log.includes('cache config') || log.includes('Cache config')
 		);
-		
-		const hasAnySwLog = consoleLogs.some(log => 
-			log.includes('SW:') || log.includes('Service Worker')
+
+		const hasAnySwLog = consoleLogs.some(
+			(log) => log.includes('SW:') || log.includes('Service Worker')
 		);
 
 		// If no logs captured, check that service worker at least exists

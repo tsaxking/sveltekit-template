@@ -39,7 +39,7 @@ declare global {
 				duration: number;
 				limit: number;
 				assets: string[];
-			}
+			};
 		};
 	};
 }

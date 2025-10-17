@@ -260,12 +260,7 @@
 							}
 						}
 					},
-					"required": [
-						"enabled",
-						"duration",
-						"limit",
-						"assets"
-					]
+					"required": ["enabled", "duration", "limit", "assets"]
 				},
 				"api": {
 					"type": "object",
@@ -293,12 +288,7 @@
 							}
 						}
 					},
-					"required": [
-						"enabled",
-						"duration",
-						"limit",
-						"assets"
-					]
+					"required": ["enabled", "duration", "limit", "assets"]
 				},
 				"pages": {
 					"type": "object",
@@ -326,22 +316,10 @@
 							}
 						}
 					},
-					"required": [
-						"enabled",
-						"duration",
-						"limit",
-						"assets"
-					]
+					"required": ["enabled", "duration", "limit", "assets"]
 				}
 			},
-			"required": [
-				"enabled",
-				"static",
-				"api",
-				"pages",
-				"version",
-				"debug"
-			],
+			"required": ["enabled", "static", "api", "pages", "version", "debug"],
 			"additionalProperties": false
 		}
 	},

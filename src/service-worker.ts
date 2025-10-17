@@ -1,6 +1,6 @@
 /**
  * Service Worker for offline functionality and performance optimization
- * 
+ *
  * Features:
  * - Caches static assets for offline access
  * - Implements cache-first strategy for assets, network-first for API calls
@@ -25,7 +25,6 @@ import { build, files } from '$service-worker';
 
 // This gives `self` the correct types
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
-
 
 const log = (...args: unknown[]) => {
 	if (cacheConfig.debug) console.log('[SW]', ...args);
@@ -97,7 +96,7 @@ async function loadCacheConfig() {
 	try {
 		const response = await fetch('/api/cache-config');
 		if (response.ok) {
-			const config = await response.json() as CacheConfig;
+			const config = (await response.json()) as CacheConfig;
 			cacheConfig = config;
 			log('📡 Loaded cache config from server:', config);
 		} else {
@@ -122,21 +121,21 @@ if (cacheConfig.enabled) {
 		STATIC_DURATION: cacheConfig.static.duration,
 		STATIC_LIMIT: cacheConfig.static.limit,
 		STATIC_ASSETS: cacheConfig.static.assets,
-		
+
 		// API configuration
 		API_ENABLED: cacheConfig.api.enabled,
 		API_DURATION: cacheConfig.api.duration,
 		API_LIMIT: cacheConfig.api.limit,
 		API_ASSETS: cacheConfig.api.assets,
-		
+
 		// Pages configuration
 		PAGES_ENABLED: cacheConfig.pages.enabled,
 		PAGES_DURATION: cacheConfig.pages.duration,
 		PAGES_LIMIT: cacheConfig.pages.limit,
 		PAGES_ASSETS: cacheConfig.pages.assets,
-		
+
 		// Image cache time (keeping reasonable default)
-		IMAGE_CACHE_TIME: 1000 * 60 * 60 * 24 * 7, // 1 week
+		IMAGE_CACHE_TIME: 1000 * 60 * 60 * 24 * 7 // 1 week
 	};
 
 	const ASSETS = [
@@ -154,10 +153,8 @@ if (cacheConfig.enabled) {
 	 */
 	function patternToRegex(pattern: string): RegExp {
 		// Escape special regex characters except * and /
-		let regexPattern = pattern
-			.replace(/[.+?^${}()|[\]\\]/g, '\\$&')
-			.replace(/\*/g, '.*'); // Convert * to .*
-		
+		let regexPattern = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*'); // Convert * to .*
+
 		// If pattern starts with /, anchor to start
 		if (regexPattern.startsWith('/')) {
 			regexPattern = '^' + regexPattern;
@@ -165,7 +162,7 @@ if (cacheConfig.enabled) {
 			// If no leading /, match anywhere in path
 			// No change needed
 		}
-		
+
 		// If pattern ends with /*, allow anything after
 		if (regexPattern.endsWith('/.*')) {
 			// Keep as is - no change needed
@@ -173,7 +170,7 @@ if (cacheConfig.enabled) {
 			// If no wildcards, match exact path (add $ anchor)
 			regexPattern = regexPattern + '$';
 		}
-		
+
 		return new RegExp(regexPattern);
 	}
 
@@ -182,8 +179,8 @@ if (cacheConfig.enabled) {
 	 */
 	function matchesPatterns(pathname: string, patterns: string[]): boolean {
 		if (patterns.includes('/*')) return true; // Universal match
-		
-		return patterns.some(pattern => {
+
+		return patterns.some((pattern) => {
 			const regex = patternToRegex(pattern);
 			return regex.test(pathname);
 		});
@@ -194,10 +191,10 @@ if (cacheConfig.enabled) {
 	 */
 	function isStaticAsset(url: URL): boolean {
 		if (!CACHE_CONFIG.STATIC_ENABLED) return false;
-		
+
 		// First check if it's in the built assets
 		if (ASSETS.includes(url.pathname)) return true;
-		
+
 		// Then check against configured patterns
 		return matchesPatterns(url.pathname, CACHE_CONFIG.STATIC_ASSETS);
 	}
@@ -240,7 +237,7 @@ if (cacheConfig.enabled) {
 	function isCacheFresh(response: Response, maxAge: number): boolean {
 		const cacheTime = response.headers.get('sw-cache-time');
 		if (!cacheTime) return false;
-		return (Date.now() - parseInt(cacheTime)) < maxAge;
+		return Date.now() - parseInt(cacheTime) < maxAge;
 	}
 
 	self.addEventListener('install', (event) => {
@@ -248,16 +245,16 @@ if (cacheConfig.enabled) {
 		async function addFilesToCache() {
 			// Load cache config first
 			await loadCacheConfig();
-			
+
 			const staticCache = await caches.open(STATIC_CACHE);
 			await staticCache.addAll(ASSETS);
-			
+
 			// Pre-cache critical pages based on configuration
 			if (CACHE_CONFIG.PAGES_ENABLED) {
 				const pagesCache = await caches.open(PAGES_CACHE);
 				// Pre-cache pages that match our patterns
 				const criticalPages = ['/', '/login', '/offline'];
-				
+
 				for (const page of criticalPages) {
 					if (matchesPatterns(page, CACHE_CONFIG.PAGES_ASSETS)) {
 						try {
@@ -285,14 +282,14 @@ if (cacheConfig.enabled) {
 			const allCacheKeys = await caches.keys();
 			let deletedCaches = 0;
 			let totalCacheSize = 0;
-			
+
 			log(`🔄 Service Worker v${cacheConfig.version} activating...`);
 			log(`📦 Current caches:`, currentCaches);
-			
+
 			for (const key of allCacheKeys) {
 				if (!currentCaches.includes(key)) {
 					log(`🗑️ Deleting old cache: ${key}`);
-					
+
 					// Calculate cache size before deletion (optional)
 					try {
 						const cache = await caches.open(key);
@@ -301,18 +298,18 @@ if (cacheConfig.enabled) {
 					} catch (e) {
 						warn(`⚠️ Could not read cache ${key} before deletion:`, e);
 					}
-					
+
 					await caches.delete(key);
 					deletedCaches++;
 				}
 			}
-			
+
 			if (deletedCaches > 0) {
 				log(`✅ Cleaned up ${deletedCaches} old cache(s) containing ~${totalCacheSize} entries`);
 			} else {
 				log(`✅ No old caches to clean up`);
 			}
-			
+
 			// Take control of all clients immediately
 			await self.clients.claim();
 			log(`🎯 Service Worker v${cacheConfig.version} now controlling all clients`);
@@ -324,6 +321,8 @@ if (cacheConfig.enabled) {
 	self.addEventListener('fetch', (event) => {
 		// Only handle GET requests
 		if (event.request.method !== 'GET') return;
+
+		if (event.request.url.includes('sse')) return;
 
 		async function respond() {
 			const url = new URL(event.request.url);
@@ -347,9 +346,9 @@ if (cacheConfig.enabled) {
 					return response;
 				} catch {
 					// Return a basic offline response for critical assets
-					return new Response('Offline', { 
-						status: 503, 
-						statusText: 'Service Unavailable' 
+					return new Response('Offline', {
+						status: 503,
+						statusText: 'Service Unavailable'
 					});
 				}
 			}
@@ -357,22 +356,22 @@ if (cacheConfig.enabled) {
 			// Strategy 2: API endpoints - Network First with smart caching
 			if (isCacheableAPI(url)) {
 				const apiCache = await caches.open(API_CACHE);
-				
+
 				try {
 					const response = await fetch(request);
-					
+
 					if (response.ok) {
 						// Cache successful API responses with timestamp
 						const responseToCache = addCacheTimestamp(response.clone());
 						await apiCache.put(request, responseToCache);
-						
+
 						// Limit cache size
 						const keys = await apiCache.keys();
 						if (keys.length > CACHE_CONFIG.API_LIMIT) {
 							await apiCache.delete(keys[0]);
 						}
 					}
-					
+
 					return response;
 				} catch {
 					// Network failed, try cache
@@ -380,16 +379,19 @@ if (cacheConfig.enabled) {
 					if (cachedResponse && isCacheFresh(cachedResponse, CACHE_CONFIG.API_DURATION)) {
 						return cachedResponse;
 					}
-					
+
 					// Return offline indicator for API calls
-					return new Response(JSON.stringify({ 
-						error: 'Offline', 
-						cached: false 
-					}), {
-						status: 503,
-						statusText: 'Service Unavailable',
-						headers: { 'Content-Type': 'application/json' }
-					});
+					return new Response(
+						JSON.stringify({
+							error: 'Offline',
+							cached: false
+						}),
+						{
+							status: 503,
+							statusText: 'Service Unavailable',
+							headers: { 'Content-Type': 'application/json' }
+						}
+					);
 				}
 			}
 
@@ -413,11 +415,11 @@ if (cacheConfig.enabled) {
 					if (cachedResponse) {
 						return cachedResponse;
 					}
-					
+
 					// Return a simple placeholder for missing images
-					return new Response('', { 
-						status: 404, 
-						statusText: 'Image not found' 
+					return new Response('', {
+						status: 404,
+						statusText: 'Image not found'
 					});
 				}
 			}
@@ -433,41 +435,43 @@ if (cacheConfig.enabled) {
 					if (isCacheFresh(cachedPage, CACHE_CONFIG.PAGES_DURATION)) {
 						return cachedPage;
 					}
-					
+
 					// Return stale version immediately, update in background
-					event.waitUntil((async () => {
-						try {
-							const freshResponse = await fetch(request);
-							if (freshResponse.ok) {
-								await pagesCache.put(request, addCacheTimestamp(freshResponse.clone()));
+					event.waitUntil(
+						(async () => {
+							try {
+								const freshResponse = await fetch(request);
+								if (freshResponse.ok) {
+									await pagesCache.put(request, addCacheTimestamp(freshResponse.clone()));
+								}
+							} catch {
+								// Background update failed, keep stale version
 							}
-						} catch {
-							// Background update failed, keep stale version
-						}
-					})());
-					
+						})()
+					);
+
 					return cachedPage;
 				}
 
 				// No cache, try network
 				try {
 					const response = await fetch(request);
-					
+
 					if (response.ok) {
 						await pagesCache.put(request, addCacheTimestamp(response.clone()));
-						
+
 						// Limit cache size
 						const keys = await pagesCache.keys();
 						if (keys.length > CACHE_CONFIG.PAGES_LIMIT) {
 							await pagesCache.delete(keys[0]);
 						}
 					}
-					
+
 					return response;
 				} catch {
 					// Network failed and no cache - redirect to offline page with original URL
 					const offlineUrl = `/offline?from=${encodeURIComponent(url.pathname + url.search)}`;
-					
+
 					try {
 						// Try to fetch the offline page with the original URL parameter
 						const offlineResponse = await fetch(offlineUrl);
@@ -484,7 +488,7 @@ if (cacheConfig.enabled) {
 								'</script>',
 								`\n\t\t// Inject original URL from service worker\n\t\toriginalUrl = '${url.pathname + url.search}';\n\t</script>`
 							);
-							
+
 							return new Response(modifiedHtml, {
 								status: 200,
 								statusText: 'OK',
@@ -494,7 +498,8 @@ if (cacheConfig.enabled) {
 					}
 
 					// Last resort - basic offline message
-					return new Response(`
+					return new Response(
+						`
 						<!DOCTYPE html>
 						<html>
 						<head><title>Offline</title></head>
@@ -504,11 +509,13 @@ if (cacheConfig.enabled) {
 							<button onclick="location.reload()">Retry</button>
 						</body>
 						</html>
-					`, {
-						status: 503,
-						statusText: 'Service Unavailable',
-						headers: { 'Content-Type': 'text/html' }
-					});
+					`,
+						{
+							status: 503,
+							statusText: 'Service Unavailable',
+							headers: { 'Content-Type': 'text/html' }
+						}
+					);
 				}
 			}
 
@@ -529,11 +536,14 @@ if (cacheConfig.enabled) {
 	});
 
 	// Handle background sync for offline form submissions
-	self.addEventListener('sync', (event: Event & { tag?: string; waitUntil?: (promise: Promise<unknown>) => void }) => {
-		if (event.tag === 'background-sync') {
-			event.waitUntil?.(handleBackgroundSync());
+	self.addEventListener(
+		'sync',
+		(event: Event & { tag?: string; waitUntil?: (promise: Promise<unknown>) => void }) => {
+			if (event.tag === 'background-sync') {
+				event.waitUntil?.(handleBackgroundSync());
+			}
 		}
-	});
+	);
 
 	/**
 	 * Handles background sync for offline operations
@@ -561,9 +571,7 @@ if (cacheConfig.enabled) {
 			]
 		};
 
-		event.waitUntil(
-			self.registration.showNotification('App Notification', options)
-		);
+		event.waitUntil(self.registration.showNotification('App Notification', options));
 	});
 
 	// Handle notification clicks
@@ -571,9 +579,7 @@ if (cacheConfig.enabled) {
 		event.notification.close();
 
 		if (event.action === 'open') {
-			event.waitUntil(
-				self.clients.openWindow('/')
-			);
+			event.waitUntil(self.clients.openWindow('/'));
 		}
 	});
 }

@@ -11,7 +11,7 @@ test.describe('Service Worker Core Functionality', () => {
 
 		// Wait for service worker registration
 		const isRegistered = await page.waitForFunction(
-			() => navigator.serviceWorker.getRegistration().then(reg => !!reg),
+			() => navigator.serviceWorker.getRegistration().then((reg) => !!reg),
 			{ timeout: 10000 }
 		);
 
@@ -33,7 +33,7 @@ test.describe('Service Worker Core Functionality', () => {
 			}),
 			api: expect.objectContaining({
 				enabled: expect.any(Boolean),
-				duration: expect.any(Number), 
+				duration: expect.any(Number),
 				limit: expect.any(Number),
 				assets: expect.any(Array)
 			}),
@@ -48,14 +48,17 @@ test.describe('Service Worker Core Functionality', () => {
 
 	test('should create appropriate caches based on configuration', async ({ page }) => {
 		await page.goto('/');
-		
-		// Wait for service worker to be ready
-		await page.waitForFunction(async () => {
-			const registration = await navigator.serviceWorker.getRegistration();
-			return registration && registration.active;
-		}, { timeout: 15000 });
 
-		// Wait longer for cache initialization 
+		// Wait for service worker to be ready
+		await page.waitForFunction(
+			async () => {
+				const registration = await navigator.serviceWorker.getRegistration();
+				return registration && registration.active;
+			},
+			{ timeout: 15000 }
+		);
+
+		// Wait longer for cache initialization
 		await page.waitForTimeout(8000);
 
 		// Make some requests to trigger cache creation
@@ -68,10 +71,10 @@ test.describe('Service Worker Core Functionality', () => {
 			const cacheNames = await caches.keys();
 			return {
 				cacheNames,
-				hasStatic: cacheNames.some(name => name.startsWith('static-')),
-				hasApi: cacheNames.some(name => name.startsWith('api-')),
-				hasPages: cacheNames.some(name => name.startsWith('pages-')),
-				hasImages: cacheNames.some(name => name.includes('image') || name.startsWith('static-'))
+				hasStatic: cacheNames.some((name) => name.startsWith('static-')),
+				hasApi: cacheNames.some((name) => name.startsWith('api-')),
+				hasPages: cacheNames.some((name) => name.startsWith('pages-')),
+				hasImages: cacheNames.some((name) => name.includes('image') || name.startsWith('static-'))
 			};
 		});
 
@@ -80,7 +83,8 @@ test.describe('Service Worker Core Functionality', () => {
 
 		// Some cache should exist - either static, pages, or api
 		expect(cacheInfo.hasStatic || cacheInfo.hasPages || cacheInfo.hasApi).toBe(true);
-	});	test('should cache static assets correctly', async ({ page }) => {
+	});
+	test('should cache static assets correctly', async ({ page }) => {
 		await page.goto('/');
 		await page.waitForTimeout(2000);
 
@@ -91,10 +95,10 @@ test.describe('Service Worker Core Functionality', () => {
 		// Check if it was cached
 		const isFaviconCached = await page.evaluate(async () => {
 			const cacheNames = await caches.keys();
-			const staticCache = cacheNames.find(name => name.startsWith('static-'));
-			
+			const staticCache = cacheNames.find((name) => name.startsWith('static-'));
+
 			if (!staticCache) return false;
-			
+
 			const cache = await caches.open(staticCache);
 			const cachedResponse = await cache.match('/favicon.png');
 			return !!cachedResponse;
@@ -120,49 +124,47 @@ test.describe('Service Worker Core Functionality', () => {
 		});
 
 		// Try to load the page again
-		const response = await page.goto('/', { 
+		const response = await page.goto('/', {
 			waitUntil: 'domcontentloaded',
-			timeout: 10000 
+			timeout: 10000
 		});
 
 		// Should either get cached content or offline page
 		expect(response?.status()).toBeLessThan(500);
-		
+
 		const content = await page.content();
 		expect(content.length).toBeGreaterThan(100); // Should have some content
 	});
 
 	test('should respect cache patterns from configuration', async ({ page }) => {
 		await page.goto('/');
-		
+
 		// Get the configuration
-		const config = await page.request.get('/api/cache-config').then(r => r.json());
-		
+		const config = await page.request.get('/api/cache-config').then((r) => r.json());
+
 		// Test pattern matching logic
 		const patternTests = await page.evaluate((config) => {
 			// Recreate the pattern matching logic from service worker
 			function patternToRegex(pattern) {
-				let regexPattern = pattern
-					.replace(/[.+?^${}()|[\]\\]/g, '\\\\$&')
-					.replace(/\\*/g, '.*');
-				
+				let regexPattern = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\\\$&').replace(/\\*/g, '.*');
+
 				if (regexPattern.startsWith('/')) {
 					regexPattern = '^' + regexPattern;
 				}
-				
+
 				if (regexPattern.endsWith('/.*')) {
 					// Keep as is
 				} else if (!regexPattern.includes('.*')) {
 					regexPattern = regexPattern + '$';
 				}
-				
+
 				return new RegExp(regexPattern);
 			}
 
 			function matchesPatterns(pathname, patterns) {
 				if (patterns.includes('/*')) return true;
-				
-				return patterns.some(pattern => {
+
+				return patterns.some((pattern) => {
 					const regex = patternToRegex(pattern);
 					return regex.test(pathname);
 				});
@@ -177,11 +179,12 @@ test.describe('Service Worker Core Functionality', () => {
 
 		// Verify pattern matching works as expected
 		expect(patternTests.staticMatch).toBe(true); // Should match /*
-		expect(patternTests.pageMatch).toBe(true);   // Should match /*
-		
+		expect(patternTests.pageMatch).toBe(true); // Should match /*
+
 		// API match depends on configuration
-		const hasApiWildcard = config.api.assets.includes('/*') || 
-							   config.api.assets.some((asset: string) => asset.startsWith('/api'));
+		const hasApiWildcard =
+			config.api.assets.includes('/*') ||
+			config.api.assets.some((asset: string) => asset.startsWith('/api'));
 		if (hasApiWildcard) {
 			expect(patternTests.apiMatch).toBe(true);
 		}
@@ -191,15 +194,15 @@ test.describe('Service Worker Core Functionality', () => {
 		await page.goto('/');
 		await page.waitForTimeout(2000);
 
-		const config = await page.request.get('/api/cache-config').then(r => r.json());
-		
+		const config = await page.request.get('/api/cache-config').then((r) => r.json());
+
 		const cacheNames = await page.evaluate(async () => {
 			return await caches.keys();
 		});
 
 		// All cache names should include the version
 		const versionString = config.version.toString();
-		cacheNames.forEach(cacheName => {
+		cacheNames.forEach((cacheName) => {
 			expect(cacheName).toContain(versionString);
 		});
 	});

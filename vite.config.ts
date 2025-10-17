@@ -22,7 +22,7 @@ export default defineConfig({
 	define: {
 		__APP_ENV__: JSON.stringify({
 			name: config.app_name,
-			cache: config.cache,
+			cache: config.cache
 		})
 	}
 });
