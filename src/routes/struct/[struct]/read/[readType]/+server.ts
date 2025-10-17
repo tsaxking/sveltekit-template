@@ -4,8 +4,9 @@ import terminal from '$lib/server/utils/terminal.js';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { decode, encode } from 'ts-utils/text';
 
-export const POST = async (event) => {
+export const GET = async (event) => {
 	// console.log('Read request for struct:', event.params.struct, event.params.readType);
 	if (event.params.struct !== 'test') {
 		if (!event.locals.account) return Errors.noAccount();
@@ -18,7 +19,9 @@ export const POST = async (event) => {
 	}
 
 	// console.log(event.params.readType, 'is the read type');
-	const body = await event.request.json();
+
+	const body = JSON.parse(decode(event.url.searchParams.get('body') || encode('{}')));
+
 	const safeBody = z
 		.object({
 			args: z.unknown()
