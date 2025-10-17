@@ -3,7 +3,7 @@ import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 
-export const POST = async (event) => {
+export const GET = async (event) => {
 	// console.log('Read archive request for struct:', event.params.struct);
 	if (event.params.struct !== 'test') {
 		if (!event.locals.account) return Errors.noAccount();
