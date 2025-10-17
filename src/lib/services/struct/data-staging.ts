@@ -28,7 +28,7 @@ type FullConflictResolver<T extends Blank> = (args: {
 	base: PartialStructable<T & GlobalCols>;
 	local: PartialStructable<T & GlobalCols>;
 	remote: PartialStructable<T & GlobalCols>;
-	conflicts: {}[];
+	conflicts: Conflict<T, keyof T>[];
 }) => PartialStructable<T> | Promise<PartialStructable<T>>;
 
 /**
@@ -37,14 +37,17 @@ type FullConflictResolver<T extends Blank> = (args: {
  * @typedef {SaveStrategy}
  * @template {Blank} T
  */
-type SaveStrategy<T extends Blank> =
-	| 'ifClean'
-	| 'force'
-	| 'preferLocal'
-	| 'preferRemote'
-	| 'mergeClean'
-	| 'manual'
-	| FullConflictResolver<T>;
+type SaveStrategy<T extends Blank> = {
+	strategy:
+		| 'ifClean'
+		| 'force'
+		| 'preferLocal'
+		| 'preferRemote'
+		| 'mergeClean'
+		| 'manual'
+		| FullConflictResolver<T>;
+	createIfDeleted: boolean;
+};
 
 /**
  * Status of a merge operation, this is used to determine the state of the local and remote data in relation to the base data.
@@ -126,6 +129,8 @@ export class StructDataStage<T extends Blank>
 	/** Tracks whether the local data has been modified since the last save or pull. */
 	public readonly localUpdated = writable(false);
 
+	public readonly deleted = writable(false);
+
 	/**
 	 * Unsubscribe from the StructData's data updates.
 	 *
@@ -156,6 +161,11 @@ export class StructDataStage<T extends Blank>
 			this.remoteUpdated.set(true);
 		});
 		this.base = JSON.parse(JSON.stringify(this.data)) as PartialStructable<T & GlobalCols>;
+		this.structData.struct.on('delete', (d) => {
+			if (d.data.id === structData.data.id) {
+				this.deleted.set(true);
+			}
+		});
 	}
 
 	/**
@@ -346,7 +356,9 @@ export class StructDataStage<T extends Blank>
 	 *   - both the local and remote values differ from the base, and
 	 *   - the local and remote values are not equal.
 	 *
-	 * @param strategy - Determines how to handle differences and conflicts:
+	 * @param config
+	 * @param config.strategy - Determines how to handle differences and conflicts:
+	 * @param config.createIfDeleted -
 	 *
 	 *  - `"ifClean"`:
 	 *      - Only saves if remote is identical to base.
@@ -374,8 +386,16 @@ export class StructDataStage<T extends Blank>
 	 *
 	 * After a successful save, the base snapshot is updated and all dirty flags are cleared.
 	 */
-	public async save(strategy: SaveStrategy<T>) {
+	public async save(config: SaveStrategy<T>) {
 		return attemptAsync(async () => {
+			if (get(this.deleted)) {
+				if (config.createIfDeleted) {
+					// as any because the server will give us an error if any property is missing
+					await this.structData.struct.new(this.data as any).unwrap();
+				} else {
+					throw new Error('Data is deleted, unable to update');
+				}
+			}
 			const local = this.data;
 			const remote = this.structData.data;
 			const base = this.base;
@@ -413,8 +433,8 @@ export class StructDataStage<T extends Blank>
 					});
 				}
 
-				if (typeof strategy === 'string') {
-					switch (strategy) {
+				if (typeof config.strategy === 'string') {
+					switch (config.strategy) {
 						case 'ifClean':
 							if (remoteChanged) throw new Error('Remote has diverged from base');
 							if (localChanged) merged[key] = localValue;
@@ -452,13 +472,13 @@ export class StructDataStage<T extends Blank>
 							break;
 
 						default:
-							throw new Error(`Unknown strategy: ${strategy satisfies never}`);
+							throw new Error(`Unknown strategy: ${config.strategy satisfies never}`);
 					}
 				}
 			}
 
-			if (typeof strategy === 'function') {
-				const resolved = await strategy({
+			if (typeof config.strategy === 'function') {
+				const resolved = await config.strategy({
 					base,
 					local,
 					remote,

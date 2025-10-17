@@ -78,7 +78,10 @@
 	};
 
 	const saveEdit = () => {
-		editStage.save('force');
+		editStage.save({
+			strategy: 'force',
+			createIfDeleted: false,
+		});
 	};
 
 	const resetEdit = () => {
