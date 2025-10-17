@@ -1,6 +1,6 @@
 /**
  * Keyboard shortcut management system
- * 
+ *
  * Provides a flexible system for managing keyboard shortcuts with support for:
  * - Multiple keyboard contexts that can be switched between
  * - Global shortcuts that work across all contexts
@@ -74,7 +74,7 @@ type ComboPrefix =
 	| `${Modifier}+${Modifier}+${Modifier}+`
 	| '';
 
-/** 
+/**
  * A keyboard combination string (e.g., 'ctrl+z', 'ctrl+shift+s', 'Enter')
  * Modifiers are separated by '+' and must come before the key name
  */
@@ -85,7 +85,7 @@ type KeyFn = () => void;
 
 /**
  * Keyboard shortcut management system supporting multiple contexts and global shortcuts.
- * 
+ *
  * Features:
  * - Multiple keyboard contexts that can be switched between
  * - Global shortcuts that work regardless of active context
@@ -95,10 +95,10 @@ type KeyFn = () => void;
 export class Keyboard {
 	/** Registry of all keyboard instances by name */
 	private static readonly keyboards = new Map<string, Keyboard>();
-	
+
 	/** The currently active keyboard context */
 	private static _current = new Keyboard('default');
-	
+
 	/** Global shortcuts that work in any context */
 	private static readonly global = new Map<string, KeyFn[]>();
 
@@ -234,11 +234,11 @@ if (browser) {
 		].filter(Boolean);
 
 		const key = [...mods, e.key.toLowerCase()].join('+') as KeyCombo;
-		
+
 		const handlers = Keyboard.get(key);
 		if (handlers && handlers.length > 0) {
 			e.preventDefault();
-			handlers.forEach(fn => fn());
+			handlers.forEach((fn) => fn());
 		}
 	});
 
