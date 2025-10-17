@@ -26,8 +26,7 @@
 	let offset = $state(0);
 
 	onMount(() => {
-		const onHide = () => {
-		};
+		const onHide = () => {};
 
 		offcanvas.addEventListener('hide.bs.offcanvas', onHide);
 
