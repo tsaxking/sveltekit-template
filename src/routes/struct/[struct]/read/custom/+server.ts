@@ -2,7 +2,6 @@ import { Errors, EventErrorCode, EventSuccessCode, status } from '$lib/server/ev
 import { QueryListener } from '$lib/server/services/struct-listeners';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { z } from 'zod';
-import { decode, encode } from 'ts-utils/text';
 
 export const GET = async (event) => {
 	// console.log('Custom request:', event.params.struct);
@@ -16,8 +15,7 @@ export const GET = async (event) => {
 		return Errors.noFrontend(struct.name);
 	}
 
-	const body = JSON.parse(decode(event.url.searchParams.get('body') || encode('{}')));
-
+	const body = JSON.parse(event.request.headers.get('X-Body') || '{}');
 	const res = await QueryListener.run(event, struct, body);
 	if (res.isErr()) {
 		return Errors.internalError(res.error);

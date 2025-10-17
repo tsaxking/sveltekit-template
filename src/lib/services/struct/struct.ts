@@ -12,7 +12,6 @@ import { saveStructUpdate, deleteStructUpdate } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr } from './data-arr';
-import { encode } from 'ts-utils/text';
 
 /**
  * All actions that can be performed on the data
@@ -1122,13 +1121,17 @@ export class Struct<T extends Blank> {
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 			this.log('GET:', action, data, date);
-			const res = await fetch(`/struct/${this.data.name}/${action}?body=${encode(JSON.stringify(data))}`, {
-				method: 'GET',
-				headers: {
-					...Object.fromEntries(Struct.headers.entries()),
-					'X-Date': String(date?.getTime() || Struct.getDate())
-				},
-			});
+			const res = await fetch(
+				`/struct/${this.data.name}/${action}`,
+				{
+					method: 'GET',
+					headers: {
+						...Object.fromEntries(Struct.headers.entries()),
+						'X-Date': String(date?.getTime() || Struct.getDate()),
+						'X-Body': JSON.stringify(data),
+					}
+				}
+			);
 
 			this.log('Get:', action, data, res);
 			return res;

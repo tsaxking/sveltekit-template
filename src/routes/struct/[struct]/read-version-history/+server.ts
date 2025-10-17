@@ -3,7 +3,6 @@ import { Permissions } from '$lib/server/structs/permissions.js';
 import { Struct } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
-import { decode, encode } from 'ts-utils/text';
 
 export const GET = async (event) => {
 	// console.log('Read version history request for struct:', event.params.struct);
@@ -17,7 +16,7 @@ export const GET = async (event) => {
 		return Errors.noFrontend(struct.name);
 	}
 
-	const body = JSON.parse(decode(event.url.searchParams.get('body') || encode('{}')));
+	const body = JSON.parse(event.request.headers.get('X-Body') || '{}');
 
 	const safe = z
 		.object({

@@ -4,7 +4,6 @@ import terminal from '$lib/server/utils/terminal.js';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
-import { decode, encode } from 'ts-utils/text';
 
 export const GET = async (event) => {
 	// console.log('Read request for struct:', event.params.struct, event.params.readType);
@@ -20,7 +19,7 @@ export const GET = async (event) => {
 
 	// console.log(event.params.readType, 'is the read type');
 
-	const body = JSON.parse(decode(event.url.searchParams.get('body') || encode('{}')));
+	const body = JSON.parse(event.request.headers.get('X-Body') || '{}');
 
 	const safeBody = z
 		.object({
