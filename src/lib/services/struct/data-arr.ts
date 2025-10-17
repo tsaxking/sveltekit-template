@@ -151,7 +151,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 	 */
 	sort(fn: (a: StructData<T>, b: StructData<T>) => number) {
 		this._sort = fn;
-		this.inform();
+		this.apply(this.data);
 	}
 
 	/**
@@ -169,7 +169,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 	 */
 	filter(fn: (data: StructData<T>) => boolean) {
 		this._filter = fn;
-		this.inform();
+		this.apply(this.data);
 	}
 
 	/**
