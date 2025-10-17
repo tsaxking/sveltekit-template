@@ -1,7 +1,6 @@
 import { Page } from '@playwright/test';
 import { Session } from '../src/lib/server/structs/session';
 import { Account } from '../src/lib/server/structs/account';
-import { sleep } from 'ts-utils/sleep';
 
 export const signIn = async (page: Page, username: string, password: string) => {
 	const account = await Account.Account.fromProperty('username', username, {
@@ -25,8 +24,6 @@ export const signIn = async (page: Page, username: string, password: string) => 
 	await passwordInput.fill(password);
 
 	await signInButton.click();
-
-	await sleep(1000); // wait for session to populate
 
 	const sessions = await Session.Session.fromProperty('accountId', account.id, {
 		type: 'all'
