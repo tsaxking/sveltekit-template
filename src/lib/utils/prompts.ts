@@ -571,9 +571,16 @@ type NotificationConfig = {
 	autoHide?: number;
 	textColor?: BootstrapColor;
 };
+
+export const history = writable<NotificationConfig[]>([]);
+
 export const notify = (config: NotificationConfig) => {
 	if (!browser) throw new Error('Cannot show notification in non-browser environment');
 
+	history.update((d) => {
+		d.push(config);
+		return d;
+	});
 	// const notif = createNotif();
 	// if (!notif) return;
 	const mounted = mount(Alert, {
