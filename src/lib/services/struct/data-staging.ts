@@ -390,7 +390,8 @@ export class StructDataStage<T extends Blank>
 		return attemptAsync(async () => {
 			if (get(this.deleted)) {
 				if (config.createIfDeleted) {
-					// TODO: DO something;
+					// as any because the server will give us an error if any property is missing
+					await this.structData.struct.new(this.data as any).unwrap();
 				} else {
 					throw new Error('Data is deleted, unable to update');
 				}
