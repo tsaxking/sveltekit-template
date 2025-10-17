@@ -65,13 +65,24 @@ export class Connection {
 
 	close() {
 		return attempt(() => {
+			// Clear cache to free memory immediately
 			this.cache = [];
 			this.send('close', null);
-			this.controller.close();
+			
+			// Close controller if still open
+			if (this.controller.desiredSize !== null) {
+				this.controller.close();
+			}
+			
 			this.onClose(this);
+			
+			// Notify all close listeners
 			for (const listener of this.closeListeners) {
 				listener();
 			}
+			
+			// Clear listeners to prevent memory leaks
+			this.closeListeners.clear();
 		});
 	}
 
@@ -126,6 +137,7 @@ export class SSE {
 		connect: Connection;
 		disconnect: Connection;
 	}>();
+	private cleanupInterval: NodeJS.Timeout;
 
 	public readonly on = this.emitter.on.bind(this.emitter);
 	public readonly off = this.emitter.off.bind(this.emitter);
@@ -134,7 +146,7 @@ export class SSE {
 		process.on('SIGTERM', () => this.shutdown());
 		process.on('exit', () => this.shutdown());
 
-		setInterval(() => {
+		this.cleanupInterval = setInterval(() => {
 			const now = Date.now();
 			for (const connection of this.connections.values()) {
 				if (now - connection.lastPing > DISCONNECT_TIMEOUT) {
@@ -149,7 +161,10 @@ export class SSE {
 	}
 
 	private shutdown() {
+		console.log('Shutting down SSE service...');
+		clearInterval(this.cleanupInterval);
 		for (const conn of this.connections.values()) conn.close();
+		this.connections.clear();
 	}
 
 	connect(event: ConnectRequestEvent) {
@@ -188,13 +203,40 @@ export class SSE {
 		if (this.connections.has(connection.uuid)) {
 			this.connections.delete(connection.uuid);
 			this.emitter.emit('disconnect', connection);
+			
+			// Decrement session tab count when connection closes
+			connection.getSession().then((sessionResult) => {
+				if (sessionResult.isOk()) {
+					const session = sessionResult.value;
+					if (session) {
+						session.update({ tabs: Math.max(0, session.data.tabs - 1) });
+					}
+				}
+			}).catch(err => {
+				console.warn('Failed to update session tab count on disconnect:', err);
+			});
 		}
 	}
 
 	send(event: string, data: unknown, condition?: (conn: Connection) => boolean | Promise<boolean>) {
-		for (const conn of this.connections.values()) {
+		// Create a copy of connections to avoid issues if map changes during iteration
+		const connectionsCopy = [...this.connections.values()];
+		
+		for (const conn of connectionsCopy) {
+			// Check if connection is still valid
+			if (!conn.connected) {
+				console.warn(`Removing disconnected connection: ${conn.uuid}`);
+				this.removeConnection(conn);
+				continue;
+			}
+			
 			if (condition && !condition(conn)) continue;
-			conn.send(event, data);
+			
+			const result = conn.send(event, data);
+			if (result.isErr()) {
+				console.warn(`Failed to send to connection ${conn.uuid}:`, result.error);
+				this.removeConnection(conn);
+			}
 		}
 	}
 
@@ -219,6 +261,45 @@ export class SSE {
 	receivePing(uuid: string) {
 		const conn = this.connections.get(uuid);
 		if (conn) conn.lastPing = Date.now();
+	}
+
+	/**
+	 * Get connection statistics for monitoring memory usage
+	 */
+	getStats() {
+		const connections = this.connections.size;
+		let totalCacheSize = 0;
+		let oldestConnection = Date.now();
+		
+		for (const conn of this.connections.values()) {
+			totalCacheSize += conn['cache'].length; // Access private cache property
+			oldestConnection = Math.min(oldestConnection, conn.lastPing);
+		}
+		
+		return {
+			activeConnections: connections,
+			totalCacheSize,
+			oldestConnectionAge: connections > 0 ? Date.now() - oldestConnection : 0,
+			memoryEstimate: `${Math.round((connections * 50 + totalCacheSize * 2) / 1024)}KB` // Rough estimate
+		};
+	}
+
+	/**
+	 * Force cleanup of stale connections (for manual intervention)
+	 */
+	forceCleanup(maxAge: number = DISCONNECT_TIMEOUT) {
+		const now = Date.now();
+		let cleaned = 0;
+		
+		for (const conn of this.connections.values()) {
+			if (now - conn.lastPing > maxAge || !conn.connected) {
+				console.log(`Force closing stale connection: ${conn.uuid}`);
+				conn.close();
+				cleaned++;
+			}
+		}
+		
+		return cleaned;
 	}
 }
 
