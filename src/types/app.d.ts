@@ -19,6 +19,7 @@ declare global {
 
 	const __APP_ENV__: {
 		name: string;
+		cache_get_requests: boolean;
 	};
 }
 

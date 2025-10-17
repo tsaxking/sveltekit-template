@@ -80,7 +80,7 @@
 	const saveEdit = () => {
 		editStage.save({
 			strategy: 'force',
-			createIfDeleted: false,
+			createIfDeleted: false
 		});
 	};
 

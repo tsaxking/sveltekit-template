@@ -52,5 +52,6 @@ export default z.object({
 		enabled: z.boolean(),
 		requests: z.number().min(1),
 		window: z.number().min(1)
-	})
+	}),
+	cache_get_requests: z.boolean()
 });

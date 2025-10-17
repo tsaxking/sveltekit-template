@@ -21,7 +21,8 @@ export default defineConfig({
 	},
 	define: {
 		__APP_ENV__: JSON.stringify({
-			name: config.app_name
+			name: config.app_name,
+			cache_get_requests: config.cache_get_requests
 		})
 	}
 });

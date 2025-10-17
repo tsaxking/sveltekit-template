@@ -47,5 +47,6 @@
 		"enabled": true,
 		"requests": 100,
 		"window": 600
-	}
+	},
+	"cache_get_requests": true
 }

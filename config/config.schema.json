@@ -217,6 +217,10 @@
 			},
 			"required": ["enabled", "requests", "window"],
 			"additionalProperties": false
+		},
+		"cache_get_requests": {
+			"type": "boolean",
+			"description": "Whether to cache GET requests"
 		}
 	},
 	"required": [
@@ -230,7 +234,8 @@
 		"admin",
 		"email",
 		"ntp",
-		"limiting"
+		"limiting",
+		"cache_get_requests"
 	],
 	"additionalProperties": false
 }
