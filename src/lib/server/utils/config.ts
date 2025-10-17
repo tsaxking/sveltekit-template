@@ -52,5 +52,28 @@ export default z.object({
 		enabled: z.boolean(),
 		requests: z.number().min(1),
 		window: z.number().min(1)
+	}),
+	cache: z.object({
+		enabled: z.boolean(),
+		debug: z.boolean(),
+		version: z.number().min(1).int(),
+		static: z.object({
+			enabled: z.boolean(),
+			duration: z.number().min(1),
+			limit: z.number().min(1),
+			assets: z.array(z.string())
+		}),
+		api: z.object({
+			enabled: z.boolean(),
+			duration: z.number().min(1),
+			limit: z.number().min(1),
+			assets: z.array(z.string())
+		}),
+		pages: z.object({
+			enabled: z.boolean(),
+			duration: z.number().min(1),
+			limit: z.number().min(1),
+			assets: z.array(z.string())
+		})
 	})
 });

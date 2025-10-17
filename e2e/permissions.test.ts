@@ -51,6 +51,8 @@ beforeAll(async () => {
 
 	await Permissions.grantRole(hierarchy.role, account).unwrap();
 
+	await Test.TestPermissions.clear().unwrap();
+
 	await Promise.all(
 		Array.from({ length: 5 }).map(async () => {
 			const res = await Test.TestPermissions.new({

@@ -481,25 +481,25 @@ export class SSE {
 		let totalCachedMessages = 0;
 		let oldestConnection = Date.now();
 		let newestConnection = 0;
-		
+
 		for (const conn of this.connections.values()) {
 			const cache = conn['cache']; // Access private cache property
 			totalCachedMessages += cache.length;
-			
+
 			// Estimate memory per cached message (JSON + metadata)
 			for (const msg of cache) {
 				const msgSize = JSON.stringify({ event: msg.event, data: msg.data, id: msg.id }).length;
 				totalCacheSize += msgSize + 64; // Add overhead for timestamp, retries, etc.
 			}
-			
+
 			oldestConnection = Math.min(oldestConnection, conn.lastPing);
 			newestConnection = Math.max(newestConnection, conn.lastPing);
 		}
-		
+
 		// Rough estimate of base memory per connection (not counting cache)
 		const baseMemoryPerConnection = 1024; // ~1KB for connection object, event listeners, etc.
-		const estimatedMemoryBytes = (connections * baseMemoryPerConnection) + totalCacheSize;
-		
+		const estimatedMemoryBytes = connections * baseMemoryPerConnection + totalCacheSize;
+
 		return {
 			activeConnections: connections,
 			totalCachedMessages,

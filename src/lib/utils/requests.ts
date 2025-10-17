@@ -147,7 +147,7 @@ export namespace Requests {
 		}>();
 		attemptAsync(async () => {
 			const formData = new FormData();
-			for (const file of files) {
+			for (const file of Array.from(files)) {
 				formData.append('file', file);
 			}
 

@@ -14,7 +14,7 @@
 		"name": "db"
 	},
 	"sessions": {
-		"auto_sign_in": "username",
+		"auto_sign_in": "admin_username",
 		"duration": 604800000,
 		"password_request_lifetime": 3600000,
 		"fingerprint_secret": "your_fingerprint_secret"
@@ -47,5 +47,34 @@
 		"enabled": true,
 		"requests": 100,
 		"window": 600
+	},
+	"cache": {
+		"enabled": true,
+		"version": 1,
+		"debug": false,
+		"static": {
+			"enabled": true,
+			"duration": 3600000,
+			"limit": 10,
+			"assets": [
+				"/static/*",
+				"/assets/*"
+			]
+		},
+		"api": {
+			"enabled": true,
+			"duration": 3600000,
+			"limit": 10,
+			"assets": [
+				"/api/*", 
+				"/struct/*"
+			]
+		},
+		"pages": {
+			"enabled": true,
+			"duration": 3600000,
+			"limit": 10,
+			"assets": []
+		}
 	}
 }

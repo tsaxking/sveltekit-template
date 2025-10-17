@@ -19,6 +19,28 @@ declare global {
 
 	const __APP_ENV__: {
 		name: string;
+		cache: {
+			enabled: boolean;
+			version: number;
+			static: {
+				enabled: boolean;
+				duration: number;
+				limit: number;
+				assets: string[];
+			};
+			api: {
+				enabled: boolean;
+				duration: number;
+				limit: number;
+				assets: string[];
+			};
+			pages: {
+				enabled: boolean;
+				duration: number;
+				limit: number;
+				assets: string[];
+			};
+		};
 	};
 }
 
