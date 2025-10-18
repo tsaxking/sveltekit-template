@@ -509,6 +509,13 @@ export type GlobalCols = {
 	canUpdate: 'boolean';
 };
 
+export type ReadConfig<AsStream extends boolean> = {
+	asStream: AsStream;
+	cache?: {
+		expires: Date;
+	};
+};
+
 /**
  * Struct class that communicates with the server
  *
@@ -1113,27 +1120,39 @@ export class Struct<T extends Blank> {
 	 * @param {unknown} data
 	 * @returns {*}
 	 */
-	getReq(action: DataAction | PropertyAction | string, data: unknown, date?: Date) {
+	getReq(action: DataAction | PropertyAction | string, config: {
+		data: unknown;
+		date?: Date;
+		cache?: {
+			expires: Date;
+		};
+	}) {
 		return attemptAsync(async () => {
-			this.log('Get Action:', action, data);
+			this.log('Get Action:', action, config.data);
 			if (!this.data.browser)
 				throw new StructError(
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
-			this.log('GET:', action, data, date);
+			let params = '';
+			if (config.cache) {
+				params += `cache=true;expires=${config.cache.expires.getTime()};`;
+			} else {
+				params += 'cache=false;';
+			}
+			this.log('Get Request:', action, config.data, config.date);
 			const res = await fetch(
-				`/struct/${this.data.name}/${action}`,
+				`/struct/${this.data.name}/${action}?${params}`,
 				{
 					method: 'GET',
 					headers: {
 						...Object.fromEntries(Struct.headers.entries()),
-						'X-Date': String(date?.getTime() || Struct.getDate()),
-						'X-Body': JSON.stringify(data),
+						'X-Date': String(config.date?.getTime() || Struct.getDate()),
+						'X-Body': JSON.stringify(config.data),
 					}
 				}
 			);
 
-			this.log('Get:', action, data, res);
+			this.log('Get Response:', action, config.data, res);
 			return res;
 		});
 	}
@@ -1199,10 +1218,17 @@ export class Struct<T extends Blank> {
 	 * @param {ReadTypes[K]} args
 	 * @returns {StructStream<T>}
 	 */
-	public getStream<K extends keyof ReadTypes>(type: K, args: ReadTypes[K]): StructStream<T> {
+	public getStream<K extends keyof ReadTypes>(type: K, args: ReadTypes[K], config?: {
+		cache?: {
+			expires: Date;
+		}
+	}): StructStream<T> {
 		this.log('Stream:', type, args);
 		const s = new StructStream(this);
-		this.getReq(`${PropertyAction.Read}/${type}`, { args }).then((res) => {
+		this.getReq(`${PropertyAction.Read}/${type}`, { 
+			data: { args },
+			cache: config?.cache,
+		 }).then((res) => {
 			const response = res.unwrap();
 			this.log('Stream Result:', response);
 
@@ -1287,26 +1313,31 @@ export class Struct<T extends Blank> {
 	/**
 	 * Gets all data as a stream
 	 *
-	 * @param {true} asStream If true, returns a stream
+	 * @param {ReadConfig<true>} config Configuration object with asStream: true and optional cache settings
 	 * @returns {StructStream<T>}
 	 */
-	all(asStream: true): StructStream<T>;
+	all(config: ReadConfig<true>): StructStream<T>;
 	/**
 	 * Gets all data as an svelte store
 	 *
-	 * @param {false} asStream If false, returns a svelte store
+	 * @param {ReadConfig<false>} config Configuration object with asStream: false and optional cache settings
 	 * @returns {DataArr<T>}
 	 */
-	all(asStream: false): DataArr<T>;
+	all(config: ReadConfig<false>): DataArr<T>;
 	/**
 	 * Gets all data as a stream or svelte store
 	 *
-	 * @param {boolean} asStream Returns a stream if true, svelte store if false
-	 * @returns
+	 * @param {ReadConfig<boolean>} config Configuration object specifying return type and caching options
+	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
 	 */
-	all(asStream: boolean) {
-		const getStream = () => this.getStream('all', undefined);
-		if (asStream) return getStream();
+	all(config: ReadConfig<boolean>) {
+		const getStream = () => this.getStream('all', undefined, {
+			cache: config.cache,
+		});
+		if (config.asStream) return getStream();
 
 		const arr = this.writables.get('all');
 		if (arr) return arr;
@@ -1329,28 +1360,33 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Gets all archived data
+	 * Gets all archived data as a stream
 	 *
-	 * @param {true} asStream If true, returns a stream
+	 * @param {ReadConfig<true>} config Configuration object with asStream: true and optional cache settings
 	 * @returns {StructStream<T>}
 	 */
-	archived(asStream: true): StructStream<T>;
+	archived(config: ReadConfig<true>): StructStream<T>;
 	/**
-	 * Gets all archived data
+	 * Gets all archived data as a svelte store
 	 *
-	 * @param {false} asStream If false, returns a svelte store
+	 * @param {ReadConfig<false>} config Configuration object with asStream: false and optional cache settings
 	 * @returns {DataArr<T>}
 	 */
-	archived(asStream: false): DataArr<T>;
+	archived(config: ReadConfig<false>): DataArr<T>;
 	/**
-	 * Gets all archived data
+	 * Gets all archived data as a stream or svelte store
 	 *
-	 * @param {boolean} asStream Returns a stream if true, svelte store if false
-	 * @returns
+	 * @param {ReadConfig<boolean>} config Configuration object specifying return type and caching options
+	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
 	 */
-	archived(asStream: boolean) {
-		const getStream = () => this.getStream('archived', undefined);
-		if (asStream) return getStream();
+	archived(config: ReadConfig<boolean>) {
+		const getStream = () => this.getStream('archived', undefined, {
+			cache: config.cache,
+		});
+		if (config.asStream) return getStream();
 
 		const arr = this.writables.get('archived');
 		if (arr) return arr;
@@ -1381,46 +1417,54 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Gets all data with a specific property value
+	 * Gets all data with a specific property value as a stream
 	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {true} asStream If true, returns a stream
+	 * @template {keyof (T & GlobalCols)} K
+	 * @param {K} key Property key
+	 * @param {ColTsType<(T & GlobalCols)[K]>} value Property value
+	 * @param {ReadConfig<true>} config Configuration object with asStream: true and optional cache settings
 	 * @returns {StructStream<T>}
 	 */
 	fromProperty<K extends keyof (T & GlobalCols)>(
 		key: K,
 		value: ColTsType<(T & GlobalCols)[K]>,
-		asStream: true
+		config: ReadConfig<true>
 	): StructStream<T>;
 	/**
-	 * Gets all data with a specific property value
+	 * Gets all data with a specific property value as a svelte store
 	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {false} asStream If false, returns a svelte store
+	 * @template {keyof (T & GlobalCols)} K
+	 * @param {K} key Property key
+	 * @param {ColTsType<(T & GlobalCols)[K]>} value Property value
+	 * @param {ReadConfig<false>} config Configuration object with asStream: false and optional cache settings
 	 * @returns {DataArr<T>}
 	 */
 	fromProperty<K extends keyof (T & GlobalCols)>(
 		key: K,
 		value: ColTsType<(T & GlobalCols)[K]>,
-		asStream: false
+		config: ReadConfig<false>
 	): DataArr<T>;
 	/**
-	 * Gets all data with a specific property value
+	 * Gets all data with a specific property value as a stream or svelte store
 	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {boolean} asStream Returns a stream if true, svelte store if false
-	 * @returns
+	 * @template {keyof (T & GlobalCols)} K
+	 * @param {K} key Property key
+	 * @param {ColTsType<(T & GlobalCols)[K]>} value Property value
+	 * @param {ReadConfig<boolean>} config Configuration object specifying return type and caching options
+	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
 	 */
 	fromProperty<K extends keyof (T & GlobalCols)>(
 		key: K,
 		value: ColTsType<(T & GlobalCols)[K]>,
-		asStream: boolean
+		config: ReadConfig<boolean>
 	) {
-		const getStream = () => this.getStream('property', { key: String(key), value });
-		if (asStream) return getStream();
+		const getStream = () => this.getStream('property', { key: String(key), value }, {
+			cache: config.cache,
+		});
+		if (config.asStream) return getStream();
 
 		const cacheKey = `property:${String(key)}:${JSON.stringify(value)}`;
 		const arr =
@@ -1446,31 +1490,36 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Gets all data in a specific universe
+	 * Gets all data in a specific universe as a stream
 	 *
 	 * @param {string} universe Universe id
-	 * @param {true} asStream If true, returns a stream
+	 * @param {ReadConfig<true>} config Configuration object with asStream: true and optional cache settings
 	 * @returns {StructStream<T>}
 	 */
-	fromUniverse(universe: string, asStream: true): StructStream<T>;
+	fromUniverse(universe: string, config: ReadConfig<true>): StructStream<T>;
 	/**
-	 * Gets all data in a specific universe
+	 * Gets all data in a specific universe as a svelte store
 	 *
 	 * @param {string} universe Universe id
-	 * @param {false} asStream If false, returns a svelte store
+	 * @param {ReadConfig<false>} config Configuration object with asStream: false and optional cache settings
 	 * @returns {DataArr<T>}
 	 */
-	fromUniverse(universe: string, asStream: false): DataArr<T>;
+	fromUniverse(universe: string, config: ReadConfig<false>): DataArr<T>;
 	/**
-	 * Gets all data in a specific universe
+	 * Gets all data in a specific universe as a stream or svelte store
 	 *
 	 * @param {string} universe Universe id
-	 * @param {boolean} asStream Returns a stream if true, svelte store if false
-	 * @returns
+	 * @param {ReadConfig<boolean>} config Configuration object specifying return type and caching options
+	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
 	 */
-	fromUniverse(universe: string, asStream: boolean) {
-		const getStream = () => this.getStream('universe', universe);
-		if (asStream) return getStream();
+	fromUniverse(universe: string, config: ReadConfig<boolean>) {
+		const getStream = () => this.getStream('universe', universe, {
+			cache: config.cache,
+		});
+		if (config.asStream) return getStream();
 
 		const cacheKey = `universe:${universe}`;
 		const arr =
@@ -1500,15 +1549,23 @@ export class Struct<T extends Blank> {
 	/**
 	 * Gets data from a specific id
 	 *
-	 * @param {string} id  Id of the data
-	 * @returns {*}
+	 * @param {string} id Id of the data
+	 * @param {Object} [config] Configuration object for caching
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {Promise<StructData<T>>} Promise that resolves to the data item
 	 */
-	fromId(id: string) {
+	fromId(id: string, config?: {
+		cache?: {
+			expires: Date;
+		}
+	}) {
 		return attemptAsync(async () => {
 			const has = this.cache.get(id);
 			if (has) return has;
-			const res = await this.postReq(`${PropertyAction.Read}/from-id`, {
-				id
+			const res = await this.getReq(`${PropertyAction.Read}/from-id`, {
+				data: id,
+				cache: config?.cache,
 			});
 			const data = await res.unwrap().json();
 			return this.Generator(data as SafePartialStructable<T & GlobalCols>);
@@ -1542,6 +1599,9 @@ export class Struct<T extends Blank> {
 		data: unknown,
 		config: {
 			asStream: true;
+			cache?: {
+				expires: Date;
+			}
 		}
 	): StructStream<T>;
 	/**
@@ -1563,6 +1623,9 @@ export class Struct<T extends Blank> {
 			asStream: false;
 			satisfies: (data: StructData<T>) => boolean;
 			includeArchive?: boolean; // default is falsy
+			cache?: {
+				expires: Date;
+			}
 		}
 	): DataArr<T>;
 	/**
@@ -1584,12 +1647,17 @@ export class Struct<T extends Blank> {
 			asStream: boolean;
 			satisfies?: (data: StructData<T>) => boolean;
 			includeArchive?: boolean;
+			cache?: {
+				expires: Date;
+			}
 		}
 	) {
 		const get = () => {
 			return this.getStream('custom', {
 				query,
 				data
+			}, {
+				cache: config.cache,
 			});
 		};
 		if (config.asStream) return get();

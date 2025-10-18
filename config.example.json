@@ -66,8 +66,6 @@
 			"duration": 3600000,
 			"limit": 10,
 			"assets": [
-				"/api/*", 
-				"/struct/*"
 			]
 		},
 		"pages": {
