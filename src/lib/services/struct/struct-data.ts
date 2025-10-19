@@ -109,7 +109,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 				})
 			).unwrap();
 			return {
-				result: (await res.json()) as StatusMessage,
+				result: res,
 				undo: () => this.update(() => prev)
 			};
 		});
@@ -132,7 +132,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 						.postReq(DataAction.Delete, {
 							id: this.data.id
 						})
-						.then((r) => r.unwrap().json())
+						.then((r) => r.unwrap())
 				);
 		});
 	}
@@ -156,7 +156,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 							.postReq(DataAction.Archive, {
 								id: this.data.id
 							})
-							.then((r) => r.unwrap().json())
+							.then((r) => r.unwrap())
 					);
 			}
 			return z
@@ -169,7 +169,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 						.postReq(DataAction.RestoreArchive, {
 							id: this.data.id
 						})
-						.then((r) => r.unwrap().json())
+						.then((r) => r.unwrap())
 				);
 		});
 	}
@@ -261,7 +261,7 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 				})
 				.unwrap();
 
-			const result = (await res.json()) as StatusMessage<string[]>;
+			const result = res as StatusMessage<string[]>;
 			if (!result.success) {
 				throw new DataError(result.message || 'Failed to set attributes');
 			}

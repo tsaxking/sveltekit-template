@@ -81,7 +81,6 @@
 			{@render test('Received Restore', tests.receivedRestore)}
 			{@render test('Received Delete', tests.receivedDelete)}
 			{@render test('Pull', tests.pullData)}
-			{@render test('Batch', tests.batch)}
 		</ul>
 	</div>
 	<div class="row">

@@ -48,6 +48,14 @@
 		"requests": 100,
 		"window": 600
 	},
+	"struct_batching": {
+		"enabled": true,
+		"interval": 100,
+		"timeout": 10000,
+		"limit": 100,
+		"batch_size": 10,
+		"debug": true
+	},
 	"struct_cache": {
 		"enabled": true,
 		"debug": false

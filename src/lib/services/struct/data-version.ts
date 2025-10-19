@@ -141,7 +141,7 @@ export class StructDataVersion<T extends Blank> {
 							id: this.data.id,
 							vhId: this.data.vhId
 						})
-						.then((r) => r.unwrap().json())
+						.then((r) => r.unwrap())
 				);
 		});
 	}
@@ -164,7 +164,7 @@ export class StructDataVersion<T extends Blank> {
 							id: this.data.id,
 							vhId: this.data.vhId
 						})
-						.then((r) => r.unwrap().json())
+						.then((r) => r.unwrap())
 				);
 		});
 	}
