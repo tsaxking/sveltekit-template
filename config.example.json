@@ -54,7 +54,7 @@
 		"timeout": 10000,
 		"limit": 100,
 		"batch_size": 10,
-		"debug": true
+		"debug": false
 	},
 	"struct_cache": {
 		"enabled": true,
@@ -64,7 +64,7 @@
 		"enabled": true,
 		"db_name": "app_indexed_db",
 		"version": 1,
-		"debug": true,
+		"debug": false,
 		"debounce_interval_ms": 16
 	}
 }
