@@ -509,8 +509,6 @@ export type GlobalCols = {
 	canUpdate: 'boolean';
 };
 
-<<<<<<< Updated upstream
-=======
 /**
  * Configuration object for read operations that determines return type and caching behavior
  *
@@ -534,7 +532,6 @@ export type ReadConfig<AsStream extends boolean> = {
 	};
 };
 
->>>>>>> Stashed changes
 /**
  * Struct class that communicates with the server
  *
