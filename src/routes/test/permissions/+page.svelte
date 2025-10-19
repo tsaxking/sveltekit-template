@@ -5,7 +5,9 @@
 	let arr = $state(Test.TestPermissions.arr());
 
 	onMount(() => {
-		arr = Test.TestPermissions.all(false);
+		arr = Test.TestPermissions.all({
+			asStream: false
+		});
 	});
 </script>
 

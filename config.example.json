@@ -47,5 +47,16 @@
 		"enabled": true,
 		"requests": 100,
 		"window": 600
+	},
+	"struct_cache": {
+		"enabled": true,
+		"debug": false
+	},
+	"indexed_db": {
+		"enabled": true,
+		"db_name": "app_indexed_db",
+		"version": 1,
+		"debug": true,
+		"debounce_interval_ms": 16
 	}
 }

@@ -13,7 +13,7 @@ export const POST = async (event) => {
 	if (!struct.frontend) {
 		return Errors.noFrontend(struct.name);
 	}
-	const body = await event.request.json();
+	const body = JSON.parse(event.request.headers.get('X-Body') || '{}');
 
 	const res = await SendListener.run(event, struct, event.params.function, body);
 	if (res.isErr()) {

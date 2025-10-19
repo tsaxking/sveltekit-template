@@ -62,7 +62,9 @@
 			return;
 		}
 
-		roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), false);
+		roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), {
+			asStream: false
+		});
 
 		return roleRulesets.subscribe((v) => {
 			const rs = v.find((r) => r.data.parent === parentRuleset.data.id);
