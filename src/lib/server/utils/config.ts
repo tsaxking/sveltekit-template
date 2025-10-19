@@ -55,7 +55,7 @@ export default z.object({
 	}),
 	struct_cache: z.object({
 		enabled: z.boolean(),
-		debug: z.boolean(),
+		debug: z.boolean()
 	}),
 	indexed_db: z.object({
 		enabled: z.boolean(),

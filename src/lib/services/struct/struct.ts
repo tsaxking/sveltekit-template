@@ -15,14 +15,15 @@ import { DataArr } from './data-arr';
 import { StructCache } from './cache';
 import { encode } from 'ts-utils/text';
 
-
 let didCacheWarning = false;
 
 const cacheWarning = () => {
 	if (__APP_ENV__.environment === 'prod') return;
 	if (didCacheWarning) return;
 	didCacheWarning = true;
-	console.warn(`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`);
+	console.warn(
+		`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`
+	);
 };
 
 /**
@@ -1174,7 +1175,7 @@ export class Struct<T extends Blank> {
 				this.log('Get Cache Hit:', action, config.data, cached);
 				return new Response(JSON.stringify(cached));
 			}
-			
+
 			this.log('Get Request:', action, config.data, config.date);
 			const res = await fetch(url, {
 				method: 'GET',
