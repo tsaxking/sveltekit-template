@@ -675,7 +675,9 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition> im
      */
     private informImmediate() {
         for (const s of this.subscribers) {
-            s(this.data.filter(this._filter).sort(this._sort));
+            const data = this.data.filter(this._filter).sort(this._sort);
+            if (this._reverse) data.reverse();
+            s(data);
         }
     }
 
@@ -687,7 +689,7 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition> im
      */
     private informDebounced = debounce(() => {
         this.informImmediate();
-    }, 16);
+    }, __APP_ENV__.indexed_db.debounce_interval_ms);
 
     /**
      * Public inform method that uses debounced updates by default
@@ -783,12 +785,34 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition> im
     }
 
     /**
+     * Indicates whether the current sort order is reversed
+     * 
+     * @private
+     * @type {boolean}
+     */
+    private _reverse = false;
+
+    /**
+     * Toggles the sort order between ascending and descending
+     * 
+     * @returns {void}
+     * @example
+     * ```typescript
+     * users.reverse();
+     * ```
+     */
+    public reverse() {
+        this._reverse = !this._reverse;
+        this.inform(true);
+    }
+
+    /**
      * Internal sort function (no-op by default)
      * 
      * @private
      * @type {(a: TableData<Name, Type>, b: TableData<Name, Type>) => number}
      */
-    private _sort = (_a: TableData<Name, Type>, _b: TableData<Name, Type>) => 0;
+    private _sort = (a: TableData<Name, Type>, b: TableData<Name, Type>) => b.data.updated_at.getTime() - a.data.updated_at.getTime();
 
     /**
      * Sets the sort function for this array

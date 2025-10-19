@@ -12,6 +12,18 @@ import { saveStructUpdate, deleteStructUpdate } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr } from './data-arr';
+import { StructCache } from './cache';
+import { encode } from 'ts-utils/text';
+
+
+let didCacheWarning = false;
+
+const cacheWarning = () => {
+	if (__APP_ENV__.environment === 'prod') return;
+	if (didCacheWarning) return;
+	didCacheWarning = true;
+	console.warn(`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`);
+};
 
 /**
  * All actions that can be performed on the data
@@ -1153,13 +1165,18 @@ export class Struct<T extends Blank> {
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 
-			if (config.cache) {
-				const now = new Date();
-				
+			const url = `/struct/${this.data.name}/${action}`;
+			const encoded = encode(JSON.stringify(config.data));
+			CACHE: if (config.cache) {
+				cacheWarning();
+				const cached = await StructCache.get(`${url}:${encoded}`).unwrap();
+				if (!cached) break CACHE;
+				this.log('Get Cache Hit:', action, config.data, cached);
+				return new Response(JSON.stringify(cached));
 			}
 			
 			this.log('Get Request:', action, config.data, config.date);
-			const res = await fetch(`/struct/${this.data.name}/${action}`, {
+			const res = await fetch(url, {
 				method: 'GET',
 				headers: {
 					...Object.fromEntries(Struct.headers.entries()),
@@ -1169,6 +1186,12 @@ export class Struct<T extends Blank> {
 			});
 
 			this.log('Get Response:', action, config.data, res);
+			if (config.cache) {
+				this.log('Setting Cache:', action, config.data);
+				await StructCache.set(`${url}:${encoded}`, await res.clone().json(), {
+					expires: config.cache.expires
+				});
+			}
 			return res;
 		});
 	}

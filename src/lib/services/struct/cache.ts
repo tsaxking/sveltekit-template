@@ -8,18 +8,29 @@ export namespace StructCache {
         expires: 'date',
     });
 
+    const log = (...data: unknown[]) => {
+        if (__APP_ENV__.struct_cache.debug) {
+            console.log('[StructCache]', ...data);
+        }
+    };
+
     export const get = (
         key: string,
     ) => {
         return attemptAsync(async () => {
-            const record = await table.fromProperty('key', key).unwrap();
+            if (!__APP_ENV__.struct_cache.enabled) {
+                return null;
+            }
+            const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
             const [res] = record.data;
             if (!res) return null;
             if (res.data.expires && res.data.expires < new Date()) {
                 // expired
                 res.delete();
+                log(`Cache expired for key: ${key}`, res.data);
                 return null;
             }
+            log(`Cache hit for key: ${key}`, res.data);
             return res.data.value;
         });
     };
@@ -33,13 +44,17 @@ export namespace StructCache {
         }
     ) => {
         return attemptAsync(async () => {
-            const record = await table.fromProperty('key', key).unwrap();
+            if (!__APP_ENV__.struct_cache.enabled) {
+                return value;
+            }
+            const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
             const res = record.data[0];
             if (res) {
                 await res.set({
                     ...res.data,
                     value,
                 }).unwrap();
+                log(`Cache updated for key: ${key}`, res.data);
                 return res.data.value;
             } else {
                 await table.new({
@@ -47,6 +62,7 @@ export namespace StructCache {
                     value,
                     expires: config.expires,
                 }).unwrap();
+                log(`Cache set for key: ${key}`, { key, value, expires: config.expires });
                 return value;
             }
         });
@@ -56,10 +72,11 @@ export namespace StructCache {
         key: string,
     ) => {
         return attemptAsync(async () => {
-            const record = await table.fromProperty('key', key).unwrap();
+            const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
             const res = record.data[0];
             if (res) {
                 await res.delete().unwrap();
+                log(`Cache cleared for key: ${key}`, res.data);
             }
         });
     };

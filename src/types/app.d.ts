@@ -18,17 +18,17 @@ declare global {
 	}
 
 	const __APP_ENV__: {
+		environment: 'prod' | 'dev' | 'test' | 'staging';
 		name: string;
 		indexed_db: {
 			enabled: boolean;
 			db_name: string;
 			version: number;
 			debug: boolean;
+			debounce_interval_ms: number;
 		};
 		struct_cache: {
 			enabled: boolean;
-			default_expiry_minutes: number;
-			cleanup_interval_minutes: number;
 			debug: boolean;
 		};
 	};

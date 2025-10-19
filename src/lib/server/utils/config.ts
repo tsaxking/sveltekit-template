@@ -4,7 +4,7 @@ import z from 'zod';
 // Be sure to alter config.schema.json and config.example.json accordingly
 
 export default z.object({
-	environment: z.enum(['dev', 'test', 'prod']),
+	environment: z.enum(['dev', 'test', 'prod', 'staging']),
 	app_name: z.string().min(1),
 	network: z.object({
 		host: z.string().min(1),
@@ -55,8 +55,6 @@ export default z.object({
 	}),
 	struct_cache: z.object({
 		enabled: z.boolean(),
-		default_expiry_minutes: z.number().min(1),
-		cleanup_interval_minutes: z.number().min(1),
 		debug: z.boolean(),
 	}),
 	indexed_db: z.object({
@@ -64,5 +62,6 @@ export default z.object({
 		db_name: z.string().min(1),
 		version: z.number().min(1),
 		debug: z.boolean(),
+		debounce_interval_ms: z.number().min(0)
 	})
 });

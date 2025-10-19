@@ -50,14 +50,13 @@
 	},
 	"struct_cache": {
 		"enabled": true,
-		"default_expiry_minutes": 10,
-		"cleanup_interval_minutes": 60,
 		"debug": false
 	},
 	"indexed_db": {
 		"enabled": true,
 		"db_name": "app_indexed_db",
 		"version": 1,
-		"debug": false
+		"debug": true,
+		"debounce_interval_ms": 16
 	}
 }
