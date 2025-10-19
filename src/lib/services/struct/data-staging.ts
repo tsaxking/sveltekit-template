@@ -3,6 +3,14 @@ import { attempt, attemptAsync } from 'ts-utils/check';
 import { type Blank, type PartialStructable, type GlobalCols } from './index';
 import { type Writable, writable, get } from 'svelte/store';
 import { StructData } from './struct-data';
+import { Table } from '../db/table';
+
+const StagingTable = new Table('struct_data_staging', {
+	dataId: 'string',
+	struct: 'string',
+	state: 'unknown',
+	base: 'unknown',
+});
 
 /**
  * Used in data proxies - a conflict is when both the local and remote data differ from the base data and from each other.
@@ -552,5 +560,29 @@ export class StructDataStage<T extends Blank>
 		else /* hasRemoteDiverge */ status = 'remoteDiverge';
 
 		return { status, conflicts };
+	}
+
+	stage() {
+		return attemptAsync(async () => {
+			if (!this.structData.data.id) return console.warn('Cannot stage struct data without ID');
+			const has = await StagingTable.fromProperty('dataId', this.structData.struct.data.name + ':' + this.structData.data.id, {
+				pagination: false,
+			}).unwrap();
+			const [existing] = has.data;
+			if (existing) {
+				await existing.update(d => ({
+					...d,
+					state: JSON.stringify(this.data),
+					base: JSON.stringify(this.base),
+				})).unwrap();
+			} else {
+				await StagingTable.new({
+					dataId: this.structData.data.id,
+					struct: this.structData.struct.data.name,
+					state: JSON.stringify(this.data),
+					base: JSON.stringify(this.base),
+				}).unwrap();
+			}
+		});
 	}
 }
