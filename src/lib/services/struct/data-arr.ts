@@ -330,11 +330,11 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 			pageSize
 		});
 
-		const bouncedGetter = debounce(async (info: { page: number; pageSize: number }) => {
+		const bouncedGetter = async (info: { page: number; pageSize: number }) => {
 			const data = await getter(info.page, info.pageSize);
 			this.set(data);
 			this.total.set(await getTotal());
-		}, 100);
+		};
 
 		// Set up automatic data refresh when pagination info changes
 		this.info.subscribe(async (info) => {
@@ -346,13 +346,13 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 		 * 
 		 * @param {number} num - Number to add to total count (+1 for add, -1 for remove)
 		 */
-		const onChange = debounce(async (num: number) => {
+		const onChange = async (num: number) => {
 			const current = get(this.info);
 			const newData = await getter(current.page, current.pageSize);
 			this.data = newData;
 			this.total.update((t) => t + num);
 			this.inform();
-		}, 100);
+		};
 
 		// Set up event handlers for data changes
 		this.on('add', () => onChange(1));
