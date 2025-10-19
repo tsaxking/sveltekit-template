@@ -27,7 +27,7 @@ import { ComplexEventEmitter } from 'ts-utils/event-emitter';
  * @returns {T} The debounced function with the same signature
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const debounce = <T extends (...args: any[]) => void>(func: T, delay: number): T => {
+const debounce = <T extends (...args: unknown[]) => void>(func: T, delay: number): T => {
 	let timeoutId: ReturnType<typeof setTimeout>;
 	return ((...args: Parameters<T>) => {
 		clearTimeout(timeoutId);
