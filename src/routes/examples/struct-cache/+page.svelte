@@ -8,7 +8,7 @@
 		data = Test.Test.all({
 			asStream: false,
 			cache: {
-				expires: new Date(Date.now() + 1000 * 60 * 1) // 5 minutes
+				expires: new Date(Date.now() + 1000 * 60 * 5) // 5 minutes
 			}
 		});
 	});
