@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		data = Test.Test.all({
-			asStream: false
+			type: 'all'
 		});
 	});
 </script>

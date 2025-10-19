@@ -63,7 +63,7 @@
 		}
 
 		roleRulesets = Permissions.RoleRuleset.fromProperty('role', String(role.data.id), {
-			asStream: false
+			type: 'all'
 		});
 
 		return roleRulesets.subscribe((v) => {

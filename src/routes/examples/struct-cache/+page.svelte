@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		data = Test.Test.all({
-			asStream: false,
+			type: 'all',
 			cache: {
 				expires: new Date(Date.now() + 1000 * 60 * 5) // 5 minutes
 			}

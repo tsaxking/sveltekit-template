@@ -113,7 +113,7 @@ export namespace Permissions {
 
 	export const getEntitlements = () => {
 		return Entitlement.all({
-			asStream: false
+			type: 'all'
 		});
 	};
 
@@ -121,7 +121,7 @@ export namespace Permissions {
 		return attemptAsync(async () => {
 			const groups = new Set<string>();
 			await Entitlement.all({
-				asStream: true
+				type: 'stream'
 			}).pipe((e) => {
 				if (e.data.group) groups.add(e.data.group);
 			});
