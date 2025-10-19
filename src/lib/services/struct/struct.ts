@@ -6,9 +6,8 @@ import { Stream } from 'ts-utils/stream';
 import { type Writable } from 'svelte/store';
 import { type ColType, DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
-import { v4 as uuid } from 'uuid';
 import { StructDataVersion } from './data-version';
-import { saveStructUpdate, deleteStructUpdate } from './batching';
+import { StructBatching } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr } from './data-arr';
@@ -318,31 +317,6 @@ export type StatusMessage<T = void> = {
 	success: boolean;
 	data?: T;
 	message?: string;
-};
-
-/**
- * Sets up a batch test mode. This should only be set to true in a testing environment. Otherwise no data will be sent
- *
- * @type {boolean}
- */
-let BATCH_TEST = false;
-
-/**
- * Initializes the batch test mode, this will not send any data to the server. This is used for testing purposes only.
- *
- * @returns {true}
- */
-export const startBatchTest = (): true => {
-	return (BATCH_TEST = true);
-};
-
-/**
- * Ends the batch test mode, this will not send any data to the server. This is used for testing purposes only.
- *
- * @returns {false}
- */
-export const endBatchTest = (): false => {
-	return (BATCH_TEST = false);
 };
 
 /**
@@ -722,7 +696,7 @@ export class Struct<T extends Blank> {
 					await this.postReq(DataAction.Create, {
 						data,
 						attributes
-					}).then((r) => r.unwrap().json())
+					}).then((r) => r.unwrap())
 				);
 		});
 	}
@@ -1101,42 +1075,8 @@ export class Struct<T extends Blank> {
 				throw new StructError(
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
-			const id = uuid();
-			if (
-				![
-					PropertyAction.Read,
-					PropertyAction.ReadArchive,
-					PropertyAction.ReadVersionHistory
-				].includes(action as PropertyAction) &&
-				action !== `${PropertyAction.Read}/custom` &&
-				!action.startsWith('custom')
-			) {
-				// this is an update, so set up batch updating
-				saveStructUpdate({
-					struct: this.data.name,
-					data,
-					id,
-					type: action
-				}).unwrap();
-			}
-			if (BATCH_TEST) {
-				throw new Error('Batch test is enabled, will not run a fetch request');
-			}
 			this.log('POST:', action, data, date);
-			const res = await fetch(`/struct/${this.data.name}/${action}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					...Object.fromEntries(Struct.headers.entries()),
-					'X-Date': String(date?.getTime() || Struct.getDate())
-				},
-				body: JSON.stringify(data)
-			});
-
-			if (res.ok) {
-				deleteStructUpdate(id).unwrap();
-			}
-
+			const res = await StructBatching.add(this.data.name, action, data, date).unwrap();
 			this.log('Post:', action, data, res);
 			return res;
 		});
@@ -1727,7 +1667,7 @@ export class Struct<T extends Blank> {
 	 */
 	call(event: string, data: unknown) {
 		return attemptAsync(async () => {
-			const res = await (await this.postReq(`call/${event}`, data)).unwrap().json();
+			const res = await (await this.postReq(`call/${event}`, data)).unwrap();
 
 			return z
 				.object({

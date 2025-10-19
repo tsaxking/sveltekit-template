@@ -53,6 +53,14 @@ export default z.object({
 		requests: z.number().min(1),
 		window: z.number().min(1)
 	}),
+	struct_batching: z.object({
+		enabled: z.boolean(),
+		interval: z.number().min(1),
+		timeout: z.number().min(1),
+		limit: z.number().min(1),
+		batch_size: z.number().min(1),
+		debug: z.boolean()
+	}),
 	struct_cache: z.object({
 		enabled: z.boolean(),
 		debug: z.boolean()

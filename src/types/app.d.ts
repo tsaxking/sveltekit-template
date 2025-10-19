@@ -31,6 +31,14 @@ declare global {
 			enabled: boolean;
 			debug: boolean;
 		};
+		struct_batching: {
+			enabled: boolean;
+			interval: number;
+			timeout: number;
+			limit: number;
+			batch_size: number;
+			debug: boolean;
+		};
 	};
 }
 

@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import Dexie from 'dexie';
+import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 
 export const DB = new Dexie(__APP_ENV__.indexed_db.db_name);
 
@@ -83,5 +84,10 @@ export const _init = async () => {
 	DB.version(__APP_ENV__.indexed_db.version).stores(pendingSchemas);
 	await DB.open();
 	initialized = true;
+	em.emit('init');
 	return DB;
 };
+
+export const em = new ComplexEventEmitter<{
+	init: void;
+}>();
