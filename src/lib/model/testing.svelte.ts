@@ -247,7 +247,9 @@ export namespace Test {
 							finish(error.message);
 						};
 
-						const stream = Test.all(true);
+						const stream = Test.all({
+							asStream: true
+						});
 						stream.on('data', onData);
 						stream.on('error', onError);
 					});
@@ -480,7 +482,9 @@ export namespace Test {
 							finish(error.message);
 						};
 
-						const stream = Test.archived(true);
+						const stream = Test.archived({
+							asStream: true
+						});
 						stream.on('data', onData);
 						stream.on('error', onError);
 					});
@@ -516,7 +520,9 @@ export namespace Test {
 							finish(error.message);
 						};
 
-						const stream = Test.fromProperty('name', uniqueName, true);
+						const stream = Test.fromProperty('name', uniqueName, {
+							asStream: true
+						});
 						stream.on('data', onData);
 						stream.on('error', onError);
 					});

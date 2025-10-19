@@ -5,7 +5,9 @@
 	let data = $state(Test.Test.arr());
 
 	onMount(() => {
-		data = Test.Test.all(false);
+		data = Test.Test.all({
+			asStream: false
+		});
 	});
 </script>
 

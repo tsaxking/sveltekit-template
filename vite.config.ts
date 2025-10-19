@@ -21,7 +21,9 @@ export default defineConfig({
 	},
 	define: {
 		__APP_ENV__: JSON.stringify({
-			name: config.app_name
-		})
+			name: config.app_name,
+			indexed_db: config.indexed_db,
+			struct_cache: config.struct_cache,
+		}),
 	}
 });

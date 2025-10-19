@@ -217,6 +217,57 @@
 			},
 			"required": ["enabled", "requests", "window"],
 			"additionalProperties": false
+		},
+		"struct_cache": {
+			"description": "Struct caching configuration",
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Whether struct caching is enabled"
+				},
+				"default_expiry_minutes": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Default expiry time for cache entries in minutes"
+				},
+				"cleanup_interval_minutes": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Interval for cleaning up expired cache entries in minutes"
+				},
+				"debug": {
+					"type": "boolean",
+					"description": "Whether to enable debug mode for IndexedDB"
+				}
+			},
+			"required": ["enabled", "default_expiry_minutes", "cleanup_interval_minutes", "debug"],
+			"additionalProperties": false
+		},
+		"indexed_db": {
+			"description": "IndexedDB configuration",
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Whether IndexedDB is enabled"
+				},
+				"db_name": {
+					"type": "string",
+					"description": "Name of the IndexedDB database"
+				},
+				"version": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "Version of the IndexedDB database"
+				},
+				"debug": {
+					"type": "boolean",
+					"description": "Whether to enable debug mode for IndexedDB"
+				}
+			},
+			"required": ["enabled", "db_name", "version", "debug"],
+			"additionalProperties": false
 		}
 	},
 	"required": [
@@ -230,7 +281,9 @@
 		"admin",
 		"email",
 		"ntp",
-		"limiting"
+		"limiting",
+		"struct_cache",
+		"indexed_db"
 	],
 	"additionalProperties": false
 }

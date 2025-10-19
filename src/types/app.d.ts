@@ -19,6 +19,18 @@ declare global {
 
 	const __APP_ENV__: {
 		name: string;
+		indexed_db: {
+			enabled: boolean;
+			db_name: string;
+			version: number;
+			debug: boolean;
+		};
+		struct_cache: {
+			enabled: boolean;
+			default_expiry_minutes: number;
+			cleanup_interval_minutes: number;
+			debug: boolean;
+		};
 	};
 }
 

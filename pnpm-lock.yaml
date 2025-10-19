@@ -137,6 +137,9 @@ importers:
       colors:
         specifier: git+https://github.com/tsaxking/colors#v1.0.0
         version: https://codeload.github.com/tsaxking/colors/tar.gz/033743f3dc346eb907160d770ba1bced183e4565
+      dexie:
+        specifier: ^4.2.1
+        version: 4.2.1
       dotenv:
         specifier: ^16.6.1
         version: 16.6.1
@@ -2732,6 +2735,9 @@ packages:
 
   devalue@5.3.2:
     resolution: {integrity: sha512-UDsjUbpQn9kvm68slnrs+mfxwFkIflOhkanmyabZ8zOYk8SMEIbJ3TK+88g70hSIeytu4y18f0z/hYHMTrXIWw==}
+
+  dexie@4.2.1:
+    resolution: {integrity: sha512-Ckej0NS6jxQ4Po3OrSQBFddayRhTCic2DoCAG5zacOfOVB9P2Q5Xc5uL/nVa7ZVs+HdMnvUPzLFCB/JwpB6Csg==}
 
   diff@4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
@@ -8055,6 +8061,8 @@ snapshots:
   detect-node@2.1.0: {}
 
   devalue@5.3.2: {}
+
+  dexie@4.2.1: {}
 
   diff@4.0.2: {}
 

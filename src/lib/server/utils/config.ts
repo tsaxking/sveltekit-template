@@ -52,5 +52,17 @@ export default z.object({
 		enabled: z.boolean(),
 		requests: z.number().min(1),
 		window: z.number().min(1)
+	}),
+	struct_cache: z.object({
+		enabled: z.boolean(),
+		default_expiry_minutes: z.number().min(1),
+		cleanup_interval_minutes: z.number().min(1),
+		debug: z.boolean(),
+	}),
+	indexed_db: z.object({
+		enabled: z.boolean(),
+		db_name: z.string().min(1),
+		version: z.number().min(1),
+		debug: z.boolean(),
 	})
 });

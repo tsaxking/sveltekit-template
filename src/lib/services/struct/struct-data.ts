@@ -303,11 +303,18 @@ export class StructData<T extends Blank> implements Writable<PartialStructable<T
 	 *
 	 * @returns {*}
 	 */
-	getVersions() {
+	getVersions(config?: {
+		cache?: {
+			expires: Date;
+		};
+	}) {
 		return attemptAsync(async () => {
 			const versions = (await this.struct
 				.getReq(PropertyAction.ReadVersionHistory, {
-					id: this.data.id
+					data: {
+						id: this.data.id
+					},
+					cache: config?.cache
 				})
 				.then((r) => r.unwrap().json())) as StatusMessage<VersionStructable<T>[]>;
 
