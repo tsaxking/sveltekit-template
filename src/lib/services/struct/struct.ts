@@ -509,6 +509,32 @@ export type GlobalCols = {
 	canUpdate: 'boolean';
 };
 
+<<<<<<< Updated upstream
+=======
+/**
+ * Configuration object for read operations that determines return type and caching behavior
+ *
+ * @export
+ * @typedef {ReadConfig}
+ * @template {boolean} AsStream
+ */
+export type ReadConfig<AsStream extends boolean> = {
+	/**
+	 * Determines the return type: true returns a StructStream, false returns a DataArr
+	 */
+	asStream: AsStream;
+	/**
+	 * Optional cache configuration for server-side caching
+	 */
+	cache?: {
+		/**
+		 * Date when the cached data expires
+		 */
+		expires: Date;
+	};
+};
+
+>>>>>>> Stashed changes
 /**
  * Struct class that communicates with the server
  *
@@ -1193,11 +1219,14 @@ export class Struct<T extends Blank> {
 	/**
 	 * Retrieves a stream of data from the server, used for querying data
 	 *
-	 * @private
+	 * @public
 	 * @template {keyof ReadTypes} K
-	 * @param {K} type
-	 * @param {ReadTypes[K]} args
-	 * @returns {StructStream<T>}
+	 * @param {K} type The type of read operation to perform
+	 * @param {ReadTypes[K]} args Arguments specific to the read type
+	 * @param {Object} [config] Configuration object for the request
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T>} Stream of data matching the query
 	 */
 	public getStream<K extends keyof ReadTypes>(type: K, args: ReadTypes[K]): StructStream<T> {
 		this.log('Stream:', type, args);
@@ -1528,14 +1557,15 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Sends a custom query to the server and returns the results.
+	 * Sends a custom query to the server and returns the results as a stream.
 	 *
-	 * @param {string} query
-	 * @param {unknown} data
-	 * @param {{
-	 * 			asStream: true;
-	 * 		}} config
-	 * @returns {StructStream<T>}
+	 * @param {string} query Custom query string to execute on the server
+	 * @param {unknown} data Data to send with the query
+	 * @param {Object} config Configuration object
+	 * @param {true} config.asStream Must be true for stream return type
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T>} Stream of query results
 	 */
 	query(
 		query: string,
@@ -1545,16 +1575,17 @@ export class Struct<T extends Blank> {
 		}
 	): StructStream<T>;
 	/**
-	 * Sends a custom query to the server and returns the results.
+	 * Sends a custom query to the server and returns the results as a svelte store.
 	 *
-	 * @param {string} query
-	 * @param {unknown} data
-	 * @param {{
-	 * 			asStream: false;
-	 * 			satisfies: (data: StructData<T>) => boolean;
-	 * 			includeArchive?: boolean; // default is falsy
-	 * 		}} config
-	 * @returns {DataArr<T>}
+	 * @param {string} query Custom query string to execute on the server
+	 * @param {unknown} data Data to send with the query
+	 * @param {Object} config Configuration object
+	 * @param {false} config.asStream Must be false for DataArr return type
+	 * @param {(data: StructData<T>) => boolean} config.satisfies Function to determine if data belongs in this collection
+	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {DataArr<T>} Reactive data array of query results
 	 */
 	query(
 		query: string,
@@ -1566,16 +1597,17 @@ export class Struct<T extends Blank> {
 		}
 	): DataArr<T>;
 	/**
-	 * Sends a custom query to the server and returns the results.
+	 * Sends a custom query to the server and returns the results as either a stream or svelte store.
 	 *
-	 * @param {string} query
-	 * @param {unknown} data
-	 * @param {{
-	 * 			asStream: boolean;
-	 * 			satisfies?: (data: StructData<T>) => boolean;
-	 * 			includeArchive?: boolean;
-	 * 		}} config
-	 * @returns {boolean; includeArchive?: boolean; }): DataArr<...>; }}
+	 * @param {string} query Custom query string to execute on the server
+	 * @param {unknown} data Data to send with the query
+	 * @param {Object} config Configuration object
+	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
+	 * @param {(data: StructData<T>) => boolean} [config.satisfies] Function to determine if data belongs in collection (required when asStream is false)
+	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
+	 * @param {Object} [config.cache] Optional cache configuration
+	 * @param {Date} [config.cache.expires] Cache expiration date
+	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
 	 */
 	query(
 		query: string,
