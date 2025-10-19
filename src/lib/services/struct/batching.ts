@@ -38,7 +38,7 @@ export namespace StructBatching {
 			const res = await fetch('/struct/batch', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
+					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(
 					items.map((i) => ({
