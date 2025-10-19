@@ -20,7 +20,7 @@
 	onclick={() => {
 		Test.Test.new({
 			name: 'Name - ' + Math.floor(Math.random() * 100),
-			age: Math.floor(Math.random()) * 100
+			age: Math.floor(Math.random() * 100)
 		});
 	}}
 >
