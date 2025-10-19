@@ -1076,7 +1076,30 @@ export class Struct<T extends Blank> {
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 			this.log('POST:', action, data, date);
-			const res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+			let res: {
+				success: boolean;
+				message?: string;
+				data?: unknown;
+			};
+			if (__APP_ENV__.struct_batching.enabled) {
+				res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+			} else {
+				res = z.object({
+					success: z.boolean(),
+					message: z.string().optional(),
+					data: z.unknown().optional()
+				}).parse(
+					await fetch(`/struct/${this.data.name}/${action}`, {
+						method: 'POST',
+						headers: {
+							...Object.fromEntries(Struct.headers.entries()),
+							'X-Date': String(date?.getTime() || Struct.getDate()),
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(data)
+					}).then((r) => r.json())
+				);
+			}
 			this.log('Post:', action, data, res);
 			return res;
 		});
