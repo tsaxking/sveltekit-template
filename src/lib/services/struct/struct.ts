@@ -1734,7 +1734,7 @@ export class Struct<T extends Blank> {
 				async (page, size) => {
 					const all = await stream;
 					if (all.isErr()) return [];
-					const items = all.value.slice((page - 1) * size, page * size);
+					const items = all.value.slice(page * size, (page + 1) * size);
 					total = all.value.length;
 					return items;
 				},
