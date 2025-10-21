@@ -3,7 +3,10 @@ import { get, writable, type Writable } from 'svelte/store';
 import { StructData } from './struct-data';
 import { EventEmitter } from 'ts-utils/event-emitter';
 
-const debounce = <T extends (...args: unknown[]) => void | Promise<void>>(func: T, delay: number) => {
+const debounce = <T extends (...args: unknown[]) => void | Promise<void>>(
+	func: T,
+	delay: number
+) => {
 	let timeoutId: NodeJS.Timeout;
 	return ((...args: unknown[]) => {
 		if (timeoutId) {
@@ -277,7 +280,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 /**
  * Paginated extension of DataArr that provides pagination functionality for struct data.
  * Automatically handles data fetching, total count management, and page navigation.
- * 
+ *
  * @export
  * @class PaginationDataArr
  * @typedef {PaginationDataArr}
@@ -287,7 +290,7 @@ export class DataArr<T extends Blank> implements Writable<StructData<T>[]> {
 export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 	/**
 	 * Reactive store containing pagination information (page and pageSize)
-	 * 
+	 *
 	 * @public
 	 * @readonly
 	 * @type {Writable<{page: number, pageSize: number}>}
@@ -299,7 +302,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Reactive store containing the total number of records across all pages
-	 * 
+	 *
 	 * @public
 	 * @readonly
 	 * @type {Writable<number>}
@@ -309,7 +312,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 	/**
 	 * Creates an instance of PaginationDataArr.
 	 * Sets up automatic data fetching when pagination info changes and event handlers for data updates.
-	 * 
+	 *
 	 * @constructor
 	 * @param {Struct<T>} struct - The parent struct instance
 	 * @param {number} page - Initial page number (0-based)
@@ -343,7 +346,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 		/**
 		 * Handles data changes by refreshing current page and updating total count
-		 * 
+		 *
 		 * @param {number} num - Number to add to total count (+1 for add, -1 for remove)
 		 */
 		const onChange = async (num: number) => {
@@ -364,7 +367,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 	/**
 	 * Creates a clone of the current PaginationDataArr instance.
 	 * Note: Uses static data from current instance rather than preserving original getter functions.
-	 * 
+	 *
 	 * @returns {PaginationDataArr<T>} A new PaginationDataArr instance with current data and settings
 	 */
 	clone(): PaginationDataArr<T> {
@@ -385,7 +388,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Gets the current page size
-	 * 
+	 *
 	 * @returns {number} Current page size
 	 */
 	get pageSize() {
@@ -394,7 +397,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Sets the page size and triggers data refresh
-	 * 
+	 *
 	 * @param {number} size - New page size
 	 */
 	set pageSize(size: number) {
@@ -406,7 +409,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Gets the current page number (0-based)
-	 * 
+	 *
 	 * @returns {number} Current page number
 	 */
 	get page() {
@@ -415,7 +418,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Sets the page number and triggers data refresh
-	 * 
+	 *
 	 * @param {number} page - New page number (0-based)
 	 */
 	set page(page: number) {
@@ -427,7 +430,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Navigates to the next page if available
-	 * 
+	 *
 	 * @returns {void}
 	 * @example
 	 * ```typescript
@@ -449,7 +452,7 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 
 	/**
 	 * Navigates to the previous page if available
-	 * 
+	 *
 	 * @returns {void}
 	 * @example
 	 * ```typescript

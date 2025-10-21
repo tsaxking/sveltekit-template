@@ -147,8 +147,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#v1.0.19
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/463e967ec8cb762bd595ae622133d48969d231a7(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
+        specifier: github:tsaxking/drizzle-struct#2025-09-09-TK-FromIds
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/27a4f8dc9946790f50dac5b5b00e9441fb607080(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -2340,6 +2340,9 @@ packages:
   axios@1.12.1:
     resolution: {integrity: sha512-Kn4kbSXpkFHCGE6rBFNwIv0GQs4AvDT80jlveJDKFxjbTYMUeB4QtsdPCv6H8Cm19Je7IU6VFtRl2zWZI0rudQ==}
 
+  axios@1.12.2:
+    resolution: {integrity: sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==}
+
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
@@ -2880,8 +2883,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/463e967ec8cb762bd595ae622133d48969d231a7:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/463e967ec8cb762bd595ae622133d48969d231a7}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/27a4f8dc9946790f50dac5b5b00e9441fb607080:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/27a4f8dc9946790f50dac5b5b00e9441fb607080}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -7680,6 +7683,14 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  axios@1.12.2:
+    dependencies:
+      follow-redirects: 1.15.11
+      form-data: 4.0.4
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
   axobject-query@4.1.0: {}
 
   balanced-match@1.0.2: {}
@@ -8132,12 +8143,12 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/463e967ec8cb762bd595ae622133d48969d231a7(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/27a4f8dc9946790f50dac5b5b00e9441fb607080(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.35.0)
       '@msgpack/msgpack': 3.0.0-beta3
       '@types/proper-lockfile': 4.1.4
-      axios: 1.12.1
+      axios: 1.12.2
       chalk: 5.6.2
       dotenv: 16.6.1
       drizzle-orm: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
