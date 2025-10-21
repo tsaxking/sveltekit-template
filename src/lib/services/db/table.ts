@@ -371,39 +371,21 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 				);
 				const offNew = this.on('new', (d) => {
 					if (d.data[key] === value) {
-						arr.info.update((i) => ({
-							...i,
-							total: i.total + 1
-						}));
 						arr.add(d);
 					}
 				});
 				const offDelete = this.on('delete', (d) => {
-					if (d.data[key] === value) {
-						arr.info.update((i) => ({
-							...i,
-							total: i.total - 1
-						}));
-					}
 					arr.remove(d);
 				});
 				const offUpdate = this.on('update', (d) => {
 					if (d.data[key] === value) {
 						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
 						if (!exists) {
-							arr.info.update((i) => ({
-								...i,
-								total: i.total + 1
-							}));
 							arr.add(d);
 						}
 					} else {
 						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
 						if (exists) {
-							arr.info.update((i) => ({
-								...i,
-								total: i.total - 1
-							}));
 							arr.remove(d);
 						}
 					}
@@ -938,10 +920,11 @@ export class PaginatedTableData<
 	 * @type {Writable<{total: number, page: number, pageSize: number}>}
 	 */
 	public readonly info: Writable<{
-		total: number;
 		page: number;
 		pageSize: number;
 	}>;
+
+	public readonly total: Writable<number>;
 
 	/**
 	 * Creates an instance of PaginatedTableData.
@@ -970,17 +953,14 @@ export class PaginatedTableData<
 			page,
 			pageSize
 		});
+		this.total = writable(total);
 
 		// Set up automatic data refresh when pagination info changes
 		this.info.subscribe(async (info) => {
 			const newData = await getter(info.page, info.pageSize);
 			this.data = newData;
-			const newTotal = await getTotal();
-			this.info.update((i) => ({
-				...i,
-				total: newTotal
-			}));
 			this.inform(true); // Immediate for pagination changes
+			this.total.set(await getTotal());
 		});
 
 		// Refresh data when items are added
@@ -988,6 +968,7 @@ export class PaginatedTableData<
 			const current = get(this.info);
 			const newData = await getter(current.page, current.pageSize);
 			this.data = newData;
+			this.total.update((t) => t + 1);
 			this.inform(); // Debounced for event-driven updates
 		});
 
@@ -996,6 +977,7 @@ export class PaginatedTableData<
 			const current = get(this.info);
 			const newData = await getter(current.page, current.pageSize);
 			this.data = newData;
+			this.total.update((t) => t - 1);
 			this.inform(); // Debounced for event-driven updates
 		});
 	}
@@ -1041,28 +1023,6 @@ export class PaginatedTableData<
 			page: p
 		}));
 	}
-
-	/**
-	 * Gets the total number of records
-	 *
-	 * @returns {number} Total record count
-	 */
-	get total() {
-		return get(this.info).total;
-	}
-
-	/**
-	 * Sets the total number of records
-	 *
-	 * @param {number} t - New total count
-	 */
-	set total(t: number) {
-		this.info.update((i) => ({
-			...i,
-			total: t
-		}));
-	}
-
 	/**
 	 * Navigates to the next page if available
 	 *
@@ -1076,7 +1036,7 @@ export class PaginatedTableData<
 	 */
 	next() {
 		const current = get(this.info);
-		if ((current.page + 1) * current.pageSize >= current.total) return;
+		if ((current.page + 1) * current.pageSize >= get(this.total)) return;
 		this.info.update((i) => ({
 			...i,
 			page: i.page + 1

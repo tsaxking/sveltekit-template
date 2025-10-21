@@ -236,7 +236,7 @@ export namespace Test {
 						};
 
 						const stream = Test.all({
-							asStream: true
+							type: 'stream'
 						});
 						stream.on('data', onData);
 						stream.on('error', onError);
@@ -471,7 +471,7 @@ export namespace Test {
 						};
 
 						const stream = Test.archived({
-							asStream: true
+							type: 'stream'
 						});
 						stream.on('data', onData);
 						stream.on('error', onError);
@@ -509,7 +509,7 @@ export namespace Test {
 						};
 
 						const stream = Test.fromProperty('name', uniqueName, {
-							asStream: true
+							type: 'stream'
 						});
 						stream.on('data', onData);
 						stream.on('error', onError);

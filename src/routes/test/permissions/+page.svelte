@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		arr = Test.TestPermissions.all({
-			asStream: false
+			type: 'all'
 		});
 	});
 </script>
