@@ -1784,6 +1784,7 @@ export class Struct<T extends Blank> {
 
 	/**
 	 * Sends custom data to the server and returns the result.
+	 * This should be used for exclusively data retrieval.
 	 *
 	 * @template T
 	 * @param {string} name
@@ -1826,6 +1827,7 @@ export class Struct<T extends Blank> {
 	// custom functions
 	/**
 	 * Calls a custom event on the server and returns the result.
+	 * This should exclusively be used for triggering server-side events.
 	 *
 	 * @param {string} event
 	 * @param {unknown} data
