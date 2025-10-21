@@ -35,33 +35,7 @@ export namespace Test {
 			}
 		});
 
-		const tests: {
-			connect: Status;
-			new: Status;
-			update: Status;
-
-			archive: Status;
-			restore: Status;
-			delete: Status;
-
-			readVersion: Status;
-			deleteVersion: Status;
-			restoreVersion: Status;
-
-			readAll: Status;
-			readArchived: Status;
-			readFromProperty: Status;
-
-			receivedNew: Status;
-			receivedUpdate: Status;
-			receivedArchive: Status;
-			receivedRestore: Status;
-			receivedDelete: Status;
-
-			pullData: Status;
-
-			promise: Promise<void>;
-		} = $state({
+		const tests = $state({
 			connect: init(),
 			new: init(),
 			update: init(),
@@ -77,6 +51,9 @@ export namespace Test {
 			readAll: init(),
 			readArchived: init(),
 			readFromProperty: init(),
+			readFromIds: init(),
+			readFromId: init(),
+			readMultiProperty: init(),
 
 			receivedNew: init(),
 			receivedUpdate: init(),
@@ -92,6 +69,7 @@ export namespace Test {
 				await sse.waitForConnection(10_000);
 
 				const uniqueName = Math.random().toString(36).substring(7);
+				console.log('Unique name: ', uniqueName);
 				const connect = async () => {
 					tests.connect.update('in progress');
 					const res = await Test.connect();
@@ -515,11 +493,131 @@ export namespace Test {
 						stream.on('error', onError);
 					});
 				};
+				const testReadFromIds = async () => {
+					return new Promise<void>((res) => {
+						tests.readFromIds.update('in progress');
+						let resolved = false;
+						const finish = (error?: string) => {
+							if (!resolved) res();
+							resolved = true;
+							if (error) {
+								tests.readFromIds.update('failure', error);
+							} else {
+								tests.readFromIds.update('success');
+							}
+
+							stream.off('data', onData);
+							stream.off('error', onError);
+						};
+
+						setTimeout(() => {
+							finish('Timeout');
+						}, 1000);
+
+						const onData = (data: TestData) => {
+							if (data.data.name === uniqueName) {
+								finish();
+							}
+						};
+
+						const onError = (error: Error) => {
+							finish(error.message);
+						};
+
+						const stream = Test.fromIds([String(testData?.data.id)], {
+							type: 'stream'
+						});
+						stream.on('data', onData);
+						stream.on('error', onError);
+					});
+				};
+
+				const testReadFromId = async () => {
+					return new Promise<void>((res) => {
+						tests.readFromId.update('in progress');
+						let resolved = false;
+						const finish = (error?: string) => {
+							if (!resolved) res();
+							resolved = true;
+							if (error) {
+								tests.readFromId.update('failure', error);
+							} else {
+								tests.readFromId.update('success');
+							}
+						};
+
+						setTimeout(() => {
+							finish('Timeout');
+						}, 1000);
+
+						Test.fromId(String(testData?.data.id), {
+							force: true,
+						}).then((r) => {
+							if (r.isErr()) {
+								return finish(r.error.message);
+							}
+
+							if (r.value.data.name !== uniqueName) {
+								return finish('Name does not match');
+							}
+
+							finish();
+						});
+					});
+				};
+
+				const readMultiProperty = async () => {
+					return new Promise<void>((res) => {
+						tests.readMultiProperty.update('in progress');
+						let resolved = false;
+						const finish = (error?: string) => {
+							if (!resolved) res();
+							resolved = true;
+							if (error) {
+								tests.readMultiProperty.update('failure', error);
+							} else {
+								tests.readMultiProperty.update('success');
+							}
+
+							stream.off('data', onData);
+							stream.off('error', onError);
+						};
+
+						setTimeout(() => {
+							finish('Timeout');
+						}, 1000);
+
+						const onData = (data: TestData) => {
+							if (data.data.name === uniqueName) {
+								finish();
+							}
+						};
+
+						const onError = (error: Error) => {
+							finish(error.message);
+						};
+
+						const stream = Test.get(
+							{
+								name: uniqueName,
+								age: 20
+							},
+							{
+								type: 'stream'
+							}
+						);
+						stream.on('data', onData);
+						stream.on('error', onError);
+					});
+				};
 
 				await connect();
 				await testNew();
 				await testReadAll();
 				await testReadProperty();
+				await testReadFromIds();
+				await testReadFromId();
+				await readMultiProperty();
 
 				if (testData) {
 					await testUpdate(testData);

@@ -1,6 +1,7 @@
 import { Errors } from '$lib/server/event-handler.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
 import terminal from '$lib/server/utils/terminal.js';
+import { fail } from '@sveltejs/kit';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
@@ -103,9 +104,12 @@ export const GET = async (event) => {
 							.unwrap();
 
 						total = await struct
-							.fromProperty(safe.key, 
+							.fromProperty(
+								safe.key,
 								// eslint-disable-next-line @typescript-eslint/no-explicit-any
-								safe.value as any, { type: 'count' })
+								safe.value as any,
+								{ type: 'count' }
+							)
 							.unwrap();
 					} else {
 						data = await struct
@@ -144,6 +148,51 @@ export const GET = async (event) => {
 					data = [found];
 				}
 				break;
+			case 'from-ids':
+				{
+					if (paginated) {
+						throw fail(400, 'Pagination is not supported for from-ids read type.');
+					}
+					const safe = z
+						.object({
+							ids: z.array(z.string())
+						})
+						.parse(safeBody.data.args);
+					data = await struct.fromIds(safe.ids, {
+						type: 'all',
+					}).unwrap();
+				}
+				break;
+			case 'get': 
+			{
+				const safe = z.record(z.union([
+					z.string(),
+					z.number(),
+					z.boolean(),
+					z.null(),
+				])).parse(safeBody.data.args);
+				if (paginated) {
+					data = await struct
+						.get(
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							safe as any,
+							{
+								type: 'array',
+								limit: size,
+								offset: page * size
+							}
+						).unwrap();
+				} else {
+					data = await struct
+						.get(
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+							safe as any,
+							{ type: 'all' }
+						).unwrap();
+				}
+				// Read by multiple properties
+				break;
+			}
 			default:
 				terminal.error('Invalid read type:', event.params.readType);
 				return new Response(
@@ -193,7 +242,7 @@ export const GET = async (event) => {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Total-Count': String(total),
+				'X-Total-Count': String(total)
 			}
 		}
 	);
