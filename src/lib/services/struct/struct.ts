@@ -1876,8 +1876,8 @@ export class Struct<T extends Blank> {
 	pagination() {
 		return new PaginationDataArr<T>(
 			this,
-			1,
 			0,
+			10,
 			async (_page, _size) => ([] as StructData<T>[]),
 			() => 0,
 		);
