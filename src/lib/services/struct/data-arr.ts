@@ -373,8 +373,8 @@ export class PaginationDataArr<T extends Blank> extends DataArr<T> {
 	clone(): PaginationDataArr<T> {
 		const d = new PaginationDataArr<T>(
 			this.struct,
-			1,
-			10,
+			this.page,
+			this.pageSize,
 			async () => this.data,
 			async () => this.data.length
 		);
