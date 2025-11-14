@@ -3,6 +3,14 @@ import { attempt, attemptAsync } from 'ts-utils/check';
 import { type Blank, type PartialStructable, type GlobalCols } from './index';
 import { type Writable, writable, get } from 'svelte/store';
 import { StructData } from './struct-data';
+import { Table } from '../db/table';
+
+const StagingTable = new Table('struct_data_staging_stash', {
+	dataId: 'string',
+	struct: 'string',
+	state: 'string',
+	base: 'string',
+});
 
 /**
  * Used in data proxies - a conflict is when both the local and remote data differ from the base data and from each other.
@@ -109,6 +117,22 @@ type StructDataStageConfig<T extends Blank> = {
 export class StructDataStage<T extends Blank>
 	implements Writable<PartialStructable<T & GlobalCols>>
 {
+	public static getStashedStaging<T extends Blank>(structData: StructData<T & GlobalCols>, config: StructDataStageConfig<T> = {}) {
+		return attemptAsync(async () => {
+			const stages = await StagingTable.fromProperty('dataId', structData.struct.data.name + ':' + structData.data.id, {
+				pagination: false,
+			}).unwrap();
+			return stages.data.map(s => {
+				const stage = new StructDataStage<T>(structData, config);
+				stage.set(JSON.parse(s.data.state) as PartialStructable<T & GlobalCols>);
+				stage.base = JSON.parse(s.data.base) as PartialStructable<T & GlobalCols>;
+				stage.remoteUpdated.set(false);
+				stage.localUpdated.set(false);
+				return stage;
+			});
+		});
+	}
+
 	/**
 	 * The proxied, locally-editable version of the data.
 	 * Modifying this triggers change tracking but does not affect the backend until `.save()`.
@@ -552,5 +576,32 @@ export class StructDataStage<T extends Blank>
 		else /* hasRemoteDiverge */ status = 'remoteDiverge';
 
 		return { status, conflicts };
+	}
+
+	/**
+	 * Saves the current staged data locally for later use.
+	 */
+	stash() {
+		return attemptAsync(async () => {
+			if (!this.structData.data.id) return console.warn('Cannot stage struct data without ID');
+			const has = await StagingTable.fromProperty('dataId', this.structData.struct.data.name + ':' + this.structData.data.id, {
+				pagination: false,
+			}).unwrap();
+			const [existing] = has.data;
+			if (existing) {
+				await existing.update(d => ({
+					...d,
+					state: JSON.stringify(this.data),
+					base: JSON.stringify(this.base),
+				})).unwrap();
+			} else {
+				await StagingTable.new({
+					dataId: this.structData.data.id,
+					struct: this.structData.struct.data.name,
+					state: JSON.stringify(this.data),
+					base: JSON.stringify(this.base),
+				}).unwrap();
+			}
+		});
 	}
 }
