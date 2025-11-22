@@ -1,24 +1,14 @@
-import { browser } from "$app/environment";
-import { sse } from "$lib/services/sse";
-import { Struct } from "$lib/services/struct";
+import { Requests } from "$lib/utils/requests";
 import z from "zod";
 
 export namespace Features {
-    export const Alert = new Struct({
-        name: 'feature_alert',
-        structure: {
-            accountId: 'string',
-            feature: 'string',
-        },
-        socket: sse,
-        browser,
+    export const getFeatureList = () => Requests.get('/api/features', {
+        cache: true,
+        expectStream: false,
+        parser: z.array(z.object({
+            name: z.string(),
+            description: z.string(),
+            date: z.number(),
+        }))
     });
-
-    export const getUnread = () => {
-        return Alert.send('unread', {},z.array(z.string()), {
-            cache: {
-                expires: new Date(Date.now() + 1000 * 60 * 60),
-            },
-        });
-    };
 }

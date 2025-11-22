@@ -13,6 +13,8 @@ import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import { StructCache } from './cache';
 import { encode } from 'ts-utils/text';
+import { sse } from '../sse';
+import { browser } from '$app/environment';
 
 let didCacheWarning = false;
 
@@ -2091,3 +2093,23 @@ export class Struct<T extends Blank> {
 		return this.postReq('clear', {});
 	}
 }
+
+
+(async () => {
+	const S = new Struct({
+		name: 'test',
+		structure: {
+			name: 'string',
+			age: 'number',
+		},
+		socket: sse,
+		browser: browser,
+	});
+
+
+	const thing = await S.fromId('thing').unwrap();
+
+	thing.subscribe((item) => {
+		console.log('New age:', item.age);
+	});
+});

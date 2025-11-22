@@ -1,7 +1,7 @@
 ---
-version: 1
-name: New Feature
+name: New Feature Notifications
 description: You can view all new features and bug fixes here!
+date: 2025/11/14
 ---
 
 # New Features
