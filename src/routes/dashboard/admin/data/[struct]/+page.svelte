@@ -26,7 +26,8 @@
 	import Flatpickr from '$lib/components/forms/Flatpickr.svelte';
 	import nav from '$lib/imports/admin';
 	import { v4 as uuid } from 'uuid';
-	import { StructDataStage } from '$lib/services/struct';
+	import { StructDataStage, type StructSearchParams, type SearchQuery } from '$lib/services/struct';
+	import { type ColType } from 'drizzle-struct/types';
 
 	nav();
 
@@ -36,7 +37,8 @@
 
 	const structType = $derived(data.structType);
 	const struct = $derived(data.struct);
-	const structData = $derived(data.data);
+	// const structData = $derived(data.data);
+	let structData = $derived(struct.pagination());
 	const total = $derived(data.total);
 	const safes = $derived(data.safes);
 	const page = $state(data.page);
@@ -62,11 +64,11 @@
 
 	let grid: Grid<StructData<Blank>>;
 	let createModal: Modal;
+	let searchModal: Modal;
 	let editModal: Modal;
 	// svelte-ignore state_referenced_locally
 	let editStage: StructDataStage<Blank> = $state(new StructDataStage(struct.Generator({}) as any));
-	let query = $state('');
-	let column = $state<string | null>(null);
+	let query: StructSearchParams<Blank> = $state({});
 
 	const newItem = () => {
 		createModal.show();
@@ -126,13 +128,10 @@
 	let distanceToTop = $state(0);
 
 	const next = () => {
-		if (page * limit >= total) return;
-		location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page + 1}&limit=${limit}`;
+		structData.next();
 	};
 	const prev = () => {
-		if (page > 0) {
-			location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page - 1}&limit=${limit}`;
-		}
+		structData.prev();
 	};
 
 	const clearTable = async () => {
@@ -146,20 +145,9 @@
 	};
 
 	const search = (query: string, column: string | null) => {
-		const url = new URL(location.href);
-		url.searchParams.set('page', '0');
-		if (query.trim() === '') {
-			url.searchParams.delete('search');
-			url.searchParams.delete('column');
-		} else {
-			url.searchParams.set('search', query);
-			if (column) {
-				url.searchParams.set('column', column);
-			} else {
-				url.searchParams.delete('column');
-			}
-		}
-		location.href = url.toString();
+		structData = struct.search({}, {
+			type: 'pagination'
+		});
 	};
 
 	onMount(() => {
@@ -175,17 +163,6 @@
 				.exec()
 				.unwrap();
 		});
-
-		const url = new URL(location.href);
-		if (url.searchParams.get('search')) {
-			query = url.searchParams.get('search') || '';
-		}
-		if (url.searchParams.get('column')) {
-			column = url.searchParams.get('column') || null;
-		}
-		// setTimeout(() => createModal.show());
-
-		// return () => createModal.hide();
 	});
 
 	let gridContainer: HTMLDivElement;
@@ -254,7 +231,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row mb-3">
+	<!-- <div class="row mb-3">
 		<div class="col">
 			<div class="input-group">
 				<div class="form-floating" style="width: 200px;">
@@ -287,7 +264,7 @@
 				</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div class="row mb-3" bind:this={gridContainer}>
 		<Grid
 			bind:this={grid}
@@ -677,5 +654,19 @@
 			Cancel
 		</button>
 		<button class="btn btn-primary" onclick={saveEdit}> Save </button>
+	{/snippet}
+</Modal>
+
+{#snippet queryable(query: SearchQuery<ColType>)}
+	
+{/snippet}
+
+<Modal bind:this={searchModal} title="Search" size="lg">
+	{#snippet body()}
+		<div class="container-fluid">
+			<div class="row mb-3">
+
+			</div>
+		</div>
 	{/snippet}
 </Modal>

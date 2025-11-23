@@ -48,6 +48,7 @@ export const GET = async (event) => {
 	const paginated = event.url.searchParams.get('pagination') === 'true';
 	const page = Number(event.url.searchParams.get('page') || '0');
 	const size = Number(event.url.searchParams.get('size') || '10');
+	const cols = String(event.url.searchParams.get('cols') || '').split(',');
 
 	let data: StructData<Blank, string>[] = [];
 	let total = 0;
@@ -193,6 +194,49 @@ export const GET = async (event) => {
 				// Read by multiple properties
 				break;
 			}
+			case 'search':
+			{
+				const schema = z.object({
+					operator: z.union([
+						z.literal('>'),
+						z.literal('<'),
+						z.literal('>='),
+						z.literal('<='),
+						z.literal('='),
+						z.literal('!='),
+						z.literal('contains'),
+						z.literal('startsWith'),
+						z.literal('endsWith'),
+						z.literal('equals'),
+					]).optional(),
+					value: z.unknown(),
+				});
+
+				const parsed = z.union([
+					schema,
+					z.object({
+						queries: z.array(schema),
+						type: z.union([
+							z.literal('or'),
+							z.literal('and'),
+						])
+					}), // each set is an "AND"
+				]).safeParse(safeBody.data.args);
+				if (!parsed.success) {
+					throw fail(400, 'Invalid search query');
+				}
+				if (paginated) {
+					data = struct.search(parsed.data, {
+						type: 'array',
+						limit: size,
+						offset: page * size,
+					}).unwrap();
+				} else {
+					data = struct.search(parsed.data, {
+						type: 'all',
+					});
+				}
+			}
 			default:
 				terminal.error('Invalid read type:', event.params.readType);
 				return new Response(
@@ -227,6 +271,13 @@ export const GET = async (event) => {
 		);
 		if (res.isErr()) {
 			return Errors.internalError(res.error);
+		}
+		if (cols.length) {
+			for (const key in res.value) {
+				if (!cols.includes(key)) {
+					delete res.value[key];
+				}
+			}
 		}
 		payload = res.value;
 	}
