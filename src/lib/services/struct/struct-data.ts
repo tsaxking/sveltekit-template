@@ -22,7 +22,7 @@ import { WritableArray, WritableBase } from '$lib/writables';
  * @class StructData
  * @typedef {StructData}
  * @template {Blank} T
- * @implements {Writable<PartialStructable<T & GlobalCols>>}
+ * @extends {WritableBase<PartialStructable<T & GlobalCols>>}
  */
 export class StructData<T extends Blank> extends WritableBase<PartialStructable<T & GlobalCols>> {
 	/**
