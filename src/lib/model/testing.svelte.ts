@@ -381,7 +381,7 @@ export namespace Test {
 						return;
 					}
 
-					const version = versions.value[0];
+					const version = versions.value.data[0];
 					if (version.data.name !== uniqueName) {
 						tests.readVersion.update('failure', 'Name does not match');
 						return;
@@ -551,7 +551,7 @@ export namespace Test {
 						}, 1000);
 
 						Test.fromId(String(testData?.data.id), {
-							force: true,
+							force: true
 						}).then((r) => {
 							if (r.isErr()) {
 								return finish(r.error.message);

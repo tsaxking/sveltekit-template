@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { type Blank, type PartialStructable, type GlobalCols } from './index';
-import { type Writable, writable, get } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { StructData } from './struct-data';
+import { WritableBase } from '$lib/writables';
 
 /**
  * Used in data proxies - a conflict is when both the local and remote data differ from the base data and from each other.
@@ -106,15 +107,9 @@ type StructDataStageConfig<T extends Blank> = {
  *
  * @template T The shape of the base struct (excluding global columns).
  */
-export class StructDataStage<T extends Blank>
-	implements Writable<PartialStructable<T & GlobalCols>>
-{
-	/**
-	 * The proxied, locally-editable version of the data.
-	 * Modifying this triggers change tracking but does not affect the backend until `.save()`.
-	 */
-	public data: PartialStructable<T & GlobalCols>;
-
+export class StructDataStage<T extends Blank> extends WritableBase<
+	PartialStructable<T & GlobalCols>
+> {
 	/**
 	 * The base data structure, which is a snapshot of the remote data
 	 *
@@ -132,33 +127,19 @@ export class StructDataStage<T extends Blank>
 	public readonly deleted = writable(false);
 
 	/**
-	 * Unsubscribe from the StructData's data updates.
-	 *
-	 * @private
-	 * @type {() => void}
-	 */
-	private dataUnsub: () => void;
-	/**
-	 * Set of subscribers that will be notified when the local data changes.
-	 *
-	 * @private
-	 * @readonly
-	 * @type {*}
-	 */
-	private readonly subscribers = new Set<(data: PartialStructable<T & GlobalCols>) => void>();
-	/** Runs once all subscribers are done */
-	private _onAllUnsubscribe = () => {};
-
-	/**
 	 * @param structData The live backend-backed StructData instance to Staging.
 	 */
 	constructor(
-		public readonly structData: StructData<T & GlobalCols>,
+		public readonly structData: StructData<(T & GlobalCols) | T>,
 		public readonly config: StructDataStageConfig<T> = {}
 	) {
+		super(structData.data);
 		this.data = this.makeStaging(structData.data);
-		this.dataUnsub = this.structData.subscribe(() => {
+		const dataUnsub = this.structData.subscribe(() => {
 			this.remoteUpdated.set(true);
+		});
+		this.onAllUnsubscribe(() => {
+			dataUnsub();
 		});
 		this.base = JSON.parse(JSON.stringify(this.data)) as PartialStructable<T & GlobalCols>;
 		this.structData.struct.on('delete', (d) => {
@@ -202,39 +183,6 @@ export class StructDataStage<T extends Blank>
 		} else {
 			this.localUpdated.set(true);
 		}
-	}
-
-	/**
-	 * Subscribes to changes in the local data Staging.
-	 * This is separate from backend changes — only local modifications trigger these.
-	 *
-	 * @param fn The function to call when local data is modified.
-	 * @returns A cleanup function to unsubscribe.
-	 */
-	public subscribe(fn: (data: PartialStructable<T & GlobalCols>) => void) {
-		fn(this.data);
-		this.subscribers.add(fn);
-		return () => {
-			this.subscribers.delete(fn);
-			if (this.subscribers.size === 0) {
-				this._onAllUnsubscribe();
-				this.dataUnsub();
-			}
-		};
-	}
-
-	/**
-	 * Sets a callback that runs when all subscribers have unsubscribed.
-	 *
-	 * @param fn A cleanup function.
-	 */
-	public onAllUnsubscribe(fn: () => void) {
-		this._onAllUnsubscribe = fn;
-	}
-
-	/** Notifies all subscribers of the current local data state. */
-	public inform() {
-		this.subscribers.forEach((fn) => fn(this.data));
 	}
 
 	/**
