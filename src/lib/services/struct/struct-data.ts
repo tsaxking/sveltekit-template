@@ -300,7 +300,7 @@ export class StructData<T extends Blank> extends WritableBase<PartialStructable<
 		});
 	}
 
-	stageing() {
+	staging() {
 		return this.struct.Stage(this);
 	}
 }
