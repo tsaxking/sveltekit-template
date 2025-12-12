@@ -532,7 +532,7 @@ export class TableData<Name extends string, Type extends SchemaDefinition> exten
 	 */
 	update(fn: Updater<TableStructable<Type>>) {
 		return attemptAsync(async () => {
-			return this.set(fn(this.data)).unwrap();
+			await this.set(fn(this.data)).unwrap();
 		});
 	}
 
