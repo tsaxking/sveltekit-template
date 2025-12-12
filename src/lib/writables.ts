@@ -144,7 +144,12 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	}
 
 	map<U>(fn: (item: T) => U) {
-		return new WritableArray<U>(this.data.map(fn));
+		const mapped = new WritableArray<U>(this.data.map(fn));
+		// Copy filter, sort, and reverse settings
+		(mapped as any)._filter = this._filter as any;
+		(mapped as any)._sort = this._sort as any;
+		(mapped as any)._reverse = this._reverse;
+		return mapped;
 	}
 
 	each(fn: (item: T, index: number, arr: T[]) => void): void {
