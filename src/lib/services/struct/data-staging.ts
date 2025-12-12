@@ -133,8 +133,9 @@ export class StructDataStage<T extends Blank> extends WritableBase<
 		public readonly structData: StructData<(T & GlobalCols) | T>,
 		public readonly config: StructDataStageConfig<T> = {}
 	) {
-		super(structData.data);
-		this.data = this.makeStaging(structData.data);
+		const proxiedData = this.makeStaging(structData.data);
+		super(proxiedData);
+		// this.data = proxiedData; // base class should already assign this
 		const dataUnsub = this.structData.subscribe(() => {
 			this.remoteUpdated.set(true);
 		});
