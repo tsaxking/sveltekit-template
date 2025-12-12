@@ -13,6 +13,7 @@ import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import { StructCache } from './cache';
 import { encode } from 'ts-utils/text';
+import { Search } from './search';
 
 let didCacheWarning = false;
 
@@ -484,7 +485,7 @@ type ReadTypes = {
 	get: {
 		[key: string]: unknown;
 	}
-	search: StructSearchParams<Blank>;
+	search: unknown;
 };
 
 /**
@@ -1159,7 +1160,9 @@ export class Struct<T extends Blank> {
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 
-			const u = new URL(`/struct/${this.data.name}/${action}`);
+			const domain = window.location.origin;
+
+			const u = new URL(`${domain}/struct/${this.data.name}/${action}`);
 			if (config.pagination) {
 				u.searchParams.append('pagination', 'true');
 				u.searchParams.append('page', String(config.pagination.page));
@@ -1184,8 +1187,8 @@ export class Struct<T extends Blank> {
 				headers: {
 					...Object.fromEntries(Struct.headers.entries()),
 					'X-Date': String(config.date?.getTime() || Struct.getDate()),
-					'X-Body': JSON.stringify(config.data)
-				}
+					'X-Body': JSON.stringify(config.data),
+				},
 			});
 
 			this.log('Get Response:', action, config.data, res);
@@ -1361,7 +1364,7 @@ export class Struct<T extends Blank> {
 		return s;
 	}
 
-	private getPaginated<ReadType extends 'all' | 'archived' | 'property' | 'from-ids' | 'get' | 'search'>(
+	getPaginated<ReadType extends 'all' | 'archived' | 'property' | 'from-ids' | 'get' | 'search'>(
 		type: ReadType,
 		args: ReadTypes[ReadType],
 		config: {
@@ -2106,66 +2109,7 @@ export class Struct<T extends Blank> {
 		return this.postReq('clear', {});
 	}
 
-	search(params: StructSearchParams<T>, config: ReadConfig<'stream', T>): StructStream<T>;
-	search(params: StructSearchParams<T>, config: ReadConfig<'all', T>): DataArr<T>;
-	search(params: StructSearchParams<T>, config: ReadConfig<'pagination', T>): PaginationDataArr<T>;
-	search(params: StructSearchParams<T>, config: ReadConfig<ReadConfigType, T>): StructStream<T> | DataArr<T> | PaginationDataArr<T> {
-		if (config.type === 'pagination' && 'pagination' in config) {
-			let total = 0;
-			return new PaginationDataArr(this, config.pagination.page, config.pagination.size, async (page, size) => {
-				const res = await this.getPaginated('search', params, {
-					pagination: {
-						page,
-						size: size
-					},
-					cols: config.cols,
-				}).unwrap();
-				total = res.total;
-				return res.items;
-			}, () => total);
-		}
-
-		const getStream = () => this.getStream('search', params, config);
-		if (config.type === 'stream') return getStream();
-
-		if (!config?.force) {
-			const arr = this.writables.get('all');
-			if (arr) return arr;
-		}
-
-		const newArr = new DataArr(this, [...this.cache.values()]);
-		this.writables.set(`search:${encode(JSON.stringify(params))}`, newArr);
-
-		this.registerDataArray(`search:${encode(JSON.stringify(params))}`, newArr, (_data) => {
-			// TODO
-			return false;
-		});
-
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (data) => newArr.set([data]));
-		stream.pipe((data) => newArr.add(data));
-
-		return newArr;
+	search() {
+		return new Search(this);
 	}
 }
-
-export type SearchQuery<T extends ColType> = (T extends 'number' ? {
-	operator: '>' | '<' | '>=' | '<=' | '=' | '!=';
-	value: number;
-} : T extends 'string' ? {
-	operator: 'contains' | 'startsWith' | 'endsWith' | 'equals';
-	value: string;
-} : T extends 'boolean' ? {
-	value: boolean;
-} : T extends 'date' ? {
-	operator: '>' | '<' | '>=' | '<=' | '=' | '!=';
-	value: Date;
-} : never) | {
-	queries: SearchQuery<T>;
-	type: 'and' | 'or';
-};
-
-export type StructSearchParams<T extends Blank> = {
-	[K in keyof T]?: SearchQuery<T[K]>;
-};

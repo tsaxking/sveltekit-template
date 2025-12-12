@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Errors } from '$lib/server/event-handler.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
 import terminal from '$lib/server/utils/terminal.js';
 import { fail } from '@sveltejs/kit';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
+import { Search } from 'drizzle-struct/search';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { groupNodeSchema } from 'drizzle-struct/search';
 
 export const GET = async (event) => {
 	// console.log('Read request for struct:', event.params.struct, event.params.readType);
@@ -196,46 +199,22 @@ export const GET = async (event) => {
 			}
 			case 'search':
 			{
-				const schema = z.object({
-					operator: z.union([
-						z.literal('>'),
-						z.literal('<'),
-						z.literal('>='),
-						z.literal('<='),
-						z.literal('='),
-						z.literal('!='),
-						z.literal('contains'),
-						z.literal('startsWith'),
-						z.literal('endsWith'),
-						z.literal('equals'),
-					]).optional(),
-					value: z.unknown(),
-				});
-
-				const parsed = z.union([
-					schema,
-					z.object({
-						queries: z.array(schema),
-						type: z.union([
-							z.literal('or'),
-							z.literal('and'),
-						])
-					}), // each set is an "AND"
-				]).safeParse(safeBody.data.args);
+				const parsed = groupNodeSchema.safeParse(safeBody.data.args);
 				if (!parsed.success) {
+					terminal.error('Invalid search query:', parsed.error);
 					throw fail(400, 'Invalid search query');
 				}
+				console.log('Parsed search query:', parsed.data);
 				if (paginated) {
-					data = struct.search(parsed.data, {
-						type: 'array',
+					data = await Search.fromNode(struct as any, parsed.data as any).array({
 						limit: size,
-						offset: page * size,
+						offset: page * size
 					}).unwrap();
 				} else {
-					data = struct.search(parsed.data, {
-						type: 'all',
-					});
+					data = await Search.fromNode(struct as any, parsed.data as any).all().unwrap();
 				}
+				// console.log('Search data:', data);
+				break;
 			}
 			default:
 				terminal.error('Invalid read type:', event.params.readType);
