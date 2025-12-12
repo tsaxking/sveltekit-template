@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Errors } from '$lib/server/event-handler.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
 import terminal from '$lib/server/utils/terminal.js';
 import { fail } from '@sveltejs/kit';
 import { Struct, StructData, type Blank } from 'drizzle-struct/back-end';
+import { Search } from 'drizzle-struct/search';
 import { PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { groupNodeSchema } from 'drizzle-struct/search';
 
 export const GET = async (event) => {
 	// console.log('Read request for struct:', event.params.struct, event.params.readType);
@@ -48,6 +51,7 @@ export const GET = async (event) => {
 	const paginated = event.url.searchParams.get('pagination') === 'true';
 	const page = Number(event.url.searchParams.get('page') || '0');
 	const size = Number(event.url.searchParams.get('size') || '10');
+	const cols = String(event.url.searchParams.get('cols') || '').split(',');
 
 	let data: StructData<Blank, string>[] = [];
 	let total = 0;
@@ -193,6 +197,25 @@ export const GET = async (event) => {
 				// Read by multiple properties
 				break;
 			}
+			case 'search':
+			{
+				const parsed = groupNodeSchema.safeParse(safeBody.data.args);
+				if (!parsed.success) {
+					terminal.error('Invalid search query:', parsed.error);
+					throw fail(400, 'Invalid search query');
+				}
+				console.log('Parsed search query:', parsed.data);
+				if (paginated) {
+					data = await Search.fromNode(struct as any, parsed.data as any).array({
+						limit: size,
+						offset: page * size
+					}).unwrap();
+				} else {
+					data = await Search.fromNode(struct as any, parsed.data as any).all().unwrap();
+				}
+				// console.log('Search data:', data);
+				break;
+			}
 			default:
 				terminal.error('Invalid read type:', event.params.readType);
 				return new Response(
@@ -227,6 +250,13 @@ export const GET = async (event) => {
 		);
 		if (res.isErr()) {
 			return Errors.internalError(res.error);
+		}
+		if (cols.length) {
+			for (const key in res.value) {
+				if (!cols.includes(key)) {
+					delete res.value[key];
+				}
+			}
 		}
 		payload = res.value;
 	}

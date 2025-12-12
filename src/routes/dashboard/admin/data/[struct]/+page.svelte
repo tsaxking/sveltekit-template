@@ -27,6 +27,7 @@
 	import nav from '$lib/imports/admin';
 	import { v4 as uuid } from 'uuid';
 	import { StructDataStage } from '$lib/services/struct';
+	import Query from '$lib/components/query/Query.svelte';
 
 	nav();
 
@@ -36,11 +37,12 @@
 
 	const structType = $derived(data.structType);
 	const struct = $derived(data.struct);
-	const structData = $derived(data.data);
-	const total = $derived(data.total);
+	// const structData = $derived(data.data);
+	let structData = $derived(struct.pagination());
 	const safes = $derived(data.safes);
-	const page = $state(data.page);
-	const limit = $state(data.limit);
+	let limit = $state(100);
+	let page = $state(0);
+	let total = $derived(structData.total);
 
 	let newData: Record<string, unknown> = $state({});
 
@@ -60,13 +62,12 @@
 		}
 	};
 
-	let grid: Grid<StructData<Blank>>;
+	let grid: Grid<StructData<Blank>> | undefined = $state(undefined);
 	let createModal: Modal;
+	let searchModal: Modal;
 	let editModal: Modal;
-	// svelte-ignore state_referenced_locally
-	let editStage: StructDataStage<Blank> = $state(new StructDataStage(struct.Generator({}) as any));
-	let query = $state('');
-	let column = $state<string | null>(null);
+	let editStage: StructDataStage<Blank> = $derived(new StructDataStage(struct.Generator({}) as any));
+	let query = $derived(struct.search());
 
 	const newItem = () => {
 		createModal.show();
@@ -126,13 +127,10 @@
 	let distanceToTop = $state(0);
 
 	const next = () => {
-		if (page * limit >= total) return;
-		location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page + 1}&limit=${limit}`;
+		structData.next();
 	};
 	const prev = () => {
-		if (page > 0) {
-			location.href = `/dashboard/admin/data/${data.struct.data.name}?page=${page - 1}&limit=${limit}`;
-		}
+		structData.prev();
 	};
 
 	const clearTable = async () => {
@@ -143,23 +141,6 @@
 		if (res === struct.data.name) {
 			struct.clear();
 		}
-	};
-
-	const search = (query: string, column: string | null) => {
-		const url = new URL(location.href);
-		url.searchParams.set('page', '0');
-		if (query.trim() === '') {
-			url.searchParams.delete('search');
-			url.searchParams.delete('column');
-		} else {
-			url.searchParams.set('search', query);
-			if (column) {
-				url.searchParams.set('column', column);
-			} else {
-				url.searchParams.delete('column');
-			}
-		}
-		location.href = url.toString();
 	};
 
 	onMount(() => {
@@ -176,16 +157,24 @@
 				.unwrap();
 		});
 
-		const url = new URL(location.href);
-		if (url.searchParams.get('search')) {
-			query = url.searchParams.get('search') || '';
-		}
-		if (url.searchParams.get('column')) {
-			column = url.searchParams.get('column') || null;
-		}
-		// setTimeout(() => createModal.show());
+		structData = query.paginated({
+			page,
+			size: limit
+		});
 
-		// return () => createModal.hide();
+		const unsubSearch = query.subscribe(() => {
+			structData = query.paginated({
+				page,
+				size: limit,
+			});
+
+			limit = structData.pageSize;
+			page = structData.page;
+		});
+
+		return () => {
+			unsubSearch();
+		}
 	});
 
 	let gridContainer: HTMLDivElement;
@@ -204,18 +193,18 @@
 		</div>
 	</div>
 	<div class="row mb-3">
-		<div class="col-4">
+		<div class="col-6">
 			<div class="d-flex justify-content-between align-items-center">
 				<p class="ps-2">
 					{$structData.length > 0 ? 'Showing' : 'No'}
-					{$structData.length} of {total} rows
+					{$structData.length} of {$total} rows
 					<br />
-					(Page {page + 1} / {Math.ceil(total / limit) || 1})
+					(Page {page + 1} / {Math.ceil($total / limit) || 1})
 				</p>
 				<button type="button" class="btn" onclick={prev} disabled={page <= 0}>
 					<i class="material-icons">navigate_before</i>
 				</button>
-				<button type="button" class="btn" onclick={next} disabled={page * limit >= total}>
+				<button type="button" class="btn" onclick={next} disabled={page * limit >= $total}>
 					<i class="material-icons">navigate_next</i>
 				</button>
 				<div class="form-floating" style="width: 150px;">
@@ -225,7 +214,7 @@
 						class="form-select"
 						onchange={(e) => {
 							const newLimit = parseInt((e.target as HTMLSelectElement).value, 10);
-							location.href = `/dashboard/admin/data/${data.struct.data.name}?page=0&limit=${newLimit}`;
+							structData.pageSize = newLimit;
 						}}
 						value={limit}
 					>
@@ -237,59 +226,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-4">
+		<div class="col-6">
 			<div class="d-flex w-100 justify-content-end pe-2">
-				<button type="button" class="btn btn-primary" onclick={newItem}>
+				<button type="button" class="btn btn-secondary btn-lg" onclick={() => searchModal.show()}>
+					<i class="material-icons">search</i>
+					Search
+				</button>
+				<button type="button" class="btn btn-primary btn-lg" onclick={newItem}>
 					<i class="material-icons">add</i>
 					New
 				</button>
-			</div>
-		</div>
-		<div class="col-4">
-			<div class="d-flex w-100 justify-content-end pe-2">
-				<button type="button" class="btn btn-danger" onclick={clearTable}>
+				<button type="button" class="btn btn-danger btn-lg" onclick={clearTable}>
 					<i class="material-icons">delete_sweep</i>
 					Clear Table
 				</button>
 			</div>
 		</div>
 	</div>
-	<div class="row mb-3">
-		<div class="col">
-			<div class="input-group">
-				<div class="form-floating" style="width: 200px;">
-					<select name="floating-column" id="column" class="form-select" bind:value={column}>
-						<option value="" selected>All Columns</option>
-						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value]}
-							<option value={key}>{capitalize(fromCamelCase(key))}</option>
-						{/each}
-					</select>
-					<label for="column"> Column </label>
-				</div>
-				<input
-					type="text"
-					class="form-control"
-					placeholder="Search..."
-					aria-label="Search"
-					bind:value={query}
-					onkeydown={(e) => {
-						if (e.key === 'Enter') {
-							search(query, column);
-						}
-					}}
-				/>
-				<button
-					class="btn btn-outline-secondary"
-					type="button"
-					onclick={() => search(query, column)}
-				>
-					<i class="material-icons">search</i>
-				</button>
-			</div>
-		</div>
-	</div>
 	<div class="row mb-3" bind:this={gridContainer}>
-		<Grid
+		{#key structData}
+					<Grid
 			bind:this={grid}
 			opts={{
 				columnDefs: [
@@ -478,6 +434,7 @@
 			}}
 			multiSelect={true}
 		/>
+		{/key}
 	</div>
 </div>
 
@@ -677,5 +634,11 @@
 			Cancel
 		</button>
 		<button class="btn btn-primary" onclick={saveEdit}> Save </button>
+	{/snippet}
+</Modal>
+
+<Modal bind:this={searchModal} title="Search" size="lg">
+	{#snippet body()}
+		<Query {struct} search={query} />
 	{/snippet}
 </Modal>
