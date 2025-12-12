@@ -1,5 +1,5 @@
 import { type Subscriber, type Writable } from "svelte/store";
-import { Struct, StructStream, type Blank } from "./struct";
+import { Struct, StructStream, type Blank, type ColTsType } from "./struct";
 import { PaginationDataArr } from "./data-arr";
 
 
@@ -16,7 +16,7 @@ export class Search<T extends Blank> implements Writable<Group<T>> {
 
     where<Col extends keyof T>(
         col: Col,
-        op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=',
+        op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=',
         value: unknown
     ) {
         // this.query.nodes.push({
@@ -136,12 +136,58 @@ export class Search<T extends Blank> implements Writable<Group<T>> {
         );
     }
 
-    addCondition(col: string, op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=' = 'equals', value: unknown) {
+    addCondition(col: string, op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=' = 'equals', value: unknown) {
         this.query.addCondition(col, op, value);
     }
 
     addGroup() {
         this.query.addGroup();
+    }
+
+    or(nodes: {
+        [K in keyof T]?: {
+            op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=';
+            value: ColTsType<T[K]>;
+        };
+    }, fn?: (g: Group<T>) => void) {
+        const group = new Group<T>('or', [], this);
+        for (const col in nodes) {
+            const condition = nodes[col];
+            if (condition) {
+                group.addCondition(
+                    String(col),
+                    condition.op,
+                    condition.value
+                );
+            }
+        }
+        if (fn) {
+            fn(group);
+        }
+        return this;
+    }
+
+    and(nodes: {
+        [K in keyof T]?: {
+            op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=';
+            value: ColTsType<T[K]>;
+        }
+    }, fn?: (g: Group<T>) => void) {
+        const group = new Group<T>('and', [], this);
+        for (const col in nodes) {
+            const condition = nodes[col];
+            if (condition) {
+                group.addCondition(
+                    String(col),
+                    condition.op,
+                    condition.value
+                );
+            }
+        }
+        if (fn) {
+            fn(group);
+        }
+        return this;
     }
 }
 
@@ -149,7 +195,7 @@ export class Search<T extends Blank> implements Writable<Group<T>> {
 export class Condition<T extends Blank> implements Writable<{
     type: 'condition';
     col: string;
-    op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=';
+    op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=';
     value: unknown;
 }> {
     type = 'condition' as const;
@@ -158,7 +204,7 @@ export class Condition<T extends Blank> implements Writable<{
 
     constructor(
         public col: string,
-        public op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=',
+        public op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=',
         public value: unknown,
         parent: Group<T> | Search<T>
     ) {
@@ -168,11 +214,11 @@ export class Condition<T extends Blank> implements Writable<{
     private subscribers = new Set<(value: {
         type: 'condition';
         col: string;
-        op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=';
+        op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=';
         value: unknown;
     }) => void>();
 
-    subscribe(fn: Subscriber<{ type: "condition"; col: string; op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }>) {
+    subscribe(fn: Subscriber<{ type: "condition"; col: string; op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }>) {
         fn({
             type: 'condition',
             col: this.col,
@@ -183,14 +229,14 @@ export class Condition<T extends Blank> implements Writable<{
         return () => this.subscribers.delete(fn);
     }
 
-    set(value: { type: "condition"; col: string; op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) {
+    set(value: { type: "condition"; col: string; op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) {
         this.col = value.col;
         this.op = value.op;
         this.value = value.value;
         this.inform();
     }
 
-    update(fn: (value: { type: "condition"; col: string; op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) => { type: "condition"; col: string; op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) {
+    update(fn: (value: { type: "condition"; col: string; op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) => { type: "condition"; col: string; op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<='; value: unknown; }) {
         const value = fn({
             type: 'condition',
             col: this.col,
@@ -290,7 +336,7 @@ export class Group<T extends Blank> implements Writable<{
         this.parent.inform();
     }
 
-    addCondition(col: string, op: 'contains' | 'equals' | 'startsWith' | 'endsWith' | '=' | '>' | '<' | '>=' | '<=' = 'equals', value: unknown) {
+    addCondition(col: string, op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=' = 'equals', value: unknown) {
         this.update(g => {
             g.nodes.push(new Condition<T>(col, op, value, this));
             return g;
@@ -302,6 +348,60 @@ export class Group<T extends Blank> implements Writable<{
             g.nodes.push(new Group<T>('and', [], this));
             return g;
         });
+    }
+
+    or(nodes: {
+        [K in keyof T]?: {
+            op: 'contains' | 'equals' |'=' | '>' | '<' | '>=' | '<=';
+            value: ColTsType<T[K]>;
+        };
+    }, fn?: (g: Group<T>) => void) {
+        const group = new Group<T>('or', [], this);
+        for (const col in nodes) {
+            const condition = nodes[col];
+            if (condition) {
+                group.addCondition(
+                    String(col),
+                    condition.op,
+                    condition.value
+                );
+            }
+        }
+        if (fn) {
+            fn(group);
+        }
+        this.update(g => {
+            g.nodes.push(group);
+            return g;
+        });
+        return this;
+    }
+
+    and(nodes: {
+        [K in keyof T]?: {
+            op: 'contains' | 'equals' | '=' | '>' | '<' | '>=' | '<=';
+            value: ColTsType<T[K]>;
+        }
+    }, fn?: (g: Group<T>) => void) {
+        const group = new Group<T>('and', [], this);
+        for (const col in nodes) {
+            const condition = nodes[col];
+            if (condition) {
+                group.addCondition(
+                    String(col),
+                    condition.op,
+                    condition.value
+                );
+            }
+        }
+        if (fn) {
+            fn(group);
+        }
+        this.update(g => {
+            g.nodes.push(group);
+            return g;
+        });
+        return this;
     }
 }
 
