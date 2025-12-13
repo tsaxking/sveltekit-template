@@ -57,7 +57,13 @@
 					<ul class="list-unstyled">
 						{#each section.links as link}
 							<li class="ps-3 mb-2">
-								<a class="text-reset text-decoration-none" href={link.href} onclick={hide}>
+								<a
+									class="text-reset text-decoration-none {link.disabled ? 'disabled' : ''}"
+									href={link.href}
+									onclick={hide}
+									target={link.external ? '_blank' : '_self'}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+								>
 									{#if link.icon.type === 'material-icons'}
 										<i class="material-icons">{link.icon.name}</i>
 									{:else if link.icon.type === 'fontawesome'}
@@ -79,3 +85,10 @@
 		</ul>
 	</div>
 </div>
+
+<style>
+	a.disabled {
+		pointer-events: none;
+		opacity: 0.6;
+	}
+</style>

@@ -1,5 +1,5 @@
 import type { Icon } from '$lib/types/icons';
-import { type Writable } from 'svelte/store';
+import { WritableArray } from '$lib/writables';
 
 export namespace Navbar {
 	type Section = {
@@ -10,32 +10,14 @@ export namespace Navbar {
 			// type: 'material-icons' | 'font-awesome' | 'material-symbols' | 'bootstrap' | 'custom';
 			name: string;
 			href: string;
+			external?: boolean;
+			disabled?: boolean;
 		}[];
 	};
 
-	class Sections implements Writable<Section[]> {
-		public readonly data: Section[] = [];
-
-		public constructor() {}
-
-		private readonly subscribers = new Set<(value: Section[]) => void>();
-		public inform() {
-			this.subscribers.forEach((fn) => fn(this.data));
-		}
-
-		public subscribe(fn: (value: Section[]) => void) {
-			this.subscribers.add(fn);
-			fn(this.data);
-			return () => this.subscribers.delete(fn);
-		}
-
-		public set(value: Section[]) {
-			this.data.splice(0, this.data.length, ...value);
-			this.inform();
-		}
-
-		public update(fn: (value: Section[]) => Section[]) {
-			this.set(fn(this.data));
+	class Sections extends WritableArray<Section> {
+		public constructor() {
+			super([]);
 		}
 	}
 
@@ -64,4 +46,6 @@ export namespace Navbar {
 			return s;
 		});
 	};
+
+	export const clear = () => sections.clear();
 }
