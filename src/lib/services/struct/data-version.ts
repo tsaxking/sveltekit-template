@@ -9,6 +9,7 @@ import {
 import { attemptAsync } from 'ts-utils/check';
 import { DataAction } from 'drizzle-struct/types';
 import { z } from 'zod';
+import { WritableBase } from '$lib/writables';
 
 /**
  * Version history of a data, requiring global columns and a version history id and created date
@@ -31,7 +32,7 @@ export type VersionStructable<T extends Blank> = Structable<{
  * @typedef {StructDataVersion}
  * @template {Blank} T
  */
-export class StructDataVersion<T extends Blank> {
+export class StructDataVersion<T extends Blank> extends WritableBase<PartialStructable<T>> {
 	/**
 	 * Creates an instance of StructDataVersion.
 	 *
@@ -51,7 +52,9 @@ export class StructDataVersion<T extends Blank> {
 					vhCreated: 'date';
 				}
 		>
-	) {}
+	) {
+		super(data);
+	}
 
 	/**
 	 * unique version history id

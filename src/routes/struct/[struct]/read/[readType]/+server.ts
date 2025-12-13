@@ -158,19 +158,17 @@ export const GET = async (event) => {
 							ids: z.array(z.string())
 						})
 						.parse(safeBody.data.args);
-					data = await struct.fromIds(safe.ids, {
-						type: 'all',
-					}).unwrap();
+					data = await struct
+						.fromIds(safe.ids, {
+							type: 'all'
+						})
+						.unwrap();
 				}
 				break;
-			case 'get': 
-			{
-				const safe = z.record(z.union([
-					z.string(),
-					z.number(),
-					z.boolean(),
-					z.null(),
-				])).parse(safeBody.data.args);
+			case 'get': {
+				const safe = z
+					.record(z.union([z.string(), z.number(), z.boolean(), z.null()]))
+					.parse(safeBody.data.args);
 				if (paginated) {
 					data = await struct
 						.get(
@@ -181,14 +179,16 @@ export const GET = async (event) => {
 								limit: size,
 								offset: page * size
 							}
-						).unwrap();
+						)
+						.unwrap();
 				} else {
 					data = await struct
 						.get(
 							// eslint-disable-next-line @typescript-eslint/no-explicit-any
 							safe as any,
 							{ type: 'all' }
-						).unwrap();
+						)
+						.unwrap();
 				}
 				// Read by multiple properties
 				break;

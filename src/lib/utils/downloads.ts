@@ -1,4 +1,4 @@
-import { attempt, attemptAsync, type Result } from 'ts-utils/check';
+import { attempt, attemptAsync } from 'ts-utils/check';
 
 /**
  * Download a file from a URL
@@ -45,11 +45,14 @@ export const downloadText = async (text: string, filename: string) => {
  * Returns a file list from the user
  * @date 1/26/2024 - 1:03:25 AM
  */
-export const loadFiles = (): Promise<Result<FileList>> => {
+export const loadFiles = (multiple = false) => {
 	return attemptAsync(async () => {
 		return new Promise<FileList>((res, rej) => {
 			const element = document.createElement('input');
 			element.setAttribute('type', 'file');
+			if (multiple) {
+				element.setAttribute('multiple', '');
+			}
 			element.style.display = 'none';
 			document.body.appendChild(element);
 			element.click();
@@ -71,16 +74,9 @@ export const loadFiles = (): Promise<Result<FileList>> => {
  * Returns the contents of files from the user
  * @date 1/26/2024 - 1:03:25 AM
  */
-export const loadFileContents = (): Promise<
-	Result<
-		{
-			name: string;
-			text: string;
-		}[]
-	>
-> => {
+export const loadFileContents = (multiple = false) => {
 	return attemptAsync(async () => {
-		const res = await loadFiles();
+		const res = await loadFiles(multiple);
 		if (res.isOk()) {
 			const files = Array.from(res.value);
 

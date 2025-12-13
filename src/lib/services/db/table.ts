@@ -1,11 +1,4 @@
-import {
-	type Subscriber,
-	type Unsubscriber,
-	type Updater,
-	type Writable,
-	writable,
-	get
-} from 'svelte/store';
+import { type Updater, type Writable, writable, get } from 'svelte/store';
 import {
 	_init,
 	_define,
@@ -15,24 +8,8 @@ import {
 } from '.';
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
-
-/**
- * Debounce function that delays execution until after a specified time has passed
- * without the function being called again. Used for performance optimization to
- * prevent excessive UI updates during rapid data changes.
- *
- * @template T - Function type that extends a function with any parameters
- * @param {T} func - The function to debounce
- * @param {number} delay - The delay in milliseconds to wait before executing
- * @returns {T} The debounced function with the same signature
- */
-const debounce = <T extends (...args: unknown[]) => void>(func: T, delay: number): T => {
-	let timeoutId: ReturnType<typeof setTimeout>;
-	return ((...args: Parameters<T>) => {
-		clearTimeout(timeoutId);
-		timeoutId = setTimeout(() => func(...args), delay);
-	}) as T;
-};
+import { debounce } from 'ts-utils';
+import { WritableArray, WritableBase } from '$lib/writables';
 
 /**
  * Configuration object for read operations that determines pagination behavior
@@ -501,9 +478,9 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
  * @template {SchemaDefinition} Type - The schema definition
  * @implements {Writable<TableStructable<Type>>}
  */
-export class TableData<Name extends string, Type extends SchemaDefinition>
-	implements Writable<TableStructable<Type>>
-{
+export class TableData<Name extends string, Type extends SchemaDefinition> extends WritableBase<
+	TableStructable<Type>
+> {
 	/**
 	 * Creates an instance of TableData.
 	 *
@@ -514,48 +491,8 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
 	constructor(
 		public table: Table<Name, Type>,
 		public data: TableStructable<Type>
-	) {}
-
-	/**
-	 * Set of subscribers listening to changes in this record
-	 *
-	 * @private
-	 * @readonly
-	 * @type {Set<(value: TableStructable<Type>) => void>}
-	 */
-	private readonly subscribers = new Set<(value: TableStructable<Type>) => void>();
-
-	/**
-	 * Notifies all subscribers about data changes
-	 *
-	 * @private
-	 * @returns {void}
-	 */
-	private inform() {
-		for (const s of this.subscribers) {
-			s(this.data);
-		}
-	}
-
-	/**
-	 * Subscribes to changes in this record (Svelte store interface)
-	 *
-	 * @param {Subscriber<TableStructable<Type>>} fn - Callback function that receives the current data
-	 * @returns {Unsubscriber} Unsubscribe function
-	 * @example
-	 * ```typescript
-	 * const user = await userTable.fromId('123');
-	 * const unsubscribe = user.subscribe(data => {
-	 *   console.log('User updated:', data);
-	 * });
-	 * ```
-	 */
-	subscribe(fn: Subscriber<TableStructable<Type>>): Unsubscriber {
-		this.subscribers.add(fn);
-		fn(this.data);
-		return () => {
-			this.subscribers.delete(fn);
-		};
+	) {
+		super(data);
 	}
 
 	/**
@@ -595,9 +532,7 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
 	 */
 	update(fn: Updater<TableStructable<Type>>) {
 		return attemptAsync(async () => {
-			const newData = fn(this.data);
-			this.data = newData;
-			await this.save().unwrap();
+			await this.set(fn(this.data)).unwrap();
 		});
 	}
 
@@ -647,9 +582,9 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
  * @template {SchemaDefinition} Type - The schema definition
  * @implements {Writable<TableData<Name, Type>[]>}
  */
-export class TableDataArr<Name extends string, Type extends SchemaDefinition>
-	implements Writable<TableData<Name, Type>[]>
-{
+export class TableDataArr<Name extends string, Type extends SchemaDefinition> extends WritableArray<
+	TableData<Name, Type>
+> {
 	/**
 	 * Event emitter for array-level events (add/remove)
 	 *
@@ -681,16 +616,9 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	constructor(
 		public table: Table<Name, Type>,
 		public data: TableData<Name, Type>[]
-	) {}
-
-	/**
-	 * Set of subscribers listening to array changes
-	 *
-	 * @private
-	 * @readonly
-	 * @type {Set<(value: TableData<Name, Type>[]) => void>}
-	 */
-	private readonly subscribers = new Set<(value: TableData<Name, Type>[]) => void>();
+	) {
+		super(data);
+	}
 
 	/**
 	 * Immediate notification for critical updates
@@ -698,7 +626,7 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 * @private
 	 * @returns {void}
 	 */
-	private informImmediate() {
+	_informImmediate() {
 		for (const s of this.subscribers) {
 			const data = this.data.filter(this._filter).sort(this._sort);
 			if (this._reverse) data.reverse();
@@ -712,8 +640,8 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 * @private
 	 * @type {() => void}
 	 */
-	private informDebounced = debounce(() => {
-		this.informImmediate();
+	_informDebounced = debounce(() => {
+		this._informImmediate();
 	}, __APP_ENV__.indexed_db.debounce_interval_ms);
 
 	/**
@@ -724,58 +652,10 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 */
 	public inform(immediate = false) {
 		if (immediate) {
-			this.informImmediate();
+			this._informImmediate();
 		} else {
-			this.informDebounced();
+			this._informDebounced();
 		}
-	}
-
-	/**
-	 * Subscribes to changes in this array (Svelte store interface)
-	 *
-	 * @param {Subscriber<TableData<Name, Type>[]>} fn - Callback function that receives the current filtered/sorted data
-	 * @returns {Unsubscriber} Unsubscribe function
-	 * @example
-	 * ```typescript
-	 * const users = userTable.arr();
-	 * const unsubscribe = users.subscribe(data => {
-	 *   console.log('Users updated:', data.length);
-	 * });
-	 * ```
-	 */
-	subscribe(fn: Subscriber<TableData<Name, Type>[]>): Unsubscriber {
-		this.subscribers.add(fn);
-		// Use immediate notification for initial subscription to ensure sync
-		fn(this.data.filter(this._filter).sort(this._sort));
-		return () => {
-			this.subscribers.delete(fn);
-			if (this.subscribers.size === 0) {
-				this._onAllUnsubscribe();
-			}
-		};
-	}
-
-	/**
-	 * Sets the entire array data (Svelte store interface)
-	 *
-	 * @param {TableData<Name, Type>[]} value - New array data to set
-	 * @returns {void}
-	 */
-	set(value: TableData<Name, Type>[]) {
-		this.data = value;
-		this.inform(true); // Immediate for direct data changes
-	}
-
-	/**
-	 * Updates the array using an updater function (Svelte store interface)
-	 *
-	 * @param {Updater<TableData<Name, Type>[]>} fn - Function that receives current data and returns new data
-	 * @returns {void}
-	 */
-	update(fn: Updater<TableData<Name, Type>[]>): void {
-		const newData = fn(this.data);
-		this.data = newData;
-		this.inform(true); // Immediate for direct data changes
 	}
 
 	/**
@@ -807,93 +687,6 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 			this.emit('remove', item);
 		}
 		this.inform(); // Debounced for event-driven updates
-	}
-
-	/**
-	 * Indicates whether the current sort order is reversed
-	 *
-	 * @private
-	 * @type {boolean}
-	 */
-	private _reverse = false;
-
-	/**
-	 * Toggles the sort order between ascending and descending
-	 *
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.reverse();
-	 * ```
-	 */
-	public reverse() {
-		this._reverse = !this._reverse;
-		this.inform(true);
-	}
-
-	/**
-	 * Internal sort function (no-op by default)
-	 *
-	 * @private
-	 * @type {(a: TableData<Name, Type>, b: TableData<Name, Type>) => number}
-	 */
-	private _sort = (a: TableData<Name, Type>, b: TableData<Name, Type>) =>
-		b.data.updated_at.getTime() - a.data.updated_at.getTime();
-
-	/**
-	 * Sets the sort function for this array
-	 *
-	 * @param {(a: TableData<Name, Type>, b: TableData<Name, Type>) => number} compareFn - Sort comparison function
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.sort((a, b) => a.data.name.localeCompare(b.data.name));
-	 * ```
-	 */
-	sort(compareFn: (a: TableData<Name, Type>, b: TableData<Name, Type>) => number) {
-		this._sort = compareFn;
-		this.inform(true); // Immediate for UI operations like sorting
-	}
-
-	/**
-	 * Internal filter function (passes all by default)
-	 *
-	 * @private
-	 * @type {(item: TableData<Name, Type>) => boolean}
-	 */
-	private _filter = (_item: TableData<Name, Type>) => true;
-
-	/**
-	 * Sets the filter function for this array
-	 *
-	 * @param {(item: TableData<Name, Type>) => boolean} filterFn - Filter predicate function
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.filter(user => user.data.active === true);
-	 * ```
-	 */
-	filter(filterFn: (item: TableData<Name, Type>) => boolean) {
-		this._filter = filterFn;
-		this.inform(true); // Immediate for UI operations like filtering
-	}
-
-	/**
-	 * Cleanup callback executed when all subscribers are removed
-	 *
-	 * @private
-	 * @type {() => void}
-	 */
-	private _onAllUnsubscribe = () => {};
-
-	/**
-	 * Sets a callback to execute when all subscribers are removed
-	 *
-	 * @param {() => void} fn - Cleanup function to execute
-	 * @returns {void}
-	 */
-	onAllUnsubscribe(fn: () => void) {
-		this._onAllUnsubscribe = fn;
 	}
 }
 

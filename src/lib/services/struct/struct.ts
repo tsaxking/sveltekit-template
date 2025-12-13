@@ -483,7 +483,7 @@ type ReadTypes = {
 	};
 	get: {
 		[key: string]: unknown;
-	}
+	};
 };
 
 /**
@@ -1000,7 +1000,7 @@ export class Struct<T extends Blank> {
 	 * @param {StructData<T & GlobalCols>} data
 	 * @returns {StructDataProxy<T & GlobalCols>}
 	 */
-	Stage(data: StructData<T & GlobalCols>) {
+	Stage(data: StructData<(T & GlobalCols) | T>) {
 		return new StructDataStage(data);
 	}
 
@@ -1510,8 +1510,10 @@ export class Struct<T extends Blank> {
 		const getStream = () => this.getStream('archived', undefined, config);
 		if (config.type === 'stream') return getStream();
 
-		if (!config?.force) {const arr = this.writables.get('archived');
-		if (arr) return arr;}
+		if (!config?.force) {
+			const arr = this.writables.get('archived');
+			if (arr) return arr;
+		}
 
 		const newArr = new DataArr(
 			this,
@@ -1665,63 +1667,60 @@ export class Struct<T extends Blank> {
 			const res = await this.getReq(`${PropertyAction.Read}/from-id`, {
 				data: {
 					args: {
-						id,
+						id
 					}
 				},
 				cache: config?.cache
 			});
 			const data = await res.unwrap().json();
-			console.log('Recieved from-id data:', data);
-			const parsed = z.object({
-				success: z.boolean(),
-				data: z.array(z.unknown()),
-				message: z.string().optional()
-			}).parse(data);
+			console.log('Received from-id data:', data);
+			const parsed = z
+				.object({
+					success: z.boolean(),
+					data: z.array(z.unknown()),
+					message: z.string().optional()
+				})
+				.parse(data);
 			return this.Generator(parsed.data[0] as SafePartialStructable<T & GlobalCols>);
 		});
 	}
 
 	/**
 	 * Gets data from specific ids as a paginated array
-	 * @param ids 
-	 * @param config 
+	 * @param ids
+	 * @param config
 	 */
-	fromIds(
-		ids: string[],
-		config: ReadConfig<'pagination'>
-	): PaginationDataArr<T>;
+	fromIds(ids: string[], config: ReadConfig<'pagination'>): PaginationDataArr<T>;
 	/**
 	 * Gets data from specific ids as a stream
-	 * @param ids 
-	 * @param config 
+	 * @param ids
+	 * @param config
 	 */
-	fromIds(
-		ids: string[],
-		config: ReadConfig<'stream'>
-	): StructStream<T>;
+	fromIds(ids: string[], config: ReadConfig<'stream'>): StructStream<T>;
 	/**
 	 * Gets data from specific ids as a svelte store
-	 * @param ids 
-	 * @param config 
+	 * @param ids
+	 * @param config
 	 */
-	fromIds(
-		ids: string[],
-		config: ReadConfig<'all'>
-	): DataArr<T>;
+	fromIds(ids: string[], config: ReadConfig<'all'>): DataArr<T>;
 	/**
 	 * Gets data from specific ids as a stream or svelte store
-	 * @param ids 
-	 * @param config 
-	 * @returns 
+	 * @param ids
+	 * @param config
+	 * @returns
 	 */
 	fromIds(
 		ids: string[],
 		config: ReadConfig<ReadConfigType>
 	): PaginationDataArr<T> | StructStream<T> | DataArr<T> {
-
-		const getStream = () => this.getStream('from-ids', {
-			ids,
-		}, config);
+		const getStream = () =>
+			this.getStream(
+				'from-ids',
+				{
+					ids
+				},
+				config
+			);
 		if (config.type === 'stream') return getStream();
 
 		if (config.type === 'pagination' && 'pagination' in config) {
@@ -1738,8 +1737,8 @@ export class Struct<T extends Blank> {
 					total = all.value.length;
 					return items;
 				},
-				() => total,
-			)
+				() => total
+			);
 		}
 
 		const cacheKey = `from-ids:${ids.join(',')}`;
@@ -1775,18 +1774,9 @@ export class Struct<T extends Blank> {
 		data: PartialStructable<T & GlobalCols>,
 		config: ReadConfig<'pagination'>
 	): PaginationDataArr<T>;
-	get(
-		data: PartialStructable<T & GlobalCols>,
-		config: ReadConfig<'stream'>
-	): StructStream<T>;
-	get(
-		data: PartialStructable<T & GlobalCols>,
-		config: ReadConfig<'all'>
-	): DataArr<T>;
-	get(
-		data: PartialStructable<T & GlobalCols>,
-		config: ReadConfig<ReadConfigType>,
-	) {
+	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'stream'>): StructStream<T>;
+	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'all'>): DataArr<T>;
+	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<ReadConfigType>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
 			return new PaginationDataArr<T>(
@@ -1794,17 +1784,13 @@ export class Struct<T extends Blank> {
 				config.pagination.page,
 				config.pagination.size,
 				async (page, size) => {
-					const res = await this.getPaginated(
-						'get',
-						data,
-						{
-							cache: config.cache,
-							pagination: {
-								page,
-								size
-							}
+					const res = await this.getPaginated('get', data, {
+						cache: config.cache,
+						pagination: {
+							page,
+							size
 						}
-					).unwrap();
+					}).unwrap();
 					total = res.total;
 					return res.items;
 				},
