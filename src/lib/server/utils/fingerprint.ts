@@ -2,6 +2,11 @@ import crypto from 'crypto';
 import { attemptAsync } from 'ts-utils/check';
 import { str } from '../utils/env';
 
+/**
+ * 
+ * @param fpConfig 
+ * @returns 
+ */
 export const signFingerprint = (fpConfig: {
 	fingerprint: string;
 	userAgent: string;
