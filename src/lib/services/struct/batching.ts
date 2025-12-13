@@ -17,7 +17,6 @@ export namespace StructBatching {
 	export type Batch = typeof table.sample;
 
 	export type StructBatch = {
-		id: string;
 		struct: Struct<Blank>;
 		type: DataAction | PropertyAction | string;
 		data: unknown;
