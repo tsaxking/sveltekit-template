@@ -9,6 +9,7 @@ import path from 'path';
 import redis from '../services/redis';
 import { config } from '../utils/env';
 import { pathMatch } from '../utils/file-match';
+import { str } from '../utils/env';
 
 export namespace Limiting {
 	try {
@@ -168,7 +169,7 @@ export namespace Limiting {
 		const accept = request.headers.get('accept') ?? '';
 		const language = request.headers.get('accept-language') ?? '';
 
-		const salt = config.sessions.fingerprint_secret;
+		const salt = str('FINGERPRINT_SECRET', true);
 
 		const raw = `${ip}|${ua}|${accept}|${language}|${salt}`;
 

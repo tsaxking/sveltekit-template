@@ -22,7 +22,6 @@ export default z.object({
 		auto_sign_in: z.string().optional(),
 		duration: z.number().min(1),
 		password_request_lifetime: z.number().min(1),
-		fingerprint_secret: z.string().min(1)
 	}),
 	redis: z.object({
 		url: z.string().url(),
