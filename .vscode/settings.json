@@ -5,13 +5,11 @@
 			"rules": [
 				{
 					"patterns": [
-						// all data in {{ }}, but not including the {{ }}
 						"\\{\\{ [^}]+\\}\\}"
 					],
 					"color": "BrightGreen"
 				},
 				{
-					// All <repeat> tags
 					"patterns": [
 						"<repeat[^>]*>",
 						"</repeat>",
@@ -58,5 +56,9 @@
 			"fileMatch": ["config.json", "config.example.json", "config.docker.json"],
 			"url": "./config/config.schema.json"
 		}
-	]
+	],
+	"files.associations": {
+		"config.json": "jsonc",
+		"config.*.json": "jsonc"
+	}
 }
