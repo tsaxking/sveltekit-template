@@ -58,11 +58,13 @@
 						{#each section.links as link}
 							<li class="ps-3 mb-2">
 								<a
-									class="text-reset text-decoration-none {link.disabled ? 'disabled' : ''}"
-									href={link.href}
-									onclick={hide}
+									class:disabled={link.disabled}
+									class="text-reset text-decoration-none"
+									{...link.disabled ? {} : { href: link.href }}
+									{...link.disabled ? {} : { onclick: hide }}
 									target={link.external ? '_blank' : '_self'}
 									rel={link.external ? 'noopener noreferrer' : undefined}
+									{...link.disabled ? { tabindex: -1, 'aria-disabled': 'true' } : {}}
 								>
 									{#if link.icon.type === 'material-icons'}
 										<i class="material-icons">{link.icon.name}</i>
