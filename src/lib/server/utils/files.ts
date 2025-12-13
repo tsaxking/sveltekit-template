@@ -360,7 +360,7 @@ export const parseJSON = <T>(json: string, parser: z.ZodType<T>) => {
 		const parsed = parse(json, null, true);
 		return parser.parse(parsed);
 	});
-}
+};
 
 export const openJSONSync = <T>(filePath: string, parser: z.ZodType<T>) => {
 	return attempt<T>(() => {
