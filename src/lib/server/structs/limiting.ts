@@ -7,9 +7,8 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
-import { config } from '../utils/env';
+import { config, str } from '../utils/env';
 import { pathMatch } from '../utils/file-match';
-import { str } from '../utils/env';
 
 export namespace Limiting {
 	try {
