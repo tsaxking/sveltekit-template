@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { Table } from '../db/table';
 import { Batch } from 'ts-utils/batch';
 import { em } from '../db';
+import type { Blank, Struct } from './struct';
 
 export namespace StructBatching {
 	const table = new Table('struct_batching', {
@@ -14,6 +15,13 @@ export namespace StructBatching {
 	});
 
 	export type Batch = typeof table.sample;
+
+	export type StructBatch = {
+		struct: Struct<Blank>;
+		type: DataAction | PropertyAction | string;
+		data: unknown;
+		date?: Date;
+	};
 
 	const log = (...args: unknown[]) => {
 		if (__APP_ENV__.struct_batching.debug) {
@@ -26,15 +34,14 @@ export namespace StructBatching {
 		if (data.isOk()) {
 			log(`Processing ${data.value.data.length} pending struct batching items...`);
 			for (const item of data.value.data) {
-				batch.add(item);
+				batcher.add(item);
 			}
 		}
 	});
 
-	const batch = new Batch(
+	const batcher = new Batch(
 		async (items: Batch[]) => {
 			log(`Sending batch of ${items.length} struct updates...`);
-			console.log(items);
 			const res = await fetch('/struct/batch', {
 				method: 'POST',
 				headers: {
@@ -53,8 +60,6 @@ export namespace StructBatching {
 
 			// If we got here, then fetch succeeded and server is running, therefore we can delete the items.
 			await Promise.all(items.map((i) => i.delete()));
-
-			console.log(res);
 
 			return z
 				.array(
@@ -75,29 +80,28 @@ export namespace StructBatching {
 		}
 	);
 
-	export const add = (
-		struct: string,
-		type: DataAction | PropertyAction | string,
-		data: unknown,
-		date?: Date
-	) => {
+	export const add = (...structBatch: StructBatch[]) => {
 		return attemptAsync(async () => {
-			const item = await table
-				.new({
-					struct,
-					type,
-					data,
-					date: date ?? new Date()
-				})
-				.unwrap();
+			const items = await Promise.all(
+				structBatch.map((b) =>
+					table
+						.new({
+							struct: b.struct.data.name,
+							type: b.type,
+							data: b.data,
+							date: b.date ?? new Date()
+						})
+						.unwrap()
+				)
+			);
 
-			const res = await batch.add(item).unwrap();
-			item.delete();
-			return {
-				message: res.message,
-				success: res.success,
-				data: res.data
-			};
+			const res = await Promise.all(items.map((i) => batcher.add(i).unwrap()));
+			await Promise.all(items.map((i) => i.delete()));
+			return res.map((r) => ({
+				message: r.message,
+				success: r.success,
+				data: r.data
+			}));
 		});
 	};
 }

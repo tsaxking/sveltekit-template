@@ -83,8 +83,6 @@ export enum FetchActions {
 	// Retrieve = 'retrieve',
 }
 
-// TODO: Batching?
-
 /**
  * Error if the data is an invalid state
  *
@@ -1102,7 +1100,13 @@ export class Struct<T extends Blank> {
 				data?: unknown;
 			};
 			if (__APP_ENV__.struct_batching.enabled) {
-				res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+				// res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+				[res] = await StructBatching.add({
+					struct: this as any,
+					data,
+					date,
+					type: action
+				}).unwrap();
 			} else {
 				res = z
 					.object({
