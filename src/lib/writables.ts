@@ -5,7 +5,7 @@ import { debounce } from 'ts-utils';
 /**
  * Base writable store implementation with debounced updates and lifecycle management.
  * Provides a foundation for reactive data stores with performance optimizations.
- * 
+ *
  * @export
  * @class WritableBase
  * @typedef {WritableBase}
@@ -15,7 +15,7 @@ import { debounce } from 'ts-utils';
 export class WritableBase<T> implements Writable<T> {
 	/**
 	 * Creates an instance of WritableBase.
-	 * 
+	 *
 	 * @constructor
 	 * @param {T} data - Initial data value
 	 * @param {object} [_config] - Optional configuration
@@ -34,7 +34,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Set of active subscribers to this writable store
-	 * 
+	 *
 	 * @public
 	 * @type {Set<Subscriber<T>>}
 	 */
@@ -42,7 +42,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Subscribes to changes in this writable store (Svelte store interface)
-	 * 
+	 *
 	 * @param {Subscriber<T>} run - Callback function that receives the current data
 	 * @returns {Unsubscriber} Function to unsubscribe from updates
 	 * @example
@@ -66,7 +66,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Immediately notifies all subscribers of the current data
-	 * 
+	 *
 	 * @private
 	 * @returns {void}
 	 */
@@ -78,7 +78,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Debounced version of _informImmediate for performance optimization
-	 * 
+	 *
 	 * @private
 	 * @type {() => void}
 	 */
@@ -86,7 +86,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Notifies subscribers of data changes, optionally with immediate or debounced delivery
-	 * 
+	 *
 	 * @param {boolean} [immediate=false] - If true, notifies immediately; otherwise debounced
 	 * @returns {void}
 	 */
@@ -100,7 +100,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Sets the data to a new value and notifies subscribers (Svelte store interface)
-	 * 
+	 *
 	 * @param {T} value - New data value
 	 * @returns {void}
 	 * @example
@@ -115,7 +115,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Updates the data using an updater function and notifies subscribers (Svelte store interface)
-	 * 
+	 *
 	 * @param {(value: T) => T} fn - Function that receives current data and returns new data
 	 * @returns {void}
 	 * @example
@@ -129,7 +129,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Set of callbacks to execute when all subscribers have unsubscribed
-	 * 
+	 *
 	 * @private
 	 * @type {Set<() => void>}
 	 */
@@ -137,7 +137,7 @@ export class WritableBase<T> implements Writable<T> {
 
 	/**
 	 * Registers a callback to execute when all subscribers have unsubscribed
-	 * 
+	 *
 	 * @param {() => void} _callback - Function to call when all subscribers are removed
 	 * @returns {void}
 	 * @example
@@ -155,7 +155,7 @@ export class WritableBase<T> implements Writable<T> {
 /**
  * Writable array store that extends WritableBase with array-specific operations.
  * Provides reactive array manipulation with filtering, sorting, and standard array methods.
- * 
+ *
  * @export
  * @class WritableArray
  * @typedef {WritableArray}
@@ -165,7 +165,7 @@ export class WritableBase<T> implements Writable<T> {
 export class WritableArray<T> extends WritableBase<T[]> {
 	/**
 	 * Creates a WritableArray from any iterable
-	 * 
+	 *
 	 * @static
 	 * @template T
 	 * @param {Iterable<T>} arr - Iterable to convert to WritableArray
@@ -182,7 +182,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Gets the current length of the array
-	 * 
+	 *
 	 * @returns {number} Number of elements in the array
 	 */
 	get length() {
@@ -191,7 +191,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Adds an item to the end of the array and notifies subscribers
-	 * 
+	 *
 	 * @param {T} item - Item to add to the array
 	 * @returns {void}
 	 */
@@ -204,7 +204,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Removes and returns the last item from the array
-	 * 
+	 *
 	 * @returns {T | undefined} The removed item, or undefined if array is empty
 	 */
 	pop(): T | undefined {
@@ -218,7 +218,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Removes and returns the first item from the array
-	 * 
+	 *
 	 * @returns {T | undefined} The removed item, or undefined if array is empty
 	 */
 	shift(): T | undefined {
@@ -232,7 +232,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Adds an item to the beginning of the array and notifies subscribers
-	 * 
+	 *
 	 * @param {T} item - Item to add to the beginning of the array
 	 * @returns {void}
 	 */
@@ -245,7 +245,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Changes the contents of the array by removing/replacing existing elements and/or adding new elements
-	 * 
+	 *
 	 * @param {number} start - Index at which to start changing the array
 	 * @param {number} deleteCount - Number of elements to remove
 	 * @param {...T[]} items - Elements to add to the array
@@ -260,7 +260,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Removes all elements from the array
-	 * 
+	 *
 	 * @returns {void}
 	 */
 	clear(): void {
@@ -269,23 +269,23 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Internal sort function (no-op by default)
-	 * 
+	 *
 	 * @private
 	 * @type {(a: T, b: T) => number}
 	 */
 	_sort = (_a: T, _b: T): number => 0;
-	
+
 	/**
 	 * Internal filter function (passes all by default)
-	 * 
+	 *
 	 * @private
 	 * @type {(item: T) => boolean}
 	 */
 	_filter = (_item: T): boolean => true;
-	
+
 	/**
 	 * Internal reverse flag
-	 * 
+	 *
 	 * @private
 	 * @type {boolean}
 	 */
@@ -293,7 +293,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Toggles the reverse order of the array display
-	 * 
+	 *
 	 * @returns {void}
 	 */
 	reverse(): void {
@@ -303,7 +303,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Sets the sort function for the array display
-	 * 
+	 *
 	 * @param {(a: T, b: T) => number} fn - Comparison function for sorting
 	 * @returns {void}
 	 * @example
@@ -319,7 +319,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Sets the filter function for the array display
-	 * 
+	 *
 	 * @param {(item: T) => boolean} fn - Predicate function for filtering
 	 * @returns {void}
 	 * @example
@@ -335,7 +335,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Notifies subscribers with filtered, sorted, and optionally reversed data
-	 * 
+	 *
 	 * @returns {void}
 	 */
 	inform(): void {
@@ -353,7 +353,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	/**
 	 * Creates a new WritableArray with the results of calling a function on every element
 	 * Note: Filter, sort, and reverse settings are copied to the new array
-	 * 
+	 *
 	 * @template U
 	 * @param {(item: T) => U} fn - Function that transforms each element
 	 * @returns {WritableArray<U>} New WritableArray with transformed elements
@@ -374,7 +374,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Executes a provided function once for each array element
-	 * 
+	 *
 	 * @param {(item: T, index: number, arr: T[]) => void} fn - Function to execute for each element
 	 * @returns {void}
 	 */
@@ -386,7 +386,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 
 	/**
 	 * Removes the first occurrence of the specified item from the array
-	 * 
+	 *
 	 * @param {T} item - Item to remove from the array
 	 * @returns {void}
 	 */
