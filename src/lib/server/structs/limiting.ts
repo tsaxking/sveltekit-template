@@ -7,7 +7,7 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
-import { config } from '../utils/env';
+import { config, str } from '../utils/env';
 import { pathMatch } from '../utils/file-match';
 
 export namespace Limiting {
@@ -168,7 +168,7 @@ export namespace Limiting {
 		const accept = request.headers.get('accept') ?? '';
 		const language = request.headers.get('accept-language') ?? '';
 
-		const salt = config.sessions.fingerprint_secret;
+		const salt = str('FINGERPRINT_SECRET', true);
 
 		const raw = `${ip}|${ua}|${accept}|${language}|${salt}`;
 

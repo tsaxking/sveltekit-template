@@ -3,7 +3,9 @@ import Busboy from 'busboy';
 import path from 'path';
 import fs from 'fs';
 import { uuid } from './uuid';
-import { attemptAsync } from 'ts-utils/check';
+import { attemptAsync, attempt } from 'ts-utils/check';
+import { z } from 'zod';
+import { parse } from 'comment-json';
 
 const UPLOAD_DIR = path.resolve(process.cwd(), 'static/uploads');
 
@@ -351,4 +353,25 @@ export const renderSearchResultHtml = (
 	}
 
 	return output;
+};
+
+export const parseJSON = <T>(json: string, parser: z.ZodType<T>) => {
+	return attempt(() => {
+		const parsed = parse(json, null, true);
+		return parser.parse(parsed);
+	});
+};
+
+export const openJSONSync = <T>(filePath: string, parser: z.ZodType<T>) => {
+	return attempt<T>(() => {
+		const raw = fs.readFileSync(filePath, 'utf-8');
+		return parseJSON(raw, parser).unwrap();
+	});
+};
+
+export const openJSON = <T>(filePath: string, parser: z.ZodType<T>) => {
+	return attemptAsync<T>(async () => {
+		const raw = await fs.promises.readFile(filePath, 'utf-8');
+		return parseJSON(raw, parser).unwrap();
+	});
 };

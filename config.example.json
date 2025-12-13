@@ -16,8 +16,7 @@
 	"sessions": {
 		"auto_sign_in": "username",
 		"duration": 604800000,
-		"password_request_lifetime": 3600000,
-		"fingerprint_secret": "your_fingerprint_secret"
+		"password_request_lifetime": 3600000
 	},
 	"redis": {
 		"url": "redis://localhost:6379",
