@@ -83,8 +83,6 @@ export enum FetchActions {
 	// Retrieve = 'retrieve',
 }
 
-// TODO: Batching?
-
 /**
  * Error if the data is an invalid state
  *
