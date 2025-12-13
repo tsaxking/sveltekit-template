@@ -3,7 +3,7 @@ import { runTask } from './task';
 
 /**
  * Gets the current Git branch name.
- * 
+ *
  * @export
  * @async
  * @returns {Promise<AttemptAsync<string>>} Promise resolving to the current branch name
@@ -23,7 +23,7 @@ export const branch = () =>
 
 /**
  * Gets the current Git commit hash (full SHA).
- * 
+ *
  * @export
  * @async
  * @returns {Promise<AttemptAsync<string>>} Promise resolving to the current commit hash
@@ -44,7 +44,7 @@ export const commit = () =>
 /**
  * Gets the repository name from the top-level directory.
  * Extracts the directory name from the Git repository's root path.
- * 
+ *
  * @export
  * @async
  * @returns {Promise<AttemptAsync<string>>} Promise resolving to the repository name
@@ -66,7 +66,7 @@ export const repoName = () =>
 /**
  * Gets the repository's origin remote URL.
  * Returns the URL configured for the origin remote.
- * 
+ *
  * @export
  * @async
  * @returns {Promise<AttemptAsync<string>>} Promise resolving to the origin remote URL
@@ -90,7 +90,7 @@ export const repoUrl = () =>
  * Gets the repository slug in the format "owner/repository".
  * Parses the origin remote URL to extract the owner and repository name.
  * Supports both SSH and HTTPS Git URLs.
- * 
+ *
  * @export
  * @async
  * @returns {Promise<AttemptAsync<string>>} Promise resolving to the repository slug

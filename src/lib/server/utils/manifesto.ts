@@ -12,7 +12,7 @@ let manifesto = '';
  * Gets the route manifesto content from the route-tree.pages file.
  * Caches the content after the first read for performance.
  * The manifesto contains route patterns with wildcard support.
- * 
+ *
  * @export
  * @returns {string} The manifesto content as a string
  * @example
@@ -31,7 +31,7 @@ export const getManifesto = () => {
  * Finds a matching route pattern in the manifesto for a given URL.
  * Supports wildcard matching where '*' in patterns can match any URL segment.
  * Compares URL segments against manifesto patterns to find exact matches.
- * 
+ *
  * @export
  * @param {string} url - The URL to match against manifesto patterns
  * @returns {string | null} The matching pattern from the manifesto, or null if no match found
@@ -40,7 +40,7 @@ export const getManifesto = () => {
  * // Manifesto contains: /users/[*]/profile
  * const pattern = getManifestoInstance('/users/123/profile');
  * console.log(pattern); // "/users/[*]/profile"
- * 
+ *
  * const noMatch = getManifestoInstance('/unknown/route');
  * console.log(noMatch); // null
  * ```

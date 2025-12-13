@@ -30,14 +30,14 @@ interface RequestEvent {
 /**
  * File upload receiver that handles multipart/form-data file uploads with size and count limits.
  * Uses Busboy to parse multipart data and saves files to the static/uploads directory.
- * 
+ *
  * @export
  * @class FileReceiver
  */
 export class FileReceiver {
 	/**
 	 * Creates an instance of FileReceiver.
-	 * 
+	 *
 	 * @constructor
 	 * @param {object} config - Configuration for file upload limits
 	 * @param {number} config.maxFileSize - Maximum file size in bytes
@@ -53,7 +53,7 @@ export class FileReceiver {
 	/**
 	 * Receives and processes multipart/form-data file uploads from a request.
 	 * Validates content type, enforces file limits, and saves files with unique names.
-	 * 
+	 *
 	 * @async
 	 * @param {RequestEvent} { request } - SvelteKit request event containing the multipart data
 	 * @returns {Promise<AttemptAsync<{files: {fieldName: string, filePath: string}[]}>>} Promise resolving to uploaded file information
@@ -138,7 +138,7 @@ export class FileReceiver {
 
 /**
  * Represents a file or directory in a hierarchical tree structure
- * 
+ *
  * @export
  * @typedef {FileTree}
  */
@@ -158,7 +158,7 @@ export type FileTree = {
 /**
  * Recursively builds a file tree structure for a given directory.
  * Reads the directory contents and creates a hierarchical representation.
- * 
+ *
  * @export
  * @async
  * @param {string} dir - Root directory path to build tree from
@@ -210,7 +210,7 @@ export const fileTree = (dir: string) => {
  * Generates a searchable file by concatenating all files in a directory tree.
  * Creates a single file with special markers for file boundaries to enable fast searching.
  * Each file's content is wrapped with --[fileName:start]-- and --[fileName:end]-- markers.
- * 
+ *
  * @export
  * @async
  * @param {string} dir - Directory to process recursively
@@ -272,7 +272,7 @@ export const generateSearchFile = (dir: string, name: string) => {
 
 /**
  * Represents a search result with location information
- * 
+ *
  * @typedef {SearchResult}
  */
 type SearchResult = {
@@ -288,7 +288,7 @@ type SearchResult = {
 
 /**
  * Configuration options for search operations
- * 
+ *
  * @typedef {SearchConfig}
  */
 type SearchConfig = {
@@ -303,7 +303,7 @@ type SearchConfig = {
 /**
  * Searches through a generated search file for occurrences of a term.
  * Parses the special file markers and returns detailed match information.
- * 
+ *
  * @export
  * @async
  * @param {string} searchFile - Name of the search file (without .search extension)
@@ -312,9 +312,9 @@ type SearchConfig = {
  * @returns {Promise<AttemptAsync<SearchResult[]>>} Promise resolving to array of search results
  * @example
  * ```typescript
- * const results = await searchFile('codebase', 'function', { 
- *   limit: 10, 
- *   caseSensitive: true 
+ * const results = await searchFile('codebase', 'function', {
+ *   limit: 10,
+ *   caseSensitive: true
  * });
  * if (results.isOk()) {
  *   console.log('Found matches:', results.value);
@@ -420,7 +420,7 @@ export const searchFile = (searchFile: string, searchTerm: string, config?: Sear
 
 /**
  * Configuration options for HTML rendering of search results
- * 
+ *
  * @typedef {HtmlRenderConfig}
  */
 type HtmlRenderConfig = {
@@ -436,7 +436,7 @@ type HtmlRenderConfig = {
 
 /**
  * Escapes HTML special characters in a string
- * 
+ *
  * @private
  * @param {string} str - String to escape
  * @returns {string} HTML-escaped string
@@ -452,7 +452,7 @@ const escapeHtml = (str: string): string =>
 /**
  * Renders a search result as HTML with highlighted matches.
  * Wraps matched terms in configurable HTML tags and optionally shows file/line information.
- * 
+ *
  * @export
  * @param {SearchResult} result - Search result to render
  * @param {HtmlRenderConfig} [config={}] - Rendering configuration options
@@ -514,7 +514,7 @@ export const renderSearchResultHtml = (
 /**
  * Parses a JSON string with comment support and validates it against a Zod schema.
  * Uses comment-json parser to handle JSON with comments.
- * 
+ *
  * @export
  * @template T
  * @param {string} json - JSON string to parse (may contain comments)
@@ -539,7 +539,7 @@ export const parseJSON = <T>(json: string, parser: z.ZodType<T>) => {
 /**
  * Synchronously reads and parses a JSON file with Zod validation.
  * Supports JSON files with comments.
- * 
+ *
  * @export
  * @template T
  * @param {string} filePath - Path to the JSON file
@@ -563,7 +563,7 @@ export const openJSONSync = <T>(filePath: string, parser: z.ZodType<T>) => {
 /**
  * Asynchronously reads and parses a JSON file with Zod validation.
  * Supports JSON files with comments.
- * 
+ *
  * @export
  * @template T
  * @param {string} filePath - Path to the JSON file

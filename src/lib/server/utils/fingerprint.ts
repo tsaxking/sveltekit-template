@@ -3,9 +3,9 @@ import { attemptAsync } from 'ts-utils/check';
 import { str } from '../utils/env';
 
 /**
- * 
- * @param fpConfig 
- * @returns 
+ *
+ * @param fpConfig
+ * @returns
  */
 export const signFingerprint = (fpConfig: {
 	fingerprint: string;
