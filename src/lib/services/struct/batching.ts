@@ -22,7 +22,7 @@ export namespace StructBatching {
 		type: DataAction | PropertyAction | string;
 		data: unknown;
 		date?: Date;
-	}
+	};
 
 	const log = (...args: unknown[]) => {
 		if (__APP_ENV__.struct_batching.debug) {
@@ -81,21 +81,23 @@ export namespace StructBatching {
 		}
 	);
 
-	export const add = (
-		...structBatch: StructBatch[]
-	) => {
+	export const add = (...structBatch: StructBatch[]) => {
 		return attemptAsync(async () => {
-			const items = await Promise.all(structBatch.map(b => table
-				.new({
-					struct: b.struct.data.name,
-					type: b.type,
-					data: b.data,
-					date: b.date ?? new Date()
-				})
-				.unwrap()));
+			const items = await Promise.all(
+				structBatch.map((b) =>
+					table
+						.new({
+							struct: b.struct.data.name,
+							type: b.type,
+							data: b.data,
+							date: b.date ?? new Date()
+						})
+						.unwrap()
+				)
+			);
 
-			const res = await Promise.all(items.map(i => batcher.add(i).unwrap()));
-			await Promise.all(items.map(i => i.delete()));
+			const res = await Promise.all(items.map((i) => batcher.add(i).unwrap()));
+			await Promise.all(items.map((i) => i.delete()));
 			return res.map((r) => ({
 				message: r.message,
 				success: r.success,

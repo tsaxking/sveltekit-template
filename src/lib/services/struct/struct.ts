@@ -1100,7 +1100,14 @@ export class Struct<T extends Blank> {
 				data?: unknown;
 			};
 			if (__APP_ENV__.struct_batching.enabled) {
-				res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+				// res = await StructBatching.add(this.data.name, action, data, date).unwrap();
+				[res] = await StructBatching.add({
+					id: Math.random().toString(36).substring(2, 15),
+					struct: this as any,
+					data,
+					date,
+					type: action
+				}).unwrap();
 			} else {
 				res = z
 					.object({
