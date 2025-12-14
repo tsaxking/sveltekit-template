@@ -9,7 +9,7 @@ import {
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { debounce } from 'ts-utils';
-import { WritableArray, WritableBase } from '$lib/writables';
+import { WritableArray, WritableBase } from '$lib/utils/writables';
 
 /**
  * Configuration object for read operations that determines pagination behavior

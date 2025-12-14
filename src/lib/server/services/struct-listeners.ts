@@ -418,7 +418,7 @@ export class SendListener<
 		data: unknown
 	) {
 		return attemptAsync<ListenerStatus<SendReturnType> | undefined>(async () => {
-			const listener = SendListener.listeners.get(fn);
+			const listener = SendListener.listeners.get(struct.data.name + ':' + fn);
 			if (!listener) {
 				return undefined;
 			}

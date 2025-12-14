@@ -2,7 +2,7 @@ import { Struct, type Blank } from './index';
 import { get, writable, type Writable } from 'svelte/store';
 import { StructData } from './struct-data';
 import { EventEmitter } from 'ts-utils/event-emitter';
-import { WritableArray } from '$lib/writables';
+import { WritableArray } from '$lib/utils/writables';
 import { debounce } from 'ts-utils';
 
 /**
