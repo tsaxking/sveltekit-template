@@ -18,7 +18,6 @@ export type ContextMenuOptions = (
 )[];
 
 const rightClickContextMenu = (e: MouseEvent, el: HTMLDivElement) => {
-	e.preventDefault();
 	const browser = {
 		h: window.innerHeight,
 		w: window.innerWidth
@@ -138,12 +137,12 @@ export const contextmenu = (
 		document.removeEventListener('click', rm);
 	};
 
-	document.addEventListener('click', rm);
-	// };
+	setTimeout(() => {
+		document.addEventListener('click', rm);
+	});
 
-	// target.addEventListener('contextmenu', fn);
 
-	// return () => {
-	// 	target.removeEventListener('contextmenu', fn);
-	// };
+	return () => {
+		rm();
+	};
 };
