@@ -178,7 +178,7 @@ export namespace Account {
 
 	export const signOut = () => {
 		return attemptAsync(async () => {
-			return fetch('/account/sign-out', {
+			return fetch('/api/account/sign-out', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ export namespace Account {
 
 	export const signOutOfSession = (sessionId: string) => {
 		return attemptAsync(async () => {
-			return fetch('/account/sign-out', {
+			return fetch('/api/account/sign-out', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

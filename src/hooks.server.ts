@@ -38,15 +38,15 @@ const sessionIgnore = ignore();
 sessionIgnore.add(`
 /account
 /status
-/sse
-/struct
+/api/sse
+/api/struct
 /test
 /favicon.ico
 /robots.txt
-/oauth
+/api/oauth
 /email
-/analytics
-/fp
+/api/analytics
+/api/fp
 `);
 
 export const handle: Handle = async ({ event, resolve }) => {

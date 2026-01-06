@@ -49,7 +49,7 @@ export namespace TimeService {
 
 	export const forceSync = async () => {
 		return attemptAsync(async () => {
-			const data = await fetch('/ntp').then((r) => r.json());
+			const data = await fetch('/api/ntp').then((r) => r.json());
 			const parsed = z
 				.object({
 					time: z.number(),

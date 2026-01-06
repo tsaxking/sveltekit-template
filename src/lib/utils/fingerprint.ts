@@ -12,7 +12,7 @@ export const fingerprint = () => {
 			throw new Error('Failed to retrieve fingerprint');
 		}
 
-		const res = await fetch('/fp', {
+		const res = await fetch('/api/fp', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

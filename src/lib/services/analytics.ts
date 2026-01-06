@@ -8,12 +8,12 @@ const close = (seconds: number) => {
 		if (called || !browser) return;
 		called = true;
 
-		// navigator.sendBeacon('/analytics/close', JSON.stringify({
+		// navigator.sendBeacon('/api/analytics/close', JSON.stringify({
 		//     page: window.location.pathname,
 		//     duration: seconds,
 		// }));
 
-		fetch('/analytics/close', {
+		fetch('/api/analytics/close', {
 			body: JSON.stringify({
 				page: window.location.pathname,
 				duration: seconds
