@@ -867,6 +867,23 @@ export class RangeSlider extends WritableBase<{
 	}
 
 	render() {
+		const HANDLE_DIAMETER = 20;
+		const HANDLE_RADIUS = HANDLE_DIAMETER / 2;
+
+		const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+		const valueToPos = (value: number, width: number) =>
+			HANDLE_RADIUS + ((value - this.config.min) / (this.config.max - this.config.min)) * (width - HANDLE_DIAMETER);
+		const deltaToValue = (deltaX: number, width: number) =>
+			deltaX * ((this.config.max - this.config.min) / (width - HANDLE_DIAMETER));
+		const setAria = (el: SVGCircleElement, value: number, label: string) => {
+			el.setAttribute('role', 'slider');
+			el.setAttribute('aria-valuemin', this.config.min.toString());
+			el.setAttribute('aria-valuemax', this.config.max.toString());
+			el.setAttribute('aria-valuenow', value.toString());
+			el.setAttribute('aria-label', label);
+			el.setAttribute('tabindex', '0');
+		};
+
 		const wrapper = document.createElement('div');
 		wrapper.style.width = '100%';
 		this.config.target.appendChild(wrapper);
@@ -878,36 +895,37 @@ export class RangeSlider extends WritableBase<{
 
 		// Background track line
 		const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-		line.setAttribute('x1', '10');
+		line.setAttribute('x1', HANDLE_RADIUS.toString());
 		line.setAttribute('y1', '25');
-		line.setAttribute('x2', `${wrapper.clientWidth - 10}`);
+		line.setAttribute('x2', `${wrapper.clientWidth - HANDLE_RADIUS}`);
 		line.setAttribute('y2', '25');
 		line.setAttribute('stroke', this.config.lineColor || '#ccc');
 		line.setAttribute('stroke-width', '4');
+		line.setAttribute('stroke-linecap', 'round');
 		svg.appendChild(line);
 
 		// Active range line (between handles)
 		const rangeLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-		rangeLine.setAttribute('x1', '10');
+		rangeLine.setAttribute('x1', HANDLE_RADIUS.toString());
 		rangeLine.setAttribute('y1', '25');
-		rangeLine.setAttribute('x2', `${wrapper.clientWidth - 10}`);
+		rangeLine.setAttribute('x2', `${wrapper.clientWidth - HANDLE_RADIUS}`);
 		rangeLine.setAttribute('y2', '25');
 		rangeLine.setAttribute('stroke', this.config.handleColor || '#007bff');
 		rangeLine.setAttribute('stroke-width', '4');
 		svg.appendChild(rangeLine);
 
 		const start = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-		start.setAttribute('cx', '10');
+		start.setAttribute('cx', HANDLE_RADIUS.toString());
 		start.setAttribute('cy', '25');
-		start.setAttribute('r', '10');
+		start.setAttribute('r', HANDLE_RADIUS.toString());
 		start.setAttribute('fill', this.config.handleColor || '#007bff');
 		start.style.cursor = 'grab';
 		svg.appendChild(start);
 
 		const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-		end.setAttribute('cx', '290');
+		end.setAttribute('cx', `${wrapper.clientWidth - HANDLE_RADIUS}`);
 		end.setAttribute('cy', '25');
-		end.setAttribute('r', '10');
+		end.setAttribute('r', HANDLE_RADIUS.toString());
 		end.setAttribute('fill', this.config.handleColor || '#007bff');
 		end.style.cursor = 'grab';
 		svg.appendChild(end);
@@ -923,6 +941,26 @@ export class RangeSlider extends WritableBase<{
 		let dragStartX = 0;
 		let dragStartValue = 0;
 
+		const applyStartValue = (value: number, width: number) => {
+			const clamped = clamp(value, this.config.min, this.data.max);
+			const steppedValue = Math.round(clamped / this.config.step) * this.config.step;
+			const startPos = valueToPos(steppedValue, width);
+			start.setAttribute('cx', startPos.toString());
+			rangeLine.setAttribute('x1', startPos.toString());
+			setAria(start, steppedValue, 'Minimum value');
+			setValue({ min: steppedValue });
+		};
+
+		const applyEndValue = (value: number, width: number) => {
+			const clamped = clamp(value, this.data.min, this.config.max);
+			const steppedValue = Math.round(clamped / this.config.step) * this.config.step;
+			const endPos = valueToPos(steppedValue, width);
+			end.setAttribute('cx', endPos.toString());
+			rangeLine.setAttribute('x2', endPos.toString());
+			setAria(end, steppedValue, 'Maximum value');
+			setValue({ max: steppedValue });
+		};
+
 		const startMouseDown = (e: MouseEvent) => {
 			e.preventDefault();
 			startDragging = true;
@@ -935,21 +973,9 @@ export class RangeSlider extends WritableBase<{
 			if (!startDragging) return;
 			e.preventDefault();
 			const deltaX = e.clientX - dragStartX;
-			const wrapperWidth = wrapper.clientWidth;
-			// Convert pixel delta to value delta
-			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
-			let newValue = dragStartValue + valueDelta;
-			// Clamp to range
-			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
-			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
-			// Update position immediately during drag for smooth interaction
-			const startPos =
-				10 +
-				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
-					(wrapperWidth - 20);
-			start.setAttribute('cx', startPos.toString());
-			rangeLine.setAttribute('x1', startPos.toString());
-			setValue({ min: steppedValue });
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyStartValue(dragStartValue + valueDelta, width);
 		};
 
 		const startMouseUp = () => {
@@ -968,21 +994,9 @@ export class RangeSlider extends WritableBase<{
 			if (!startDragging) return;
 			e.preventDefault();
 			const deltaX = e.touches[0].clientX - dragStartX;
-			const wrapperWidth = wrapper.clientWidth;
-			// Convert pixel delta to value delta
-			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
-			let newValue = dragStartValue + valueDelta;
-			// Clamp to range
-			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
-			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
-			// Update position immediately during drag for smooth interaction
-			const startPos =
-				10 +
-				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
-					(wrapperWidth - 20);
-			start.setAttribute('cx', startPos.toString());
-			rangeLine.setAttribute('x1', startPos.toString());
-			setValue({ min: steppedValue });
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyStartValue(dragStartValue + valueDelta, width);
 		};
 
 		const startTouchEnd = () => {
@@ -1001,21 +1015,9 @@ export class RangeSlider extends WritableBase<{
 			if (!endDragging) return;
 			e.preventDefault();
 			const deltaX = e.clientX - dragStartX;
-			const wrapperWidth = wrapper.clientWidth;
-			// Convert pixel delta to value delta
-			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
-			let newValue = dragStartValue + valueDelta;
-			// Clamp to range
-			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
-			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
-			// Update position immediately during drag for smooth interaction
-			const endPos =
-				10 +
-				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
-					(wrapperWidth - 20);
-			end.setAttribute('cx', endPos.toString());
-			rangeLine.setAttribute('x2', endPos.toString());
-			setValue({ max: steppedValue });
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyEndValue(dragStartValue + valueDelta, width);
 		};
 
 		const endMouseUp = () => {
@@ -1030,25 +1032,57 @@ export class RangeSlider extends WritableBase<{
 			dragStartValue = this.data.max;
 		};
 
+		const handleKey = (e: KeyboardEvent, type: 'start' | 'end') => {
+			const isStart = type === 'start';
+			const current = isStart ? this.data.min : this.data.max;
+			const minBound = this.config.min;
+			const maxBound = this.config.max;
+			const sibling = isStart ? this.data.max : this.data.min;
+			const step = this.config.step;
+			const bigStep = step * 10;
+
+			let next = current;
+			switch (e.key) {
+				case 'ArrowLeft':
+				case 'ArrowDown':
+					next = current - step;
+					break;
+				case 'ArrowRight':
+				case 'ArrowUp':
+					next = current + step;
+					break;
+				case 'PageDown':
+					next = current - bigStep;
+					break;
+				case 'PageUp':
+					next = current + bigStep;
+					break;
+				case 'Home':
+					next = isStart ? minBound : sibling;
+					break;
+				case 'End':
+					next = isStart ? sibling : maxBound;
+					break;
+				default:
+					return;
+			}
+
+			e.preventDefault();
+			const width = wrapper.clientWidth;
+			if (isStart) {
+				applyStartValue(next, width);
+			} else {
+				applyEndValue(next, width);
+			}
+		};
+
 		const endTouchMove = (e: TouchEvent) => {
 			if (!endDragging) return;
 			e.preventDefault();
 			const deltaX = e.touches[0].clientX - dragStartX;
-			const wrapperWidth = wrapper.clientWidth;
-			// Convert pixel delta to value delta
-			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
-			let newValue = dragStartValue + valueDelta;
-			// Clamp to range
-			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
-			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
-			// Update position immediately during drag for smooth interaction
-			const endPos =
-				10 +
-				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
-					(wrapperWidth - 20);
-			end.setAttribute('cx', endPos.toString());
-			rangeLine.setAttribute('x2', endPos.toString());
-			setValue({ max: steppedValue });
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyEndValue(dragStartValue + valueDelta, width);
 		};
 
 		const endTouchEnd = () => {
@@ -1056,11 +1090,16 @@ export class RangeSlider extends WritableBase<{
 		};
 
 		// Attach mouse/touch listeners
+		const startKeyDown = (e: KeyboardEvent) => handleKey(e, 'start');
+		const endKeyDown = (e: KeyboardEvent) => handleKey(e, 'end');
+
 		start.addEventListener('mousedown', startMouseDown);
-		start.addEventListener('touchstart', startTouchStart);
+		start.addEventListener('touchstart', startTouchStart, { passive: false });
+		start.addEventListener('keydown', startKeyDown);
 
 		end.addEventListener('mousedown', endMouseDown);
-		end.addEventListener('touchstart', endTouchStart);
+		end.addEventListener('touchstart', endTouchStart, { passive: false });
+		end.addEventListener('keydown', endKeyDown);
 
 		// Global move and up listeners for dragging
 		document.addEventListener('mousemove', startMouseMove);
@@ -1068,10 +1107,10 @@ export class RangeSlider extends WritableBase<{
 		document.addEventListener('mouseup', startMouseUp);
 		document.addEventListener('mouseup', endMouseUp);
 
-		document.addEventListener('touchmove', startTouchMove);
-		document.addEventListener('touchmove', endTouchMove);
-		document.addEventListener('touchend', startTouchEnd);
-		document.addEventListener('touchend', endTouchEnd);
+		document.addEventListener('touchmove', startTouchMove, { passive: false });
+		document.addEventListener('touchmove', endTouchMove, { passive: false });
+		document.addEventListener('touchend', startTouchEnd, { passive: false });
+		document.addEventListener('touchend', endTouchEnd, { passive: false });
 
 		let doAnimate = true;
 		const animate = () => {
@@ -1081,21 +1120,19 @@ export class RangeSlider extends WritableBase<{
 
 			const rect = wrapper.getBoundingClientRect();
 			svg.setAttribute('viewBox', `0 0 ${rect.width} 50`);
-			line.setAttribute('x2', `${rect.width - 10}`);
+			line.setAttribute('x1', HANDLE_RADIUS.toString());
+			line.setAttribute('x2', `${rect.width - HANDLE_RADIUS}`);
 
 			if (!startDragging && !endDragging) {
-				// Calculate positions in viewBox coordinates
-				const startPos =
-					10 + ((min - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
-				const endPos =
-					10 + ((max - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
+				const startPos = valueToPos(min, rect.width);
+				const endPos = valueToPos(max, rect.width);
 
 				start.setAttribute('cx', startPos.toString());
 				end.setAttribute('cx', endPos.toString());
-
-				// Update the range line to connect the two handles
 				rangeLine.setAttribute('x1', startPos.toString());
 				rangeLine.setAttribute('x2', endPos.toString());
+				setAria(start, min, 'Minimum value');
+				setAria(end, max, 'Maximum value');
 			}
 
 			requestAnimationFrame(animate);
@@ -1106,9 +1143,11 @@ export class RangeSlider extends WritableBase<{
 		return () => {
 			start.removeEventListener('mousedown', startMouseDown);
 			start.removeEventListener('touchstart', startTouchStart);
+			start.removeEventListener('keydown', startKeyDown);
 
 			end.removeEventListener('mousedown', endMouseDown);
 			end.removeEventListener('touchstart', endTouchStart);
+			end.removeEventListener('keydown', endKeyDown);
 
 			document.removeEventListener('mousemove', startMouseMove);
 			document.removeEventListener('mousemove', endMouseMove);
