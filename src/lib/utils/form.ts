@@ -943,7 +943,10 @@ export class RangeSlider extends WritableBase<{
 			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
 			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
 			// Update position immediately during drag for smooth interaction
-			const startPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			const startPos =
+				10 +
+				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
+					(wrapperWidth - 20);
 			start.setAttribute('cx', startPos.toString());
 			rangeLine.setAttribute('x1', startPos.toString());
 			setValue({ min: steppedValue });
@@ -973,7 +976,10 @@ export class RangeSlider extends WritableBase<{
 			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
 			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
 			// Update position immediately during drag for smooth interaction
-			const startPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			const startPos =
+				10 +
+				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
+					(wrapperWidth - 20);
 			start.setAttribute('cx', startPos.toString());
 			rangeLine.setAttribute('x1', startPos.toString());
 			setValue({ min: steppedValue });
@@ -1003,7 +1009,10 @@ export class RangeSlider extends WritableBase<{
 			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
 			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
 			// Update position immediately during drag for smooth interaction
-			const endPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			const endPos =
+				10 +
+				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
+					(wrapperWidth - 20);
 			end.setAttribute('cx', endPos.toString());
 			rangeLine.setAttribute('x2', endPos.toString());
 			setValue({ max: steppedValue });
@@ -1033,7 +1042,10 @@ export class RangeSlider extends WritableBase<{
 			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
 			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
 			// Update position immediately during drag for smooth interaction
-			const endPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			const endPos =
+				10 +
+				((steppedValue - this.config.min) / (this.config.max - this.config.min)) *
+					(wrapperWidth - 20);
 			end.setAttribute('cx', endPos.toString());
 			rangeLine.setAttribute('x2', endPos.toString());
 			setValue({ max: steppedValue });
@@ -1061,7 +1073,6 @@ export class RangeSlider extends WritableBase<{
 		document.addEventListener('touchend', startTouchEnd);
 		document.addEventListener('touchend', endTouchEnd);
 
-
 		let doAnimate = true;
 		const animate = () => {
 			if (!doAnimate) return;
@@ -1074,17 +1085,19 @@ export class RangeSlider extends WritableBase<{
 
 			if (!startDragging && !endDragging) {
 				// Calculate positions in viewBox coordinates
-				const startPos = 10 + ((min - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
-				const endPos = 10 + ((max - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
-				
+				const startPos =
+					10 + ((min - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
+				const endPos =
+					10 + ((max - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
+
 				start.setAttribute('cx', startPos.toString());
 				end.setAttribute('cx', endPos.toString());
-				
+
 				// Update the range line to connect the two handles
 				rangeLine.setAttribute('x1', startPos.toString());
 				rangeLine.setAttribute('x2', endPos.toString());
 			}
-			
+
 			requestAnimationFrame(animate);
 		};
 
