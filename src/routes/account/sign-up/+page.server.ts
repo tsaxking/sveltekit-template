@@ -144,7 +144,7 @@ export const actions = {
 			port: false,
 			protocol: true
 		});
-		const redirectUri = `${url}/oauth/sign-up`;
+		const redirectUri = `${url}/api/oauth/sign-up`;
 		const client = new OAuth2Client({
 			clientSecret: str('OAUTH2_CLIENT_SECRET', true),
 			clientId: str('OAUTH2_CLIENT_ID', true),

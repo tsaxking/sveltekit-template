@@ -42,7 +42,7 @@ export namespace StructBatching {
 	const batcher = new Batch(
 		async (items: Batch[]) => {
 			log(`Sending batch of ${items.length} struct updates...`);
-			const res = await fetch('/struct/batch', {
+			const res = await fetch('/api/struct/batch', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

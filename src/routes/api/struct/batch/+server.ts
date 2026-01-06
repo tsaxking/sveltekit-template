@@ -17,7 +17,7 @@ export const POST = async (event) => {
 		await Promise.all(
 			schema.parse(data).map(async (item) => {
 				const res = await event
-					.fetch(`/struct/${item.struct}/${item.type}`, {
+					.fetch(`/api/struct/${item.struct}/${item.type}`, {
 						body: JSON.stringify(item.data),
 						method: 'POST',
 						headers: {

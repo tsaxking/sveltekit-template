@@ -133,7 +133,7 @@ class SSE {
 		const establishConnection = () => {
 			// Set SSE metadata for server identification
 			Requests.setMeta('sse', this.uuid);
-			const source = new EventSource(`/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
+			const source = new EventSource(`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
 
 			/**
 			 * Handles successful connection establishment
@@ -260,7 +260,7 @@ class SSE {
 	 */
 	private ack(id: number) {
 		this.lastAckedId = id;
-		fetch(`/sse/ack/${this.uuid}/${id}`);
+		fetch(`/api/sse/ack/${this.uuid}/${id}`);
 	}
 
 	/**
@@ -271,7 +271,7 @@ class SSE {
 	private async ping() {
 		const start = performance.now();
 		try {
-			const res = await fetch(`/sse/ping/${this.uuid}`);
+			const res = await fetch(`/api/sse/ping/${this.uuid}`);
 			const end = performance.now();
 			const latency = end - start;
 			const text = await res.text();

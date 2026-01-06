@@ -1115,7 +1115,7 @@ export class Struct<T extends Blank> {
 						data: z.unknown().optional()
 					})
 					.parse(
-						await fetch(`/struct/${this.data.name}/${action}`, {
+						await fetch(`/api/struct/${this.data.name}/${action}`, {
 							method: 'POST',
 							headers: {
 								...Object.fromEntries(Struct.headers.entries()),
@@ -1159,7 +1159,7 @@ export class Struct<T extends Blank> {
 					'Currently not in a browser environment. Will not run a fetch request'
 				);
 
-			let url = `/struct/${this.data.name}/${action}`;
+			let url = `/api/struct/${this.data.name}/${action}`;
 			if (config.pagination) {
 				url += `?pagination=true&page=${config.pagination.page}&size=${config.pagination.size}`;
 			}
@@ -1228,7 +1228,7 @@ export class Struct<T extends Blank> {
 					message: z.string()
 				})
 				.parse(
-					await fetch(`/struct/${this.data.name}/connect`, {
+					await fetch(`/api/struct/${this.data.name}/connect`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'

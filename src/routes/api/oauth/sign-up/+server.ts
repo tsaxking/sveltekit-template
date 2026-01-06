@@ -12,12 +12,12 @@ export const GET = async (event) => {
 	// 	? `${process.env.PUBLIC_DOMAIN}:${process.env.PORT}`
 	// 	: process.env.PUBLIC_DOMAIN;
 	// const protocol = process.env.HTTPS === 'true' ? 'https://' : 'http://';
-	// const redirectUri = `${protocol}${domain}/oauth/sign-in`;
+	// const redirectUri = `${protocol}${domain}/api/oauth/sign-in`;
 	const url = domain({
 		port: false,
 		protocol: true
 	});
-	const redirectUri = `${url}/oauth/sign-up`;
+	const redirectUri = `${url}/api/oauth/sign-up`;
 	try {
 		const client = new OAuth2Client({
 			clientId: str('OAUTH2_CLIENT_ID', true),

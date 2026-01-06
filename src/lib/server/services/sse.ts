@@ -1,5 +1,5 @@
 import { attempt, attemptAsync } from 'ts-utils/check';
-import type { RequestEvent as ConnectRequestEvent } from '../../../routes/sse/init/[uuid]/$types';
+import type { RequestEvent as ConnectRequestEvent } from '../../../routes/api/sse/init/[uuid]/$types';
 import { Session } from '../structs/session';
 import { encode } from 'ts-utils/text';
 import { EventEmitter } from 'ts-utils/event-emitter';

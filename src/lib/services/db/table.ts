@@ -142,7 +142,7 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 			_init();
 			const newData = {
 				...data,
-				id: crypto.randomUUID(),
+				id: Math.random().toString(36).substring(2, 10) + Date.now().toString(36),
 				created_at: new Date(),
 				updated_at: new Date()
 			};
