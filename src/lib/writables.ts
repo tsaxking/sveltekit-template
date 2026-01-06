@@ -165,7 +165,7 @@ export class WritableBase<T> implements Writable<T> {
 	 * Once this writable has no subscribers, the pipe subscription will be unsubscribed
 	 * @param {Writable<unknown>} target - The writable store to pipe from
 	 */
-	pipe(target: Writable<unknown>) {
+	pipe(target: Writable<unknown>): void {
 		this.onAllUnsubscribe(target.subscribe(() => this.inform()));
 	}
 }
