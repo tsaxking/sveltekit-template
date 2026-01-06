@@ -233,9 +233,6 @@ importers:
       proper-lockfile:
         specifier: ^4.1.2
         version: 4.1.2
-      range-slider-input:
-        specifier: ^2.4.4
-        version: 2.4.4
       redis:
         specifier: ^5.7.0
         version: 5.8.2
@@ -4340,9 +4337,6 @@ packages:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
 
-  range-slider-input@2.4.4:
-    resolution: {integrity: sha512-AbbDCz1g2FDwXUFIMgkBALqJZ4AGSiYQuUEwWmOWrbrT57zdG5OesIV3TjQ4W5D0EMUlR1S0rHI6dqla9wucMQ==}
-
   raw-body@2.5.2:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
@@ -4941,6 +4935,10 @@ packages:
 
   ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/41d2ddec9d5552a057d4272e57805283a2e580b4:
     resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/41d2ddec9d5552a057d4272e57805283a2e580b4}
+    version: 1.0.0
+
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11:
+    resolution: {tarball: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11}
     version: 1.0.0
 
   ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/e3d13149e420c7b9fe046cbcf9df6eef1b1864e8:
@@ -8941,7 +8939,7 @@ snapshots:
       expr-eval: 2.0.2
       node-html-parser: 7.0.1
       prettier: 3.6.2
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/e3d13149e420c7b9fe046cbcf9df6eef1b1864e8(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       typescript: 5.9.2
       vite-node: 3.2.4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       vitest: 2.1.9(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
@@ -9994,8 +9992,6 @@ snapshots:
 
   range-parser@1.2.1: {}
 
-  range-slider-input@2.4.4: {}
-
   raw-body@2.5.2:
     dependencies:
       bytes: 3.1.2
@@ -10046,7 +10042,7 @@ snapshots:
   redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/1e612b476d486f0e002b6e4fd92b379a81102416(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       redis: 5.8.2
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/e3d13149e420c7b9fe046cbcf9df6eef1b1864e8(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       uuid: 11.1.0
       vitest: 3.2.4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       zod: 3.25.76
@@ -10071,7 +10067,7 @@ snapshots:
   redis-service@https://codeload.github.com/tsaxking/redis/tar.gz/d3b228def595096d6252e89ee9fb1c10f583eadf(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       redis: 5.8.2
-      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/e3d13149e420c7b9fe046cbcf9df6eef1b1864e8(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
+      ts-utils: https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       uuid: 11.1.0
       vitest: 3.2.4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
       zod: 3.25.76
@@ -10650,6 +10646,28 @@ snapshots:
       yn: 3.1.1
 
   ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/41d2ddec9d5552a057d4272e57805283a2e580b4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1):
+    dependencies:
+      typescript: 5.9.2
+      vitest: 3.2.4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/debug'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+
+  ts-utils@https://codeload.github.com/tsaxking/global-ts-utilities/tar.gz/7f4bdafefe7da988f7a7e055e412131062d7ba11(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       typescript: 5.9.2
       vitest: 3.2.4(@types/node@22.18.3)(sass-embedded@1.92.1)(sass@1.92.1)
