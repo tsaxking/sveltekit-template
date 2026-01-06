@@ -862,7 +862,7 @@ export class RangeSlider extends WritableBase<{
 
 		// check if step is valid (both min and max should be divisible by step)
 		if (config.min % config.step !== 0 || config.max % config.step !== 0) {
-			throw new Error('RangeSlider: min and max must be divisible by step');
+			throw new Error('RangeSlider: min and max must both be divisible by step');
 		}
 	}
 
