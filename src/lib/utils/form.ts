@@ -904,8 +904,18 @@ export class RangeSlider extends WritableBase<{
 		start.style.cursor = 'grab';
 		svg.appendChild(start);
 
+		// Compute initial end handle position based on configuration rather than a hardcoded value.
+		const rangeMin = (this.config as any).min ?? (this.data as any).min ?? 0;
+		const rangeMax = (this.config as any).max ?? (this.data as any).max ?? 100;
+		const endValue = (this.config as any).init?.[1] ?? rangeMax;
+		const sliderWidth = Math.max(wrapper.clientWidth - 20, 0);
+		const normalizedEnd =
+			rangeMax !== rangeMin ? (endValue - rangeMin) / (rangeMax - rangeMin) : 0;
+		const clampedNormalizedEnd = Math.min(1, Math.max(0, normalizedEnd));
+		const endCx = 10 + clampedNormalizedEnd * sliderWidth;
+
 		const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-		end.setAttribute('cx', '290');
+		end.setAttribute('cx', `${endCx}`);
 		end.setAttribute('cy', '25');
 		end.setAttribute('r', '10');
 		end.setAttribute('fill', this.config.handleColor || '#007bff');
