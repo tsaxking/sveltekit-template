@@ -862,7 +862,7 @@ export class RangeSlider extends WritableBase<{
 
 		// check if step is valid (both min and max should be divisible by step)
 		if (config.min % config.step !== 0 || config.max % config.step !== 0) {
-			throw new Error('RangeSlider: min and max must be divisible by step');
+			throw new Error('RangeSlider: min and max must both be divisible by step');
 		}
 	}
 
@@ -921,6 +921,16 @@ export class RangeSlider extends WritableBase<{
 		start.setAttribute('fill', this.config.handleColor || '#007bff');
 		start.style.cursor = 'grab';
 		svg.appendChild(start);
+
+		// Compute initial end handle position based on configuration rather than a hardcoded value.
+		// const rangeMin = this.config.min ?? this.data.min ?? 0;
+		// const rangeMax = this.config.max ?? this.data.max ?? 100;
+		// const endValue = this.config.init?.[1] ?? rangeMax;
+		// const sliderWidth = Math.max(wrapper.clientWidth - 20, 0);
+		// const normalizedEnd =
+			// rangeMax !== rangeMin ? (endValue - rangeMin) / (rangeMax - rangeMin) : 0;
+		// const clampedNormalizedEnd = Math.min(1, Math.max(0, normalizedEnd));
+		// const endCx = 10 + clampedNormalizedEnd * sliderWidth;
 
 		const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 		end.setAttribute('cx', `${wrapper.clientWidth - HANDLE_RADIUS}`);
