@@ -139,7 +139,7 @@ export const contextmenu = (
 
 	setTimeout(() => {
 		document.addEventListener('click', rm);
-	});
+	}, 10);
 
 	return () => {
 		rm();
