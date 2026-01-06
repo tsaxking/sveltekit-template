@@ -34,7 +34,7 @@ export class StructData<T extends Blank> extends WritableBase<PartialStructable<
 	 */
 	constructor(
 		public readonly struct: Struct<T>,
-		public data: PartialStructable<T> & PartialStructable<GlobalCols>
+		data: PartialStructable<T> & PartialStructable<GlobalCols>
 	) {
 		super(data);
 	}
