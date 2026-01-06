@@ -141,7 +141,6 @@ export const contextmenu = (
 		document.addEventListener('click', rm);
 	});
 
-
 	return () => {
 		rm();
 	};

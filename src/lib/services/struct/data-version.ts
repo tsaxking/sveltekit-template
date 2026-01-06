@@ -45,7 +45,7 @@ export class StructDataVersion<T extends Blank> extends WritableBase<PartialStru
 	 */
 	constructor(
 		public readonly struct: Struct<T>,
-		public readonly data: PartialStructable<
+		data: PartialStructable<
 			T &
 				GlobalCols & {
 					vhId: 'string';
