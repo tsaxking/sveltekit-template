@@ -4,9 +4,7 @@
 			"paths": ["*.html", "*.mjml", "*.md"],
 			"rules": [
 				{
-					"patterns": [
-						"\\{\\{ [^}]+\\}\\}"
-					],
+					"patterns": ["\\{\\{ [^}]+\\}\\}"],
 					"color": "BrightGreen"
 				},
 				{

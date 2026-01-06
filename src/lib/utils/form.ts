@@ -2,6 +2,7 @@ import Modal from '../components/bootstrap/Modal.svelte';
 import { createRawSnippet, mount } from 'svelte';
 import { modalTarget, createButtons, clearModals } from './prompts';
 import { attemptAsync } from 'ts-utils/check';
+import { WritableBase } from './writables';
 
 type Option =
 	| string
@@ -835,6 +836,285 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 					clearModals();
 				});
 			});
+		});
+	}
+}
+
+export class RangeSlider extends WritableBase<{
+	min: number;
+	max: number;
+}> {
+	constructor(
+		private readonly config: {
+			min: number;
+			max: number;
+			step: number;
+			target: HTMLElement;
+			init?: [number, number];
+			lineColor?: string;
+			handleColor?: string;
+		}
+	) {
+		super({
+			min: config.init ? config.init[0] : config.min,
+			max: config.init ? config.init[1] : config.max
+		});
+
+		// check if step is valid (both min and max should be divisible by step)
+		if (config.min % config.step !== 0 || config.max % config.step !== 0) {
+			throw new Error('RangeSlider: min and max must be divisible by step');
+		}
+	}
+
+	render() {
+		const wrapper = document.createElement('div');
+		wrapper.style.width = '100%';
+		this.config.target.appendChild(wrapper);
+
+		const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		svg.setAttribute('height', '50');
+		svg.setAttribute('viewBox', `0 0 ${wrapper.clientWidth} 50`);
+		svg.style.userSelect = 'none';
+
+		// Background track line
+		const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		line.setAttribute('x1', '10');
+		line.setAttribute('y1', '25');
+		line.setAttribute('x2', `${wrapper.clientWidth - 10}`);
+		line.setAttribute('y2', '25');
+		line.setAttribute('stroke', this.config.lineColor || '#ccc');
+		line.setAttribute('stroke-width', '4');
+		svg.appendChild(line);
+
+		// Active range line (between handles)
+		const rangeLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		rangeLine.setAttribute('x1', '10');
+		rangeLine.setAttribute('y1', '25');
+		rangeLine.setAttribute('x2', `${wrapper.clientWidth - 10}`);
+		rangeLine.setAttribute('y2', '25');
+		rangeLine.setAttribute('stroke', this.config.handleColor || '#007bff');
+		rangeLine.setAttribute('stroke-width', '4');
+		svg.appendChild(rangeLine);
+
+		const start = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		start.setAttribute('cx', '10');
+		start.setAttribute('cy', '25');
+		start.setAttribute('r', '10');
+		start.setAttribute('fill', this.config.handleColor || '#007bff');
+		start.style.cursor = 'grab';
+		svg.appendChild(start);
+
+		const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		end.setAttribute('cx', '290');
+		end.setAttribute('cy', '25');
+		end.setAttribute('r', '10');
+		end.setAttribute('fill', this.config.handleColor || '#007bff');
+		end.style.cursor = 'grab';
+		svg.appendChild(end);
+
+		wrapper.appendChild(svg);
+
+		const setValue = (range: { min?: number; max?: number }) => {
+			this.set({ ...this.data, min: range.min ?? this.data.min, max: range.max ?? this.data.max });
+		};
+
+		let startDragging = false;
+		let endDragging = false;
+		let dragStartX = 0;
+		let dragStartValue = 0;
+
+		const startMouseDown = (e: MouseEvent) => {
+			e.preventDefault();
+			startDragging = true;
+			dragStartX = e.clientX;
+			dragStartValue = this.data.min;
+			start.style.cursor = 'grabbing';
+		};
+
+		const startMouseMove = (e: MouseEvent) => {
+			if (!startDragging) return;
+			e.preventDefault();
+			const deltaX = e.clientX - dragStartX;
+			const wrapperWidth = wrapper.clientWidth;
+			// Convert pixel delta to value delta
+			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
+			let newValue = dragStartValue + valueDelta;
+			// Clamp to range
+			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
+			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
+			// Update position immediately during drag for smooth interaction
+			const startPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			start.setAttribute('cx', startPos.toString());
+			rangeLine.setAttribute('x1', startPos.toString());
+			setValue({ min: steppedValue });
+		};
+
+		const startMouseUp = () => {
+			startDragging = false;
+			start.style.cursor = 'grab';
+		};
+
+		const startTouchStart = (e: TouchEvent) => {
+			e.preventDefault();
+			startDragging = true;
+			dragStartX = e.touches[0].clientX;
+			dragStartValue = this.data.min;
+		};
+
+		const startTouchMove = (e: TouchEvent) => {
+			if (!startDragging) return;
+			e.preventDefault();
+			const deltaX = e.touches[0].clientX - dragStartX;
+			const wrapperWidth = wrapper.clientWidth;
+			// Convert pixel delta to value delta
+			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
+			let newValue = dragStartValue + valueDelta;
+			// Clamp to range
+			newValue = Math.max(this.config.min, Math.min(this.data.max, newValue));
+			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
+			// Update position immediately during drag for smooth interaction
+			const startPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			start.setAttribute('cx', startPos.toString());
+			rangeLine.setAttribute('x1', startPos.toString());
+			setValue({ min: steppedValue });
+		};
+
+		const startTouchEnd = () => {
+			startDragging = false;
+		};
+
+		const endMouseDown = (e: MouseEvent) => {
+			e.preventDefault();
+			endDragging = true;
+			dragStartX = e.clientX;
+			dragStartValue = this.data.max;
+			end.style.cursor = 'grabbing';
+		};
+
+		const endMouseMove = (e: MouseEvent) => {
+			if (!endDragging) return;
+			e.preventDefault();
+			const deltaX = e.clientX - dragStartX;
+			const wrapperWidth = wrapper.clientWidth;
+			// Convert pixel delta to value delta
+			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
+			let newValue = dragStartValue + valueDelta;
+			// Clamp to range
+			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
+			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
+			// Update position immediately during drag for smooth interaction
+			const endPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			end.setAttribute('cx', endPos.toString());
+			rangeLine.setAttribute('x2', endPos.toString());
+			setValue({ max: steppedValue });
+		};
+
+		const endMouseUp = () => {
+			endDragging = false;
+			end.style.cursor = 'grab';
+		};
+
+		const endTouchStart = (e: TouchEvent) => {
+			e.preventDefault();
+			endDragging = true;
+			dragStartX = e.touches[0].clientX;
+			dragStartValue = this.data.max;
+		};
+
+		const endTouchMove = (e: TouchEvent) => {
+			if (!endDragging) return;
+			e.preventDefault();
+			const deltaX = e.touches[0].clientX - dragStartX;
+			const wrapperWidth = wrapper.clientWidth;
+			// Convert pixel delta to value delta
+			const valueDelta = deltaX * ((this.config.max - this.config.min) / (wrapperWidth - 20));
+			let newValue = dragStartValue + valueDelta;
+			// Clamp to range
+			newValue = Math.max(this.data.min, Math.min(this.config.max, newValue));
+			const steppedValue = Math.round(newValue / this.config.step) * this.config.step;
+			// Update position immediately during drag for smooth interaction
+			const endPos = 10 + ((steppedValue - this.config.min) / (this.config.max - this.config.min)) * (wrapperWidth - 20);
+			end.setAttribute('cx', endPos.toString());
+			rangeLine.setAttribute('x2', endPos.toString());
+			setValue({ max: steppedValue });
+		};
+
+		const endTouchEnd = () => {
+			endDragging = false;
+		};
+
+		// Attach mouse/touch listeners
+		start.addEventListener('mousedown', startMouseDown);
+		start.addEventListener('touchstart', startTouchStart);
+
+		end.addEventListener('mousedown', endMouseDown);
+		end.addEventListener('touchstart', endTouchStart);
+
+		// Global move and up listeners for dragging
+		document.addEventListener('mousemove', startMouseMove);
+		document.addEventListener('mousemove', endMouseMove);
+		document.addEventListener('mouseup', startMouseUp);
+		document.addEventListener('mouseup', endMouseUp);
+
+		document.addEventListener('touchmove', startTouchMove);
+		document.addEventListener('touchmove', endTouchMove);
+		document.addEventListener('touchend', startTouchEnd);
+		document.addEventListener('touchend', endTouchEnd);
+
+
+		let doAnimate = true;
+		const animate = () => {
+			if (!doAnimate) return;
+
+			const { min, max } = this.data;
+
+			const rect = wrapper.getBoundingClientRect();
+			svg.setAttribute('viewBox', `0 0 ${rect.width} 50`);
+			line.setAttribute('x2', `${rect.width - 10}`);
+
+			if (!startDragging && !endDragging) {
+				// Calculate positions in viewBox coordinates
+				const startPos = 10 + ((min - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
+				const endPos = 10 + ((max - this.config.min) / (this.config.max - this.config.min)) * (rect.width - 20);
+				
+				start.setAttribute('cx', startPos.toString());
+				end.setAttribute('cx', endPos.toString());
+				
+				// Update the range line to connect the two handles
+				rangeLine.setAttribute('x1', startPos.toString());
+				rangeLine.setAttribute('x2', endPos.toString());
+			}
+			
+			requestAnimationFrame(animate);
+		};
+
+		requestAnimationFrame(animate);
+
+		return () => {
+			start.removeEventListener('mousedown', startMouseDown);
+			start.removeEventListener('touchstart', startTouchStart);
+
+			end.removeEventListener('mousedown', endMouseDown);
+			end.removeEventListener('touchstart', endTouchStart);
+
+			document.removeEventListener('mousemove', startMouseMove);
+			document.removeEventListener('mousemove', endMouseMove);
+			document.removeEventListener('mouseup', startMouseUp);
+			document.removeEventListener('mouseup', endMouseUp);
+
+			document.removeEventListener('touchmove', startTouchMove);
+			document.removeEventListener('touchmove', endTouchMove);
+			document.removeEventListener('touchend', startTouchEnd);
+			document.removeEventListener('touchend', endTouchEnd);
+
+			doAnimate = false;
+		};
+	}
+
+	revert() {
+		this.set({
+			min: this.config.init ? this.config.init[0] : this.config.min,
+			max: this.config.init ? this.config.init[1] : this.config.max
 		});
 	}
 }
