@@ -13,7 +13,7 @@ import { type Readable } from 'svelte/store';
 import { DataAction, PropertyAction } from 'drizzle-struct/types';
 import { z } from 'zod';
 import { StructDataVersion, type VersionStructable } from './data-version';
-import { WritableArray, WritableBase } from '$lib/writables';
+import { WritableArray, WritableBase } from '$lib/utils/writables';
 
 /**
  * Struct data for a single data point
@@ -34,7 +34,7 @@ export class StructData<T extends Blank> extends WritableBase<PartialStructable<
 	 */
 	constructor(
 		public readonly struct: Struct<T>,
-		public data: PartialStructable<T> & PartialStructable<GlobalCols>
+		data: PartialStructable<T> & PartialStructable<GlobalCols>
 	) {
 		super(data);
 	}

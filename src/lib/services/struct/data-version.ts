@@ -9,7 +9,7 @@ import {
 import { attemptAsync } from 'ts-utils/check';
 import { DataAction } from 'drizzle-struct/types';
 import { z } from 'zod';
-import { WritableBase } from '$lib/writables';
+import { WritableBase } from '$lib/utils/writables';
 
 /**
  * Version history of a data, requiring global columns and a version history id and created date
@@ -45,7 +45,7 @@ export class StructDataVersion<T extends Blank> extends WritableBase<PartialStru
 	 */
 	constructor(
 		public readonly struct: Struct<T>,
-		public readonly data: PartialStructable<
+		data: PartialStructable<
 			T &
 				GlobalCols & {
 					vhId: 'string';

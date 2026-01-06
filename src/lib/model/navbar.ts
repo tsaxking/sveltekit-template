@@ -1,5 +1,5 @@
 import type { Icon } from '$lib/types/icons';
-import { WritableArray } from '$lib/writables';
+import { WritableArray } from '$lib/utils/writables';
 
 export namespace Navbar {
 	type Section = {

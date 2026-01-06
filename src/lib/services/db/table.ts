@@ -9,7 +9,7 @@ import {
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { debounce } from 'ts-utils';
-import { WritableArray, WritableBase } from '$lib/writables';
+import { WritableArray, WritableBase } from '$lib/utils/writables';
 
 /**
  * Configuration object for read operations that determines pagination behavior
@@ -490,7 +490,7 @@ export class TableData<Name extends string, Type extends SchemaDefinition> exten
 	 */
 	constructor(
 		public table: Table<Name, Type>,
-		public data: TableStructable<Type>
+		data: TableStructable<Type>
 	) {
 		super(data);
 	}
@@ -615,7 +615,7 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition> ex
 	 */
 	constructor(
 		public table: Table<Name, Type>,
-		public data: TableData<Name, Type>[]
+		data: TableData<Name, Type>[]
 	) {
 		super(data);
 	}
