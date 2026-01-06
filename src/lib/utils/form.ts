@@ -872,7 +872,8 @@ export class RangeSlider extends WritableBase<{
 
 		const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 		const valueToPos = (value: number, width: number) =>
-			HANDLE_RADIUS + ((value - this.config.min) / (this.config.max - this.config.min)) * (width - HANDLE_DIAMETER);
+			HANDLE_RADIUS +
+			((value - this.config.min) / (this.config.max - this.config.min)) * (width - HANDLE_DIAMETER);
 		const deltaToValue = (deltaX: number, width: number) =>
 			deltaX * ((this.config.max - this.config.min) / (width - HANDLE_DIAMETER));
 		const setAria = (el: SVGCircleElement, value: number, label: string) => {
@@ -928,7 +929,7 @@ export class RangeSlider extends WritableBase<{
 		// const endValue = this.config.init?.[1] ?? rangeMax;
 		// const sliderWidth = Math.max(wrapper.clientWidth - 20, 0);
 		// const normalizedEnd =
-			// rangeMax !== rangeMin ? (endValue - rangeMin) / (rangeMax - rangeMin) : 0;
+		// rangeMax !== rangeMin ? (endValue - rangeMin) / (rangeMax - rangeMin) : 0;
 		// const clampedNormalizedEnd = Math.min(1, Math.max(0, normalizedEnd));
 		// const endCx = 10 + clampedNormalizedEnd * sliderWidth;
 
