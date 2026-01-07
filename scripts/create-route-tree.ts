@@ -46,4 +46,6 @@ export default async () => {
 		Array.from(paths).sort().join('\n'),
 		'utf-8'
 	);
+
+	return Array.from(paths).sort().join('\n');
 };

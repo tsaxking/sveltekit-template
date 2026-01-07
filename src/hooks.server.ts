@@ -19,6 +19,7 @@ import { sleep } from 'ts-utils/sleep';
 // import { signFingerprint } from '$lib/server/utils/fingerprint';
 import redis from '$lib/server/services/redis';
 import { config } from '$lib/server/utils/env';
+import createTree from '../scripts/create-route-tree';
 
 (async () => {
 	await redis.init();
@@ -28,6 +29,7 @@ import { config } from '$lib/server/utils/env';
 			createStructEventService(struct);
 		}
 	});
+	await createTree();
 })();
 
 // if (env.LOG === 'true') {
