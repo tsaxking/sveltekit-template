@@ -583,3 +583,58 @@ export const openJSON = <T>(filePath: string, parser: z.ZodType<T>) => {
 		return parseJSON(raw, parser).unwrap();
 	});
 };
+
+
+
+/**
+ * Asynchronously reads the content of a file as a UTF-8 string.
+ * @param filepath - Path to the file to be read
+ * @returns {Promise<AttemptAsync<string>>} Promise resolving to the file content
+ * @example
+ * ```typescript
+ * const content = await openFile('./data.txt');
+ * if (content.isOk()) {
+ *   console.log('File content:', content.value);
+ * }
+ * ```
+ */
+export const openFile = (filepath: string) => {
+	return attemptAsync<string>(async () => {
+		return fs.promises.readFile(filepath, 'utf-8');
+	});
+};
+
+
+/**
+ * Asynchronously saves content to a file, with options for directory creation and overwrite control.
+ * @param filepath - Path to the file where content should be saved
+ * @param content - Content to be written to the file
+ * @param config - Configuration options
+ * @param config.recurse - Whether to create parent directories if they don't exist (default: true)
+ * @param config.overwrite - Whether to overwrite the file if it already exists (default: true)
+ * @returns {Promise<AttemptAsync<void>>} Promise resolving when the file is saved
+ * @example
+ * ```typescript
+ * await saveFile('./output/data.txt', 'Hello, World!', { recurse: true, overwrite: false });
+ * ```
+ */
+export const saveFile = (filepath: string, content: string, config?: {
+	recurse?: boolean; // default true
+	overwrite?: boolean; // default true
+}) => {
+	return attemptAsync<void>(async () => {
+		const { recurse = true, overwrite = true } = config ?? {};
+		if (recurse) {
+			await fs.promises.mkdir(path.dirname(filepath), { recursive: true });
+		}
+		if (!overwrite) {
+			try {
+				await fs.promises.access(filepath, fs.constants.F_OK);
+				throw new Error('File already exists and overwrite is set to false.');
+			} catch {
+				// File does not exist, proceed
+			}
+		}
+		await fs.promises.writeFile(filepath, content, 'utf-8');
+	});
+};
