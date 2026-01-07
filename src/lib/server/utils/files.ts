@@ -631,8 +631,13 @@ export const saveFile = (filepath: string, content: string, config?: {
 			try {
 				await fs.promises.access(filepath, fs.constants.F_OK);
 				throw new Error('File already exists and overwrite is set to false.');
-			} catch {
-				// File does not exist, proceed
+			} catch (err: unknown) {
+				const error = err as NodeJS.ErrnoException;
+				if (!error || error.code !== 'ENOENT') {
+					// Re-throw unexpected errors and the explicit "file exists" error
+					throw err;
+				}
+				// File does not exist (ENOENT), proceed
 			}
 		}
 		await fs.promises.writeFile(filepath, content, 'utf-8');
