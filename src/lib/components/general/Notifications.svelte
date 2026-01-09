@@ -4,6 +4,7 @@
 	import Notification from '../account/Notification.svelte';
 	import { rawModal } from '$lib/utils/prompts';
 	import NotificationHistory from '../account/NotificationHistory.svelte';
+	import { Features } from '$lib/model/features';
 
 	const id = 'notifications';
 
@@ -36,8 +37,17 @@
 		])
 	);
 
+	let features: string[] = $state(
+		[]
+	);
+
 	onMount(() => {
 		notifications = Account.getNotifs(/*limit, page*/);
+		Features.getUnread().then(r => {
+			if (r.isOk()) {
+				features = r.value;
+			}
+		});
 
 		const unsub = notifications.subscribe((d) => {
 			notifs = d.filter((n) => !n.data.read).length;
