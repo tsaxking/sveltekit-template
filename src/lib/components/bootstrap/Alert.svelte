@@ -47,9 +47,11 @@
 
 	let timeout: any | undefined;
 
-	if (autoHide > 0) {
-		timeout = setTimeout(() => hide(), autoHide);
-	}
+	$effect(() => {
+		if (autoHide > 0) {
+			timeout = setTimeout(() => hide(), autoHide);
+		}
+	});
 
 	onMount(() => destroy);
 

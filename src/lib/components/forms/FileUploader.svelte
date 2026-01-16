@@ -24,6 +24,7 @@
 		endpoint: string;
 		usage: 'images' | 'general';
 		allowLocal?: boolean;
+		btnClasses?: string;
 	}
 
 	const {
@@ -31,42 +32,53 @@
 		message = 'Upload Files',
 		endpoint,
 		usage = 'images',
-		allowLocal = true
+		allowLocal = true,
+		btnClasses = 'btn btn-primary'
 	}: Props = $props();
 
-	const allowedFileTypes = usage === 'images' ? ['image/*'] : ['*'];
+	const allowedFileTypes = $derived(usage === 'images' ? ['image/*'] : ['*']);
 
-	export const uppy = new Uppy({
-		debug: false,
-		allowMultipleUploads: multiple,
-		restrictions: { allowedFileTypes }
-	});
+	const uppy = $derived(
+		new Uppy({
+			debug: false,
+			allowMultipleUploads: multiple,
+			restrictions: { allowedFileTypes }
+		})
+	);
 
-	uppy.use(XHRUpload, {
-		endpoint,
-		onAfterResponse(xhr) {
-			if (xhr.status >= 200 && xhr.status < 300) {
-				emitter.emit(
-					'load',
-					z
-						.object({
-							url: z.string()
-						})
-						.parse(JSON.parse(xhr.responseText)).url
-				);
-				modal.hide();
-			} else {
-				console.error(xhr.responseText);
-				emitter.emit('error', 'Failed to upload file.');
-				error(500, 'Failed to upload file.');
+	export const getUppy = () => uppy;
+
+	$effect(() => {
+		uppy.use(XHRUpload, {
+			endpoint,
+			onAfterResponse(xhr) {
+				if (xhr.status >= 200 && xhr.status < 300) {
+					emitter.emit(
+						'load',
+						z
+							.object({
+								url: z.string()
+							})
+							.parse(JSON.parse(xhr.responseText)).url
+					);
+					modal.hide();
+				} else {
+					console.error(xhr.responseText);
+					emitter.emit('error', 'Failed to upload file.');
+					error(500, 'Failed to upload file.');
+				}
 			}
-		}
+		});
 	});
 
 	let modal: Modal;
+
+	export const show = () => {
+		modal.show();
+	};
 </script>
 
-<button type="button" class="btn btn-primary" onclick={() => modal.show()}>
+<button type="button" class={btnClasses} onclick={() => modal.show()}>
 	<i class="material-icons">add</i>
 	{message}
 </button>

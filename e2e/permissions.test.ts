@@ -1,12 +1,13 @@
 import * as testing from '@playwright/test';
 import { Account } from '../src/lib/server/structs/account';
 import { Permissions } from '../src/lib/server/structs/permissions';
+import '../src/lib/server/structs/session';
 import { Test } from '../src/lib/server/structs/testing';
-import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '../src/lib/server/db';
 import { logging, signIn } from './test-utils';
 import { v4 as uuid } from 'uuid';
 import { sleep } from 'ts-utils/sleep';
+import { Struct } from 'drizzle-struct/back-end';
 
 const expect = testing.expect;
 const test = testing.test;

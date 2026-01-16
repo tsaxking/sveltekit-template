@@ -26,9 +26,11 @@
 		passwordResult = passwordStrength(password);
 	});
 
-	if (form?.redirect && browser) {
-		goto(form.redirect);
-	}
+	$effect(() => {
+		if (form?.redirect && browser) {
+			goto(form.redirect);
+		}
+	});
 </script>
 
 <main>
