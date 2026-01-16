@@ -1,9 +1,10 @@
 import { browser } from '$app/environment';
-import { writable, type Subscriber, type Unsubscriber, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 import type { Icon } from '$lib/types/icons';
+import { WritableArray, WritableBase } from '$lib/utils/writables';
 
 export namespace Dashboard {
 	export const getGridSize = () => {
@@ -40,7 +41,7 @@ export namespace Dashboard {
 		height: number;
 	};
 
-	export class Dashboard {
+	export class Dashboard extends WritableArray<Card> {
 		private readonly listeners = new Set<() => void>();
 
 		constructor(
@@ -50,6 +51,7 @@ export namespace Dashboard {
 				cards: Card[];
 			}
 		) {
+			super(config.cards);
 			const hidden = this.pull();
 			this.hiddenCards.set(hidden);
 			for (const card of config.cards) {
@@ -84,6 +86,20 @@ export namespace Dashboard {
 			return this.config.cards;
 		}
 
+		get orderedCards() {
+			const a = new WritableArray(
+				[...this.config.cards].sort((a, b) => a.getOrder() - b.getOrder())
+			);
+
+			a.onAllUnsubscribe(
+				this.subscribe(() => {
+					a.set([...this.config.cards].sort((a, b) => a.getOrder() - b.getOrder()));
+				})
+			);
+
+			return a;
+		}
+
 		public hiddenCards = writable(new Set<Card>());
 
 		save() {
@@ -109,14 +125,19 @@ export namespace Dashboard {
 				arr.data.map((id) => Card.cards.get(id)).filter((card): card is Card => !!card)
 			);
 		}
+
+		init() {
+			if (!browser) return;
+			document.addEventListener('resize', () => {
+				this.inform();
+			});
+		}
 	}
 
-	export class Card implements Writable<CardData> {
+	export class Card extends WritableBase<CardData> {
 		public static readonly cards = new Map<string, Card>();
 
 		public state: CardData;
-
-		private readonly subscribers = new Set<(value: CardData) => void>();
 
 		private readonly em = new EventEmitter<{
 			show: boolean;
@@ -134,16 +155,22 @@ export namespace Dashboard {
 				icon: Icon;
 				id: string;
 				size: {
-					xs?: { width: number; height: number };
-					sm?: { width: number; height: number };
-					md?: { width: number; height: number };
-					lg?: { width: number; height: number };
-					xl?: { width: number; height: number };
+					xs?: { width: number; height: number; order?: number };
+					sm?: { width: number; height: number; order?: number };
+					md?: { width: number; height: number; order?: number };
+					lg?: { width: number; height: number; order?: number };
+					xl?: { width: number; height: number; order?: number };
 					width: number;
 					height: number;
 				};
 			}
 		) {
+			super({
+				show: true,
+				maximized: false,
+				width: config.size.width,
+				height: config.size.height
+			});
 			if (!Number.isInteger(config.size.width) || !Number.isInteger(config.size.height)) {
 				throw new Error('Width and height must be integers');
 			}
@@ -191,51 +218,18 @@ export namespace Dashboard {
 			};
 		}
 
+		getOrder() {
+			const size = getGridSize();
+			const s = this.config.size[size];
+			return s?.order ?? 0;
+		}
+
 		get width() {
 			return this.config.size.width;
 		}
 
 		get height() {
 			return this.config.size.height;
-		}
-
-		set(value: CardData) {
-			this.state = value;
-			this.subscribers.forEach((subscriber) => subscriber(this.state));
-			// if (this.state.show) {
-			// 	hiddenCards.update((cards) => {
-			// 		cards.delete(this);
-			// 		return cards;
-			// 	});
-			// } else {
-			// 	hiddenCards.update((cards) => {
-			// 		cards.add(this);
-			// 		return cards;
-			// 	});
-			// }
-
-			// save();
-		}
-
-		update(fn: (value: CardData) => CardData) {
-			this.set(fn(this.state));
-		}
-
-		private _onAllUnsubscribe?: () => void;
-
-		subscribe(run: Subscriber<CardData>, invalidate?: () => void): Unsubscriber {
-			this.subscribers.add(run);
-			run(this.state);
-
-			return () => {
-				this.subscribers.delete(run);
-				invalidate?.();
-				if (this.subscribers.size === 0) this._onAllUnsubscribe?.();
-			};
-		}
-
-		public onAllUnsubscribe(fn: () => void) {
-			this._onAllUnsubscribe = fn;
 		}
 
 		show() {

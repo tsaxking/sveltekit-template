@@ -32,15 +32,15 @@
 
 	const { data } = $props();
 
-	const cs = useCommandStack('admin-data-' + data.struct, onMount, onDestroy);
+	const cs = $derived(useCommandStack('admin-data-' + data.struct, onMount, onDestroy));
 
 	const structType = $derived(data.structType);
 	const struct = $derived(data.struct);
 	const structData = $derived(data.data);
 	const total = $derived(data.total);
 	const safes = $derived(data.safes);
-	const page = $state(data.page);
-	const limit = $state(data.limit);
+	const page = $derived(data.page);
+	const limit = $derived(data.limit);
 
 	let newData: Record<string, unknown> = $state({});
 

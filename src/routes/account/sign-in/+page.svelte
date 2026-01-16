@@ -10,9 +10,11 @@
 
 	// let user = $state(form?.user || '');
 
-	if (form?.redirect && browser) {
-		goto(form.redirect);
-	}
+	$effect(() => {
+		if (form?.redirect && browser) {
+			goto(form.redirect);
+		}
+	});
 
 	const requestPasswordReset = () => {
 		new Form()

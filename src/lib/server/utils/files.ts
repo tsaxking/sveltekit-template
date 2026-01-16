@@ -584,8 +584,6 @@ export const openJSON = <T>(filePath: string, parser: z.ZodType<T>) => {
 	});
 };
 
-
-
 /**
  * Asynchronously reads the content of a file as a UTF-8 string.
  * @param filepath - Path to the file to be read
@@ -604,7 +602,6 @@ export const openFile = (filepath: string) => {
 	});
 };
 
-
 /**
  * Asynchronously saves content to a file, with options for directory creation and overwrite control.
  * @param filepath - Path to the file where content should be saved
@@ -618,10 +615,14 @@ export const openFile = (filepath: string) => {
  * await saveFile('./output/data.txt', 'Hello, World!', { recurse: true, overwrite: false });
  * ```
  */
-export const saveFile = (filepath: string, content: string, config?: {
-	recurse?: boolean; // default true
-	overwrite?: boolean; // default true
-}) => {
+export const saveFile = (
+	filepath: string,
+	content: string,
+	config?: {
+		recurse?: boolean; // default true
+		overwrite?: boolean; // default true
+	}
+) => {
 	return attemptAsync<void>(async () => {
 		const { recurse = true, overwrite = true } = config ?? {};
 		if (recurse) {

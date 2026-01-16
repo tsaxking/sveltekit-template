@@ -57,19 +57,21 @@
 		multiSelect = false
 	}: Props = $props();
 
-	ModuleRegistry.registerModules([
-		...modules,
-		ClientSideRowModelModule,
-		PaginationModule,
-		ValidationModule,
-		RowApiModule,
-		QuickFilterModule,
-		RowSelectionModule,
-		RenderApiModule,
-		EventApiModule,
-		RowStyleModule,
-		CellStyleModule
-	]);
+	$effect(() =>
+		ModuleRegistry.registerModules([
+			...modules,
+			ClientSideRowModelModule,
+			PaginationModule,
+			ValidationModule,
+			RowApiModule,
+			QuickFilterModule,
+			RowSelectionModule,
+			RenderApiModule,
+			EventApiModule,
+			RowStyleModule,
+			CellStyleModule
+		])
+	);
 
 	const em = new EventEmitter<{
 		filter: T[];
@@ -102,17 +104,19 @@
 	};
 
 	// Create a custom dark theme using Theming API
-	const darkTheme = themeQuartz.withParams({
-		backgroundColor: `var(--layer-${layer})`,
-		browserColorScheme: 'dark',
-		chromeBackgroundColor: {
-			ref: 'foregroundColor',
-			mix: 0.07,
-			onto: 'backgroundColor'
-		},
-		foregroundColor: `var(--text-layer-${layer})`,
-		headerFontSize: 14
-	});
+	const darkTheme = $derived(
+		themeQuartz.withParams({
+			backgroundColor: `var(--layer-${layer})`,
+			browserColorScheme: 'dark',
+			chromeBackgroundColor: {
+				ref: 'foregroundColor',
+				mix: 0.07,
+				onto: 'backgroundColor'
+			},
+			foregroundColor: `var(--text-layer-${layer})`,
+			headerFontSize: 14
+		})
+	);
 
 	let gridDiv: HTMLDivElement;
 	let grid: GridApi<T>;

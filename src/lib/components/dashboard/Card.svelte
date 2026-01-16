@@ -15,7 +15,7 @@
 
 	let { body, card, style = '' }: Props = $props();
 
-	let height = $state(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
+	let height = $derived(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
 
 	let resizeTimeout: number | undefined;
 	const onResize = () => {

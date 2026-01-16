@@ -12,8 +12,8 @@
 
 	const { title, body, color, classes = '', glowColor }: Props = $props();
 
-	const glowColorProxy = glowColor ? `glow glow-${glowColor}` : 'shadow';
-	const colorProxy = color ? `bg-${color}` : '';
+	const glowColorProxy = $derived(glowColor ? `glow glow-${glowColor}` : 'shadow');
+	const colorProxy = $derived(color ? `bg-${color}` : '');
 
 	let minimized = $state(false);
 	let hidden = $state(false);

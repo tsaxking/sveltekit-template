@@ -34,9 +34,11 @@
 
 	let type: 'text' | 'password' = $state('password');
 
-	if (!id) {
-		id = name;
-	}
+	$effect(() => {
+		if (!id) {
+			id = name;
+		}
+	});
 
 	const toggle = () => {
 		type = type === 'text' ? 'password' : 'text';

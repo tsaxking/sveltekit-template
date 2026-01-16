@@ -4,17 +4,19 @@
 
 	const { data, form } = $props();
 
-	const { account } = data;
+	const { account } = $derived(data);
 
-	if (form?.message) {
-		notify({
-			autoHide: 3000,
-			color: 'warning',
-			title: 'Error',
-			message: form.message,
-			textColor: 'dark'
-		});
-	}
+	$effect(() => {
+		if (form?.message) {
+			notify({
+				autoHide: 3000,
+				color: 'warning',
+				title: 'Error',
+				message: form.message,
+				textColor: 'dark'
+			});
+		}
+	});
 
 	let password = $state('');
 	let confirmPassword = $state('');
