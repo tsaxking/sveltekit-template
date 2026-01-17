@@ -150,8 +150,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#v1.0.24
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/6e79adacd02b7e170cfa53e5f8161b307bc924b4(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
+        specifier: github:tsaxking/drizzle-struct#v1.0.25
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -2892,8 +2892,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/6e79adacd02b7e170cfa53e5f8161b307bc924b4:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/6e79adacd02b7e170cfa53e5f8161b307bc924b4}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -8174,7 +8174,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/6e79adacd02b7e170cfa53e5f8161b307bc924b4(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.35.0)
       '@msgpack/msgpack': 3.0.0-beta3
