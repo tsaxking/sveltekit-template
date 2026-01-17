@@ -69,7 +69,8 @@ export const POST = async (event) => {
 			'universe',
 			'attributes',
 			'lifetime',
-			'canUpdate'
+			'canUpdate',
+			'hash'
 		]
 	});
 

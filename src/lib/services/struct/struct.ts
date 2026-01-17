@@ -497,6 +497,7 @@ export type GlobalCols = {
 	attributes: 'string';
 	lifetime: 'number';
 	canUpdate: 'boolean';
+	hash: 'string';
 };
 
 type ReadConfigType = 'stream' | 'all' | 'pagination';
