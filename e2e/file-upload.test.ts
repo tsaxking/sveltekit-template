@@ -130,11 +130,10 @@ describe('File Upload E2E Test', () => {
 		// Wait a bit for Uppy to fully initialize
 		await page.waitForTimeout(1000);
 
-		// Add files to Uppy programmatically via the page context
-		// This directly calls Uppy's addFile API which is more reliable than DOM manipulation
-		for (let i = 0; i < filePaths.length; i++) {
-			const filePath = filePaths[i];
-			const testFile = TEST_FILES[i];
+		// Add files to Uppy by simulating user file selection
+		// We programmatically create File objects and trigger the input's change event
+		for (const [index, filePath] of filePaths.entries()) {
+			const testFile = TEST_FILES[index];
 			
 			// Read file as buffer for Uppy
 			const fileBuffer = await fs.readFile(filePath);
@@ -144,27 +143,19 @@ describe('File Upload E2E Test', () => {
 				({ name, base64, type }) => {
 					// Convert base64 to blob
 					const byteCharacters = atob(base64);
-					const byteNumbers = new Array(byteCharacters.length);
-					for (let i = 0; i < byteCharacters.length; i++) {
-						byteNumbers[i] = byteCharacters.charCodeAt(i);
-					}
-					const byteArray = new Uint8Array(byteNumbers);
+					const byteArray = Uint8Array.from(byteCharacters, c => c.charCodeAt(0));
 					const blob = new Blob([byteArray], { type });
 					const file = new File([blob], name, { type });
 					
-					// Get Uppy instance from window (it should be exposed)
-					// @ts-ignore
+					// Find the file input element
 					const uppyDashboard = document.querySelector('.uppy-Dashboard');
 					if (uppyDashboard) {
-						// Find the Uppy instance - it's stored on the Dashboard component
-						// We need to access it through the Svelte component or window
-						// Try to add via input element
 						const input = document.querySelector('.uppy-Dashboard-input') as HTMLInputElement;
 						if (input) {
 							const dataTransfer = new DataTransfer();
 							dataTransfer.items.add(file);
 							input.files = dataTransfer.files;
-							// Trigger change event
+							// Trigger change event to notify Uppy
 							const event = new Event('change', { bubbles: true });
 							input.dispatchEvent(event);
 						}
