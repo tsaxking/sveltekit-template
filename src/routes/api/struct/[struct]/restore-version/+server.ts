@@ -72,7 +72,8 @@ export const POST = async (event) => {
 		const canDo = await Permissions.accountCanDo(
 			event.locals.account,
 			[data.value],
-			DataAction.RestoreVersion
+			DataAction.RestoreVersion,
+			event.locals.permissionCache
 		);
 
 		if (canDo.isErr()) {

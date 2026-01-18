@@ -223,7 +223,8 @@ export const GET = async (event) => {
 		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
 			data,
-			PropertyAction.Read
+			PropertyAction.Read,
+			event.locals.permissionCache
 		);
 		if (res.isErr()) {
 			return Errors.internalError(res.error);

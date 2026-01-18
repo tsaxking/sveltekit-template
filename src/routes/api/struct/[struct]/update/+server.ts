@@ -105,7 +105,8 @@ export const POST = async (event) => {
 	const filtered = await Permissions.filterPropertyActionFromAccount(
 		event.locals.account,
 		[targetData.value],
-		PropertyAction.Update
+		PropertyAction.Update,
+		event.locals.permissionCache
 	);
 
 	if (filtered.isErr()) {

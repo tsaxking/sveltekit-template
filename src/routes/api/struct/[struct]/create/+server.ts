@@ -54,7 +54,12 @@ export const POST = async (event) => {
 			break PERMIT;
 		}
 
-		const canDo = await Permissions.canCreate(event.locals.account, struct, safe.data.attributes);
+		const canDo = await Permissions.canCreate(
+			event.locals.account,
+			struct,
+			safe.data.attributes,
+			event.locals.permissionCache
+		);
 
 		if (canDo.isErr()) {
 			return Errors.internalError(canDo.error);
