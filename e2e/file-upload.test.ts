@@ -54,12 +54,16 @@ afterAll(async () => {
 	try {
 		const files = await fs.readdir(UPLOAD_DIR);
 		for (const file of files) {
-			if (file.startsWith('test-')) {
+			// Clean up files that contain our test file names
+			if (file.includes('test-image.png') || 
+			    file.includes('test-text.txt') || 
+			    file.includes('test-json.json')) {
 				await fs.unlink(path.join(UPLOAD_DIR, file));
 			}
 		}
 	} catch (err) {
 		// Ignore errors if directory doesn't exist
+		console.log('Error cleaning up test files:', err);
 	}
 });
 
@@ -134,18 +138,26 @@ describe('File Upload E2E Test', () => {
 		const uppyUploadButton = page.locator('.uppy-StatusBar-actionBtn--upload');
 		await uppyUploadButton.click();
 
-		// Wait for uploads to complete
-		await page.waitForTimeout(3000);
+		// Wait for uploads to complete by checking for success indicators
+		// Wait for either success message or upload completion
+		try {
+			await page.waitForSelector('.uppy-StatusBar.is-complete', { timeout: 10000 });
+		} catch {
+			// Fallback to timeout if selector doesn't appear
+			await page.waitForTimeout(3000);
+		}
 
 		// Verify files were saved to disk
 		const uploadedFiles = await fs.readdir(UPLOAD_DIR);
 		
 		// Check that files exist in the upload directory
+		const uploadedTestFiles: string[] = [];
 		for (const testFile of testFiles) {
 			const matchingFile = uploadedFiles.find(f => f.includes(testFile.name));
 			expect(matchingFile).toBeTruthy();
 
 			if (matchingFile) {
+				uploadedTestFiles.push(matchingFile);
 				// Verify file contents
 				const savedFilePath = path.join(UPLOAD_DIR, matchingFile);
 				const savedContent = await fs.readFile(savedFilePath);
@@ -155,8 +167,13 @@ describe('File Upload E2E Test', () => {
 
 		// Clean up temporary files
 		for (const filePath of filePaths) {
-			await fs.unlink(filePath);
+			await fs.unlink(filePath).catch(() => {});
 		}
-		await fs.rmdir(tmpDir);
+		await fs.rmdir(tmpDir).catch(() => {});
+
+		// Clean up uploaded files
+		for (const uploadedFile of uploadedTestFiles) {
+			await fs.unlink(path.join(UPLOAD_DIR, uploadedFile)).catch(() => {});
+		}
 	});
 });
