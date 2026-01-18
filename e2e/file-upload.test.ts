@@ -14,7 +14,51 @@ const beforeAll = testing.default.beforeAll;
 
 const UPLOAD_DIR = path.resolve(process.cwd(), './static/uploads');
 
+// Admin credentials for test
+const ADMIN_USERNAME = 'testadmin';
+const ADMIN_PASSWORD = 'AdminPassword123!';
+const ADMIN_EMAIL = 'testadmin@example.com';
+
+// Test files configuration
+const TEST_FILES = [
+	{
+		name: 'test-image.png',
+		// 1x1 pixel transparent PNG for testing image upload
+		content: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64'),
+		type: 'image/png'
+	},
+	{
+		name: 'test-text.txt',
+		content: Buffer.from('This is a test text file for e2e testing.'),
+		type: 'text/plain'
+	},
+	{
+		name: 'test-json.json',
+		content: Buffer.from(JSON.stringify({ test: 'data', value: 123 })),
+		type: 'application/json'
+	}
+];
+
 let adminAccount: Account.AccountData | undefined;
+
+/**
+ * Clean up uploaded test files from the upload directory
+ */
+async function cleanupTestFiles() {
+	try {
+		const files = await fs.readdir(UPLOAD_DIR);
+		for (const file of files) {
+			// Clean up files that contain our test file names
+			const isTestFile = TEST_FILES.some(tf => file.includes(tf.name));
+			if (isTestFile) {
+				await fs.unlink(path.join(UPLOAD_DIR, file));
+			}
+		}
+	} catch (err) {
+		// Ignore errors if directory doesn't exist
+		console.log('Error cleaning up test files:', err);
+	}
+}
 
 beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
@@ -22,11 +66,11 @@ beforeAll(async () => {
 
 	// Create admin account for file upload
 	adminAccount = await Account.createAccount({
-		username: 'testadmin',
-		email: 'testadmin@example.com',
+		username: ADMIN_USERNAME,
+		email: ADMIN_EMAIL,
 		firstName: 'Test',
 		lastName: 'Admin',
-		password: 'AdminPassword123!'
+		password: ADMIN_PASSWORD
 	}).unwrap();
 
 	// Add to admins table
@@ -51,20 +95,7 @@ afterAll(async () => {
 	}
 
 	// Clean up uploaded test files
-	try {
-		const files = await fs.readdir(UPLOAD_DIR);
-		for (const file of files) {
-			// Clean up files that contain our test file names
-			if (file.includes('test-image.png') || 
-			    file.includes('test-text.txt') || 
-			    file.includes('test-json.json')) {
-				await fs.unlink(path.join(UPLOAD_DIR, file));
-			}
-		}
-	} catch (err) {
-		// Ignore errors if directory doesn't exist
-		console.log('Error cleaning up test files:', err);
-	}
+	await cleanupTestFiles();
 });
 
 describe('File Upload E2E Test', () => {
@@ -76,7 +107,7 @@ describe('File Upload E2E Test', () => {
 		}
 
 		// Sign in as admin
-		await signIn(page, 'testadmin', 'AdminPassword123!');
+		await signIn(page, ADMIN_USERNAME, ADMIN_PASSWORD);
 
 		// Navigate to file upload test page
 		await page.goto('/test/file-upload');
@@ -84,38 +115,19 @@ describe('File Upload E2E Test', () => {
 		// Wait for the page to load
 		await page.waitForLoadState('networkidle');
 
-		// Create test files to upload
-		const testFiles = [
-			{
-				name: 'test-image.png',
-				content: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64'),
-				type: 'image/png'
-			},
-			{
-				name: 'test-text.txt',
-				content: Buffer.from('This is a test text file for e2e testing.'),
-				type: 'text/plain'
-			},
-			{
-				name: 'test-json.json',
-				content: Buffer.from(JSON.stringify({ test: 'data', value: 123 })),
-				type: 'application/json'
-			}
-		];
-
 		// Create temporary files for upload
 		const tmpDir = path.join(process.cwd(), 'tmp', 'test-uploads');
 		await fs.mkdir(tmpDir, { recursive: true });
 
 		const filePaths: string[] = [];
-		for (const testFile of testFiles) {
+		for (const testFile of TEST_FILES) {
 			const filePath = path.join(tmpDir, testFile.name);
 			await fs.writeFile(filePath, testFile.content);
 			filePaths.push(filePath);
 		}
 
 		// Click the upload button to open modal
-		const uploadButton = page.locator('button:has-text("Drag and drop your files")');
+		const uploadButton = page.locator('button').filter({ hasText: 'Drag and drop your files' });
 		await uploadButton.click();
 
 		// Wait for modal to appear
@@ -151,13 +163,11 @@ describe('File Upload E2E Test', () => {
 		const uploadedFiles = await fs.readdir(UPLOAD_DIR);
 		
 		// Check that files exist in the upload directory
-		const uploadedTestFiles: string[] = [];
-		for (const testFile of testFiles) {
+		for (const testFile of TEST_FILES) {
 			const matchingFile = uploadedFiles.find(f => f.includes(testFile.name));
 			expect(matchingFile).toBeTruthy();
 
 			if (matchingFile) {
-				uploadedTestFiles.push(matchingFile);
 				// Verify file contents
 				const savedFilePath = path.join(UPLOAD_DIR, matchingFile);
 				const savedContent = await fs.readFile(savedFilePath);
@@ -172,8 +182,6 @@ describe('File Upload E2E Test', () => {
 		await fs.rmdir(tmpDir).catch(() => {});
 
 		// Clean up uploaded files
-		for (const uploadedFile of uploadedTestFiles) {
-			await fs.unlink(path.join(UPLOAD_DIR, uploadedFile)).catch(() => {});
-		}
+		await cleanupTestFiles();
 	});
 });
