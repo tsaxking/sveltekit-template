@@ -1678,7 +1678,6 @@ export class Struct<T extends Blank> {
 				cache: config?.cache
 			});
 			const data = await res.unwrap().json();
-			console.log('Received from-id data:', data);
 			const parsed = z
 				.object({
 					success: z.boolean(),
