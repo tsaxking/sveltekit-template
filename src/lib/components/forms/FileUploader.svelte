@@ -22,7 +22,7 @@
 		multiple?: boolean;
 		message?: string;
 		endpoint: string;
-		usage: 'images' | 'general';
+		allowedFileTypes?: string[];
 		allowLocal?: boolean;
 		btnClasses?: string;
 	}
@@ -31,12 +31,11 @@
 		multiple = true,
 		message = 'Upload Files',
 		endpoint,
-		usage = 'images',
 		allowLocal = true,
-		btnClasses = 'btn btn-primary'
+		btnClasses = 'btn btn-primary',
+		allowedFileTypes = [],
 	}: Props = $props();
 
-	const allowedFileTypes = $derived(usage === 'images' ? ['image/*'] : ['*']);
 
 	const uppy = $derived(
 		new Uppy({

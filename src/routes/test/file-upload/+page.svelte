@@ -10,6 +10,6 @@
 		multiple={true}
 		message="Drag and drop your files or click here to browse"
 		endpoint="/test/upload"
-		usage="general"
+		allowedFileTypes={['image/*', 'application/pdf', '.docx', '.txt', '.json']}
 	/>
 </div>
