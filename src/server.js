@@ -8,7 +8,9 @@ const PORT = Number(process.env.PORT) || 3000;
 // Security: Add security headers middleware
 app.use((req, res, next) => {
 	// Set Content Security Policy (CSP)
-	// Note: Adjust this policy based on your application's needs
+	// Note: 'unsafe-inline' is currently required for SvelteKit's client-side hydration
+	// and dynamic styles. To remove it, implement nonce-based CSP or move to strict-dynamic.
+	// Adjust this policy based on your application's specific requirements.
 	res.setHeader(
 		'Content-Security-Policy',
 		"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self';"
@@ -20,12 +22,9 @@ app.use((req, res, next) => {
 	// Prevent MIME type sniffing
 	res.setHeader('X-Content-Type-Options', 'nosniff');
 	
-	// Enable XSS protection
-	res.setHeader('X-XSS-Protection', '1; mode=block');
-	
-	// Enforce HTTPS in production
+	// Enforce HTTPS in production (provides better XSS protection than X-XSS-Protection)
 	if (process.env.NODE_ENV === 'production') {
-		res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+		res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 	}
 	
 	// Prevent referrer leakage
