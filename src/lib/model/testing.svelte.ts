@@ -11,7 +11,6 @@ export namespace Test {
 		},
 		socket: sse,
 		browser
-		// log: true
 	});
 
 	export type TestData = StructData<typeof Test.data.structure>;
@@ -641,7 +640,6 @@ export namespace Test {
 		},
 		socket: sse,
 		browser,
-		log: true
 	});
 
 	export type TestPermissionsData = typeof TestPermissions.sample;

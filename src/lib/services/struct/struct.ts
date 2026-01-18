@@ -268,7 +268,7 @@ export type StructBuilder<T extends Blank> = {
 	/**
 	 * Log all actions to the console (only use for development because this could log sensitive data and may slow down the application)
 	 */
-	log?: boolean;
+	debug?: boolean;
 
 	/**
 	 * Whether the struct is a browser struct, this is used to prevent fetch requests on the server when sveltekit is doing SSR
@@ -1849,7 +1849,7 @@ export class Struct<T extends Blank> {
 	 * @param {...any[]} args
 	 */
 	public log(...args: any[]) {
-		if (this.data.log) {
+		if (this.data.debug) {
 			console.log(`[${this.data.name}]`, ...args);
 		}
 	}

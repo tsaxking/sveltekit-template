@@ -14,7 +14,7 @@ export namespace StructBatching {
 		date: 'date'
 	});
 
-	export type Batch = typeof table.sample;
+	export type B = typeof table.sample;
 
 	export type StructBatch = {
 		struct: Struct<Blank>;
@@ -29,18 +29,29 @@ export namespace StructBatching {
 		}
 	};
 
-	em.on('init', async () => {
-		const data = await table.all({ pagination: false });
-		if (data.isOk()) {
-			log(`Processing ${data.value.data.length} pending struct batching items...`);
-			for (const item of data.value.data) {
-				batcher.add(item);
+	em.on('init', () => {
+		setTimeout(async () => {
+			const data = await table.all({ pagination: false });
+			if (data.isOk()) {
+				log(`Processing ${data.value.data.length} pending struct batching items...`);
+				for (const item of data.value.data) {
+					log(awaiting, item.data.id);
+					if (awaiting.has(item.data.id)) continue;
+					batcher.add(item);
+				}
 			}
-		}
+		}, 1000 * 5); // 5 seconds after init
 	});
 
+	const awaiting = new Set<string>();
+
 	const batcher = new Batch(
-		async (items: Batch[]) => {
+		async (items: B[]) => {
+			log('Awaiting batch:', items);
+			for (const item of items) {
+				awaiting.add(item.data.id);
+				log('Added to awaiting:', item.data.id);
+			}
 			log(`Sending batch of ${items.length} struct updates...`);
 			const res = await fetch('/api/struct/batch', {
 				method: 'POST',
@@ -60,6 +71,10 @@ export namespace StructBatching {
 
 			// If we got here, then fetch succeeded and server is running, therefore we can delete the items.
 			await Promise.all(items.map((i) => i.delete()));
+			for (const item of items) {
+				awaiting.delete(item.data.id);
+				log('Removed from awaiting:', item.data.id);
+			}
 
 			return z
 				.array(
