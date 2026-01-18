@@ -128,7 +128,7 @@ describe('File Upload E2E Test', () => {
 		await page.waitForSelector('.uppy-Dashboard', { timeout: 5000 });
 
 		// Find the file input element within the Uppy dashboard
-		const fileInput = page.locator('.uppy-Dashboard-input');
+		const fileInput = page.locator('.uppy-Dashboard-input').first();
 		await fileInput.setInputFiles(filePaths);
 
 		// Wait for files to be added to the upload list
