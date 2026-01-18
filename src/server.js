@@ -15,21 +15,21 @@ app.use((req, res, next) => {
 		'Content-Security-Policy',
 		"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self';"
 	);
-	
+
 	// Prevent clickjacking
 	res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-	
+
 	// Prevent MIME type sniffing
 	res.setHeader('X-Content-Type-Options', 'nosniff');
-	
+
 	// Enforce HTTPS in production (provides better XSS protection than X-XSS-Protection)
 	if (process.env.NODE_ENV === 'production') {
 		res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 	}
-	
+
 	// Prevent referrer leakage
 	res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-	
+
 	next();
 });
 

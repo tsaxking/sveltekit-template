@@ -7,6 +7,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 1. Path Traversal Protection
 
 #### File Upload Endpoint (`/files/[fileId]/+server.ts`)
+
 - **Fixed**: Path traversal vulnerability in file upload and retrieval
 - **Measures**:
   - Filename sanitization using `path.basename()`
@@ -16,6 +17,7 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Rejection of special filenames (`.`, `..`)
 
 #### Static Assets Endpoint (`/assets/[...filepath]/+server.ts`)
+
 - **Fixed**: Enhanced path traversal protection
 - **Measures**:
   - Explicit rejection of paths containing `..`
@@ -27,6 +29,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 2. Security Headers
 
 #### Server Configuration (`src/server.js`)
+
 - **Fixed**: Removed CSP removal, added comprehensive security headers
 - **Headers Added**:
   - `Content-Security-Policy`: Restricts resource loading (with documented unsafe-inline for SvelteKit compatibility)
@@ -40,6 +43,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 3. Rate Limiting & DDoS Protection
 
 #### Configuration (`hooks.server.ts` & `limiting.ts`)
+
 - **Status**: ✅ Implemented and enabled by default
 - **Features**:
   - Per-IP rate limiting
@@ -58,6 +62,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 4. IP Access Control
 
 #### Whitelist/Blacklist System (`limiting.ts`)
+
 - **Status**: ✅ Implemented
 - **Features**:
   - IP-based page access restrictions via `private/ip-limited.pages`
@@ -70,6 +75,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 5. Permission System (CRUD/Features)
 
 #### Role-Based Access Control (`permissions.ts`)
+
 - **Status**: ✅ Comprehensive system implemented
 - **Features**:
   - Hierarchical role system with parent-child relationships
@@ -84,6 +90,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 6. Admin Information Protection
 
 #### Admin Routes (`/dashboard/admin/*`)
+
 - **Status**: ✅ Protected by permission system
 - **Measures**:
   - All admin routes require authentication
@@ -94,6 +101,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 7. Database Security
 
 #### SQL Injection Prevention
+
 - **Status**: ✅ Protected
 - **Measures**:
   - Using Drizzle ORM for all database queries
@@ -104,6 +112,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ### 8. Session Security
 
 #### Session Management (`session.ts`)
+
 - **Status**: ✅ Implemented
 - **Features**:
   - Fingerprint-based session tracking
@@ -115,6 +124,7 @@ This document outlines the security measures implemented in this SvelteKit templ
 ## ⚠️ Security Considerations & Recommendations
 
 ### 1. Content Security Policy (CSP)
+
 - **Current**: Basic CSP implemented with `unsafe-inline` for scripts and styles
 - **Recommendation**: Tighten CSP by:
   - Removing `unsafe-inline` and using nonces or hashes
@@ -122,16 +132,19 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Regularly reviewing and updating the policy
 
 ### 2. CSRF Protection
+
 - **Current**: Not explicitly visible in the codebase
 - **Recommendation**: Ensure SvelteKit's built-in CSRF protection is active
 - **Note**: SvelteKit provides CSRF protection by default for form actions
 
 ### 3. Authentication & Password Security
+
 - **Current**: Using `@node-rs/argon2` for password hashing
 - **Status**: ✅ Industry-standard secure hashing
 - **Note**: Argon2 is recommended by OWASP
 
 ### 4. File Upload Security
+
 - **Current Limits**: 10MB max file size
 - **Additional Recommendations**:
   - Implement file type validation (whitelist allowed MIME types)
@@ -140,6 +153,7 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Implement file retention policies
 
 ### 5. OAuth2 Security
+
 - **Current**: OAuth2 implementation present
 - **Recommendations**:
   - Ensure state parameter validation
@@ -148,6 +162,7 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Review token storage and refresh mechanisms
 
 ### 6. Environment Variables
+
 - **Current**: `.env.example` auto-generated
 - **Recommendations**:
   - Never commit `.env` to version control (✅ in .gitignore)
@@ -156,11 +171,13 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Review OAuth2 credentials are properly secured
 
 ### 7. Error Handling
+
 - **Current**: Generic error messages for file operations
 - **Status**: ✅ Good practice (prevents information disclosure)
 - **Note**: Continue avoiding detailed error messages in production
 
 ### 8. Logging
+
 - **Current**: Terminal logging with configurable levels
 - **Recommendations**:
   - Ensure sensitive data (passwords, tokens) is never logged
@@ -169,6 +186,7 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Consider centralized logging in production
 
 ### 9. Production Hardening
+
 - **Recommendations**:
   - Enable fingerprint mismatch detection (currently commented out)
   - Disable `auto_sign_in` in production
@@ -177,6 +195,7 @@ This document outlines the security measures implemented in this SvelteKit templ
   - Regular security audits and dependency updates
 
 ### 10. Ignored Pages & Routes
+
 - **Current**: Session ignore list in `hooks.server.ts`
 - **Status**: ✅ Implemented
 - **Note**: Reduces unnecessary session overhead for public routes

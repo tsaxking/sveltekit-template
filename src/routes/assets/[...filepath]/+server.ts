@@ -4,7 +4,7 @@ import mime from 'mime-types';
 
 export const GET = async (event) => {
 	const staticDir = path.join(process.cwd(), 'static');
-	
+
 	// Security: Validate filepath parameter exists
 	if (!event.params.filepath) {
 		return new Response('File not found', { status: 404 });
@@ -20,7 +20,9 @@ export const GET = async (event) => {
 
 	// Security: Ensure path stays within 'static' directory using resolved paths
 	const resolvedStaticDir = path.resolve(staticDir);
-	if (!(requestedPath.startsWith(resolvedStaticDir + path.sep) || requestedPath === resolvedStaticDir)) {
+	if (
+		!(requestedPath.startsWith(resolvedStaticDir + path.sep) || requestedPath === resolvedStaticDir)
+	) {
 		return new Response('Access denied', { status: 403 });
 	}
 
