@@ -57,7 +57,8 @@ export const GET = async (event) => {
 		const res = await Permissions.filterPropertyActionFromAccount(
 			event.locals.account,
 			versions.value,
-			PropertyAction.ReadVersionHistory
+			PropertyAction.ReadVersionHistory,
+			event.locals.permissionCache
 		);
 		if (res.isErr()) {
 			return Errors.internalError(res.error);
