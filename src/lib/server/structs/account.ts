@@ -329,7 +329,7 @@ export namespace Account {
 
 	export const hash = (password: string, salt: string) => {
 		return attempt(() => {
-			return crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+			return crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
 		});
 	};
 
