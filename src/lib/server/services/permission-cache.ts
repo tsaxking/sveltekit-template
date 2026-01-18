@@ -44,6 +44,33 @@ export namespace PermissionCache {
 	const REDIS_PREFIX = 'perm:';
 
 	/**
+	 * Helper function to save account rulesets to cache
+	 */
+	const cacheAccountRulesets = async (
+		accountId: string,
+		rulesets: (Permissions.RoleRulesetData | Permissions.AccountRulesetData)[],
+		requestCache?: RequestCache
+	) => {
+		const cacheKey = `account-rulesets:${accountId}`;
+		const redisKey = `${REDIS_PREFIX}${cacheKey}`;
+
+		// Serialize for Redis
+		const serialized = rulesets.map((r) => ({
+			struct: r.struct.name,
+			data: r.data,
+			id: r.id
+		}));
+
+		// Store in Redis
+		await redis.set(redisKey, JSON.stringify(serialized), REDIS_TTL);
+
+		// Store in request cache
+		requestCache?.set(cacheKey, rulesets);
+
+		return rulesets;
+	};
+
+	/**
 	 * Get account rulesets with multi-level caching
 	 * @param accountId - Account ID to get rulesets for
 	 * @param requestCache - Optional request-scoped cache
@@ -85,38 +112,11 @@ export namespace PermissionCache {
 			}
 
 			// Level 3: Fetch from database
-			const account = await Permissions.Role.fromId(accountId).unwrap();
-			if (!account) {
-				// If not a role, try as account
-				const accountData = { id: accountId } as Account.AccountData;
-				const rulesets = await Permissions.getRulesetsFromAccount(accountData).unwrap();
-				
-				// Cache the result
-				const serialized = rulesets.map((r) => ({
-					struct: r.struct.name,
-					data: r.data,
-					id: r.id
-				}));
-				await redis.set(redisKey, JSON.stringify(serialized), REDIS_TTL);
-				requestCache?.set(cacheKey, rulesets);
-				
-				return rulesets;
-			}
-			
-			// This shouldn't normally happen, but handle it gracefully
 			const accountData = { id: accountId } as Account.AccountData;
 			const rulesets = await Permissions.getRulesetsFromAccount(accountData).unwrap();
 			
 			// Cache the result
-			const serialized = rulesets.map((r) => ({
-				struct: r.struct.name,
-				data: r.data,
-				id: r.id
-			}));
-			await redis.set(redisKey, JSON.stringify(serialized), REDIS_TTL);
-			requestCache?.set(cacheKey, rulesets);
-			
-			return rulesets;
+			return cacheAccountRulesets(accountId, rulesets, requestCache);
 		});
 	};
 
