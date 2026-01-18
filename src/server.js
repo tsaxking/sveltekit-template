@@ -11,10 +11,6 @@ app.use((req, res, next) => {
 	// Note: 'unsafe-inline' is currently required for SvelteKit's client-side hydration
 	// and dynamic styles. To remove it, implement nonce-based CSP or move to strict-dynamic.
 	// Adjust this policy based on your application's specific requirements.
-	res.setHeader(
-		'Content-Security-Policy',
-		"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self';"
-	);
 
 	// Prevent clickjacking
 	res.setHeader('X-Frame-Options', 'SAMEORIGIN');
