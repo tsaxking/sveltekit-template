@@ -66,7 +66,6 @@ export namespace Account {
 		},
 		socket: sse,
 		browser,
-		log: true
 	});
 
 	export type AccountNotificationData = StructData<typeof AccountNotification.data.structure>;

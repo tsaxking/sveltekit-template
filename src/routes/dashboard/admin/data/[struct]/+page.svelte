@@ -460,7 +460,6 @@
 					});
 				},
 				preventDefaultOnContextMenu: true,
-				onRowDataUpdated: (params) => console.log('Row data updated:', params),
 				tooltipMouseTrack: true,
 				tooltipShowDelay: 1000
 			}}

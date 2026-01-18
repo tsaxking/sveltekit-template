@@ -10,7 +10,6 @@
 	let data = $state(User.arr());
 
 	const pull = async () => {
-		console.log('pulling data');
 		data = await User.all({
 			pagination: false
 		}).unwrap();
