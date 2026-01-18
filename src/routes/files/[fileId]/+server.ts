@@ -32,7 +32,7 @@ export async function POST({ request }) {
 	// Security: Ensure the resolved path is within UPLOAD_DIR
 	const resolvedPath = path.resolve(filePath);
 	const resolvedUploadDir = path.resolve(UPLOAD_DIR);
-	if (!resolvedPath.startsWith(resolvedUploadDir + path.sep) && resolvedPath !== resolvedUploadDir) {
+	if (!(resolvedPath.startsWith(resolvedUploadDir + path.sep) || resolvedPath === resolvedUploadDir)) {
 		throw error(403, 'Invalid file path');
 	}
 
@@ -64,7 +64,7 @@ export async function GET({ params }) {
 	// Security: Ensure the resolved path is within UPLOAD_DIR
 	const resolvedPath = path.resolve(filePath);
 	const resolvedUploadDir = path.resolve(UPLOAD_DIR);
-	if (!resolvedPath.startsWith(resolvedUploadDir + path.sep) && resolvedPath !== resolvedUploadDir) {
+	if (!(resolvedPath.startsWith(resolvedUploadDir + path.sep) || resolvedPath === resolvedUploadDir)) {
 		throw error(403, 'Access denied');
 	}
 
@@ -100,7 +100,7 @@ export async function DELETE({ params }) {
 	// Security: Ensure the resolved path is within UPLOAD_DIR
 	const resolvedPath = path.resolve(filePath);
 	const resolvedUploadDir = path.resolve(UPLOAD_DIR);
-	if (!resolvedPath.startsWith(resolvedUploadDir + path.sep) && resolvedPath !== resolvedUploadDir) {
+	if (!(resolvedPath.startsWith(resolvedUploadDir + path.sep) || resolvedPath === resolvedUploadDir)) {
 		throw error(403, 'Access denied');
 	}
 

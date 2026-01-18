@@ -29,12 +29,13 @@ This document outlines the security measures implemented in this SvelteKit templ
 #### Server Configuration (`src/server.js`)
 - **Fixed**: Removed CSP removal, added comprehensive security headers
 - **Headers Added**:
-  - `Content-Security-Policy`: Restricts resource loading
+  - `Content-Security-Policy`: Restricts resource loading (with documented unsafe-inline for SvelteKit compatibility)
   - `X-Frame-Options`: Prevents clickjacking
   - `X-Content-Type-Options`: Prevents MIME sniffing
-  - `X-XSS-Protection`: Enables XSS filtering
-  - `Strict-Transport-Security`: Enforces HTTPS (production only)
+  - `Strict-Transport-Security`: Enforces HTTPS with preload (production only)
   - `Referrer-Policy`: Prevents referrer leakage
+- **Headers Intentionally NOT Set**:
+  - `X-XSS-Protection`: Deprecated and can introduce vulnerabilities in older browsers; CSP provides better protection
 
 ### 3. Rate Limiting & DDoS Protection
 

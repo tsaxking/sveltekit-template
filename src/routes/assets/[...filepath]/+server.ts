@@ -20,7 +20,7 @@ export const GET = async (event) => {
 
 	// Security: Ensure path stays within 'static' directory using resolved paths
 	const resolvedStaticDir = path.resolve(staticDir);
-	if (!requestedPath.startsWith(resolvedStaticDir + path.sep) && requestedPath !== resolvedStaticDir) {
+	if (!(requestedPath.startsWith(resolvedStaticDir + path.sep) || requestedPath === resolvedStaticDir)) {
 		return new Response('Access denied', { status: 403 });
 	}
 
