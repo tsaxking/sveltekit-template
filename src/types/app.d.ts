@@ -2,6 +2,7 @@
 
 import type { Account } from '$lib/server/structs/account';
 import type { Session } from '$lib/server/structs/session';
+import type { RequestCache } from '$lib/server/services/permission-cache';
 
 // for information about these interfaces
 declare global {
@@ -11,6 +12,7 @@ declare global {
 			account?: Account.AccountData | undefined;
 			session: Session.SessionData;
 			start: number;
+			permissionCache: RequestCache;
 		}
 		// interface PageData {}
 		// interface PageState {}

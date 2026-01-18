@@ -20,6 +20,7 @@ import { sleep } from 'ts-utils/sleep';
 import redis from '$lib/server/services/redis';
 import { config } from '$lib/server/utils/env';
 import createTree from '../scripts/create-route-tree';
+import { RequestCache } from '$lib/server/services/permission-cache';
 
 (async () => {
 	await redis.init();
@@ -54,6 +55,7 @@ sessionIgnore.add(`
 export const handle: Handle = async ({ event, resolve }) => {
 	// console.log('Request:', event.request.method, event.url.pathname);
 	event.locals.start = performance.now();
+	event.locals.permissionCache = new RequestCache();
 	if (Limiting.isBlockedPage(event.url.pathname).unwrap()) {
 		// Redirect to /status/404
 		return new Response('Redirect', {

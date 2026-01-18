@@ -27,6 +27,7 @@ import {
 	SendListener
 } from '../services/struct-listeners';
 import type { RequestEvent } from '@sveltejs/kit';
+import { PermissionCache, type RequestCache } from '../services/permission-cache';
 
 export namespace Permissions {
 	/**
@@ -84,7 +85,12 @@ export namespace Permissions {
 				};
 			}
 
-			const res = await filterPropertyActionFromAccount(account, roles.value, PropertyAction.Read);
+			const res = await filterPropertyActionFromAccount(
+				account,
+				roles.value,
+				PropertyAction.Read,
+				event.locals.permissionCache
+			);
 
 			if (res.isErr()) {
 				return {
@@ -150,7 +156,8 @@ export namespace Permissions {
 				const canCreate = await Permissions.canCreate(
 					event.locals.account,
 					Role,
-					parentRole.getAttributes().unwrap()
+					parentRole.getAttributes().unwrap(),
+					event.locals.permissionCache
 				).unwrap();
 
 				if (!canCreate) {
@@ -1243,22 +1250,30 @@ export namespace Permissions {
 	 * @param account The account to check permissions for.
 	 * @param struct The struct to check permissions against.
 	 * @param attributes The attributes to check permissions for.
+	 * @param requestCache Optional request-scoped cache for performance
 	 * @returns A promise that resolves to true if the account can create the struct with the given attributes, false otherwise.
 	 */
 	export const canCreate = <T extends Blank>(
 		account: Account.AccountData,
 		struct: Struct<T, string>,
-		attributes: string[]
+		attributes: string[],
+		requestCache?: RequestCache
 	) => {
 		return attemptAsync(async () => {
 			if (await Account.isAdmin(account).unwrap()) return true;
-			const rulesets = await getRulesetsFromAccount(account).unwrap();
+
+			// Use cached versions
+			const rulesets = await PermissionCache.getAccountRulesets(
+				account.id,
+				requestCache
+			).unwrap();
+
 			if (rulesets.length === 0) return false;
 
-			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+			const entitlements = await PermissionCache.getEntitlements(requestCache).unwrap();
+
 			const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
 
-			// const entitlementsByName = Object.fromEntries(entitlements.map(e => [e.data.name, e]));
 			const permissionsByName = Object.fromEntries(permissions.map((p) => [p.name, p]));
 
 			// Check that every attribute is allowed by some matching ruleset+permission
@@ -1272,7 +1287,7 @@ export namespace Permissions {
 					return permission.canCreate(struct);
 				});
 
-				if (!isPermitted) return false; // One attribute isn't allowed → fail early
+				if (!isPermitted) return false;
 			}
 
 			return true;
@@ -1309,25 +1324,28 @@ export namespace Permissions {
 	 * @param account The account to check permissions for.
 	 * @param data The struct data to check permissions against.
 	 * @param action The action to check permissions for (DataAction or PropertyAction).
+	 * @param requestCache Optional request-scoped cache for performance
 	 * @returns A promise that resolves to an array of booleans indicating if the account can perform the action on each data item.
 	 */
 	export const accountCanDo = (
 		account: Account.AccountData,
 		data: StructData<Blank, string>[],
-		action: DataAction | PropertyAction
+		action: DataAction | PropertyAction,
+		requestCache?: RequestCache
 	) => {
 		return attemptAsync(async () => {
 			if (await Account.isAdmin(account).unwrap()) return data.map(() => true);
+
 			const [rulesets, entitlements] = await Promise.all([
-				getRulesetsFromAccount(account).unwrap(),
-				Entitlement.all({
-					type: 'all'
-				}).unwrap()
+				PermissionCache.getAccountRulesets(account.id, requestCache).unwrap(),
+				PermissionCache.getEntitlements(requestCache).unwrap()
 			]);
+
 			const res = rulesets.map((r) => ({
 				ruleset: r,
 				entitlement: entitlements.find((e) => e.data.name === r.data.entitlement)
 			}));
+
 			return data.map((d) =>
 				res.some((r) => {
 					if (!r.entitlement) return false;
@@ -1342,23 +1360,27 @@ export namespace Permissions {
 	 * @param roles The roles to check permissions for.
 	 * @param data The struct data to check permissions against.
 	 * @param action The action to check permissions for (DataAction or PropertyAction).
+	 * @param requestCache Optional request-scoped cache for performance
 	 * @returns A promise that resolves to an array of booleans indicating if the roles can perform the action on each data item.
 	 */
 	export const rolesCanDo = <T extends Blank>(
 		roles: RoleData[],
 		data: StructData<T, string>[],
-		action: DataAction | PropertyAction
+		action: DataAction | PropertyAction,
+		requestCache?: RequestCache
 	) => {
 		return attemptAsync(async () => {
 			const rulesets = resolveAll(await Promise.all(roles.map((r) => getRulesetsFromRole(r))))
 				.unwrap()
 				.flat();
-			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+
+			const entitlements = await PermissionCache.getEntitlements(requestCache).unwrap();
 
 			const res = rulesets.map((r) => ({
 				ruleset: r,
 				entitlement: entitlements.find((e) => e.data.name === r.data.entitlement)
 			}));
+
 			return data.map((d) =>
 				res.some((r) => {
 					if (!r.entitlement) return false;
@@ -1373,12 +1395,14 @@ export namespace Permissions {
 	 * @param account The account to check permissions for.
 	 * @param data The struct data to filter.
 	 * @param action The action to filter properties by (PropertyAction).
+	 * @param requestCache Optional request-scoped cache for performance
 	 * @returns A promise that resolves to an array of filtered struct data.
 	 */
 	export const filterPropertyActionFromAccount = <T extends Blank>(
 		account: Account.AccountData,
 		data: StructData<T, string>[] | DataVersion<T, string>[],
-		action: PropertyAction
+		action: PropertyAction,
+		requestCache?: RequestCache
 	) => {
 		return attemptAsync<Partial<Structable<T>>[]>(async () => {
 			if (data.length === 0) {
@@ -1394,8 +1418,12 @@ export namespace Permissions {
 			if (await Account.isAdmin(account).unwrap()) {
 				return data.map((d) => d.data) as Partial<Structable<T>>[];
 			}
-			const rulesets = await getRulesetsFromAccount(account).unwrap();
-			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+
+			const [rulesets, entitlements] = await Promise.all([
+				PermissionCache.getAccountRulesets(account.id, requestCache).unwrap(),
+				PermissionCache.getEntitlements(requestCache).unwrap()
+			]);
+
 			const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
 
 			const entitlementsByName = Object.fromEntries(entitlements.map((e) => [e.data.name, e]));
@@ -1418,14 +1446,8 @@ export namespace Permissions {
 					) {
 						return d.data;
 					}
-					// if (struct.bypasses.some((b) => b.action === action && b.condition(account, d.data))) {
-					// 	return d.data;
-					// }
-
-					// Array.from(ActionBypass.listeners).some(b => b.run())
 
 					const attributes = d.getAttributes().unwrap();
-					// all rulsets that match the action, struct, and target attribute
 					const rulesets = res.filter((r) => {
 						if (!r.entitlement) return false;
 						if (!r.permissions) return false;
@@ -1434,7 +1456,7 @@ export namespace Permissions {
 								(p) => p.action === action && (p.struct === d.struct.name || p.struct === '*')
 							)
 						) {
-							return false; // no permissions for this action and struct combination
+							return false;
 						}
 
 						return attributes.includes(r.ruleset.data.targetAttribute);
@@ -1453,7 +1475,7 @@ export namespace Permissions {
 							.filter(Boolean)
 					) as Partial<Structable<T>>;
 				})
-				.filter((d) => Object.keys(d).length > 0); // filter out empty objects
+				.filter((d) => Object.keys(d).length > 0);
 		});
 	};
 
@@ -1463,15 +1485,18 @@ export namespace Permissions {
 	 * @param account The account to check permissions for.
 	 * @param action The action to filter properties by (PropertyAction).
 	 * @param callback The callback to call with the filtered data.
+	 * @param requestCache Optional request-scoped cache for performance
 	 * @returns A function that takes struct data and filters its properties based on the account's permissions.
 	 */
 	// TODO: Bypasses
 	export const filterPropertyActionPipe = <T extends Blank>(
 		account: Account.AccountData,
 		action: PropertyAction,
-		callback: (data: Partial<Structable<T>>) => void
+		callback: (data: Partial<Structable<T>>) => void,
+		requestCache?: RequestCache
 	) => {
-		const res = new Promise<
+		// Pre-fetch and cache the rulesets/entitlements once
+		const preparedData = new Promise<
 			| 'admin'
 			| {
 					permissions: EntitlementPermission;
@@ -1483,6 +1508,7 @@ export namespace Permissions {
 				if (await Account.isAdmin(account).unwrap()) {
 					return 'admin';
 				}
+
 				const blank = () =>
 					[] as {
 						permissions: EntitlementPermission;
@@ -1493,14 +1519,16 @@ export namespace Permissions {
 				const roles = await getRolesFromAccount(account).unwrap();
 				if (roles.length === 0) return blank();
 
-				const rulesets = await getRulesetsFromAccount(account).unwrap();
-				if (rulesets.length === 0) return blank();
+				// Use cached versions
+				const [rulesets, entitlements] = await Promise.all([
+					PermissionCache.getAccountRulesets(account.id, requestCache).unwrap(),
+					PermissionCache.getEntitlements(requestCache).unwrap()
+				]);
 
-				const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+				if (rulesets.length === 0) return blank();
 				if (entitlements.length === 0) return blank();
 
 				const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
-
 				const entitlementsByName = Object.fromEntries(entitlements.map((e) => [e.data.name, e]));
 				const permissionsByName = Object.fromEntries(permissions.map((p) => [p.name, p]));
 
@@ -1522,10 +1550,9 @@ export namespace Permissions {
 		});
 
 		return async (data: StructData<T>) => {
-			const allRulesets = await res;
+			const allRulesets = await preparedData;
 
 			if (allRulesets === 'admin') {
-				// If admin, return all data
 				callback(data.data as Partial<Structable<T>>);
 				return;
 			}
@@ -1534,7 +1561,6 @@ export namespace Permissions {
 			const structName = data.struct.name;
 			const keys = Object.keys(data.safe());
 
-			// Filter applicable rulesets for this data instance
 			const matching = allRulesets.filter((r) => {
 				if (!r.entitlement || !r.permissions) return false;
 				if (
@@ -1547,7 +1573,6 @@ export namespace Permissions {
 				return attributes.includes(r.ruleset.data.targetAttribute);
 			});
 
-			// Build filtered object
 			const filtered = Object.fromEntries(
 				keys
 					.map((key) => {
@@ -1557,7 +1582,6 @@ export namespace Permissions {
 					.filter(Boolean)
 			) as Partial<Structable<T>>;
 
-			// Only run callback if there's at least one property
 			if (Object.keys(filtered).length > 0) callback(filtered);
 		};
 	};
@@ -1824,12 +1848,21 @@ export type Features = \n	${
 		});
 	};
 
-	export const canDoFeature = (account: Account.AccountData, feature: Features, scope?: string) => {
+	export const canDoFeature = (
+		account: Account.AccountData,
+		feature: Features,
+		scope?: string,
+		requestCache?: RequestCache
+	) => {
 		return attemptAsync(async () => {
-			const rulesets = await getRulesetsFromAccount(account).unwrap();
+			// Use cached rulesets and entitlements
+			const rulesets = await PermissionCache.getAccountRulesets(account.id, requestCache).unwrap();
+
 			if (rulesets.length === 0) return false;
-			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
+
+			const entitlements = await PermissionCache.getEntitlements(requestCache).unwrap();
 			if (entitlements.length === 0) return false;
+
 			const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
 
 			const entitlementsByName = Object.fromEntries(entitlements.map((e) => [e.data.name, e]));
@@ -1838,15 +1871,16 @@ export type Features = \n	${
 			for (const ruleset of rulesets) {
 				const entitlement = entitlementsByName[ruleset.data.entitlement];
 				if (!entitlement) continue;
+
 				const entitlementScopes = JSON.parse(entitlement.data.defaultFeatureScopes) as string[];
 				const permission = permissionsByName[ruleset.data.entitlement];
 				if (!permission) continue;
+
 				const features = JSON.parse(entitlement.data.features) as string[];
 				if (!features.includes(feature)) continue;
+
 				if (entitlementScopes.includes('*')) return true;
 				if (scope && entitlementScopes.includes(scope)) return true;
-
-				// all entitlement feature scopes must be present in the ruleset feature scopes
 			}
 
 			return false;
