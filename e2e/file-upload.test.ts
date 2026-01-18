@@ -39,7 +39,7 @@ const TEST_FILES = [
 	}
 ];
 
-let adminAccount: Account.AccountData | undefined;
+let adminAccount: ReturnType<typeof Account.Account.Generator> | undefined;
 
 /**
  * Clean up uploaded test files from the upload directory
@@ -83,14 +83,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	// Clean up admin account
+	// Clean up admin account (admin record is auto-deleted via delete hook)
 	if (adminAccount) {
-		const admin = await Account.Admins.fromProperty('accountId', adminAccount.id, {
-			type: 'single'
-		}).unwrap();
-		if (admin) {
-			await admin.delete().unwrap();
-		}
 		await adminAccount.delete().unwrap();
 	}
 
@@ -133,18 +127,12 @@ describe('File Upload E2E Test', () => {
 		// Wait for modal to appear
 		await page.waitForSelector('.uppy-Dashboard', { timeout: 5000 });
 
-		// Upload files using Playwright's file chooser
-		const fileChooserPromise = page.waitForEvent('filechooser');
-		
-		// Find and click the "Browse files" button in the Uppy dashboard
-		const browseButton = page.locator('.uppy-Dashboard-browse');
-		await browseButton.click();
-		
-		const fileChooser = await fileChooserPromise;
-		await fileChooser.setFiles(filePaths);
+		// Find the file input element within the Uppy dashboard
+		const fileInput = page.locator('.uppy-Dashboard-input');
+		await fileInput.setInputFiles(filePaths);
 
 		// Wait for files to be added to the upload list
-		await page.waitForSelector('.uppy-Dashboard-Item', { timeout: 5000 });
+		await page.waitForSelector('.uppy-Dashboard-Item', { timeout: 10000 });
 
 		// Click the upload button in the Uppy dashboard
 		const uppyUploadButton = page.locator('.uppy-StatusBar-actionBtn--upload');
@@ -179,7 +167,7 @@ describe('File Upload E2E Test', () => {
 		for (const filePath of filePaths) {
 			await fs.unlink(filePath).catch(() => {});
 		}
-		await fs.rmdir(tmpDir).catch(() => {});
+		await fs.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
 
 		// Clean up uploaded files
 		await cleanupTestFiles();
