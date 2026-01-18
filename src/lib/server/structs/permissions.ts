@@ -27,6 +27,7 @@ import {
 	SendListener
 } from '../services/struct-listeners';
 import type { RequestEvent } from '@sveltejs/kit';
+import { PermissionCache, type RequestCache } from '../services/permission-cache';
 
 export namespace Permissions {
 	/**
@@ -1143,6 +1144,61 @@ export namespace Permissions {
 
 	export type AccountRulesetData = typeof AccountRuleset.sample;
 
+	// Cache invalidation hooks
+	Entitlement.on('create', async () => {
+		await PermissionCache.invalidateEntitlements().unwrap();
+	});
+
+	Entitlement.on('update', async () => {
+		await PermissionCache.invalidateEntitlements().unwrap();
+	});
+
+	RoleRuleset.on('create', async (ruleset) => {
+		const role = await Role.fromId(ruleset.data.role).unwrap();
+		if (role) {
+			const accounts = await getAccountsFromRole(role).unwrap();
+			await Promise.all(
+				accounts.map(async (a) => {
+					await PermissionCache.invalidateAccountRulesets(a.account.id).unwrap();
+					await PermissionCache.invalidateAllAccountChecks(a.account.id).unwrap();
+				})
+			);
+		}
+	});
+
+	RoleRuleset.on('delete', async (ruleset) => {
+		const role = await Role.fromId(ruleset.data.role).unwrap();
+		if (role) {
+			const accounts = await getAccountsFromRole(role).unwrap();
+			await Promise.all(
+				accounts.map(async (a) => {
+					await PermissionCache.invalidateAccountRulesets(a.account.id).unwrap();
+					await PermissionCache.invalidateAllAccountChecks(a.account.id).unwrap();
+				})
+			);
+		}
+	});
+
+	RoleAccount.on('create', async (ra) => {
+		await PermissionCache.invalidateAccountRulesets(ra.data.account).unwrap();
+		await PermissionCache.invalidateAllAccountChecks(ra.data.account).unwrap();
+	});
+
+	RoleAccount.on('delete', async (ra) => {
+		await PermissionCache.invalidateAccountRulesets(ra.data.account).unwrap();
+		await PermissionCache.invalidateAllAccountChecks(ra.data.account).unwrap();
+	});
+
+	AccountRuleset.on('create', async (ar) => {
+		await PermissionCache.invalidateAccountRulesets(ar.data.account).unwrap();
+		await PermissionCache.invalidateAllAccountChecks(ar.data.account).unwrap();
+	});
+
+	AccountRuleset.on('delete', async (ar) => {
+		await PermissionCache.invalidateAccountRulesets(ar.data.account).unwrap();
+		await PermissionCache.invalidateAllAccountChecks(ar.data.account).unwrap();
+	});
+
 	/**
 	 * Gets all roles associated with a given account.
 	 * @param account The account to get roles for.
@@ -1335,6 +1391,48 @@ export namespace Permissions {
 				})
 			);
 		});
+	};
+
+	/**
+	 * Check permissions with caching support
+	 */
+	export const canWithCache = async (
+		account: Account.AccountData,
+		action: DataAction | PropertyAction,
+		data: StructData<any, any>,
+		property?: string,
+		requestCache?: RequestCache
+	): Promise<boolean> => {
+		return attemptAsync(async () => {
+			const resourceId = `${data.struct.name}:${data.id}${property ? `:${property}` : ''}`;
+
+			// Check cache
+			const cached = await PermissionCache.getCachedPermissionCheck(
+				account.id,
+				action,
+				resourceId,
+				requestCache
+			).unwrap();
+
+			if (cached !== null) {
+				return cached;
+			}
+
+			// Perform check (use existing accountCanDo logic)
+			const results = await accountCanDo(account, [data], action).unwrap();
+			const result = results[0];
+
+			// Cache result
+			await PermissionCache.cachePermissionCheck(
+				account.id,
+				action,
+				resourceId,
+				result,
+				requestCache
+			).unwrap();
+
+			return result;
+		}).then((r) => r.unwrapOr(false));
 	};
 
 	/**
