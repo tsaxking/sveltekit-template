@@ -65,5 +65,8 @@
 		"version": 1,
 		"debug": true,
 		"debounce_interval_ms": 16
+	},
+	"sse": {
+		"debug": false
 	}
 }

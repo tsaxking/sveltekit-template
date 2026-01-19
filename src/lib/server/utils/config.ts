@@ -70,5 +70,8 @@ export default z.object({
 		version: z.number().min(1),
 		debug: z.boolean(),
 		debounce_interval_ms: z.number().min(0)
+	}),
+	sse: z.object({
+		debug: z.boolean(),
 	})
 });

@@ -158,7 +158,7 @@ export namespace Requests {
 
 			if (config?.headers) {
 				for (const [key, value] of Object.entries(config.headers)) {
-					xhr.setRequestHeader(key, value);
+					xhr.setRequestHeader('X-' + key, value);
 				}
 			}
 

@@ -99,6 +99,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	event.locals.session = session.value;
+	const sseId = event.request.headers.get('X-SSE');
+	if (sseId) event.locals.sse = sse.getConnection(sseId);
 
 	const autoSignIn = config.sessions.auto_sign_in;
 
