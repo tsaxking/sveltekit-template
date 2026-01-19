@@ -29,11 +29,11 @@ export const status = (
 		data?: unknown;
 		errors?: unknown;
 	},
-	init: {
+	_init: {
 		status: number;
 	}
 ) => {
-	return json(status, init);
+	return status;
 };
 
 export const Errors = {

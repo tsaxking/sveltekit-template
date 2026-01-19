@@ -104,7 +104,7 @@ export const POST = async (event) => {
 		dataId: res.value.id,
 		accountId: event.locals.account?.id || 'unknown',
 		type: 'create',
-		message: `${event.locals.account?.data.username || 'unknown'} archived data with id ${res.value.id}`
+		message: `${event.locals.account?.data.username || 'unknown'} created data with id ${res.value.id}`
 	});
 
 	return status(
