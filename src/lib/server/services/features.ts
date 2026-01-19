@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z, type ZodType, type ZodRawShape } from 'zod';
-import { attempt, attemptAsync } from 'ts-utils/check';
+import { attemptAsync } from 'ts-utils/check';
 import type { Account } from '../structs/account';
 import fs from 'fs';
 import path from 'path';
@@ -211,9 +211,11 @@ export namespace Features {
 				return true;
 			}
 
+			const first = args.length > 0 ? (args as unknown[])[0] : undefined;
+
 			// If there's a check function, call it
 			if (feature.check) {
-				const scopes = args[0];
+				const scopes = first;
 				if (feature.scopes && !scopes) {
 					terminal.error(`Feature '${featureName}' requires scopes but none were provided`);
 					return false;
@@ -235,7 +237,7 @@ export namespace Features {
 
 			// If there are scopes but no check function, just validate the scopes
 			if (feature.scopes) {
-				const scopes = args[0];
+				const scopes = first;
 				if (!scopes) {
 					terminal.error(`Feature '${featureName}' requires scopes but none were provided`);
 					return false;

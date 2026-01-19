@@ -4,6 +4,8 @@ import { Account } from '$lib/server/structs/account';
 import { ServerCode } from 'ts-utils/status';
 import { fail } from '@sveltejs/kit';
 import { EventEmitter } from 'ts-utils/event-emitter';
+import { attemptAsync } from 'ts-utils';
+import { Features } from './features';
 
 // xhr only for now
 export class FileUploader extends EventEmitter<{
@@ -88,3 +90,21 @@ export class FileUploader extends EventEmitter<{
 		return result;
 	}
 }
+
+export type FileUploadResponse = {
+	purpose: string;
+	allowedMime: string[];
+	maxSizeMB: number;
+	token: string;
+	expires: number;
+};
+
+export const requestFileUpload = () => {
+	return attemptAsync(async () => {});
+};
+
+Features.register({
+	name: 'file-upload',
+	description: 'Allows uploading files to the server.',
+	scopes: {}
+});

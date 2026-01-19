@@ -15,7 +15,8 @@ import { Account } from './account';
 import { PropertyAction, DataAction } from 'drizzle-struct/types';
 import { DB } from '../db';
 import { and, eq, ilike, inArray } from 'drizzle-orm';
-import type { Entitlement, Features } from '$lib/types/entitlements';
+import type { Entitlement } from '$lib/types/entitlements';
+import { type FeatureName } from '$lib/types/features';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
 import path from 'path';
@@ -1768,15 +1769,7 @@ export namespace Permissions {
 			ENTITLEMENT_FILE,
 			`
 export type Entitlement = \n    ${entitlements.value.map((e) => `'${e.data.name}'`).join('\n  | ') || 'string'};
-export type Group = \n    ${Array.from(new Set(entitlements.value.map((e) => `'${e.data.group}'`))).join('\n  | ') || 'string'};
-export type Features = \n	${
-				Array.from(
-					new Set(entitlements.value.flatMap((e) => JSON.parse(e.data.features) as string[]))
-				)
-					.map((f) => `'${f}'`)
-					.join('\n  | ') || 'string'
-			};
-			`.trim()
+export type Group = \n    ${Array.from(new Set(entitlements.value.map((e) => `'${e.data.group}'`))).join('\n  | ') || 'string'};`.trim()
 		);
 	};
 
@@ -1825,7 +1818,7 @@ export type Features = \n	${
 		description: string;
 		structs: S;
 		permissions: Permission<S>[]; // Now supports multiple structs
-		features: string[];
+		features: FeatureName[];
 		defaultFeatureScopes?: string[];
 	}) => {
 		if (!/[a-z0-9-]+/.test(entitlement.name)) {
@@ -1922,35 +1915,6 @@ export type Features = \n	${
 		});
 	};
 
-	export const canDoFeature = (account: Account.AccountData, feature: Features, scope?: string) => {
-		return attemptAsync(async () => {
-			const rulesets = await getRulesetsFromAccount(account).unwrap();
-			if (rulesets.length === 0) return false;
-			const entitlements = await Entitlement.all({ type: 'all' }).unwrap();
-			if (entitlements.length === 0) return false;
-			const permissions = entitlements.map((e) => getPermissionsFromEntitlement(e).unwrap());
-
-			const entitlementsByName = Object.fromEntries(entitlements.map((e) => [e.data.name, e]));
-			const permissionsByName = Object.fromEntries(permissions.map((p) => [p.name, p]));
-
-			for (const ruleset of rulesets) {
-				const entitlement = entitlementsByName[ruleset.data.entitlement];
-				if (!entitlement) continue;
-				const entitlementScopes = JSON.parse(entitlement.data.defaultFeatureScopes) as string[];
-				const permission = permissionsByName[ruleset.data.entitlement];
-				if (!permission) continue;
-				const features = JSON.parse(entitlement.data.features) as string[];
-				if (!features.includes(feature)) continue;
-				if (entitlementScopes.includes('*')) return true;
-				if (scope && entitlementScopes.includes(scope)) return true;
-
-				// all entitlement feature scopes must be present in the ruleset feature scopes
-			}
-
-			return false;
-		});
-	};
-
 	export const startHierarchy = (
 		name: string,
 		description: string,
@@ -1972,7 +1936,7 @@ export type Features = \n	${
 
 			rulesets.push({
 				entitlement: 'manage-roles',
-				targetAttribute: localAdmin.data.id,
+				targetAttribute: `hierarchy:${localAdmin.id}`,
 				featureScopes: [],
 				name: 'Manage Roles',
 				description: 'Allows managing roles and their permissions.'
@@ -2005,12 +1969,14 @@ export type Features = \n	${
 		color?: string;
 	}) => {
 		return attemptAsync(async () => {
+			const allParents = await getUpperHierarchy(config.parent, true).unwrap();
 			const role = await Role.new({
 				name: config.name,
 				description: config.description,
 				parent: config.parent.id,
 				color: config.color || '#ffffff'
 			}).unwrap();
+			await role.setAttributes(allParents.map((r) => `hierarchy:${r.id}`)).unwrap();
 			return role;
 		});
 	};
@@ -2046,7 +2012,7 @@ export type Features = \n	${
 		permissions: ['role:create', 'role:read:name', 'role:read:description'],
 		group: 'Roles',
 		description: 'Allows creating new roles, deleting roles, and updating existing roles.',
-		features: ['manage-roles']
+		features: []
 	});
 
 	Permissions.createEntitlement({

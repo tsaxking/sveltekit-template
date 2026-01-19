@@ -17,7 +17,10 @@ export default defineConfig({
 	server: {
 		port: config.network.port,
 		host: '0.0.0.0',
-		allowedHosts: ['dev.tsaxking.com']
+		allowedHosts: ['dev.tsaxking.com'],
+		watch: {
+			ignored: ['**/src/lib/types/**']
+		}
 	},
 	define: {
 		__APP_ENV__: JSON.stringify({

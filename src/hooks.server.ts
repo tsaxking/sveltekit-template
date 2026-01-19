@@ -33,6 +33,7 @@ import '$lib/server/features';
 		}
 	});
 	await createTree();
+	PermissionCache.init();
 })();
 
 // if (env.LOG === 'true') {
@@ -57,10 +58,10 @@ sessionIgnore.add(`
 export const handle: Handle = async ({ event, resolve }) => {
 	// console.log('Request:', event.request.method, event.url.pathname);
 	event.locals.start = performance.now();
-	
+
 	// Create request-level permission cache
 	event.locals.permissionCache = PermissionCache.createRequestCache();
-	
+
 	if (Limiting.isBlockedPage(event.url.pathname).unwrap()) {
 		// Redirect to /status/404
 		return new Response('Redirect', {

@@ -54,9 +54,6 @@ export class RequestCache {
 	}
 }
 
-// Redis cache service
-const permCache = redis.createItemGroup('perm', 'string');
-
 // Cache statistics
 const stats = {
 	hits: 0,
@@ -65,18 +62,25 @@ const stats = {
 	invalidations: 0
 };
 
-export namespace PermissionCache {
+class PC {
+	permCache: ReturnType<typeof redis.createItemGroup> | undefined;
+	constructor() {}
+
+	init() {
+		this.permCache = redis.createItemGroup('perm', 'string');
+	}
+
 	/**
 	 * Create a new request-level cache
 	 */
-	export function createRequestCache(): RequestCache {
+	createRequestCache(): RequestCache {
 		return new RequestCache();
 	}
 
 	/**
 	 * Get all entitlements from cache
 	 */
-	export function getEntitlements(requestCache?: RequestCache) {
+	getEntitlements(requestCache?: RequestCache) {
 		return attemptAsync(async () => {
 			const key = 'entitlements:all';
 
@@ -87,7 +91,7 @@ export namespace PermissionCache {
 			}
 
 			// Check Redis cache
-			const cached = await permCache.getItem(key).unwrap();
+			const cached = await this.permCache?.getItem(key).unwrap();
 			if (cached) {
 				stats.hits++;
 				const data = JSON.parse(cached) as Permissions.EntitlementData[];
@@ -103,17 +107,14 @@ export namespace PermissionCache {
 	/**
 	 * Cache all entitlements
 	 */
-	export function cacheEntitlements(
-		entitlements: Permissions.EntitlementData[],
-		requestCache?: RequestCache
-	) {
+	cacheEntitlements(entitlements: Permissions.EntitlementData[], requestCache?: RequestCache) {
 		return attemptAsync(async () => {
 			const key = 'entitlements:all';
 			const value = JSON.stringify(entitlements);
 
 			// Cache in Redis with 1 hour TTL
-			await permCache.setItem(key, value).unwrap();
-			await permCache.expire(key, 3600).unwrap();
+			this.permCache?.createItem(key, value);
+			await this.permCache?.expire(key, 3600).unwrap();
 
 			// Cache in request cache
 			requestCache?.set(key, value);
@@ -125,7 +126,7 @@ export namespace PermissionCache {
 	/**
 	 * Get account rulesets from cache
 	 */
-	export function getAccountRulesets(accountId: string, requestCache?: RequestCache) {
+	getAccountRulesets(accountId: string, requestCache?: RequestCache) {
 		return attemptAsync(async () => {
 			const key = `rulesets:${accountId}`;
 
@@ -139,7 +140,7 @@ export namespace PermissionCache {
 			}
 
 			// Check Redis cache
-			const cached = await permCache.getItem(key).unwrap();
+			const cached = await this.permCache?.getItem(key).unwrap();
 			if (cached) {
 				stats.hits++;
 				const data = JSON.parse(cached) as (
@@ -158,7 +159,7 @@ export namespace PermissionCache {
 	/**
 	 * Cache account rulesets
 	 */
-	export function cacheAccountRulesets(
+	cacheAccountRulesets(
 		accountId: string,
 		rulesets: (Permissions.RoleRulesetData | Permissions.AccountRulesetData)[],
 		requestCache?: RequestCache
@@ -168,8 +169,8 @@ export namespace PermissionCache {
 			const value = JSON.stringify(rulesets);
 
 			// Cache in Redis with 5 minute TTL
-			await permCache.setItem(key, value).unwrap();
-			await permCache.expire(key, 300).unwrap();
+			await this.permCache?.createItem(key, value).unwrap();
+			await this.permCache?.expire(key, 300).unwrap();
 
 			// Cache in request cache
 			requestCache?.set(key, value);
@@ -181,7 +182,7 @@ export namespace PermissionCache {
 	/**
 	 * Get a cached permission check result
 	 */
-	export function getCachedPermissionCheck(
+	getCachedPermissionCheck(
 		accountId: string,
 		action: DataAction | PropertyAction,
 		resourceId: string,
@@ -197,7 +198,7 @@ export namespace PermissionCache {
 			}
 
 			// Check Redis cache
-			const cached = await permCache.getItem(key).unwrap();
+			const cached = await this.permCache?.getItem(key).unwrap();
 			if (cached !== null) {
 				stats.hits++;
 				const result = cached === 'true';
@@ -213,7 +214,7 @@ export namespace PermissionCache {
 	/**
 	 * Cache a permission check result
 	 */
-	export function cachePermissionCheck(
+	cachePermissionCheck(
 		accountId: string,
 		action: DataAction | PropertyAction,
 		resourceId: string,
@@ -225,8 +226,8 @@ export namespace PermissionCache {
 			const value = result ? 'true' : 'false';
 
 			// Cache in Redis with 1 minute TTL
-			await permCache.setItem(key, value).unwrap();
-			await permCache.expire(key, 60).unwrap();
+			await this.permCache?.createItem(key, value).unwrap();
+			await this.permCache?.expire(key, 60).unwrap();
 
 			// Cache in request cache
 			requestCache?.set(key, value);
@@ -238,7 +239,7 @@ export namespace PermissionCache {
 	/**
 	 * Get a cached feature check result
 	 */
-	export function getCachedFeatureCheck(
+	getCachedFeatureCheck(
 		accountId: string,
 		feature: string,
 		scopes: any,
@@ -255,7 +256,7 @@ export namespace PermissionCache {
 			}
 
 			// Check Redis cache
-			const cached = await permCache.getItem(key).unwrap();
+			const cached = await this.permCache?.getItem(key).unwrap();
 			if (cached !== null) {
 				stats.hits++;
 				const result = cached === 'true';
@@ -271,7 +272,7 @@ export namespace PermissionCache {
 	/**
 	 * Cache a feature check result
 	 */
-	export function cacheFeatureCheck(
+	cacheFeatureCheck(
 		accountId: string,
 		feature: string,
 		scopes: any,
@@ -284,8 +285,8 @@ export namespace PermissionCache {
 			const value = result ? 'true' : 'false';
 
 			// Cache in Redis with 1 minute TTL
-			await permCache.setItem(key, value).unwrap();
-			await permCache.expire(key, 60).unwrap();
+			await this.permCache?.createItem(key, value).unwrap();
+			await this.permCache?.expire(key, 60).unwrap();
 
 			// Cache in request cache
 			requestCache?.set(key, value);
@@ -297,9 +298,9 @@ export namespace PermissionCache {
 	/**
 	 * Invalidate all entitlements cache
 	 */
-	export function invalidateEntitlements() {
+	invalidateEntitlements() {
 		return attemptAsync(async () => {
-			await permCache.deleteItem('entitlements:all').unwrap();
+			await this.permCache?.deleteItem('entitlements:all').unwrap();
 			stats.invalidations++;
 		});
 	}
@@ -307,9 +308,9 @@ export namespace PermissionCache {
 	/**
 	 * Invalidate account rulesets cache
 	 */
-	export function invalidateAccountRulesets(accountId: string) {
+	invalidateAccountRulesets(accountId: string) {
 		return attemptAsync(async () => {
-			await permCache.deleteItem(`rulesets:${accountId}`).unwrap();
+			await this.permCache?.deleteItem(`rulesets:${accountId}`).unwrap();
 			stats.invalidations++;
 		});
 	}
@@ -317,7 +318,7 @@ export namespace PermissionCache {
 	/**
 	 * Invalidate all permission checks for an account
 	 */
-	export function invalidateAllAccountChecks(accountId: string) {
+	invalidateAllAccountChecks(_accountId: string) {
 		return attemptAsync(async () => {
 			// We need to use pattern matching to delete all keys for this account
 			// This is a limitation - we'll just let them expire naturally
@@ -329,7 +330,7 @@ export namespace PermissionCache {
 	/**
 	 * Invalidate all feature checks for an account
 	 */
-	export function invalidateAllAccountFeatures(accountId: string) {
+	invalidateAllAccountFeatures(_accountId: string) {
 		return attemptAsync(async () => {
 			// Similar to invalidateAllAccountChecks, we'll let them expire naturally
 			stats.invalidations++;
@@ -339,18 +340,17 @@ export namespace PermissionCache {
 	/**
 	 * Get cache statistics
 	 */
-	export function getStats() {
+	getStats() {
 		return {
 			...stats,
-			hitRate:
-				stats.hits + stats.misses > 0 ? (stats.hits / (stats.hits + stats.misses)) * 100 : 0
+			hitRate: stats.hits + stats.misses > 0 ? (stats.hits / (stats.hits + stats.misses)) * 100 : 0
 		};
 	}
 
 	/**
 	 * Clear all cache statistics
 	 */
-	export function clearStats() {
+	clearStats() {
 		stats.hits = 0;
 		stats.misses = 0;
 		stats.sets = 0;
@@ -360,11 +360,13 @@ export namespace PermissionCache {
 	/**
 	 * Emergency clear all caches
 	 */
-	export function clearAll() {
+	clearAll() {
 		return attemptAsync(async () => {
 			// This would require getting all keys with the perm: prefix
 			// For now, we'll just reset stats
-			clearStats();
+			this.clearStats();
 		});
 	}
 }
+
+export const PermissionCache = new PC();

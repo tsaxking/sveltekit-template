@@ -4,19 +4,42 @@
 /**
  * All registered feature names
  */
-export type FeatureName = never;
+export type FeatureName = 
+  | 'access-admin-panel'
+  | 'upload-file'
+  | 'export-data'
+  | 'access-page'
+  | 'file-upload';
 
 /**
  * Feature scope type map
  * Each feature maps to its required scope object
  */
 export interface FeatureScopes {
-	// No features registered yet
+  'access-admin-panel': never;
+  'upload-file': {
+  type: 'pdf' | 'image' | 'csv' | 'video';
+  maxSize: number;
+};
+  'export-data': {
+  format: 'csv' | 'json' | 'pdf' | 'excel';
+  scope: 'own' | 'team' | 'organization';
+  limit?: number | undefined;
+};
+  'access-page': {
+  path: string;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | undefined;
+};
+  'file-upload': {};
 }
 
 /**
  * Feature metadata
  */
 export const FEATURE_METADATA = {
-	// No features registered yet
+  'access-admin-panel': 'Access to the admin panel',
+  'upload-file': 'Upload files to the server',
+  'export-data': 'Export data in various formats',
+  'access-page': 'Access a specific page',
+  'file-upload': 'Allows uploading files to the server.'
 } as const;

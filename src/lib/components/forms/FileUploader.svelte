@@ -33,9 +33,8 @@
 		endpoint,
 		allowLocal = true,
 		btnClasses = 'btn btn-primary',
-		allowedFileTypes = [],
+		allowedFileTypes = []
 	}: Props = $props();
-
 
 	const uppy = $derived(
 		new Uppy({
