@@ -11,6 +11,7 @@ declare global {
 			account?: Account.AccountData | undefined;
 			session: Session.SessionData;
 			start: number;
+			permissionCache?: import('$lib/server/services/permission-cache').RequestCache;
 		}
 		// interface PageData {}
 		// interface PageState {}

@@ -20,6 +20,9 @@ import { sleep } from 'ts-utils/sleep';
 import redis from '$lib/server/services/redis';
 import { config } from '$lib/server/utils/env';
 import createTree from '../scripts/create-route-tree';
+import { PermissionCache } from '$lib/server/services/permission-cache';
+// Import features to trigger registration
+import '$lib/server/features';
 
 (async () => {
 	await redis.init();
@@ -30,6 +33,7 @@ import createTree from '../scripts/create-route-tree';
 		}
 	});
 	await createTree();
+	PermissionCache.init();
 })();
 
 // if (env.LOG === 'true') {
@@ -54,6 +58,10 @@ sessionIgnore.add(`
 export const handle: Handle = async ({ event, resolve }) => {
 	// console.log('Request:', event.request.method, event.url.pathname);
 	event.locals.start = performance.now();
+
+	// Create request-level permission cache
+	event.locals.permissionCache = PermissionCache.createRequestCache();
+
 	if (Limiting.isBlockedPage(event.url.pathname).unwrap()) {
 		// Redirect to /status/404
 		return new Response('Redirect', {

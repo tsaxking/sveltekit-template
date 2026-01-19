@@ -24,7 +24,10 @@ const TEST_FILES = [
 	{
 		name: 'test-image.png',
 		// 1x1 pixel transparent PNG for testing image upload
-		content: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64'),
+		content: Buffer.from(
+			'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+			'base64'
+		),
 		type: 'image/png'
 	},
 	{
@@ -49,7 +52,7 @@ async function cleanupTestFiles() {
 		const files = await fs.readdir(UPLOAD_DIR);
 		for (const file of files) {
 			// Clean up files that contain our test file names
-			const isTestFile = TEST_FILES.some(tf => file.includes(tf.name));
+			const isTestFile = TEST_FILES.some((tf) => file.includes(tf.name));
 			if (isTestFile) {
 				await fs.unlink(path.join(UPLOAD_DIR, file));
 			}
@@ -64,19 +67,27 @@ beforeAll(async () => {
 	await Struct.buildAll(DB).unwrap();
 	process.env.AUTO_SIGN_IN = undefined; // disable auto sign in for this test
 
-	// Create admin account for file upload
-	adminAccount = await Account.createAccount({
-		username: ADMIN_USERNAME,
-		email: ADMIN_EMAIL,
-		firstName: 'Test',
-		lastName: 'Admin',
-		password: ADMIN_PASSWORD
+	const exists = await Account.Account.fromProperty('username', ADMIN_USERNAME, {
+		type: 'single',
 	}).unwrap();
 
-	// Add to admins table
-	await Account.Admins.new({
-		accountId: adminAccount.id
-	}).unwrap();
+	if (exists) {
+		adminAccount = exists;
+	} else {
+		// Create admin account for file upload
+		adminAccount = await Account.createAccount({
+			username: ADMIN_USERNAME,
+			email: ADMIN_EMAIL,
+			firstName: 'Test',
+			lastName: 'Admin',
+			password: ADMIN_PASSWORD
+		}).unwrap();
+
+		// Add to admins table
+		await Account.Admins.new({
+			accountId: adminAccount.id
+		}).unwrap();
+	}
 
 	// Ensure upload directory exists
 	await fs.mkdir(UPLOAD_DIR, { recursive: true });
@@ -149,10 +160,10 @@ describe('File Upload E2E Test', () => {
 
 		// Verify files were saved to disk
 		const uploadedFiles = await fs.readdir(UPLOAD_DIR);
-		
+
 		// Check that files exist in the upload directory
 		for (const testFile of TEST_FILES) {
-			const matchingFile = uploadedFiles.find(f => f.includes(testFile.name));
+			const matchingFile = uploadedFiles.find((f) => f.includes(testFile.name));
 			expect(matchingFile).toBeTruthy();
 
 			if (matchingFile) {
