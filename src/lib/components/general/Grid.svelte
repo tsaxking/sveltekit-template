@@ -28,7 +28,6 @@
 		CheckBoxSelectRenderer,
 		HeaderCheckboxRenderer
 	} from '$lib/utils/ag-grid/checkbox-select';
-	import { theme } from '$lib/utils/theme';
 
 	interface Props {
 		filter?: boolean;
@@ -141,7 +140,7 @@
 		if (!opts.columnDefs) {
 			throw new Error('Column definitions are required');
 		}
-		em.emit('init', gridDiv); // Emit the init event with the grid container
+		em.emit('init', gridDiv);
 		const gridOptions: GridOptions<T> = {
 			theme: gridTheme,
 			...opts,
@@ -196,24 +195,15 @@
 				return (params.node as any).checkboxSelected ? 'row-checked' : '';
 			}
 		};
-		grid = createGrid(gridDiv, gridOptions); // Create the grid with custom options
-		em.emit('ready', grid); // Emit the ready event with the grid API
-
-		// const themeSub = theme.subscribe((value) => {
-		// 	const theme = themeQuartz.withParams({
-
-		// 	})
-		// 	grid.setGridOption('theme', gridTheme);
-		// 	grid.refreshCells();
-		// });
+		grid = createGrid(gridDiv, gridOptions);
+		em.emit('ready', grid);
 
  		const dataUnsub = data.subscribe((r) => {
-			grid.setGridOption('rowData', r); // Set the row data from the provided store
+			grid.setGridOption('rowData', r);
 			onDataFilter();
 		});
 
 		return () => {
-			// themeSub();
 			dataUnsub();
 			grid.destroy();
 		}
