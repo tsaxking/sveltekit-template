@@ -9,19 +9,18 @@ import { browser } from '$app/environment';
 init();
 fingerprint();
 
-
 export const ogFetch = (() => {
-    if (!browser) return fetch;
-    const og = window.fetch;
-    window.fetch = (url: URL | RequestInfo, config?: RequestInit) => {
-        const headers = {
-                ...(config?.headers ?? {}),
-                ...Object.fromEntries(Object.entries(Requests.metadata).map(([k, v]) => [`X-${k}`, v])),
-            };
-        return og(url, {
-            ...config,
-            headers 
-        });
-    };
-    return og;
+	if (!browser) return fetch;
+	const og = window.fetch;
+	window.fetch = (url: URL | RequestInfo, config?: RequestInit) => {
+		const headers = {
+			...(config?.headers ?? {}),
+			...Object.fromEntries(Object.entries(Requests.metadata).map(([k, v]) => [`X-${k}`, v]))
+		};
+		return og(url, {
+			...config,
+			headers
+		});
+	};
+	return og;
 })();

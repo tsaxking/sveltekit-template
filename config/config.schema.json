@@ -302,9 +302,23 @@
 				"debug": {
 					"type": "boolean",
 					"description": "Whether to enable debug mode for SSE"
+				},
+				"ping_interval_ms": {
+					"type": "integer",
+					"minimum": 1000,
+					"description": "Interval for sending ping messages in milliseconds"
+				},
+				"state_report_threshold": {
+					"type": "integer",
+					"minimum": 5000,
+					"description": "Maximum interval between state reports in milliseconds"
+				},
+				"do_report": {
+					"type": "boolean",
+					"description": "Whether to enable state reporting"
 				}
 			},
-			"required": ["debug"],
+			"required": ["debug", "ping_interval_ms", "state_report_threshold", "do_report"],
 			"additionalProperties": false
 		}
 	},

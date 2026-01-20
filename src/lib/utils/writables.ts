@@ -440,7 +440,7 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	remove(config: T | ((item: T) => boolean)): void {
 		if (typeof config === 'function') {
 			this.update((arr) => {
-				return arr.filter(i => !(config as (item: T) => boolean)(i));
+				return arr.filter((i) => !(config as (item: T) => boolean)(i));
 			});
 			return;
 		} else {

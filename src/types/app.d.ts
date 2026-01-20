@@ -41,6 +41,12 @@ declare global {
 			batch_size: number;
 			debug: boolean;
 		};
+		sse: {
+			debug: boolean;
+			ping_interval_ms: number;
+			state_report_threshold: number;
+			do_report: boolean;
+		};
 	};
 }
 

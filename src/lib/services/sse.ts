@@ -137,7 +137,9 @@ class SSE {
 			this.log('Establishing SSE connection...');
 			// Set SSE metadata for server identification
 			Requests.setMeta('sse', this.uuid);
-			const source = new EventSource(`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}&url=${encodeURIComponent(window.location.href)}`);
+			const source = new EventSource(
+				`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}&url=${encodeURIComponent(window.location.href)}`
+			);
 
 			/**
 			 * Handles successful connection establishment
@@ -350,12 +352,15 @@ class SSE {
 export const sse = new SSE();
 sse.init(browser);
 
-
 sse.on('sse:redirect', async (data) => {
 	const parsed = z.object({ url: z.string(), reason: z.string().optional() }).safeParse(data);
 
 	if (parsed.success) {
-		if (await confirm(`${parsed.data.reason ?? `You are being redirected to another page (${parsed.data.url}). Continue?`}`)) {
+		if (
+			await confirm(
+				`${parsed.data.reason ?? `You are being redirected to another page (${parsed.data.url}). Continue?`}`
+			)
+		) {
 			window.location.href = parsed.data.url;
 		}
 	}
@@ -365,7 +370,11 @@ sse.on('sse:reload', async (data) => {
 	const parsed = z.object({ reason: z.string().optional() }).safeParse(data);
 
 	if (parsed.success) {
-		if (await confirm(`${parsed.data.reason ?? 'This page is being reloaded by the server. Reload now?'}`)) {
+		if (
+			await confirm(
+				`${parsed.data.reason ?? 'This page is being reloaded by the server. Reload now?'}`
+			)
+		) {
 			window.location.reload();
 		}
 	}

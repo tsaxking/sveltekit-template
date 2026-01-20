@@ -78,6 +78,7 @@ export class DataArr<T extends Blank> extends WritableArray<StructData<T>> {
 		}
 	}
 
+	public remove(fn: (data: StructData<T>) => boolean): void;
 	/**
 	 *Removes data from the array and updates the subscribers
 	 *
