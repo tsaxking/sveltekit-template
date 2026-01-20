@@ -100,15 +100,21 @@ export class DataArr<T extends Blank> extends WritableArray<StructData<T>> {
 		// If first argument is a function, treat it as a predicate
 		if (values.length === 1 && typeof values[0] === 'function') {
 			const predicate = values[0] as (item: StructData<T>) => boolean;
+			const removed: StructData<T>[] = [];
+			
 			this.apply(
 				this.data.filter((value) => {
-					const p = !predicate(value);
-					if (!p) {
-						this.emit('remove', [value]);
+					if (predicate(value)) {
+						removed.push(value);
+						return false;
 					}
-					return p;
+					return true;
 				})
 			);
+			
+			if (removed.length > 0) {
+				this.emit('remove', removed);
+			}
 		} else {
 			// Otherwise, remove all specified items
 			this.apply(this.data.filter((value) => !(values as StructData<T>[]).includes(value)));
