@@ -23,8 +23,8 @@
 				} else {
 					document.body.setAttribute('data-bs-theme', 'light');
 				}
-			} catch {
-				//
+			} catch (error) {
+				console.warn('Failed to initialize theme from localStorage or matchMedia:', error);
 			}
 			const { create, createDeep, find, findAll } = (() => {
 				const setAttributes = (element, attrs) => {
