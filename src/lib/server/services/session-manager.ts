@@ -94,7 +94,6 @@ export class SessionManager {
 }
 
 sse.on('connect', (connection) => {
-	console.log('Connection established:', connection.uuid);
 	for (const m of SessionManager.managers.values()) {
 		if (m.sessions.find((s) => s === connection.sessionId)) {
 			m.emit('connect', connection);
@@ -109,7 +108,6 @@ sse.on('connect', (connection) => {
 });
 
 sse.on('disconnect', (connection) => {
-	console.log('Connection disconnected:', connection.uuid);
 	for (const m of SessionManager.managers.values()) {
 		if (m.sessions.find((s) => s === connection.sessionId)) {
 			m.emit('disconnect', connection);
@@ -128,7 +126,8 @@ sse.on('state-change', (connection) => {
 		}
 		m.owner.send('session-manager:connection-state-change', {
 			id: connection.uuid,
-			sessionId: connection.sessionId
+			sessionId: connection.sessionId,
+			state: connection.state,
 		});
 	}
 });

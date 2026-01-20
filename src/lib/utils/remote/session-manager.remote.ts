@@ -1,16 +1,18 @@
 import { getRequestEvent, query, command } from '$app/server';
-import { Account } from '../server/structs/account';
 import { uuid } from '$lib/server/services/uuid';
 import { SessionManager } from '$lib/server/services/session-manager';
 import z from 'zod';
 import { sse } from '$lib/server/services/sse';
 import { ConnectionStateSchema } from '$lib/types/sse';
 import { config } from '$lib/server/utils/env';
+import { isAdmin } from './utils.remote';
 
-export const isAdmin = query(() => {
-	const a = getRequestEvent().locals.account;
-	if (!a) return false;
-	return Account.isAdmin(a).unwrap();
+export const isOwner = query(z.string(), (data) => {
+	const manager = SessionManager.managers.get(data);
+	if (!manager) return false;
+	const ownerConnection = getRequestEvent().locals.sse;
+	if (!ownerConnection) return false;
+	return manager.owner === ownerConnection;
 });
 
 export const startManager = command(async () => {
@@ -35,6 +37,7 @@ export const managerSend = command(
 		if (!(await isAdmin())) throw new Error('Unauthorized to send session manager event.');
 		const manager = SessionManager.managers.get(data.manager);
 		if (!manager) throw new Error('Session manager not found: ' + data.manager);
+		if (!isOwner(data.manager)) throw new Error('Not the owner of the session manager: ' + data.manager);
 		manager.send(data.event, data.data);
 	}
 );
@@ -43,6 +46,7 @@ export const closeManager = command(z.string(), async (managerId) => {
 	if (!(await isAdmin())) throw new Error('Unauthorized to close session manager.');
 	const manager = SessionManager.managers.get(managerId);
 	if (!manager) throw new Error('Session manager not found: ' + managerId);
+	if (!isOwner(managerId)) throw new Error('Not the owner of the session manager: ' + managerId);
 	manager.delete();
 });
 
@@ -50,6 +54,7 @@ export const getManagerConnections = query(z.string(), async (managerId) => {
 	if (!(await isAdmin())) throw new Error('Unauthorized to get session manager connections.');
 	const manager = SessionManager.managers.get(managerId);
 	if (!manager) throw new Error('Session manager not found: ' + managerId);
+	if (!isOwner(managerId)) throw new Error('Not the owner of the session manager: ' + managerId);
 	return manager.getConnections().map((c) =>
 		c.connections.map((con) => ({
 			id: con.uuid,

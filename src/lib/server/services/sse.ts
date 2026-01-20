@@ -48,7 +48,7 @@ export class Connection {
 
 	private readonly em = new EventEmitter<{
 		close: void;
-		state: ConnectionState;
+		'state-change': Connection;
 	}>();
 
 	private lastReport = 0;
@@ -207,7 +207,7 @@ export class Connection {
 			}
 			this.lastReport = now;
 			this.state = state;
-			this.emit('state', state);
+			this.emit('state-change', this);
 		});
 	}
 }
@@ -385,7 +385,7 @@ export class SSE {
 					const connection = new Connection(uuid, session.id, controller, url, me);
 					me.connections.set(uuid, connection);
 					me.emitter.emit('connect', connection);
-					me.on('state-change', (con) => {
+					connection.on('state-change', (con) => {
 						me.emitter.emit('state-change', con);
 					});
 				},

@@ -13,7 +13,6 @@ export const ogFetch = (() => {
 	if (!browser) return fetch;
 	const og = window.fetch;
 	window.fetch = (url: URL | RequestInfo, config?: RequestInit) => {
-		console.log('Intercepting fetch:', url);
 		const headers = {
 			...(config?.headers ?? {}),
 			...Object.fromEntries(Object.entries(Requests.metadata).map(([k, v]) => [`X-${k}`, v]))

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '$lib/services/sse';
-	import { startManager } from '$lib/utils/remote-utils.remote.ts';
+	import { startManager } from '$lib/utils/remote/session-manager.remote';
 
 	let response = $state('unknown');
 </script>

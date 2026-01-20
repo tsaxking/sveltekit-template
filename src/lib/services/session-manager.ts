@@ -7,14 +7,12 @@ import {
 	reloadConnection,
 	sendToConnection,
 	getActiveConnections
-} from '$lib/utils/remote-utils.remote';
+} from '$lib/utils/remote/session-manager.remote';
 import { attemptAsync, sleep } from 'ts-utils';
 import { sse } from './sse';
 import z from 'zod';
 import { WritableArray, WritableBase } from '$lib/utils/writables';
 import { ConnectionStateSchema, type ConnectionState } from '$lib/types/sse';
-
-sse.debug = true;
 
 type ConnectionData = {
 	url: string;
@@ -86,7 +84,6 @@ export class SessionManager extends WritableArray<Connection> {
 	public static init() {
 		return attemptAsync(async () => {
 			const connections = await getActiveConnections();
-			console.log('SessionManager initializing with', connections.length, 'active connections.');
 			for (const con of connections) {
 				const connection = new Connection(con);
 				SessionManager.connections.push(connection);
@@ -168,7 +165,7 @@ export class SessionManager extends WritableArray<Connection> {
 
 	addConnection(data: Connection) {
 		if (this.data.find((c) => c.id === data.id)) return;
-		this.data.push(new Connection(data));
+		this.data.push(data);
 		this.inform();
 	}
 
