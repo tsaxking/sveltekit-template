@@ -69,7 +69,7 @@ class SSE {
 	public off = this.emitter.off.bind(this.emitter);
 	public once = this.emitter.once.bind(this.emitter);
 
-	public debug = false;
+	public debug = __APP_ENV__.sse.debug;
 
 	/**
 	 * Initializes the SSE connection and sets up user activity monitoring
