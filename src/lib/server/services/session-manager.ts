@@ -127,7 +127,7 @@ sse.on('state-change', (connection) => {
 		m.owner.send('session-manager:connection-state-change', {
 			id: connection.uuid,
 			sessionId: connection.sessionId,
-			state: connection.state,
+			state: connection.state
 		});
 	}
 });

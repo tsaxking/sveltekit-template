@@ -203,7 +203,9 @@ export class Connection {
 		return attempt(() => {
 			const now = Date.now();
 			if (now - this.lastReport < config.sse.state_report_threshold) {
-				throw new Error(`State reports are limited to once every ${config.sse.state_report_threshold} milliseconds.`);
+				throw new Error(
+					`State reports are limited to once every ${config.sse.state_report_threshold} milliseconds.`
+				);
 			}
 			this.lastReport = now;
 			this.state = state;

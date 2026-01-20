@@ -37,7 +37,8 @@ export const managerSend = command(
 		if (!(await isAdmin())) throw new Error('Unauthorized to send session manager event.');
 		const manager = SessionManager.managers.get(data.manager);
 		if (!manager) throw new Error('Session manager not found: ' + data.manager);
-		if (!isOwner(data.manager)) throw new Error('Not the owner of the session manager: ' + data.manager);
+		if (!isOwner(data.manager))
+			throw new Error('Not the owner of the session manager: ' + data.manager);
 		manager.send(data.event, data.data);
 	}
 );
