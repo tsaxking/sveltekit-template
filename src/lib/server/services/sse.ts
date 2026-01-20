@@ -205,6 +205,7 @@ export class Connection {
 			if (now - this.lastReport < config.sse.state_report_threshold) {
 				throw new Error('State reports are limited to once every 5 seconds.');
 			}
+			this.lastReport = now;
 			this.state = state;
 			this.emit('state', state);
 		});
