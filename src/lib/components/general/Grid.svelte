@@ -28,6 +28,7 @@
 		CheckBoxSelectRenderer,
 		HeaderCheckboxRenderer
 	} from '$lib/utils/ag-grid/checkbox-select';
+	import { theme } from '$lib/utils/theme';
 
 	interface Props {
 		filter?: boolean;
@@ -104,10 +105,9 @@
 	};
 
 	// Create a custom dark theme using Theming API
-	const darkTheme = $derived(
+	const gridTheme = $derived(
 		themeQuartz.withParams({
 			backgroundColor: `var(--layer-${layer})`,
-			browserColorScheme: 'dark',
 			chromeBackgroundColor: {
 				ref: 'foregroundColor',
 				mix: 0.07,
@@ -143,7 +143,7 @@
 		}
 		em.emit('init', gridDiv); // Emit the init event with the grid container
 		const gridOptions: GridOptions<T> = {
-			theme: darkTheme,
+			theme: gridTheme,
 			...opts,
 			rowData: $data,
 			columnDefs: [
@@ -199,10 +199,24 @@
 		grid = createGrid(gridDiv, gridOptions); // Create the grid with custom options
 		em.emit('ready', grid); // Emit the ready event with the grid API
 
-		return data.subscribe((r) => {
+		// const themeSub = theme.subscribe((value) => {
+		// 	const theme = themeQuartz.withParams({
+
+		// 	})
+		// 	grid.setGridOption('theme', gridTheme);
+		// 	grid.refreshCells();
+		// });
+
+ 		const dataUnsub = data.subscribe((r) => {
 			grid.setGridOption('rowData', r); // Set the row data from the provided store
 			onDataFilter();
 		});
+
+		return () => {
+			// themeSub();
+			dataUnsub();
+			grid.destroy();
+		}
 	});
 </script>
 
