@@ -414,43 +414,45 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	 */
 	remove(fn: (item: T) => boolean): void;
 	/**
-	 * Removes a specific item from the array
-	 * @param item - The item to remove
+	 * Removes specific items from the array
+	 * @param items - The items to remove
 	 * @returns {void}
 	 * @example
 	 * ```typescript
 	 * // Remove a specific item
 	 * store.remove(targetItem);
+	 * // Remove multiple items
+	 * store.remove(item1, item2, item3);
 	 * ```
 	 */
-	remove(item: T): void;
+	remove(...items: T[]): void;
 	/**
-	 * Removes items from the array based on a predicate function or specific item
-	 * @param config - Predicate function or specific item to remove
+	 * Removes items from the array based on a predicate function or specific items
+	 * @param items - Predicate function or specific items to remove
 	 * @returns {void}
 	 * @example
 	 * ```typescript
 	 * // Remove items matching a condition
 	 * store.remove(item => item.id === targetId);
 	 *
-	 * // Remove a specific item
+	 * // Remove specific items
 	 * store.remove(targetItem);
+	 * store.remove(item1, item2, item3);
 	 * ```
 	 */
-	remove(config: T | ((item: T) => boolean)): void {
-		if (typeof config === 'function') {
+	remove(...items: (T | ((item: T) => boolean))[]): void {
+		// If first argument is a function, treat it as a predicate
+		if (items.length === 1 && typeof items[0] === 'function') {
+			const predicate = items[0] as (item: T) => boolean;
 			this.update((arr) => {
-				return arr.filter((i) => !(config as (item: T) => boolean)(i));
+				return arr.filter((i) => !predicate(i));
 			});
 			return;
-		} else {
-			this.update((arr) => {
-				const index = arr.indexOf(config);
-				if (index !== -1) {
-					arr.splice(index, 1);
-				}
-				return arr;
-			});
 		}
+
+		// Otherwise, remove all specified items
+		this.update((arr) => {
+			return arr.filter((item) => !(items as T[]).includes(item));
+		});
 	}
 }

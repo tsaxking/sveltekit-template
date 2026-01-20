@@ -675,17 +675,46 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition> ex
 	}
 
 	/**
-	 * Removes an item from the array by ID
+	 * Removes items from the array based on a predicate function
+	 * @param fn - Predicate function to determine which items to remove
+	 */
+	remove(fn: (item: TableData<Name, Type>) => boolean): void;
+	/**
+	 * Removes specific items from the array by ID
+	 * @param items - Items to remove from the array
+	 */
+	remove(...items: TableData<Name, Type>[]): void;
+	/**
+	 * Removes items from the array by ID or based on a predicate function
 	 *
-	 * @param {TableData<Name, Type>} item - Item to remove from the array
+	 * @param items - Predicate function or specific items to remove
 	 * @returns {void}
 	 */
-	remove(item: TableData<Name, Type>) {
+	remove(...items: (TableData<Name, Type> | ((item: TableData<Name, Type>) => boolean))[]): void {
 		const len = this.data.length;
-		this.data = this.data.filter((d) => d.data.id !== item.data.id);
-		if (this.data.length !== len) {
-			this.emit('remove', item);
+
+		// If first argument is a function, treat it as a predicate
+		if (items.length === 1 && typeof items[0] === 'function') {
+			const predicate = items[0] as (item: TableData<Name, Type>) => boolean;
+			const removed = this.data.filter(predicate);
+			this.data = this.data.filter((d) => !predicate(d));
+			if (this.data.length !== len && removed.length > 0) {
+				for (const item of removed) {
+					this.emit('remove', item);
+				}
+			}
+		} else {
+			// Otherwise, remove all specified items by ID
+			const itemsToRemove = items as TableData<Name, Type>[];
+			const idsToRemove = new Set(itemsToRemove.map((item) => item.data.id));
+			this.data = this.data.filter((d) => !idsToRemove.has(d.data.id));
+			if (this.data.length !== len) {
+				for (const item of itemsToRemove) {
+					this.emit('remove', item);
+				}
+			}
 		}
+
 		this.inform(); // Debounced for event-driven updates
 	}
 }
