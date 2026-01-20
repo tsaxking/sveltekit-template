@@ -100,7 +100,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event.locals.session = session.value;
 	const sseId = event.request.headers.get('X-SSE');
-	if (sseId) event.locals.sse = sse.getConnection(sseId);
+	if (sseId) {
+		const connection = sse.getConnection(sseId);
+		if (!connection) {
+			terminal.warn(`Invalid SSE connection ID "${sseId}" for ${event.url.pathname}`);
+			return new Response('Invalid SSE connection', { status: ServerCode.badRequest });
+		}
+		event.locals.sse = connection;
+	}
 
 	const autoSignIn = config.sessions.auto_sign_in;
 
