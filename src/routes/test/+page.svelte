@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte.ts';
 	import { toSnakeCase } from 'ts-utils/text';
+	import '$lib/index';
 
 	const tests = Test.unitTest();
 	let complete = $state(false);

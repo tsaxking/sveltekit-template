@@ -13,6 +13,8 @@ import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import { StructCache } from './cache';
 import { encode } from 'ts-utils/text';
+import { sse } from '../sse';
+import { browser } from '$app/environment';
 
 let didCacheWarning = false;
 
