@@ -343,7 +343,7 @@ class SSE {
 
 	log(...args: unknown[]) {
 		if (this.debug) {
-			console.log('[SSE]', ...args);
+			console.log('[SSE_CLIENT]', ...args);
 		}
 	}
 }
