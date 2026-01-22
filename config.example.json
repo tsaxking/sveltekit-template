@@ -65,5 +65,11 @@
 		"version": 1,
 		"debug": true,
 		"debounce_interval_ms": 16
+	},
+	"sse": {
+		"debug": false,
+		"ping_interval_ms": 30000,
+		"state_report_threshold": 5000,
+		"do_report": true
 	}
 }

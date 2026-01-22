@@ -6,5 +6,5 @@ export async function GET(event) {
 		console.error('SSE connect error:', res.error);
 		return new Response('Server Error', { status: 500 });
 	}
-	return res.unwrap();
+	return res.value;
 }

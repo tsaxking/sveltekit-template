@@ -22,7 +22,7 @@ export class WritableBase<T> implements Writable<T> {
 	 * @param {number} [_config.debounceMs=0] - Debounce delay in milliseconds for updates
 	 */
 	constructor(
-		public _data: T,
+		private _data: T,
 		private _config?: {
 			debounceMs?: number;
 		}
@@ -403,18 +403,56 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	}
 
 	/**
-	 * Removes the first occurrence of the specified item from the array
-	 *
-	 * @param {T} item - Item to remove from the array
+	 * Removes items from the array based on a predicate function
+	 * @param fn - Predicate function to determine which items to remove
 	 * @returns {void}
+	 * @example
+	 * ```typescript
+	 * // Remove items matching a condition
+	 * store.remove(item => item.id === targetId);
+	 * ```
 	 */
-	remove(item: T): void {
+	remove(fn: (item: T) => boolean): void;
+	/**
+	 * Removes specific items from the array
+	 * @param items - The items to remove
+	 * @returns {void}
+	 * @example
+	 * ```typescript
+	 * // Remove a specific item
+	 * store.remove(targetItem);
+	 * // Remove multiple items
+	 * store.remove(item1, item2, item3);
+	 * ```
+	 */
+	remove(...items: T[]): void;
+	/**
+	 * Removes items from the array based on a predicate function or specific items
+	 * @param items - Predicate function or specific items to remove
+	 * @returns {void}
+	 * @example
+	 * ```typescript
+	 * // Remove items matching a condition
+	 * store.remove(item => item.id === targetId);
+	 *
+	 * // Remove specific items
+	 * store.remove(targetItem);
+	 * store.remove(item1, item2, item3);
+	 * ```
+	 */
+	remove(...items: (T | ((item: T) => boolean))[]): void {
+		// If first argument is a function, treat it as a predicate
+		if (items.length === 1 && typeof items[0] === 'function') {
+			const predicate = items[0] as (item: T) => boolean;
+			this.update((arr) => {
+				return arr.filter((i) => !predicate(i));
+			});
+			return;
+		}
+
+		// Otherwise, remove all specified items
 		this.update((arr) => {
-			const index = arr.indexOf(item);
-			if (index !== -1) {
-				arr.splice(index, 1);
-			}
-			return arr;
+			return arr.filter((item) => !(items as T[]).includes(item));
 		});
 	}
 }

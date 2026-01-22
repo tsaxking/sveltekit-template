@@ -1,5 +1,6 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
+import type { Connection } from '$lib/server/services/sse';
 import type { Account } from '$lib/server/structs/account';
 import type { Session } from '$lib/server/structs/session';
 
@@ -11,6 +12,7 @@ declare global {
 			account?: Account.AccountData | undefined;
 			session: Session.SessionData;
 			start: number;
+			sse?: Connection;
 		}
 		// interface PageData {}
 		// interface PageState {}
@@ -38,6 +40,12 @@ declare global {
 			limit: number;
 			batch_size: number;
 			debug: boolean;
+		};
+		sse: {
+			debug: boolean;
+			ping_interval_ms: number;
+			state_report_threshold: number;
+			do_report: boolean;
 		};
 	};
 }
