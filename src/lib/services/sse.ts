@@ -132,9 +132,7 @@ class SSE {
 		 */
 		const establishConnection = () => {
 			// Set SSE metadata for server identification
-			setTimeout(() => {
-				Requests.setMeta('sse', this.uuid);
-			});
+			Requests.setMeta('sse', this.uuid);
 			const source = new EventSource(`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
 
 			/**
