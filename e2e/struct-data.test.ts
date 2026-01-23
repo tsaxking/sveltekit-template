@@ -2,10 +2,10 @@ import { expect, test } from '@playwright/test';
 
 test('Front end data management', async ({ page }) => {
 	await page.goto('/test');
-	page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
-	page.on('pageerror', (err) => console.error('PAGE ERROR:', err));
+	page.on('console', (msg) => console.log('Struct Data Test PAGE LOG:', msg.text()));
+	page.on('pageerror', (err) => console.error('Struct Data Test PAGE ERROR:', err));
 	page.on('requestfailed', (request) => {
-		console.error('Request failed:', request.url(), request.failure());
+		console.error('Struct Data Test Request failed:', request.url(), request.failure());
 	});
 
 	const complete = await page.locator('#test-complete').elementHandle();
