@@ -7,7 +7,7 @@ import {
 	reloadConnection,
 	sendToConnection,
 	getActiveConnections
-} from '$lib/utils/remote/session-manager.remote';
+} from '$lib/remotes/session-manager.remote';
 import { attemptAsync, sleep } from 'ts-utils';
 import { sse } from './sse';
 import z from 'zod';

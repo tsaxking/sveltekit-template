@@ -9,10 +9,10 @@ import {
 	StructData,
 	type Blank,
 	type Structable
-} from 'drizzle-struct/back-end';
+} from 'drizzle-struct';
 import { attempt, attemptAsync, resolveAll } from 'ts-utils/check';
 import { Account } from './account';
-import { PropertyAction, DataAction } from 'drizzle-struct/types';
+import { PropertyAction, DataAction } from '$lib/types/struct';
 import { DB } from '../db';
 import { and, eq, ilike, inArray } from 'drizzle-orm';
 import type { Entitlement, Features } from '$lib/types/entitlements';
@@ -20,27 +20,25 @@ import { z } from 'zod';
 import terminal from '../utils/terminal';
 import path from 'path';
 import fs from 'fs';
-import {
-	ActionBypass,
-	CallListener,
-	QueryListener,
-	SendListener
-} from '../services/struct-listeners';
 import type { RequestEvent } from '@sveltejs/kit';
+import structRegistry from '../services/struct-registry';
 
 export namespace Permissions {
 	/**
 	 * Blocks all edit on a struct.
 	 * @param struct The struct to block actions on.
 	 */
-	const block = (struct: Struct<any, any>) => {
-		struct.block(DataAction.Delete, () => true, `Cannot delete ${struct.name}`);
-		struct.block(DataAction.Create, () => true, `Cannot create new ${struct.name}`);
-		struct.block(PropertyAction.Update, () => true, `Cannot update ${struct.name}`);
-		struct.block(DataAction.Archive, () => true, `Cannot archive ${struct.name}`);
-		struct.block(DataAction.RestoreArchive, () => true, `Cannot restore ${struct.name}`);
-		struct.block(DataAction.DeleteVersion, () => true, `Cannot delete version of ${struct.name}`);
-		struct.block(DataAction.RestoreVersion, () => true, `Cannot create version of ${struct.name}`);
+	const registerAndBlock = (struct: Struct<any, any>) => {
+		return structRegistry.register(struct)
+			.block(DataAction.Delete)
+			.block(DataAction.Create)
+			.block(DataAction.Delete)
+			.block(DataAction.Create)
+			.block(PropertyAction.Update)
+			.block(DataAction.Archive)
+			.block(DataAction.RestoreArchive)
+			.block(DataAction.DeleteVersion)
+			.block(DataAction.RestoreVersion);
 	};
 
 	/*
@@ -58,139 +56,8 @@ export namespace Permissions {
 		}
 	});
 
-	SendListener.on(
-		'search',
-		Role,
-		z.object({
-			searchKey: z.string(),
-			offset: z.number().int(),
-			limit: z.number().int()
-		}),
-		async (event, data) => {
-			const account = event.locals.account;
-			if (!account)
-				return {
-					success: false,
-					message: 'Not logged in'
-				};
-			const roles = await searchRoles(data.searchKey, {
-				offset: data.offset,
-				limit: data.limit
-			});
-			if (roles.isErr()) {
-				return {
-					success: false,
-					message: 'Internal server error'
-				};
-			}
 
-			const res = await filterPropertyActionFromAccount(account, roles.value, PropertyAction.Read);
-
-			if (res.isErr()) {
-				return {
-					success: false,
-					message: 'Internal server error'
-				};
-			}
-
-			return {
-				success: true,
-				data: {
-					roles: res.value
-				}
-			};
-		}
-	).bypass((event) => !!event.locals.account && Account.isAdmin(event.locals.account).unwrap());
-
-	CallListener.on(
-		'create-role',
-		Role,
-		z.object({
-			name: z.string(),
-			description: z.string(),
-			parent: z.string(),
-			color: z.string().refine((val) => /^#([0-9A-F]{3}){1,2}$/i.test(val), {
-				message: 'Invalid color format'
-			})
-		}),
-		async (event, data) => {
-			if (!event.locals.account) {
-				return {
-					success: false,
-					message: 'Not logged in'
-				};
-			}
-
-			const parentRole = await Role.fromId(data.parent).unwrap();
-			if (!parentRole) {
-				return {
-					success: false,
-					message: 'No parent role found'
-				};
-			}
-
-			PERMIT: {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-				// if an account has that role or higher in the hierarchy, they can create child roles.
-				const highestRole = await getHighestLevelRole(
-					parentRole,
-					event.locals.account,
-					true
-				).unwrap();
-				if (!highestRole) {
-					return {
-						success: false,
-						message:
-							'You do not have permission to create a role under this parent role. You must have the parent role or a role higher in the hierarchy and possess the necessary permissions.'
-					};
-				}
-
-				const canCreate = await Permissions.canCreate(
-					event.locals.account,
-					Role,
-					parentRole.getAttributes().unwrap()
-				).unwrap();
-
-				if (!canCreate) {
-					return {
-						success: false,
-						message: 'You do not have permission to create a role under this parent role'
-					};
-				}
-
-				// Ensure there are no duplicate names within the whole system
-				const [upper, lower] = await Promise.all([
-					getUpperHierarchy(parentRole, true).unwrap(),
-					getLowerHierarchy(parentRole, true).unwrap()
-				]);
-
-				if (
-					[...upper, ...lower].some((r) => r.data.name.toLowerCase() === data.name.toLowerCase())
-				) {
-					return {
-						success: false,
-						message: 'A role with this name already exists in the hierarchy.'
-					};
-				}
-			}
-
-			await Role.new({
-				name: data.name,
-				description: data.description,
-				parent: data.parent,
-				color: data.color
-			}).unwrap();
-
-			return {
-				success: true,
-				data: {}
-			};
-		}
-	).bypass((event) => !!event.locals.account && Account.isAdmin(event.locals.account).unwrap());
-
-	const searchRoles = (
+	export const searchRoles = (
 		searchKey: string,
 		config: {
 			offset: number;
@@ -289,7 +156,7 @@ export namespace Permissions {
 		}
 	});
 
-	block(RoleAccount);
+	registerAndBlock(RoleAccount);
 
 	export type RoleAccountData = typeof RoleAccount.sample;
 
@@ -448,7 +315,7 @@ export namespace Permissions {
 
 	ActionBypass.on(PropertyAction.Read, Entitlement, () => true); // anyone can read entitlements
 
-	block(Entitlement);
+	registerAndBlock(Entitlement);
 
 	export type EntitlementData = typeof Entitlement.sample;
 
@@ -465,7 +332,7 @@ export namespace Permissions {
 		}
 	});
 
-	block(RoleRuleset);
+	registerAndBlock(RoleRuleset);
 
 	QueryListener.on('my-permissions', RoleRuleset, z.object({}), async (event) => {
 		if (!event.locals.account) {
@@ -1139,7 +1006,7 @@ export namespace Permissions {
 		}
 	);
 
-	block(AccountRuleset);
+	registerAndBlock(AccountRuleset);
 
 	export type AccountRulesetData = typeof AccountRuleset.sample;
 
@@ -1247,7 +1114,7 @@ export namespace Permissions {
 	 */
 	export const canCreate = <T extends Blank>(
 		account: Account.AccountData,
-		struct: Struct<T, string>,
+		struct: Struct<T>,
 		attributes: string[]
 	) => {
 		return attemptAsync(async () => {
@@ -1377,7 +1244,7 @@ export namespace Permissions {
 	 */
 	export const filterPropertyActionFromAccount = <T extends Blank>(
 		account: Account.AccountData,
-		data: StructData<T, string>[] | DataVersion<T, string>[],
+		data: StructData<T>[] | DataVersion<T>[],
 		action: PropertyAction
 	) => {
 		return attemptAsync<Partial<Structable<T>>[]>(async () => {

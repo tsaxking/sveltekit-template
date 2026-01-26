@@ -1,5 +1,5 @@
 import { boolean, text } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
@@ -8,14 +8,13 @@ import { eq, or, ilike } from 'drizzle-orm';
 import type { Notification } from '../../types/notification';
 import { Session } from './session';
 import { sse } from '../services/sse';
-import { DataAction, PropertyAction } from 'drizzle-struct/types';
-// import { Universes } from './universe';
 import { sendEmail } from '../services/email';
 import type { Icon } from '../../types/icons';
 import { z } from 'zod';
 import { Permissions } from './permissions';
-import { QueryListener } from '../services/struct-listeners';
 import { config, domain } from '../utils/env';
+import structRegistry from '../services/struct-registry';
+import { DataAction, PropertyAction } from '$lib/types/struct';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -37,53 +36,7 @@ export namespace Account {
 		safes: ['key', 'salt', 'verification']
 	});
 
-	QueryListener.on(
-		'search',
-		Account,
-		z.object({
-			query: z.string().min(1).max(255),
-			limit: z.number().min(1).max(100).default(10),
-			offset: z.number().min(0).default(0)
-		}),
-		async (event, data) => {
-			if (!event.locals.account) {
-				throw new Error('Not logged in');
-			}
-
-			return searchAccounts(data.query, {
-				type: 'array',
-				limit: data.limit || 10,
-				offset: data.offset || 0
-			}).unwrap();
-		}
-	);
-
-	Account.sendListen('self', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
-		if (!account) {
-			return new Error('Not logged in');
-		}
-		return account.safe();
-	});
-
-	Account.sendListen('username-exists', async (event, data) => {
-		const parsed = z
-			.object({
-				username: z.string().min(1)
-			})
-			.safeParse(data);
-
-		if (!parsed.success) {
-			throw new Error('Invalid data recieved');
-		}
-
-		const account = await Account.fromProperty('username', parsed.data.username, {
-			type: 'count'
-		}).unwrap();
-
-		return account > 0;
-	});
+	structRegistry.register(Account);
 
 	Account.on('delete', async (a) => {
 		Admins.fromProperty('accountId', a.id, {
@@ -197,6 +150,8 @@ export namespace Account {
 		}
 	});
 
+	structRegistry.register(AccountInfo);
+
 	export type AccountInfoData = typeof AccountInfo.sample;
 
 	AccountInfo.on('update', ({ from, to }) => {
@@ -273,32 +228,10 @@ export namespace Account {
 		}
 	});
 
-	AccountNotification.bypass(DataAction.Delete, (a, b) => a.id === b?.accountId);
-	AccountNotification.bypass(PropertyAction.Update, (a, b) => a.id === b?.accountId);
-	AccountNotification.bypass(PropertyAction.Read, (a, b) => a.id === b?.accountId);
-	AccountNotification.queryListen('get-own-notifs', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
-
-		if (!account) {
-			return new Error('Not logged in');
-		}
-
-		return AccountNotification.fromProperty('accountId', account.id, {
-			type: 'stream'
-		});
-	});
-
-	export const Settings = new Struct({
-		name: 'account_settings',
-		structure: {
-			accountId: text('account_id').notNull(),
-			setting: text('setting').notNull(),
-			value: text('value').notNull()
-		}
-	});
-
-	Settings.bypass('*', (account, setting) => account.id === setting?.accountId);
+	structRegistry.register(AccountNotification)
+		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId);
 
 	const PASSWORD_REQUEST_LIFETIME = config.sessions.password_request_lifetime;
 

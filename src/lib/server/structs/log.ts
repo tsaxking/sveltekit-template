@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { text } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { attemptAsync } from 'ts-utils/check';
 import { z } from 'zod';
 import { DB } from '../db';
 import { and, not, sql, or } from 'drizzle-orm';
+import structRegistry from '../services/struct-registry';
 
 export namespace Logs {
 	export const Log = new Struct({
@@ -27,12 +28,15 @@ export namespace Logs {
 						'archive',
 						'restore',
 						'delete',
-						'set-universe'
-						// 'set-attributes',
+						'set-attributes',
+						'add-attributes',
+						'remove-attributes',
 					])
 					.safeParse(t).success
 		}
 	});
+
+	structRegistry.register(Log);
 
 	export type LogData = typeof Log.sample;
 
@@ -50,8 +54,7 @@ export namespace Logs {
 			| 'set-attributes'
 			| 'add-attributes'
 			| 'remove-attributes'
-			| 'delete'
-			| 'set-universe';
+			| 'delete';
 		message: string;
 	}) => Log.new(config);
 

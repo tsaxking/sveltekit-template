@@ -1,9 +1,10 @@
 import { text } from 'drizzle-orm/pg-core';
 import { integer } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import terminal from '../utils/terminal';
 import { Permissions } from './permissions';
 import { env } from '../utils/env';
+import structRegistry from '../services/struct-registry';
 
 terminal.log(
 	`This file ('./struct/testing') should only be used for unit tests. If you are seeing this outside of a unit testing environment, there is an issue with the program.`
@@ -22,6 +23,8 @@ export namespace Test {
 		},
 		lifetime: 1000 * 60 * 10
 	});
+
+	structRegistry.register(Test);
 
 	export const TestPermissions = new Struct({
 		name: 'test_permissions',
@@ -50,6 +53,8 @@ export namespace Test {
 			group: 'Testing'
 		});
 	}
+
+	structRegistry.register(TestPermissions);
 }
 
 export const _test = Test.Test.table;

@@ -1,5 +1,5 @@
 import { text } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
