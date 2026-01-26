@@ -79,16 +79,42 @@ export class DataArr<T extends Blank> extends WritableArray<StructData<T>> {
 	}
 
 	/**
-	 *Removes data from the array and updates the subscribers
+	 * Removes data from the array based on a predicate function
+	 * @param fn - Predicate function to determine which items to remove
+	 */
+	public remove(fn: (item: StructData<T>) => boolean): void;
+	/**
+	 * Removes specific data items from the array
+	 * @param values - The items to remove
+	 */
+	public remove(...values: StructData<T>[]): void;
+	/**
+	 * Removes data from the array and updates the subscribers
 	 *
 	 * @public
-	 * @param {...StructData<T>[]} values
+	 * @param values - Predicate function or specific items to remove
 	 */
-	public remove(...values: StructData<T>[]): void {
+	public remove(...values: (StructData<T> | ((item: StructData<T>) => boolean))[]): void {
 		const current = [...this.data];
-		this.apply(this.data.filter((value) => !values.includes(value)));
-		if (this.data.length < current.length) {
-			this.emit('remove', values);
+
+		// If first argument is a function, treat it as a predicate
+		if (values.length === 1 && typeof values[0] === 'function') {
+			const predicate = values[0] as (item: StructData<T>) => boolean;
+			this.apply(
+				this.data.filter((value) => {
+					const p = !predicate(value);
+					if (!p) {
+						this.emit('remove', [value]);
+					}
+					return p;
+				})
+			);
+		} else {
+			// Otherwise, remove all specified items
+			this.apply(this.data.filter((value) => !(values as StructData<T>[]).includes(value)));
+			if (this.data.length < current.length) {
+				this.emit('remove', values as StructData<T>[]);
+			}
 		}
 	}
 

@@ -5,6 +5,9 @@ import { encode } from 'ts-utils/text';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import type { Notification } from '$lib/types/notification';
 import { toByteString } from 'ts-utils/text';
+import { getManifestoInstance } from '../utils/manifesto';
+import { config } from '../utils/env';
+import { type ConnectionState } from '$lib/types/sse';
 
 /** Maximum number of cached messages per connection */
 const CACHE_LIMIT = 50;
@@ -14,6 +17,12 @@ const CACHE_TTL = 30000;
 const PING_INTERVAL = 10000;
 /** Timeout for disconnecting inactive connections in milliseconds */
 const DISCONNECT_TIMEOUT = 35000;
+
+const log = (...args: unknown[]) => {
+	if (config.sse.debug) {
+		console.log('[SSE]', ...args);
+	}
+};
 
 /**
  * Represents a single Server-Sent Events (SSE) connection to a client.
@@ -37,6 +46,18 @@ export class Connection {
 	/** Timestamp of the last ping received from this connection */
 	public lastPing = Date.now();
 
+	private readonly em = new EventEmitter<{
+		close: void;
+		'state-change': Connection;
+	}>();
+
+	private lastReport = 0;
+
+	public readonly on = this.em.on.bind(this.em);
+	public readonly off = this.em.off.bind(this.em);
+	public readonly emit = this.em.emit.bind(this.em);
+	public readonly once = this.em.once.bind(this.em);
+
 	/** Cache of messages awaiting acknowledgment from the client */
 	private cache: {
 		event: string;
@@ -49,6 +70,8 @@ export class Connection {
 	/** Counter for generating unique message IDs */
 	private idCounter = 0;
 
+	public state: ConnectionState | undefined;
+
 	/**
 	 * Creates a new SSE connection instance
 	 * @param uuid - Unique identifier for this connection
@@ -60,7 +83,8 @@ export class Connection {
 		public readonly uuid: string,
 		public readonly sessionId: string,
 		private readonly controller: ReadableStreamDefaultController<string>,
-		private readonly onClose: (conn: Connection) => void
+		public readonly url: string,
+		public readonly sse: SSE
 	) {}
 
 	/**
@@ -71,6 +95,10 @@ export class Connection {
 		return this.controller.desiredSize !== null;
 	}
 
+	get generalizedUrl() {
+		return getManifestoInstance(this.url);
+	}
+
 	/**
 	 * Sends an event to the client via Server-Sent Events
 	 * @param event - Event name/type
@@ -79,6 +107,7 @@ export class Connection {
 	 */
 	send(event: string, data: unknown) {
 		return attempt(() => {
+			log(`Sending event "${event}" to connection ${this.uuid}`);
 			const id = this.idCounter++;
 			const payload = JSON.stringify({ event, data, id });
 			this.controller.enqueue(`data: ${encode(payload)}\n\n`);
@@ -127,26 +156,16 @@ export class Connection {
 	 * Clears cache, closes controller, and notifies listeners
 	 * @returns Result indicating success or failure
 	 */
-	close() {
+	closeConnection() {
 		return attempt(() => {
-			// Clear cache to free memory immediately
 			this.cache = [];
 			this.send('close', null);
+			log('Closing SSE connection:', this.uuid);
+			this.em.destroyEvents();
 
-			// Close controller if still open
 			if (this.controller.desiredSize !== null) {
 				this.controller.close();
 			}
-
-			this.onClose(this);
-
-			// Notify all close listeners
-			for (const listener of this.closeListeners) {
-				listener();
-			}
-
-			// Clear listeners to prevent memory leaks
-			this.closeListeners.clear();
 		});
 	}
 
@@ -167,17 +186,31 @@ export class Connection {
 		return Session.Session.fromId(this.sessionId);
 	}
 
-	/** Set of listeners waiting for connection close events */
-	private readonly closeListeners = new Set<() => void>();
-
 	/**
-	 * Registers a one-time listener for the close event
-	 * @param event - Must be 'close'
-	 * @param listener - Function to call when connection closes
+	 * Sends a redirect command to the client
+	 * @param url - URL to redirect the client to
+	 * @param reason - Optional reason for the redirect
 	 */
-	once(event: 'close', listener: () => void) {
-		if (event !== 'close') throw new Error(`Unsupported event: ${event}`);
-		this.closeListeners.add(listener);
+	redirect(url: string, reason?: string) {
+		this.send('sse:redirect', { url, reason });
+	}
+
+	reload(reason?: string) {
+		this.send('sse:reload', { reason });
+	}
+
+	reportState(state: ConnectionState) {
+		return attempt(() => {
+			const now = Date.now();
+			if (now - this.lastReport < config.sse.state_report_threshold) {
+				throw new Error(
+					`State reports are limited to once every ${config.sse.state_report_threshold} milliseconds.`
+				);
+			}
+			this.lastReport = now;
+			this.state = state;
+			this.emit('state-change', this);
+		});
 	}
 }
 
@@ -197,7 +230,10 @@ class ConnectionArray {
 	 * Creates a new connection array
 	 * @param connections - Array of Connection instances to manage
 	 */
-	constructor(private readonly connections: Connection[]) {}
+	constructor(
+		public readonly sessionId: string,
+		public readonly connections: Connection[]
+	) {}
 
 	/**
 	 * Adds a connection to this array
@@ -282,12 +318,13 @@ class ConnectionArray {
  */
 export class SSE {
 	/** Map of active connections indexed by UUID */
-	private readonly connections = new Map<string, Connection>();
+	public readonly connections = new Map<string, Connection>();
 
 	/** Event emitter for connection lifecycle events */
 	private readonly emitter = new EventEmitter<{
 		connect: Connection;
 		disconnect: Connection;
+		'state-change': Connection;
 	}>();
 
 	/** Interval handle for periodic cleanup and ping operations */
@@ -309,8 +346,8 @@ export class SSE {
 			const now = Date.now();
 			for (const connection of this.connections.values()) {
 				if (now - connection.lastPing > DISCONNECT_TIMEOUT) {
-					console.warn(`SSE Connection ${connection.uuid} timed out.`);
-					connection.close();
+					log(`SSE Connection ${connection.uuid} timed out.`);
+					connection.closeConnection();
 				} else {
 					connection.ping();
 					connection.retryCached(now);
@@ -324,9 +361,9 @@ export class SSE {
 	 * Cleans up intervals, closes all connections, and frees memory
 	 */
 	private shutdown() {
-		console.log('Shutting down SSE service...');
+		log('Shutting down SSE service...');
 		clearInterval(this.cleanupInterval);
-		for (const conn of this.connections.values()) conn.close();
+		for (const conn of this.connections.values()) conn.closeConnection();
 		this.connections.clear();
 	}
 
@@ -339,21 +376,27 @@ export class SSE {
 	connect(event: ConnectRequestEvent) {
 		const me = this;
 		return attemptAsync(async () => {
+			log('New SSE connection request:', event.params.uuid);
 			const session = event.locals.session;
 			session.update({ tabs: session.data.tabs + 1 });
 			const uuid = event.params.uuid;
+			const url = event.url.searchParams.get('url') || '';
 
 			const stream = new ReadableStream<string>({
 				start(controller) {
-					const connection = new Connection(uuid, session.id, controller, (conn) =>
-						me.removeConnection(conn)
-					);
+					const connection = new Connection(uuid, session.id, controller, url, me);
 					me.connections.set(uuid, connection);
 					me.emitter.emit('connect', connection);
+					connection.on('state-change', (con) => {
+						me.emitter.emit('state-change', con);
+					});
 				},
 				cancel() {
 					const connection = me.connections.get(uuid);
-					if (connection) connection.close();
+					if (connection) {
+						connection.closeConnection();
+						me.removeConnection(connection);
+					}
 				}
 			});
 
@@ -374,11 +417,11 @@ export class SSE {
 	 * @param connection - Connection to remove
 	 */
 	private removeConnection(connection: Connection) {
+		log('Removing SSE connection:', connection.uuid);
 		if (this.connections.has(connection.uuid)) {
 			this.connections.delete(connection.uuid);
 			this.emitter.emit('disconnect', connection);
 
-			// Decrement session tab count when connection closes
 			connection
 				.getSession()
 				.then((sessionResult) => {
@@ -403,13 +446,14 @@ export class SSE {
 	 * @param condition - Optional filter function to determine which connections receive the message
 	 */
 	send(event: string, data: unknown, condition?: (conn: Connection) => boolean | Promise<boolean>) {
+		log(`Sending event "${event}" to connections${condition ? ' with condition' : ''}.`);
 		// Create a copy of connections to avoid issues if map changes during iteration
 		const connectionsCopy = [...this.connections.values()];
 
 		for (const conn of connectionsCopy) {
 			// Check if connection is still valid
 			if (!conn.connected) {
-				console.warn(`Removing disconnected connection: ${conn.uuid}`);
+				log(`Removing disconnected connection: ${conn.uuid}`);
 				this.removeConnection(conn);
 				continue;
 			}
@@ -418,7 +462,7 @@ export class SSE {
 
 			const result = conn.send(event, data);
 			if (result.isErr()) {
-				console.warn(`Failed to send to connection ${conn.uuid}:`, result.error);
+				log(`Failed to send to connection ${conn.uuid}:`, result.error);
 				this.removeConnection(conn);
 			}
 		}
@@ -448,6 +492,7 @@ export class SSE {
 	 */
 	fromSession(sessionId: string) {
 		return new ConnectionArray(
+			sessionId,
 			[...this.connections.values()].filter((conn) => conn.sessionId === sessionId)
 		);
 	}
@@ -524,7 +569,7 @@ export class SSE {
 		for (const conn of this.connections.values()) {
 			if (now - conn.lastPing > maxAge || !conn.connected) {
 				console.log(`Force closing stale connection: ${conn.uuid}`);
-				conn.close();
+				conn.closeConnection();
 				cleaned++;
 			}
 		}

@@ -70,5 +70,11 @@ export default z.object({
 		version: z.number().min(1),
 		debug: z.boolean(),
 		debounce_interval_ms: z.number().min(0)
+	}),
+	sse: z.object({
+		debug: z.boolean(),
+		ping_interval_ms: z.number().min(1000),
+		state_report_threshold: z.number().min(5000),
+		do_report: z.boolean()
 	})
 });

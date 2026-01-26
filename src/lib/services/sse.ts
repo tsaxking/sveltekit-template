@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { decode } from 'ts-utils/text';
-import { notify } from '../utils/prompts';
+import { confirm, notify } from '../utils/prompts';
 import { z } from 'zod';
 import { Requests } from '../utils/requests';
 import { Random } from 'ts-utils/math';
@@ -69,12 +69,15 @@ class SSE {
 	public off = this.emitter.off.bind(this.emitter);
 	public once = this.emitter.once.bind(this.emitter);
 
+	public debug = __APP_ENV__.sse.debug;
+
 	/**
 	 * Initializes the SSE connection and sets up user activity monitoring
 	 * @param enable - Whether to enable SSE (typically based on browser environment)
 	 */
 	init(enable: boolean) {
 		if (!enable) return;
+		this.log('Initializing SSE client...');
 		this.connect();
 
 		// User activity events that indicate the user is active
@@ -131,15 +134,19 @@ class SSE {
 		 * Handles all connection logic, event parsing, and error recovery
 		 */
 		const establishConnection = () => {
+			this.log('Establishing SSE connection...');
 			// Set SSE metadata for server identification
 			Requests.setMeta('sse', this.uuid);
-			const source = new EventSource(`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}`);
+			const source = new EventSource(
+				`/api/sse/init/${this.uuid}?lastAck=${this.lastAckedId}&url=${encodeURIComponent(window.location.href)}`
+			);
 
 			/**
 			 * Handles successful connection establishment
 			 * Resets reconnection counters and emits connect event
 			 */
 			const handleConnect = () => {
+				this.log('SSE connection established.');
 				this.emitter.emit('connect', undefined);
 				this.reconnectAttempt = 0;
 				this.pingFailures = 0;
@@ -178,6 +185,7 @@ class SSE {
 							});
 						}
 					} else if (parsed.event !== 'ping') {
+						this.log('Received SSE event:', parsed.event, parsed.data);
 						// Emit custom events to listeners
 						this.emitter.emit(parsed.event, parsed.data);
 					}
@@ -185,7 +193,7 @@ class SSE {
 					// Acknowledge message receipt
 					this.ack(parsed.id);
 				} catch (err) {
-					console.error('Failed to parse SSE event:', err);
+					this.log('Failed to parse SSE event:', err);
 				}
 			};
 
@@ -271,6 +279,7 @@ class SSE {
 	private async ping() {
 		const start = performance.now();
 		try {
+			this.log('Sending SSE ping...');
 			const res = await fetch(`/api/sse/ping/${this.uuid}`);
 			const end = performance.now();
 			const latency = end - start;
@@ -288,6 +297,7 @@ class SSE {
 			if (this._latency.length > 3) this._latency.shift();
 			return res.ok;
 		} catch {
+			this.log('SSE ping failed.');
 			return false;
 		}
 	}
@@ -302,16 +312,19 @@ class SSE {
 		return new Promise<void>((resolve, reject) => {
 			let settled = false;
 			if (!this.isDisconnected) {
+				this.log('SSE connection already established.');
 				return resolve();
 			}
 			this.once('connect', () => {
 				if (settled) return;
+				this.log('SSE connection established after wait.');
 				settled = true;
 				clearTimeout(timer);
 				resolve();
 			});
 			const timer = setTimeout(() => {
 				if (settled) return;
+				this.log('SSE connection wait timed out.');
 				settled = true;
 				reject(new Error(`SSE connection timed out after ${timeout}ms`));
 			}, timeout);
@@ -327,8 +340,42 @@ class SSE {
 		if (this._latency.length === 0) return 0;
 		return this._latency.reduce((a, b) => a + b, 0) / this._latency.length;
 	}
+
+	log(...args: unknown[]) {
+		if (this.debug) {
+			console.log('[SSE_CLIENT]', ...args);
+		}
+	}
 }
 
 /** Global SSE client instance - automatically initializes in browser environment */
 export const sse = new SSE();
 sse.init(browser);
+
+sse.on('sse:redirect', async (data) => {
+	const parsed = z.object({ url: z.string(), reason: z.string().optional() }).safeParse(data);
+
+	if (parsed.success) {
+		if (
+			await confirm(
+				`${parsed.data.reason ?? `You are being redirected to another page (${parsed.data.url}). Continue?`}`
+			)
+		) {
+			window.location.href = parsed.data.url;
+		}
+	}
+});
+
+sse.on('sse:reload', async (data) => {
+	const parsed = z.object({ reason: z.string().optional() }).safeParse(data);
+
+	if (parsed.success) {
+		if (
+			await confirm(
+				`${parsed.data.reason ?? 'This page is being reloaded by the server. Reload now?'}`
+			)
+		) {
+			window.location.reload();
+		}
+	}
+});
