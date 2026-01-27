@@ -23,7 +23,7 @@ export default async (roleName: string) => {
 
 	roleName = `TEST-` + roleName.trim();
 
-	const role = await Permissions.Role.fromProperty('name', roleName, { type: 'single' }).unwrap();
+	const role = await Permissions.Role.get({ name: roleName }, { type: 'single' }).unwrap();
 	if (role) {
 		console.log(`Role "${roleName}" already exists.`);
 		return;

@@ -1,4 +1,4 @@
-import { PropertyAction, DataAction } from 'drizzle-struct/types';
+import { PropertyAction, DataAction } from '$lib/types/struct';
 import { Account } from './structs/account';
 import { z } from 'zod';
 import terminal from '$lib/server/utils/terminal';

@@ -26,31 +26,15 @@ export const searchRoles = query(
 			limit: data.limit
 		});
 		if (roles.isErr()) {
-			return {
-				success: false,
-				message: 'Internal server error'
-			};
+			return error(500, 'Internal server error');
 		}
 
 		const res = await Permissions.filterPropertyActionFromAccount(
 			account,
 			roles.value,
 			PropertyAction.Read
-		);
-
-		if (res.isErr()) {
-			return {
-				success: false,
-				message: 'Internal server error'
-			};
-		}
-
-		return {
-			success: true,
-			data: {
-				roles: res.value
-			}
-		};
+		).unwrap();
+		return res;
 	}
 );
 
@@ -361,7 +345,7 @@ export const availablePermissions = query(
 
 		const role = await Permissions.Role.fromId(data.role).unwrap();
 		if (!role) {
-			throw new Error('Role not found');
+			return error(404, 'Role not found');
 		}
 
 		PERMIT: if (account) {
@@ -374,17 +358,18 @@ export const availablePermissions = query(
 				throw new Error("You do not have permission to view this role's rulesets");
 			}
 		} else {
-			throw new Error('No Authenticated account found');
+			return error(401, 'Unauthorized');
 		}
 
-		if (!role.data.parent) return Permissions.getRulesetsFromRole(role).unwrap();
+		if (!role.data.parent)
+			return (await Permissions.getRulesetsFromRole(role).unwrap()).map((r) => r.safe());
 
 		const parent = await Permissions.getParent(role).unwrap();
 		if (!parent) {
-			throw new Error('No parent role found for this role');
+			return error(500, 'Parent role not found');
 		}
 
-		return Permissions.getRulesetsFromRole(parent).unwrap();
+		return (await Permissions.getRulesetsFromRole(parent).unwrap()).map((r) => r.safe());
 	}
 );
 

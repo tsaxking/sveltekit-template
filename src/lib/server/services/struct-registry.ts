@@ -1,4 +1,4 @@
-import type { DataAction, PropertyAction } from '$lib/types/struct';
+import type { DataAction, PropertyAction } from '../../types/struct';
 import { DataVersion, Struct, StructData, type Blank } from 'drizzle-struct';
 import type { Account } from '../structs/account';
 import { attempt } from 'ts-utils';

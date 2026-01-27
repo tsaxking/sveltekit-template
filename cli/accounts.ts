@@ -161,9 +161,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		const admin = admins[a];
 
 		const adminData = (
-			await Account.Admins.fromProperty('accountId', admin.id, {
-				type: 'single'
-			})
+			await Account.Admins.get(
+				{ accountId: admin.id },
+				{
+					type: 'single'
+				}
+			)
 		).unwrap();
 
 		if (!adminData) return terminal.log('Invalid admin');
@@ -233,9 +236,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		const developer = developers[a];
 
 		const developerData = (
-			await Account.Developers.fromProperty('accountId', developer.id, {
-				type: 'single'
-			})
+			await Account.Developers.get(
+				{ accountId: developer.id },
+				{
+					type: 'single'
+				}
+			)
 		).unwrap();
 
 		if (!developerData) return terminal.log('Invalid developer');
@@ -265,9 +271,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		if (!account) return terminal.log('Invalid account');
 
 		const logs = (
-			await Logs.Log.fromProperty('accountId', account.id, {
-				type: 'stream'
-			}).await()
+			await Logs.Log.get(
+				{ accountId: account.id },
+				{
+					type: 'stream'
+				}
+			).await()
 		).unwrap();
 
 		terminal.log('LOGS:', logs.length);

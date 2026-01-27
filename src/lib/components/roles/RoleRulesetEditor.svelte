@@ -21,7 +21,12 @@
 	}>({});
 
 	onMount(() => {
-		availablePermissions = Permissions.getAvailableRolePermissions(role);
+		const res = Permissions.getAvailableRolePermissions(role);
+		if (res.isOk()) {
+			availablePermissions = res.value;
+		} else {
+			console.error('Failed to load available permissions:', res.error);
+		}
 		entitlements = Permissions.getEntitlements();
 
 		const assign = () => {

@@ -8,7 +8,7 @@ import '$lib/server/structs/testing';
 import { type Handle } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import terminal from '$lib/server/utils/terminal';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { DB } from '$lib/server/db/';
 import '$lib/server/utils/files';
 import '$lib/server/index';
@@ -110,7 +110,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const autoSignIn = config.sessions.auto_sign_in;
 
 	if (autoSignIn && config.environment !== 'prod') {
-		const a = await Account.Account.fromProperty('username', autoSignIn, { type: 'single' });
+		const a = await Account.Account.get({ username: autoSignIn }, { type: 'single' });
 		if (a.isOk() && a.value) {
 			event.locals.account = a.value;
 			Object.assign(event.locals.session.data, {

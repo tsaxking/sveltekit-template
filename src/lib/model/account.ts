@@ -96,7 +96,25 @@ export namespace Account {
 		return self;
 	};
 
-	export const getNotifs = (/*limit: number, offset: number*/) => {};
+	export const getNotifs = (config?: { limit: number; page: number }) => {
+		const w = AccountNotification.arr();
+		remote
+			.getNotifications({
+				...config
+			})
+			.then((res) => {
+				w.set(
+					res.map((d) =>
+						AccountNotification.Generator({
+							...d,
+							created: d.created,
+							updated: d.updated
+						})
+					)
+				);
+			});
+		return w;
+	};
 
 	export const usernameExists = (username: string) => {
 		return attemptAsync(async () => {
@@ -116,13 +134,17 @@ export namespace Account {
 			page: 0
 		}
 	) => {
-		return attemptAsync(async () => {
-			return remote.search({
+		const w = Account.arr();
+		remote
+			.search({
 				query,
 				limit: config.limit,
 				page: config.page
+			})
+			.then((res) => {
+				w.set(res.map((d) => Account.Generator(d)));
 			});
-		});
+		return w;
 	};
 
 	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {

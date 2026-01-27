@@ -262,161 +262,6 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 	}
 
 	/**
-	 * Retrieves records matching a specific property value as a reactive data array
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match
-	 * @param {ReadConfig<false>} config - Configuration with pagination disabled
-	 * @returns {ResultPromise<TableDataArr<Name, Type>>} Promise resolving to a reactive data array
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<false>
-	): ResultPromise<TableDataArr<Name, Type>>;
-
-	/**
-	 * Retrieves records matching a specific property value as a paginated reactive data array
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match
-	 * @param {ReadConfig<true>} config - Configuration with pagination enabled
-	 * @returns {ResultPromise<PaginatedTableData<Name, Type>>} Promise resolving to a paginated data array
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<true>
-	): ResultPromise<PaginatedTableData<Name, Type>>;
-
-	/**
-	 * Retrieves records with a specific property value, with optional pagination and real-time sync.
-	 * Automatically handles adding/removing items when their properties change.
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match exactly
-	 * @param {ReadConfig<boolean>} config - Configuration object specifying pagination behavior
-	 * @returns {ResultPromise<TableDataArr<Name, Type> | PaginatedTableData<Name, Type>>} Reactive filtered data collection
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<boolean>
-	) {
-		return attemptAsync(async () => {
-			_init();
-			if (config.pagination) {
-				const total = await this.table()
-					.where(key as string)
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					.equals(value as any)
-					.count();
-				const datas = await this.table()
-					.where(key as string)
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					.equals(value as any)
-					.offset(config.pagination.page * config.pagination.pageSize)
-					.limit(config.pagination.pageSize)
-					.toArray();
-				const arr = new PaginatedTableData(
-					this,
-					datas.map((data) => this.Generator(data)),
-					total,
-					config.pagination.page,
-					config.pagination.pageSize,
-					async (page, pageSize) => {
-						_init();
-						const datas = await this.table()
-							.where(key as string)
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							.equals(value as any)
-							.offset(page * pageSize)
-							.limit(pageSize)
-							.toArray();
-						return datas.map((data) => this.Generator(data));
-					},
-					async () => {
-						return await this.table()
-							.where(key as string)
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							.equals(value as any)
-							.count();
-					}
-				);
-				const offNew = this.on('new', (d) => {
-					if (d.data[key] === value) {
-						arr.add(d);
-					}
-				});
-				const offDelete = this.on('delete', (d) => {
-					arr.remove(d);
-				});
-				const offUpdate = this.on('update', (d) => {
-					if (d.data[key] === value) {
-						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-						if (!exists) {
-							arr.add(d);
-						}
-					} else {
-						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-						if (exists) {
-							arr.remove(d);
-						}
-					}
-				});
-				arr.onAllUnsubscribe(() => {
-					offNew();
-					offDelete();
-					offUpdate();
-				});
-				return arr;
-			}
-			const has = this.writables.get(`${String(key)}=${String(value)}`);
-			if (has) return has;
-			const datas = await this.table()
-				.where(key as string)
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.equals(value as any)
-				.toArray();
-			const arr = new TableDataArr(
-				this,
-				datas.map((data) => this.Generator(data))
-			);
-			this.writables.set(`${String(key)}=${String(value)}`, arr);
-			const offNew = this.on('new', (d) => {
-				if (d.data[key] === value) {
-					arr.add(d);
-				}
-			});
-			const offDelete = this.on('delete', (d) => {
-				arr.remove(d);
-			});
-			const offUpdate = this.on('update', (d) => {
-				if (d.data[key] === value) {
-					const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-					if (!exists) {
-						arr.add(d);
-					}
-				} else {
-					const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-					if (exists) {
-						arr.remove(d);
-					}
-				}
-			});
-			arr.onAllUnsubscribe(() => {
-				offNew();
-				offDelete();
-				offUpdate();
-			});
-			return arr;
-		});
-	}
-
-	/**
 	 * Returns a sample TableData instance for TypeScript type inference.
 	 * This is only used for development and type checking - never call at runtime.
 	 *
@@ -464,6 +309,65 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 	 */
 	arr() {
 		return new TableDataArr(this, []);
+	}
+
+	get(
+		data: {
+			[K in keyof Type]?: SchemaFieldReturnType<Type[K]>;
+		},
+		config: ReadConfig<false>
+	): ResultPromise<TableDataArr<Name, Type>> {
+		return attemptAsync(async () => {
+			_init();
+			const datas = await this.table().where(data);
+			const arr = new TableDataArr(
+				this,
+				(await datas.toArray()).map((d) => this.Generator(d))
+			);
+
+			const onNew = (d: TableData<Name, Type>) => {
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						return;
+					}
+				}
+				arr.add(d);
+			};
+			const onDelete = (d: TableData<Name, Type>) => {
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						return;
+					}
+				}
+				arr.remove(d);
+			};
+
+			const onUpdate = (d: TableData<Name, Type>) => {
+				let match = true;
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						match = false;
+					}
+				}
+				if (match) {
+					arr.add(d);
+				} else {
+					arr.remove(d);
+				}
+			};
+
+			const offNew = this.on('new', onNew);
+			const offDelete = this.on('delete', onDelete);
+			const offUpdate = this.on('update', onUpdate);
+
+			arr.onAllUnsubscribe(() => {
+				offNew();
+				offDelete();
+				offUpdate();
+			});
+
+			return arr;
+		});
 	}
 }
 

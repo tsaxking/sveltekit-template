@@ -13,7 +13,7 @@ import type { Icon } from '../../types/icons';
 import { Permissions } from './permissions';
 import { config, domain } from '../utils/env';
 import structRegistry from '../services/struct-registry';
-import { DataAction, PropertyAction } from '$lib/types/struct';
+import { DataAction, PropertyAction } from '../../types/struct';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -101,7 +101,9 @@ export namespace Account {
 	export const Settings = new Struct({
 		name: 'account_settings',
 		structure: {
-			accountId: text('account_id').notNull()
+			accountId: text('account_id').notNull(),
+			setting: text('setting').notNull(),
+			value: text('value').notNull()
 		}
 	});
 

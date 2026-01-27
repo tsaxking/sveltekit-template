@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { Limiting } from '../src/lib/server/structs/limiting';
 import { selectData } from './struct';
-import { globalCols } from 'drizzle-struct/back-end';
+import { globalCols } from 'drizzle-struct';
 
 export default new Folder(
 	'Page Limiting',
@@ -383,9 +383,12 @@ export default new Folder(
 			new Action('Delete IP', 'Delete all rulesets for a specific IP address', '🗑️', async () => {
 				const ip = await promptIp('Enter the IP address to delete rulesets for').unwrap();
 
-				const count = await Limiting.PageRuleset.fromProperty('ip', ip, {
-					type: 'count'
-				});
+				const count = await Limiting.PageRuleset.get(
+					{ ip },
+					{
+						type: 'count'
+					}
+				);
 
 				if (count.isErr()) {
 					await alert({
@@ -408,10 +411,13 @@ export default new Folder(
 						message: `Are you sure you want to delete ${count.value} rulesets for IP ${ip}?`
 					}).unwrap()
 				) {
-					await Limiting.PageRuleset.fromProperty('ip', ip, {
-						type: 'stream',
-						includeArchived: true
-					}).pipe((rs) => rs.delete());
+					await Limiting.PageRuleset.get(
+						{ ip },
+						{
+							type: 'stream',
+							includeArchived: true
+						}
+					).pipe((rs) => rs.delete());
 					await alert({
 						message: `Deleted ${count.value} rulesets for IP ${ip}.`,
 						clear: true
@@ -441,9 +447,12 @@ export default new Folder(
 						return;
 					}
 
-					const count = await Limiting.PageRuleset.fromProperty('page', page, {
-						type: 'count'
-					});
+					const count = await Limiting.PageRuleset.get(
+						{ page },
+						{
+							type: 'count'
+						}
+					);
 
 					if (count.isErr()) {
 						await alert({
@@ -466,10 +475,13 @@ export default new Folder(
 							message: `Are you sure you want to delete ${count.value} rulesets for page ${page}?`
 						}).unwrap()
 					) {
-						await Limiting.PageRuleset.fromProperty('page', page, {
-							type: 'stream',
-							includeArchived: true
-						}).pipe((rs) => rs.delete());
+						await Limiting.PageRuleset.get(
+							{ page },
+							{
+								type: 'stream',
+								includeArchived: true
+							}
+						).pipe((rs) => rs.delete());
 						await alert({
 							message: `Deleted ${count.value} rulesets for page ${page}.`,
 							clear: true
@@ -500,9 +512,12 @@ export default new Folder(
 						return;
 					}
 
-					const rules = await Limiting.PageRuleset.fromProperty('page', page, {
-						type: 'all'
-					});
+					const rules = await Limiting.PageRuleset.get(
+						{ page },
+						{
+							type: 'all'
+						}
+					);
 
 					if (rules.isErr()) {
 						await alert({
@@ -552,9 +567,12 @@ export default new Folder(
 			new Action('Search Rulesets by IP', 'Search for rulesets by IP address', '🔍', async () => {
 				const ip = await promptIp('Enter the IP address to search rulesets for').unwrap();
 
-				const rules = await Limiting.PageRuleset.fromProperty('ip', ip, {
-					type: 'all'
-				});
+				const rules = await Limiting.PageRuleset.get(
+					{ ip },
+					{
+						type: 'all'
+					}
+				);
 
 				if (rules.isErr()) {
 					await alert({

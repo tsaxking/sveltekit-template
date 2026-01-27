@@ -1,6 +1,6 @@
 import * as testing from '@playwright/test';
 import { Account } from '../src/lib/server/structs/account';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { DB } from '../src/lib/server/db';
 import { signIn, logging } from './test-utils';
 import fs from 'fs/promises';

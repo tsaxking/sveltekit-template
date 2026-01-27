@@ -2,7 +2,7 @@ import { Account } from './account';
 import { Struct, StructData, DataArr } from '$lib/services/struct/index';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
-import { attemptAsync } from 'ts-utils/check';
+import { attemptAsync, attempt } from 'ts-utils/check';
 import { Form } from '$lib/utils/form';
 import * as remote from '$lib/remotes/permissions.remote';
 
@@ -95,11 +95,18 @@ export namespace Permissions {
 		});
 	};
 	export const getAvailableRolePermissions = (role: RoleData) => {
-		return attemptAsync(async () => {
+		return attempt(() => {
 			if (!role.data.id) throw new Error('Role must have an ID');
-			return remote.availablePermissions({
-				role: role.data.id
-			});
+			const w = RoleRuleset.arr();
+			remote
+				.availablePermissions({
+					role: role.data.id
+				})
+				.then((res) => {
+					w.set(res.map((d) => RoleRuleset.Generator(d)));
+				})
+				.catch(console.error);
+			return w;
 		});
 	};
 
@@ -179,13 +186,17 @@ export namespace Permissions {
 			limit: number;
 		}
 	) => {
-		return attemptAsync(async () => {
-			return remote.searchRoles({
+		const w = Role.arr();
+		remote
+			.searchRoles({
 				searchKey,
 				limit: config.limit,
 				page: Math.floor(config.offset / config.limit)
+			})
+			.then((res) => {
+				w.set(res.map((d) => Role.Generator(d)));
 			});
-		});
+		return w;
 	};
 
 	export const createRole = (

@@ -3,9 +3,12 @@ import { fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 
 export const load = async (event) => {
-	const account = await Account.Account.fromProperty('username', event.params.username, {
-		type: 'single'
-	}).unwrap();
+	const account = await Account.Account.get(
+		{ username: event.params.username },
+		{
+			type: 'single'
+		}
+	).unwrap();
 
 	if (!account) {
 		throw fail(ServerCode.notFound, {

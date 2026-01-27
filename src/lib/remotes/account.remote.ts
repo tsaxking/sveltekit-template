@@ -37,9 +37,12 @@ export const usernameExists = query(
 		username: z.string().min(3).max(32)
 	}),
 	async (data) => {
-		const account = await Account.Account.fromProperty('username', data.username, {
-			type: 'count'
-		}).unwrap();
+		const account = await Account.Account.get(
+			{ username: data.username },
+			{
+				type: 'count'
+			}
+		).unwrap();
 
 		return account > 0;
 	}
@@ -76,3 +79,29 @@ export const signOut = command(async () => {
 	const session = await getSession();
 	await Session.signOut(session).unwrap();
 });
+
+export const getNotifications = query(
+	z.object({
+		limit: z.number().min(1).max(100).default(10),
+		page: z.number().min(0).default(0)
+	}),
+	async (data) => {
+		const account = await getAccount();
+		if (!account) return error(401, 'Unauthorized');
+
+		return (
+			await Account.AccountNotification.get(
+				{
+					accountId: account.id
+				},
+				{
+					type: 'array',
+					limit: data.limit,
+					offset: data.page * data.limit
+				}
+			)
+		)
+			.unwrap()
+			.map((n) => n.safe());
+	}
+);

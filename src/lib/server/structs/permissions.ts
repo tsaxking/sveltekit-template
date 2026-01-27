@@ -6,10 +6,10 @@ import { text } from 'drizzle-orm/pg-core';
 import { DataVersion, Struct, StructData, type Blank, type Structable } from 'drizzle-struct';
 import { attempt, attemptAsync, resolveAll } from 'ts-utils/check';
 import { Account } from './account';
-import { PropertyAction, DataAction } from '$lib/types/struct';
+import { PropertyAction, DataAction } from '../../types/struct';
 import { DB } from '../db';
 import { and, eq, ilike, inArray } from 'drizzle-orm';
-import type { Entitlement, Features } from '$lib/types/entitlements';
+import type { Entitlement, Features } from '../../types/entitlements';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
 import path from 'path';
@@ -236,9 +236,6 @@ export namespace Permissions {
 	 * @returns  A promise that resolves to an array of child roles.
 	 */
 	export const getChildren = (role: RoleData) => {
-		// return Role.fromProperty('parent', role.id, {
-		// 	type: 'all'
-		// });
 		return Role.get(
 			{
 				parent: role.id
@@ -539,7 +536,6 @@ export namespace Permissions {
 	 * @returns A promise that resolves to an array of rulesets associated with the role.
 	 */
 	export const getRulesetsFromRole = (role: RoleData) => {
-		// return RoleRuleset.fromProperty('role', role.id, { type: 'all' });
 		return RoleRuleset.get(
 			{
 				role: role.id

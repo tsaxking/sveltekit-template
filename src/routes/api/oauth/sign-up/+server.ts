@@ -37,9 +37,8 @@ export const GET = async (event) => {
 			.userinfo.get();
 
 		// log(r);
-		const account = await Account.Account.fromProperty(
-			'email',
-			info.data.email || 'nothing should never happen',
+		const account = await Account.Account.get(
+			{ email: info.data.email || 'nothing should never happen' },
 			{
 				type: 'single'
 			}
