@@ -54,7 +54,7 @@ export const fingerprint = command(
 		const session = await getSession();
 		await session
 			.update({
-				fingerprint: data.fingerprint
+				fingerprint: data.fingerprint.toString()
 			})
 			.unwrap();
 		const event = getRequestEvent();
