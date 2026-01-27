@@ -1,5 +1,5 @@
 import { Test } from '../src/lib/server/structs/testing';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { DB } from '../src/lib/server/db/index.js';
 
 export default async (num: string) => {

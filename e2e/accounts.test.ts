@@ -1,6 +1,6 @@
 import * as testing from '@playwright/test';
 import { Account } from '../src/lib/server/structs/account';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { DB } from '../src/lib/server/db';
 import { signIn, logging } from './test-utils';
 
@@ -15,16 +15,22 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	const accountA = await Account.Account.fromProperty('username', 'testuser', {
-		type: 'single'
-	}).unwrap();
+	const accountA = await Account.Account.get(
+		{ username: 'testuser' },
+		{
+			type: 'single'
+		}
+	).unwrap();
 	if (accountA) {
 		await accountA.delete().unwrap();
 	}
 
-	const accountB = await Account.Account.fromProperty('username', 'testuser2', {
-		type: 'single'
-	}).unwrap();
+	const accountB = await Account.Account.get(
+		{ username: 'testuser2' },
+		{
+			type: 'single'
+		}
+	).unwrap();
 
 	if (accountB) {
 		await accountB.delete().unwrap();
@@ -73,9 +79,12 @@ describe('Account Sign Up', () => {
 			expect(page.url()).toBe('http://localhost:4173/account/sign-up?/register');
 		}
 
-		const account = await Account.Account.fromProperty('username', 'testuser', {
-			type: 'single'
-		}).unwrap();
+		const account = await Account.Account.get(
+			{ username: 'testuser' },
+			{
+				type: 'single'
+			}
+		).unwrap();
 		if (!account) {
 			throw new Error('Account not found');
 		}

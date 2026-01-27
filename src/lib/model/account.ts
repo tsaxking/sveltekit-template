@@ -8,10 +8,10 @@ import {
 	type GlobalCols
 } from '$lib/services/struct/index';
 import { browser } from '$app/environment';
-import { z } from 'zod';
 import { modalTarget, rawModal } from '$lib/utils/prompts';
 import { mount } from 'svelte';
 import AccountSearch from '$lib/components/account/AccountSearch.svelte';
+import * as remote from '$lib/remotes/account.remote';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -93,66 +93,58 @@ export namespace Account {
 	);
 
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
-		attemptAsync(async () => {
-			const data = await Account.send('self', {}, Account.getZodSchema());
-			const account = data.unwrap();
-			self.update((d) => {
-				d.set(account);
-				return d;
-			});
-		});
 		return self;
 	};
 
-	export const getNotifs = (/*limit: number, offset: number*/) => {
-		return AccountNotification.query(
-			'get-own-notifs',
-			{},
-			{
-				asStream: false,
-				satisfies: (d) => d.data.accountId === self.get().data.id
-			}
-		);
-	};
-
-	export const getUsersFromUniverse = (universe: string) => {
-		return Account.query(
-			'from-universe',
-			{
-				universe
-			},
-			{
-				asStream: false,
-				satisfies: () => false
-			}
-		);
+	export const getNotifs = (config?: { limit: number; page: number }) => {
+		const w = AccountNotification.arr();
+		remote
+			.getNotifications({
+				...config
+			})
+			.then((res) => {
+				w.set(
+					res.map((d) =>
+						AccountNotification.Generator({
+							...d,
+							created: d.created,
+							updated: d.updated
+						})
+					)
+				);
+			});
+		return w;
 	};
 
 	export const usernameExists = (username: string) => {
-		return Account.send('username-exists', { username }, z.boolean());
+		return attemptAsync(async () => {
+			return remote.usernameExists({
+				username
+			});
+		});
 	};
 
 	export const search = (
 		query: string,
 		config: {
 			limit: number;
-			offset: number;
+			page: number;
 		} = {
 			limit: 25,
-			offset: 0
+			page: 0
 		}
 	) => {
-		return Account.query(
-			'search',
-			{
+		const w = Account.arr();
+		remote
+			.search({
 				query,
-				...config
-			},
-			{
-				asStream: false,
-				satisfies: () => false
-			}
-		);
+				limit: config.limit,
+				page: config.page
+			})
+			.then((res) => {
+				w.set(res.map((d) => Account.Generator(d)));
+			});
+		return w;
 	};
 
 	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {

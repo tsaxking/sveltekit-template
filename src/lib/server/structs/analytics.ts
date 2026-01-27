@@ -1,12 +1,10 @@
 import { text, integer } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import type { Account } from './account';
 import { attemptAsync } from 'ts-utils/check';
 import { DB } from '../db';
 import { Session } from './session';
 import { eq, or } from 'drizzle-orm';
-import { z } from 'zod';
-import { DataAction, PropertyAction } from 'drizzle-struct/types';
 
 export namespace Analytics {
 	export const Links = new Struct({
@@ -21,50 +19,9 @@ export namespace Analytics {
 
 	export type LinkData = typeof Links.sample;
 
-	for (const i of [...Object.values(DataAction), ...Object.values(PropertyAction)]) {
-		Links.block(i, () => true, 'Cannot perform this action on analytics links');
-	}
-
-	Links.queryListen('my-links', async (event, data) => {
-		const account = event.locals.account;
-
-		const parsed = z
-			.object({
-				offset: z.number(),
-				limit: z.number()
-			})
-			.safeParse(data);
-
-		if (!parsed.success) {
-			throw new Error('Invalid data');
-		}
-
-		if (!account) {
-			const links = await Links.fromProperty('session', event.locals.session.id, {
-				type: 'all'
-			}).unwrap();
-			const filtered = links.filter(
-				(v, i, a) => a.findIndex((v2) => v2.data.url === v.data.url) === i
-			);
-			const limited = filtered.slice(parsed.data.offset, parsed.data.offset + parsed.data.limit);
-			return limited;
-		}
-
-		return getAccountLinks(account, parsed.data).unwrap();
-	});
-
-	Links.sendListen('count', async (event) => {
-		const account = event.locals.account;
-		if (!account) {
-			const links = await Links.fromProperty('session', event.locals.session.id, {
-				type: 'all'
-			}).unwrap();
-			return links.filter((v, i, a) => a.findIndex((v2) => v2.data.url === v.data.url) === i)
-				.length;
-		} else {
-			return getCount(account).unwrap();
-		}
-	});
+	// for (const i of [...Object.values(DataAction), ...Object.values(PropertyAction)]) {
+	// 	Links.block(i, () => true, 'Cannot perform this action on analytics links');
+	// }
 
 	export const getAccountLinks = (
 		account: Account.AccountData,

@@ -19,7 +19,7 @@ export namespace StructCache {
 			if (!__APP_ENV__.struct_cache.enabled) {
 				return null;
 			}
-			const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
+			const record = await table.get({ key }, { pagination: false }).unwrap();
 			const [res] = record.data;
 			if (!res) return null;
 			if (res.data.expires && res.data.expires < new Date()) {
@@ -44,7 +44,7 @@ export namespace StructCache {
 			if (!__APP_ENV__.struct_cache.enabled) {
 				return value;
 			}
-			const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
+			const record = await table.get({ key }, { pagination: false }).unwrap();
 			const res = record.data[0];
 			if (res) {
 				await res
@@ -71,7 +71,7 @@ export namespace StructCache {
 
 	export const clear = (key: string) => {
 		return attemptAsync(async () => {
-			const record = await table.fromProperty('key', key, { pagination: false }).unwrap();
+			const record = await table.get({ key }, { pagination: false }).unwrap();
 			const res = record.data[0];
 			if (res) {
 				await res.delete().unwrap();

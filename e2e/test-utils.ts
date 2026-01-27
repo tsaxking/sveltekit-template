@@ -3,9 +3,12 @@ import { Session } from '../src/lib/server/structs/session';
 import { Account } from '../src/lib/server/structs/account';
 
 export const signIn = async (page: Page, username: string, password: string) => {
-	const account = await Account.Account.fromProperty('username', username, {
-		type: 'single'
-	}).unwrap();
+	const account = await Account.Account.get(
+		{ username: username },
+		{
+			type: 'single'
+		}
+	).unwrap();
 
 	if (!account) {
 		throw new Error(`Account with username ${username} not found`);
@@ -25,9 +28,12 @@ export const signIn = async (page: Page, username: string, password: string) => 
 
 	await signInButton.click();
 
-	const sessions = await Session.Session.fromProperty('accountId', account.id, {
-		type: 'all'
-	}).unwrap();
+	const sessions = await Session.Session.get(
+		{ accountId: account.id },
+		{
+			type: 'all'
+		}
+	).unwrap();
 
 	if (sessions.length === 0) {
 		throw new Error('No session found after sign in');

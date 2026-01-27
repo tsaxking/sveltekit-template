@@ -41,7 +41,7 @@
 	{#if query}
 		<div class="search-results card mt-1">
 			<ul class="list-group list-group-flush">
-				{#each $results as account}
+				{#each $results as account (account.data.id)}
 					<li class="list-group-item list-group-item-action">
 						<button type="button" class="btn" onclick={() => select(account)}>
 							{account.data.username} - {account.data.firstName}

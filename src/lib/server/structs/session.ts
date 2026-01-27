@@ -1,5 +1,5 @@
 import { attemptAsync } from 'ts-utils/check';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { integer, text } from 'drizzle-orm/pg-core';
 import { Account } from './account';
 import { domain, config } from '../utils/env';
@@ -40,7 +40,6 @@ export namespace Session {
 			fingerprint: text('fingerprint').notNull().default(''),
 			tabs: integer('tabs').notNull().default(0)
 		},
-		frontend: false,
 		safes: ['fingerprint'],
 		lifetime: SESSION_DURATION
 	});
@@ -112,22 +111,16 @@ export namespace Session {
 			await account.update({
 				lastLogin: new Date().toISOString()
 			});
-
-			// const universes = (await Universes.getUniverses(account)).unwrap();
-
-			// for (let i = 0; i < universes.length; i++) {
-			// 	event.cookies.set(`universe-${i}`, universes[i].id, {
-			// 		httpOnly: true,
-			// 		domain: DOMAIN ?? '',
-			// 		path: '/',
-			// 		// expires: new Date(Date.now() + parseInt(SESSION_DURATION ?? '0'))
-			// 	});
-			// }
-
 			return {
 				session
 				// universes,
 			};
+		});
+	};
+
+	export const signOut = (session: SessionData) => {
+		return session.update({
+			accountId: ''
 		});
 	};
 }

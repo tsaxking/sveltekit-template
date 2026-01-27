@@ -4,7 +4,8 @@ import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { match } from 'ts-utils/match';
 import { Stream } from 'ts-utils/stream';
 import { type Writable } from 'svelte/store';
-import { type ColType, DataAction, PropertyAction } from 'drizzle-struct/types';
+import { DataAction, PropertyAction } from '$lib/types/struct';
+import type { ColType, globalCols } from 'drizzle-struct';
 import { z } from 'zod';
 import { StructDataVersion } from './data-version';
 import { StructBatching } from './batching';
@@ -13,6 +14,7 @@ import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import { StructCache } from './cache';
 import { encode } from 'ts-utils/text';
+import * as remote from '$lib/remotes/struct.remote';
 
 let didCacheWarning = false;
 
@@ -71,16 +73,7 @@ export enum FetchActions {
 	/**
 	 * Update a data point
 	 */
-	Update = 'update',
-	/**
-	 * Run a custom function on the back end
-	 */
-	Call = 'call',
-	/**
-	 * Custom query, this is used if a specific read type doesn't fulfill your needs.
-	 */
-	Query = 'query'
-	// Retrieve = 'retrieve',
+	Update = 'update'
 }
 
 /**
@@ -461,30 +454,6 @@ export type StructEvents<T extends Blank> = {
 };
 
 /**
- * All read types that can be used to query data
- *
- * @typedef {ReadTypes}
- */
-type ReadTypes = {
-	all: void;
-	archived: void;
-	property: {
-		key: string;
-		value: unknown;
-	};
-	custom: {
-		query: string;
-		data: unknown;
-	};
-	'from-ids': {
-		ids: string[];
-	};
-	get: {
-		[key: string]: unknown;
-	};
-};
-
-/**
  * Global columns that are required for all data
  *
  * @typedef {GlobalCols}
@@ -509,7 +478,7 @@ type ReadConfigType = 'stream' | 'all' | 'pagination';
  * @typedef {ReadConfig}
  * @template {boolean} AsStream
  */
-export type ReadConfig<AsStream extends ReadConfigType> = AsStream extends 'stream' | 'all'
+export type ReadConfig<AsStream extends ReadConfigType, T extends Blank> = AsStream extends 'all'
 	? {
 			/**
 			 * Determines the return type: true returns a StructStream, false returns a DataArr
@@ -525,6 +494,7 @@ export type ReadConfig<AsStream extends ReadConfigType> = AsStream extends 'stre
 				expires: Date;
 			};
 			force?: boolean;
+			keys?: (keyof T & keyof typeof globalCols)[];
 		}
 	: {
 			type: 'pagination';
@@ -536,6 +506,7 @@ export type ReadConfig<AsStream extends ReadConfigType> = AsStream extends 'stre
 				size: number;
 			};
 			force?: boolean;
+			keys?: (keyof T & keyof typeof globalCols)[];
 		};
 
 /**
@@ -706,17 +677,11 @@ export class Struct<T extends Blank> {
 	 */
 	new(data: Structable<T>, attributes: string[] = []) {
 		return attemptAsync<StatusMessage>(async () => {
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional()
-				})
-				.parse(
-					await this.postReq(DataAction.Create, {
-						data,
-						attributes
-					}).then((r) => r.unwrap())
-				);
+			return remote.create({
+				struct: this.data.name,
+				data,
+				attributes
+			});
 		});
 	}
 
@@ -863,17 +828,17 @@ export class Struct<T extends Blank> {
 		return attempt(() => {
 			this.data.socket.on(`struct:${this.data.name}`, (data) => {
 				this.log('Event Data:', data);
-				if (typeof data !== 'object' || data === null) {
-					return console.error('Invalid data:', data);
+				const parsed = z
+					.object({
+						event: z.enum(['create', 'update', 'archive', 'delete', 'restore', 'stream']),
+						data: z.record(z.unknown())
+					})
+					.safeParse(data);
+				if (!parsed.success) {
+					return console.error('Invalid data:', parsed.error, data);
 				}
-				if (!Object.hasOwn(data, 'event')) {
-					return console.error('Invalid event:', data);
-				}
-				if (!Object.hasOwn(data, 'data')) {
-					return console.error('Invalid data:', data);
-				}
-				const { event, data: structData } = data as {
-					event: 'create' | 'update' | 'archive' | 'delete' | 'restore';
+				const { event, data: structData } = parsed.data as {
+					event: 'create' | 'update' | 'archive' | 'delete' | 'restore' | 'stream';
 					data: PartialStructable<T & GlobalCols>;
 				};
 				const { id } = structData;
@@ -897,6 +862,14 @@ export class Struct<T extends Blank> {
 					})
 					.case('create', () => {
 						this.log('Create:', structData);
+						const exists = this.cache.get(id);
+						if (exists) return;
+						const d = new StructData(this, structData);
+						this.cache.set(id, d);
+						this.emit('new', d);
+					})
+					.case('stream', () => {
+						this.log('Stream:', structData);
 						const exists = this.cache.get(id);
 						if (exists) return;
 						const d = new StructData(this, structData);
@@ -1081,120 +1054,6 @@ export class Struct<T extends Blank> {
 	}
 
 	/**
-	 * Sends a post request to the server
-	 *
-	 * @param {(DataAction | PropertyAction)} action
-	 * @param {unknown} data
-	 * @returns {*}
-	 */
-	postReq(action: DataAction | PropertyAction | string, data: unknown, date?: Date) {
-		return attemptAsync(async () => {
-			this.log('Post Action:', action, data);
-			if (!this.data.browser)
-				throw new StructError(
-					'Currently not in a browser environment. Will not run a fetch request'
-				);
-			this.log('POST:', action, data, date);
-			let res: {
-				success: boolean;
-				message?: string;
-				data?: unknown;
-			};
-			if (__APP_ENV__.struct_batching.enabled) {
-				// res = await StructBatching.add(this.data.name, action, data, date).unwrap();
-				[res] = await StructBatching.add({
-					struct: this as any,
-					data,
-					date,
-					type: action
-				}).unwrap();
-			} else {
-				res = z
-					.object({
-						success: z.boolean(),
-						message: z.string().optional(),
-						data: z.unknown().optional()
-					})
-					.parse(
-						await fetch(`/api/struct/${this.data.name}/${action}`, {
-							method: 'POST',
-							headers: {
-								...Object.fromEntries(Struct.headers.entries()),
-								'X-Date': String(date?.getTime() || Struct.getDate()),
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify(data)
-						}).then((r) => r.json())
-					);
-			}
-			this.log('Post:', action, data, res);
-			return res;
-		});
-	}
-
-	/**
-	 * Sends a post request to the server
-	 *
-	 * @param {(DataAction | PropertyAction)} action
-	 * @param {unknown} data
-	 * @returns {*}
-	 */
-	getReq(
-		action: DataAction | PropertyAction | string,
-		config: {
-			data: unknown;
-			date?: Date;
-			cache?: {
-				expires: Date;
-			};
-			pagination?: {
-				page: number;
-				size: number;
-			};
-		}
-	) {
-		return attemptAsync(async () => {
-			this.log('Get Action:', action, config.data);
-			if (!this.data.browser)
-				throw new StructError(
-					'Currently not in a browser environment. Will not run a fetch request'
-				);
-
-			let url = `/api/struct/${this.data.name}/${action}`;
-			if (config.pagination) {
-				url += `?pagination=true&page=${config.pagination.page}&size=${config.pagination.size}`;
-			}
-			const encoded = encode(JSON.stringify(config.data));
-			CACHE: if (config.cache) {
-				cacheWarning();
-				const cached = await StructCache.get(`${url}:${encoded}`).unwrap();
-				if (!cached) break CACHE;
-				this.log('Get Cache Hit:', action, config.data, cached);
-				return new Response(JSON.stringify(cached));
-			}
-
-			this.log('Get Request:', action, config.data, config.date);
-			const res = await fetch(url, {
-				method: 'GET',
-				headers: {
-					...Object.fromEntries(Struct.headers.entries()),
-					'X-Date': String(config.date?.getTime() || Struct.getDate()),
-					'X-Body': JSON.stringify(config.data)
-				}
-			});
-
-			this.log('Get Response:', action, config.data, res);
-			if (config.cache) {
-				this.log('Setting Cache:', action, config.data);
-				await StructCache.set(`${url}:${encoded}`, await res.clone().json(), {
-					expires: config.cache.expires
-				});
-			}
-			return res;
-		});
-	}
-
-	/**
 	 * Builds the struct
 	 *
 	 * @returns {*}
@@ -1223,226 +1082,54 @@ export class Struct<T extends Blank> {
 			message: string;
 		}>(async () => {
 			this.log('Connecting to struct:', this.data.name);
-			const res = z
-				.object({
-					success: z.boolean(),
-					message: z.string()
-				})
-				.parse(
-					await fetch(`/api/struct/${this.data.name}/connect`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							structure: this.data.structure
-						})
-					}).then((r) => r.json())
-				);
-			if (!res.success) {
-				throw new FatalStructError(res.message);
-			}
-			return res;
-		});
-	}
-
-	/**
-	 * Retrieves a stream of data from the server, used for querying data
-	 *
-	 * @public
-	 * @template {keyof ReadTypes} K
-	 * @param {K} type The type of read operation to perform
-	 * @param {ReadTypes[K]} args Arguments specific to the read type
-	 * @param {Object} [config] Configuration object for the request
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {StructStream<T>} Stream of data matching the query
-	 */
-	public getStream<K extends keyof ReadTypes>(
-		type: K,
-		args: ReadTypes[K],
-		config?: {
-			cache?: {
-				expires: Date;
-			};
-		}
-	): StructStream<T> {
-		this.log('Stream:', type, args);
-		const s = new StructStream(this);
-		this.getReq(`${PropertyAction.Read}/${type}`, {
-			data: { args },
-			cache: config?.cache
-		}).then((res) => {
-			const response = res.unwrap();
-			this.log('Stream Result:', response);
-
-			// if (response.headers.get('Content-Type') === 'application/json') {
-			return setTimeout(async () => {
-				this.log('Recieved Streamable JSON');
-				const data = await response.json();
-				this.log('Stream Data:', data);
-				const parsed = z
-					.object({
-						success: z.boolean(),
-						data: z.array(z.unknown()).optional(),
-						message: z.string().optional()
-					})
-					.parse(data);
-				if (!parsed.success) {
-					this.log('Stream Error:', parsed);
-					return s.end();
-				}
-				if (parsed.data) {
-					for (const d of parsed.data) {
-						s.add(this.Generator(d as any));
-					}
-					s.end();
-				}
+			const res = await remote.connect({
+				struct: this.data.name,
+				structure: this.data.structure
 			});
-			// }
-
-			// const reader = response.body?.getReader();
-			// if (!reader) {
-			// 	return;
-			// }
-
-			// this.log('Stream Reader:', reader);
-
-			// let buffer = '';
-
-			// reader.read().then(({ done, value }) => {
-			// 	this.log('Stream Read:', done, value);
-			// 	const text = new TextDecoder().decode(value);
-			// 	let chunks = text.split('\n\n');
-			// 	this.log('Stream Chunks:', ...chunks);
-
-			// 	if (buffer) {
-			// 		chunks[0] = buffer + chunks[0];
-			// 		buffer = '';
-			// 	}
-
-			// 	if (!text.endsWith('\n\n')) {
-			// 		buffer = chunks.pop() || '';
-			// 	}
-
-			// 	chunks = chunks.filter((i) => {
-			// 		if (i === 'end') done = true;
-			// 		try {
-			// 			JSON.parse(i);
-			// 			return true;
-			// 		} catch {
-			// 			return false;
-			// 		}
-			// 	});
-
-			// 	for (const chunk of chunks) {
-			// 		try {
-			// 			const data = JSON.parse(decode(chunk));
-			// 			this.log('Stream Data:', data);
-			// 			s.add(this.Generator(data));
-			// 		} catch (error) {
-			// 			console.error('Invalid JSON:', chunk);
-			// 		}
-			// 	}
-
-			// 	if (done) {
-			// 		this.log('Stream Done');
-			// 		s.end();
-			// 	}
-			// });
-		});
-		return s;
-	}
-
-	private getPaginated<ReadType extends 'all' | 'archived' | 'property' | 'from-ids' | 'get'>(
-		type: ReadType,
-		args: ReadTypes[ReadType],
-		config: {
-			cache?: {
-				expires: Date;
-			};
-			pagination: {
-				page: number;
-				size: number;
-			};
-		}
-	) {
-		return attemptAsync(async () => {
-			const res = await this.getReq(`${PropertyAction.Read}/${type}`, {
-				data: { args },
-				cache: config?.cache,
-				pagination: config.pagination
-			}).then((r) => r.unwrap());
-
-			const parsed = z
-				.object({
-					success: z.boolean(),
-					data: z.array(z.unknown()),
-					message: z.string().optional()
-				})
-				.parse(await res.json());
-
-			const total = Number(res.headers.get('X-Total-Count'));
-
-			if (!parsed.success) {
-				throw new StructError(parsed.message || 'Failed to get paginated data');
-			}
-
-			return {
-				items: parsed.data.map((d) => this.Generator(d as any)),
-				total
-			};
+			return res;
 		});
 	}
 
 	/**
 	 * Gets all data as a paginated array
 	 */
-	all(config: ReadConfig<'pagination'>): PaginationDataArr<T>;
-	/**
-	 * Gets all data as a stream
-	 *
-	 * @param {true} asStream If true, returns a stream
-	 * @returns {StructStream<T>}
-	 */
-	all(config: ReadConfig<'stream'>): StructStream<T>;
+	all(config: ReadConfig<'pagination', T>): PaginationDataArr<T>;
 	/**
 	 * Gets all data as an svelte store
 	 *
 	 * @param {false} asStream If false, returns a svelte store
 	 * @returns {DataArr<T>}
 	 */
-	all(config: ReadConfig<'all'>): DataArr<T>;
+	all(config: ReadConfig<'all', T>): DataArr<T>;
 	/**
 	 * Gets all data as a stream or svelte store
 	 *
 	 * @param {boolean} asStream Returns a stream if true, svelte store if false
 	 * @returns
 	 */
-	all(config: ReadConfig<ReadConfigType>) {
+	all(config: ReadConfig<ReadConfigType, T>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
 			return new PaginationDataArr<T>(
 				this,
 				config.pagination.page,
 				config.pagination.size,
-				async (page, size) => {
-					const res = await this.getPaginated('all', undefined, {
-						cache: config.cache,
+				async (page, limit) => {
+					const res = await remote.all({
+						struct: this.data.name,
+						cached: Array.from(this.cache.keys()),
+						keys: config.keys || [],
 						pagination: {
 							page,
-							size
+							limit
 						}
-					}).unwrap();
+					});
 					total = res.total;
-					return res.items;
+					return res.items.map((d) => this.Generator(d as any));
 				},
 				() => total
 			);
 		}
-
-		const getStream = () => this.getStream('all', undefined, config);
-		if (config.type === 'stream') return getStream();
 
 		if (!config?.force) {
 			const arr = this.writables.get('all');
@@ -1458,10 +1145,15 @@ export class Struct<T extends Blank> {
 			return !data.data.archived;
 		});
 
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (data) => newArr.set([data]));
-		stream.pipe((data) => newArr.add(data));
+		remote
+			.all({
+				struct: this.data.name,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				newArr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return newArr;
 	}
@@ -1469,51 +1161,43 @@ export class Struct<T extends Blank> {
 	/**
 	 * Gets all archived data as a paginated array
 	 */
-	archived(config: ReadConfig<'pagination'>): PaginationDataArr<T>;
-	/**
-	 * Gets all archived data
-	 *
-	 * @param {true} asStream If true, returns a stream
-	 * @returns {StructStream<T>}
-	 */
-	archived(config: ReadConfig<'stream'>): StructStream<T>;
+	archived(config: ReadConfig<'pagination', T>): PaginationDataArr<T>;
 	/**
 	 * Gets all archived data
 	 *
 	 * @param {false} asStream If false, returns a svelte store
 	 * @returns {DataArr<T>}
 	 */
-	archived(config: ReadConfig<'all'>): DataArr<T>;
+	archived(config: ReadConfig<'all', T>): DataArr<T>;
 	/**
 	 * Gets all archived data
 	 *
 	 * @param {boolean} asStream Returns a stream if true, svelte store if false
 	 * @returns
 	 */
-	archived(config: ReadConfig<ReadConfigType>) {
+	archived(config: ReadConfig<ReadConfigType, T>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
 			return new PaginationDataArr<T>(
 				this,
 				config.pagination.page,
 				config.pagination.size,
-				async (page, size) => {
-					const res = await this.getPaginated('archived', undefined, {
-						cache: config.cache,
+				async (page, limit) => {
+					const res = await remote.archived({
+						struct: this.data.name,
+						cached: Array.from(this.cache.keys()),
+						keys: config.keys || [],
 						pagination: {
 							page,
-							size
+							limit
 						}
-					}).unwrap();
+					});
 					total = res.total;
-					return res.items;
+					return res.items.map((d) => this.Generator(d as any));
 				},
 				() => total
 			);
 		}
-
-		const getStream = () => this.getStream('archived', undefined, config);
-		if (config.type === 'stream') return getStream();
 
 		if (!config?.force) {
 			const arr = this.writables.get('archived');
@@ -1537,116 +1221,17 @@ export class Struct<T extends Blank> {
 			true
 		); // includeArchived = true for archived data arrays
 
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (data) => newArr.set([data]));
-		stream.pipe((data) => newArr.add(data));
+		remote
+			.archived({
+				struct: this.data.name,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				newArr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return newArr;
-	}
-
-	/**
-	 * Gets all data with a specific property value as a paginated array
-	 */
-	fromProperty<K extends keyof (T & GlobalCols)>(
-		key: K,
-		value: ColTsType<(T & GlobalCols)[K]>,
-		config: ReadConfig<'pagination'>
-	): PaginationDataArr<T>;
-	/**
-	 * Gets all data with a specific property value
-	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {true} asStream If true, returns a stream
-	 * @returns {StructStream<T>}
-	 */
-	fromProperty<K extends keyof (T & GlobalCols)>(
-		key: K,
-		value: ColTsType<(T & GlobalCols)[K]>,
-		config: ReadConfig<'stream'>
-	): StructStream<T>;
-	/**
-	 * Gets all data with a specific property value
-	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {false} asStream If false, returns a svelte store
-	 * @returns {DataArr<T>}
-	 */
-	fromProperty<K extends keyof (T & GlobalCols)>(
-		key: K,
-		value: ColTsType<(T & GlobalCols)[K]>,
-		config: ReadConfig<'all'>
-	): DataArr<T>;
-	/**
-	 * Gets all data with a specific property value
-	 *
-	 * @param {string} key Property key
-	 * @param {unknown} value Property value
-	 * @param {boolean} asStream Returns a stream if true, svelte store if false
-	 * @returns
-	 */
-	fromProperty<K extends keyof (T & GlobalCols)>(
-		key: K,
-		value: ColTsType<(T & GlobalCols)[K]>,
-		config: ReadConfig<ReadConfigType>
-	) {
-		if (config.type === 'pagination' && 'pagination' in config) {
-			let total = 0;
-			return new PaginationDataArr<T>(
-				this,
-				config.pagination.page,
-				config.pagination.size,
-				async (page, size) => {
-					const res = await this.getPaginated(
-						'property',
-						{ key: String(key), value },
-						{
-							cache: config.cache,
-							pagination: {
-								page,
-								size
-							}
-						}
-					).unwrap();
-					total = res.total;
-					return res.items;
-				},
-				() => total
-			);
-		}
-
-		const getStream = () => this.getStream('property', { key: String(key), value }, config);
-		if (config.type === 'stream') return getStream();
-
-		const cacheKey = `property:${String(key)}:${JSON.stringify(value)}`;
-
-		if (!config?.force) {
-			const arr = this.writables.get(cacheKey);
-			if (arr) return arr;
-		}
-
-		const arr =
-			this.writables.get(cacheKey) ||
-			new DataArr(
-				this,
-				[...this.cache.values()].filter((d) => d.data[key] === value && !d.data.archived)
-			);
-		this.writables.set(cacheKey, arr);
-
-		// Register with centralized event system using a satisfy function
-		this.registerDataArray(cacheKey, arr, (data) => {
-			// Data satisfies if property matches the value and is not archived
-			return (data.data as any)[key] === value && !data.data.archived;
-		});
-
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (data) => arr.set([data]));
-		stream.pipe((data) => arr.add(data));
-
-		return arr;
 	}
 
 	/**
@@ -1662,6 +1247,7 @@ export class Struct<T extends Blank> {
 				expires: Date;
 			};
 			force?: boolean;
+			keys?: (keyof T & keyof typeof globalCols)[];
 		}
 	) {
 		return attemptAsync(async () => {
@@ -1669,23 +1255,12 @@ export class Struct<T extends Blank> {
 				const has = this.cache.get(id);
 				if (has) return has;
 			}
-			const res = await this.getReq(`${PropertyAction.Read}/from-id`, {
-				data: {
-					args: {
-						id
-					}
-				},
-				cache: config?.cache
+			const res = await remote.fromId({
+				struct: this.data.name,
+				id,
+				keys: config?.keys || []
 			});
-			const data = await res.unwrap().json();
-			const parsed = z
-				.object({
-					success: z.boolean(),
-					data: z.array(z.unknown()),
-					message: z.string().optional()
-				})
-				.parse(data);
-			return this.Generator(parsed.data[0] as SafePartialStructable<T & GlobalCols>);
+			return this.Generator(res as any);
 		});
 	}
 
@@ -1694,19 +1269,13 @@ export class Struct<T extends Blank> {
 	 * @param ids
 	 * @param config
 	 */
-	fromIds(ids: string[], config: ReadConfig<'pagination'>): PaginationDataArr<T>;
-	/**
-	 * Gets data from specific ids as a stream
-	 * @param ids
-	 * @param config
-	 */
-	fromIds(ids: string[], config: ReadConfig<'stream'>): StructStream<T>;
+	fromIds(ids: string[], config: ReadConfig<'pagination', T>): PaginationDataArr<T>;
 	/**
 	 * Gets data from specific ids as a svelte store
 	 * @param ids
 	 * @param config
 	 */
-	fromIds(ids: string[], config: ReadConfig<'all'>): DataArr<T>;
+	fromIds(ids: string[], config: ReadConfig<'all', T>): DataArr<T>;
 	/**
 	 * Gets data from specific ids as a stream or svelte store
 	 * @param ids
@@ -1715,31 +1284,27 @@ export class Struct<T extends Blank> {
 	 */
 	fromIds(
 		ids: string[],
-		config: ReadConfig<ReadConfigType>
+		config: ReadConfig<ReadConfigType, T>
 	): PaginationDataArr<T> | StructStream<T> | DataArr<T> {
-		const getStream = () =>
-			this.getStream(
-				'from-ids',
-				{
-					ids
-				},
-				config
-			);
-		if (config.type === 'stream') return getStream();
-
 		if (config.type === 'pagination' && 'pagination' in config) {
-			const stream = getStream().await();
 			let total = 0;
 			return new PaginationDataArr<T>(
 				this,
 				config.pagination.page,
 				config.pagination.size,
-				async (page, size) => {
-					const all = await stream;
-					if (all.isErr()) return [];
-					const items = all.value.slice(page * size, (page + 1) * size);
-					total = all.value.length;
-					return items;
+				async (page, limit) => {
+					const res = await remote.fromIds({
+						struct: this.data.name,
+						ids,
+						cached: Array.from(this.cache.keys()),
+						keys: config.keys || [],
+						pagination: {
+							page,
+							limit
+						}
+					});
+					total = res.total;
+					return res.items.map((d) => this.Generator(d as any));
 				},
 				() => total
 			);
@@ -1767,43 +1332,49 @@ export class Struct<T extends Blank> {
 			return ids.includes(data.data.id) && !data.data.archived;
 		});
 
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (data) => arr.set([data]));
-		stream.pipe((data) => arr.add(data));
+		remote
+			.fromIds({
+				struct: this.data.name,
+				ids,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				arr.set(res.items.map((d) => this.Generator(d as any)));
+			});
+
 		return arr;
 	}
 
 	get(
 		data: PartialStructable<T & GlobalCols>,
-		config: ReadConfig<'pagination'>
+		config: ReadConfig<'pagination', T>
 	): PaginationDataArr<T>;
-	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'stream'>): StructStream<T>;
-	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'all'>): DataArr<T>;
-	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<ReadConfigType>) {
+	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'all', T>): DataArr<T>;
+	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<ReadConfigType, T>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
 			return new PaginationDataArr<T>(
 				this,
 				config.pagination.page,
 				config.pagination.size,
-				async (page, size) => {
-					const res = await this.getPaginated('get', data, {
-						cache: config.cache,
+				async (page, limit) => {
+					const res = await remote.get({
+						struct: this.data.name,
+						data,
+						cached: Array.from(this.cache.keys()),
+						keys: config.keys || [],
 						pagination: {
 							page,
-							size
+							limit
 						}
-					}).unwrap();
+					});
 					total = res.total;
-					return res.items;
+					return res.items.map((d) => this.Generator(d as any));
 				},
 				() => total
 			);
 		}
-
-		const getStream = () => this.getStream('get', data, config);
-		if (config.type === 'stream') return getStream();
 
 		const cacheKey = `get:${JSON.stringify(data)}`;
 
@@ -1833,10 +1404,16 @@ export class Struct<T extends Blank> {
 			return !d.data.archived;
 		});
 
-		// Load initial data from stream
-		const stream = getStream();
-		stream.once('data', (d) => arr.set([d]));
-		stream.pipe((d) => arr.add(d));
+		remote
+			.get({
+				struct: this.data.name,
+				data,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				arr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return arr;
 	}
@@ -1851,191 +1428,6 @@ export class Struct<T extends Blank> {
 		if (this.data.log) {
 			console.log(`[${this.data.name}]`, ...args);
 		}
-	}
-
-	/**
-	 * Sends a custom query to the server and returns the results as a stream.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {true} config.asStream Must be true for stream return type
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {StructStream<T>} Stream of query results
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: true;
-			cache?: {
-				expires: Date;
-			};
-		}
-	): StructStream<T>;
-	/**
-	 * Sends a custom query to the server and returns the results as a svelte store.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {false} config.asStream Must be false for DataArr return type
-	 * @param {(data: StructData<T>) => boolean} config.satisfies Function to determine if data belongs in this collection
-	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {DataArr<T>} Reactive data array of query results
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: false;
-			satisfies: (data: StructData<T>) => boolean;
-			includeArchive?: boolean; // default is falsy
-			cache?: {
-				expires: Date;
-			};
-		}
-	): DataArr<T>;
-	/**
-	 * Sends a custom query to the server and returns the results as either a stream or svelte store.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
-	 * @param {(data: StructData<T>) => boolean} [config.satisfies] Function to determine if data belongs in collection (required when asStream is false)
-	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: boolean;
-			satisfies?: (data: StructData<T>) => boolean;
-			includeArchive?: boolean;
-			cache?: {
-				expires: Date;
-			};
-		}
-	) {
-		const get = () => {
-			return this.getStream(
-				'custom',
-				{
-					query,
-					data
-				},
-				{
-					cache: config?.cache
-				}
-			);
-		};
-		if (config.asStream) return get();
-
-		const cacheKey = `custom:${query}:${JSON.stringify(data)}`;
-		const exists = this.writables.get(cacheKey);
-		if (exists) return exists;
-
-		// Filter initial cache data based on satisfy function and archive setting
-		const initialData = [...this.cache.values()].filter((d) => {
-			const satisfies = config.satisfies?.(d) || false;
-			const includeArchived = config.includeArchive || false;
-			return satisfies && (!d.data.archived || includeArchived);
-		});
-
-		const arr = new DataArr(this, initialData);
-		this.writables.set(cacheKey, arr);
-
-		// Register with centralized event system using the provided satisfy function
-		this.registerDataArray(
-			cacheKey,
-			arr,
-			(data) => {
-				if (!config.satisfies) return false;
-				const satisfies = config.satisfies(data);
-				const includeArchived = config.includeArchive || false;
-				return satisfies && (!data.data.archived || includeArchived);
-			},
-			config.includeArchive
-		);
-
-		// Load initial data from stream
-		const res = get();
-		res.once('data', (d) => arr.set([d]));
-		res.pipe((d) => arr.add(d));
-
-		return arr;
-	}
-
-	/**
-	 * Sends custom data to the server and returns the result.
-	 * This should be used for exclusively data retrieval.
-	 *
-	 * @template T
-	 * @param {string} name
-	 * @param {unknown} data
-	 * @param {z.ZodType<T>} returnType
-	 * @returns {*}
-	 */
-	send<T>(
-		name: string,
-		data: unknown,
-		returnType: z.ZodType<T>,
-		config?: {
-			cache?: {
-				expires: Date;
-			};
-		}
-	) {
-		return attemptAsync<T>(async () => {
-			const res = await this.getReq(`custom/${name}`, {
-				data,
-				cache: config?.cache
-			}).then((r) => r.unwrap().json());
-			const parsed = z
-				.object({
-					success: z.boolean(),
-					data: z.unknown(),
-					message: z.string().optional()
-				})
-				.parse(res);
-			if (!parsed.success) {
-				throw new DataError(parsed.message || 'Failed to send data');
-			}
-			if (!parsed.data) {
-				throw new DataError('No data returned');
-			}
-			return returnType.parse(parsed.data);
-		});
-	}
-
-	// custom functions
-	/**
-	 * Calls a custom event on the server and returns the result.
-	 * This should exclusively be used for triggering server-side events.
-	 *
-	 * @param {string} event
-	 * @param {unknown} data
-	 * @returns {*}
-	 */
-	call(event: string, data: unknown) {
-		return attemptAsync(async () => {
-			const res = await (await this.postReq(`call/${event}`, data)).unwrap();
-
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional(),
-					data: z.unknown().optional()
-				})
-				.parse(res);
-		});
 	}
 
 	/**
@@ -2078,6 +1470,8 @@ export class Struct<T extends Blank> {
 
 	clear() {
 		this.log('Clearing all data from struct (admin only)');
-		return this.postReq('clear', {});
+		return remote.clear({
+			struct: this.data.name
+		});
 	}
 }

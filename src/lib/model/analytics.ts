@@ -1,7 +1,8 @@
 import { Struct } from '$lib/services/struct/index';
 import { browser } from '$app/environment';
 import { sse } from '$lib/services/sse';
-import { z } from 'zod';
+import { attemptAsync } from 'ts-utils';
+import * as remote from '$lib/remotes/analytics.remote';
 
 export namespace Analytics {
 	export const Links = new Struct({
@@ -18,13 +19,15 @@ export namespace Analytics {
 
 	export type LinkData = typeof Links.sample;
 
-	export const myLinks = (config: { offset: number; limit: number }) => {
-		return Links.query('my-links', config, {
-			asStream: true
-		}).await();
+	export const myLinks = (config: { page: number; limit: number }) => {
+		return attemptAsync(async () => {
+			return remote.myLinks(config);
+		});
 	};
 
 	export const count = () => {
-		return Links.send('count', {}, z.number());
+		return attemptAsync(async () => {
+			return remote.count();
+		});
 	};
 }

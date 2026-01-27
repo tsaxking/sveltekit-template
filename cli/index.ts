@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DB } from '../src/lib/server/db/index';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { openStructs } from './struct';
 import { Folder } from './utils';
 import accounts from './accounts';

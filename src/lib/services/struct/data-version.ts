@@ -3,13 +3,11 @@ import {
 	Struct,
 	type Structable,
 	type PartialStructable,
-	type GlobalCols,
-	type StatusMessage
+	type GlobalCols
 } from './index';
 import { attemptAsync } from 'ts-utils/check';
-import { DataAction } from 'drizzle-struct/types';
-import { z } from 'zod';
 import { WritableBase } from '$lib/utils/writables';
+import * as remote from '$lib/remotes/struct.remote';
 
 /**
  * Version history of a data, requiring global columns and a version history id and created date
@@ -132,20 +130,12 @@ export class StructDataVersion<T extends Blank> extends WritableBase<PartialStru
 	 * @returns {*}
 	 */
 	delete() {
-		return attemptAsync<StatusMessage>(async () => {
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional()
-				})
-				.parse(
-					await this.struct
-						.postReq(DataAction.DeleteVersion, {
-							id: this.data.id,
-							vhId: this.data.vhId
-						})
-						.then((r) => r.unwrap())
-				);
+		return attemptAsync(async () => {
+			if (!this.data.vhId) throw new Error('No vhId available to delete version');
+			await remote.removeVersion({
+				struct: this.struct.data.name,
+				vhId: String(this.data.vhId)
+			});
 		});
 	}
 
@@ -155,20 +145,12 @@ export class StructDataVersion<T extends Blank> extends WritableBase<PartialStru
 	 * @returns {*}
 	 */
 	restore() {
-		return attemptAsync<StatusMessage>(async () => {
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional()
-				})
-				.parse(
-					await this.struct
-						.postReq(DataAction.RestoreVersion, {
-							id: this.data.id,
-							vhId: this.data.vhId
-						})
-						.then((r) => r.unwrap())
-				);
+		return attemptAsync(async () => {
+			if (!this.data.vhId) throw new Error('No vhId available to restore version');
+			await remote.restoreVersion({
+				struct: this.struct.data.name,
+				vhId: String(this.data.vhId)
+			});
 		});
 	}
 }

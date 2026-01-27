@@ -1,5 +1,5 @@
 import { attemptAsync } from 'ts-utils/check';
-import { type DataAction, type PropertyAction } from 'drizzle-struct/types';
+import { type DataAction, type PropertyAction } from '$lib/types/struct';
 import { z } from 'zod';
 import { Table } from '../db/table';
 import { Batch } from 'ts-utils/batch';

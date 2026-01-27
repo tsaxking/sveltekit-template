@@ -1,22 +1,23 @@
-import { browser } from "$app/environment";
-import { writable } from "svelte/store";
+import { browser } from '$app/environment';
+import { writable } from 'svelte/store';
 
 export const theme = writable<'light' | 'dark'>('light');
 
 export const setTheme = (documentTheme: 'light' | 'dark') => {
-    theme.set(documentTheme);
-    if (browser) {
-        document.body.setAttribute('data-bs-theme', documentTheme);
-        localStorage.setItem('theme', documentTheme);
-    }
-}
+	theme.set(documentTheme);
+	if (browser) {
+		document.body.setAttribute('data-bs-theme', documentTheme);
+		localStorage.setItem('theme', documentTheme);
+	}
+};
 
 if (browser) {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-        setTheme(savedTheme);
-    } else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(prefersDark ? 'dark' : 'light');
-    }
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme === 'light' || savedTheme === 'dark') {
+		setTheme(savedTheme);
+	} else {
+		const prefersDark =
+			window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		setTheme(prefersDark ? 'dark' : 'light');
+	}
 }

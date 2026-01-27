@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { openStructs } from '../cli/struct';
 import { DB } from '../src/lib/server/db';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import AdmZip from 'adm-zip';
 import { prompt } from '../cli/utils';
 import { toSnakeCase } from 'ts-utils/text';

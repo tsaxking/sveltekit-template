@@ -1,4 +1,4 @@
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { Account } from './structs/account';
 import terminal from './utils/terminal';
 import testSchema from '../../../scripts/test-schema';
@@ -17,7 +17,7 @@ export const postBuild = async () => {
 	const ADMIN_FIRST_NAME = config.admin.first_name;
 	const ADMIN_LAST_NAME = config.admin.last_name;
 
-	const admin = await Account.Account.fromProperty('username', ADMIN_USERNAME, { type: 'single' });
+	const admin = await Account.Account.get({ username: ADMIN_USERNAME }, { type: 'single' });
 	if (admin.isErr()) {
 		terminal.error(`Failed to find admin account: ${admin.error}`);
 		return;

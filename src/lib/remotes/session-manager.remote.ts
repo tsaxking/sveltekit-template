@@ -5,7 +5,7 @@ import z from 'zod';
 import { sse } from '$lib/server/services/sse';
 import { ConnectionStateSchema } from '$lib/types/sse';
 import { config } from '$lib/server/utils/env';
-import { isAdmin } from './utils.remote';
+import { isAdmin } from './index.remote';
 
 export const isOwner = query(z.string(), (data) => {
 	const manager = SessionManager.managers.get(data);

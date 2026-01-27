@@ -3,11 +3,11 @@ import type { RequestEvent as ConnectRequestEvent } from '../../../routes/api/ss
 import { Session } from '../structs/session';
 import { encode } from 'ts-utils/text';
 import { EventEmitter } from 'ts-utils/event-emitter';
-import type { Notification } from '$lib/types/notification';
+import type { Notification } from '../../types/notification';
 import { toByteString } from 'ts-utils/text';
 import { getManifestoInstance } from '../utils/manifesto';
 import { config } from '../utils/env';
-import { type ConnectionState } from '$lib/types/sse';
+import { type ConnectionState } from '../../types/sse';
 
 /** Maximum number of cached messages per connection */
 const CACHE_LIMIT = 50;

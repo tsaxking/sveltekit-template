@@ -315,63 +315,63 @@
 						.map(([key, _value]) => ({
 							field: ('data.' + key) as any,
 							headerName: capitalize(fromCamelCase(key)),
-							valueGetter: ['created', 'updated'].includes(key)
-								? (params: ValueGetterParams<StructData<Blank>>) =>
-										dateTime(new Date(String(params.data?.data[key])))
-								: key === 'attributes'
-									? (params: ValueGetterParams<StructData<Blank>>) =>
-											(JSON.parse(params.data?.data.attributes || '[]') as string[]).join(', ')
-									: undefined,
-							editable: (params: EditableCallbackParams<StructData<Blank>>) => {
-								const isStatic = ['id', 'created', 'updated', 'canUpdate'].includes(key);
-								if (isStatic) return false;
-								if (key === 'canUpdate') return true;
-								if (!params.data?.data.canUpdate) return false;
-								return true;
-							},
-							valueSetter: (params: ValueSetterParams<StructData<Blank>>) => {
-								const isStatic = ['id', 'created', 'updated'].includes(key);
-								if (isStatic) return false;
+							// valueGetter: ['created', 'updated'].includes(key)
+							// 	? (params: ValueGetterParams<StructData<Blank>>) =>
+							// 			dateTime(new Date(String(params.data?.data[key])))
+							// 	: key === 'attributes'
+							// 		? (params: ValueGetterParams<StructData<Blank>>) =>
+							// 				(JSON.parse(params.data?.data.attributes || '[]') as string[]).join(', ')
+							// 		: undefined,
+							// editable: (params: EditableCallbackParams<StructData<Blank>>) => {
+							// 	const isStatic = ['id', 'created', 'updated', 'canUpdate'].includes(key);
+							// 	if (isStatic) return false;
+							// 	if (key === 'canUpdate') return true;
+							// 	if (!params.data?.data.canUpdate) return false;
+							// 	return true;
+							// },
+							// valueSetter: (params: ValueSetterParams<StructData<Blank>>) => {
+							// 	const isStatic = ['id', 'created', 'updated'].includes(key);
+							// 	if (isStatic) return false;
 
-								if (key === 'canUpdate') {
-									// Cannot update static fields
-									return false;
-								}
+							// 	if (key === 'canUpdate') {
+							// 		// Cannot update static fields
+							// 		return false;
+							// 	}
 
-								cs.execute({
-									label: 'Update ' + params.data.data.id + ' ' + key,
-									do: () => {
-										if (key === 'attributes') {
-											params.data.setAttributes(
-												String(params.newValue)
-													.split(',')
-													.map((a) => a.trim())
-											);
-											return;
-										}
-										params.data.update((d) => ({
-											...d,
-											[key]: params.newValue
-										}));
-									},
-									undo: () => {
-										if (key === 'attributes') {
-											params.data.setAttributes(
-												String(params.oldValue)
-													.split(',')
-													.map((a) => a.trim())
-											);
-											return;
-										}
-										params.data.update((d) => ({
-											...d,
-											[key]: params.oldValue
-										}));
-									}
-								});
+							// 	cs.execute({
+							// 		label: 'Update ' + params.data.data.id + ' ' + key,
+							// 		do: () => {
+							// 			if (key === 'attributes') {
+							// 				params.data.setAttributes(
+							// 					String(params.newValue)
+							// 						.split(',')
+							// 						.map((a) => a.trim())
+							// 				);
+							// 				return;
+							// 			}
+							// 			params.data.update((d) => ({
+							// 				...d,
+							// 				[key]: params.newValue
+							// 			}));
+							// 		},
+							// 		undo: () => {
+							// 			if (key === 'attributes') {
+							// 				params.data.setAttributes(
+							// 					String(params.oldValue)
+							// 						.split(',')
+							// 						.map((a) => a.trim())
+							// 				);
+							// 				return;
+							// 			}
+							// 			params.data.update((d) => ({
+							// 				...d,
+							// 				[key]: params.oldValue
+							// 			}));
+							// 		}
+							// 	});
 
-								return true;
-							},
+							// 	return true;
+							// },
 							// tooltipValueGetter: (params: any) => {
 							//     if (key === 'attributes') {
 							//         return JSON.stringify(JSON.parse(params.data.data.attributes), null, 2);

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { select } from '../cli/utils';
 import { openStructs } from '../cli/struct';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import AdmZip from 'adm-zip';
 import backup from './backup';
 

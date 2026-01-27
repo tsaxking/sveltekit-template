@@ -2,9 +2,9 @@ import { Account } from './account';
 import { Struct, StructData, DataArr } from '$lib/services/struct/index';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
-import { attemptAsync } from 'ts-utils/check';
-import { z } from 'zod';
+import { attemptAsync, attempt } from 'ts-utils/check';
 import { Form } from '$lib/utils/form';
+import * as remote from '$lib/remotes/permissions.remote';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -87,28 +87,27 @@ export namespace Permissions {
 	export type AccountRulesetDataArr = DataArr<typeof AccountRuleset.data.structure>;
 
 	export const getRolePermissions = (role: RoleData) => {
-		return RoleRuleset.query(
-			'from-role',
-			{
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			return remote.permissionsFromRole({
 				role: role.data.id
-			},
-			{
-				asStream: false,
-				satisfies: (data) => data.data.role === role.data.id
-			}
-		);
+			});
+		});
 	};
 	export const getAvailableRolePermissions = (role: RoleData) => {
-		return RoleRuleset.query(
-			'available-permissions',
-			{
-				role: role.data.id
-			},
-			{
-				asStream: false,
-				satisfies: (data) => data.data.role === role.data.parent
-			}
-		);
+		return attempt(() => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			const w = RoleRuleset.arr();
+			remote
+				.availablePermissions({
+					role: role.data.id
+				})
+				.then((res) => {
+					w.set(res.map((d) => RoleRuleset.Generator(d)));
+				})
+				.catch(console.error);
+			return w;
+		});
 	};
 
 	export const getEntitlements = () => {
@@ -120,25 +119,36 @@ export namespace Permissions {
 	export const getEntitlementGroups = () => {
 		return attemptAsync(async () => {
 			const groups = new Set<string>();
-			await Entitlement.all({
-				type: 'stream'
-			}).pipe((e) => {
+			const entitlements = getEntitlements();
+			const fn = (e: EntitlementData) => {
 				if (e.data.group) groups.add(e.data.group);
-			});
+			};
+			if (entitlements.length) entitlements.each(fn);
+			else {
+				const res = await entitlements.await().unwrap();
+				for (const e of res) fn(e);
+			}
 			return Array.from(groups);
 		});
 	};
 
 	export const grantRuleset = (role: RoleData, ruleset: RoleRulesetData) => {
-		return RoleRuleset.call('grant-permission', {
-			role: role.data.id,
-			ruleset: ruleset.data.id
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.grantRolePermission({
+				role: role.data.id,
+				ruleset: ruleset.data.id
+			});
 		});
 	};
 
 	export const revokeRolePermission = (ruleset: RoleRulesetData) => {
-		return RoleRuleset.call('revoke-permission', {
-			ruleset: ruleset.data.id
+		return attemptAsync(async () => {
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.revokeRolePermission({
+				ruleset: ruleset.data.id
+			});
 		});
 	};
 
@@ -148,16 +158,24 @@ export namespace Permissions {
 		targetAttribute: string,
 		featureScopes?: string[]
 	) => {
-		return AccountRuleset.call('grant-permission', {
-			account: account.data.id,
-			entitlement: entitlement.data.name,
-			targetAttribute,
-			featureScopes: featureScopes || []
+		return attemptAsync(async () => {
+			if (!account.data.id) throw new Error('Account must have an ID');
+			if (!entitlement.data.id) throw new Error('Entitlement must have an ID');
+			return remote.grantAccountPermission({
+				account: account.data.id,
+				entitlement: entitlement.data.id,
+				targetAttribute,
+				featureScopes: featureScopes ? featureScopes : []
+			});
 		});
 	};
+
 	export const revokeAccountPermission = (ruleset: AccountRulesetData) => {
-		return AccountRuleset.call('revoke-permission', {
-			ruleset: ruleset.data.id
+		return attemptAsync(async () => {
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.revokeAccountPermission({
+				ruleset: ruleset.data.id
+			});
 		});
 	};
 
@@ -168,34 +186,31 @@ export namespace Permissions {
 			limit: number;
 		}
 	) => {
-		return attemptAsync(async () => {
-			const res = await Role.send(
-				'search',
-				{
-					searchKey,
-					offset: config.offset,
-					limit: config.limit
-				},
-				z.array(
-					Role.getZodSchema({
-						optionals: Object.keys(Role.data.structure)
-					})
-				)
-			).unwrap();
-
-			return res.map((r) => Role.Generator(r));
-		});
+		const w = Role.arr();
+		remote
+			.searchRoles({
+				searchKey,
+				limit: config.limit,
+				page: Math.floor(config.offset / config.limit)
+			})
+			.then((res) => {
+				w.set(res.map((d) => Role.Generator(d)));
+			});
+		return w;
 	};
 
 	export const createRole = (
 		parent: RoleData,
 		config: { name: string; description: string; color: string }
 	) => {
-		return Role.call('create-role', {
-			parent: parent.data.id,
-			name: config.name,
-			description: config.description,
-			color: config.color
+		return attemptAsync(async () => {
+			if (!parent.data.id) throw new Error('Parent role must have an ID');
+			return remote.createRole({
+				name: config.name,
+				description: config.description,
+				color: config.color,
+				parent: parent.data.id
+			});
 		});
 	};
 
@@ -233,16 +248,24 @@ export namespace Permissions {
 	};
 
 	export const addToRole = (role: RoleData, account: Account.AccountData) => {
-		return RoleAccount.call('add-to-role', {
-			role: role.data.id,
-			account: account.data.id
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!account.data.id) throw new Error('Account must have an ID');
+			return remote.addToRole({
+				role: role.data.id,
+				account: account.data.id
+			});
 		});
 	};
 
 	export const removeFromRole = (role: RoleData, account: Account.AccountData) => {
-		return RoleAccount.call('remove-from-role', {
-			role: role.data.id,
-			account: account.data.id
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!account.data.id) throw new Error('Account must have an ID');
+			return remote.removeFromRole({
+				role: role.data.id,
+				account: account.data.id
+			});
 		});
 	};
 }

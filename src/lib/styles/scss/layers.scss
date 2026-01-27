@@ -1,14 +1,14 @@
 :root {
 	@for $i from 0 through 5 {
-		[data-bs-theme=dark] {
+		[data-bs-theme='dark'] {
 			--layer-#{$i}: #{nth((#18181b, #1f1f23, #25252a, #2d2d33, #373740, #43434d), $i + 1)};
 
 			--text-layer-#{$i}: #{nth((#ffffff, #e4e4e7, #cfcfd4, #b8b8bf, #a1a1aa, #8b8b96), $i + 1)};
 		}
 
-		[data-bs-theme=light] {
+		[data-bs-theme='light'] {
 			--layer-#{$i}: #{nth((#ffffff, #f3f4f6, #e5e7eb, #d1d5db, #9ca3af, #6b7280), $i + 1)};
-		
+
 			--text-layer-#{$i}: #{nth((#000000, #1f2937, #374151, #4b5563, #6b7280, #9ca3af), $i + 1)};
 		}
 	}
@@ -19,7 +19,9 @@
 		background-color: var(--layer-#{$i});
 		color: var(--text-layer-#{$i});
 
-		transition: background-color 0.3s ease, color 0.3s ease;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease;
 
 		@if $i > 0 {
 			border-radius: 3px;

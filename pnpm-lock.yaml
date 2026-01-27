@@ -150,8 +150,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#v1.0.25
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
+        specifier: github:tsaxking/drizzle-struct#2026-01-26-TK-UpdateTypes
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -352,8 +352,8 @@ importers:
         specifier: ^9.1.2
         version: 9.1.2(eslint@9.35.0)
       eslint-plugin-svelte:
-        specifier: ^2.46.1
-        version: 2.46.1(eslint@9.35.0)(svelte@5.46.4)(ts-node@10.9.2(@types/node@22.18.3)(typescript@5.9.2))
+        specifier: ^3.14.0
+        version: 3.14.0(eslint@9.35.0)(svelte@5.46.4)(ts-node@10.9.2(@types/node@22.18.3)(typescript@5.9.2))
       globals:
         specifier: ^15.15.0
         version: 15.15.0
@@ -376,8 +376,8 @@ importers:
         specifier: ^5.46.4
         version: 5.46.4
       svelte-check:
-        specifier: ^4.3.0
-        version: 4.3.1(picomatch@4.0.3)(svelte@5.46.4)(typescript@5.9.2)
+        specifier: ^4.3.5
+        version: 4.3.5(picomatch@4.0.3)(svelte@5.46.4)(typescript@5.9.2)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.18.3)(typescript@5.9.2)
@@ -2892,8 +2892,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -3016,6 +3016,16 @@ packages:
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0 || ^9.0.0-0
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+
+  eslint-plugin-svelte@3.14.0:
+    resolution: {integrity: sha512-Isw0GvaMm0yHxAj71edAdGFh28ufYs+6rk2KlbbZphnqZAzrH3Se3t12IFh2H9+1F/jlDhBBL4oiOJmLqmYX0g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.1 || ^9.0.0
       svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
       svelte:
@@ -3361,6 +3371,10 @@ packages:
     resolution: {integrity: sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==}
     engines: {node: '>=18'}
 
+  globals@16.5.0:
+    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
+    engines: {node: '>=18'}
+
   google-auth-library@9.15.1:
     resolution: {integrity: sha512-Jb6Z0+nvECVz+2lzSMt9u98UsoakXxA2HGHMCxh+so3n90XgYWkq5dur19JAJV7ONiJY22yBTyJB1TSkvPq9Ng==}
     engines: {node: '>=14'}
@@ -3679,6 +3693,9 @@ packages:
 
   known-css-properties@0.35.0:
     resolution: {integrity: sha512-a/RAk2BfKk+WFGhhOCAYqSiFLc34k8Mt/6NWRI4joER0EYUzXIcFivjjnoD3+XU1DggLn/tZc3DOAgke7l8a4A==}
+
+  known-css-properties@0.37.0:
+    resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -4225,6 +4242,12 @@ packages:
     peerDependencies:
       postcss: ^8.3.3
 
+  postcss-safe-parser@7.0.1:
+    resolution: {integrity: sha512-0AioNCJZ2DPYz5ABT6bddIqlhgwhpHZ/l65YAYo0BCIn0xiDpsnTHz0gnoTGk0OXZW0JRs+cDwL8u/teRdz+8A==}
+    engines: {node: '>=18.0'}
+    peerDependencies:
+      postcss: ^8.4.31
+
   postcss-scss@4.0.9:
     resolution: {integrity: sha512-AjKOeiwAitL/MXxQW2DliT28EKukvvbEWx3LBmJIRN8KfBGZbRTxNYW0kSqi1COiTZ57nZ9NW06S6ux//N1c9A==}
     engines: {node: '>=12.0'}
@@ -4233,6 +4256,10 @@ packages:
 
   postcss-selector-parser@6.1.2:
     resolution: {integrity: sha512-Q8qQfPiZ+THO/3ZrOrO0cJJKfpYCagtMUkXbnEfmgUjwXg6z/WBeOyS9APBBPCTSiDV+s4SwQGu8yFsiMRIudg==}
+    engines: {node: '>=4'}
+
+  postcss-selector-parser@7.1.1:
+    resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
     engines: {node: '>=4'}
 
   postcss@8.5.6:
@@ -4777,8 +4804,8 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
-  svelte-check@4.3.1:
-    resolution: {integrity: sha512-lkh8gff5gpHLjxIV+IaApMxQhTGnir2pNUAqcNgeKkvK5bT/30Ey/nzBxNLDlkztCH4dP7PixkMt9SWEKFPBWg==}
+  svelte-check@4.3.5:
+    resolution: {integrity: sha512-e4VWZETyXaKGhpkxOXP+B/d0Fp/zKViZoJmneZWe/05Y2aqSKj3YN2nLfYPJBQ87WEiY4BQCQ9hWGu9mPT1a1Q==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
@@ -4788,6 +4815,15 @@ packages:
   svelte-eslint-parser@0.43.0:
     resolution: {integrity: sha512-GpU52uPKKcVnh8tKN5P4UZpJ/fUDndmq7wfsvoVXsyP+aY0anol7Yqo01fyrlaWGMFfm4av5DyrjlaXdLRJvGA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+
+  svelte-eslint-parser@1.4.1:
+    resolution: {integrity: sha512-1eqkfQ93goAhjAXxZiu1SaKI9+0/sxp4JIWQwUpsz7ybehRE5L8dNuz7Iry7K22R47p5/+s9EM+38nHV2OlgXA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0, pnpm: 10.24.0}
     peerDependencies:
       svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
@@ -8174,7 +8210,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/d108e431fcc3fbaf9c2ef94a846ff965a7ada03f(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.35.0)
       '@msgpack/msgpack': 3.0.0-beta3
@@ -8387,6 +8423,24 @@ snapshots:
       postcss-selector-parser: 6.1.2
       semver: 7.7.2
       svelte-eslint-parser: 0.43.0(svelte@5.46.4)
+    optionalDependencies:
+      svelte: 5.46.4
+    transitivePeerDependencies:
+      - ts-node
+
+  eslint-plugin-svelte@3.14.0(eslint@9.35.0)(svelte@5.46.4)(ts-node@10.9.2(@types/node@22.18.3)(typescript@5.9.2)):
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.0(eslint@9.35.0)
+      '@jridgewell/sourcemap-codec': 1.5.5
+      eslint: 9.35.0
+      esutils: 2.0.3
+      globals: 16.5.0
+      known-css-properties: 0.37.0
+      postcss: 8.5.6
+      postcss-load-config: 3.1.4(postcss@8.5.6)(ts-node@10.9.2(@types/node@22.18.3)(typescript@5.9.2))
+      postcss-safe-parser: 7.0.1(postcss@8.5.6)
+      semver: 7.7.2
+      svelte-eslint-parser: 1.4.1(svelte@5.46.4)
     optionalDependencies:
       svelte: 5.46.4
     transitivePeerDependencies:
@@ -8879,6 +8933,8 @@ snapshots:
 
   globals@15.15.0: {}
 
+  globals@16.5.0: {}
+
   google-auth-library@9.15.1:
     dependencies:
       base64-js: 1.5.1
@@ -9257,6 +9313,8 @@ snapshots:
   kleur@4.1.5: {}
 
   known-css-properties@0.35.0: {}
+
+  known-css-properties@0.37.0: {}
 
   levn@0.4.1:
     dependencies:
@@ -9932,11 +9990,20 @@ snapshots:
     dependencies:
       postcss: 8.5.6
 
+  postcss-safe-parser@7.0.1(postcss@8.5.6):
+    dependencies:
+      postcss: 8.5.6
+
   postcss-scss@4.0.9(postcss@8.5.6):
     dependencies:
       postcss: 8.5.6
 
   postcss-selector-parser@6.1.2:
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+
+  postcss-selector-parser@7.1.1:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
@@ -10535,7 +10602,7 @@ snapshots:
       svelte: 5.46.4
       zimmerframe: 1.1.2
 
-  svelte-check@4.3.1(picomatch@4.0.3)(svelte@5.46.4)(typescript@5.9.2):
+  svelte-check@4.3.5(picomatch@4.0.3)(svelte@5.46.4)(typescript@5.9.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       chokidar: 4.0.3
@@ -10554,6 +10621,17 @@ snapshots:
       espree: 9.6.1
       postcss: 8.5.6
       postcss-scss: 4.0.9(postcss@8.5.6)
+    optionalDependencies:
+      svelte: 5.46.4
+
+  svelte-eslint-parser@1.4.1(svelte@5.46.4):
+    dependencies:
+      eslint-scope: 8.4.0
+      eslint-visitor-keys: 4.2.1
+      espree: 10.4.0
+      postcss: 8.5.6
+      postcss-scss: 4.0.9(postcss@8.5.6)
+      postcss-selector-parser: 7.1.1
     optionalDependencies:
       svelte: 5.46.4
 
