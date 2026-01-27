@@ -115,7 +115,7 @@ export namespace Permissions {
 			const entitlements = getEntitlements();
 			const fn = (e: EntitlementData) => {
 				if (e.data.group) groups.add(e.data.group);
-			}
+			};
 			if (entitlements.length) entitlements.each(fn);
 			else {
 				const res = await entitlements.await().unwrap();

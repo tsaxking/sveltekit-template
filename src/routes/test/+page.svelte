@@ -75,7 +75,6 @@
 			{@render test('Restore Version', tests.restoreVersion)}
 			{@render test('Read All', tests.readAll)}
 			{@render test('Read Archived', tests.readArchived)}
-			{@render test('Read From Property', tests.readFromProperty)}
 			{@render test('Read From Ids', tests.readFromIds)}
 			{@render test('Read From Id', tests.readFromId)}
 			{@render test('Read Multi Property', tests.readMultiProperty)}

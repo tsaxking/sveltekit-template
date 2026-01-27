@@ -101,11 +101,12 @@ export namespace Account {
 	export const Settings = new Struct({
 		name: 'account_settings',
 		structure: {
-			accountId: text('account_id').notNull(),
+			accountId: text('account_id').notNull()
 		}
 	});
 
-	structRegistry.register(Settings)
+	structRegistry
+		.register(Settings)
 		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
 		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
 		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId)

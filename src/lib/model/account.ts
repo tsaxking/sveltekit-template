@@ -101,7 +101,7 @@ export namespace Account {
 	export const usernameExists = (username: string) => {
 		return attemptAsync(async () => {
 			return remote.usernameExists({
-				username,
+				username
 			});
 		});
 	};

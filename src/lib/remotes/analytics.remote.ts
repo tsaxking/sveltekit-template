@@ -34,11 +34,14 @@ export const count = query(async () => {
 		return Analytics.getCount(account).unwrap();
 	} else {
 		const session = await getSession();
-		const links = await Analytics.Links.get({
-			session: session.id
-		}, {
-			type: 'all'
-		}).unwrap();
+		const links = await Analytics.Links.get(
+			{
+				session: session.id
+			},
+			{
+				type: 'all'
+			}
+		).unwrap();
 		return links.filter((v, i, a) => a.findIndex((v2) => v2.data.url === v.data.url) === i).length;
 	}
 });

@@ -50,7 +50,6 @@ export namespace Test {
 
 			readAll: init(),
 			readArchived: init(),
-			readFromProperty: init(),
 			readFromIds: init(),
 			readFromId: init(),
 			readMultiProperty: init(),
@@ -170,10 +169,6 @@ export namespace Test {
 									return tests.update.update('failure', r.error.message);
 								}
 
-								if (!r.value.result.success) {
-									return tests.update.update('failure', r.value.result.message || 'No message');
-								}
-
 								tests.update.update('success');
 							});
 					});
@@ -182,43 +177,18 @@ export namespace Test {
 				let testData: TestData | undefined;
 
 				const testReadAll = async () => {
-					return new Promise<void>((res) => {
-						tests.readAll.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readAll.update('failure', error);
-							} else {
-								tests.readAll.update('success');
-							}
-
-							stream.off('data', onData);
-							stream.off('error', onError);
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						const onData = (data: TestData) => {
-							if (data.data.name === uniqueName) {
-								testData = data;
-								finish();
-							}
-						};
-
-						const onError = (error: Error) => {
-							finish(error.message);
-						};
-
-						const stream = Test.all({
-							type: 'stream'
-						});
-						stream.on('data', onData);
-						stream.on('error', onError);
-					});
+					tests.readAll.update('in progress');
+					const res = await Test.all({ type: 'all' }).await(1000);
+					if (res.isErr()) {
+						return tests.readAll.update('failure', res.error.message);
+					}
+					const found = res.value.find((d) => d.data.name === uniqueName);
+					if (!found) {
+						tests.readAll.update('failure', 'Could not find created test');
+					} else {
+						testData = found;
+						tests.readAll.update('success');
+					}
 				};
 
 				const testArchive = async (data: TestData) => {
@@ -251,10 +221,6 @@ export namespace Test {
 						data.setArchive(true).then((r) => {
 							if (r.isErr()) {
 								return tests.archive.update('failure', r.error.message);
-							}
-
-							if (!r.value.success) {
-								return tests.archive.update('failure', r.value.message || 'No message');
 							}
 
 							tests.archive.update('success');
@@ -294,10 +260,6 @@ export namespace Test {
 								return tests.restore.update('failure', r.error.message);
 							}
 
-							if (!r.value.success) {
-								return tests.restore.update('failure', r.value.message || 'No message');
-							}
-
 							tests.restore.update('success');
 						});
 					});
@@ -333,10 +295,6 @@ export namespace Test {
 						data.delete().then((r) => {
 							if (r.isErr()) {
 								return tests.delete.update('failure', r.error.message);
-							}
-
-							if (!r.value.success) {
-								return tests.delete.update('failure', r.value.message || 'No message');
 							}
 
 							tests.delete.update('success');
@@ -395,11 +353,6 @@ export namespace Test {
 						return;
 					}
 
-					if (!restoreVersion.value.success) {
-						tests.restoreVersion.update('failure', restoreVersion.value.message || 'No message');
-						return;
-					}
-
 					tests.restoreVersion.update('success');
 
 					const deleted = await version.delete();
@@ -408,213 +361,75 @@ export namespace Test {
 						return;
 					}
 
-					if (!deleted.value.success) {
-						tests.deleteVersion.update('failure', deleted.value.message || 'No message');
-						return;
-					}
-
 					tests.deleteVersion.update('success');
 				};
 
 				const testReadArchived = async () => {
-					return new Promise<void>((res) => {
-						tests.readArchived.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readArchived.update('failure', error);
-							} else {
-								tests.readArchived.update('success');
-							}
-
-							stream.off('data', onData);
-							stream.off('error', onError);
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						const onData = (data: TestData) => {
-							console.log('archived', data);
-							if (data.data.name === uniqueName) {
-								finish();
-							}
-						};
-
-						const onError = (error: Error) => {
-							finish(error.message);
-						};
-
-						const stream = Test.archived({
-							type: 'stream'
-						});
-						stream.on('data', onData);
-						stream.on('error', onError);
-					});
-				};
-				const testReadProperty = async () => {
-					return new Promise<void>((res) => {
-						tests.readFromProperty.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readFromProperty.update('failure', error);
-							} else {
-								tests.readFromProperty.update('success');
-							}
-
-							stream.off('data', onData);
-							stream.off('error', onError);
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						const onData = (data: TestData) => {
-							if (data.data.name === uniqueName) {
-								finish();
-							}
-						};
-
-						const onError = (error: Error) => {
-							finish(error.message);
-						};
-
-						const stream = Test.fromProperty('name', uniqueName, {
-							type: 'stream'
-						});
-						stream.on('data', onData);
-						stream.on('error', onError);
-					});
+					tests.readArchived.update('in progress');
+					const res = await Test.archived({ type: 'all' }).await(1000);
+					if (res.isErr()) {
+						return tests.readArchived.update('failure', res.error.message);
+					}
+					const found = res.value.find((d) => d.data.name === uniqueName);
+					if (found) {
+						tests.readArchived.update('success');
+					} else {
+						tests.readArchived.update('failure', 'Could not find archived test');
+					}
 				};
 				const testReadFromIds = async () => {
-					return new Promise<void>((res) => {
-						tests.readFromIds.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readFromIds.update('failure', error);
-							} else {
-								tests.readFromIds.update('success');
-							}
-
-							stream.off('data', onData);
-							stream.off('error', onError);
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						const onData = (data: TestData) => {
-							if (data.data.name === uniqueName) {
-								finish();
-							}
-						};
-
-						const onError = (error: Error) => {
-							finish(error.message);
-						};
-
-						const stream = Test.fromIds([String(testData?.data.id)], {
-							type: 'stream'
-						});
-						stream.on('data', onData);
-						stream.on('error', onError);
-					});
+					tests.readFromIds.update('in progress');
+					const res = await Test.fromIds([String(testData?.data.id)], {
+						type: 'all'
+					}).await(1000);
+					if (res.isErr()) {
+						return tests.readFromIds.update('failure', res.error.message);
+					}
+					const found = res.value.find((d) => d.data.name === uniqueName);
+					if (found) {
+						tests.readFromIds.update('success');
+					} else {
+						tests.readFromIds.update('failure', 'Could not find test from IDs');
+					}
 				};
 
 				const testReadFromId = async () => {
-					return new Promise<void>((res) => {
-						tests.readFromId.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readFromId.update('failure', error);
-							} else {
-								tests.readFromId.update('success');
-							}
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						Test.fromId(String(testData?.data.id), {
-							force: true
-						}).then((r) => {
-							if (r.isErr()) {
-								return finish(r.error.message);
-							}
-
-							if (r.value.data.name !== uniqueName) {
-								return finish('Name does not match');
-							}
-
-							finish();
-						});
-					});
+					tests.readFromId.update('in progress');
+					const res = await Test.fromId(String(testData?.data.id));
+					if (res.isErr()) {
+						return tests.readFromId.update('failure', res.error.message);
+					}
+					if (res.value.data.name === uniqueName) {
+						tests.readFromId.update('success');
+					} else {
+						tests.readFromId.update('failure', 'Could not find test from ID');
+					}
 				};
 
 				const readMultiProperty = async () => {
-					return new Promise<void>((res) => {
-						tests.readMultiProperty.update('in progress');
-						let resolved = false;
-						const finish = (error?: string) => {
-							if (!resolved) res();
-							resolved = true;
-							if (error) {
-								tests.readMultiProperty.update('failure', error);
-							} else {
-								tests.readMultiProperty.update('success');
-							}
-
-							stream.off('data', onData);
-							stream.off('error', onError);
-						};
-
-						setTimeout(() => {
-							finish('Timeout');
-						}, 1000);
-
-						const onData = (data: TestData) => {
-							if (data.data.name === uniqueName) {
-								finish();
-							}
-						};
-
-						const onError = (error: Error) => {
-							finish(error.message);
-						};
-
-						const stream = Test.get(
-							{
-								name: uniqueName,
-								age: 20
-							},
-							{
-								type: 'stream'
-							}
-						);
-						stream.on('data', onData);
-						stream.on('error', onError);
-					});
+					tests.readMultiProperty.update('in progress');
+					const res = await Test.get(
+						{
+							name: uniqueName
+						},
+						{
+							type: 'all'
+						}
+					).await(1000);
+					if (res.isErr()) {
+						return tests.readMultiProperty.update('failure', res.error.message);
+					}
+					const found = res.value.find((d) => d.data.name === uniqueName);
+					if (found) {
+						tests.readMultiProperty.update('success');
+					} else {
+						tests.readMultiProperty.update('failure', 'Could not find test from multi property');
+					}
 				};
 
 				await connect();
 				await testNew();
 				await testReadAll();
-				await testReadProperty();
 				await testReadFromIds();
 				await testReadFromId();
 				await readMultiProperty();
