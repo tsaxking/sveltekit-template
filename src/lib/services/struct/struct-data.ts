@@ -197,7 +197,7 @@ export class StructData<T extends Blank> extends WritableBase<PartialStructable<
 			const versions = await remote.versionHistory({
 				struct: this.struct.data.name,
 				id: this.data.id,
-				keys: config?.keys as string[]
+				keys: config?.keys?.map(String) || []
 			});
 
 			return new WritableArray(

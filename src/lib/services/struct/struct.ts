@@ -1082,25 +1082,10 @@ export class Struct<T extends Blank> {
 			message: string;
 		}>(async () => {
 			this.log('Connecting to struct:', this.data.name);
-			const res = z
-				.object({
-					success: z.boolean(),
-					message: z.string()
-				})
-				.parse(
-					await fetch(`/api/struct/${this.data.name}/connect`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							structure: this.data.structure
-						})
-					}).then((r) => r.json())
-				);
-			if (!res.success) {
-				throw new FatalStructError(res.message);
-			}
+			const res = await remote.connect({
+				struct: this.data.name,
+				structure: this.data.structure
+			});
 			return res;
 		});
 	}

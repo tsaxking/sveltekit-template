@@ -48,7 +48,6 @@ sessionIgnore.add(`
 /api/oauth
 /email
 /api/analytics
-/api/fp
 `);
 
 export const handle: Handle = async ({ event, resolve }) => {

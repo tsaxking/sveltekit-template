@@ -48,7 +48,7 @@ export const count = query(async () => {
 
 export const fingerprint = command(
 	z.object({
-		fingerprint: z.string()
+		fingerprint: z.number()
 	}),
 	async (data) => {
 		const session = await getSession();
@@ -61,7 +61,7 @@ export const fingerprint = command(
 		event.cookies.set(
 			'fpid',
 			await signFingerprint({
-				fingerprint: data.fingerprint,
+				fingerprint: data.fingerprint.toString(),
 				userAgent: event.request.headers.get('user-agent') || '',
 				language: event.request.headers.get('accept-language') || ''
 			}).unwrap(),

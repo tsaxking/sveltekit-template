@@ -86,7 +86,10 @@ export const connect = query(
 	async (data) => {
 		const registry = structRegistry.get(data.struct);
 		if (!registry) {
-			return error(404, `Struct ${data.struct} not found`);
+			return {
+				success: false,
+				message: 'Invalid data type'
+			};
 		}
 		for (const [k, v] of Object.entries(registry.struct.data.structure)) {
 			if (!data.structure[k]) {
@@ -95,21 +98,30 @@ export const connect = query(
 					continue;
 				}
 				terminal.error(`Key ${k} is missing from the structure`);
-				return error(400, 'Invalid data');
+				return {
+					success: false,
+					message: 'Invalid data type'
+				};
 			}
 			if (registry.struct.data.safes?.includes(k) && data.structure[k]) {
 				terminal.error(`Key ${k} is a safe and should not be included in the structure`);
-				return error(400, 'Invalid data');
+				return {
+					success: false,
+					message: 'Invalid data type'
+				};
 			}
 			if (data.structure[k] !== (v as any).config.dataType) {
 				terminal.error(
 					`Key ${k} has an invalid data type, expected ${(v as any).config.dataType}, got ${data.structure[k]}`
 				);
-				return error(400, 'Invalid data');
+				return {
+					success: false,
+					message: 'Invalid data type'
+				};
 			}
 		}
 
-		return { success: true };
+		return { success: true, message: 'Structure is valid' };
 	}
 );
 
