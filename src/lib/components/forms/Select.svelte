@@ -23,7 +23,7 @@
 	{#if defaultValue}
 		<option value="" disabled selected={!selected}>{defaultValue}</option>
 	{/if}
-	{#each options as option}
+	{#each options as option (option)}
 		<option value={option}>{option}</option>
 	{/each}
 </select>

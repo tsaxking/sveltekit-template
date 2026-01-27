@@ -4,6 +4,7 @@
 	import { dateTime } from 'ts-utils/clock';
 	import { capitalize, fromSnakeCase, abbreviate } from 'ts-utils/text';
 	import nav from '$lib/imports/admin';
+	import { SvelteURLSearchParams } from 'svelte/reactivity';
 
 	nav();
 
@@ -29,7 +30,7 @@
 		page: number;
 		limit: number;
 	}) => {
-		const sp = new URLSearchParams();
+		const sp = new SvelteURLSearchParams();
 		if (config.accountId) sp.set('account', config.accountId);
 		if (config.type) sp.set('type', config.type);
 		if (config.dataId) sp.set('data', config.dataId);
@@ -74,7 +75,7 @@
 				}}
 			>
 				<option value="" selected={struct === undefined}>All</option>
-				{#each structs as s}
+				{#each structs as s (s)}
 					<option value={s} selected={s === struct}>{capitalize(fromSnakeCase(s))}</option>
 				{/each}
 			</select>
@@ -237,7 +238,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each logs as log, i}
+						{#each logs as log, i (log.data?.id)}
 							<tr>
 								<td>{(page - 1) * limit + i + 1}</td>
 								<td>

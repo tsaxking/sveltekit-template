@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { OAuth2Client } from 'google-auth-library';
 import terminal from '$lib/server/utils/terminal';
 import { domain, str } from '$lib/server/utils/env';
+import type { Pathname } from '$app/types';
 
 export const actions = {
 	login: async (event) => {
@@ -87,7 +88,7 @@ export const actions = {
 		return {
 			message: 'Logged in',
 			user: res.data.username,
-			redirect: event.locals.session.data.prevUrl || '/',
+			redirect: (event.locals.session.data.prevUrl || '/') as Pathname,
 			success: true
 		};
 	},

@@ -6,6 +6,6 @@
 	const d = $derived(Test.Test.arr(data.data.map((d) => Test.Test.Generator(d))));
 </script>
 
-{#each $d as item}
+{#each $d as item (item.data.id)}
 	<p>{item.data.name} | {item.data.age}</p>
 {/each}

@@ -47,7 +47,7 @@
 	Add User
 </button>
 
-{#each $data as user}
+{#each $data as user (user.data.id)}
 	<div class="card mb-2 p-3">
 		<div><strong>Name:</strong> {user.data.name}</div>
 		<div><strong>Age:</strong> {user.data.age}</div>

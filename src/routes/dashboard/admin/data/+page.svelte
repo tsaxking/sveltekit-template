@@ -19,7 +19,7 @@
 
 <div class="container layer-1">
 	<div class="row">
-		{#each structs as [name]}
+		{#each structs as [name] (name)}
 			<div
 				class="col-md-3"
 				style="

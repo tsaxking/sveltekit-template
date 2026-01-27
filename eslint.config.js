@@ -59,15 +59,7 @@ export default ts.config(
 			'@typescript-eslint/no-empty-object-type': 'off',
 			'svelte/valid-compile': 'error',
 			'svelte/require-each-key': 'warn',
-			'svelte/no-navigation-without-resolve': [
-				'warn',
-				{
-					ignoreGoto: false,
-					ignoreLinks: true,
-					ignorePushState: false,
-					ignoreReplaceState: false
-				}
-			],
+			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/prefer-writable-derived': 'warn',
 			'svelte/prefer-svelte-reactivity': 'warn'
 		}

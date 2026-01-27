@@ -51,11 +51,11 @@
 	</div>
 	<div class="offcanvas-body layer-2">
 		<ul class="list-unstyled">
-			{#each $sections as section}
+			{#each $sections as section (section.name)}
 				<li class="mb-3">
 					<h4 class="text-secondary">{section.name}</h4>
 					<ul class="list-unstyled">
-						{#each section.links as link}
+						{#each section.links as link (link.name)}
 							<li class="ps-3 mb-2">
 								<a
 									class:disabled={link.disabled}

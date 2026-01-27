@@ -9,12 +9,12 @@
 		NumberEditorModule,
 		TextEditorModule,
 		TooltipModule,
-		type ValueGetterParams,
-		type EditableCallbackParams,
-		type ValueSetterParams,
+		// type ValueGetterParams,
+		// type EditableCallbackParams,
+		// type ValueSetterParams,
 		type ICellRendererParams
 	} from 'ag-grid-community';
-	import { dateTime } from 'ts-utils/clock';
+	// import { dateTime } from 'ts-utils/clock';
 	import { contextmenu } from '$lib/utils/contextmenu.js';
 	import { copy } from '$lib/utils/clipboard.js';
 	import { useCommandStack } from '$lib/services/event-stack.js';
@@ -229,7 +229,7 @@
 						}}
 						value={limit}
 					>
-						{#each [10, 25, 50, 100, 250, 500] as lim}
+						{#each [10, 25, 50, 100, 250, 500] as lim (lim)}
 							<option value={lim}>{lim}</option>
 						{/each}
 					</select>
@@ -260,7 +260,7 @@
 				<div class="form-floating" style="width: 200px;">
 					<select name="floating-column" id="column" class="form-select" bind:value={column}>
 						<option value="" selected>All Columns</option>
-						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value]}
+						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value] (key)}
 							<option value={key}>{capitalize(fromCamelCase(key))}</option>
 						{/each}
 					</select>
@@ -483,7 +483,7 @@
 <Modal bind:this={createModal} title="Create New Item" size="lg">
 	{#snippet body()}
 		<div class="container-fluid">
-			{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value]}
+			{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value] (key)}
 				<div class="row mb-3">
 					{#if value === 'text'}
 						<div class="form-floating">
@@ -578,7 +578,7 @@
 	{#snippet body()}
 		<div class="container-fluid">
 			{#key editStage}
-				{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value]}
+				{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value] (key)}
 					<div class="row mb-3">
 						{#if value === 'text'}
 							<div class="form-floating">

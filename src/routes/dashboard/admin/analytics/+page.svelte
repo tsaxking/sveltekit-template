@@ -131,7 +131,7 @@
 						overflow-y: scroll;
 					"
 				>
-					{#each Object.keys(pages) as item}
+					{#each Object.keys(pages) as item (item)}
 						<li class="list-group-item d-flex align-items-centent ws-nowrap">
 							<input
 								class="form-check-input me-1"

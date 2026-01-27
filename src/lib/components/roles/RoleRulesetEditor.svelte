@@ -87,7 +87,7 @@
 </script>
 
 <div class="container">
-	{#each Object.entries(groups).filter(([, g]) => g.filter((i) => i.ruleset).length) as [name, group]}
+	{#each Object.entries(groups).filter(([, g]) => g.filter((i) => i.ruleset).length) as [name, group] (name)}
 		<hr />
 		<div class="row mb-3">
 			<h4>{name}</h4>
@@ -95,7 +95,7 @@
 		<div class="row mb-3">
 			<div class="col-12">
 				<ul class="list-group">
-					{#each group as item}
+					{#each group as item (item.entitlement.data.id)}
 						{#if item.ruleset}
 							<li class="list-group-item">
 								<RulesetSwitch

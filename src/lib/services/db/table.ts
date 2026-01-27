@@ -316,9 +316,49 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 			[K in keyof Type]?: SchemaFieldReturnType<Type[K]>;
 		},
 		config: ReadConfig<false>
-	): ResultPromise<TableDataArr<Name, Type>> {
+	): ResultPromise<TableDataArr<Name, Type>>;
+	get(
+		data: {
+			[K in keyof Type]?: SchemaFieldReturnType<Type[K]>;
+		},
+		config: ReadConfig<true>
+	): ResultPromise<PaginatedTableData<Name, Type>>;
+	get(
+		data: {
+			[K in keyof Type]?: SchemaFieldReturnType<Type[K]>;
+		},
+		config: ReadConfig<boolean>
+	): ResultPromise<TableDataArr<Name, Type> | PaginatedTableData<Name, Type>> {
 		return attemptAsync(async () => {
 			_init();
+			if (config.pagination) {
+				const total = await this.table().where(data).count();
+				const datas = await this.table()
+					.where(data)
+					.offset(config.pagination.page * config.pagination.pageSize)
+					.limit(config.pagination.pageSize)
+					.toArray();
+				const arr = new PaginatedTableData(
+					this,
+					datas.map((d) => this.Generator(d)),
+					total,
+					config.pagination.page,
+					config.pagination.pageSize,
+					async (page, pageSize) => {
+						_init();
+						const datas = await this.table()
+							.where(data)
+							.offset(page * pageSize)
+							.limit(pageSize)
+							.toArray();
+						return datas.map((d) => this.Generator(d));
+					},
+					async () => {
+						return await this.table().where(data).count();
+					}
+				);
+				return arr;
+			}
 			const datas = await this.table().where(data);
 			const arr = new TableDataArr(
 				this,

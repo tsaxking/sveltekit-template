@@ -13,7 +13,7 @@
 {#if $cards.size > 0}
 	<div class="w-100 d-flex align-items-center">
 		<p class="m-0">Minimized:</p>
-		{#each $cards.values() as card}
+		{#each $cards.values() as card (card.config.name)}
 			<button class="btn btn-small" onclick={() => card.show()}>
 				{#if card.config.icon.type === 'bootstrap'}
 					<i class="bi bi-{card.config.icon.name}"></i>

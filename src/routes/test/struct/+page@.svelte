@@ -41,7 +41,7 @@
 </script>
 
 <ul class="list-group">
-	{#each $structs as [s, status]}
+	{#each $structs as [s, status] (s.data.name)}
 		<li class="list-group-item">
 			<p class="data-test">
 				<strong>

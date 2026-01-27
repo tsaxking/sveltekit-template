@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { passwordStrength } from 'check-password-strength';
 import { OAuth2Client } from 'google-auth-library';
 import { domain, str } from '$lib/server/utils/env';
+import type { Pathname } from '$app/types';
 
 export const actions = {
 	register: async (event) => {
@@ -137,7 +138,7 @@ export const actions = {
 
 		return {
 			message: 'Account created',
-			redirect: '/account/sign-in',
+			redirect: '/account/sign-in' as Pathname,
 			success: true
 		};
 	},

@@ -4,28 +4,24 @@ import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { match } from 'ts-utils/match';
 import { Stream } from 'ts-utils/stream';
 import { type Writable } from 'svelte/store';
-import { DataAction, PropertyAction } from '$lib/types/struct';
 import type { ColType, globalCols } from 'drizzle-struct';
 import { z } from 'zod';
 import { StructDataVersion } from './data-version';
-import { StructBatching } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
-import { StructCache } from './cache';
-import { encode } from 'ts-utils/text';
 import * as remote from '$lib/remotes/struct.remote';
 
-let didCacheWarning = false;
+// let didCacheWarning = false;
 
-const cacheWarning = () => {
-	if (__APP_ENV__.environment === 'prod') return;
-	if (didCacheWarning) return;
-	didCacheWarning = true;
-	console.warn(
-		`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`
-	);
-};
+// const cacheWarning = () => {
+// 	if (__APP_ENV__.environment === 'prod') return;
+// 	if (didCacheWarning) return;
+// 	didCacheWarning = true;
+// 	console.warn(
+// 		`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`
+// 	);
+// };
 
 /**
  * All actions that can be performed on the data
