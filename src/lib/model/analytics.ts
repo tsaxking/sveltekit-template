@@ -19,12 +19,9 @@ export namespace Analytics {
 	export type LinkData = typeof Links.sample;
 
 	export const myLinks = (config: { offset: number; limit: number }) => {
-		return Links.query('my-links', config, {
-			asStream: true
-		}).await();
+
 	};
 
 	export const count = () => {
-		return Links.send('count', {}, z.number());
 	};
 }

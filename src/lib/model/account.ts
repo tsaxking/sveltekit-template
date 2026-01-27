@@ -93,26 +93,11 @@ export namespace Account {
 	);
 
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
-		attemptAsync(async () => {
-			const data = await Account.send('self', {}, Account.getZodSchema());
-			const account = data.unwrap();
-			self.update((d) => {
-				d.set(account);
-				return d;
-			});
-		});
+
 		return self;
 	};
 
 	export const getNotifs = (/*limit: number, offset: number*/) => {
-		return AccountNotification.query(
-			'get-own-notifs',
-			{},
-			{
-				asStream: false,
-				satisfies: (d) => d.data.accountId === self.get().data.id
-			}
-		);
 	};
 
 	export const getUsersFromUniverse = (universe: string) => {
@@ -142,17 +127,6 @@ export namespace Account {
 			offset: 0
 		}
 	) => {
-		return Account.query(
-			'search',
-			{
-				query,
-				...config
-			},
-			{
-				asStream: false,
-				satisfies: () => false
-			}
-		);
 	};
 
 	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {

@@ -4,7 +4,8 @@ import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { match } from 'ts-utils/match';
 import { Stream } from 'ts-utils/stream';
 import { type Writable } from 'svelte/store';
-import { type ColType, DataAction, PropertyAction } from 'drizzle-struct/types';
+import { DataAction, PropertyAction } from '$lib/types/struct';
+import type { ColType } from 'drizzle-struct';
 import { z } from 'zod';
 import { StructDataVersion } from './data-version';
 import { StructBatching } from './batching';
@@ -72,15 +73,6 @@ export enum FetchActions {
 	 * Update a data point
 	 */
 	Update = 'update',
-	/**
-	 * Run a custom function on the back end
-	 */
-	Call = 'call',
-	/**
-	 * Custom query, this is used if a specific read type doesn't fulfill your needs.
-	 */
-	Query = 'query'
-	// Retrieve = 'retrieve',
 }
 
 /**
@@ -863,17 +855,17 @@ export class Struct<T extends Blank> {
 		return attempt(() => {
 			this.data.socket.on(`struct:${this.data.name}`, (data) => {
 				this.log('Event Data:', data);
-				if (typeof data !== 'object' || data === null) {
-					return console.error('Invalid data:', data);
+				const parsed = z
+					.object({
+						event: z.enum(['create', 'update', 'archive', 'delete', 'restore', 'stream']),
+						data: z.record(z.unknown())
+					})
+					.safeParse(data);
+				if (!parsed.success) {
+					return console.error('Invalid data:', parsed.error, data);
 				}
-				if (!Object.hasOwn(data, 'event')) {
-					return console.error('Invalid event:', data);
-				}
-				if (!Object.hasOwn(data, 'data')) {
-					return console.error('Invalid data:', data);
-				}
-				const { event, data: structData } = data as {
-					event: 'create' | 'update' | 'archive' | 'delete' | 'restore';
+				const { event, data: structData } = parsed.data as {
+					event: 'create' | 'update' | 'archive' | 'delete' | 'restore' | 'stream';
 					data: PartialStructable<T & GlobalCols>;
 				};
 				const { id } = structData;
@@ -897,6 +889,14 @@ export class Struct<T extends Blank> {
 					})
 					.case('create', () => {
 						this.log('Create:', structData);
+						const exists = this.cache.get(id);
+						if (exists) return;
+						const d = new StructData(this, structData);
+						this.cache.set(id, d);
+						this.emit('new', d);
+					})
+					.case('stream', () => {
+						this.log('Stream:', structData);
 						const exists = this.cache.get(id);
 						if (exists) return;
 						const d = new StructData(this, structData);
@@ -1851,191 +1851,6 @@ export class Struct<T extends Blank> {
 		if (this.data.log) {
 			console.log(`[${this.data.name}]`, ...args);
 		}
-	}
-
-	/**
-	 * Sends a custom query to the server and returns the results as a stream.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {true} config.asStream Must be true for stream return type
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {StructStream<T>} Stream of query results
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: true;
-			cache?: {
-				expires: Date;
-			};
-		}
-	): StructStream<T>;
-	/**
-	 * Sends a custom query to the server and returns the results as a svelte store.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {false} config.asStream Must be false for DataArr return type
-	 * @param {(data: StructData<T>) => boolean} config.satisfies Function to determine if data belongs in this collection
-	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {DataArr<T>} Reactive data array of query results
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: false;
-			satisfies: (data: StructData<T>) => boolean;
-			includeArchive?: boolean; // default is falsy
-			cache?: {
-				expires: Date;
-			};
-		}
-	): DataArr<T>;
-	/**
-	 * Sends a custom query to the server and returns the results as either a stream or svelte store.
-	 *
-	 * @param {string} query Custom query string to execute on the server
-	 * @param {unknown} data Data to send with the query
-	 * @param {Object} config Configuration object
-	 * @param {boolean} config.asStream Returns a stream if true, svelte store if false
-	 * @param {(data: StructData<T>) => boolean} [config.satisfies] Function to determine if data belongs in collection (required when asStream is false)
-	 * @param {boolean} [config.includeArchive=false] Whether to include archived data in the collection
-	 * @param {Object} [config.cache] Optional cache configuration
-	 * @param {Date} [config.cache.expires] Cache expiration date
-	 * @returns {StructStream<T> | DataArr<T>} Stream or DataArr based on asStream parameter
-	 */
-	query(
-		query: string,
-		data: unknown,
-		config: {
-			asStream: boolean;
-			satisfies?: (data: StructData<T>) => boolean;
-			includeArchive?: boolean;
-			cache?: {
-				expires: Date;
-			};
-		}
-	) {
-		const get = () => {
-			return this.getStream(
-				'custom',
-				{
-					query,
-					data
-				},
-				{
-					cache: config?.cache
-				}
-			);
-		};
-		if (config.asStream) return get();
-
-		const cacheKey = `custom:${query}:${JSON.stringify(data)}`;
-		const exists = this.writables.get(cacheKey);
-		if (exists) return exists;
-
-		// Filter initial cache data based on satisfy function and archive setting
-		const initialData = [...this.cache.values()].filter((d) => {
-			const satisfies = config.satisfies?.(d) || false;
-			const includeArchived = config.includeArchive || false;
-			return satisfies && (!d.data.archived || includeArchived);
-		});
-
-		const arr = new DataArr(this, initialData);
-		this.writables.set(cacheKey, arr);
-
-		// Register with centralized event system using the provided satisfy function
-		this.registerDataArray(
-			cacheKey,
-			arr,
-			(data) => {
-				if (!config.satisfies) return false;
-				const satisfies = config.satisfies(data);
-				const includeArchived = config.includeArchive || false;
-				return satisfies && (!data.data.archived || includeArchived);
-			},
-			config.includeArchive
-		);
-
-		// Load initial data from stream
-		const res = get();
-		res.once('data', (d) => arr.set([d]));
-		res.pipe((d) => arr.add(d));
-
-		return arr;
-	}
-
-	/**
-	 * Sends custom data to the server and returns the result.
-	 * This should be used for exclusively data retrieval.
-	 *
-	 * @template T
-	 * @param {string} name
-	 * @param {unknown} data
-	 * @param {z.ZodType<T>} returnType
-	 * @returns {*}
-	 */
-	send<T>(
-		name: string,
-		data: unknown,
-		returnType: z.ZodType<T>,
-		config?: {
-			cache?: {
-				expires: Date;
-			};
-		}
-	) {
-		return attemptAsync<T>(async () => {
-			const res = await this.getReq(`custom/${name}`, {
-				data,
-				cache: config?.cache
-			}).then((r) => r.unwrap().json());
-			const parsed = z
-				.object({
-					success: z.boolean(),
-					data: z.unknown(),
-					message: z.string().optional()
-				})
-				.parse(res);
-			if (!parsed.success) {
-				throw new DataError(parsed.message || 'Failed to send data');
-			}
-			if (!parsed.data) {
-				throw new DataError('No data returned');
-			}
-			return returnType.parse(parsed.data);
-		});
-	}
-
-	// custom functions
-	/**
-	 * Calls a custom event on the server and returns the result.
-	 * This should exclusively be used for triggering server-side events.
-	 *
-	 * @param {string} event
-	 * @param {unknown} data
-	 * @returns {*}
-	 */
-	call(event: string, data: unknown) {
-		return attemptAsync(async () => {
-			const res = await (await this.postReq(`call/${event}`, data)).unwrap();
-
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional(),
-					data: z.unknown().optional()
-				})
-				.parse(res);
-		});
 	}
 
 	/**
