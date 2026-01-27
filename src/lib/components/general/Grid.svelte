@@ -198,7 +198,7 @@
 		grid = createGrid(gridDiv, gridOptions);
 		em.emit('ready', grid);
 
- 		const dataUnsub = data.subscribe((r) => {
+		const dataUnsub = data.subscribe((r) => {
 			grid.setGridOption('rowData', r);
 			onDataFilter();
 		});
@@ -206,7 +206,7 @@
 		return () => {
 			dataUnsub();
 			grid.destroy();
-		}
+		};
 	});
 </script>
 

@@ -120,9 +120,9 @@ export namespace Session {
 
 	export const signOut = (session: SessionData) => {
 		return session.update({
-			accountId: '',
+			accountId: ''
 		});
-	}
+	};
 }
 
 // // for drizzle

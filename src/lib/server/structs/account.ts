@@ -10,7 +10,6 @@ import { Session } from './session';
 import { sse } from '../services/sse';
 import { sendEmail } from '../services/email';
 import type { Icon } from '../../types/icons';
-import { z } from 'zod';
 import { Permissions } from './permissions';
 import { config, domain } from '../utils/env';
 import structRegistry from '../services/struct-registry';
@@ -39,38 +38,78 @@ export namespace Account {
 	structRegistry.register(Account);
 
 	Account.on('delete', async (a) => {
-		Admins.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Developers.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		AccountNotification.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Settings.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		PasswordReset.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Session.Session.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((s) => s.delete());
-		AccountInfo.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe(async (a) => {
+		Admins.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Developers.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		AccountNotification.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Settings.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		PasswordReset.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Session.Session.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((s) => s.delete());
+		AccountInfo.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe(async (a) => {
 			const versions = await a.getVersions().unwrapOr([]);
 			await Promise.all(versions.map((v) => v.delete()));
 			a.delete();
 		});
-		Permissions.RoleAccount.fromProperty('account', a.id, {
-			type: 'stream'
-		}).pipe((ra) => ra.delete());
-		Permissions.AccountRuleset.fromProperty('account', a.id, {
-			type: 'stream'
-		}).pipe((ar) => ar.delete());
+		Permissions.RoleAccount.get(
+			{ account: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((ra) => ra.delete());
+		Permissions.AccountRuleset.get(
+			{ account: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((ar) => ar.delete());
 	});
+
+	export const Settings = new Struct({
+		name: 'account_settings',
+		structure: {
+			accountId: text('account_id').notNull(),
+		}
+	});
+
+	structRegistry.register(Settings)
+		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId)
+		.bypass(DataAction.Create, (account) => account.id === account.id);
 
 	export const Admins = new Struct({
 		name: 'admins',
@@ -83,9 +122,12 @@ export namespace Account {
 		return attemptAsync(async () => {
 			return (
 				(
-					await Admins.fromProperty('accountId', account.id, {
-						type: 'count'
-					})
+					await Admins.get(
+						{ accountId: account.id },
+						{
+							type: 'count'
+						}
+					)
 				).unwrap() > 0
 			);
 		});
@@ -120,9 +162,12 @@ export namespace Account {
 		return attemptAsync(async () => {
 			return (
 				(
-					await Developers.fromProperty('accountId', account.id, {
-						type: 'count'
-					})
+					await Developers.get(
+						{ accountId: account.id },
+						{
+							type: 'count'
+						}
+					)
 				).unwrap() > 0
 			);
 		});
@@ -183,9 +228,12 @@ export namespace Account {
 			const info = await getAccountInfo(account).unwrap();
 			if (info.data.viewOnline !== 'all') return false;
 			let isOnline = false;
-			const stream = Session.Session.fromProperty('accountId', accountId, {
-				type: 'stream'
-			});
+			const stream = Session.Session.get(
+				{ accountId },
+				{
+					type: 'stream'
+				}
+			);
 			await stream.pipe((s) => {
 				if (s.data.tabs > 0) {
 					isOnline = true;
@@ -198,9 +246,12 @@ export namespace Account {
 
 	export const getAccountInfo = (account: AccountData) => {
 		return attemptAsync(async () => {
-			const info = await AccountInfo.fromProperty('accountId', account.id, {
-				type: 'single'
-			}).unwrap();
+			const info = await AccountInfo.get(
+				{ accountId: account.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (info) return info;
 			return AccountInfo.new({
 				accountId: account.id,
@@ -228,7 +279,8 @@ export namespace Account {
 		}
 	});
 
-	structRegistry.register(AccountNotification)
+	structRegistry
+		.register(AccountNotification)
 		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
 		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
 		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId);
@@ -332,9 +384,12 @@ export namespace Account {
 
 	export const notifyPopup = (accountId: string, notification: Notification) => {
 		return attemptAsync(async () => {
-			Session.Session.fromProperty('accountId', accountId, {
-				type: 'stream'
-			}).pipe((s) => sse.fromSession(s.id).notify(notification));
+			Session.Session.get(
+				{ accountId },
+				{
+					type: 'stream'
+				}
+			).pipe((s) => sse.fromSession(s.id).notify(notification));
 		});
 	};
 
@@ -400,16 +455,22 @@ export namespace Account {
 	};
 
 	export const getSettings = (accountId: string) => {
-		return Settings.fromProperty('accountId', accountId, {
-			type: 'stream'
-		}).await();
+		return Settings.get(
+			{ accountId },
+			{
+				type: 'stream'
+			}
+		).await();
 	};
 
 	export const requestPasswordReset = (account: AccountData) => {
 		return attemptAsync(async () => {
-			PasswordReset.fromProperty('accountId', account.id, {
-				type: 'stream'
-			}).pipe((pr) => pr.delete());
+			PasswordReset.get(
+				{ accountId: account.id },
+				{
+					type: 'stream'
+				}
+			).pipe((pr) => pr.delete());
 
 			const pr = (
 				await PasswordReset.new({

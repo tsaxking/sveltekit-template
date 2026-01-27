@@ -58,9 +58,12 @@ export namespace Limiting {
 
 	// Prevent duplicates
 	PageRuleset.on('create', async (rs) => {
-		const rules = PageRuleset.fromProperty('ip', rs.data.ip, {
-			type: 'stream'
-		});
+		const rules = PageRuleset.get(
+			{ ip: rs.data.ip },
+			{
+				type: 'stream'
+			}
+		);
 
 		rules.pipe((r) => {
 			if (r.data.page === rs.data.page && r.id !== rs.id) {
@@ -84,9 +87,12 @@ export namespace Limiting {
 	export const isIpAllowed = (ip: string, page: string) => {
 		return attemptAsync(async () => {
 			const manifest = limits.ip.getPattern(page);
-			const rules = await PageRuleset.fromProperty('ip', ip, {
-				type: 'all'
-			}).unwrap();
+			const rules = await PageRuleset.get(
+				{ ip },
+				{
+					type: 'all'
+				}
+			).unwrap();
 			return !!rules.find((r) => manifest.includes(r.data.page));
 		});
 	};
@@ -138,24 +144,32 @@ export namespace Limiting {
 					blocked: false;
 			  }
 		>(async () => {
-			const ipBlocked = await BlockedIps.fromProperty('ip', session.data.ip, {
-				type: 'single'
-			}).unwrap();
+			const ipBlocked = await BlockedIps.get(
+				{ ip: session.data.ip },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (ipBlocked) return { blocked: true, reason: ipBlocked.data.reason };
-			const sessionBlocked = await BlockedSessions.fromProperty('session', session.id, {
-				type: 'single'
-			}).unwrap();
+			const sessionBlocked = await BlockedSessions.get(
+				{ session: session.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (sessionBlocked) return { blocked: true, reason: sessionBlocked.data.reason };
-			const fingerprintBlocked = await BlockedFingerprints.fromProperty(
-				'fingerprint',
-				session.data.fingerprint,
+			const fingerprintBlocked = await BlockedFingerprints.get(
+				{ fingerprint: session.data.fingerprint },
 				{ type: 'single' }
 			).unwrap();
 			if (fingerprintBlocked) return { blocked: true, reason: fingerprintBlocked.data.reason };
 			if (account) {
-				const accountBlocked = await BlockedAccounts.fromProperty('account', account.id, {
-					type: 'single'
-				}).unwrap();
+				const accountBlocked = await BlockedAccounts.get(
+					{ account: account.id },
+					{
+						type: 'single'
+					}
+				).unwrap();
 				if (accountBlocked) return { blocked: true, reason: accountBlocked.data.reason };
 			}
 			return { blocked: false };
@@ -233,9 +247,12 @@ export namespace Limiting {
 			}
 
 			// If the score is 50 or more, block the IP, session, fingerprint, and account.
-			const sessionExists = await BlockedSessions.fromProperty('session', session.id, {
-				type: 'single'
-			}).unwrap();
+			const sessionExists = await BlockedSessions.get(
+				{ session: session.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (!sessionExists) {
 				await BlockedSessions.new({
 					session: session.id,
@@ -249,9 +266,12 @@ export namespace Limiting {
 					.unwrap();
 			}
 
-			const ipExists = await BlockedIps.fromProperty('ip', session.data.ip, {
-				type: 'single'
-			}).unwrap();
+			const ipExists = await BlockedIps.get(
+				{ ip: session.data.ip },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (!ipExists) {
 				await BlockedIps.new({
 					ip: session.data.ip,
@@ -265,9 +285,8 @@ export namespace Limiting {
 					.unwrap();
 			}
 
-			const fingerprintExists = await BlockedFingerprints.fromProperty(
-				'fingerprint',
-				session.data.fingerprint,
+			const fingerprintExists = await BlockedFingerprints.get(
+				{ fingerprint: session.data.fingerprint },
 				{ type: 'single' }
 			).unwrap();
 			if (!fingerprintExists) {

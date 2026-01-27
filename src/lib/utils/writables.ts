@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Subscriber, Unsubscriber, Writable } from 'svelte/store';
-import { debounce } from 'ts-utils';
+import { attemptAsync, debounce, ResultPromise } from 'ts-utils';
 
 /**
  * Base writable store implementation with debounced updates and lifecycle management.
@@ -167,6 +167,27 @@ export class WritableBase<T> implements Writable<T> {
 	 */
 	pipe(target: Writable<unknown>): void {
 		this.onAllUnsubscribe(target.subscribe(() => this.inform()));
+	}
+
+	/**
+	 * Awaits the next update to the writable, with an optional timeout
+	 * @param timeout - Maximum time to wait in milliseconds (default: 10 seconds)
+	 * @returns {ResultPromise<T>} ResultPromise that resolves with the next data value or rejects on timeout
+	 */
+	await(timeout = 10 * 1000): ResultPromise<T> {
+		return attemptAsync<T>(async () => {
+			return new Promise<T>((resolve, reject) => {
+				const unsub = this.subscribe((data) => {
+					resolve(data);
+					unsub();
+					clearTimeout(t);
+				});
+				const t = setTimeout(() => {
+					reject(new Error('WritableBase.await timed out'));
+					unsub();
+				}, timeout);
+			});
+		});
 	}
 }
 

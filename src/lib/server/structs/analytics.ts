@@ -23,7 +23,6 @@ export namespace Analytics {
 	// 	Links.block(i, () => true, 'Cannot perform this action on analytics links');
 	// }
 
-
 	export const getAccountLinks = (
 		account: Account.AccountData,
 		config: {

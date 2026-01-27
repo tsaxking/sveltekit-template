@@ -8,10 +8,10 @@ import {
 	type GlobalCols
 } from '$lib/services/struct/index';
 import { browser } from '$app/environment';
-import { z } from 'zod';
 import { modalTarget, rawModal } from '$lib/utils/prompts';
 import { mount } from 'svelte';
 import AccountSearch from '$lib/components/account/AccountSearch.svelte';
+import * as remote from '$lib/remotes/account.remote';
 
 export namespace Account {
 	export const Account = new Struct({
@@ -93,40 +93,36 @@ export namespace Account {
 	);
 
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
-
 		return self;
 	};
 
-	export const getNotifs = (/*limit: number, offset: number*/) => {
-	};
-
-	export const getUsersFromUniverse = (universe: string) => {
-		return Account.query(
-			'from-universe',
-			{
-				universe
-			},
-			{
-				asStream: false,
-				satisfies: () => false
-			}
-		);
-	};
+	export const getNotifs = (/*limit: number, offset: number*/) => {};
 
 	export const usernameExists = (username: string) => {
-		return Account.send('username-exists', { username }, z.boolean());
+		return attemptAsync(async () => {
+			return remote.usernameExists({
+				username,
+			});
+		});
 	};
 
 	export const search = (
 		query: string,
 		config: {
 			limit: number;
-			offset: number;
+			page: number;
 		} = {
 			limit: 25,
-			offset: 0
+			page: 0
 		}
 	) => {
+		return attemptAsync(async () => {
+			return remote.search({
+				query,
+				limit: config.limit,
+				page: config.page
+			});
+		});
 	};
 
 	export const searchAccountsModal = (config?: { filter: (account: AccountData) => boolean }) => {

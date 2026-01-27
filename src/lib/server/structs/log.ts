@@ -30,7 +30,7 @@ export namespace Logs {
 						'delete',
 						'set-attributes',
 						'add-attributes',
-						'remove-attributes',
+						'remove-attributes'
 					])
 					.safeParse(t).success
 		}

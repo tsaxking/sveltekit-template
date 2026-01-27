@@ -3,8 +3,8 @@ import { Struct, StructData, DataArr } from '$lib/services/struct/index';
 import { sse } from '$lib/services/sse';
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';
-import { z } from 'zod';
 import { Form } from '$lib/utils/form';
+import * as remote from '$lib/remotes/permissions.remote';
 
 export namespace Permissions {
 	export const Role = new Struct({
@@ -87,10 +87,20 @@ export namespace Permissions {
 	export type AccountRulesetDataArr = DataArr<typeof AccountRuleset.data.structure>;
 
 	export const getRolePermissions = (role: RoleData) => {
-
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			return remote.permissionsFromRole({
+				role: role.data.id
+			});
+		});
 	};
 	export const getAvailableRolePermissions = (role: RoleData) => {
-
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			return remote.availablePermissions({
+				role: role.data.id
+			});
+		});
 	};
 
 	export const getEntitlements = () => {
@@ -102,21 +112,37 @@ export namespace Permissions {
 	export const getEntitlementGroups = () => {
 		return attemptAsync(async () => {
 			const groups = new Set<string>();
-			await Entitlement.all({
-				type: 'stream'
-			}).pipe((e) => {
+			const entitlements = getEntitlements();
+			const fn = (e: EntitlementData) => {
 				if (e.data.group) groups.add(e.data.group);
-			});
+			}
+			if (entitlements.length) entitlements.each(fn);
+			else {
+				const res = await entitlements.await().unwrap();
+				for (const e of res) fn(e);
+			}
 			return Array.from(groups);
 		});
 	};
 
 	export const grantRuleset = (role: RoleData, ruleset: RoleRulesetData) => {
-
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.grantRolePermission({
+				role: role.data.id,
+				ruleset: ruleset.data.id
+			});
+		});
 	};
 
 	export const revokeRolePermission = (ruleset: RoleRulesetData) => {
-
+		return attemptAsync(async () => {
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.revokeRolePermission({
+				ruleset: ruleset.data.id
+			});
+		});
 	};
 
 	export const grantAccountPermission = (
@@ -125,10 +151,25 @@ export namespace Permissions {
 		targetAttribute: string,
 		featureScopes?: string[]
 	) => {
-
+		return attemptAsync(async () => {
+			if (!account.data.id) throw new Error('Account must have an ID');
+			if (!entitlement.data.id) throw new Error('Entitlement must have an ID');
+			return remote.grantAccountPermission({
+				account: account.data.id,
+				entitlement: entitlement.data.id,
+				targetAttribute,
+				featureScopes: featureScopes ? featureScopes : []
+			});
+		});
 	};
-	export const revokeAccountPermission = (ruleset: AccountRulesetData) => {
 
+	export const revokeAccountPermission = (ruleset: AccountRulesetData) => {
+		return attemptAsync(async () => {
+			if (!ruleset.data.id) throw new Error('Ruleset must have an ID');
+			return remote.revokeAccountPermission({
+				ruleset: ruleset.data.id
+			});
+		});
 	};
 
 	export const searchRoles = (
@@ -138,14 +179,28 @@ export namespace Permissions {
 			limit: number;
 		}
 	) => {
-
+		return attemptAsync(async () => {
+			return remote.searchRoles({
+				searchKey,
+				limit: config.limit,
+				page: Math.floor(config.offset / config.limit)
+			});
+		});
 	};
 
 	export const createRole = (
 		parent: RoleData,
 		config: { name: string; description: string; color: string }
 	) => {
-
+		return attemptAsync(async () => {
+			if (!parent.data.id) throw new Error('Parent role must have an ID');
+			return remote.createRole({
+				name: config.name,
+				description: config.description,
+				color: config.color,
+				parent: parent.data.id
+			});
+		});
 	};
 
 	export const createChildRolePopup = async (parent: RoleData) => {
@@ -182,10 +237,24 @@ export namespace Permissions {
 	};
 
 	export const addToRole = (role: RoleData, account: Account.AccountData) => {
-
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!account.data.id) throw new Error('Account must have an ID');
+			return remote.addToRole({
+				role: role.data.id,
+				account: account.data.id
+			});
+		});
 	};
 
 	export const removeFromRole = (role: RoleData, account: Account.AccountData) => {
-
+		return attemptAsync(async () => {
+			if (!role.data.id) throw new Error('Role must have an ID');
+			if (!account.data.id) throw new Error('Account must have an ID');
+			return remote.removeFromRole({
+				role: role.data.id,
+				account: account.data.id
+			});
+		});
 	};
 }
