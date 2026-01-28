@@ -1,4 +1,8 @@
 /**
+ * @fileoverview ANSI color escape codes used by CLI rendering.
+ */
+
+/**
  * All terminal colors
  * @date 10/12/2023 - 3:24:15 PM
  *

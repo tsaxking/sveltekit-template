@@ -52,9 +52,13 @@ export namespace Permissions {
 	export const Role = new Struct({
 		name: 'role',
 		structure: {
+			/** Role name. */
 			name: text('name').notNull(),
+			/** Role description. */
 			description: text('description').notNull(),
+			/** Parent role ID for hierarchy. */
 			parent: text('parent').notNull().default(''), // Parent role for hierarchy. A parent role can manage its child roles.
+			/** UI color hex code. */
 			color: text('color').notNull().default('#000000') // Color for UI purposes
 		}
 	});
@@ -168,7 +172,9 @@ export namespace Permissions {
 	export const RoleAccount = new Struct({
 		name: 'role_account',
 		structure: {
+			/** Role ID. */
 			role: text('role').notNull(),
+			/** Account ID. */
 			account: text('account').notNull()
 		}
 	});
@@ -180,12 +186,19 @@ export namespace Permissions {
 	export const Entitlement = new Struct({
 		name: 'entitlements',
 		structure: {
+			/** Unique entitlement name. */
 			name: text('name').notNull().unique(),
+			/** Entitlement description. */
 			description: text('description').notNull().default(''),
+			/** JSON string of struct names. */
 			structs: text('structs').notNull().default('[]'), // JSON string of struct names
+			/** JSON string of permission rules. */
 			permissions: text('permissions').notNull().default('[]'), // JSON string of permissions
+			/** Group name for UI organization. */
 			group: text('group').notNull(), // Group name for UI organization
+			/** JSON string of features enabled by this entitlement. */
 			features: text('features').notNull().default('[]'), // JSON string of features that this entitlement enables
+			/** Default feature scope list (JSON string). */
 			defaultFeatureScopes: text('default_feature_scopes').notNull().default('[]') // Default feature scope for this entitlement
 		}
 	});
@@ -197,12 +210,19 @@ export namespace Permissions {
 	export const RoleRuleset = new Struct({
 		name: 'role_rulesets',
 		structure: {
+			/** Ruleset name. */
 			name: text('name').notNull(),
+			/** Ruleset description. */
 			description: text('description').notNull(),
+			/** Role ID the ruleset belongs to. */
 			role: text('role').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]'),
+			/** Parent ruleset ID. */
 			parent: text('parent').notNull().default('') // parent ruleset id
 		}
 	});
@@ -459,9 +479,13 @@ export namespace Permissions {
 	export const AccountRuleset = new Struct({
 		name: 'account_rulesets',
 		structure: {
+			/** Account ID the ruleset is scoped to. */
 			account: text('account').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]')
 		}
 	});

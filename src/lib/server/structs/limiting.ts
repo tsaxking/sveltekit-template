@@ -67,7 +67,9 @@ export namespace Limiting {
 	export const PageRuleset = new Struct({
 		name: 'page_ruleset',
 		structure: {
+			/** IP address allowed for a page. */
 			ip: text('ip').notNull(),
+			/** Page path pattern. */
 			page: text('page').notNull()
 		}
 	});
@@ -138,7 +140,9 @@ export namespace Limiting {
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
 		structure: {
+			/** Blocked IP address. */
 			ip: text('ip').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
@@ -152,7 +156,9 @@ export namespace Limiting {
 	export const BlockedSessions = new Struct({
 		name: 'blocked_sessions',
 		structure: {
+			/** Blocked session ID. */
 			session: text('session').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
@@ -166,7 +172,9 @@ export namespace Limiting {
 	export const BlockedFingerprints = new Struct({
 		name: 'blocked_fingerprints',
 		structure: {
+			/** Fingerprint hash. */
 			fingerprint: text('fingerprint').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
@@ -180,7 +188,9 @@ export namespace Limiting {
 	export const BlockedAccounts = new Struct({
 		name: 'blocked_accounts',
 		structure: {
+			/** Blocked account ID. */
 			account: text('account').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});

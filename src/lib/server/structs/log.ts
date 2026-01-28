@@ -36,10 +36,15 @@ export namespace Logs {
 	export const Log = new Struct({
 		name: 'logs',
 		structure: {
+			/** ID of the data record. */
 			dataId: text('data_id').notNull(),
+			/** Account that performed the action. */
 			accountId: text('account_id').notNull(),
+			/** Action type. */
 			type: text('type').notNull(),
+			/** Log message. */
 			message: text('message').notNull(),
+			/** Struct name. */
 			struct: text('struct').notNull()
 		},
 		validators: {

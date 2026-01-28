@@ -28,9 +28,13 @@ export namespace Analytics {
 	export const Links = new Struct({
 		name: 'analytics_links',
 		structure: {
+			/** Session ID for the visit. */
 			session: text('session').notNull(),
+			/** Visited URL. */
 			url: text('url').notNull(),
+			/** Time spent in milliseconds. */
 			duration: integer('duration').notNull(),
+			/** Optional account ID. */
 			account: text('account').notNull().default('')
 		}
 	});

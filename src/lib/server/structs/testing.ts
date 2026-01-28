@@ -30,7 +30,9 @@ export namespace Test {
 	export const Test = new Struct({
 		name: 'test',
 		structure: {
+			/** Name field. */
 			name: text('name').notNull(),
+			/** Age field. */
 			age: integer('age').notNull()
 		},
 		versionHistory: {
@@ -51,7 +53,9 @@ export namespace Test {
 	export const TestPermissions = new Struct({
 		name: 'test_permissions',
 		structure: {
+			/** Name field. */
 			name: text('name').notNull(),
+			/** Age field. */
 			age: integer('age').notNull()
 		}
 	});

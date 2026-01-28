@@ -50,14 +50,23 @@ export namespace Account {
 	export const Account = new Struct({
 		name: 'account',
 		structure: {
+			/** Unique public username. */
 			username: text('username').notNull().unique(),
+			/** Password hash. */
 			key: text('key').notNull(),
+			/** Password salt. */
 			salt: text('salt').notNull(),
+			/** First name. */
 			firstName: text('first_name').notNull(),
+			/** Last name. */
 			lastName: text('last_name').notNull(),
+			/** Unique email address. */
 			email: text('email').notNull().unique(),
+			/** Email verification status. */
 			verified: boolean('verified').notNull(),
+			/** Verification token. */
 			verification: text('verification').notNull(),
+			/** ISO timestamp of last login. */
 			lastLogin: text('last_login').notNull().default('')
 		},
 		generators: {
@@ -139,8 +148,11 @@ export namespace Account {
 	export const Settings = new Struct({
 		name: 'account_settings',
 		structure: {
+			/** Owning account ID. */
 			accountId: text('account_id').notNull(),
+			/** Setting key. */
 			setting: text('setting').notNull(),
+			/** Setting value. */
 			value: text('value').notNull()
 		}
 	});
@@ -160,6 +172,7 @@ export namespace Account {
 	export const Admins = new Struct({
 		name: 'admins',
 		structure: {
+			/** Account ID of the admin. */
 			accountId: text('account_id').notNull().unique()
 		}
 	});
@@ -204,6 +217,7 @@ export namespace Account {
 	export const Developers = new Struct({
 		name: 'developers',
 		structure: {
+			/** Account ID of the developer. */
 			accountId: text('account_id').notNull().unique()
 		}
 	});
@@ -255,12 +269,19 @@ export namespace Account {
 	export const AccountInfo = new Struct({
 		name: 'account_info',
 		structure: {
+			/** Owning account ID. */
 			accountId: text('account_id').notNull(),
+			/** Online visibility setting. */
 			viewOnline: text('view_online').notNull().default('all'), // allow others to see if user is online
+			/** Profile image URL. */
 			picture: text('picture').notNull(),
+			/** Short biography. */
 			bio: text('bio').notNull(),
+			/** Personal website URL. */
 			website: text('website').notNull(),
+			/** Serialized social links. */
 			socials: text('socials').notNull().default(''),
+			/** Theme preference. */
 			theme: text('theme').notNull().default('default')
 		},
 		versionHistory: {
@@ -368,13 +389,21 @@ export namespace Account {
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
 		structure: {
+			/** Recipient account ID. */
 			accountId: text('account_id').notNull(),
+			/** Notification title. */
 			title: text('title').notNull(),
+			/** Severity level. */
 			severity: text('severity').notNull(),
+			/** Notification body. */
 			message: text('message').notNull(),
+			/** Icon name. */
 			icon: text('icon').notNull(),
+			/** Icon set type. */
 			iconType: text('icon_type').notNull().default(''),
+			/** Associated link. */
 			link: text('link').notNull(),
+			/** Read/unread state. */
 			read: boolean('read').notNull()
 		}
 	});
@@ -399,7 +428,9 @@ export namespace Account {
 	export const PasswordReset = new Struct({
 		name: 'password_reset',
 		structure: {
+			/** Owning account ID. */
 			accountId: text('account_id').notNull(),
+			/** ISO timestamp when the token expires. */
 			expires: text('expires').notNull()
 		},
 		lifetime: PASSWORD_REQUEST_LIFETIME,

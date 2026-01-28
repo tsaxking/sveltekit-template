@@ -67,12 +67,19 @@ export namespace Session {
 	export const Session = new Struct({
 		name: 'session',
 		structure: {
+			/** Account ID for signed-in users. */
 			accountId: text('account_id').notNull(),
+			/** Client IP address. */
 			ip: text('ip').notNull(),
+			/** User agent string. */
 			userAgent: text('user_agent').notNull(),
+			/** Request counter. */
 			requests: integer('requests').notNull(),
+			/** Previous visited URL. */
 			prevUrl: text('prev_url').notNull(),
+			/** Client fingerprint hash. */
 			fingerprint: text('fingerprint').notNull().default(''),
+			/** Active tab count. */
 			tabs: integer('tabs').notNull().default(0)
 		},
 		safes: ['fingerprint'],
