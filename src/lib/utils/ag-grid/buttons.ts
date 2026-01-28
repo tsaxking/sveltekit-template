@@ -3,7 +3,12 @@
  *
  * @example
  * import { ButtonCellRenderer } from '$lib/utils/ag-grid/buttons';
- * const column = { cellRenderer: ButtonCellRenderer, cellRendererParams: { buttons: [...] } };
+ * const column = { cellRenderer: ButtonCellRenderer, cellRendererParams: { buttons: [{
+ * 		label: 'Click Me',
+ * 		onClick: (params) => { console.log('Button clicked!', params); },
+ * 		className: 'btn-primary',
+ * 		title: 'Click this button'
+ * }] } };
  */
 import type { ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
 
