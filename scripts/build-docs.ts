@@ -183,6 +183,102 @@ const sanitizeApiDocs = async () => {
 	);
 };
 
+const extractFileOverview = (content: string) => {
+	const blocks = content.match(/\/\*\*[\s\S]*?\*\//g) ?? [];
+	for (const block of blocks) {
+		if (!block.includes('@fileoverview') && !block.includes('@file')) continue;
+		const lines = block
+			.replace(/\r/g, '')
+			.split('\n')
+			.map((line) => line.replace(/^\s*\*\s?/, ''));
+
+		const startIndex = lines.findIndex((line) => line.includes('@fileoverview'));
+		const fileTagIndex = startIndex === -1 ? lines.findIndex((line) => line.includes('@file')) : startIndex;
+		if (fileTagIndex === -1) continue;
+
+		const overviewLines: string[] = [];
+		const tagLine = lines[fileTagIndex];
+		const tagContent = tagLine
+			.replace(/.*@fileoverview\s?/, '')
+			.replace(/.*@file\s?/, '')
+			.trim();
+		if (tagContent) overviewLines.push(tagContent);
+
+		for (let i = fileTagIndex + 1; i < lines.length; i += 1) {
+			const line = lines[i].trimEnd();
+			if (line.trim().startsWith('@')) break;
+			overviewLines.push(line);
+		}
+
+		const overview = overviewLines
+			.map((line) => line.trim())
+			.filter(Boolean)
+			.join(' ')
+			.trim();
+
+		if (overview) return overview;
+	}
+
+	return null;
+};
+
+const injectFileOverviews = async () => {
+	const readmes = await glob('api/**/README.md', {
+		cwd: DOCS_DIR,
+		nodir: true
+	});
+
+	for (const relPath of readmes) {
+		const modulePath = relPath.replace(/^api\//, '').replace(/\/README\.md$/, '');
+		const possibleFiles = [
+			path.join(ROOT, modulePath),
+			path.join(ROOT, `${modulePath}.ts`),
+			path.join(ROOT, `${modulePath}.js`),
+			path.join(ROOT, `${modulePath}.svelte`),
+			path.join(ROOT, `${modulePath}.mjs`)
+		];
+
+		let sourcePath: string | null = null;
+		for (const candidate of possibleFiles) {
+			try {
+				const stat = await fs.stat(candidate);
+				if (stat.isFile()) {
+					sourcePath = candidate;
+					break;
+				}
+			} catch {
+				// ignore missing files
+			}
+		}
+
+		if (!sourcePath) continue;
+
+		let overview: string | null = null;
+		try {
+			overview = extractFileOverview(await fs.readFile(sourcePath, 'utf-8'));
+		} catch {
+			// ignore read errors
+		}
+
+		if (!overview) continue;
+
+		const readmePath = path.join(DOCS_DIR, relPath);
+		const readme = await fs.readFile(readmePath, 'utf-8');
+		if (readme.includes('## File Overview')) continue;
+		if (readme.includes(overview)) continue;
+
+		const headingMatch = readme.match(/^#\s.+$/m);
+		if (!headingMatch) continue;
+		const heading = headingMatch[0];
+		const insertIndex = readme.indexOf(heading) + heading.length;
+		const updated =
+			readme.slice(0, insertIndex) +
+			`\n\n## File Overview\n\n${overview}\n` +
+			readme.slice(insertIndex);
+		await fs.writeFile(readmePath, updated);
+	}
+};
+
 const writeNotesIndex = async (notePaths: string[]) => {
 	const lines: string[] = [
 		'---',
@@ -309,6 +405,7 @@ const buildApiDocs = async () => {
 
 	await sanitizeApiDocs();
 	await writeApiIndex();
+	await injectFileOverviews();
 
 	return result;
 };
