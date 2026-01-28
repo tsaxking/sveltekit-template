@@ -1,4 +1,3 @@
-
 # Scripts
 
 This folder contains project maintenance and automation scripts executed via the script runner in package.json.
@@ -23,7 +22,6 @@ The runner lives at scripts/index.ts and is wired in package.json as the script 
 - `pnpm fix-readme`: normalizes README formatting.
 
 ## Notes
-
 
 - The arguments passed to the script can be accessed as separate string parameters in the default export function.
 - To generate a script, create a new TypeScript file in the `scripts/` directory and ensure it has a default export function.

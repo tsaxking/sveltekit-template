@@ -3,6 +3,7 @@
 Configuration assets used by local dev, containers, and production deployments.
 
 ### Files
+
 - config.example.json: sample app configuration (copy to config.json).
 - config.json: local configuration overrides (not committed).
 - config.schema.json: JSON schema for config validation.
@@ -13,11 +14,13 @@ Configuration assets used by local dev, containers, and production deployments.
 - start.sh: container entrypoint and startup helper.
 
 ### Setup
+
 1. Copy the example config:
-	- config.example.json → config.json
+   - config.example.json → config.json
 2. Adjust values for your environment (ports, database, redis, etc.).
 3. If you want validation, use config.schema.json in your editor or tooling.
 
 ### Notes
+
 - config.json is environment-specific. Avoid committing secrets.
 - Docker files and scripts read from config.json and environment variables.

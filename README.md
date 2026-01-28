@@ -10,24 +10,24 @@ A full-featured SvelteKit application template with database integration, authen
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-	- [Install Dependencies](#install-dependencies)
-	- [Recommended vscode Extensions](#recommended-vscode-extensions)
+  - [Install Dependencies](#install-dependencies)
+  - [Recommended vscode Extensions](#recommended-vscode-extensions)
 - [Structure](#structure)
 - [Usage](#usage)
-	- [Set up](#set-up)
-	- [Database](#database)
-	- [Development](#development)
-	- [Production](#production)
-	- [Testing](#testing)
+  - [Set up](#set-up)
+  - [Database](#database)
+  - [Development](#development)
+  - [Production](#production)
+  - [Testing](#testing)
 - [Development Mode](#development-mode)
 - [pnpm Scripts](#pnpm-scripts)
-	- [Development](#development-1)
-	- [Building](#building)
-	- [Code Quality](#code-quality)
-	- [Testing](#testing-1)
+  - [Development](#development-1)
+  - [Building](#building)
+  - [Code Quality](#code-quality)
+  - [Testing](#testing-1)
 - [Build](#build)
 - [Database (pnpm db:)](#database-pnpm-db)
-	- [Database Setup](#database-setup)
+  - [Database Setup](#database-setup)
 - [Additional Scripts](#additional-scripts)
 - [Contributing](#contributing)
 - [License](#license)
@@ -88,11 +88,11 @@ This requires node v22.12.0 or higher. Go ahead and run this script and it will 
 - .vscode/ - Vscode settings and configurations
 - cli/ - Command Line Interface
 - config/ - Configuration and initialization scripts
-	- postgres.sh - Postgres Database setup script
-	- redis.sh - Redis setup script
-	- nvm.sh - Node Version Manager setup script
-	- nginx.conf - Nginx reverse-proxy configuration file
-	- start.sh - Start script for the project
+  - postgres.sh - Postgres Database setup script
+  - redis.sh - Redis setup script
+  - nvm.sh - Node Version Manager setup script
+  - nginx.conf - Nginx reverse-proxy configuration file
+  - start.sh - Start script for the project
 - diagrams/ - Drawio Diagrams
 - drizzle/ - Drizzle ORM configuration and migrations
 - e2e/ - End to End Tests

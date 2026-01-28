@@ -1,4 +1,3 @@
-
 # End-to-end tests
 
 This folder contains Playwright-based end-to-end tests for the app. Use these tests to validate critical user flows, permissions, and file upload behavior against a built or running application.
