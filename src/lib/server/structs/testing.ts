@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Test-only structs and entitlements for non-production runs.
+ *
+ * These structs are meant for unit testing and should not be used in
+ * production environments.
+ *
+ * @example
+ * import { Test } from '$lib/server/structs/testing';
+ * const entry = await Test.Test.new({ name: 'Test', age: 42 }).unwrap();
+ */
 import { text } from 'drizzle-orm/pg-core';
 import { integer } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct';
@@ -11,10 +21,18 @@ terminal.log(
 );
 
 export namespace Test {
+	/**
+	 * Test struct with version history and lifetime.
+	 *
+	 * @property {string} name - Name field.
+	 * @property {number} age - Age field.
+	 */
 	export const Test = new Struct({
 		name: 'test',
 		structure: {
+			/** Name field. */
 			name: text('name').notNull(),
+			/** Age field. */
 			age: integer('age').notNull()
 		},
 		versionHistory: {
@@ -26,10 +44,18 @@ export namespace Test {
 
 	structRegistry.register(Test);
 
+	/**
+	 * Permissions test struct.
+	 *
+	 * @property {string} name - Name field.
+	 * @property {number} age - Age field.
+	 */
 	export const TestPermissions = new Struct({
 		name: 'test_permissions',
 		structure: {
+			/** Name field. */
 			name: text('name').notNull(),
+			/** Age field. */
 			age: integer('age').notNull()
 		}
 	});

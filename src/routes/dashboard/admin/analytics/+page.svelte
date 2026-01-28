@@ -1,3 +1,7 @@
+<!--
+@component
+Admin analytics page at `/dashboard/admin/analytics`.
+-->
 <script lang="ts">
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
 	import Card from '$lib/components/dashboard/Card.svelte';

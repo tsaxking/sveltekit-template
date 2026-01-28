@@ -1,11 +1,28 @@
+/**
+ * @fileoverview AG Grid checkbox cell and header renderers.
+ *
+ * @example
+ * import { CheckBoxSelectRenderer, HeaderCheckboxRenderer } from '$lib/utils/ag-grid/checkbox-select';
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
 
+/**
+ * Checkbox renderer for row selection.
+ */
 export class CheckBoxSelectRenderer<T> implements ICellRendererComp {
+	/** Root element container. */
 	private eGui!: HTMLElement;
+	/** Checkbox input element. */
 	private input!: HTMLInputElement;
+	/** Cached renderer params. */
 	private params!: ICellRendererParams<T>;
 
+	/**
+	 * Initializes the renderer for a row.
+	 *
+	 * @param {ICellRendererParams<T>} params - Renderer params.
+	 */
 	init(params: ICellRendererParams<T>): void {
 		this.params = params;
 
@@ -35,25 +52,47 @@ export class CheckBoxSelectRenderer<T> implements ICellRendererComp {
 		this.eGui.appendChild(box);
 	}
 
+	/**
+	 * Returns the renderer root element.
+	 */
 	getGui(): HTMLElement {
 		return this.eGui;
 	}
 
+	/**
+	 * Refreshes checkbox state from node data.
+	 *
+	 * @param {ICellRendererParams<T>} params - Renderer params.
+	 */
 	refresh(params: ICellRendererParams<T>): boolean {
 		this.input.checked = !!(params.node as any).checkboxSelected;
 		return true;
 	}
 
+	/**
+	 * Cleanup hook.
+	 */
 	destroy(): void {
 		this.input.remove();
 	}
 }
 
+/**
+ * Header renderer that toggles all row checkboxes.
+ */
 export class HeaderCheckboxRenderer implements ICellRendererComp {
+	/** Root element container. */
 	private eGui!: HTMLElement;
+	/** Checkbox input element. */
 	private input!: HTMLInputElement;
+	/** Cached renderer params. */
 	private params!: ICellRendererParams;
 
+	/**
+	 * Initializes the header checkbox renderer.
+	 *
+	 * @param {ICellRendererParams} params - Renderer params.
+	 */
 	init(params: ICellRendererParams): void {
 		this.params = params;
 
@@ -102,16 +141,27 @@ export class HeaderCheckboxRenderer implements ICellRendererComp {
 		this.updateState();
 	}
 
+	/**
+	 * Returns the renderer root element.
+	 */
 	getGui(): HTMLElement {
 		return this.eGui;
 	}
 
+	/**
+	 * Refreshes header checkbox state.
+	 *
+	 * @param {ICellRendererParams} params - Renderer params.
+	 */
 	refresh(params: ICellRendererParams): boolean {
 		this.params = params;
 		this.updateState();
 		return true;
 	}
 
+	/**
+	 * Computes checked/indeterminate state.
+	 */
 	private updateState() {
 		const api = this.params.api;
 		let checkedCount = 0;
@@ -136,6 +186,9 @@ export class HeaderCheckboxRenderer implements ICellRendererComp {
 		}
 	}
 
+	/**
+	 * Cleanup hook.
+	 */
 	destroy(): void {
 		this.input.remove();
 	}

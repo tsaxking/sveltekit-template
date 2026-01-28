@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin accounts list at `/dashboard/admin/account`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Permissions } from '$lib/server/structs/permissions.js';
 import { redirect, fail } from '@sveltejs/kit';

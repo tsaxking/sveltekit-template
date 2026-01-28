@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Reactive struct data arrays and pagination helpers.
+ *
+ * @example
+ * import { DataArr } from '$lib/services/struct/data-arr';
+ * const arr = new DataArr(struct, []);
+ */
 import { Struct, type Blank } from './index';
 import { get, writable, type Writable } from 'svelte/store';
 import { StructData } from './struct-data';

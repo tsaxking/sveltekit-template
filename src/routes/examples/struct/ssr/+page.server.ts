@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for `/examples/struct/ssr`.
+ */
 import { Test } from '$lib/server/structs/testing.js';
 import { fail } from '@sveltejs/kit';
 

@@ -1,3 +1,7 @@
+<!--
+@component
+Example database page at `/examples/db`.
+-->
 <script lang="ts">
 	import { Table } from '$lib/services/db/table';
 	import { onMount } from 'svelte';

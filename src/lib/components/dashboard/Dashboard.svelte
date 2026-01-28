@@ -18,6 +18,26 @@
 	});
 </script>
 
+<!--
+@component
+Dashboard layout wrapper that renders cards grid.
+
+**Props**
+- `body`: `Snippet<[Dashboard.Card[]]>` — Render function for cards.
+- `dashboard`: `Dashboard.Dashboard` — Dashboard controller.
+
+**Example**
+```svelte
+<Dashboard {dashboard}>
+	{#snippet body(cards)}
+		{#each cards as card}
+			<Card {card}>{#snippet body()}...{/snippet}</Card>
+		{/each}
+	{/snippet}
+</Dashboard>
+```
+-->
+
 <div class="container-fluid layer-1">
 	<h1>{capitalize(dashboard.name)}</h1>
 	<MinimizedCards {dashboard} />

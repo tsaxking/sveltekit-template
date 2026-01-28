@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Client-side SSE manager for realtime updates.
+ *
+ * @example
+ * import { sse } from '$lib/services/sse';
+ * sse.on('notification', (data) => console.log(data));
+ */
 import { browser } from '$app/environment';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { decode } from 'ts-utils/text';

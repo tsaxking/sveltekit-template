@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin struct data `/dashboard/admin/data/[struct]`.
+ */
 import { DB } from '$lib/server/db/index.js';
 import { Account } from '$lib/server/structs/account.js';
 import { redirect, fail } from '@sveltejs/kit';

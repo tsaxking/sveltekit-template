@@ -1,3 +1,6 @@
+/**
+ * @fileoverview OAuth sign-up endpoint at `/api/oauth/sign-up`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';

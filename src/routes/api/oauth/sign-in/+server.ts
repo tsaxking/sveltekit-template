@@ -1,3 +1,6 @@
+/**
+ * @fileoverview OAuth sign-in endpoint at `/api/oauth/sign-in`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';
 import { redirect } from '@sveltejs/kit';

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview SSE ping endpoint at `/api/sse/ping/[uuid]`.
+ */
 import { sse } from '$lib/server/services/sse';
 
 export const GET = async (event) => {

@@ -28,6 +28,19 @@
 	};
 </script>
 
+<!--
+@component
+Role search list with selection handler.
+
+**Props**
+- `onselect`: `(role: Permissions.RoleData) => void` — Called with selected role.
+
+**Example**
+```svelte
+<RoleSelect onselect={(role) => console.log(role)} />
+```
+-->
+
 <div>
 	<div class="form-floating mb-3">
 		<input

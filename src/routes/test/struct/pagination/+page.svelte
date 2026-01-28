@@ -1,3 +1,7 @@
+<!--
+@component
+Struct pagination test page at `/test/struct/pagination`.
+-->
 <script lang="ts">
 	import Grid from '$lib/components/general/Grid.svelte';
 	import { Test } from '$lib/model/testing.svelte';

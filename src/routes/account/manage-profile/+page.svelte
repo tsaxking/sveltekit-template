@@ -1,3 +1,7 @@
+<!--
+@component
+Account profile management page at `/account/manage-profile`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import UsernameChange from '$lib/components/account/UsernameChange.svelte';

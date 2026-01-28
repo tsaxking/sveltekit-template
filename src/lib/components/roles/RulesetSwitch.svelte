@@ -77,6 +77,26 @@
 	});
 </script>
 
+<!--
+@component
+Toggle for granting or revoking a role ruleset.
+
+**Props**
+- `role`: `Permissions.RoleData` — Target role.
+- `ruleset`: `Permissions.RoleRulesetData` — Parent ruleset to toggle.
+- `saveOnChange`: `boolean` — Save immediately on change.
+
+**Exports**
+- `hasUnsaved`: `Writable<boolean>` — Unsaved state store.
+- `save()`: persist current state.
+- `set(value: boolean)`: set toggle state.
+
+**Example**
+```svelte
+<RulesetSwitch {role} {ruleset} saveOnChange={true} />
+```
+-->
+
 <div class="form-check form-switch">
 	<input
 		{disabled}

@@ -1,3 +1,7 @@
+<!--
+@component
+Canvas critters example at `/examples/canvas/critters`.
+-->
 <script lang="ts">
 	import { render } from '$lib/canvas/critters';
 	import { onMount } from 'svelte';

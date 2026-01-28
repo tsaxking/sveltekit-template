@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for `/account/[username]` profile page.
+ */
 import { Account } from '$lib/server/structs/account';
 import { fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';

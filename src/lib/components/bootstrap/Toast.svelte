@@ -118,6 +118,32 @@
 	onMount(() => show());
 </script>
 
+<!--
+@component
+Toast notification rendered in a portal.
+
+**Props**
+- `title`: `string` — Toast title.
+- `message`: `string` — Toast body text.
+- `color`: `BootstrapColor` — Base color.
+- `autoHide`: `number` — Auto-hide timeout in milliseconds.
+- `icon`?: `Snippet` — Optional icon snippet.
+- `animate`: `boolean` — Toggle entrance/exit animations.
+- `textColor`?: `BootstrapColor` — Override text color.
+- `onHide`?: `() => void` — Called after hide.
+- `onShow`?: `() => void` — Called after show.
+
+**Exports**
+- `show()`: show toast.
+- `hide()`: hide toast.
+- `destroy()`: cleanup timers.
+
+**Example**
+```svelte
+<Toast title="Updated" message="Saved" color="success" autoHide={4000} animate={true} />
+```
+-->
+
 <Portal target="body">
 	<div
 		bind:this={toast}

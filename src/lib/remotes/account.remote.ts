@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Account RPC layer for shared client/server access.
+ *
+ * Each `query()`/`command()` curries a handler with a Zod schema that validates
+ * inputs at the boundary, enabling type-safe and permission-safe usage on both
+ * client and server.
+ *
+ * @example
+ * import * as accountRemote from '$lib/remotes/account.remote';
+ * const results = await accountRemote.search({ query: 'alice', limit: 10, page: 0 });
+ */
 import { command, query } from '$app/server';
 import z from 'zod';
 import { Account } from '$lib/server/structs/account';
@@ -5,6 +16,11 @@ import { getAccount, getSession, isLoggedIn } from './index.remote';
 import { Session } from '$lib/server/structs/session';
 import { error } from '@sveltejs/kit';
 
+/**
+ * Searches accounts by username or profile fields.
+ *
+ * @param {{ query: string; limit?: number; page?: number }} data - Search payload.
+ */
 export const search = query(
 	z.object({
 		query: z.string().min(1).max(255),
@@ -26,12 +42,20 @@ export const search = query(
 	}
 );
 
+/**
+ * Returns the current account or 401 if not signed in.
+ */
 export const self = query(async () => {
 	const a = await getAccount();
 	if (!a) return error(401, 'Unauthorized');
 	return a.safe();
 });
 
+/**
+ * Checks whether a username already exists.
+ *
+ * @param {{ username: string }} data - Username payload.
+ */
 export const usernameExists = query(
 	z.object({
 		username: z.string().min(3).max(32)
@@ -48,6 +72,11 @@ export const usernameExists = query(
 	}
 );
 
+/**
+ * Returns unread notifications for the current account.
+ *
+ * @param {{ page?: number; limit?: number }} data - Paging payload.
+ */
 export const getOwnNotifs = query(
 	z.object({
 		page: z.number().min(0).default(0),
@@ -75,11 +104,19 @@ export const getOwnNotifs = query(
 	}
 );
 
+/**
+ * Signs out the current session.
+ */
 export const signOut = command(async () => {
 	const session = await getSession();
 	await Session.signOut(session).unwrap();
 });
 
+/**
+ * Returns all notifications for the current account.
+ *
+ * @param {{ page?: number; limit?: number }} data - Paging payload.
+ */
 export const getNotifications = query(
 	z.object({
 		limit: z.number().min(1).max(100).default(10),

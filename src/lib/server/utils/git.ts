@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Git repository helper utilities.
+ *
+ * @example
+ * import { branch, commit } from '$lib/server/utils/git';
+ * const b = await branch().unwrap();
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { runTask } from './task';
 

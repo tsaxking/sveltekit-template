@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Struct registry and permission overrides.
+ *
+ * Registers server structs and configures block/bypass handlers by action.
+ *
+ * @example
+ * import registry from '$lib/server/services/struct-registry';
+ * registry.register(MyStruct).block(DataAction.Delete);
+ */
 import type { DataAction, PropertyAction } from '../../types/struct';
 import { DataVersion, Struct, StructData, type Blank } from 'drizzle-struct';
 import type { Account } from '../structs/account';

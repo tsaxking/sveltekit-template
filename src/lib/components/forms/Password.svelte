@@ -48,6 +48,27 @@
 	let input: HTMLInputElement;
 </script>
 
+<!--
+@component
+Password input with visibility toggle and optional label.
+
+**Props**
+- `value`?: `string` — Current value (bindable).
+- `placeholder`: `string` — Input placeholder.
+- `onInput`?: `(value: string) => void` — Input handler.
+- `onChange`?: `(value: string) => void` — Change handler.
+- `name`: `string` — Input name.
+- `floatingLabel`?: `boolean` — Use floating label layout.
+- `label`?: `string` — Label text.
+- `buttonColor`?: `'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'link'` — Toggle button color.
+- `id`?: `string` — Input id (defaults to `name`).
+
+**Example**
+```svelte
+<Password name="password" placeholder="Password" label="Password" floatingLabel />
+```
+-->
+
 {#snippet password()}
 	<input
 		bind:this={input}

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Server load/actions for `/account/sign-in`.
+ */
+/**
+ * @fileoverview Server load/actions for `/account/sign-in`.
+ */
 import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';

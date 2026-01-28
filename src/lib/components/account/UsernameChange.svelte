@@ -33,6 +33,19 @@
 	};
 </script>
 
+<!--
+@component
+Username change input with availability checks.
+
+**Props**
+- `account`: `Account.AccountData` — Current account.
+
+**Example**
+```svelte
+<UsernameChange {account} />
+```
+-->
+
 <div class="form-floating mb-3">
 	<input
 		type="text"

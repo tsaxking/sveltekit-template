@@ -1,4 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * @fileoverview Struct RPC endpoints for shared client/server access.
+ *
+ * Each `query()`/`command()` curries a handler with a Zod schema that validates
+ * inputs at the boundary, enabling type-safe and permission-safe usage on both
+ * client and server.
+ *
+ * All queries send the list of ids currently cached on the client to minimize
+ * redundant data transfer.
+ *
+ * @example
+ * import * as structRemote from '$lib/remotes/struct.remote';
+ * await structRemote.create({ struct: 'account', data: { username: 'demo' }, attributes: [] });
+ */
 // all queries will send the list of ids it currently has cached to avoid redundant data transfer
 
 import { DataAction, PropertyAction } from '$lib/types/struct';
@@ -11,6 +25,14 @@ import { getAccount, isAdmin } from './index.remote';
 import { Account } from '$lib/server/structs/account';
 import { Permissions } from '$lib/server/structs/permissions';
 
+/**
+ * Creates a new struct record.
+ *
+ * @param {object} params - Create parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {Record<string, unknown>} params.data - Payload data.
+ * @param {string[]} params.attributes - Attribute list.
+ */
 export const create = command(
 	z.object({
 		struct: z.string(),
@@ -78,6 +100,13 @@ export const create = command(
 	}
 );
 
+/**
+ * Validates the client-side structure for a struct.
+ *
+ * @param {object} params - Connection parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {Record<string, string>} params.structure - Client structure map.
+ */
 export const connect = query(
 	z.object({
 		struct: z.string(),
@@ -125,6 +154,14 @@ export const connect = query(
 	}
 );
 
+/**
+ * Updates a struct record by id.
+ *
+ * @param {object} params - Update parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ * @param {Record<string, unknown>} params.data - Partial update data.
+ */
 export const update = command(
 	z.object({
 		struct: z.string(),
@@ -221,6 +258,13 @@ export const update = command(
 	}
 );
 
+/**
+ * Archives a struct record by id.
+ *
+ * @param {object} params - Archive parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ */
 export const archive = command(
 	z.object({
 		struct: z.string(),
@@ -272,6 +316,13 @@ export const archive = command(
 	}
 );
 
+/**
+ * Restores an archived struct record.
+ *
+ * @param {object} params - Restore parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ */
 export const restoreArchive = command(
 	z.object({
 		struct: z.string(),
@@ -325,6 +376,12 @@ export const restoreArchive = command(
 	}
 );
 
+/**
+ * Clears all data from a struct.
+ *
+ * @param {object} params - Clear parameters.
+ * @param {string} params.struct - Struct name.
+ */
 export const clear = command(
 	z.object({
 		struct: z.string()
@@ -344,6 +401,13 @@ export const clear = command(
 	}
 );
 
+/**
+ * Restores a record to a version history entry.
+ *
+ * @param {object} params - Restore parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.vhId - Version history id.
+ */
 export const restoreVersion = command(
 	z.object({
 		struct: z.string(),
@@ -402,6 +466,13 @@ export const restoreVersion = command(
 	}
 );
 
+/**
+ * Permanently deletes a record.
+ *
+ * @param {object} params - Delete parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ */
 export const remove = command(
 	z.object({
 		struct: z.string(),
@@ -452,6 +523,13 @@ export const remove = command(
 	}
 );
 
+/**
+ * Permanently deletes a version history entry.
+ *
+ * @param {object} params - Delete parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.vhId - Version history id.
+ */
 export const removeVersion = command(
 	z.object({
 		struct: z.string(),
@@ -519,6 +597,16 @@ const filterKeys = (keys: string[]) => (item: Record<string, unknown>) => {
 	return filtered;
 };
 
+/**
+ * Returns records based on query type and pagination.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.type - Query type (all/array/single/count/stream).
+ * @param {number} [params.limit] - Max results.
+ * @param {number} [params.offset] - Offset for pagination.
+ * @param {string[]} [params.ids] - Cached ids on the client.
+ */
 export const all = query(
 	z.object({
 		struct: z.string(),
@@ -575,6 +663,17 @@ export const all = query(
 	}
 );
 
+/**
+ * Returns records matching a property filter.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {Record<string, unknown>} params.filter - Property filter.
+ * @param {string} params.type - Query type.
+ * @param {number} [params.limit] - Max results.
+ * @param {number} [params.offset] - Offset for pagination.
+ * @param {string[]} [params.ids] - Cached ids on the client.
+ */
 export const get = query(
 	z.object({
 		struct: z.string(),
@@ -632,6 +731,13 @@ export const get = query(
 	}
 );
 
+/**
+ * Returns a record by id.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ */
 export const fromId = query(
 	z.object({
 		struct: z.string(),
@@ -672,6 +778,13 @@ export const fromId = query(
 	}
 );
 
+/**
+ * Returns records by a list of ids.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string[]} params.ids - Record ids.
+ */
 export const fromIds = query(
 	z.object({
 		struct: z.string(),
@@ -728,6 +841,15 @@ export const fromIds = query(
 	}
 );
 
+/**
+ * Returns archived records.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.type - Query type.
+ * @param {number} [params.limit] - Max results.
+ * @param {number} [params.offset] - Offset for pagination.
+ */
 export const archived = query(
 	z.object({
 		struct: z.string(),
@@ -786,6 +908,13 @@ export const archived = query(
 	}
 );
 
+/**
+ * Returns version history for a record.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {string} params.id - Record id.
+ */
 export const versionHistory = query(
 	z.object({
 		struct: z.string(),
@@ -831,6 +960,13 @@ export const versionHistory = query(
 
 // TODO: Pagination
 
+/**
+ * Executes multiple commands in a single request.
+ *
+ * @param {object} params - Batch parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {Array<{ action: string; data: Record<string, unknown> }>} params.commands - Commands list.
+ */
 export const batchCommand = command(
 	z.array(
 		z.object({
@@ -898,6 +1034,13 @@ export const batchCommand = command(
 	}
 );
 
+/**
+ * Executes multiple queries in a single request.
+ *
+ * @param {object} params - Batch parameters.
+ * @param {string} params.struct - Struct name.
+ * @param {Array<{ action: string; data: Record<string, unknown> }>} params.queries - Queries list.
+ */
 export const batchQuery = query(
 	z.array(
 		z.object({

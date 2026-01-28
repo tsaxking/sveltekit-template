@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Struct data staging and conflict resolution.
+ *
+ * Provides local staging of struct data with merge/conflict helpers.
+ *
+ * @example
+ * import { StructDataStage } from '$lib/services/struct/data-staging';
+ * const stage = new StructDataStage(data);
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { type Blank, type PartialStructable, type GlobalCols } from './index';

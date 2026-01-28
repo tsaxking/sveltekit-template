@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Static asset proxy for `/assets/[...filepath]`.
+ */
 import fs from 'fs/promises';
 import path from 'path';
 import mime from 'mime-types';

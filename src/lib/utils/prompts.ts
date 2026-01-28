@@ -1,5 +1,5 @@
 /**
- * Modal and notification system for user interactions
+ * @fileoverview Modal and notification system for user interactions.
  *
  * Provides a comprehensive set of modal dialogs and notification utilities:
  * - Prompt dialogs with validation and keyboard support
@@ -13,6 +13,10 @@
  *
  * All modals support keyboard navigation (Enter to confirm, Escape to cancel)
  * and auto-focus on input elements for better UX.
+ *
+ * @example
+ * import { prompt } from '$lib/utils/prompts';
+ * const name = await prompt('Name?');
  */
 import { browser } from '$app/environment';
 import { type BootstrapColor } from 'colors/color';

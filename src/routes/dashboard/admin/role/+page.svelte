@@ -1,3 +1,7 @@
+<!--
+@component
+Admin roles list page at `/dashboard/admin/role`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
