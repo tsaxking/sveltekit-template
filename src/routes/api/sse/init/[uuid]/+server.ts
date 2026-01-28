@@ -1,3 +1,6 @@
+/**
+ * @fileoverview SSE init endpoint at `/api/sse/init/[uuid]`.
+ */
 import { sse } from '$lib/server/services/sse';
 
 export async function GET(event) {

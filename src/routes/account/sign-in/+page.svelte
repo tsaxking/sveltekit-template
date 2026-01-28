@@ -1,3 +1,7 @@
+<!--
+@component
+Sign-in page at `/account/sign-in`.
+-->
 <script lang="ts">
 	import '$lib/styles/gsi.css';
 	import type { ActionData } from './$types';

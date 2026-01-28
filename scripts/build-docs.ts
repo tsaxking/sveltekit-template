@@ -89,6 +89,17 @@ const buildTree = (paths: string[], base: string) => {
 			const part = parts[i];
 			const isLeaf = i === parts.length - 1;
 			const name = part.replace(/\.md$/, '');
+			const isReadme = name.toLowerCase() === 'readme';
+
+			if (isLeaf && isReadme) {
+				const prefix = parts
+					.slice(0, i)
+					.map((p) => p.replace(/\.md$/, ''))
+					.join('/');
+				const link = prefix ? `/${base}/${prefix}/` : `/${base}/`;
+				current.link = link;
+				continue;
+			}
 
 			if (!current.children.has(name)) {
 				current.children.set(name, createNode(name));
@@ -109,13 +120,15 @@ const buildTree = (paths: string[], base: string) => {
 
 const toSidebarItems = (node: SidebarNode) => {
 	const items = Array.from(node.children.values())
+		.filter((child) => child.name.toLowerCase() !== 'readme')
 		.sort((a, b) => a.name.localeCompare(b.name))
 		.map((child) => {
 			const item: { text: string; link?: string; items?: (typeof item)[] } = {
 				text: titleize(child.name)
 			};
 			if (child.link) {
-				item.link = child.link;
+				const needsSlash = child.children.size > 0 && !child.link.endsWith('/');
+				item.link = needsSlash ? `${child.link}/` : child.link;
 			}
 			if (child.children.size > 0) {
 				item.items = toSidebarItems(child);
@@ -124,6 +137,84 @@ const toSidebarItems = (node: SidebarNode) => {
 		});
 
 	return items;
+};
+
+const extractSvelteDoc = (content: string) => {
+	const blocks = content.match(/<!--([\s\S]*?)-->/g) ?? [];
+	for (const block of blocks) {
+		if (!block.includes('@component')) continue;
+		const lines = block
+			.replace(/^<!--/, '')
+			.replace(/-->$/, '')
+			.replace(/\r/g, '')
+			.split('\n')
+			.map((line) => line.trim());
+
+		const filtered = lines.filter((line) => line && !line.startsWith('@component'));
+		const body = filtered.join('\n').trim();
+		if (body) return body;
+	}
+
+	return null;
+};
+
+const writeSvelteIndex = async (
+	sectionDir: string,
+	title: string,
+	entries: string[]
+) => {
+	const lines: string[] = ['---', `title: ${title}`, '---', '', `# ${title}`, ''];
+
+	const sorted = [...entries].sort((a, b) => a.localeCompare(b));
+	for (const rel of sorted) {
+		lines.push(`- [${rel}](./${rel})`);
+	}
+
+	await ensureDir(sectionDir);
+	await fs.writeFile(path.join(sectionDir, 'README.md'), lines.join('\n'));
+};
+
+const generateSvelteDocs = async () => {
+	const targets = [
+		{ root: path.join(ROOT, 'src', 'lib', 'components'), title: 'Components' },
+		{ root: path.join(ROOT, 'src', 'routes'), title: 'Routes (Svelte)' }
+	];
+
+	for (const target of targets) {
+		let entries: string[] = [];
+		try {
+			const files = await glob('**/*.svelte', { cwd: target.root, nodir: true });
+			entries = [];
+			for (const relPath of files) {
+				const absPath = path.join(target.root, relPath);
+				const content = await fs.readFile(absPath, 'utf-8');
+				const doc = extractSvelteDoc(content);
+				if (!doc) continue;
+
+				const relNoExt = relPath.replace(/\.svelte$/, '');
+				const outputPath = path.join(
+					DOCS_DIR,
+					'api',
+					path.relative(ROOT, absPath).replace(/\.svelte$/, '.md')
+				);
+				await ensureDir(path.dirname(outputPath));
+				const title = titleFromPath(relNoExt);
+				const body = ensureFrontmatter(`\n# ${title}\n\n${doc}\n`, title);
+				await fs.writeFile(outputPath, body);
+				entries.push(relNoExt);
+			}
+			if (entries.length > 0) {
+				const sectionDir = path.join(
+					DOCS_DIR,
+					'api',
+					path.relative(ROOT, target.root)
+				);
+				await writeSvelteIndex(sectionDir, target.title, entries);
+			}
+		} catch {
+			// ignore
+		}
+	}
 };
 
 const writeSidebar = async () => {
@@ -326,6 +417,28 @@ const writeApiIndex = async () => {
 	await fs.writeFile(path.join(API_DIR, 'index.md'), lines.join('\n'));
 };
 
+const ensureApiIndexes = async () => {
+	const readmes = await glob('api/**/README.md', {
+		cwd: DOCS_DIR,
+		nodir: true
+	});
+
+	await Promise.all(
+		readmes.map(async (relPath) => {
+			const readmePath = path.join(DOCS_DIR, relPath);
+			const indexPath = path.join(path.dirname(readmePath), 'index.md');
+			try {
+				await fs.access(indexPath);
+				return;
+			} catch {
+				// continue to write
+			}
+			const content = await fs.readFile(readmePath, 'utf-8');
+			await fs.writeFile(indexPath, content);
+		})
+	);
+};
+
 const copyMarkdownFiles = async () => {
 	const ignore = [
 		'**/node_modules/**',
@@ -402,7 +515,9 @@ const buildApiDocs = async () => {
 		return result;
 	}
 
+	await generateSvelteDocs();
 	await sanitizeApiDocs();
+	await ensureApiIndexes();
 	await writeApiIndex();
 	await injectFileOverviews();
 

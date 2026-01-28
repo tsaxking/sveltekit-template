@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Client load for admin accounts list `/dashboard/admin/account`.
+ */
 import { Account } from '$lib/model/account.js';
 import { Permissions } from '$lib/model/permissions.js';
 

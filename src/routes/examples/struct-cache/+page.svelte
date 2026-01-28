@@ -1,3 +1,7 @@
+<!--
+@component
+Example struct cache page at `/examples/struct-cache`.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte';
 	import { onMount } from 'svelte';

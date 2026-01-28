@@ -1,3 +1,7 @@
+<!--
+@component
+Sign-out page at `/account/sign-out`.
+-->
 <script lang="ts">
 	const goBack = () => {
 		window.history.back();

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Test SSE init endpoint at `/test/sse/init`.
+ */
 import { sse } from '$lib/server/services/sse.js';
 
 export const POST = (event) => {

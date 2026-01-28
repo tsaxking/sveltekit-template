@@ -1,3 +1,10 @@
+<!--
+@component
+Canvas bubbles example at `/examples/canvas/bubbles`.
+
+Demonstrates the canvas rendering pipeline and animation helpers for bubbles.
+Used for visual testing and iteration on canvas effects.
+-->
 <script lang="ts">
 	import { render } from '$lib/canvas/bubbles';
 	import { onMount } from 'svelte';

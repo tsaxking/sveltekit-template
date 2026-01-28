@@ -1,3 +1,6 @@
+/**
+ * @fileoverview SSE ack endpoint at `/api/sse/ack/[uuid]/[id]`.
+ */
 import { sse } from '$lib/server/services/sse';
 
 export const GET = async (event) => {

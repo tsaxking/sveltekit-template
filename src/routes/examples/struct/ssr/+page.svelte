@@ -1,3 +1,7 @@
+<!--
+@component
+Server-side struct example page at `/examples/struct/ssr`.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte.js';
 

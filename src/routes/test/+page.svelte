@@ -1,3 +1,10 @@
+<!--
+@component
+Test index page at `/test`.
+
+Landing page for QA/verification routes. Links out to focused test pages used
+for manual checks during development.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte.ts';
 	import { toSnakeCase } from 'ts-utils/text';

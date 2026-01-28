@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin role detail `/dashboard/admin/role/[roleId]`.
+ */
 import { redirect, fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 import { Account } from '$lib/server/structs/account';

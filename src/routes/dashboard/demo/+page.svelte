@@ -1,3 +1,7 @@
+<!--
+@component
+Dashboard demo page at `/dashboard/demo`.
+-->
 <script lang="ts">
 	import Card from '$lib/components/dashboard/Card.svelte';
 	import { Dashboard } from '$lib/model/dashboard';

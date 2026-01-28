@@ -1,3 +1,7 @@
+<!--
+@component
+File upload test page at `/test/file-upload`.
+-->
 <script lang="ts">
 	import FileUploaderComponent from '$lib/components/forms/FileUploader.svelte';
 </script>

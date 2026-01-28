@@ -1,3 +1,6 @@
+/**
+ * @fileoverview File upload endpoint for account profile updates at `/account/profile`.
+ */
 import { FileReceiver } from '$lib/server/utils/files';
 import { error } from '@sveltejs/kit';
 

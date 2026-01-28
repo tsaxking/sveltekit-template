@@ -1,3 +1,7 @@
+<!--
+@component
+Modal test page at `/test/modals`.
+-->
 <script lang="ts">
 	import { prompt, alert, confirm, choose, select, colorPicker, notify } from '$lib/utils/prompts';
 </script>

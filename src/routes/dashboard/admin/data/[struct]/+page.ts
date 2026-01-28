@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Client load for admin struct data `/dashboard/admin/data/[struct]`.
+ */
 import { Struct } from '$lib/services/struct';
 import '$lib/model/account';
 import '$lib/model/analytics';

@@ -1,3 +1,7 @@
+<!--
+@component
+Root error page rendered on routing or server failures.
+-->
 <script lang="ts">
 	import { page } from '$app/state';
 	import codes from 'http-status-codes';

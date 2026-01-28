@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin account detail `/dashboard/admin/account/[accountId]`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';
 import { redirect, fail } from '@sveltejs/kit';

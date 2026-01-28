@@ -1,3 +1,7 @@
+<!--
+@component
+Test account page at `/test/account`.
+-->
 <script lang="ts">
 	const { data } = $props();
 
