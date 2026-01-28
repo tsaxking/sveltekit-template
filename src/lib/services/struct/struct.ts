@@ -317,7 +317,7 @@ export type StatusMessage<T = void> = {
 
 /**
  * Writable store that holds a single StructData item and allows updates to it.
- * This is useful for managin1g a single piece of data that can be updated and subscribed to.
+ * This is useful for managing a single piece of data that can be updated and subscribed to.
  * For example, it can be used to manage a single user profile or settings.
  * This differs from the StructData class in that it is a writable store and is meant to be used in a reactive context.
  * This differs from the StructDataProxy in that it does not proxy the data and is meant to be used in a reactive context.
