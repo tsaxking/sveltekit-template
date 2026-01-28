@@ -14,8 +14,6 @@ The runner lives at scripts/index.ts and is wired in package.json as the script 
 ## Common scripts (from package.json)
 
 - `pnpm route-tree`: generates the route tree used by the app.
-- `pnpm build:docs`: generates markdown docs (build-docs script).
-- `pnpm deploy:docs`: builds docs for deployment.
 - `pnpm build:email`: builds MJML email templates.
 - `pnpm test:schema`: validates the schema.
 - `pnpm test:integration`: runs integration tests.

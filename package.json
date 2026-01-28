@@ -32,9 +32,7 @@
 		"fix-readme": "pnpm script fix-readme.ts",
 		"route-tree": "pnpm script create-route-tree.ts",
 		"backup": "pnpm script backup",
-		"restore": "pnpm script restore",
-		"deploy:docs": "pnpm script build-docs",
-		"build:docs": "pnpm script generate-doc-mds"
+		"restore": "pnpm script restore"
 	},
 	"packageManager": "pnpm@10.16.0",
 	"engines": {
