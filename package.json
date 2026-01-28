@@ -32,11 +32,7 @@
 		"fix-readme": "pnpm script fix-readme.ts",
 		"route-tree": "pnpm script create-route-tree.ts",
 		"backup": "pnpm script backup",
-		"restore": "pnpm script restore",
-		"build-docs": "pnpm script build-docs.ts",
-		"docs:build": "pnpm script build-docs.ts",
-		"docs:dev": "docusaurus start --config ./docs/docusaurus.config.cjs",
-		"docs:serve": "docusaurus serve --config ./docs/docusaurus.config.cjs --dir ./docs/dist"
+		"restore": "pnpm script restore"
 	},
 	"packageManager": "pnpm@10.16.0",
 	"engines": {
@@ -44,9 +40,6 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^3.2.7",
-		"@docusaurus/core": "^3.7.0",
-		"@docusaurus/preset-classic": "^3.7.0",
-		"@easyops-cn/docusaurus-search-local": "^0.42.0",
 		"@eslint/compat": "^1.3.1",
 		"@playwright/test": "^1.54.2",
 		"@rajesh896__broprint.js": "link:@types/@rajesh896__broprint.js",
@@ -86,8 +79,6 @@
 		"svelte": "^5.46.4",
 		"svelte-check": "^4.3.5",
 		"ts-node": "^10.9.2",
-		"typedoc": "^0.28.9",
-		"typedoc-plugin-markdown": "^4.8.0",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.38.0",
 		"vite": "^5.4.19",
