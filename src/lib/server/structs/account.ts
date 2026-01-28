@@ -1,3 +1,21 @@
+/**
+ * @fileoverview Account domain structs, helpers, and notification utilities.
+ *
+ * This module defines the primary account struct and related entities such as
+ * account settings, admin/developer memberships, account info, notifications,
+ * and password reset tokens. It also provides helper functions for hashing,
+ * querying, and notifications.
+ *
+ * @example
+ * import { Account } from '$lib/server/structs/account';
+ * const account = await Account.createAccount({
+ *   username: 'jdoe',
+ *   email: 'jdoe@example.com',
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ *   password: 'S3cure!'
+ * }).unwrap();
+ */
 import { boolean, text } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct';
 import { uuid } from '../utils/uuid';
@@ -16,6 +34,19 @@ import structRegistry from '../services/struct-registry';
 import { DataAction, PropertyAction } from '../../types/struct';
 
 export namespace Account {
+	/**
+	 * Core account record.
+	 *
+	 * @property {string} username - Unique public username.
+	 * @property {string} key - Password hash.
+	 * @property {string} salt - Password salt.
+	 * @property {string} firstName - First name.
+	 * @property {string} lastName - Last name.
+	 * @property {string} email - Unique email address.
+	 * @property {boolean} verified - Email verification status.
+	 * @property {string} verification - Verification token.
+	 * @property {string} lastLogin - ISO timestamp of the last login.
+	 */
 	export const Account = new Struct({
 		name: 'account',
 		structure: {
@@ -98,6 +129,13 @@ export namespace Account {
 		).pipe((ar) => ar.delete());
 	});
 
+	/**
+	 * Per-account key/value settings.
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {string} setting - Setting key.
+	 * @property {string} value - Setting value.
+	 */
 	export const Settings = new Struct({
 		name: 'account_settings',
 		structure: {
@@ -114,6 +152,11 @@ export namespace Account {
 		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId)
 		.bypass(DataAction.Create, (account) => account.id === account.id);
 
+	/**
+	 * Membership for admin accounts.
+	 *
+	 * @property {string} accountId - Account ID of the admin.
+	 */
 	export const Admins = new Struct({
 		name: 'admins',
 		structure: {
@@ -121,6 +164,11 @@ export namespace Account {
 		}
 	});
 
+	/**
+	 * Checks whether an account is an admin.
+	 *
+	 * @param {AccountData} account - Account to check.
+	 */
 	export const isAdmin = (account: AccountData) => {
 		return attemptAsync(async () => {
 			return (
@@ -136,6 +184,9 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Returns all admin accounts.
+	 */
 	export const getAdmins = () => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -145,6 +196,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Membership for developer accounts.
+	 *
+	 * @property {string} accountId - Account ID of the developer.
+	 */
 	export const Developers = new Struct({
 		name: 'developers',
 		structure: {
@@ -152,6 +208,9 @@ export namespace Account {
 		}
 	});
 
+	/**
+	 * Returns all developer accounts.
+	 */
 	export const getDevelopers = () => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -161,6 +220,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Checks whether an account is a developer.
+	 *
+	 * @param {AccountData} account - Account to check.
+	 */
 	export const isDeveloper = (account: AccountData) => {
 		return attemptAsync(async () => {
 			return (
@@ -177,6 +241,17 @@ export namespace Account {
 	};
 	export type AccountData = typeof Account.sample;
 
+	/**
+	 * Extended account profile info (versioned).
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {'all'|'friends'|'none'} viewOnline - Online visibility.
+	 * @property {string} picture - Profile image URL.
+	 * @property {string} bio - Short biography.
+	 * @property {string} website - Personal website URL.
+	 * @property {string} socials - Serialized social links.
+	 * @property {'default'|'dark'|'light'} theme - UI theme preference.
+	 */
 	export const AccountInfo = new Struct({
 		name: 'account_info',
 		structure: {
@@ -224,6 +299,11 @@ export namespace Account {
 		});
 	});
 
+	/**
+	 * Determines whether an account is currently online.
+	 *
+	 * @param {string} accountId - Account ID to check.
+	 */
 	export const isOnline = (accountId: string) => {
 		return attemptAsync(async () => {
 			const account = await Account.fromId(accountId).unwrap();
@@ -247,6 +327,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Retrieves account info, creating a default record if missing.
+	 *
+	 * @param {AccountData} account - Owning account.
+	 */
 	export const getAccountInfo = (account: AccountData) => {
 		return attemptAsync(async () => {
 			const info = await AccountInfo.get(
@@ -268,6 +353,18 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Notification record for an account.
+	 *
+	 * @property {string} accountId - Recipient account ID.
+	 * @property {string} title - Notification title.
+	 * @property {string} severity - Severity level.
+	 * @property {string} message - Notification body.
+	 * @property {string} icon - Icon name.
+	 * @property {string} iconType - Icon set type.
+	 * @property {string} link - Associated link.
+	 * @property {boolean} read - Read/unread state.
+	 */
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
 		structure: {
@@ -288,8 +385,17 @@ export namespace Account {
 		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
 		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId);
 
+	/**
+	 * Password reset link lifetime in milliseconds.
+	 */
 	const PASSWORD_REQUEST_LIFETIME = config.sessions.password_request_lifetime;
 
+	/**
+	 * Password reset token.
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {string} expires - ISO timestamp when the token expires.
+	 */
 	export const PasswordReset = new Struct({
 		name: 'password_reset',
 		structure: {
@@ -307,6 +413,11 @@ export namespace Account {
 		}
 	});
 
+	/**
+	 * Generates a new password hash and salt.
+	 *
+	 * @param {string} password - Plaintext password.
+	 */
 	export const newHash = (password: string) => {
 		return attempt(() => {
 			const salt = crypto.randomBytes(32).toString('hex');
@@ -315,12 +426,24 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Hashes a password using a provided salt.
+	 *
+	 * @param {string} password - Plaintext password.
+	 * @param {string} salt - Salt used for hashing.
+	 */
 	export const hash = (password: string, salt: string) => {
 		return attempt(() => {
 			return crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
 		});
 	};
 
+	/**
+	 * Creates a new account with hashed credentials.
+	 *
+	 * @param {{ username: string; email: string; firstName: string; lastName: string; password: string }} data
+	 * @param {{ canUpdate?: boolean }} [config] - Optional struct creation config.
+	 */
 	export const createAccount = (
 		data: {
 			username: string;
@@ -361,6 +484,12 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Searches accounts by username or email.
+	 *
+	 * @param {string} query - Search term.
+	 * @param {{ type: 'array'; limit: number; offset: number }} config - Paging config.
+	 */
 	export const searchAccounts = (
 		query: string,
 		config: {
@@ -385,6 +514,12 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Sends a notification to active sessions via SSE.
+	 *
+	 * @param {string} accountId - Recipient account ID.
+	 * @param {Notification} notification - Notification payload.
+	 */
 	export const notifyPopup = (accountId: string, notification: Notification) => {
 		return attemptAsync(async () => {
 			Session.Session.get(
@@ -396,6 +531,12 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Persists a notification and sends it over SSE.
+	 *
+	 * @param {string} accountId - Recipient account ID.
+	 * @param {Notification & { icon: Icon; link: string }} notif - Notification payload.
+	 */
 	export const sendAccountNotif = (
 		accountId: string,
 		notif: Notification & {
@@ -416,6 +557,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Creates a new account from OAuth user info.
+	 *
+	 * @param {{ email?: string | null; given_name?: string | null; family_name?: string | null }} data
+	 */
 	export const createAccountFromOauth = (data: {
 		email?: string | null;
 		given_name?: string | null;
@@ -457,6 +603,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Streams all settings for the given account.
+	 *
+	 * @param {string} accountId - Account ID.
+	 */
 	export const getSettings = (accountId: string) => {
 		return Settings.get(
 			{ accountId },
@@ -466,6 +617,11 @@ export namespace Account {
 		).await();
 	};
 
+	/**
+	 * Creates a password reset token and sends the reset email.
+	 *
+	 * @param {AccountData} account - Account requesting a reset.
+	 */
 	export const requestPasswordReset = (account: AccountData) => {
 		return attemptAsync(async () => {
 			PasswordReset.get(

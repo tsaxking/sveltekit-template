@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Icon name unions for supported icon sets.
+ *
+ * @example
+ * import type { MaterialSymbol } from '$lib/types/icons';
+ * const icon: MaterialSymbol = 'home';
+ */
 export type MaterialSymbol =
 	| 'search'
 	| 'search'

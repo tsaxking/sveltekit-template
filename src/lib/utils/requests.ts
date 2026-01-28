@@ -1,3 +1,10 @@
+/**
+ * @fileoverview HTTP request helpers with caching, parsing, and uploads.
+ *
+ * @example
+ * import { Requests } from '$lib/utils/requests';
+ * const data = await Requests.get('/api/status', { expectStream: false, parser: z.any() }).unwrap();
+ */
 import { Loop } from 'ts-utils/loop';
 import { attemptAsync, type Result } from 'ts-utils/check';
 import { Stream } from 'ts-utils/stream';
@@ -6,9 +13,13 @@ import { z } from 'zod';
 import { Struct } from '$lib/services/struct';
 
 export namespace Requests {
+	/** Metadata headers applied to all requests. */
 	export const metadata: Record<string, string> = {};
 	let requests: ServerRequest[] = [];
 
+	/**
+	 * Error thrown for failed HTTP requests.
+	 */
 	class RequestError extends Error {
 		constructor(
 			public readonly status: number,
@@ -26,6 +37,9 @@ export namespace Requests {
 		});
 	}, 1000 * 60);
 
+	/**
+	 * Internal request wrapper that caches in-flight requests.
+	 */
 	class ServerRequest<T extends 'get' | 'post' = 'get' | 'post'> {
 		public readonly time = Date.now();
 		public promise?: Promise<Result<unknown>>;
@@ -98,12 +112,21 @@ export namespace Requests {
 		}
 	}
 
+	/**
+	 * Configuration for GET requests.
+	 */
 	export type GetConfig<T = unknown> = {
 		expectStream: boolean;
 		headers?: Record<string, string>;
 		cache?: boolean;
 		parser: z.ZodType<T>;
 	};
+	/**
+	 * Sends a GET request and parses the response.
+	 *
+	 * @param {string} url - Request URL.
+	 * @param {GetConfig<T>} config - Request config.
+	 */
 	export const get = async <T = unknown>(url: string, config: GetConfig<T>) => {
 		return attemptAsync(async () => {
 			const sr = new ServerRequest<'get'>(url, 'get', config);
@@ -112,6 +135,9 @@ export namespace Requests {
 		});
 	};
 
+	/**
+	 * Configuration for POST requests.
+	 */
 	export type PostConfig<T = unknown> = {
 		expectStream: boolean;
 		headers?: Record<string, string>;
@@ -119,6 +145,12 @@ export namespace Requests {
 		cache?: boolean;
 		parser: z.ZodType<T>;
 	};
+	/**
+	 * Sends a POST request and parses the response.
+	 *
+	 * @param {string} url - Request URL.
+	 * @param {PostConfig<T>} config - Request config.
+	 */
 	export const post = async <T = unknown>(url: string, config: PostConfig<T>) => {
 		return attemptAsync(async () => {
 			const sr = new ServerRequest<'post'>(url, 'post', config);
@@ -127,11 +159,24 @@ export namespace Requests {
 		});
 	};
 
+	/**
+	 * Sets metadata header value for subsequent requests.
+	 *
+	 * @param {string} key - Header key (without X- prefix).
+	 * @param {string} value - Header value.
+	 */
 	export const setMeta = (key: string, value: string) => {
 		metadata[key] = value;
 		Struct.headers.set(key, value);
 	};
 
+	/**
+	 * Uploads a list of files using XMLHttpRequest.
+	 *
+	 * @param {string} url - Upload URL.
+	 * @param {FileList} files - Files to upload.
+	 * @param {{ headers?: Record<string, string>; body?: unknown }} [config] - Optional config.
+	 */
 	export const uploadFiles = (
 		url: string,
 		files: FileList,

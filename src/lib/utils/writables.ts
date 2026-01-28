@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Writable store helpers with debouncing and utilities.
+ *
+ * @example
+ * import { WritableBase } from '$lib/utils/writables';
+ * const store = new WritableBase(0);
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Subscriber, Unsubscriber, Writable } from 'svelte/store';
 import { attemptAsync, debounce, ResultPromise } from 'ts-utils';

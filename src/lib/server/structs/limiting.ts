@@ -1,3 +1,13 @@
+/**
+ * @fileoverview IP and session limiting, blocking, and rate-limit utilities.
+ *
+ * This module manages page rulesets, blocked entities, and rate-limit
+ * enforcement using Redis counters.
+ *
+ * @example
+ * import { Limiting } from '$lib/server/structs/limiting';
+ * const limited = Limiting.isIpLimitedPage('/admin').unwrap();
+ */
 import { text } from 'drizzle-orm/pg-core';
 import { Struct } from 'drizzle-struct';
 import type { Session } from './session';
@@ -48,6 +58,12 @@ export namespace Limiting {
 		);
 	}
 
+	/**
+	 * Per-page IP allow list entry.
+	 *
+	 * @property {string} ip - IP address allowed for a page.
+	 * @property {string} page - Page path pattern.
+	 */
 	export const PageRuleset = new Struct({
 		name: 'page_ruleset',
 		structure: {
@@ -72,18 +88,34 @@ export namespace Limiting {
 		});
 	});
 
+	/**
+	 * Checks whether a page is subject to IP limiting.
+	 *
+	 * @param {string} page - Page path.
+	 */
 	export const isIpLimitedPage = (page: string) => {
 		return attempt(() => {
 			return limits.ip.test(page);
 		});
 	};
 
+	/**
+	 * Checks whether a page is blocked for all users.
+	 *
+	 * @param {string} page - Page path.
+	 */
 	export const isBlockedPage = (page: string) => {
 		return attempt(() => {
 			return limits.blocked.test(page);
 		});
 	};
 
+	/**
+	 * Determines whether an IP is allowed to access a limited page.
+	 *
+	 * @param {string} ip - Client IP address.
+	 * @param {string} page - Requested page path.
+	 */
 	export const isIpAllowed = (ip: string, page: string) => {
 		return attemptAsync(async () => {
 			const manifest = limits.ip.getPattern(page);
@@ -97,6 +129,12 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Blocked IP record.
+	 *
+	 * @property {string} ip - Blocked IP address.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
 		structure: {
@@ -105,6 +143,12 @@ export namespace Limiting {
 		}
 	});
 
+	/**
+	 * Blocked session record.
+	 *
+	 * @property {string} session - Blocked session ID.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedSessions = new Struct({
 		name: 'blocked_sessions',
 		structure: {
@@ -113,6 +157,12 @@ export namespace Limiting {
 		}
 	});
 
+	/**
+	 * Blocked fingerprint record.
+	 *
+	 * @property {string} fingerprint - Fingerprint hash.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedFingerprints = new Struct({
 		name: 'blocked_fingerprints',
 		structure: {
@@ -121,6 +171,12 @@ export namespace Limiting {
 		}
 	});
 
+	/**
+	 * Blocked account record.
+	 *
+	 * @property {string} account - Blocked account ID.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedAccounts = new Struct({
 		name: 'blocked_accounts',
 		structure: {
@@ -129,11 +185,23 @@ export namespace Limiting {
 		}
 	});
 
+	/**
+	 * Thresholds for escalating violations.
+	 *
+	 * @property {number} warn - Violation score to warn.
+	 * @property {number} block - Violation score to block.
+	 */
 	export const ViolationTiers = {
 		warn: 10,
 		block: 50
 	};
 
+	/**
+	 * Checks whether a session, IP, fingerprint, or account is blocked.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData} [account] - Optional account.
+	 */
 	export const isBlocked = (session: Session.SessionData, account?: Account.AccountData) => {
 		return attemptAsync<
 			| {
@@ -176,6 +244,11 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Builds a fingerprint hash from request headers.
+	 *
+	 * @param {Request} request - Incoming request.
+	 */
 	export const getFingerprint = (request: Request) => {
 		const ip = request.headers.get('x-forwarded-for') ?? '';
 		const ua = request.headers.get('user-agent') ?? '';
@@ -189,8 +262,16 @@ export namespace Limiting {
 		return createHash('sha256').update(raw).digest('hex');
 	};
 
+	/**
+	 * Redis counter group for rate limits and violations.
+	 */
 	const limitService = redis.createItemGroup('rate_limit', 'number');
 
+	/**
+	 * Increments and checks the rate limit counter for a key.
+	 *
+	 * @param {string} key - Rate limit key (e.g., IP or session).
+	 */
 	export const rateLimit = async (key: string) => {
 		return attemptAsync(async () => {
 			if (!config.limiting.enabled) return false;
@@ -206,6 +287,14 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Increments violation counters and returns the new severity.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData | undefined} account - Optional account.
+	 * @param {number} increment - Violation increment amount.
+	 * @param {string} reason - Reason for the violation.
+	 */
 	export const violate = async (
 		session: Session.SessionData,
 		account: Account.AccountData | undefined,
@@ -306,6 +395,12 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Returns the highest violation score for the given identifiers.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData} [account] - Optional account.
+	 */
 	export const violationSeverity = (
 		session: Session.SessionData,
 		account?: Account.AccountData

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type-safe form builder with modal prompts.
+ *
+ * @example
+ * import { Form } from '$lib/utils/form';
+ * const form = new Form().input('name', { type: 'text', label: 'Name', required: true });
+ */
 import Modal from '../components/bootstrap/Modal.svelte';
 import { createRawSnippet, mount } from 'svelte';
 import { modalTarget, createButtons, clearModals } from './prompts';

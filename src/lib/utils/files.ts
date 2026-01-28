@@ -1,7 +1,21 @@
+/**
+ * @fileoverview Client-side file upload helper.
+ *
+ * @example
+ * import { FileUploader } from '$lib/utils/files';
+ * const uploader = new FileUploader('/api/files', { method: 'POST' });
+ * const { on, abort } = await uploader.sendFile(file, 'file').unwrap();
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { z } from 'zod';
 
+/**
+ * Uploads files using XMLHttpRequest with progress events.
+ *
+ * @property {string} endpoint - Upload endpoint URL.
+ * @property {{ method: 'POST'|'GET'|'DELETE'; headers?: Record<string, string>; body?: unknown }} config - Request config.
+ */
 export class FileUploader {
 	constructor(
 		public readonly endpoint: string,
@@ -12,6 +26,12 @@ export class FileUploader {
 		}
 	) {}
 
+	/**
+	 * Sends a file using multipart/form-data.
+	 *
+	 * @param {File} file - File to upload.
+	 * @param {string} fieldName - Form field name.
+	 */
 	sendFile(file: File, fieldName: string) {
 		return attemptAsync(async () => {
 			const xhr = new XMLHttpRequest();

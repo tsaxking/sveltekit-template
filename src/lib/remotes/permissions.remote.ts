@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Permission management RPC endpoints (roles, rulesets, entitlements).
+ *
+ * Each `query()`/`command()` curries a handler with a Zod schema that validates
+ * inputs at the boundary, enabling type-safe and permission-safe usage on both
+ * client and server.
+ *
+ * @example
+ * import * as permRemote from '$lib/remotes/permissions.remote';
+ * const roles = await permRemote.searchRoles({ searchKey: 'admin', limit: 10, page: 0 });
+ */
 import { command, query } from '$app/server';
 import z from 'zod';
 import { getAccount } from './index.remote';
@@ -9,6 +20,14 @@ import { DB } from '$lib/server/db';
 import { and, eq } from 'drizzle-orm';
 import { type Entitlement } from '$lib/types/entitlements';
 
+/**
+ * Searches roles by name with pagination.
+ *
+ * @param {object} params - Search parameters.
+ * @param {string} params.searchKey - Partial role name to search.
+ * @param {number} params.limit - Max results per page.
+ * @param {number} params.page - Page index.
+ */
 export const searchRoles = query(
 	z.object({
 		searchKey: z.string().min(1).max(32),
@@ -38,6 +57,15 @@ export const searchRoles = query(
 	}
 );
 
+/**
+ * Creates a role under a parent, enforcing hierarchy permissions.
+ *
+ * @param {object} params - Create parameters.
+ * @param {string} params.name - Role name.
+ * @param {string} params.description - Role description.
+ * @param {string} params.parent - Parent role id.
+ * @param {string} params.color - Hex color string.
+ */
 export const createRole = command(
 	z.object({
 		name: z.string().min(3).max(32),
@@ -116,6 +144,15 @@ export const createRole = command(
 	}
 );
 
+/**
+ * Determines whether `self` can manage `data.account` membership for `data.role`.
+ *
+ * @param {Account.AccountData} self - Acting account.
+ * @param {object} data - Target data.
+ * @param {Permissions.RoleData} data.role - Role being managed.
+ * @param {Account.AccountData} data.account - Account being managed.
+ * @returns {Promise<true|string>} True if permitted, otherwise an error message.
+ */
 const canManage = async (
 	self: Account.AccountData,
 	data: {
@@ -145,6 +182,13 @@ const canManage = async (
 	return true;
 };
 
+/**
+ * Adds an account to a role if the caller can manage membership.
+ *
+ * @param {object} params - Membership parameters.
+ * @param {string} params.role - Role id.
+ * @param {string} params.account - Account id.
+ */
 export const addToRole = command(
 	z.object({
 		role: z.string(),
@@ -200,6 +244,13 @@ export const addToRole = command(
 	}
 );
 
+/**
+ * Removes an account from a role if the caller can manage membership.
+ *
+ * @param {object} params - Membership parameters.
+ * @param {string} params.role - Role id.
+ * @param {string} params.account - Account id.
+ */
 export const removeFromRole = command(
 	z.object({
 		role: z.string(),
@@ -291,6 +342,9 @@ export const removeFromRole = command(
 	}
 );
 
+/**
+ * Returns permissions for the current account.
+ */
 export const myPermissions = query(async () => {
 	const account = await getAccount();
 	if (!account) {
@@ -301,6 +355,12 @@ export const myPermissions = query(async () => {
 	return rs.filter((r) => r.struct.name === 'role_rulesets') as Permissions.RoleRulesetData[];
 });
 
+/**
+ * Returns rulesets/permissions for a given role.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.role - Role id.
+ */
 export const permissionsFromRole = query(
 	z.object({
 		role: z.string()
@@ -333,6 +393,12 @@ export const permissionsFromRole = query(
 	}
 );
 
+/**
+ * Returns available permissions a role can be granted.
+ *
+ * @param {object} params - Query parameters.
+ * @param {string} params.role - Role id.
+ */
 export const availablePermissions = query(
 	z.object({
 		role: z.string()
@@ -373,6 +439,13 @@ export const availablePermissions = query(
 	}
 );
 
+/**
+ * Grants a ruleset to a role.
+ *
+ * @param {object} params - Grant parameters.
+ * @param {string} params.role - Role id.
+ * @param {string} params.ruleset - Ruleset id.
+ */
 export const grantRolePermission = command(
 	z.object({
 		role: z.string(),
@@ -485,6 +558,12 @@ export const grantRolePermission = command(
 	}
 );
 
+/**
+ * Revokes a ruleset from a role.
+ *
+ * @param {object} params - Revoke parameters.
+ * @param {string} params.ruleset - Ruleset id.
+ */
 export const revokeRolePermission = command(
 	z.object({
 		ruleset: z.string()
@@ -574,6 +653,9 @@ export const revokeRolePermission = command(
 	}
 );
 
+/**
+ * Returns account-specific rulesets for the current account.
+ */
 export const myAccountPermissions = query(async () => {
 	const account = await getAccount();
 	if (!account) {
@@ -588,6 +670,15 @@ export const myAccountPermissions = query(async () => {
 	return rs.filter((r) => r.struct.name === 'account_rulesets') as Permissions.AccountRulesetData[];
 });
 
+/**
+ * Grants an entitlement to an account.
+ *
+ * @param {object} params - Grant parameters.
+ * @param {string} params.account - Account id.
+ * @param {string} params.entitlement - Entitlement id.
+ * @param {string} params.targetAttribute - Attribute target id.
+ * @param {string[]} [params.featureScopes] - Feature scopes.
+ */
 export const grantAccountPermission = command(
 	z.object({
 		account: z.string(),
@@ -664,6 +755,12 @@ export const grantAccountPermission = command(
 	}
 );
 
+/**
+ * Revokes an account ruleset.
+ *
+ * @param {object} params - Revoke parameters.
+ * @param {string} params.ruleset - Ruleset id.
+ */
 export const revokeAccountPermission = command(
 	z.object({
 		ruleset: z.string()

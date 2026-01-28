@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Permissions and role-based access control structs.
+ *
+ * Defines roles, entitlements, rulesets, and helpers for permission checks.
+ *
+ * @example
+ * import { Permissions } from '$lib/server/structs/permissions';
+ * const roles = await Permissions.searchRoles('admin', { offset: 0, limit: 10 }).unwrap();
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // See /diagrams/permissions.excalidraw for the diagram of this file

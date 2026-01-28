@@ -1,6 +1,19 @@
+/**
+ * @fileoverview Clipboard helper utilities.
+ *
+ * @example
+ * import { copy } from '$lib/utils/clipboard';
+ * copy('Hello', true);
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { notify as notif } from './prompts';
 
+/**
+ * Copies text to the clipboard.
+ *
+ * @param {string} text - Text to copy.
+ * @param {boolean} notify - Whether to show a toast.
+ */
 export const copy = (text: string, notify: boolean) => {
 	navigator.clipboard.writeText(text);
 	if (notify) {
@@ -13,6 +26,12 @@ export const copy = (text: string, notify: boolean) => {
 	}
 };
 
+/**
+ * Copies a canvas as a PNG image to the clipboard.
+ *
+ * @param {HTMLCanvasElement} canvas - Canvas to copy.
+ * @param {boolean} notify - Whether to show a toast.
+ */
 export const copyCanvas = (canvas: HTMLCanvasElement, notify: boolean) => {
 	return attemptAsync(async () => {
 		const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res));
@@ -32,6 +51,12 @@ export const copyCanvas = (canvas: HTMLCanvasElement, notify: boolean) => {
 	});
 };
 
+/**
+ * Copies an image element or URL to the clipboard.
+ *
+ * @param {HTMLImageElement | string} img - Image element or URL.
+ * @param {boolean} notify - Whether to show a toast.
+ */
 export const copyImage = (img: HTMLImageElement | string, notify: boolean) => {
 	return attemptAsync(async () => {
 		let imageElement: HTMLImageElement;

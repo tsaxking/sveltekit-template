@@ -1,3 +1,10 @@
+/**
+ * @fileoverview AG Grid date/time cell editor using flatpickr.
+ *
+ * @example
+ * import { DateTimeCellEditor } from '$lib/utils/ag-grid/date-time';
+ * const column = { cellEditor: DateTimeCellEditor };
+ */
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 // import 'flatpickr/dist/themes/dark.css';
@@ -5,14 +12,28 @@ import '$lib/styles/flatpickr.css';
 
 import type { ICellEditorComp, ICellEditorParams } from 'ag-grid-community';
 
+/**
+ * Flatpickr-based date/time editor for AG Grid.
+ */
 export class DateTimeCellEditor implements ICellEditorComp {
+	/** Wrapper element used as the editor GUI. */
 	private eWrapper!: HTMLDivElement;
+	/** Input element bound to flatpickr. */
 	private eInput!: HTMLInputElement;
+	/** Flatpickr instance. */
 	private picker!: flatpickr.Instance;
+	/** Initial cell value. */
 	private initialValue: string | null = null;
+	/** Whether editing was canceled. */
 	private cancel = false;
+	/** Blur handler for outside clicks/focus. */
 	private blurListener!: (e: MouseEvent | FocusEvent) => void;
 
+	/**
+	 * Initializes the editor and binds flatpickr.
+	 *
+	 * @param {ICellEditorParams} params - Editor params.
+	 */
 	init(params: ICellEditorParams): void {
 		this.eWrapper = document.createElement('div');
 		this.eWrapper.classList.add('ag-input-wrapper');
@@ -73,10 +94,16 @@ export class DateTimeCellEditor implements ICellEditorComp {
 		this.eWrapper.appendChild(this.eInput);
 	}
 
+	/**
+	 * Returns the editor root element.
+	 */
 	getGui(): HTMLElement {
 		return this.eWrapper;
 	}
 
+	/**
+	 * Focuses the input after the GUI is attached.
+	 */
 	afterGuiAttached(): void {
 		requestAnimationFrame(() => {
 			this.eInput.focus();
@@ -84,20 +111,32 @@ export class DateTimeCellEditor implements ICellEditorComp {
 		});
 	}
 
+	/**
+	 * Returns the edited value as an ISO string.
+	 */
 	getValue(): string | null {
 		if (this.cancel) return this.initialValue;
 		const selectedDate = this.picker.selectedDates[0];
 		return selectedDate ? selectedDate.toISOString() : null;
 	}
 
+	/**
+	 * Indicates the editor should render as a popup.
+	 */
 	isPopup(): boolean {
 		return true;
 	}
 
+	/**
+	 * Indicates if the edit should be canceled.
+	 */
 	isCancelAfterEnd(): boolean {
 		return this.cancel;
 	}
 
+	/**
+	 * Cleans up flatpickr and event listeners.
+	 */
 	destroy(): void {
 		if (this.picker) {
 			this.picker.destroy();

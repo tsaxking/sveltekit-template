@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Struct data version wrappers.
+ *
+ * @example
+ * import { StructDataVersion } from '$lib/services/struct/data-version';
+ */
 import {
 	type Blank,
 	Struct,

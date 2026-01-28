@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Client-side struct batching for offline-safe updates.
+ *
+ * Queues struct updates in IndexedDB and flushes them in batches when
+ * connectivity is available.
+ *
+ * @example
+ * import { StructBatching } from '$lib/services/struct/batching';
+ * await StructBatching.add({ struct, type: 'update', data });
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { type DataAction, type PropertyAction } from '$lib/types/struct';
 import { z } from 'zod';
@@ -6,6 +16,9 @@ import { Batch } from 'ts-utils/batch';
 import { em } from '../db';
 import type { Blank, Struct } from './struct';
 
+/**
+ * Batching utilities for struct updates.
+ */
 export namespace StructBatching {
 	const table = new Table('struct_batching', {
 		struct: 'string',
@@ -14,8 +27,19 @@ export namespace StructBatching {
 		date: 'date'
 	});
 
+	/**
+	 * Stored batch record type.
+	 */
 	export type Batch = typeof table.sample;
 
+	/**
+	 * Struct update payload.
+	 *
+	 * @property {Struct<Blank>} struct - Target struct.
+	 * @property {DataAction | PropertyAction | string} type - Action type.
+	 * @property {unknown} data - Payload data.
+	 * @property {Date} [date] - Optional timestamp.
+	 */
 	export type StructBatch = {
 		struct: Struct<Blank>;
 		type: DataAction | PropertyAction | string;
@@ -80,6 +104,11 @@ export namespace StructBatching {
 		}
 	);
 
+	/**
+	 * Persists and enqueues struct updates to be batched.
+	 *
+	 * @param {StructBatch[]} structBatch - Updates to enqueue.
+	 */
 	export const add = (...structBatch: StructBatch[]) => {
 		return attemptAsync(async () => {
 			const items = await Promise.all(

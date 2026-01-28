@@ -1,31 +1,36 @@
+/**
+ * @fileoverview Client-side struct implementation with caching and batching.
+ *
+ * Provides the core Struct client API, data wrappers, and remote bindings.
+ *
+ * @example
+ * import { Struct } from '$lib/services/struct';
+ * const Users = new Struct({ name: 'users', structure: { name: 'string' }, socket: sse });
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { match } from 'ts-utils/match';
 import { Stream } from 'ts-utils/stream';
 import { type Writable } from 'svelte/store';
-import { DataAction, PropertyAction } from '$lib/types/struct';
 import type { ColType, globalCols } from 'drizzle-struct';
 import { z } from 'zod';
 import { StructDataVersion } from './data-version';
-import { StructBatching } from './batching';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
-import { StructCache } from './cache';
-import { encode } from 'ts-utils/text';
 import * as remote from '$lib/remotes/struct.remote';
 
-let didCacheWarning = false;
+// let didCacheWarning = false;
 
-const cacheWarning = () => {
-	if (__APP_ENV__.environment === 'prod') return;
-	if (didCacheWarning) return;
-	didCacheWarning = true;
-	console.warn(
-		`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`
-	);
-};
+// const cacheWarning = () => {
+// 	if (__APP_ENV__.environment === 'prod') return;
+// 	if (didCacheWarning) return;
+// 	didCacheWarning = true;
+// 	console.warn(
+// 		`⚠️⚠️⚠️ Cache Warning: By using Struct Caching, you may be serving stale data to users. Be sure to limit cache duration appropriately. You can view your cache in the index db under the database: ${__APP_ENV__.indexed_db.db_name}.`
+// 	);
+// };
 
 /**
  * All actions that can be performed on the data
@@ -312,7 +317,7 @@ export type StatusMessage<T = void> = {
 
 /**
  * Writable store that holds a single StructData item and allows updates to it.
- * This is useful for managing a single piece of data that can be updated and subscribed to.
+ * This is useful for managin1g a single piece of data that can be updated and subscribed to.
  * For example, it can be used to manage a single user profile or settings.
  * This differs from the StructData class in that it is a writable store and is meant to be used in a reactive context.
  * This differs from the StructDataProxy in that it does not proxy the data and is meant to be used in a reactive context.
@@ -1346,11 +1351,29 @@ export class Struct<T extends Blank> {
 		return arr;
 	}
 
+	/**
+	 * Gets data matching a filter as a paginated array.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<'pagination', T>} config - Pagination config.
+	 */
 	get(
 		data: PartialStructable<T & GlobalCols>,
 		config: ReadConfig<'pagination', T>
 	): PaginationDataArr<T>;
+	/**
+	 * Gets data matching a filter as a reactive store.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<'all', T>} config - Store config.
+	 */
 	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'all', T>): DataArr<T>;
+	/**
+	 * Gets data matching a filter as a paginated array or reactive store.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<ReadConfigType, T>} config - Read config.
+	 */
 	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<ReadConfigType, T>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
@@ -1458,6 +1481,11 @@ export class Struct<T extends Blank> {
 		return arr;
 	}
 
+	/**
+	 * Creates an empty paginated data array placeholder.
+	 *
+	 * @returns {PaginationDataArr<T>} Empty pagination wrapper.
+	 */
 	pagination() {
 		return new PaginationDataArr<T>(
 			this,
@@ -1468,6 +1496,9 @@ export class Struct<T extends Blank> {
 		);
 	}
 
+	/**
+	 * Clears all data for this struct (admin only).
+	 */
 	clear() {
 		this.log('Clearing all data from struct (admin only)');
 		return remote.clear({

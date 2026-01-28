@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Struct action enums for permission checks.
+ *
+ * @example
+ * import { DataAction, PropertyAction } from '$lib/types/struct';
+ */
+/**
+ * Property-level actions.
+ */
 export enum PropertyAction {
 	Read = 'read',
 	Update = 'update',
@@ -7,6 +16,9 @@ export enum PropertyAction {
 }
 
 // these are not property specific
+/**
+ * Data-level actions.
+ */
 export enum DataAction {
 	Create = 'create',
 	Delete = 'delete',

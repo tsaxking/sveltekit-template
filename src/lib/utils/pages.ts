@@ -1,6 +1,18 @@
+/**
+ * @fileoverview Page metadata utilities.
+ *
+ * @example
+ * import { getTitle } from '$lib/utils/pages';
+ * const title = await getTitle('https://example.com').unwrap();
+ */
 import { browser } from '$app/environment';
 import { attemptAsync } from 'ts-utils/check';
 
+/**
+ * Fetches a URL and returns its HTML document title.
+ *
+ * @param {string} url - Page URL.
+ */
 export const getTitle = (url: string) => {
 	return attemptAsync(async () => {
 		if (!browser) {

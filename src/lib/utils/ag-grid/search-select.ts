@@ -1,20 +1,48 @@
+/**
+ * @fileoverview AG Grid searchable select cell editor.
+ *
+ * @example
+ * import { SearchSelectCellEditor } from '$lib/utils/ag-grid/search-select';
+ * const column = { cellEditor: SearchSelectCellEditor, cellEditorParams: { values: ['A', 'B'] } };
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ICellEditorComp, ICellEditorParams } from 'ag-grid-community';
 
+/**
+ * Configuration for the search-select editor.
+ *
+ * @property {any[]} [values] - Available values.
+ * @property {any} [value] - Initial value.
+ * @property {string} [defaultValue] - Default placeholder value.
+ */
 export type SearchSelectCellEditorParams = ICellEditorParams & {
 	values?: any[];
 	value?: any;
 	defaultValue?: string;
 };
 
+/**
+ * Searchable select editor for AG Grid.
+ */
 export class SearchSelectCellEditor implements ICellEditorComp {
+	/** Input element for filtering. */
 	private eInput!: HTMLInputElement;
+	/** List element for options. */
 	private eList!: HTMLUListElement;
+	/** Cached editor params. */
 	private params!: SearchSelectCellEditorParams;
+	/** Filtered values for rendering. */
 	private filteredValues: any[] = [];
+	/** Current selected value. */
 	private value: any;
+	/** Current highlighted index. */
 	private highlightIndex = -1;
 
+	/**
+	 * Initializes the editor UI and behavior.
+	 *
+	 * @param {SearchSelectCellEditorParams} params - Editor params.
+	 */
 	init(params: SearchSelectCellEditorParams) {
 		this.params = params;
 		const validValues = (params.values ?? []).map((v) => v.toString());
@@ -136,27 +164,49 @@ export class SearchSelectCellEditor implements ICellEditorComp {
 		}, 0);
 	}
 
+	/**
+	 * Returns the editor root element.
+	 */
 	getGui() {
 		return this.eInput.parentElement!;
 	}
 
+	/**
+	 * Focuses the input after GUI is attached.
+	 */
 	afterGuiAttached() {
 		this.eInput.focus();
 	}
 
+	/**
+	 * Returns the current value.
+	 */
 	getValue() {
 		return this.value;
 	}
 
+	/**
+	 * Indicates this editor is a popup.
+	 */
 	isPopup?() {
 		return true;
 	}
 
+	/**
+	 * Sets the current value.
+	 *
+	 * @param {string} newValue - New value.
+	 */
 	setValue(newValue: string) {
 		this.value = newValue;
 		this.eInput.value = newValue;
 	}
 
+	/**
+	 * Filters values based on input.
+	 *
+	 * @param {string} filterText - Filter text.
+	 */
 	filterList(filterText: string) {
 		const lower = filterText.toLowerCase();
 		this.filteredValues = (this.params.values ?? []).filter((v: any) =>
@@ -165,6 +215,9 @@ export class SearchSelectCellEditor implements ICellEditorComp {
 		this.renderList();
 	}
 
+	/**
+	 * Updates the highlighted option.
+	 */
 	updateHighlight() {
 		const items = Array.from(this.eList.children);
 		items.forEach((el, idx) => {
@@ -175,6 +228,9 @@ export class SearchSelectCellEditor implements ICellEditorComp {
 		if (current) current.scrollIntoView({ block: 'nearest' });
 	}
 
+	/**
+	 * Renders the dropdown list.
+	 */
 	renderList() {
 		this.eList.innerHTML = '';
 		for (const val of this.filteredValues) {
@@ -188,6 +244,9 @@ export class SearchSelectCellEditor implements ICellEditorComp {
 		this.updateHighlight();
 	}
 
+	/**
+	 * Cleanup hook.
+	 */
 	destroy() {
 		// Optional cleanup
 	}
