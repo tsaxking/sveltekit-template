@@ -13,11 +13,11 @@ This folder contains Playwright-based end-to-end tests for the app. Use these te
 
 Scripts are defined in package.json:
 
-- pnpm test:e2e: builds first (pnpm build) then runs Playwright.
-- pnpm test:e2e:no-build: runs Playwright without rebuilding.
-- pnpm test runs schema checks, unit tests, then end-to-end tests.
+- `pnpm test:e2e`: builds first (pnpm build) then runs Playwright.
+- `pnpm test:e2e:no-build`: runs Playwright without rebuilding.
+- `pnpm test` runs schema checks, unit tests, then end-to-end tests.
 
-Use test:e2e for CI or clean runs, and test:e2e:no-build for faster local iteration when the app is already built.
+Use `test:e2e` for CI or clean runs, and test:e2e:no-build for faster local iteration when the app is already built.
 
 ## Tips
 

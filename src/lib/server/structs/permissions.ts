@@ -409,6 +409,11 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a ruleset to a role.
+	 *
+	 * @param {{ role: RoleData; entitlement: Entitlement; targetAttribute: string; featureScopes: string[]; parentRuleset?: RoleRulesetData; name: string; description: string }} config
+	 */
 	export const grantRoleRuleset = (config: {
 		role: RoleData;
 		entitlement: Entitlement;
@@ -439,6 +444,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a role to an account.
+	 *
+	 * @param {RoleData} role - Role to grant.
+	 * @param {Account.AccountData} account - Account to receive the role.
+	 */
 	export const grantRole = (role: RoleData, account: Account.AccountData) => {
 		return RoleAccount.new({
 			role: role.id,
@@ -446,6 +457,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a role from an account.
+	 *
+	 * @param {RoleData} role - Role to revoke.
+	 * @param {Account.AccountData} account - Account to remove from the role.
+	 */
 	export const revokeRole = (role: RoleData, account: Account.AccountData) => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -462,6 +479,13 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a ruleset from a role.
+	 *
+	 * @param {RoleData} role - Role to update.
+	 * @param {Entitlement} entitlement - Entitlement name.
+	 * @param {string} targetAttribute - Target attribute selector.
+	 */
 	export const revokeRoleRuleset = (
 		role: RoleData,
 		entitlement: Entitlement,
