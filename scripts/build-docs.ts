@@ -158,11 +158,7 @@ const extractSvelteDoc = (content: string) => {
 	return null;
 };
 
-const writeSvelteIndex = async (
-	sectionDir: string,
-	title: string,
-	entries: string[]
-) => {
+const writeSvelteIndex = async (sectionDir: string, title: string, entries: string[]) => {
 	const lines: string[] = ['---', `title: ${title}`, '---', '', `# ${title}`, ''];
 
 	const sorted = [...entries].sort((a, b) => a.localeCompare(b));
@@ -204,11 +200,7 @@ const generateSvelteDocs = async () => {
 				entries.push(relNoExt);
 			}
 			if (entries.length > 0) {
-				const sectionDir = path.join(
-					DOCS_DIR,
-					'api',
-					path.relative(ROOT, target.root)
-				);
+				const sectionDir = path.join(DOCS_DIR, 'api', path.relative(ROOT, target.root));
 				await writeSvelteIndex(sectionDir, target.title, entries);
 			}
 		} catch {
