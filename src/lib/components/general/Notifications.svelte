@@ -61,6 +61,19 @@
 	// };
 </script>
 
+<!--
+@component
+Notifications offcanvas panel with unread count binding.
+
+**Props**
+- `notifs`: `number` — Unread notifications count (bindable).
+
+**Example**
+```svelte
+<Notifications bind:notifs />
+```
+-->
+
 <div class="offcanvas offcanvas-end" tabindex="-1" {id} aria-labelledby="{id}Label">
 	<div class="offcanvas-header layer-1">
 		<h5 class="offcanvas-title" id="{id}Label">My Notifications</h5>

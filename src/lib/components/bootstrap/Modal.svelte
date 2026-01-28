@@ -62,6 +62,37 @@
 	});
 </script>
 
+<!--
+@component
+Bootstrap modal wrapper rendered via a portal.
+
+**Props**
+- `title`: `string` — Modal title text.
+- `body`: `Snippet` — Main content.
+- `buttons`?: `Snippet` — Footer button content.
+- `show`?: `boolean` — Show immediately on mount.
+- `size`?: `'sm' | 'md' | 'lg' | 'xl'` — Modal size (default: `'md'`).
+
+**Exports**
+- `on(event)`: subscribe to `'show' | 'hide'` events.
+- `once(event)`: subscribe once to `'show' | 'hide'`.
+- `off(event)`: unsubscribe.
+- `show()`: open the modal.
+- `hide()`: close the modal.
+
+**Example**
+```svelte
+<Modal title="Confirm">
+	{#snippet body()}
+		<p>Are you sure?</p>
+	{/snippet}
+	{#snippet buttons()}
+		<button class="btn btn-primary" onclick={confirm}>OK</button>
+	{/snippet}
+</Modal>
+```
+-->
+
 <Portal target="body">
 	<div bind:this={self} {id} class="modal fade" aria-modal="true" role="dialog" tabindex="-1">
 		<div class="modal-dialog modal-{size}">

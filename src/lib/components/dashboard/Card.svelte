@@ -37,6 +37,25 @@
 	});
 </script>
 
+<!--
+@component
+Dashboard card container with maximize and hide controls.
+
+**Props**
+- `body`: `Snippet` — Card body content.
+- `card`: `Dashboard.Card` — Card controller.
+- `style`?: `string` — Extra inline styles.
+
+**Example**
+```svelte
+<Card {card}>
+	{#snippet body()}
+		<p>Card content</p>
+	{/snippet}
+</Card>
+```
+-->
+
 {#if $card.show}
 	<!-- Overlay for graying out the background when card is maximized -->
 	{#if $card.maximized}

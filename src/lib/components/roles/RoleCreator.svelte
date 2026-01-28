@@ -44,6 +44,23 @@
 	};
 </script>
 
+<!--
+@component
+Role creation form for a parent role.
+
+**Props**
+- `parent`: `Permissions.RoleData` — Parent role.
+- `oncreate`?: `(role: Permissions.RoleData) => void` — Called after creation.
+
+**Exports**
+- `save()`: create the role.
+
+**Example**
+```svelte
+<RoleCreator {parent} oncreate={(role) => console.log(role)} />
+```
+-->
+
 <div class="container-fluid">
 	<div class="row mb-3">
 		<label for="role-name" class="form-label">Role Name</label>
