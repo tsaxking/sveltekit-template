@@ -1,0 +1,23 @@
+{
+  "id": "api/types/app/namespaces/App/interfaces/Error",
+  "title": "Error",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/app/namespaces/App/interfaces/Error.md",
+  "sourceDirName": "api/types/app/namespaces/App/interfaces",
+  "slug": "/api/types/app/namespaces/App/interfaces/Error",
+  "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Error",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/"
+  },
+  "next": {
+    "title": "Locals",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Locals"
+  }
+}

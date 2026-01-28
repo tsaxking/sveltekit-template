@@ -1,0 +1,23 @@
+{
+  "id": "api/types/svelte-filepond/interfaces/FilePondProps",
+  "title": "FilePondProps",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/svelte-filepond/interfaces/FilePondProps.md",
+  "sourceDirName": "api/types/svelte-filepond/interfaces",
+  "slug": "/api/types/svelte-filepond/interfaces/FilePondProps",
+  "permalink": "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondProps",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "FilePondFile",
+    "permalink": "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondFile"
+  },
+  "next": {
+    "title": "FilePondEvent",
+    "permalink": "/sveltekit-template/api/types/svelte-filepond/type-aliases/FilePondEvent"
+  }
+}

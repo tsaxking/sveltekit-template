@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions",
+  "title": "getRolePermissions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getEntitlements",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements"
+  },
+  "next": {
+    "title": "grantAccountPermission",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission"
+  }
+}

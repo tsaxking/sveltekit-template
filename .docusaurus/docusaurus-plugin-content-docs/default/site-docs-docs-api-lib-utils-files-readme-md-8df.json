@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/files/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/files/README.md",
+  "sourceDirName": "api/lib/utils/files",
+  "slug": "/api/lib/utils/files/",
+  "permalink": "/sveltekit-template/api/lib/utils/files/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "loadFiles",
+    "permalink": "/sveltekit-template/api/lib/utils/downloads/functions/loadFiles"
+  },
+  "next": {
+    "title": "FileUploader",
+    "permalink": "/sveltekit-template/api/lib/utils/files/classes/FileUploader"
+  }
+}

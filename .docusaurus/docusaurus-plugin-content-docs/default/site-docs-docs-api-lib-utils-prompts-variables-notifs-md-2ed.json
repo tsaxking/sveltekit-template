@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/prompts/variables/notifs",
+  "title": "notifs",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/prompts/variables/notifs.md",
+  "sourceDirName": "api/lib/utils/prompts/variables",
+  "slug": "/api/lib/utils/prompts/variables/notifs",
+  "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/notifs",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "modalTarget",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/modalTarget"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/"
+  }
+}

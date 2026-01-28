@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/ntp/namespaces/TimeService/functions/getTime",
+  "title": "getTime",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime.md",
+  "sourceDirName": "api/lib/server/services/ntp/namespaces/TimeService/functions",
+  "slug": "/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime",
+  "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getLastSynced",
+    "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getLastSynced"
+  },
+  "next": {
+    "title": "init",
+    "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/init"
+  }
+}

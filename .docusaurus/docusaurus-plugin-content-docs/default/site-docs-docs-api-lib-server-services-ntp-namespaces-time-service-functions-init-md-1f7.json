@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/ntp/namespaces/TimeService/functions/init",
+  "title": "init",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/ntp/namespaces/TimeService/functions/init.md",
+  "sourceDirName": "api/lib/server/services/ntp/namespaces/TimeService/functions",
+  "slug": "/api/lib/server/services/ntp/namespaces/TimeService/functions/init",
+  "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/init",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getTime",
+    "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/redis/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/git/functions/branch",
+  "title": "branch",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/git/functions/branch.md",
+  "sourceDirName": "api/lib/server/utils/git/functions",
+  "slug": "/api/lib/server/utils/git/functions/branch",
+  "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/branch",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/"
+  },
+  "next": {
+    "title": "commit",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/commit"
+  }
+}

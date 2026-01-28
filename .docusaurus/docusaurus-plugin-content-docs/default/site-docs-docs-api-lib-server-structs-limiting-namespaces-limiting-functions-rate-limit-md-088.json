@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit",
+  "title": "rateLimit",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit.md",
+  "sourceDirName": "api/lib/server/structs/limiting/namespaces/Limiting/functions",
+  "slug": "/api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit",
+  "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "isIpLimitedPage",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpLimitedPage"
+  },
+  "next": {
+    "title": "violate",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/violate"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/sse/classes/SSE",
+  "title": "SSE",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/sse/classes/SSE.md",
+  "sourceDirName": "api/lib/server/services/sse/classes",
+  "slug": "/api/lib/server/services/sse/classes/SSE",
+  "permalink": "/sveltekit-template/api/lib/server/services/sse/classes/SSE",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Connection",
+    "permalink": "/sveltekit-template/api/lib/server/services/sse/classes/Connection"
+  },
+  "next": {
+    "title": "sse",
+    "permalink": "/sveltekit-template/api/lib/server/services/sse/variables/sse"
+  }
+}

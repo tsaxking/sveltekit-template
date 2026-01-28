@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize",
+  "title": "getGridSize",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize.md",
+  "sourceDirName": "api/lib/model/dashboard/namespaces/Dashboard/functions",
+  "slug": "/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize",
+  "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Dashboard",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard"
+  },
+  "next": {
+    "title": "sizes",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/variables/sizes"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/variables/DB",
+  "title": "DB",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/variables/DB.md",
+  "sourceDirName": "api/lib/services/db/variables",
+  "slug": "/api/lib/services/db/variables/DB",
+  "permalink": "/sveltekit-template/api/lib/services/db/variables/DB",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "TableStructable",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/TableStructable"
+  },
+  "next": {
+    "title": "em",
+    "permalink": "/sveltekit-template/api/lib/services/db/variables/em"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "scripts/index",
+  "title": "Scripts",
+  "description": "This folder contains project maintenance and automation scripts executed via the script runner in package.json.",
+  "source": "@site/docs/docs/scripts/index.md",
+  "sourceDirName": "scripts",
+  "slug": "/scripts/",
+  "permalink": "/sveltekit-template/scripts/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Scripts"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SvelteKit Template",
+    "permalink": "/sveltekit-template/"
+  }
+}

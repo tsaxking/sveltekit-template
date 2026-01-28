@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount",
+  "title": "getRolesFromAccount",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getRoleRuleset",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRoleRuleset"
+  },
+  "next": {
+    "title": "getRolesFromAccountWithinHierarchy",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccountWithinHierarchy"
+  }
+}

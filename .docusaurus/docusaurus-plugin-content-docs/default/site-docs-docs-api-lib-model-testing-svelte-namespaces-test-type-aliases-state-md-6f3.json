@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/State",
+  "title": "State",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/testing.svelte/namespaces/Test/type-aliases/State.md",
+  "sourceDirName": "api/lib/model/testing.svelte/namespaces/Test/type-aliases",
+  "slug": "/api/lib/model/testing.svelte/namespaces/Test/type-aliases/State",
+  "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/State",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "unitTest",
+    "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/functions/unitTest"
+  },
+  "next": {
+    "title": "Status",
+    "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/Status"
+  }
+}

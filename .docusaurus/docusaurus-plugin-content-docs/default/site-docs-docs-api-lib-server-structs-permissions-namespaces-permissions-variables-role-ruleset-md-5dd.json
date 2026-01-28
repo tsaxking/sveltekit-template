@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset",
+  "title": "RoleRuleset",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/variables",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "RoleAccount",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleAccount"
+  },
+  "next": {
+    "title": "accountRuleset",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/variables/accountRuleset"
+  }
+}

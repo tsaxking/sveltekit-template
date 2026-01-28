@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission",
+  "title": "grantAccountPermission",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getRolePermissions",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions"
+  },
+  "next": {
+    "title": "grantRuleset",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset"
+  }
+}

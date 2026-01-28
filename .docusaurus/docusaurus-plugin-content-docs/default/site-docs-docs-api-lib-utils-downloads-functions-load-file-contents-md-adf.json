@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/downloads/functions/loadFileContents",
+  "title": "loadFileContents",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/downloads/functions/loadFileContents.md",
+  "sourceDirName": "api/lib/utils/downloads/functions",
+  "slug": "/api/lib/utils/downloads/functions/loadFileContents",
+  "permalink": "/sveltekit-template/api/lib/utils/downloads/functions/loadFileContents",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "downloadUrl",
+    "permalink": "/sveltekit-template/api/lib/utils/downloads/functions/downloadUrl"
+  },
+  "next": {
+    "title": "loadFiles",
+    "permalink": "/sveltekit-template/api/lib/utils/downloads/functions/loadFiles"
+  }
+}

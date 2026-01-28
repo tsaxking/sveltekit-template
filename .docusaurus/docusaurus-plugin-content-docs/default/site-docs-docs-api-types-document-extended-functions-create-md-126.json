@@ -1,0 +1,23 @@
+{
+  "id": "api/types/document-extended/functions/create",
+  "title": "create",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/document-extended/functions/create.md",
+  "sourceDirName": "api/types/document-extended/functions",
+  "slug": "/api/types/document-extended/functions/create",
+  "permalink": "/sveltekit-template/api/types/document-extended/functions/create",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/types/document-extended/"
+  },
+  "next": {
+    "title": "createDeep",
+    "permalink": "/sveltekit-template/api/types/document-extended/functions/createDeep"
+  }
+}

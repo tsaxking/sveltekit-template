@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/functions/openJSONSync",
+  "title": "openJSONSync",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/functions/openJSONSync.md",
+  "sourceDirName": "api/lib/server/utils/files/functions",
+  "slug": "/api/lib/server/utils/files/functions/openJSONSync",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/openJSONSync",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "openJSON",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/openJSON"
+  },
+  "next": {
+    "title": "parseJSON",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/parseJSON"
+  }
+}

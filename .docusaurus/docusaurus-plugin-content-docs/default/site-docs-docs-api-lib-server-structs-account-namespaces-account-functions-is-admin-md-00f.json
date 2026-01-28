@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/namespaces/Account/functions/isAdmin",
+  "title": "isAdmin",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/namespaces/Account/functions/isAdmin.md",
+  "sourceDirName": "api/lib/server/structs/account/namespaces/Account/functions",
+  "slug": "/api/lib/server/structs/account/namespaces/Account/functions/isAdmin",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isAdmin",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "hash",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/hash"
+  },
+  "next": {
+    "title": "isDeveloper",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isDeveloper"
+  }
+}

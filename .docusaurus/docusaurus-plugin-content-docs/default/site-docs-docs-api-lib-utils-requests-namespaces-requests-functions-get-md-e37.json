@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/requests/namespaces/Requests/functions/get",
+  "title": "get",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/requests/namespaces/Requests/functions/get.md",
+  "sourceDirName": "api/lib/utils/requests/namespaces/Requests/functions",
+  "slug": "/api/lib/utils/requests/namespaces/Requests/functions/get",
+  "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/get",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/"
+  },
+  "next": {
+    "title": "post",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/post"
+  }
+}

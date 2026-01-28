@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/limits",
+  "title": "limits",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits.md",
+  "sourceDirName": "api/lib/server/structs/limiting/namespaces/Limiting/variables",
+  "slug": "/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits",
+  "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ViolationTiers",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers"
+  },
+  "next": {
+    "title": "blockedAccounts",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedAccounts"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/global-events/type-aliases/Events",
+  "title": "Events",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/global-events/type-aliases/Events.md",
+  "sourceDirName": "api/lib/server/services/global-events/type-aliases",
+  "slug": "/api/lib/server/services/global-events/type-aliases/Events",
+  "permalink": "/sveltekit-template/api/lib/server/services/global-events/type-aliases/Events",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/global-events/"
+  },
+  "next": {
+    "title": "default",
+    "permalink": "/sveltekit-template/api/lib/server/services/global-events/variables/default"
+  }
+}

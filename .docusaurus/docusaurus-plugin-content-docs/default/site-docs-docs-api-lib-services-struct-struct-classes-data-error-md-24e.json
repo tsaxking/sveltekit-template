@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/classes/DataError",
+  "title": "DataError",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/classes/DataError.md",
+  "sourceDirName": "api/lib/services/struct/struct/classes",
+  "slug": "/api/lib/services/struct/struct/classes/DataError",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/DataError",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/"
+  },
+  "next": {
+    "title": "FatalDataError",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/FatalDataError"
+  }
+}

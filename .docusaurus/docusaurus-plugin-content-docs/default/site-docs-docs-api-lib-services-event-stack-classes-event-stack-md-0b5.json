@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/event-stack/classes/EventStack",
+  "title": "EventStack",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/event-stack/classes/EventStack.md",
+  "sourceDirName": "api/lib/services/event-stack/classes",
+  "slug": "/api/lib/services/event-stack/classes/EventStack",
+  "permalink": "/sveltekit-template/api/lib/services/event-stack/classes/EventStack",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/event-stack/"
+  },
+  "next": {
+    "title": "createOverrideStack",
+    "permalink": "/sveltekit-template/api/lib/services/event-stack/functions/createOverrideStack"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/task/functions/runTs",
+  "title": "runTs",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/task/functions/runTs.md",
+  "sourceDirName": "api/lib/server/utils/task/functions",
+  "slug": "/api/lib/server/utils/task/functions/runTs",
+  "permalink": "/sveltekit-template/api/lib/server/utils/task/functions/runTs",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "runTask",
+    "permalink": "/sveltekit-template/api/lib/server/utils/task/functions/runTask"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/utils/terminal/"
+  }
+}

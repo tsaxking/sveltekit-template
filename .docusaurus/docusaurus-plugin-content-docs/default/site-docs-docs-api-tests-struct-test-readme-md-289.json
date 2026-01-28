@@ -1,0 +1,23 @@
+{
+  "id": "api/tests/struct.test/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/tests/struct.test/README.md",
+  "sourceDirName": "api/tests/struct.test",
+  "slug": "/api/tests/struct.test/",
+  "permalink": "/sveltekit-template/api/tests/struct.test/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/tests/run-task.test/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/tests/task-import/"
+  }
+}

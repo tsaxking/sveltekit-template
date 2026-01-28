@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/dashboard/namespaces/Dashboard/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/dashboard/namespaces/Dashboard/README.md",
+  "sourceDirName": "api/lib/model/dashboard/namespaces/Dashboard",
+  "slug": "/api/lib/model/dashboard/namespaces/Dashboard/",
+  "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/"
+  },
+  "next": {
+    "title": "Card",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Card"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr",
+  "title": "RoleDataArr",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/type-aliases",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "RoleData",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleData"
+  },
+  "next": {
+    "title": "RoleRulesetData",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetData"
+  }
+}

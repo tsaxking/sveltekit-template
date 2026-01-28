@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/variables/accountInfoVersionHistory",
+  "title": "accountInfoVersionHistory",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/variables/accountInfoVersionHistory.md",
+  "sourceDirName": "api/lib/server/structs/account/variables",
+  "slug": "/api/lib/server/structs/account/variables/accountInfoVersionHistory",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/accountInfoVersionHistory",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "accountInfo",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/accountInfo"
+  },
+  "next": {
+    "title": "accountNotificationTable",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/accountNotificationTable"
+  }
+}

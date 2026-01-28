@@ -1,0 +1,2692 @@
+{
+  "/sveltekit-template/__docusaurus/debug-5ee": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/__docusaurus/debug/config-266": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/__docusaurus/debug/content-e22": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    },
+    "__props": "__props---sveltekit-template-docusaurus-debug-content-9-a-1-f44"
+  },
+  "/sveltekit-template/__docusaurus/debug/globalData-13f": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/__docusaurus/debug/metadata-8fb": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/__docusaurus/debug/registry-557": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/__docusaurus/debug/routes-e30": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-docusaurus-debugb-38-140"
+    }
+  },
+  "/sveltekit-template/search-9fd": {
+    "__comp": "__comp---theme-search-page-1-a-4-d6f",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-search-138-36e"
+    }
+  },
+  "/sveltekit-template/-5c6": {
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__context": {
+      "plugin": "plugin---sveltekit-template-aba-57b"
+    }
+  },
+  "/sveltekit-template/-ba9": {
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---sveltekit-template-00-d-bde"
+  },
+  "/sveltekit-template/-273": {
+    "__comp": "__comp---theme-doc-roota-94-67a"
+  },
+  "/sveltekit-template/api/-e3c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-072-1a6"
+  },
+  "/sveltekit-template/api/hooks.server/-668": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-hooks-server-6-ca-876"
+  },
+  "/sveltekit-template/api/hooks.server/variables/handle-709": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-hooks-server-variables-handle-83-e-9a2"
+  },
+  "/sveltekit-template/api/lib/-4fa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-e-0-f-6d3"
+  },
+  "/sveltekit-template/api/lib/canvas/bubbles/-d2a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-canvas-bubbles-b-25-4d5"
+  },
+  "/sveltekit-template/api/lib/canvas/bubbles/functions/render-ffe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-canvas-bubbles-functions-rendere-8-c-cfe"
+  },
+  "/sveltekit-template/api/lib/canvas/critters/-e06": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-canvas-critters-34-d-4f1"
+  },
+  "/sveltekit-template/api/lib/canvas/critters/functions/render-dc6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-canvas-critters-functions-renderf-7-a-787"
+  },
+  "/sveltekit-template/api/lib/imports/-f7d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-imports-569-dd4"
+  },
+  "/sveltekit-template/api/lib/imports/admin/-cb9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-imports-admin-16-d-ebe"
+  },
+  "/sveltekit-template/api/lib/imports/admin/variables/default-0e1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-imports-admin-variables-defaulte-04-78a"
+  },
+  "/sveltekit-template/api/lib/model/account/-e87": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-482-647"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/-3d9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-117-9d1"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getNotifs-ee5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-get-notifs-41-b-040"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getSelf-3c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-get-self-51-f-b9c"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/search-457": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-searche-26-2d4"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/searchAccountsModal-75e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-search-accounts-modale-95-e8c"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/signOut-5cf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-sign-out-03-a-fe8"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/signOutOfSession-1fb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-sign-out-of-session-250-f03"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/usernameExists-92b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-functions-username-exists-7-d-4-716"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountArr-eb2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-type-aliases-account-arrb-43-e67"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountData-394": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-type-aliases-account-datace-3-5f1"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountInfoData-7dd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-type-aliases-account-info-datae-2-a-864"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationArr-01d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-type-aliases-account-notification-arra-77-bc9"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData-0ee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-type-aliases-account-notification-data-602-89d"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/Account-3dc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-variables-accountc-90-a67"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/AccountInfo-396": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-variables-account-info-553-4f1"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/AccountNotification-369": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-variables-account-notification-735-176"
+  },
+  "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/self-9e7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-account-namespaces-account-variables-self-263-016"
+  },
+  "/sveltekit-template/api/lib/model/analytics/-f04": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-214-754"
+  },
+  "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/-231": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-namespaces-analytics-017-f3a"
+  },
+  "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/count-293": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-namespaces-analytics-functions-count-891-1c3"
+  },
+  "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/myLinks-dfe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-namespaces-analytics-functions-my-links-311-e5b"
+  },
+  "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/type-aliases/LinkData-db9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-namespaces-analytics-type-aliases-link-data-98-d-9ad"
+  },
+  "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/variables/Links-dfe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-analytics-namespaces-analytics-variables-links-1-df-a3f"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/-fa2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-580-8f8"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/-203": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-namespaces-dashboard-fd-9-07d"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Card-557": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-namespaces-dashboard-classes-cardc-81-dd1"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard-64b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-namespaces-dashboard-classes-dashboardf-32-8a1"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize-e46": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-namespaces-dashboard-functions-get-grid-sizeb-8-a-4f6"
+  },
+  "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/variables/sizes-0b5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-dashboard-namespaces-dashboard-variables-sizes-11-d-b92"
+  },
+  "/sveltekit-template/api/lib/model/navbar/-0e2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-d-82-f19"
+  },
+  "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/-6f2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-namespaces-navbar-fe-3-0f7"
+  },
+  "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/addSection-493": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-namespaces-navbar-functions-add-section-2-e-3-e10"
+  },
+  "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/clear-63e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-namespaces-navbar-functions-clearc-20-98f"
+  },
+  "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/getSections-87f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-namespaces-navbar-functions-get-sectionsa-02-019"
+  },
+  "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/removeSection-25e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-navbar-namespaces-navbar-functions-remove-sectiona-33-b97"
+  },
+  "/sveltekit-template/api/lib/model/permissions/-32a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-489-c61"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/-c84": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-144-16a"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/addToRole-4bb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-add-to-roled-97-208"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/createChildRolePopup-970": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-create-child-role-popupf-3-b-ee7"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/createRole-b51": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-create-rolee-24-92e"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getAvailableRolePermissions-84f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-get-available-role-permissions-6-d-8-25d"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlementGroups-af3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-get-entitlement-groupsf-14-b0c"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements-955": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-get-entitlements-320-194"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions-abc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-get-role-permissions-371-a19"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission-999": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-grant-account-permission-2-be-8fa"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset-e07": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-grant-ruleset-9-ad-fb8"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/removeFromRole-9ba": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-remove-from-role-7-ab-07b"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission-00b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-revoke-account-permission-031-86a"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeRolePermission-e32": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-revoke-role-permission-105-69a"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/searchRoles-51a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-functions-search-rolese-99-748"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetData-95f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-account-ruleset-data-5-b-0-ecf"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetDataArr-151": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-account-ruleset-data-arrf-21-7ae"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementData-657": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-entitlement-data-956-a3e"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr-c72": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-entitlement-data-arr-3-e-3-c94"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData-c69": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-account-datacfe-1ef"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountDataArr-090": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-account-data-arr-360-19b"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleData-e50": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-data-992-206"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr-d47": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-data-arr-5-c-6-eab"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetData-3a1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-ruleset-data-5-b-0-a14"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetDataArr-d3f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-type-aliases-role-ruleset-data-arr-085-99c"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset-fde": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-variables-account-ruleset-76-c-72d"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/Entitlement-0d6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-variables-entitlement-3-ab-ede"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/Role-aca": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-variables-role-9-d-9-46d"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/RoleAccount-da9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-variables-role-accountf-0-f-2f9"
+  },
+  "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/RoleRuleset-ef4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-permissions-namespaces-permissions-variables-role-ruleset-4-ed-7e7"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/-642": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-8-c-2-035"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/-4a9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-319-6c4"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/functions/unitTest-bbc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-functions-unit-test-0-e-4-631"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/State-206": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-type-aliases-state-6-f-3-38a"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/Status-1aa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-type-aliases-statusffd-26d"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestData-92f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-type-aliases-test-data-1-a-0-456"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr-73c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-type-aliases-test-permissions-arr-857-d30"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsData-a24": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-type-aliases-test-permissions-data-0-b-3-178"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/Test-5bb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-variables-test-606-c50"
+  },
+  "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions-773": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-model-testing-svelte-namespaces-test-variables-test-permissionsc-7-b-084"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/-d3e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-81-b-39c"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/getNotifications-c2e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-get-notifications-5-b-0-2f2"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/getOwnNotifs-8fd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-get-own-notifs-0-f-6-297"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/search-1c1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-searchf-55-e18"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/self-078": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-self-3-ed-b3d"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/signOut-faf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-sign-oute-51-812"
+  },
+  "/sveltekit-template/api/lib/remotes/account.remote/variables/usernameExists-03e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-account-remote-variables-username-existscbe-e6b"
+  },
+  "/sveltekit-template/api/lib/remotes/analytics.remote/-a65": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-analytics-remote-8-a-3-ab3"
+  },
+  "/sveltekit-template/api/lib/remotes/analytics.remote/variables/close-57e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-analytics-remote-variables-close-838-a9a"
+  },
+  "/sveltekit-template/api/lib/remotes/analytics.remote/variables/count-7c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-analytics-remote-variables-count-9-c-9-ea7"
+  },
+  "/sveltekit-template/api/lib/remotes/analytics.remote/variables/fingerprint-733": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-analytics-remote-variables-fingerprint-8-c-4-dc1"
+  },
+  "/sveltekit-template/api/lib/remotes/analytics.remote/variables/myLinks-10f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-analytics-remote-variables-my-links-822-96d"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/-4ba": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-7-e-3-fb6"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/variables/getAccount-697": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-variables-get-accounte-34-973"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/variables/getSession-474": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-variables-get-sessionfa-9-cbe"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/variables/getSSE-243": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-variables-get-sse-85-b-31c"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/variables/isAdmin-018": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-variables-is-admin-75-c-cf9"
+  },
+  "/sveltekit-template/api/lib/remotes/index.remote/variables/isLoggedIn-0c0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-index-remote-variables-is-logged-in-550-517"
+  },
+  "/sveltekit-template/api/lib/remotes/ntp.remote/-731": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-ntp-remote-7-c-5-dd9"
+  },
+  "/sveltekit-template/api/lib/remotes/ntp.remote/variables/ntp-820": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-ntp-remote-variables-ntp-021-a87"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/-bfa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-c-88-34d"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/addToRole-d44": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-add-to-role-432-978"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/availablePermissions-9f1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-available-permissions-9-af-a0d"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/createRole-9f8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-create-role-0-d-3-f77"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/grantAccountPermission-209": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-grant-account-permission-411-369"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/grantRolePermission-466": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-grant-role-permission-67-c-3d2"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myAccountPermissions-fc4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-my-account-permissions-1-c-7-761"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myPermissions-9ca": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-my-permissions-6-ed-739"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/permissionsFromRole-59e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-permissions-from-role-105-6e9"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/removeFromRole-b50": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-remove-from-role-6-a-3-3a5"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/revokeAccountPermission-d6f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-revoke-account-permissionbd-6-35b"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/revokeRolePermission-10f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-revoke-role-permission-894-1df"
+  },
+  "/sveltekit-template/api/lib/remotes/permissions.remote/variables/searchRoles-980": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-permissions-remote-variables-search-roles-4-de-72f"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/-070": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-a-95-5c6"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/closeManager-af1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-close-managerc-98-9f4"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/getActiveConnections-947": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-get-active-connections-4-e-6-f90"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/getManagerConnections-3a7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-get-manager-connections-8-f-7-eeb"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/isOwner-ca4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-is-owner-490-c42"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/managerSend-015": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-manager-sendaa-5-a95"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/redirectConnection-2dc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-redirect-connectiond-87-532"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/reloadConnection-85c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-reload-connection-35-c-a85"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/reportState-b65": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-report-statef-40-8e3"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/sendToConnection-aa6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-send-to-connection-312-4e8"
+  },
+  "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/startManager-0dc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-session-manager-remote-variables-start-managerdca-f20"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/-bea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-22-d-4fa"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/all-2f5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-allf-9-c-4b2"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/archive-417": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-archive-3-da-5ad"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/archived-529": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-archived-4-e-0-203"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/batchCommand-3b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-batch-commandbbc-49b"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/batchQuery-c17": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-batch-query-8-f-7-3a4"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/clear-99d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-clear-9-ec-a4e"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/connect-554": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-connectd-77-71d"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/create-4ed": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-createafa-bc1"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/fromId-983": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-from-id-3-d-0-c4b"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/fromIds-499": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-from-ids-8-fb-228"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/get-962": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-get-098-51a"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/remove-0f1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-remove-956-143"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/removeVersion-e2f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-remove-versionb-04-9ab"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreArchive-591": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-restore-archive-8-be-53d"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreVersion-8b9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-restore-versionfd-6-967"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/update-f48": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-updatefa-5-68b"
+  },
+  "/sveltekit-template/api/lib/remotes/struct.remote/variables/versionHistory-c9e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-remotes-struct-remote-variables-version-history-327-fd9"
+  },
+  "/sveltekit-template/api/lib/server/-8be": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-558-385"
+  },
+  "/sveltekit-template/api/lib/server/db/-560": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-db-2-b-2-4d3"
+  },
+  "/sveltekit-template/api/lib/server/db/variables/client-291": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-db-variables-client-41-a-820"
+  },
+  "/sveltekit-template/api/lib/server/db/variables/DB-1bc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-db-variables-db-46-c-853"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/-700": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-350-896"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/enumerations/EventErrorCode-141": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-enumerations-event-error-code-04-d-e91"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/enumerations/EventSuccessCode-d90": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-enumerations-event-success-code-866-da3"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/functions/status-080": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-functions-status-758-ded"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/variables/Errors-9fb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-variables-errorsd-35-ff2"
+  },
+  "/sveltekit-template/api/lib/server/event-handler/variables/Success-bb1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-event-handler-variables-success-201-c7c"
+  },
+  "/sveltekit-template/api/lib/server/functions/postBuild-eba": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-functions-post-builda-42-684"
+  },
+  "/sveltekit-template/api/lib/server/services/email/-8ef": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-email-b-0-a-5c3"
+  },
+  "/sveltekit-template/api/lib/server/services/email/functions/sendEmail-601": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-email-functions-send-email-79-e-afc"
+  },
+  "/sveltekit-template/api/lib/server/services/file-upload/-e77": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-file-upload-c-47-7cc"
+  },
+  "/sveltekit-template/api/lib/server/services/file-upload/classes/FileUploader-260": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-file-upload-classes-file-uploader-0-d-1-e68"
+  },
+  "/sveltekit-template/api/lib/server/services/global-events/-2e7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-global-events-1-cc-343"
+  },
+  "/sveltekit-template/api/lib/server/services/global-events/type-aliases/Events-63e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-global-events-type-aliases-events-6-e-0-562"
+  },
+  "/sveltekit-template/api/lib/server/services/global-events/variables/default-a20": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-global-events-variables-defaultfd-8-752"
+  },
+  "/sveltekit-template/api/lib/server/services/ntp/-107": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-ntp-d-91-87e"
+  },
+  "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/-bb1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-ntp-namespaces-time-service-163-b9c"
+  },
+  "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getLastSynced-c1f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-ntp-namespaces-time-service-functions-get-last-synced-35-e-f91"
+  },
+  "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime-60f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-ntp-namespaces-time-service-functions-get-time-889-906"
+  },
+  "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/init-fcf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-ntp-namespaces-time-service-functions-init-1-f-7-f3a"
+  },
+  "/sveltekit-template/api/lib/server/services/redis/-11f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-redis-9-d-8-28b"
+  },
+  "/sveltekit-template/api/lib/server/services/redis/variables/default-b78": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-redis-variables-default-655-500"
+  },
+  "/sveltekit-template/api/lib/server/services/session-manager/-043": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-session-manager-795-a2f"
+  },
+  "/sveltekit-template/api/lib/server/services/session-manager/classes/SessionManager-8b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-session-manager-classes-session-manager-557-10d"
+  },
+  "/sveltekit-template/api/lib/server/services/sse/-804": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-sse-c-10-e6e"
+  },
+  "/sveltekit-template/api/lib/server/services/sse/classes/Connection-ef5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-sse-classes-connectionb-14-aed"
+  },
+  "/sveltekit-template/api/lib/server/services/sse/classes/SSE-ac9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-sse-classes-sse-433-ab5"
+  },
+  "/sveltekit-template/api/lib/server/services/sse/variables/sse-aca": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-sse-variables-sse-25-f-c11"
+  },
+  "/sveltekit-template/api/lib/server/services/struct-event/-c7d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-struct-event-8-da-d0e"
+  },
+  "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructEventService-8f4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-struct-event-functions-create-struct-event-service-620-14f"
+  },
+  "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructListenerService-7fb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-struct-event-functions-create-struct-listener-service-573-b90"
+  },
+  "/sveltekit-template/api/lib/server/services/struct-registry/-118": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-struct-registry-b-2-a-ee8"
+  },
+  "/sveltekit-template/api/lib/server/services/struct-registry/variables/default-823": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-struct-registry-variables-default-5-d-4-081"
+  },
+  "/sveltekit-template/api/lib/server/services/uuid/-53b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-uuid-bbb-01f"
+  },
+  "/sveltekit-template/api/lib/server/services/uuid/functions/uuid-113": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-services-uuid-functions-uuid-78-d-27c"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/-e79": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-2-cf-b0f"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/-4f1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-32-b-da9"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccount-be8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-create-account-1-ae-326"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth-f71": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-create-account-from-oauthb-9-b-677"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAccountInfo-6fb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-get-account-info-222-a4d"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAdmins-39b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-get-admins-09-d-af3"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getDevelopers-d48": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-get-developersca-2-ee5"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getSettings-2c3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-get-settings-6-ef-fce"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/hash-349": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-hash-0-e-1-f5d"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isAdmin-b2c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-is-admin-00-f-6de"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isDeveloper-2c8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-is-developer-00-d-8d6"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isOnline-c2b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-is-online-057-f16"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/newHash-e25": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-new-hasha-45-643"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/notifyPopup-2c6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-notify-popupc-34-88f"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/requestPasswordReset-b3d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-request-password-reset-0-e-7-13d"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/searchAccounts-77c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-search-accountsc-49-228"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/sendAccountNotif-0ea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-functions-send-account-notif-63-a-616"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/type-aliases/AccountData-109": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-type-aliases-account-datab-69-4aa"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/type-aliases/AccountInfoData-873": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-type-aliases-account-info-datab-96-cc2"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Account-11b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-accountc-62-c65"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/AccountInfo-7f8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-account-infoe-1-c-e5c"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/AccountNotification-457": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-account-notificationd-30-266"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Admins-43a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-admins-6-fb-9e5"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Developers-2b3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-developers-88-f-bd5"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/PasswordReset-3b2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-password-reset-881-d1b"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Settings-516": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-namespaces-account-variables-settings-8-dd-0b9"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/accountInfo-2a0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-account-infodbf-dc8"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/accountInfoVersionHistory-cb9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-account-info-version-history-293-c16"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/accountNotificationTable-a01": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-account-notification-table-236-3bc"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/accountSettings-cda": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-account-settings-02-d-ed6"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/accountTable-67c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-account-table-2-f-9-1c2"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/adminsTable-e28": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-admins-tablefaf-577"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/developersTable-d6f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-developers-table-5-f-0-b6f"
+  },
+  "/sveltekit-template/api/lib/server/structs/account/variables/passwordReset-333": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-account-variables-password-reset-356-de7"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/-a2b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-a-57-f39"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/-299": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-namespaces-analytics-41-d-370"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/functions/getAccountLinks-e35": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-namespaces-analytics-functions-get-account-links-007-a24"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/functions/getCount-221": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-namespaces-analytics-functions-get-countf-25-654"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/type-aliases/LinkData-9ea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-namespaces-analytics-type-aliases-link-datace-3-134"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/variables/Links-b37": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-namespaces-analytics-variables-linksa-34-386"
+  },
+  "/sveltekit-template/api/lib/server/structs/analytics/variables/links-801": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-analytics-variables-links-1-ad-1f5"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/-f9e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-5-ab-0f0"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/-222": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-11-b-905"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/getFingerprint-53b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-get-fingerprint-458-e52"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlocked-17e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-is-blockedc-0-a-8ce"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlockedPage-e6b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-is-blocked-page-6-ce-3f7"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpAllowed-c6e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-is-ip-allowed-007-bcc"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpLimitedPage-ed6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-is-ip-limited-page-2-e-1-c22"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit-faf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-rate-limit-088-b09"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/violate-e83": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-violate-321-f45"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/violationSeverity-1a5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-functions-violation-severity-79-a-2e9"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedAccounts-9c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-blocked-accountsc-6-a-bda"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedFingerprints-889": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-blocked-fingerprints-839-f59"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedIps-fd9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-blocked-ips-92-a-1a5"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedSessions-024": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-blocked-sessions-1-c-5-dc5"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits-450": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-limits-0-b-2-c12"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/PageRuleset-846": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-page-ruleset-777-7e4"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers-e59": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-namespaces-limiting-variables-violation-tiers-4-d-7-6b2"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedAccounts-a67": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-variables-blocked-accounts-587-8a8"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedFingerprints-9e8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-variables-blocked-fingerprints-0-e-7-ce3"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedIps-6c9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-variables-blocked-ips-9-f-0-26c"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedSessions-300": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-variables-blocked-sessionsaa-1-0bc"
+  },
+  "/sveltekit-template/api/lib/server/structs/limiting/variables/pageRuleset-490": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-limiting-variables-page-ruleset-0-bb-82f"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/-d8a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-ccf-4ef"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/-c99": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-namespaces-logs-80-e-85d"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/log-3c6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-namespaces-logs-functions-log-3-b-7-037"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/search-bda": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-namespaces-logs-functions-searchffe-e52"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData-627": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-namespaces-logs-type-aliases-log-datab-32-5bb"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/variables/Log-aa5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-namespaces-logs-variables-loga-3-b-5da"
+  },
+  "/sveltekit-template/api/lib/server/structs/log/variables/logTable-a8b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-log-variables-log-tabled-79-cf3"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/-25e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-592-55b"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/-b37": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-006-c07"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission-99c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-classes-combined-entitlement-permission-709-189"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/EntitlementPermission-54f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-classes-entitlement-permission-298-b1f"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/accountCanDo-a98": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-account-can-do-76-a-6d9"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canCreate-7b4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-can-create-620-07a"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo-148": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-can-dof-81-a38"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDoFeature-012": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-can-do-feature-495-c46"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/createChildRole-f63": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-create-child-role-8-eb-637"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/createEntitlement-22c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-create-entitlement-453-904"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/detectCircularHierarchy-e32": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-detect-circular-hierarchy-5-a-0-ecd"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionFromAccount-9b3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-filter-property-action-from-account-1-f-7-ac3"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionPipe-d7d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-filter-property-action-pipe-3-c-8-667"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getAccountsFromRole-bda": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-accounts-from-rolecc-4-258"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getChildren-2f3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-children-2-d-8-0b5"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlements-a60": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-entitlementsee-6-458"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount-5a7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-entitlements-from-account-620-83d"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromRole-a4c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-entitlements-from-rolee-80-943"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getHighestLevelRole-b46": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-highest-level-role-7-e-7-b10"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy-b87": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-lower-hierarchy-5-be-4c3"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getParent-39b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-parent-10-c-6e1"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getPermissionsFromEntitlement-ea4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-permissions-from-entitlement-80-e-8f5"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRoleRuleset-b9b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-role-rulesetc-7-b-d68"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount-dfb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-roles-from-account-442-574"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccountWithinHierarchy-5a6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-roles-from-account-within-hierarchyfac-037"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromAccount-0bb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-rulesets-from-account-6-a-2-b4e"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromRole-514": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-rulesets-from-rolefdd-a37"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsfromRoles-f32": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-rulesetsfrom-roles-917-c4b"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getTopLevelRole-f95": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-top-level-role-1-fe-ffc"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getUpperHierarchy-681": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-get-upper-hierarchy-4-e-5-0e6"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRole-300": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-grant-role-772-23a"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRoleRuleset-055": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-grant-role-ruleset-6-a-4-eee"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/isInRole-415": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-is-in-rolee-19-9e7"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/isParent-4c9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-is-parentc-6-b-e80"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRole-866": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-revoke-rolee-0-c-009"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRoleRuleset-57f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-revoke-role-ruleset-1-a-6-f4a"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/rolesCanDo-cc9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-roles-can-dofa-8-a83"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/searchRoles-a77": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-search-roles-697-eff"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/startHierarchy-0a2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-functions-start-hierarchye-56-8cc"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData-715": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-account-ruleset-dataab-5-5ba"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData-714": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-entitlement-data-5-dd-51b"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/Permission-3f0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-permission-7-a-9-d80"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleAccountData-95a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-role-account-dataeaa-b07"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleData-0d0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-role-databf-5-b9f"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleRulesetData-5e2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-type-aliases-role-ruleset-datac-2-e-5d8"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/AccountRuleset-c72": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-variables-account-ruleset-041-68f"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Entitlement-62f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-variables-entitlementa-4-b-98f"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Role-255": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-variables-role-24-f-e20"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleAccount-839": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-variables-role-account-22-f-8d0"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset-ea0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-namespaces-permissions-variables-role-ruleset-5-dd-c78"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/variables/accountRuleset-1db": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-variables-account-ruleset-278-05b"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/variables/entitlement-76b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-variables-entitlement-467-eff"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/variables/role-7fa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-variables-role-087-fe9"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/variables/roleAccount-d8b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-variables-role-accountec-1-87d"
+  },
+  "/sveltekit-template/api/lib/server/structs/permissions/variables/roleRuleset-fc8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-permissions-variables-role-rulesete-24-999"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/-208": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-456-d7b"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/-578": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-d-5-b-bcb"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getAccount-d9b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-functions-get-account-6-d-0-d94"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getSession-7fa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-functions-get-session-013-17d"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signIn-322": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-functions-sign-in-974-5ef"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signOut-8bb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-functions-sign-out-98-d-9b3"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData-bea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-type-aliases-session-dataa-17-18a"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/variables/Session-cee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-namespaces-session-variables-session-6-de-1e6"
+  },
+  "/sveltekit-template/api/lib/server/structs/session/variables/sessionTable-7b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-session-variables-session-tableac-1-f45"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/-e36": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-2-a-5-e7c"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/-476": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-namespaces-test-d-9-a-50c"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/variables/Test-6ae": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-namespaces-test-variables-testb-8-b-417"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/variables/TestPermissions-e63": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-namespaces-test-variables-test-permissionse-95-c64"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/variables/test-e64": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-variables-testd-5-f-631"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/variables/testPermissions-292": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-variables-test-permissionsd-58-f94"
+  },
+  "/sveltekit-template/api/lib/server/structs/testing/variables/testVersion-35a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-structs-testing-variables-test-version-20-a-48f"
+  },
+  "/sveltekit-template/api/lib/server/utils/config/-d23": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-config-f-1-b-2f8"
+  },
+  "/sveltekit-template/api/lib/server/utils/config/variables/default-83a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-config-variables-default-0-eb-370"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/-6b7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-a-4-c-8e7"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/classes/EnvironmentError-f31": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-classes-environment-errordd-9-d34"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/bool-901": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-bool-5-dc-aae"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/domain-e88": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-domain-305-1cf"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/get-50b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-gete-65-ab3"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/getPublicIp-af2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-get-public-ipd-53-65f"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/num-f6c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-num-955-817"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/functions/str-ee8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-functions-str-64-f-b77"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/variables/config-5fb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-variables-config-8-b-8-145"
+  },
+  "/sveltekit-template/api/lib/server/utils/env/variables/env-2da": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-env-variables-env-0-ed-f5e"
+  },
+  "/sveltekit-template/api/lib/server/utils/file-match/-9fa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-file-match-713-b2f"
+  },
+  "/sveltekit-template/api/lib/server/utils/file-match/functions/pathMatch-b60": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-file-match-functions-path-match-8-d-7-a5c"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/-fe4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-37-f-3cb"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/classes/FileReceiver-bfc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-classes-file-receiver-5-d-9-acc"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/fileTree-1c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-file-tree-649-968"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/generateSearchFile-126": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-generate-search-fileac-2-755"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/openFile-4b6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-open-file-8-f-0-082"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/openJSON-073": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-open-jso-ne-82-ef6"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/openJSONSync-3f5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-open-json-sync-46-a-c8a"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/parseJSON-714": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-parse-jso-nd-9-b-9ac"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/renderSearchResultHtml-ca7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-render-search-result-htmlc-6-f-ffc"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/saveFile-de1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-save-file-460-e53"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/functions/searchFile-32f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-functions-search-file-38-a-b1d"
+  },
+  "/sveltekit-template/api/lib/server/utils/files/type-aliases/FileTree-532": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-files-type-aliases-file-treef-07-7f2"
+  },
+  "/sveltekit-template/api/lib/server/utils/fingerprint/-0dc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-fingerprint-3-d-9-ac9"
+  },
+  "/sveltekit-template/api/lib/server/utils/fingerprint/functions/signFingerprint-10f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-fingerprint-functions-sign-fingerprint-781-969"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/-cd8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-041-5de"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/functions/branch-1e8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-functions-branch-3-f-0-744"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/functions/commit-a00": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-functions-commitd-68-0ab"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/functions/repoName-e3d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-functions-repo-nameb-2-d-be3"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/functions/repoSlug-8ae": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-functions-repo-slugd-97-eb0"
+  },
+  "/sveltekit-template/api/lib/server/utils/git/functions/repoUrl-db8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-git-functions-repo-urlf-61-fbc"
+  },
+  "/sveltekit-template/api/lib/server/utils/manifesto/-f14": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-manifesto-9-a-1-fbe"
+  },
+  "/sveltekit-template/api/lib/server/utils/manifesto/functions/getManifesto-b99": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-manifesto-functions-get-manifesto-125-106"
+  },
+  "/sveltekit-template/api/lib/server/utils/manifesto/functions/getManifestoInstance-392": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-manifesto-functions-get-manifesto-instance-0-f-6-48e"
+  },
+  "/sveltekit-template/api/lib/server/utils/task/-056": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-task-1-c-7-8d5"
+  },
+  "/sveltekit-template/api/lib/server/utils/task/functions/runTask-672": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-task-functions-run-task-5-cf-d46"
+  },
+  "/sveltekit-template/api/lib/server/utils/task/functions/runTs-b9a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-task-functions-run-tsa-3-d-4f2"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/-0ce": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-062-cb3"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/functions/error-689": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-functions-error-040-c69"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/functions/log-d7f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-functions-logbbc-0b1"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/functions/save-1f9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-functions-save-005-0c1"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/functions/warn-77a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-functions-warn-547-832"
+  },
+  "/sveltekit-template/api/lib/server/utils/terminal/variables/default-822": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-terminal-variables-defaultb-79-422"
+  },
+  "/sveltekit-template/api/lib/server/utils/uuid/-6c7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-uuid-b-1-a-1a7"
+  },
+  "/sveltekit-template/api/lib/server/utils/uuid/functions/uuid-c75": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-server-utils-uuid-functions-uuidf-86-069"
+  },
+  "/sveltekit-template/api/lib/services/analytics/-b92": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-analytics-776-e93"
+  },
+  "/sveltekit-template/api/lib/services/analytics/functions/init-b25": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-analytics-functions-init-63-f-983"
+  },
+  "/sveltekit-template/api/lib/services/db/-397": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-158-974"
+  },
+  "/sveltekit-template/api/lib/services/db/functions/define-6d8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-functions-defined-75-4b2"
+  },
+  "/sveltekit-template/api/lib/services/db/functions/init-8d8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-functions-initae-0-120"
+  },
+  "/sveltekit-template/api/lib/services/db/table/-e36": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-879-ab2"
+  },
+  "/sveltekit-template/api/lib/services/db/table/classes/PaginatedTableData-2d2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-classes-paginated-table-datadcd-c09"
+  },
+  "/sveltekit-template/api/lib/services/db/table/classes/Table-5a0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-classes-tableae-5-413"
+  },
+  "/sveltekit-template/api/lib/services/db/table/classes/TableData-f15": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-classes-table-datac-4-c-620"
+  },
+  "/sveltekit-template/api/lib/services/db/table/classes/TableDataArr-96f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-classes-table-data-arrfac-f2d"
+  },
+  "/sveltekit-template/api/lib/services/db/table/type-aliases/ReadConfig-93d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-table-type-aliases-read-confige-4-e-d1a"
+  },
+  "/sveltekit-template/api/lib/services/db/type-aliases/SchemaDefinition-8ef": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-type-aliases-schema-definition-204-0d7"
+  },
+  "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldReturnType-1ee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-type-aliases-schema-field-return-type-63-b-c88"
+  },
+  "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldType-58e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-type-aliases-schema-field-type-5-da-a30"
+  },
+  "/sveltekit-template/api/lib/services/db/type-aliases/TableStructable-8a6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-type-aliases-table-structablef-74-f03"
+  },
+  "/sveltekit-template/api/lib/services/db/variables/DB-bc0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-variables-d-bc-81-b39"
+  },
+  "/sveltekit-template/api/lib/services/db/variables/em-a62": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-db-variables-em-5-f-1-2c6"
+  },
+  "/sveltekit-template/api/lib/services/event-stack/-818": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-event-stack-65-b-b69"
+  },
+  "/sveltekit-template/api/lib/services/event-stack/classes/EventStack-545": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-event-stack-classes-event-stack-0-b-5-d97"
+  },
+  "/sveltekit-template/api/lib/services/event-stack/functions/createOverrideStack-d93": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-event-stack-functions-create-override-stack-305-1eb"
+  },
+  "/sveltekit-template/api/lib/services/event-stack/functions/useCommandStack-8ea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-event-stack-functions-use-command-stack-5-c-7-815"
+  },
+  "/sveltekit-template/api/lib/services/event-stack/type-aliases/Command-c2f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-event-stack-type-aliases-commandc-72-cd5"
+  },
+  "/sveltekit-template/api/lib/services/ntp/-dfe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-89-a-cbb"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/-cc4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-b-19-b47"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/forceSync-b11": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-functions-force-syncd-10-467"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/getLastSynced-57b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-functions-get-last-syncedd-13-f40"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/getTime-7c2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-functions-get-time-1-ef-e9b"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/init-2f0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-functions-init-340-360"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/off-9b4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-variables-offb-5-e-9b3"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/on-174": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-variables-on-7-ca-1c2"
+  },
+  "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/once-357": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-ntp-namespaces-time-service-variables-once-44-e-65b"
+  },
+  "/sveltekit-template/api/lib/services/session-manager/-6ed": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-session-manager-5-a-4-9fe"
+  },
+  "/sveltekit-template/api/lib/services/session-manager/classes/Connection-362": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-session-manager-classes-connection-7-dd-37c"
+  },
+  "/sveltekit-template/api/lib/services/session-manager/classes/SessionManager-b74": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-session-manager-classes-session-manager-84-c-6c5"
+  },
+  "/sveltekit-template/api/lib/services/sse/-0b3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-sse-f-89-d21"
+  },
+  "/sveltekit-template/api/lib/services/sse/variables/sse-03d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-sse-variables-sse-611-dea"
+  },
+  "/sveltekit-template/api/lib/services/struct/-7d3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-dfe-899"
+  },
+  "/sveltekit-template/api/lib/services/struct/batching/-aac": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-batching-c-9-a-bff"
+  },
+  "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/-6ef": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-batching-namespaces-struct-batching-7-d-4-714"
+  },
+  "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/functions/add-676": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-batching-namespaces-struct-batching-functions-add-4-cb-818"
+  },
+  "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/Batch-b1d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-batching-namespaces-struct-batching-type-aliases-batch-342-beb"
+  },
+  "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch-9d4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-batching-namespaces-struct-batching-type-aliases-struct-batch-5-e-9-2c7"
+  },
+  "/sveltekit-template/api/lib/services/struct/cache/-791": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-cache-be-5-b83"
+  },
+  "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/-9cc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-cache-namespaces-struct-cache-0-e-4-493"
+  },
+  "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/clear-413": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-cache-namespaces-struct-cache-functions-clearc-0-a-ff0"
+  },
+  "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/get-35c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-cache-namespaces-struct-cache-functions-getec-1-526"
+  },
+  "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/set-499": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-cache-namespaces-struct-cache-functions-set-169-12d"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-arr/-595": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-arr-1-e-7-589"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-arr/classes/DataArr-429": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-arr-classes-data-arra-48-e8d"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-arr/classes/PaginationDataArr-74d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-arr-classes-pagination-data-arr-8-db-bc9"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-staging/-ac5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-staging-a-23-968"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-staging/classes/StructDataStage-97a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-staging-classes-struct-data-staged-6-e-432"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-version/-c50": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-version-0-f-7-960"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-version/classes/StructDataVersion-6f7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-version-classes-struct-data-versionc-5-f-d92"
+  },
+  "/sveltekit-template/api/lib/services/struct/data-version/type-aliases/VersionStructable-972": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-data-version-type-aliases-version-structable-864-c03"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct-data/-8c3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-data-a-3-a-51d"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct-data/classes/StructData-1c0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-data-classes-struct-data-784-048"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/-887": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-69-b-473"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/DataError-7ee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-data-error-24-e-b80"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/FatalDataError-907": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-fatal-data-errordd-5-76c"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/FatalStructError-4e9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-fatal-struct-errora-84-2e7"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/SingleWritable-c7a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-single-writable-996-880"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/Struct-7cd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-structa-59-6fb"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/StructError-295": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-struct-error-449-448"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/classes/StructStream-d44": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-classes-struct-stream-13-a-0a8"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/enumerations/FetchActions-f71": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-enumerations-fetch-actions-899-df6"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/interfaces/Socket-5f9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-interfaces-socket-4-b-1-938"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/Blank-621": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-blank-6-d-2-51a"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/ColTsType-f6c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-col-ts-type-9-e-3-8d5"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/GlobalCols-6f0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-global-colsa-2-c-675"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/PartialStructable-a72": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-partial-structable-77-c-dc6"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/ReadConfig-905": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-read-config-7-b-9-6f5"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/SafeColTsType-ac1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-safe-col-ts-type-67-a-cc0"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/SafePartialStructable-06a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-safe-partial-structabledcb-856"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StatusMessage-c7f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-status-message-689-def"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/Structable-4ad": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-structable-0-bf-3ce"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructBuilder-ea3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-struct-builderc-45-a67"
+  },
+  "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructEvents-5a2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-services-struct-struct-type-aliases-struct-eventsb-66-f4c"
+  },
+  "/sveltekit-template/api/lib/types/email/-a3b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-email-e-3-f-3b2"
+  },
+  "/sveltekit-template/api/lib/types/email/type-aliases/Email-426": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-email-type-aliases-email-753-a75"
+  },
+  "/sveltekit-template/api/lib/types/entitlements/-231": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-entitlements-fc-4-8d6"
+  },
+  "/sveltekit-template/api/lib/types/entitlements/type-aliases/Entitlement-f8a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-entitlements-type-aliases-entitlement-04-c-75d"
+  },
+  "/sveltekit-template/api/lib/types/entitlements/type-aliases/Features-c5f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-entitlements-type-aliases-featuresf-32-106"
+  },
+  "/sveltekit-template/api/lib/types/entitlements/type-aliases/Group-bdd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-entitlements-type-aliases-group-8-d-8-f1d"
+  },
+  "/sveltekit-template/api/lib/types/icons/-bba": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-1-f-7-1cd"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/BootstrapIcon-fd0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-bootstrap-iconf-62-56b"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/FontAwesomeIcon-149": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-font-awesome-icon-9-e-3-dd7"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/Icon-54b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-icon-127-392"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/IconTypes-3c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-icon-types-7-f-4-fba"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/MaterialIcon-361": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-material-icon-75-d-85d"
+  },
+  "/sveltekit-template/api/lib/types/icons/type-aliases/MaterialSymbol-27c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-icons-type-aliases-material-symbol-604-d31"
+  },
+  "/sveltekit-template/api/lib/types/notification/-a71": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-notification-dfd-15b"
+  },
+  "/sveltekit-template/api/lib/types/notification/type-aliases/Notification-ab5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-notification-type-aliases-notificationf-74-3c4"
+  },
+  "/sveltekit-template/api/lib/types/sse/-c34": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-sse-f-71-b03"
+  },
+  "/sveltekit-template/api/lib/types/sse/type-aliases/ConnectionState-d12": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-sse-type-aliases-connection-state-1-a-4-5bf"
+  },
+  "/sveltekit-template/api/lib/types/sse/variables/ConnectionStateSchema-8da": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-sse-variables-connection-state-schemaa-7-a-463"
+  },
+  "/sveltekit-template/api/lib/types/struct/-226": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-struct-420-fa1"
+  },
+  "/sveltekit-template/api/lib/types/struct/enumerations/DataAction-864": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-struct-enumerations-data-action-372-ad0"
+  },
+  "/sveltekit-template/api/lib/types/struct/enumerations/PropertyAction-997": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-types-struct-enumerations-property-actionb-07-04f"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/buttons/-160": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-buttons-869-047"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/buttons/classes/ButtonCellRenderer-609": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-buttons-classes-button-cell-renderer-0-c-4-a86"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/-a65": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-checkbox-select-7-ca-314"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/CheckBoxSelectRenderer-a75": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-checkbox-select-classes-check-box-select-renderer-2-d-4-24d"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/HeaderCheckboxRenderer-17f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-checkbox-select-classes-header-checkbox-rendererfd-2-47e"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/date-time/-849": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-date-time-7-d-9-db2"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/date-time/classes/DateTimeCellEditor-b94": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-date-time-classes-date-time-cell-editor-53-d-462"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/search-select/-a6a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-search-select-60-d-62f"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/search-select/classes/SearchSelectCellEditor-5f9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-search-select-classes-search-select-cell-editorfd-1-955"
+  },
+  "/sveltekit-template/api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams-b48": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-ag-grid-search-select-type-aliases-search-select-cell-editor-paramseba-2aa"
+  },
+  "/sveltekit-template/api/lib/utils/clipboard/-4bf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-clipboard-5-cf-4ce"
+  },
+  "/sveltekit-template/api/lib/utils/clipboard/functions/copy-4cf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-clipboard-functions-copyeb-2-cbb"
+  },
+  "/sveltekit-template/api/lib/utils/clipboard/functions/copyCanvas-77d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-clipboard-functions-copy-canvasaa-8-0bf"
+  },
+  "/sveltekit-template/api/lib/utils/clipboard/functions/copyImage-c75": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-clipboard-functions-copy-image-5-a-9-484"
+  },
+  "/sveltekit-template/api/lib/utils/contextmenu/-d00": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-contextmenu-148-0d3"
+  },
+  "/sveltekit-template/api/lib/utils/contextmenu/functions/contextmenu-363": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-contextmenu-functions-contextmenufa-8-16a"
+  },
+  "/sveltekit-template/api/lib/utils/contextmenu/type-aliases/ContextMenuOptions-617": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-contextmenu-type-aliases-context-menu-optionse-3-f-871"
+  },
+  "/sveltekit-template/api/lib/utils/countdown/-58f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-countdown-710-6a5"
+  },
+  "/sveltekit-template/api/lib/utils/countdown/classes/Countdown-5c9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-countdown-classes-countdown-42-b-3cf"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/-5b6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-593-6ae"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/functions/downloadBlob-cb5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-functions-download-blob-9-b-0-e04"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/functions/downloadText-956": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-functions-download-text-0-da-7f2"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/functions/downloadUrl-4bb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-functions-download-url-0-a-0-e38"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/functions/loadFileContents-494": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-functions-load-file-contentsadf-c5a"
+  },
+  "/sveltekit-template/api/lib/utils/downloads/functions/loadFiles-fd0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-downloads-functions-load-files-281-7e3"
+  },
+  "/sveltekit-template/api/lib/utils/files/-41f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-files-8-df-789"
+  },
+  "/sveltekit-template/api/lib/utils/files/classes/FileUploader-41f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-files-classes-file-uploader-583-8a0"
+  },
+  "/sveltekit-template/api/lib/utils/fingerprint/-ba6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-fingerprint-2-d-0-df3"
+  },
+  "/sveltekit-template/api/lib/utils/fingerprint/functions/fingerprint-ef3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-fingerprint-functions-fingerprintda-0-7b3"
+  },
+  "/sveltekit-template/api/lib/utils/form/-a67": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-form-e-3-e-9e7"
+  },
+  "/sveltekit-template/api/lib/utils/form/classes/Form-44f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-form-classes-form-1-ac-a0f"
+  },
+  "/sveltekit-template/api/lib/utils/form/classes/RangeSlider-271": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-form-classes-range-slidera-5-b-82a"
+  },
+  "/sveltekit-template/api/lib/utils/fullscreen/-dc8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-fullscreen-a-5-d-07f"
+  },
+  "/sveltekit-template/api/lib/utils/fullscreen/functions/fullscreen-b88": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-fullscreen-functions-fullscreen-1-cb-3e0"
+  },
+  "/sveltekit-template/api/lib/utils/generate-type/-cb7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-generate-type-b-1-a-764"
+  },
+  "/sveltekit-template/api/lib/utils/generate-type/functions/toType-c96": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-generate-type-functions-to-type-846-459"
+  },
+  "/sveltekit-template/api/lib/utils/generate-type/functions/toZodType-2ed": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-generate-type-functions-to-zod-type-50-b-306"
+  },
+  "/sveltekit-template/api/lib/utils/keybinds/-d82": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-keybinds-0-ff-846"
+  },
+  "/sveltekit-template/api/lib/utils/keybinds/classes/Keyboard-e7e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-keybinds-classes-keyboard-1-db-f74"
+  },
+  "/sveltekit-template/api/lib/utils/keybinds/type-aliases/KeyCombo-d6b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-keybinds-type-aliases-key-comboa-6-a-491"
+  },
+  "/sveltekit-template/api/lib/utils/keybinds/type-aliases/KeyName-11b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-keybinds-type-aliases-key-namefd-8-d22"
+  },
+  "/sveltekit-template/api/lib/utils/keybinds/type-aliases/Modifier-eb7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-keybinds-type-aliases-modifier-077-0fa"
+  },
+  "/sveltekit-template/api/lib/utils/pages/-c44": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-pages-00-c-3c0"
+  },
+  "/sveltekit-template/api/lib/utils/pages/functions/getTitle-5f3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-pages-functions-get-title-68-d-047"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/-969": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-c-77-0f7"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/alert-4dc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-alert-438-f09"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/choose-6b8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-choose-6-c-1-dde"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/clearModals-efd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-clear-modalse-91-e12"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/colorPicker-222": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-color-pickerd-58-ea3"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/confirm-9b2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-confirm-4-bd-339"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/createButtons-5c1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-create-buttons-69-a-e00"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/notify-914": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-notifyc-71-d80"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/prompt-4c6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-prompt-2-de-ebb"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/rawModal-0f5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-raw-modal-6-a-4-807"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/functions/select-c3f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-functions-selectfa-6-9f7"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/variables/history-3db": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-variables-history-21-f-730"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/variables/modalTarget-7fc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-variables-modal-target-5-f-4-dc7"
+  },
+  "/sveltekit-template/api/lib/utils/prompts/variables/notifs-1e4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-prompts-variables-notifs-2-ed-484"
+  },
+  "/sveltekit-template/api/lib/utils/requests/-41a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-cd-6-3ca"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/-257": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-092-054"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/get-eed": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-functions-gete-37-d5f"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/post-549": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-functions-postd-6-e-617"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/setMeta-95f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-functions-set-metaa-4-a-21b"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/uploadFiles-bdb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-functions-upload-files-09-b-481"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/type-aliases/GetConfig-2b4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-type-aliases-get-config-39-c-dab"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/type-aliases/PostConfig-809": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-type-aliases-post-configefb-427"
+  },
+  "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/variables/metadata-4b4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-requests-namespaces-requests-variables-metadata-938-491"
+  },
+  "/sveltekit-template/api/lib/utils/stack/-93e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-stack-846-dd4"
+  },
+  "/sveltekit-template/api/lib/utils/stack/classes/Stack-4be": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-stack-classes-stack-0-b-1-6f8"
+  },
+  "/sveltekit-template/api/lib/utils/theme/-1e4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-theme-b-64-ca1"
+  },
+  "/sveltekit-template/api/lib/utils/theme/functions/setTheme-5ba": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-theme-functions-set-themeea-7-12d"
+  },
+  "/sveltekit-template/api/lib/utils/theme/variables/theme-22e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-theme-variables-theme-4-ed-84e"
+  },
+  "/sveltekit-template/api/lib/utils/writables/-b49": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-writables-c-1-e-0e5"
+  },
+  "/sveltekit-template/api/lib/utils/writables/classes/WritableArray-21d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-writables-classes-writable-arraya-3-a-7c0"
+  },
+  "/sveltekit-template/api/lib/utils/writables/classes/WritableBase-99f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-utils-writables-classes-writable-base-78-c-94b"
+  },
+  "/sveltekit-template/api/lib/variables/ogFetch-3e9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-lib-variables-og-fetch-242-3d5"
+  },
+  "/sveltekit-template/api/routes/+layout/-8e7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-layout-548-759"
+  },
+  "/sveltekit-template/api/routes/account/[username]/+page.server/-ede": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-username-page-server-e-52-91c"
+  },
+  "/sveltekit-template/api/routes/account/[username]/+page.server/functions/load-77d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-username-page-server-functions-loadea-7-dff"
+  },
+  "/sveltekit-template/api/routes/account/manage-profile/+page.server/-1d9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-manage-profile-page-server-a-53-589"
+  },
+  "/sveltekit-template/api/routes/account/manage-profile/+page.server/functions/load-d02": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-manage-profile-page-server-functions-load-5-bd-f0c"
+  },
+  "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/-03a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-password-reset-id-page-server-4-e-8-a20"
+  },
+  "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/functions/load-01d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-password-reset-id-page-server-functions-loadf-58-8b4"
+  },
+  "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/variables/actions-55c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-password-reset-id-page-server-variables-actions-4-d-5-c6a"
+  },
+  "/sveltekit-template/api/routes/account/password-reset/[id]/+page/-1fc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-password-reset-id-page-658-6a3"
+  },
+  "/sveltekit-template/api/routes/account/password-reset/[id]/+page/functions/load-16b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-password-reset-id-page-functions-loade-57-e11"
+  },
+  "/sveltekit-template/api/routes/account/profile/+server/-8cc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-profile-server-8-c-7-664"
+  },
+  "/sveltekit-template/api/routes/account/profile/+server/functions/POST-7ea": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-profile-server-functions-post-809-ffe"
+  },
+  "/sveltekit-template/api/routes/account/settings/+page.server/-093": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-settings-page-server-287-243"
+  },
+  "/sveltekit-template/api/routes/account/settings/+page/-0e0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-settings-page-ad-4-98c"
+  },
+  "/sveltekit-template/api/routes/account/sign-in/+page.server/-664": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-in-page-server-526-1b6"
+  },
+  "/sveltekit-template/api/routes/account/sign-in/+page.server/variables/actions-1fc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-in-page-server-variables-actions-248-5f8"
+  },
+  "/sveltekit-template/api/routes/account/sign-out/+page.server/-ff2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-out-page-server-893-9ef"
+  },
+  "/sveltekit-template/api/routes/account/sign-out/+page.server/functions/load-783": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-out-page-server-functions-load-5-f-0-518"
+  },
+  "/sveltekit-template/api/routes/account/sign-out/+page.server/variables/actions-865": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-out-page-server-variables-actions-305-21f"
+  },
+  "/sveltekit-template/api/routes/account/sign-up/+page.server/-03b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-up-page-server-405-34a"
+  },
+  "/sveltekit-template/api/routes/account/sign-up/+page.server/variables/actions-048": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-account-sign-up-page-server-variables-actions-011-49b"
+  },
+  "/sveltekit-template/api/routes/api/+server/-6c8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-server-491-107"
+  },
+  "/sveltekit-template/api/routes/api/+server/functions/GET-62a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-server-functions-get-364-59f"
+  },
+  "/sveltekit-template/api/routes/api/oauth/sign-in/+server/-025": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-oauth-sign-in-server-333-dbb"
+  },
+  "/sveltekit-template/api/routes/api/oauth/sign-in/+server/functions/GET-93f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-oauth-sign-in-server-functions-get-336-869"
+  },
+  "/sveltekit-template/api/routes/api/oauth/sign-up/+server/-890": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-oauth-sign-up-server-3-dd-14c"
+  },
+  "/sveltekit-template/api/routes/api/oauth/sign-up/+server/functions/GET-534": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-oauth-sign-up-server-functions-get-14-f-610"
+  },
+  "/sveltekit-template/api/routes/api/sse/ack/[uuid]/[id]/+server/-374": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-ack-uuid-id-server-771-9a2"
+  },
+  "/sveltekit-template/api/routes/api/sse/ack/[uuid]/[id]/+server/functions/GET-4a4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-ack-uuid-id-server-functions-get-439-169"
+  },
+  "/sveltekit-template/api/routes/api/sse/init/[uuid]/+server/-faa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-init-uuid-server-21-a-e4e"
+  },
+  "/sveltekit-template/api/routes/api/sse/init/[uuid]/+server/functions/GET-241": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-init-uuid-server-functions-ge-tf-17-edd"
+  },
+  "/sveltekit-template/api/routes/api/sse/ping/[uuid]/+server/-3e3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-ping-uuid-server-661-e5d"
+  },
+  "/sveltekit-template/api/routes/api/sse/ping/[uuid]/+server/functions/GET-bc4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-api-sse-ping-uuid-server-functions-ge-tcb-7-513"
+  },
+  "/sveltekit-template/api/routes/assets/[...filepath]/+server/-fe4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-assets-filepath-server-175-518"
+  },
+  "/sveltekit-template/api/routes/assets/[...filepath]/+server/functions/GET-ba1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-assets-filepath-server-functions-get-85-f-e51"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/+server/-e2f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-server-76-c-eed"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/+server/functions/GET-da6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-server-functions-ge-tc-34-c5c"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/[accountId]/+page.server/-b26": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-account-id-page-server-0-c-1-994"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/[accountId]/+page.server/functions/load-0cb": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-account-id-page-server-functions-load-24-b-276"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/+page.server/-569": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-page-server-f-4-b-296"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/+page.server/functions/load-2ae": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-page-server-functions-loadfeb-cd7"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/+page/-806": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-page-6-aa-d2c"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/account/+page/functions/load-d09": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-account-page-functions-load-021-1df"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/-745": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-analytics-page-server-9-a-1-390"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/functions/load-75d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-analytics-page-server-functions-load-779-47b"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page.server/-bf7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-struct-page-server-1-b-0-a08"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page.server/functions/load-ffe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-struct-page-server-functions-load-9-cc-6b4"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page/-66c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-struct-page-97-b-a95"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page/functions/load-562": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-struct-page-functions-load-3-c-7-400"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/+page.server/-9f9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-page-server-a-92-b8c"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/data/+page.server/functions/load-4ce": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-data-page-server-functions-loade-3-d-aad"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/logs/+page.server/-632": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-logs-page-server-6-b-1-6fa"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/logs/+page.server/functions/load-f1f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-logs-page-server-functions-loadd-1-e-5a9"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page.server/-8c2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-role-id-page-server-aac-513"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page.server/functions/load-854": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-role-id-page-server-functions-load-121-46a"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page/-8b9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-role-id-page-6-c-3-cca"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page/functions/load-866": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-role-id-page-functions-load-6-f-6-a01"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/+page.server/-56f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-page-server-2-e-6-630"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/+page.server/functions/load-76b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-page-server-functions-load-915-f80"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/+page/-6e5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-page-ba-0-453"
+  },
+  "/sveltekit-template/api/routes/dashboard/admin/role/+page/functions/load-e7d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-dashboard-admin-role-page-functions-load-989-28f"
+  },
+  "/sveltekit-template/api/routes/examples/sse/+page.server/-720": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-examples-sse-page-server-1-e-6-dd0"
+  },
+  "/sveltekit-template/api/routes/examples/struct/ssr/+page.server/-ea8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-examples-struct-ssr-page-server-834-9ea"
+  },
+  "/sveltekit-template/api/routes/examples/struct/ssr/+page.server/functions/load-424": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-examples-struct-ssr-page-server-functions-load-8-a-3-83f"
+  },
+  "/sveltekit-template/api/routes/files/[fileId]/+server/-734": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-files-file-id-server-44-a-e45"
+  },
+  "/sveltekit-template/api/routes/files/[fileId]/+server/functions/GET-e88": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-files-file-id-server-functions-get-777-1bf"
+  },
+  "/sveltekit-template/api/routes/files/[fileId]/+server/functions/POST-ef2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-files-file-id-server-functions-pos-tf-61-ed4"
+  },
+  "/sveltekit-template/api/routes/test/+page.server/-fbf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-page-server-2-d-5-086"
+  },
+  "/sveltekit-template/api/routes/test/account/+page.server/-5ed": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-account-page-server-3-c-9-bee"
+  },
+  "/sveltekit-template/api/routes/test/account/+page.server/functions/load-ff3": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-account-page-server-functions-loadf-48-b94"
+  },
+  "/sveltekit-template/api/routes/test/sse/init/+server/-8fd": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-sse-init-server-a-65-82f"
+  },
+  "/sveltekit-template/api/routes/test/sse/init/+server/functions/POST-0de": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-sse-init-server-functions-post-2-f-7-197"
+  },
+  "/sveltekit-template/api/routes/test/upload/+server/-90c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-upload-server-8-e-6-e99"
+  },
+  "/sveltekit-template/api/routes/test/upload/+server/functions/POST-8b9": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-routes-test-upload-server-functions-post-8-ff-dfb"
+  },
+  "/sveltekit-template/api/tests/run-task.test/-5df": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-tests-run-task-test-4-ff-70e"
+  },
+  "/sveltekit-template/api/tests/struct.test/-186": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-tests-struct-test-289-1ce"
+  },
+  "/sveltekit-template/api/tests/task-import/-1c4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-tests-task-import-66-b-90a"
+  },
+  "/sveltekit-template/api/tests/task-import/functions/test-f07": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-tests-task-import-functions-testc-05-c48"
+  },
+  "/sveltekit-template/api/types/app/-d2c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-6-b-6-73c"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/-c09": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-495-079"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/interfaces/Error-883": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-interfaces-error-2-e-0-c36"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/interfaces/Locals-709": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-interfaces-localsa-17-cc2"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageData-4ab": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-interfaces-page-data-7-db-ee1"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageState-57c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-interfaces-page-state-7-da-aab"
+  },
+  "/sveltekit-template/api/types/app/namespaces/App/interfaces/Platform-e49": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-namespaces-app-interfaces-platformf-49-85d"
+  },
+  "/sveltekit-template/api/types/app/variables/APP_ENV-70f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-app-variables-app-en-vfb-0-2ba"
+  },
+  "/sveltekit-template/api/types/broprint/-190": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-broprint-832-927"
+  },
+  "/sveltekit-template/api/types/broprint/functions/getCurrentBrowserFingerPrint-15c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-broprint-functions-get-current-browser-finger-printb-24-ffa"
+  },
+  "/sveltekit-template/api/types/document-extended/-9ee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-5-de-d03"
+  },
+  "/sveltekit-template/api/types/document-extended/functions/create-1be": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-functions-create-126-d41"
+  },
+  "/sveltekit-template/api/types/document-extended/functions/createDeep-d68": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-functions-create-deep-332-98a"
+  },
+  "/sveltekit-template/api/types/document-extended/functions/find-ec7": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-functions-findaa-3-678"
+  },
+  "/sveltekit-template/api/types/document-extended/functions/findAll-648": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-functions-find-allcf-4-a0f"
+  },
+  "/sveltekit-template/api/types/document-extended/variables/recaptchaSiteKey-446": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-document-extended-variables-recaptcha-site-keyda-4-ccc"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/-632": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-668-762"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/classes/default-153": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-classes-default-21-c-5b6"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/functions/registerPlugin-d72": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-functions-register-plugina-9-e-a24"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/functions/supported-776": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-functions-supportede-20-2b5"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondFile-e4e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-interfaces-file-pond-file-1-c-8-1c1"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondProps-f73": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-interfaces-file-pond-props-39-e-15b"
+  },
+  "/sveltekit-template/api/types/svelte-filepond/type-aliases/FilePondEvent-313": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-api-types-svelte-filepond-type-aliases-file-pond-event-2-f-4-a2e"
+  },
+  "/sveltekit-template/config/-0b8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-config-7-dd-0ed"
+  },
+  "/sveltekit-template/diagrams/-0fa": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-diagrams-a-18-d70"
+  },
+  "/sveltekit-template/e2e/-602": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-e-2-e-a-22-67d"
+  },
+  "/sveltekit-template/scripts/-5da": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-scripts-303-452"
+  },
+  "/sveltekit-template/-863": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---sveltekit-template-bba-463"
+  }
+}

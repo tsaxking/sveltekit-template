@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/ntp/namespaces/TimeService/variables/on",
+  "title": "on",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/ntp/namespaces/TimeService/variables/on.md",
+  "sourceDirName": "api/lib/services/ntp/namespaces/TimeService/variables",
+  "slug": "/api/lib/services/ntp/namespaces/TimeService/variables/on",
+  "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/on",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "off",
+    "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/off"
+  },
+  "next": {
+    "title": "once",
+    "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/once"
+  }
+}

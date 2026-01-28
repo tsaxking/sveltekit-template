@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/ag-grid/search-select/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/ag-grid/search-select/README.md",
+  "sourceDirName": "api/lib/utils/ag-grid/search-select",
+  "slug": "/api/lib/utils/ag-grid/search-select/",
+  "permalink": "/sveltekit-template/api/lib/utils/ag-grid/search-select/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "DateTimeCellEditor",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/date-time/classes/DateTimeCellEditor"
+  },
+  "next": {
+    "title": "SearchSelectCellEditor",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/search-select/classes/SearchSelectCellEditor"
+  }
+}

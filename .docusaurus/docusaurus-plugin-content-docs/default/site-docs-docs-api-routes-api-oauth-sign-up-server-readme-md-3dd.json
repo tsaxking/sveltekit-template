@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/api/oauth/sign-up/+server/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/api/oauth/sign-up/+server/README.md",
+  "sourceDirName": "api/routes/api/oauth/sign-up/+server",
+  "slug": "/api/routes/api/oauth/sign-up/+server/",
+  "permalink": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "GET",
+    "permalink": "/sveltekit-template/api/routes/api/oauth/sign-in/+server/functions/GET"
+  },
+  "next": {
+    "title": "GET",
+    "permalink": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/functions/GET"
+  }
+}

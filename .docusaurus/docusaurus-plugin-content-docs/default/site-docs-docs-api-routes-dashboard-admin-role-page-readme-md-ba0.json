@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/dashboard/admin/role/+page/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/dashboard/admin/role/+page/README.md",
+  "sourceDirName": "api/routes/dashboard/admin/role/+page",
+  "slug": "/api/routes/dashboard/admin/role/+page/",
+  "permalink": "/sveltekit-template/api/routes/dashboard/admin/role/+page/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "load",
+    "permalink": "/sveltekit-template/api/routes/dashboard/admin/logs/+page.server/functions/load"
+  },
+  "next": {
+    "title": "load",
+    "permalink": "/sveltekit-template/api/routes/dashboard/admin/role/+page/functions/load"
+  }
+}

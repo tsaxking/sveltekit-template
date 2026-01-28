@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch",
+  "title": "StructBatch",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch.md",
+  "sourceDirName": "api/lib/services/struct/batching/namespaces/StructBatching/type-aliases",
+  "slug": "/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch",
+  "permalink": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Batch",
+    "permalink": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/Batch"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/struct/cache/"
+  }
+}

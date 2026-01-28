@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/account/namespaces/Account/functions/getSelf",
+  "title": "getSelf",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/account/namespaces/Account/functions/getSelf.md",
+  "sourceDirName": "api/lib/model/account/namespaces/Account/functions",
+  "slug": "/api/lib/model/account/namespaces/Account/functions/getSelf",
+  "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getSelf",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getNotifs",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getNotifs"
+  },
+  "next": {
+    "title": "search",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/search"
+  }
+}

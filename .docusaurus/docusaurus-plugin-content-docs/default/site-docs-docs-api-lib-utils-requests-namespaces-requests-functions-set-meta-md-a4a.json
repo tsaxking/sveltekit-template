@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/requests/namespaces/Requests/functions/setMeta",
+  "title": "setMeta",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/requests/namespaces/Requests/functions/setMeta.md",
+  "sourceDirName": "api/lib/utils/requests/namespaces/Requests/functions",
+  "slug": "/api/lib/utils/requests/namespaces/Requests/functions/setMeta",
+  "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/setMeta",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "post",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/post"
+  },
+  "next": {
+    "title": "uploadFiles",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/uploadFiles"
+  }
+}

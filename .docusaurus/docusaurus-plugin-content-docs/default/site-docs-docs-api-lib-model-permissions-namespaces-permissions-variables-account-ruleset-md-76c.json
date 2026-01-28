@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset",
+  "title": "AccountRuleset",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/variables",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "RoleRulesetDataArr",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetDataArr"
+  },
+  "next": {
+    "title": "Entitlement",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/Entitlement"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/terminal/functions/log",
+  "title": "log",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/terminal/functions/log.md",
+  "sourceDirName": "api/lib/server/utils/terminal/functions",
+  "slug": "/api/lib/server/utils/terminal/functions/log",
+  "permalink": "/sveltekit-template/api/lib/server/utils/terminal/functions/log",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "error",
+    "permalink": "/sveltekit-template/api/lib/server/utils/terminal/functions/error"
+  },
+  "next": {
+    "title": "save",
+    "permalink": "/sveltekit-template/api/lib/server/utils/terminal/functions/save"
+  }
+}

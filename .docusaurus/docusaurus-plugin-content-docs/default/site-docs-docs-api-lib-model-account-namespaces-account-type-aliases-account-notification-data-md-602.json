@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData",
+  "title": "AccountNotificationData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData.md",
+  "sourceDirName": "api/lib/model/account/namespaces/Account/type-aliases",
+  "slug": "/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData",
+  "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "AccountNotificationArr",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationArr"
+  },
+  "next": {
+    "title": "Account",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/Account"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/addToRole",
+  "title": "addToRole",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/addToRole.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/addToRole",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/addToRole",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/"
+  },
+  "next": {
+    "title": "createChildRolePopup",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/createChildRolePopup"
+  }
+}

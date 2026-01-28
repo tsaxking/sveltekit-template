@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/git/functions/repoName",
+  "title": "repoName",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/git/functions/repoName.md",
+  "sourceDirName": "api/lib/server/utils/git/functions",
+  "slug": "/api/lib/server/utils/git/functions/repoName",
+  "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/repoName",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "commit",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/commit"
+  },
+  "next": {
+    "title": "repoSlug",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/repoSlug"
+  }
+}

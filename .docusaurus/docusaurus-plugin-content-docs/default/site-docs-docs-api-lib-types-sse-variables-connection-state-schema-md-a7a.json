@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/sse/variables/ConnectionStateSchema",
+  "title": "ConnectionStateSchema",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/sse/variables/ConnectionStateSchema.md",
+  "sourceDirName": "api/lib/types/sse/variables",
+  "slug": "/api/lib/types/sse/variables/ConnectionStateSchema",
+  "permalink": "/sveltekit-template/api/lib/types/sse/variables/ConnectionStateSchema",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ConnectionState",
+    "permalink": "/sveltekit-template/api/lib/types/sse/type-aliases/ConnectionState"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/types/struct/"
+  }
+}

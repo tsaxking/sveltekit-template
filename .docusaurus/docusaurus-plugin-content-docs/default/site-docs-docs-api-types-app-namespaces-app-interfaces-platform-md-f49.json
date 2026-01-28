@@ -1,0 +1,23 @@
+{
+  "id": "api/types/app/namespaces/App/interfaces/Platform",
+  "title": "Platform",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/app/namespaces/App/interfaces/Platform.md",
+  "sourceDirName": "api/types/app/namespaces/App/interfaces",
+  "slug": "/api/types/app/namespaces/App/interfaces/Platform",
+  "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Platform",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "PageState",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageState"
+  },
+  "next": {
+    "title": "APP_ENV",
+    "permalink": "/sveltekit-template/api/types/app/variables/APP_ENV"
+  }
+}

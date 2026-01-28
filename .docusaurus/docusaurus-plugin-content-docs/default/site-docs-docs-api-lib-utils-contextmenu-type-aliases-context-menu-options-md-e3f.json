@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/contextmenu/type-aliases/ContextMenuOptions",
+  "title": "ContextMenuOptions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/contextmenu/type-aliases/ContextMenuOptions.md",
+  "sourceDirName": "api/lib/utils/contextmenu/type-aliases",
+  "slug": "/api/lib/utils/contextmenu/type-aliases/ContextMenuOptions",
+  "permalink": "/sveltekit-template/api/lib/utils/contextmenu/type-aliases/ContextMenuOptions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "contextmenu",
+    "permalink": "/sveltekit-template/api/lib/utils/contextmenu/functions/contextmenu"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/countdown/"
+  }
+}

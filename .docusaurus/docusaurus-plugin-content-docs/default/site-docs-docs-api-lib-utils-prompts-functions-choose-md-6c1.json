@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/prompts/functions/choose",
+  "title": "choose",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/prompts/functions/choose.md",
+  "sourceDirName": "api/lib/utils/prompts/functions",
+  "slug": "/api/lib/utils/prompts/functions/choose",
+  "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/choose",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "alert",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/alert"
+  },
+  "next": {
+    "title": "clearModals",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/clearModals"
+  }
+}

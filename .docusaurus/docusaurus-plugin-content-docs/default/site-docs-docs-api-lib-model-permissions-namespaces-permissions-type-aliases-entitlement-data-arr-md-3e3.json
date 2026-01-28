@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr",
+  "title": "EntitlementDataArr",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/type-aliases",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "EntitlementData",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementData"
+  },
+  "next": {
+    "title": "RoleAccountData",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData"
+  }
+}

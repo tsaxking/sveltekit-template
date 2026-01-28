@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/event-handler/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/event-handler/README.md",
+  "sourceDirName": "api/lib/server/event-handler",
+  "slug": "/api/lib/server/event-handler/",
+  "permalink": "/sveltekit-template/api/lib/server/event-handler/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "client",
+    "permalink": "/sveltekit-template/api/lib/server/db/variables/client"
+  },
+  "next": {
+    "title": "EventErrorCode",
+    "permalink": "/sveltekit-template/api/lib/server/event-handler/enumerations/EventErrorCode"
+  }
+}

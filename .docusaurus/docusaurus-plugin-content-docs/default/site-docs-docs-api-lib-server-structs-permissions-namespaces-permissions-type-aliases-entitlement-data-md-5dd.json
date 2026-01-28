@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+  "title": "EntitlementData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "AccountRulesetData",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData"
+  },
+  "next": {
+    "title": "Permission",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/Permission"
+  }
+}

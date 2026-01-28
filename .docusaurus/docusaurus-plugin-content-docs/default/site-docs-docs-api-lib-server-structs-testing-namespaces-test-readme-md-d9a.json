@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/testing/namespaces/Test/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/testing/namespaces/Test/README.md",
+  "sourceDirName": "api/lib/server/structs/testing/namespaces/Test",
+  "slug": "/api/lib/server/structs/testing/namespaces/Test/",
+  "permalink": "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/structs/testing/"
+  },
+  "next": {
+    "title": "Test",
+    "permalink": "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/variables/Test"
+  }
+}

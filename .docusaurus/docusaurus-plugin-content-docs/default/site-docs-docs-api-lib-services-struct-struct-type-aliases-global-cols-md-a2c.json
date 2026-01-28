@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/type-aliases/GlobalCols",
+  "title": "GlobalCols",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/type-aliases/GlobalCols.md",
+  "sourceDirName": "api/lib/services/struct/struct/type-aliases",
+  "slug": "/api/lib/services/struct/struct/type-aliases/GlobalCols",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/GlobalCols",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ColTsType",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/ColTsType"
+  },
+  "next": {
+    "title": "PartialStructable",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/PartialStructable"
+  }
+}

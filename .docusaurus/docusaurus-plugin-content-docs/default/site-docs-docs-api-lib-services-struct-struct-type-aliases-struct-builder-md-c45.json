@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/type-aliases/StructBuilder",
+  "title": "StructBuilder",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/type-aliases/StructBuilder.md",
+  "sourceDirName": "api/lib/services/struct/struct/type-aliases",
+  "slug": "/api/lib/services/struct/struct/type-aliases/StructBuilder",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructBuilder",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "StatusMessage",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StatusMessage"
+  },
+  "next": {
+    "title": "StructEvents",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructEvents"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/enumerations/FetchActions",
+  "title": "FetchActions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/enumerations/FetchActions.md",
+  "sourceDirName": "api/lib/services/struct/struct/enumerations",
+  "slug": "/api/lib/services/struct/struct/enumerations/FetchActions",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/enumerations/FetchActions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "StructStream",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/StructStream"
+  },
+  "next": {
+    "title": "Socket",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/interfaces/Socket"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/limiting/variables/blockedFingerprints",
+  "title": "blockedFingerprints",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/limiting/variables/blockedFingerprints.md",
+  "sourceDirName": "api/lib/server/structs/limiting/variables",
+  "slug": "/api/lib/server/structs/limiting/variables/blockedFingerprints",
+  "permalink": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedFingerprints",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "blockedAccounts",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedAccounts"
+  },
+  "next": {
+    "title": "blockedIps",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedIps"
+  }
+}

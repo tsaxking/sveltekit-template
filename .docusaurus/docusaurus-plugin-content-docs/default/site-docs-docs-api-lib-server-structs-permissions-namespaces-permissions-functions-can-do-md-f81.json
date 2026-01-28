@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo",
+  "title": "canDo",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "canCreate",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canCreate"
+  },
+  "next": {
+    "title": "canDoFeature",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDoFeature"
+  }
+}

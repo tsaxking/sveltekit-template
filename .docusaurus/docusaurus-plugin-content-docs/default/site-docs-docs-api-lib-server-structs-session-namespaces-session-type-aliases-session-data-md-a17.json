@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData",
+  "title": "SessionData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData.md",
+  "sourceDirName": "api/lib/server/structs/session/namespaces/Session/type-aliases",
+  "slug": "/api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData",
+  "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "signOut",
+    "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signOut"
+  },
+  "next": {
+    "title": "Session",
+    "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/variables/Session"
+  }
+}

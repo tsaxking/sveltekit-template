@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/analytics/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/analytics/README.md",
+  "sourceDirName": "api/lib/services/analytics",
+  "slug": "/api/lib/services/analytics/",
+  "permalink": "/sveltekit-template/api/lib/services/analytics/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "uuid",
+    "permalink": "/sveltekit-template/api/lib/server/utils/uuid/functions/uuid"
+  },
+  "next": {
+    "title": "init",
+    "permalink": "/sveltekit-template/api/lib/services/analytics/functions/init"
+  }
+}

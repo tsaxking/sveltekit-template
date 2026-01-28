@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/ag-grid/date-time/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/ag-grid/date-time/README.md",
+  "sourceDirName": "api/lib/utils/ag-grid/date-time",
+  "slug": "/api/lib/utils/ag-grid/date-time/",
+  "permalink": "/sveltekit-template/api/lib/utils/ag-grid/date-time/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "HeaderCheckboxRenderer",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/HeaderCheckboxRenderer"
+  },
+  "next": {
+    "title": "DateTimeCellEditor",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/date-time/classes/DateTimeCellEditor"
+  }
+}

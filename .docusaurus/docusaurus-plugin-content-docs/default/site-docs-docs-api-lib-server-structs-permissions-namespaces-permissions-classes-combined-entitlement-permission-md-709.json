@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission",
+  "title": "CombinedEntitlementPermission",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/classes",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/"
+  },
+  "next": {
+    "title": "EntitlementPermission",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/EntitlementPermission"
+  }
+}

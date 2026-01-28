@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/ntp/namespaces/TimeService/variables/off",
+  "title": "off",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/ntp/namespaces/TimeService/variables/off.md",
+  "sourceDirName": "api/lib/services/ntp/namespaces/TimeService/variables",
+  "slug": "/api/lib/services/ntp/namespaces/TimeService/variables/off",
+  "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/off",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "init",
+    "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/init"
+  },
+  "next": {
+    "title": "on",
+    "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/on"
+  }
+}

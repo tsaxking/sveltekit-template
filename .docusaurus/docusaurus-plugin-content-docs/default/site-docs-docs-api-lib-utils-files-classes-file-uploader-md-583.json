@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/files/classes/FileUploader",
+  "title": "FileUploader",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/files/classes/FileUploader.md",
+  "sourceDirName": "api/lib/utils/files/classes",
+  "slug": "/api/lib/utils/files/classes/FileUploader",
+  "permalink": "/sveltekit-template/api/lib/utils/files/classes/FileUploader",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/files/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/fingerprint/"
+  }
+}

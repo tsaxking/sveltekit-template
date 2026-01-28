@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/struct-event/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/struct-event/README.md",
+  "sourceDirName": "api/lib/server/services/struct-event",
+  "slug": "/api/lib/server/services/struct-event/",
+  "permalink": "/sveltekit-template/api/lib/server/services/struct-event/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "sse",
+    "permalink": "/sveltekit-template/api/lib/server/services/sse/variables/sse"
+  },
+  "next": {
+    "title": "createStructEventService",
+    "permalink": "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructEventService"
+  }
+}

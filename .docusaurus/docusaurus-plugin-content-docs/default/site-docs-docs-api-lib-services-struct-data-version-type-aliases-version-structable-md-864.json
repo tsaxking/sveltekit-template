@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/data-version/type-aliases/VersionStructable",
+  "title": "VersionStructable",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/data-version/type-aliases/VersionStructable.md",
+  "sourceDirName": "api/lib/services/struct/data-version/type-aliases",
+  "slug": "/api/lib/services/struct/data-version/type-aliases/VersionStructable",
+  "permalink": "/sveltekit-template/api/lib/services/struct/data-version/type-aliases/VersionStructable",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "StructDataVersion",
+    "permalink": "/sveltekit-template/api/lib/services/struct/data-version/classes/StructDataVersion"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/"
+  }
+}

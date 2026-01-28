@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/navbar/namespaces/Navbar/functions/getSections",
+  "title": "getSections",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/navbar/namespaces/Navbar/functions/getSections.md",
+  "sourceDirName": "api/lib/model/navbar/namespaces/Navbar/functions",
+  "slug": "/api/lib/model/navbar/namespaces/Navbar/functions/getSections",
+  "permalink": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/getSections",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "clear",
+    "permalink": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/clear"
+  },
+  "next": {
+    "title": "removeSection",
+    "permalink": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/removeSection"
+  }
+}

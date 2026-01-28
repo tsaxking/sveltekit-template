@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/analytics/namespaces/Analytics/functions/count",
+  "title": "count",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/analytics/namespaces/Analytics/functions/count.md",
+  "sourceDirName": "api/lib/model/analytics/namespaces/Analytics/functions",
+  "slug": "/api/lib/model/analytics/namespaces/Analytics/functions/count",
+  "permalink": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/count",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/"
+  },
+  "next": {
+    "title": "myLinks",
+    "permalink": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/myLinks"
+  }
+}

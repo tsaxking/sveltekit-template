@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false
+  },
+  "include": [
+    "../src/**/*.ts",
+    "../src/**/*.d.ts",
+    "../cli/**/*.ts",
+    "../scripts/**/*.ts"
+  ],
+  "exclude": [
+    "../**/node_modules/**",
+    "../**/.svelte-kit/**",
+    "../**/build/**",
+    "../**/test-results/**"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/icons/type-aliases/FontAwesomeIcon",
+  "title": "FontAwesomeIcon",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/icons/type-aliases/FontAwesomeIcon.md",
+  "sourceDirName": "api/lib/types/icons/type-aliases",
+  "slug": "/api/lib/types/icons/type-aliases/FontAwesomeIcon",
+  "permalink": "/sveltekit-template/api/lib/types/icons/type-aliases/FontAwesomeIcon",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "BootstrapIcon",
+    "permalink": "/sveltekit-template/api/lib/types/icons/type-aliases/BootstrapIcon"
+  },
+  "next": {
+    "title": "Icon",
+    "permalink": "/sveltekit-template/api/lib/types/icons/type-aliases/Icon"
+  }
+}

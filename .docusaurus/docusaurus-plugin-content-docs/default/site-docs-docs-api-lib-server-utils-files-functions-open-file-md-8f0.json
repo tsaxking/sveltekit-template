@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/functions/openFile",
+  "title": "openFile",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/functions/openFile.md",
+  "sourceDirName": "api/lib/server/utils/files/functions",
+  "slug": "/api/lib/server/utils/files/functions/openFile",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/openFile",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "generateSearchFile",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/generateSearchFile"
+  },
+  "next": {
+    "title": "openJSON",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/openJSON"
+  }
+}

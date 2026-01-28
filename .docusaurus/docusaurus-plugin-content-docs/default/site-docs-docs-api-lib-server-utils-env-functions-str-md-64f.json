@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/env/functions/str",
+  "title": "str",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/env/functions/str.md",
+  "sourceDirName": "api/lib/server/utils/env/functions",
+  "slug": "/api/lib/server/utils/env/functions/str",
+  "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/str",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "num",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/num"
+  },
+  "next": {
+    "title": "config",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/variables/config"
+  }
+}

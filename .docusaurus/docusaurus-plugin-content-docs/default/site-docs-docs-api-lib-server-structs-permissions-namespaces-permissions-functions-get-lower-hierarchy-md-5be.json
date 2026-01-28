@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy",
+  "title": "getLowerHierarchy",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getHighestLevelRole",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getHighestLevelRole"
+  },
+  "next": {
+    "title": "getParent",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getParent"
+  }
+}

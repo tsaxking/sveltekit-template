@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount",
+  "title": "getEntitlementsFromAccount",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getEntitlements",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlements"
+  },
+  "next": {
+    "title": "getEntitlementsFromRole",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromRole"
+  }
+}

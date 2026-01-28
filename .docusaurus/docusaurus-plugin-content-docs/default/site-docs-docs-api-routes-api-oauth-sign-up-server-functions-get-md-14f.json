@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/api/oauth/sign-up/+server/functions/GET",
+  "title": "GET",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/api/oauth/sign-up/+server/functions/GET.md",
+  "sourceDirName": "api/routes/api/oauth/sign-up/+server/functions",
+  "slug": "/api/routes/api/oauth/sign-up/+server/functions/GET",
+  "permalink": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/functions/GET",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/routes/api/sse/ack/[uuid]/[id]/+server/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/types/app/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/app/README.md",
+  "sourceDirName": "api/types/app",
+  "slug": "/api/types/app/",
+  "permalink": "/sveltekit-template/api/types/app/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "test",
+    "permalink": "/sveltekit-template/api/tests/task-import/functions/test"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/"
+  }
+}

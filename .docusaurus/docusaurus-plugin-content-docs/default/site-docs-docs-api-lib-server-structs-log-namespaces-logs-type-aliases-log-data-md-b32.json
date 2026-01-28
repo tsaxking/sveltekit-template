@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData",
+  "title": "LogData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData.md",
+  "sourceDirName": "api/lib/server/structs/log/namespaces/Logs/type-aliases",
+  "slug": "/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData",
+  "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "search",
+    "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/search"
+  },
+  "next": {
+    "title": "Log",
+    "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/variables/Log"
+  }
+}

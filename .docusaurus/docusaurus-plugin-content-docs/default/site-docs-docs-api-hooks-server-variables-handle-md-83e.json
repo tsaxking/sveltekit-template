@@ -1,0 +1,23 @@
+{
+  "id": "api/hooks.server/variables/handle",
+  "title": "handle",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/hooks.server/variables/handle.md",
+  "sourceDirName": "api/hooks.server/variables",
+  "slug": "/api/hooks.server/variables/handle",
+  "permalink": "/sveltekit-template/api/hooks.server/variables/handle",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/hooks.server/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/"
+  }
+}

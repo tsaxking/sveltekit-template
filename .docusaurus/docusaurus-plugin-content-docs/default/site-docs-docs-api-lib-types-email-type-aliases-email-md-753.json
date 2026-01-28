@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/email/type-aliases/Email",
+  "title": "Email",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/email/type-aliases/Email.md",
+  "sourceDirName": "api/lib/types/email/type-aliases",
+  "slug": "/api/lib/types/email/type-aliases/Email",
+  "permalink": "/sveltekit-template/api/lib/types/email/type-aliases/Email",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/types/email/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/types/entitlements/"
+  }
+}

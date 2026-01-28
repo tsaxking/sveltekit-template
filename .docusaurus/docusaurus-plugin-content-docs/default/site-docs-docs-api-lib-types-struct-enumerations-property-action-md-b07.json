@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/struct/enumerations/PropertyAction",
+  "title": "PropertyAction",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/struct/enumerations/PropertyAction.md",
+  "sourceDirName": "api/lib/types/struct/enumerations",
+  "slug": "/api/lib/types/struct/enumerations/PropertyAction",
+  "permalink": "/sveltekit-template/api/lib/types/struct/enumerations/PropertyAction",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "DataAction",
+    "permalink": "/sveltekit-template/api/lib/types/struct/enumerations/DataAction"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/buttons/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/prompts/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/prompts/README.md",
+  "sourceDirName": "api/lib/utils/prompts",
+  "slug": "/api/lib/utils/prompts/",
+  "permalink": "/sveltekit-template/api/lib/utils/prompts/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getTitle",
+    "permalink": "/sveltekit-template/api/lib/utils/pages/functions/getTitle"
+  },
+  "next": {
+    "title": "alert",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/alert"
+  }
+}

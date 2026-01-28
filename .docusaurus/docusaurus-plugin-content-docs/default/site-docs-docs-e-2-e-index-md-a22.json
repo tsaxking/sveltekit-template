@@ -1,0 +1,25 @@
+{
+  "id": "e2e/index",
+  "title": "End-to-end tests",
+  "description": "This folder contains Playwright-based end-to-end tests for the app. Use these tests to validate critical user flows, permissions, and file upload behavior against a built or running application.",
+  "source": "@site/docs/docs/e2e/index.md",
+  "sourceDirName": "e2e",
+  "slug": "/e2e/",
+  "permalink": "/sveltekit-template/e2e/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "End-to-end tests"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Diagrams",
+    "permalink": "/sveltekit-template/diagrams/"
+  },
+  "next": {
+    "title": "SvelteKit Template",
+    "permalink": "/sveltekit-template/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/navbar/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/navbar/README.md",
+  "sourceDirName": "api/lib/model/navbar",
+  "slug": "/api/lib/model/navbar/",
+  "permalink": "/sveltekit-template/api/lib/model/navbar/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "sizes",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/variables/sizes"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/"
+  }
+}

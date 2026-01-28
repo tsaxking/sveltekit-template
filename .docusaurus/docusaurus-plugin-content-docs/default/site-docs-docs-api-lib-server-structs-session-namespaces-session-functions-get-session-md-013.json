@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/session/namespaces/Session/functions/getSession",
+  "title": "getSession",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/session/namespaces/Session/functions/getSession.md",
+  "sourceDirName": "api/lib/server/structs/session/namespaces/Session/functions",
+  "slug": "/api/lib/server/structs/session/namespaces/Session/functions/getSession",
+  "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getSession",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getAccount",
+    "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getAccount"
+  },
+  "next": {
+    "title": "signIn",
+    "permalink": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signIn"
+  }
+}

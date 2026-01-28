@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/permissions.remote/variables/myPermissions",
+  "title": "myPermissions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/permissions.remote/variables/myPermissions.md",
+  "sourceDirName": "api/lib/remotes/permissions.remote/variables",
+  "slug": "/api/lib/remotes/permissions.remote/variables/myPermissions",
+  "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myPermissions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "myAccountPermissions",
+    "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myAccountPermissions"
+  },
+  "next": {
+    "title": "permissionsFromRole",
+    "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/permissionsFromRole"
+  }
+}

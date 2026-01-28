@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/uuid/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/uuid/README.md",
+  "sourceDirName": "api/lib/server/services/uuid",
+  "slug": "/api/lib/server/services/uuid/",
+  "permalink": "/sveltekit-template/api/lib/server/services/uuid/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "default",
+    "permalink": "/sveltekit-template/api/lib/server/services/struct-registry/variables/default"
+  },
+  "next": {
+    "title": "uuid",
+    "permalink": "/sveltekit-template/api/lib/server/services/uuid/functions/uuid"
+  }
+}

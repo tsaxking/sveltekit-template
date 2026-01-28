@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/type-aliases/StructEvents",
+  "title": "StructEvents",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/type-aliases/StructEvents.md",
+  "sourceDirName": "api/lib/services/struct/struct/type-aliases",
+  "slug": "/api/lib/services/struct/struct/type-aliases/StructEvents",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructEvents",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "StructBuilder",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructBuilder"
+  },
+  "next": {
+    "title": "Structable",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/Structable"
+  }
+}

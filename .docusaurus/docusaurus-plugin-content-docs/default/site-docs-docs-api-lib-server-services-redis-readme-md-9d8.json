@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/redis/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/redis/README.md",
+  "sourceDirName": "api/lib/server/services/redis",
+  "slug": "/api/lib/server/services/redis/",
+  "permalink": "/sveltekit-template/api/lib/server/services/redis/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "init",
+    "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/init"
+  },
+  "next": {
+    "title": "default",
+    "permalink": "/sveltekit-template/api/lib/server/services/redis/variables/default"
+  }
+}

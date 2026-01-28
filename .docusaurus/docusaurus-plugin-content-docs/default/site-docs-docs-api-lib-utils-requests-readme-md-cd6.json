@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/requests/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/requests/README.md",
+  "sourceDirName": "api/lib/utils/requests",
+  "slug": "/api/lib/utils/requests/",
+  "permalink": "/sveltekit-template/api/lib/utils/requests/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "notifs",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/notifs"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/"
+  }
+}

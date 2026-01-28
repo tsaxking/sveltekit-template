@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/analytics/namespaces/Analytics/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/analytics/namespaces/Analytics/README.md",
+  "sourceDirName": "api/lib/server/structs/analytics/namespaces/Analytics",
+  "slug": "/api/lib/server/structs/analytics/namespaces/Analytics/",
+  "permalink": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/structs/analytics/"
+  },
+  "next": {
+    "title": "getAccountLinks",
+    "permalink": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/functions/getAccountLinks"
+  }
+}

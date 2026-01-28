@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/limiting/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/limiting/README.md",
+  "sourceDirName": "api/lib/server/structs/limiting",
+  "slug": "/api/lib/server/structs/limiting/",
+  "permalink": "/sveltekit-template/api/lib/server/structs/limiting/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "links",
+    "permalink": "/sveltekit-template/api/lib/server/structs/analytics/variables/links"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/"
+  }
+}

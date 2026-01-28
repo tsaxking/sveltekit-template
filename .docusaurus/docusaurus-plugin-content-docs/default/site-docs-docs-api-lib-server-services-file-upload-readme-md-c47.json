@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/file-upload/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/file-upload/README.md",
+  "sourceDirName": "api/lib/server/services/file-upload",
+  "slug": "/api/lib/server/services/file-upload/",
+  "permalink": "/sveltekit-template/api/lib/server/services/file-upload/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "sendEmail",
+    "permalink": "/sveltekit-template/api/lib/server/services/email/functions/sendEmail"
+  },
+  "next": {
+    "title": "FileUploader",
+    "permalink": "/sveltekit-template/api/lib/server/services/file-upload/classes/FileUploader"
+  }
+}

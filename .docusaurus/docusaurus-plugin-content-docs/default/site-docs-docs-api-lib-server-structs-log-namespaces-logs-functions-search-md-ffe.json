@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/log/namespaces/Logs/functions/search",
+  "title": "search",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/log/namespaces/Logs/functions/search.md",
+  "sourceDirName": "api/lib/server/structs/log/namespaces/Logs/functions",
+  "slug": "/api/lib/server/structs/log/namespaces/Logs/functions/search",
+  "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/search",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "log",
+    "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/log"
+  },
+  "next": {
+    "title": "LogData",
+    "permalink": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData"
+  }
+}

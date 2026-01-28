@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/entitlements/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/entitlements/README.md",
+  "sourceDirName": "api/lib/types/entitlements",
+  "slug": "/api/lib/types/entitlements/",
+  "permalink": "/sveltekit-template/api/lib/types/entitlements/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Email",
+    "permalink": "/sveltekit-template/api/lib/types/email/type-aliases/Email"
+  },
+  "next": {
+    "title": "Entitlement",
+    "permalink": "/sveltekit-template/api/lib/types/entitlements/type-aliases/Entitlement"
+  }
+}

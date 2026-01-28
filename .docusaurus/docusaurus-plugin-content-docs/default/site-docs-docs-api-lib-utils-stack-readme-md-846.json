@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/stack/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/stack/README.md",
+  "sourceDirName": "api/lib/utils/stack",
+  "slug": "/api/lib/utils/stack/",
+  "permalink": "/sveltekit-template/api/lib/utils/stack/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "metadata",
+    "permalink": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/variables/metadata"
+  },
+  "next": {
+    "title": "Stack",
+    "permalink": "/sveltekit-template/api/lib/utils/stack/classes/Stack"
+  }
+}

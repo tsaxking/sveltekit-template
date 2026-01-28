@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission",
+  "title": "revokeAccountPermission",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "removeFromRole",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/removeFromRole"
+  },
+  "next": {
+    "title": "revokeRolePermission",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeRolePermission"
+  }
+}

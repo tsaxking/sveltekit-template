@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/session-manager.remote/variables/managerSend",
+  "title": "managerSend",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/session-manager.remote/variables/managerSend.md",
+  "sourceDirName": "api/lib/remotes/session-manager.remote/variables",
+  "slug": "/api/lib/remotes/session-manager.remote/variables/managerSend",
+  "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/managerSend",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "isOwner",
+    "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/isOwner"
+  },
+  "next": {
+    "title": "redirectConnection",
+    "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/redirectConnection"
+  }
+}

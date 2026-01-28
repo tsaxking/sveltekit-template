@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/manifesto/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/manifesto/README.md",
+  "sourceDirName": "api/lib/server/utils/manifesto",
+  "slug": "/api/lib/server/utils/manifesto/",
+  "permalink": "/sveltekit-template/api/lib/server/utils/manifesto/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "repoUrl",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/repoUrl"
+  },
+  "next": {
+    "title": "getManifesto",
+    "permalink": "/sveltekit-template/api/lib/server/utils/manifesto/functions/getManifesto"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/functions/generateSearchFile",
+  "title": "generateSearchFile",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/functions/generateSearchFile.md",
+  "sourceDirName": "api/lib/server/utils/files/functions",
+  "slug": "/api/lib/server/utils/files/functions/generateSearchFile",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/generateSearchFile",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "fileTree",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/fileTree"
+  },
+  "next": {
+    "title": "openFile",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/openFile"
+  }
+}

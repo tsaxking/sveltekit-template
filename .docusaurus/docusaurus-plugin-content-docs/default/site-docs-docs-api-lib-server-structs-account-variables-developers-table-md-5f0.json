@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/variables/developersTable",
+  "title": "developersTable",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/variables/developersTable.md",
+  "sourceDirName": "api/lib/server/structs/account/variables",
+  "slug": "/api/lib/server/structs/account/variables/developersTable",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/developersTable",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "adminsTable",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/adminsTable"
+  },
+  "next": {
+    "title": "passwordReset",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/variables/passwordReset"
+  }
+}

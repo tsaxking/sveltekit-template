@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/event-handler/variables/Success",
+  "title": "Success",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/event-handler/variables/Success.md",
+  "sourceDirName": "api/lib/server/event-handler/variables",
+  "slug": "/api/lib/server/event-handler/variables/Success",
+  "permalink": "/sveltekit-template/api/lib/server/event-handler/variables/Success",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Errors",
+    "permalink": "/sveltekit-template/api/lib/server/event-handler/variables/Errors"
+  },
+  "next": {
+    "title": "postBuild",
+    "permalink": "/sveltekit-template/api/lib/server/functions/postBuild"
+  }
+}

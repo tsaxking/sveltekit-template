@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/functions/renderSearchResultHtml",
+  "title": "renderSearchResultHtml",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/functions/renderSearchResultHtml.md",
+  "sourceDirName": "api/lib/server/utils/files/functions",
+  "slug": "/api/lib/server/utils/files/functions/renderSearchResultHtml",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/renderSearchResultHtml",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "parseJSON",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/parseJSON"
+  },
+  "next": {
+    "title": "saveFile",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/saveFile"
+  }
+}

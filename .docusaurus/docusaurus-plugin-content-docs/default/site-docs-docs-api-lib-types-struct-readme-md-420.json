@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/types/struct/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/types/struct/README.md",
+  "sourceDirName": "api/lib/types/struct",
+  "slug": "/api/lib/types/struct/",
+  "permalink": "/sveltekit-template/api/lib/types/struct/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ConnectionStateSchema",
+    "permalink": "/sveltekit-template/api/lib/types/sse/variables/ConnectionStateSchema"
+  },
+  "next": {
+    "title": "DataAction",
+    "permalink": "/sveltekit-template/api/lib/types/struct/enumerations/DataAction"
+  }
+}

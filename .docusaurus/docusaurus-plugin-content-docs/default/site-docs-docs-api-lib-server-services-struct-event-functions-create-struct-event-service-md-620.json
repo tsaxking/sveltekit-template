@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/struct-event/functions/createStructEventService",
+  "title": "createStructEventService",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/struct-event/functions/createStructEventService.md",
+  "sourceDirName": "api/lib/server/services/struct-event/functions",
+  "slug": "/api/lib/server/services/struct-event/functions/createStructEventService",
+  "permalink": "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructEventService",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/struct-event/"
+  },
+  "next": {
+    "title": "createStructListenerService",
+    "permalink": "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructListenerService"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/Role",
+  "title": "Role",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/variables/Role.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/variables",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/variables/Role",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Role",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Entitlement",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Entitlement"
+  },
+  "next": {
+    "title": "RoleAccount",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleAccount"
+  }
+}

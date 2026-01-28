@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/dashboard/admin/analytics/+page.server/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/dashboard/admin/analytics/+page.server/README.md",
+  "sourceDirName": "api/routes/dashboard/admin/analytics/+page.server",
+  "slug": "/api/routes/dashboard/admin/analytics/+page.server/",
+  "permalink": "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "load",
+    "permalink": "/sveltekit-template/api/routes/dashboard/admin/account/[accountId]/+page.server/functions/load"
+  },
+  "next": {
+    "title": "load",
+    "permalink": "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/functions/load"
+  }
+}

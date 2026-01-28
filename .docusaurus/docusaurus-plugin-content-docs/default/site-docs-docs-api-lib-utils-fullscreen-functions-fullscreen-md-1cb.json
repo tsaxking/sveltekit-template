@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/fullscreen/functions/fullscreen",
+  "title": "fullscreen",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/fullscreen/functions/fullscreen.md",
+  "sourceDirName": "api/lib/utils/fullscreen/functions",
+  "slug": "/api/lib/utils/fullscreen/functions/fullscreen",
+  "permalink": "/sveltekit-template/api/lib/utils/fullscreen/functions/fullscreen",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/fullscreen/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/generate-type/"
+  }
+}

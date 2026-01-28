@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/writables/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/writables/README.md",
+  "sourceDirName": "api/lib/utils/writables",
+  "slug": "/api/lib/utils/writables/",
+  "permalink": "/sveltekit-template/api/lib/utils/writables/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "theme",
+    "permalink": "/sveltekit-template/api/lib/utils/theme/variables/theme"
+  },
+  "next": {
+    "title": "WritableArray",
+    "permalink": "/sveltekit-template/api/lib/utils/writables/classes/WritableArray"
+  }
+}

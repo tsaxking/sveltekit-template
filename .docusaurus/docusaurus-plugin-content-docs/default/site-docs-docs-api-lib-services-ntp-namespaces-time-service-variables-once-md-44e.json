@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/ntp/namespaces/TimeService/variables/once",
+  "title": "once",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/ntp/namespaces/TimeService/variables/once.md",
+  "sourceDirName": "api/lib/services/ntp/namespaces/TimeService/variables",
+  "slug": "/api/lib/services/ntp/namespaces/TimeService/variables/once",
+  "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/once",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "on",
+    "permalink": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/on"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/session-manager/"
+  }
+}

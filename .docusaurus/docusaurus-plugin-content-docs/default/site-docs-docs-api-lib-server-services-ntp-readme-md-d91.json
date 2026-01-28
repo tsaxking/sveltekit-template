@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/ntp/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/ntp/README.md",
+  "sourceDirName": "api/lib/server/services/ntp",
+  "slug": "/api/lib/server/services/ntp/",
+  "permalink": "/sveltekit-template/api/lib/server/services/ntp/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "default",
+    "permalink": "/sveltekit-template/api/lib/server/services/global-events/variables/default"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/"
+  }
+}

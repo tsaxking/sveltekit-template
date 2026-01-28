@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/classes/FatalStructError",
+  "title": "FatalStructError",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/classes/FatalStructError.md",
+  "sourceDirName": "api/lib/services/struct/struct/classes",
+  "slug": "/api/lib/services/struct/struct/classes/FatalStructError",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/FatalStructError",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "FatalDataError",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/FatalDataError"
+  },
+  "next": {
+    "title": "SingleWritable",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/SingleWritable"
+  }
+}

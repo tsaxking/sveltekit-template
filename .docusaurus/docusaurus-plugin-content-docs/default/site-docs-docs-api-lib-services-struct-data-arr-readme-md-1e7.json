@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/data-arr/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/data-arr/README.md",
+  "sourceDirName": "api/lib/services/struct/data-arr",
+  "slug": "/api/lib/services/struct/data-arr/",
+  "permalink": "/sveltekit-template/api/lib/services/struct/data-arr/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "set",
+    "permalink": "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/set"
+  },
+  "next": {
+    "title": "DataArr",
+    "permalink": "/sveltekit-template/api/lib/services/struct/data-arr/classes/DataArr"
+  }
+}

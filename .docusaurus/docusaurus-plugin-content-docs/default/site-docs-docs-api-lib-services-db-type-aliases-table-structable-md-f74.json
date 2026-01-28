@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/type-aliases/TableStructable",
+  "title": "TableStructable",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/type-aliases/TableStructable.md",
+  "sourceDirName": "api/lib/services/db/type-aliases",
+  "slug": "/api/lib/services/db/type-aliases/TableStructable",
+  "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/TableStructable",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SchemaFieldType",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldType"
+  },
+  "next": {
+    "title": "DB",
+    "permalink": "/sveltekit-template/api/lib/services/db/variables/DB"
+  }
+}

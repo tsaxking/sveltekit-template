@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/email/functions/sendEmail",
+  "title": "sendEmail",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/email/functions/sendEmail.md",
+  "sourceDirName": "api/lib/server/services/email/functions",
+  "slug": "/api/lib/server/services/email/functions/sendEmail",
+  "permalink": "/sveltekit-template/api/lib/server/services/email/functions/sendEmail",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/email/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/file-upload/"
+  }
+}

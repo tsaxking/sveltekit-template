@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/ag-grid/checkbox-select/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/ag-grid/checkbox-select/README.md",
+  "sourceDirName": "api/lib/utils/ag-grid/checkbox-select",
+  "slug": "/api/lib/utils/ag-grid/checkbox-select/",
+  "permalink": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "ButtonCellRenderer",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/buttons/classes/ButtonCellRenderer"
+  },
+  "next": {
+    "title": "CheckBoxSelectRenderer",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/CheckBoxSelectRenderer"
+  }
+}

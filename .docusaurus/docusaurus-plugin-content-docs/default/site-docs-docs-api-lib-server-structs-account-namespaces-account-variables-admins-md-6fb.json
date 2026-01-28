@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/namespaces/Account/variables/Admins",
+  "title": "Admins",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/namespaces/Account/variables/Admins.md",
+  "sourceDirName": "api/lib/server/structs/account/namespaces/Account/variables",
+  "slug": "/api/lib/server/structs/account/namespaces/Account/variables/Admins",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Admins",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "AccountNotification",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/AccountNotification"
+  },
+  "next": {
+    "title": "Developers",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Developers"
+  }
+}

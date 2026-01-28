@@ -1,0 +1,23 @@
+{
+  "id": "api/types/app/namespaces/App/interfaces/PageState",
+  "title": "PageState",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/types/app/namespaces/App/interfaces/PageState.md",
+  "sourceDirName": "api/types/app/namespaces/App/interfaces",
+  "slug": "/api/types/app/namespaces/App/interfaces/PageState",
+  "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageState",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "PageData",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageData"
+  },
+  "next": {
+    "title": "Platform",
+    "permalink": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Platform"
+  }
+}

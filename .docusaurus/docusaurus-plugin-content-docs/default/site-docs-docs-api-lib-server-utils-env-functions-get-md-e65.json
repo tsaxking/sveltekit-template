@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/env/functions/get",
+  "title": "get",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/env/functions/get.md",
+  "sourceDirName": "api/lib/server/utils/env/functions",
+  "slug": "/api/lib/server/utils/env/functions/get",
+  "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/get",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "domain",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/domain"
+  },
+  "next": {
+    "title": "getPublicIp",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/getPublicIp"
+  }
+}

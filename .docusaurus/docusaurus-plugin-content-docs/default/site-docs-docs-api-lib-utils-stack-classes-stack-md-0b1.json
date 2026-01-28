@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/stack/classes/Stack",
+  "title": "Stack",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/stack/classes/Stack.md",
+  "sourceDirName": "api/lib/utils/stack/classes",
+  "slug": "/api/lib/utils/stack/classes/Stack",
+  "permalink": "/sveltekit-template/api/lib/utils/stack/classes/Stack",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/stack/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/theme/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/struct.remote/variables/restoreVersion",
+  "title": "restoreVersion",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/struct.remote/variables/restoreVersion.md",
+  "sourceDirName": "api/lib/remotes/struct.remote/variables",
+  "slug": "/api/lib/remotes/struct.remote/variables/restoreVersion",
+  "permalink": "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreVersion",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "restoreArchive",
+    "permalink": "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreArchive"
+  },
+  "next": {
+    "title": "update",
+    "permalink": "/sveltekit-template/api/lib/remotes/struct.remote/variables/update"
+  }
+}

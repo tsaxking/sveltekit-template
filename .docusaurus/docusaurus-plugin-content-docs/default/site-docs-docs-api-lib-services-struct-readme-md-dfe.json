@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/README.md",
+  "sourceDirName": "api/lib/services/struct",
+  "slug": "/api/lib/services/struct/",
+  "permalink": "/sveltekit-template/api/lib/services/struct/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "sse",
+    "permalink": "/sveltekit-template/api/lib/services/sse/variables/sse"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/struct/batching/"
+  }
+}

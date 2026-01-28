@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/type-aliases/SchemaFieldReturnType",
+  "title": "SchemaFieldReturnType",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/type-aliases/SchemaFieldReturnType.md",
+  "sourceDirName": "api/lib/services/db/type-aliases",
+  "slug": "/api/lib/services/db/type-aliases/SchemaFieldReturnType",
+  "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldReturnType",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SchemaDefinition",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaDefinition"
+  },
+  "next": {
+    "title": "SchemaFieldType",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldType"
+  }
+}

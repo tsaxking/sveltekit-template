@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/namespaces/Account/functions/getSettings",
+  "title": "getSettings",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/namespaces/Account/functions/getSettings.md",
+  "sourceDirName": "api/lib/server/structs/account/namespaces/Account/functions",
+  "slug": "/api/lib/server/structs/account/namespaces/Account/functions/getSettings",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getSettings",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getDevelopers",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getDevelopers"
+  },
+  "next": {
+    "title": "hash",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/hash"
+  }
+}

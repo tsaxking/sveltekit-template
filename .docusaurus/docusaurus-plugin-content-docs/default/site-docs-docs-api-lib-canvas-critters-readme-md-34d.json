@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/canvas/critters/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/canvas/critters/README.md",
+  "sourceDirName": "api/lib/canvas/critters",
+  "slug": "/api/lib/canvas/critters/",
+  "permalink": "/sveltekit-template/api/lib/canvas/critters/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "render",
+    "permalink": "/sveltekit-template/api/lib/canvas/bubbles/functions/render"
+  },
+  "next": {
+    "title": "render",
+    "permalink": "/sveltekit-template/api/lib/canvas/critters/functions/render"
+  }
+}

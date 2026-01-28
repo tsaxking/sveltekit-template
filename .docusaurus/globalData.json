@@ -1,0 +1,3313 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/sveltekit-template/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/sveltekit-template/",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "api/hooks.server/README",
+              "path": "/sveltekit-template/api/hooks.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/hooks.server/variables/handle",
+              "path": "/sveltekit-template/api/hooks.server/variables/handle",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/canvas/bubbles/functions/render",
+              "path": "/sveltekit-template/api/lib/canvas/bubbles/functions/render",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/canvas/bubbles/README",
+              "path": "/sveltekit-template/api/lib/canvas/bubbles/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/canvas/critters/functions/render",
+              "path": "/sveltekit-template/api/lib/canvas/critters/functions/render",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/canvas/critters/README",
+              "path": "/sveltekit-template/api/lib/canvas/critters/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/imports/admin/README",
+              "path": "/sveltekit-template/api/lib/imports/admin/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/imports/admin/variables/default",
+              "path": "/sveltekit-template/api/lib/imports/admin/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/imports/README",
+              "path": "/sveltekit-template/api/lib/imports/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/getNotifs",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getNotifs",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/getSelf",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/getSelf",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/search",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/search",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/searchAccountsModal",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/searchAccountsModal",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/signOut",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/signOut",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/signOutOfSession",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/signOutOfSession",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/functions/usernameExists",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/usernameExists",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/README",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountArr",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountData",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountInfoData",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountInfoData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationArr",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountNotificationData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/variables/Account",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/Account",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/variables/AccountInfo",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/AccountInfo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/variables/AccountNotification",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/AccountNotification",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/namespaces/Account/variables/self",
+              "path": "/sveltekit-template/api/lib/model/account/namespaces/Account/variables/self",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/account/README",
+              "path": "/sveltekit-template/api/lib/model/account/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/namespaces/Analytics/functions/count",
+              "path": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/count",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/namespaces/Analytics/functions/myLinks",
+              "path": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/functions/myLinks",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/namespaces/Analytics/README",
+              "path": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/namespaces/Analytics/type-aliases/LinkData",
+              "path": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/type-aliases/LinkData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/namespaces/Analytics/variables/Links",
+              "path": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/variables/Links",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/analytics/README",
+              "path": "/sveltekit-template/api/lib/model/analytics/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/namespaces/Dashboard/classes/Card",
+              "path": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Card",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard",
+              "path": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize",
+              "path": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/namespaces/Dashboard/README",
+              "path": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/namespaces/Dashboard/variables/sizes",
+              "path": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/variables/sizes",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/dashboard/README",
+              "path": "/sveltekit-template/api/lib/model/dashboard/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/namespaces/Navbar/functions/addSection",
+              "path": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/addSection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/namespaces/Navbar/functions/clear",
+              "path": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/clear",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/namespaces/Navbar/functions/getSections",
+              "path": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/getSections",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/namespaces/Navbar/functions/removeSection",
+              "path": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/functions/removeSection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/namespaces/Navbar/README",
+              "path": "/sveltekit-template/api/lib/model/navbar/namespaces/Navbar/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/navbar/README",
+              "path": "/sveltekit-template/api/lib/model/navbar/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/addToRole",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/addToRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/createChildRolePopup",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/createChildRolePopup",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/createRole",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/createRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/getAvailableRolePermissions",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getAvailableRolePermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/getEntitlementGroups",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlementGroups",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/removeFromRole",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/removeFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeAccountPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/revokeRolePermission",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/revokeRolePermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/functions/searchRoles",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/searchRoles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/README",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetDataArr",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/AccountRulesetDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountDataArr",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleData",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetData",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetDataArr",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleRulesetDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/AccountRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/variables/Entitlement",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/Entitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/variables/Role",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/Role",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/variables/RoleAccount",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/RoleAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/namespaces/Permissions/variables/RoleRuleset",
+              "path": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/variables/RoleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/permissions/README",
+              "path": "/sveltekit-template/api/lib/model/permissions/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/functions/unitTest",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/functions/unitTest",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/README",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/State",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/State",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/Status",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/Status",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestData",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsData",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/variables/Test",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/Test",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/model/testing.svelte/README",
+              "path": "/sveltekit-template/api/lib/model/testing.svelte/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/README",
+              "path": "/sveltekit-template/api/lib/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/getNotifications",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/getNotifications",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/getOwnNotifs",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/getOwnNotifs",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/search",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/search",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/self",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/self",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/signOut",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/signOut",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/account.remote/variables/usernameExists",
+              "path": "/sveltekit-template/api/lib/remotes/account.remote/variables/usernameExists",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/analytics.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/analytics.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/analytics.remote/variables/close",
+              "path": "/sveltekit-template/api/lib/remotes/analytics.remote/variables/close",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/analytics.remote/variables/count",
+              "path": "/sveltekit-template/api/lib/remotes/analytics.remote/variables/count",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/analytics.remote/variables/fingerprint",
+              "path": "/sveltekit-template/api/lib/remotes/analytics.remote/variables/fingerprint",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/analytics.remote/variables/myLinks",
+              "path": "/sveltekit-template/api/lib/remotes/analytics.remote/variables/myLinks",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/variables/getAccount",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/variables/getAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/variables/getSession",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/variables/getSession",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/variables/getSSE",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/variables/getSSE",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/variables/isAdmin",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/variables/isAdmin",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/index.remote/variables/isLoggedIn",
+              "path": "/sveltekit-template/api/lib/remotes/index.remote/variables/isLoggedIn",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/ntp.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/ntp.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/ntp.remote/variables/ntp",
+              "path": "/sveltekit-template/api/lib/remotes/ntp.remote/variables/ntp",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/addToRole",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/addToRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/availablePermissions",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/availablePermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/createRole",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/createRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/grantAccountPermission",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/grantAccountPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/grantRolePermission",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/grantRolePermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/myAccountPermissions",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myAccountPermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/myPermissions",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/myPermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/permissionsFromRole",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/permissionsFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/removeFromRole",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/removeFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/revokeAccountPermission",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/revokeAccountPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/revokeRolePermission",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/revokeRolePermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/permissions.remote/variables/searchRoles",
+              "path": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/searchRoles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/closeManager",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/closeManager",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/getActiveConnections",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/getActiveConnections",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/getManagerConnections",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/getManagerConnections",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/isOwner",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/isOwner",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/managerSend",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/managerSend",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/redirectConnection",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/redirectConnection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/reloadConnection",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/reloadConnection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/reportState",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/reportState",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/sendToConnection",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/sendToConnection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/session-manager.remote/variables/startManager",
+              "path": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/startManager",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/README",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/all",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/all",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/archive",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/archive",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/archived",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/archived",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/batchCommand",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/batchCommand",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/batchQuery",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/batchQuery",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/clear",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/clear",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/connect",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/connect",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/create",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/create",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/fromId",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/fromId",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/fromIds",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/fromIds",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/get",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/get",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/remove",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/remove",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/removeVersion",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/removeVersion",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/restoreArchive",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreArchive",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/restoreVersion",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/restoreVersion",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/update",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/update",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/remotes/struct.remote/variables/versionHistory",
+              "path": "/sveltekit-template/api/lib/remotes/struct.remote/variables/versionHistory",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/db/README",
+              "path": "/sveltekit-template/api/lib/server/db/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/db/variables/client",
+              "path": "/sveltekit-template/api/lib/server/db/variables/client",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/db/variables/DB",
+              "path": "/sveltekit-template/api/lib/server/db/variables/DB",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/enumerations/EventErrorCode",
+              "path": "/sveltekit-template/api/lib/server/event-handler/enumerations/EventErrorCode",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/enumerations/EventSuccessCode",
+              "path": "/sveltekit-template/api/lib/server/event-handler/enumerations/EventSuccessCode",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/functions/status",
+              "path": "/sveltekit-template/api/lib/server/event-handler/functions/status",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/README",
+              "path": "/sveltekit-template/api/lib/server/event-handler/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/variables/Errors",
+              "path": "/sveltekit-template/api/lib/server/event-handler/variables/Errors",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/event-handler/variables/Success",
+              "path": "/sveltekit-template/api/lib/server/event-handler/variables/Success",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/functions/postBuild",
+              "path": "/sveltekit-template/api/lib/server/functions/postBuild",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/README",
+              "path": "/sveltekit-template/api/lib/server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/email/functions/sendEmail",
+              "path": "/sveltekit-template/api/lib/server/services/email/functions/sendEmail",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/email/README",
+              "path": "/sveltekit-template/api/lib/server/services/email/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/file-upload/classes/FileUploader",
+              "path": "/sveltekit-template/api/lib/server/services/file-upload/classes/FileUploader",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/file-upload/README",
+              "path": "/sveltekit-template/api/lib/server/services/file-upload/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/global-events/README",
+              "path": "/sveltekit-template/api/lib/server/services/global-events/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/global-events/type-aliases/Events",
+              "path": "/sveltekit-template/api/lib/server/services/global-events/type-aliases/Events",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/global-events/variables/default",
+              "path": "/sveltekit-template/api/lib/server/services/global-events/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/ntp/namespaces/TimeService/functions/getLastSynced",
+              "path": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getLastSynced",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/ntp/namespaces/TimeService/functions/getTime",
+              "path": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/getTime",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/ntp/namespaces/TimeService/functions/init",
+              "path": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/functions/init",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/ntp/namespaces/TimeService/README",
+              "path": "/sveltekit-template/api/lib/server/services/ntp/namespaces/TimeService/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/ntp/README",
+              "path": "/sveltekit-template/api/lib/server/services/ntp/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/redis/README",
+              "path": "/sveltekit-template/api/lib/server/services/redis/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/redis/variables/default",
+              "path": "/sveltekit-template/api/lib/server/services/redis/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/session-manager/classes/SessionManager",
+              "path": "/sveltekit-template/api/lib/server/services/session-manager/classes/SessionManager",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/session-manager/README",
+              "path": "/sveltekit-template/api/lib/server/services/session-manager/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/sse/classes/Connection",
+              "path": "/sveltekit-template/api/lib/server/services/sse/classes/Connection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/sse/classes/SSE",
+              "path": "/sveltekit-template/api/lib/server/services/sse/classes/SSE",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/sse/README",
+              "path": "/sveltekit-template/api/lib/server/services/sse/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/sse/variables/sse",
+              "path": "/sveltekit-template/api/lib/server/services/sse/variables/sse",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/struct-event/functions/createStructEventService",
+              "path": "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructEventService",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/struct-event/functions/createStructListenerService",
+              "path": "/sveltekit-template/api/lib/server/services/struct-event/functions/createStructListenerService",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/struct-event/README",
+              "path": "/sveltekit-template/api/lib/server/services/struct-event/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/struct-registry/README",
+              "path": "/sveltekit-template/api/lib/server/services/struct-registry/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/struct-registry/variables/default",
+              "path": "/sveltekit-template/api/lib/server/services/struct-registry/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/uuid/functions/uuid",
+              "path": "/sveltekit-template/api/lib/server/services/uuid/functions/uuid",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/services/uuid/README",
+              "path": "/sveltekit-template/api/lib/server/services/uuid/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/createAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/getAccountInfo",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAccountInfo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/getAdmins",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAdmins",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/getDevelopers",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getDevelopers",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/getSettings",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getSettings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/hash",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/hash",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/isAdmin",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isAdmin",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/isDeveloper",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isDeveloper",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/isOnline",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/isOnline",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/newHash",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/newHash",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/notifyPopup",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/notifyPopup",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/requestPasswordReset",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/requestPasswordReset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/searchAccounts",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/searchAccounts",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/functions/sendAccountNotif",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/sendAccountNotif",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/README",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/type-aliases/AccountData",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/type-aliases/AccountData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/type-aliases/AccountInfoData",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/type-aliases/AccountInfoData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/Account",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Account",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/AccountInfo",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/AccountInfo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/AccountNotification",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/AccountNotification",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/Admins",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Admins",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/Developers",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Developers",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/PasswordReset",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/PasswordReset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/namespaces/Account/variables/Settings",
+              "path": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/variables/Settings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/README",
+              "path": "/sveltekit-template/api/lib/server/structs/account/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/accountInfo",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/accountInfo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/accountInfoVersionHistory",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/accountInfoVersionHistory",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/accountNotificationTable",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/accountNotificationTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/accountSettings",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/accountSettings",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/accountTable",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/accountTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/adminsTable",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/adminsTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/developersTable",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/developersTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/account/variables/passwordReset",
+              "path": "/sveltekit-template/api/lib/server/structs/account/variables/passwordReset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/namespaces/Analytics/functions/getAccountLinks",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/functions/getAccountLinks",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/namespaces/Analytics/functions/getCount",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/functions/getCount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/namespaces/Analytics/README",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/namespaces/Analytics/type-aliases/LinkData",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/type-aliases/LinkData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/namespaces/Analytics/variables/Links",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/namespaces/Analytics/variables/Links",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/README",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/analytics/variables/links",
+              "path": "/sveltekit-template/api/lib/server/structs/analytics/variables/links",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/getFingerprint",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/getFingerprint",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlocked",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlocked",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlockedPage",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isBlockedPage",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpAllowed",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpAllowed",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpLimitedPage",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/isIpLimitedPage",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/rateLimit",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/violate",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/violate",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/functions/violationSeverity",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/functions/violationSeverity",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/README",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedAccounts",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedAccounts",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedFingerprints",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedFingerprints",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedIps",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedIps",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedSessions",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/BlockedSessions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/limits",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/PageRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/PageRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/README",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/variables/blockedAccounts",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedAccounts",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/variables/blockedFingerprints",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedFingerprints",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/variables/blockedIps",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedIps",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/variables/blockedSessions",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/variables/blockedSessions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/limiting/variables/pageRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/limiting/variables/pageRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/namespaces/Logs/functions/log",
+              "path": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/log",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/namespaces/Logs/functions/search",
+              "path": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/functions/search",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/namespaces/Logs/README",
+              "path": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData",
+              "path": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/type-aliases/LogData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/namespaces/Logs/variables/Log",
+              "path": "/sveltekit-template/api/lib/server/structs/log/namespaces/Logs/variables/Log",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/README",
+              "path": "/sveltekit-template/api/lib/server/structs/log/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/log/variables/logTable",
+              "path": "/sveltekit-template/api/lib/server/structs/log/variables/logTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/CombinedEntitlementPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/classes/EntitlementPermission",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/classes/EntitlementPermission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/accountCanDo",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/accountCanDo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/canCreate",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canCreate",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/canDoFeature",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/canDoFeature",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/createChildRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/createChildRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/createEntitlement",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/createEntitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/detectCircularHierarchy",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/detectCircularHierarchy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionFromAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionFromAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionPipe",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/filterPropertyActionPipe",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getAccountsFromRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getAccountsFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getChildren",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getChildren",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlements",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlements",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getEntitlementsFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getHighestLevelRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getHighestLevelRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getLowerHierarchy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getParent",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getParent",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getPermissionsFromEntitlement",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getPermissionsFromEntitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRoleRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRoleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccountWithinHierarchy",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRolesFromAccountWithinHierarchy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsFromRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsfromRoles",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getRulesetsfromRoles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getTopLevelRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getTopLevelRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/getUpperHierarchy",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/getUpperHierarchy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRoleRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/grantRoleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/isInRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/isInRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/isParent",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/isParent",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRole",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRole",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRoleRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/revokeRoleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/rolesCanDo",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/rolesCanDo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/searchRoles",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/searchRoles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/functions/startHierarchy",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/startHierarchy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/README",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/Permission",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/Permission",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleData",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleRulesetData",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/RoleRulesetData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/AccountRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/AccountRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/Entitlement",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Entitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/Role",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/Role",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/variables/RoleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/README",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/variables/accountRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/variables/accountRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/variables/entitlement",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/variables/entitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/variables/role",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/variables/role",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/variables/roleAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/variables/roleAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/permissions/variables/roleRuleset",
+              "path": "/sveltekit-template/api/lib/server/structs/permissions/variables/roleRuleset",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/functions/getAccount",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getAccount",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/functions/getSession",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/getSession",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/functions/signIn",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signIn",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/functions/signOut",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/functions/signOut",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/README",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/type-aliases/SessionData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/namespaces/Session/variables/Session",
+              "path": "/sveltekit-template/api/lib/server/structs/session/namespaces/Session/variables/Session",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/README",
+              "path": "/sveltekit-template/api/lib/server/structs/session/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/session/variables/sessionTable",
+              "path": "/sveltekit-template/api/lib/server/structs/session/variables/sessionTable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/namespaces/Test/README",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/namespaces/Test/variables/Test",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/variables/Test",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/namespaces/Test/variables/TestPermissions",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/namespaces/Test/variables/TestPermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/README",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/variables/test",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/variables/test",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/variables/testPermissions",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/variables/testPermissions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/structs/testing/variables/testVersion",
+              "path": "/sveltekit-template/api/lib/server/structs/testing/variables/testVersion",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/config/README",
+              "path": "/sveltekit-template/api/lib/server/utils/config/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/config/variables/default",
+              "path": "/sveltekit-template/api/lib/server/utils/config/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/classes/EnvironmentError",
+              "path": "/sveltekit-template/api/lib/server/utils/env/classes/EnvironmentError",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/bool",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/bool",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/domain",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/domain",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/get",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/get",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/getPublicIp",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/getPublicIp",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/num",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/num",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/functions/str",
+              "path": "/sveltekit-template/api/lib/server/utils/env/functions/str",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/README",
+              "path": "/sveltekit-template/api/lib/server/utils/env/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/variables/config",
+              "path": "/sveltekit-template/api/lib/server/utils/env/variables/config",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/env/variables/env",
+              "path": "/sveltekit-template/api/lib/server/utils/env/variables/env",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/file-match/functions/pathMatch",
+              "path": "/sveltekit-template/api/lib/server/utils/file-match/functions/pathMatch",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/file-match/README",
+              "path": "/sveltekit-template/api/lib/server/utils/file-match/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/classes/FileReceiver",
+              "path": "/sveltekit-template/api/lib/server/utils/files/classes/FileReceiver",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/fileTree",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/fileTree",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/generateSearchFile",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/generateSearchFile",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/openFile",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/openFile",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/openJSON",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/openJSON",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/openJSONSync",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/openJSONSync",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/parseJSON",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/parseJSON",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/renderSearchResultHtml",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/renderSearchResultHtml",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/saveFile",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/saveFile",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/functions/searchFile",
+              "path": "/sveltekit-template/api/lib/server/utils/files/functions/searchFile",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/README",
+              "path": "/sveltekit-template/api/lib/server/utils/files/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/files/type-aliases/FileTree",
+              "path": "/sveltekit-template/api/lib/server/utils/files/type-aliases/FileTree",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/fingerprint/functions/signFingerprint",
+              "path": "/sveltekit-template/api/lib/server/utils/fingerprint/functions/signFingerprint",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/fingerprint/README",
+              "path": "/sveltekit-template/api/lib/server/utils/fingerprint/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/functions/branch",
+              "path": "/sveltekit-template/api/lib/server/utils/git/functions/branch",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/functions/commit",
+              "path": "/sveltekit-template/api/lib/server/utils/git/functions/commit",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/functions/repoName",
+              "path": "/sveltekit-template/api/lib/server/utils/git/functions/repoName",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/functions/repoSlug",
+              "path": "/sveltekit-template/api/lib/server/utils/git/functions/repoSlug",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/functions/repoUrl",
+              "path": "/sveltekit-template/api/lib/server/utils/git/functions/repoUrl",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/git/README",
+              "path": "/sveltekit-template/api/lib/server/utils/git/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/manifesto/functions/getManifesto",
+              "path": "/sveltekit-template/api/lib/server/utils/manifesto/functions/getManifesto",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/manifesto/functions/getManifestoInstance",
+              "path": "/sveltekit-template/api/lib/server/utils/manifesto/functions/getManifestoInstance",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/manifesto/README",
+              "path": "/sveltekit-template/api/lib/server/utils/manifesto/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/task/functions/runTask",
+              "path": "/sveltekit-template/api/lib/server/utils/task/functions/runTask",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/task/functions/runTs",
+              "path": "/sveltekit-template/api/lib/server/utils/task/functions/runTs",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/task/README",
+              "path": "/sveltekit-template/api/lib/server/utils/task/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/functions/error",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/functions/error",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/functions/log",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/functions/log",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/functions/save",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/functions/save",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/functions/warn",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/functions/warn",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/README",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/terminal/variables/default",
+              "path": "/sveltekit-template/api/lib/server/utils/terminal/variables/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/uuid/functions/uuid",
+              "path": "/sveltekit-template/api/lib/server/utils/uuid/functions/uuid",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/server/utils/uuid/README",
+              "path": "/sveltekit-template/api/lib/server/utils/uuid/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/analytics/functions/init",
+              "path": "/sveltekit-template/api/lib/services/analytics/functions/init",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/analytics/README",
+              "path": "/sveltekit-template/api/lib/services/analytics/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/functions/define",
+              "path": "/sveltekit-template/api/lib/services/db/functions/define",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/functions/init",
+              "path": "/sveltekit-template/api/lib/services/db/functions/init",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/README",
+              "path": "/sveltekit-template/api/lib/services/db/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/classes/PaginatedTableData",
+              "path": "/sveltekit-template/api/lib/services/db/table/classes/PaginatedTableData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/classes/Table",
+              "path": "/sveltekit-template/api/lib/services/db/table/classes/Table",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/classes/TableData",
+              "path": "/sveltekit-template/api/lib/services/db/table/classes/TableData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/classes/TableDataArr",
+              "path": "/sveltekit-template/api/lib/services/db/table/classes/TableDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/README",
+              "path": "/sveltekit-template/api/lib/services/db/table/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/table/type-aliases/ReadConfig",
+              "path": "/sveltekit-template/api/lib/services/db/table/type-aliases/ReadConfig",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/type-aliases/SchemaDefinition",
+              "path": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaDefinition",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/type-aliases/SchemaFieldReturnType",
+              "path": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldReturnType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/type-aliases/SchemaFieldType",
+              "path": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/type-aliases/TableStructable",
+              "path": "/sveltekit-template/api/lib/services/db/type-aliases/TableStructable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/variables/DB",
+              "path": "/sveltekit-template/api/lib/services/db/variables/DB",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/db/variables/em",
+              "path": "/sveltekit-template/api/lib/services/db/variables/em",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/event-stack/classes/EventStack",
+              "path": "/sveltekit-template/api/lib/services/event-stack/classes/EventStack",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/event-stack/functions/createOverrideStack",
+              "path": "/sveltekit-template/api/lib/services/event-stack/functions/createOverrideStack",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/event-stack/functions/useCommandStack",
+              "path": "/sveltekit-template/api/lib/services/event-stack/functions/useCommandStack",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/event-stack/README",
+              "path": "/sveltekit-template/api/lib/services/event-stack/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/event-stack/type-aliases/Command",
+              "path": "/sveltekit-template/api/lib/services/event-stack/type-aliases/Command",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/functions/forceSync",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/forceSync",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/functions/getLastSynced",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/getLastSynced",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/functions/getTime",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/getTime",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/functions/init",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/functions/init",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/README",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/variables/off",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/off",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/variables/on",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/on",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/namespaces/TimeService/variables/once",
+              "path": "/sveltekit-template/api/lib/services/ntp/namespaces/TimeService/variables/once",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/ntp/README",
+              "path": "/sveltekit-template/api/lib/services/ntp/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/session-manager/classes/Connection",
+              "path": "/sveltekit-template/api/lib/services/session-manager/classes/Connection",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/session-manager/classes/SessionManager",
+              "path": "/sveltekit-template/api/lib/services/session-manager/classes/SessionManager",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/session-manager/README",
+              "path": "/sveltekit-template/api/lib/services/session-manager/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/sse/README",
+              "path": "/sveltekit-template/api/lib/services/sse/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/sse/variables/sse",
+              "path": "/sveltekit-template/api/lib/services/sse/variables/sse",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/batching/namespaces/StructBatching/functions/add",
+              "path": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/functions/add",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/batching/namespaces/StructBatching/README",
+              "path": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/Batch",
+              "path": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/Batch",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch",
+              "path": "/sveltekit-template/api/lib/services/struct/batching/namespaces/StructBatching/type-aliases/StructBatch",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/batching/README",
+              "path": "/sveltekit-template/api/lib/services/struct/batching/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/cache/namespaces/StructCache/functions/clear",
+              "path": "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/clear",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/cache/namespaces/StructCache/functions/get",
+              "path": "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/get",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/cache/namespaces/StructCache/functions/set",
+              "path": "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/functions/set",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/cache/namespaces/StructCache/README",
+              "path": "/sveltekit-template/api/lib/services/struct/cache/namespaces/StructCache/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/cache/README",
+              "path": "/sveltekit-template/api/lib/services/struct/cache/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-arr/classes/DataArr",
+              "path": "/sveltekit-template/api/lib/services/struct/data-arr/classes/DataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-arr/classes/PaginationDataArr",
+              "path": "/sveltekit-template/api/lib/services/struct/data-arr/classes/PaginationDataArr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-arr/README",
+              "path": "/sveltekit-template/api/lib/services/struct/data-arr/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-staging/classes/StructDataStage",
+              "path": "/sveltekit-template/api/lib/services/struct/data-staging/classes/StructDataStage",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-staging/README",
+              "path": "/sveltekit-template/api/lib/services/struct/data-staging/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-version/classes/StructDataVersion",
+              "path": "/sveltekit-template/api/lib/services/struct/data-version/classes/StructDataVersion",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-version/README",
+              "path": "/sveltekit-template/api/lib/services/struct/data-version/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/data-version/type-aliases/VersionStructable",
+              "path": "/sveltekit-template/api/lib/services/struct/data-version/type-aliases/VersionStructable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/README",
+              "path": "/sveltekit-template/api/lib/services/struct/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct-data/classes/StructData",
+              "path": "/sveltekit-template/api/lib/services/struct/struct-data/classes/StructData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct-data/README",
+              "path": "/sveltekit-template/api/lib/services/struct/struct-data/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/DataError",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/DataError",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/FatalDataError",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/FatalDataError",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/FatalStructError",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/FatalStructError",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/SingleWritable",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/SingleWritable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/Struct",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/Struct",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/StructError",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/StructError",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/classes/StructStream",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/classes/StructStream",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/enumerations/FetchActions",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/enumerations/FetchActions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/interfaces/Socket",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/interfaces/Socket",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/README",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/Blank",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/Blank",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/ColTsType",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/ColTsType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/GlobalCols",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/GlobalCols",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/PartialStructable",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/PartialStructable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/ReadConfig",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/ReadConfig",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/SafeColTsType",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/SafeColTsType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/SafePartialStructable",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/SafePartialStructable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/StatusMessage",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StatusMessage",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/Structable",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/Structable",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/StructBuilder",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructBuilder",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/services/struct/struct/type-aliases/StructEvents",
+              "path": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructEvents",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/email/README",
+              "path": "/sveltekit-template/api/lib/types/email/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/email/type-aliases/Email",
+              "path": "/sveltekit-template/api/lib/types/email/type-aliases/Email",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/entitlements/README",
+              "path": "/sveltekit-template/api/lib/types/entitlements/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/entitlements/type-aliases/Entitlement",
+              "path": "/sveltekit-template/api/lib/types/entitlements/type-aliases/Entitlement",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/entitlements/type-aliases/Features",
+              "path": "/sveltekit-template/api/lib/types/entitlements/type-aliases/Features",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/entitlements/type-aliases/Group",
+              "path": "/sveltekit-template/api/lib/types/entitlements/type-aliases/Group",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/README",
+              "path": "/sveltekit-template/api/lib/types/icons/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/BootstrapIcon",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/BootstrapIcon",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/FontAwesomeIcon",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/FontAwesomeIcon",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/Icon",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/Icon",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/IconTypes",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/IconTypes",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/MaterialIcon",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/MaterialIcon",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/icons/type-aliases/MaterialSymbol",
+              "path": "/sveltekit-template/api/lib/types/icons/type-aliases/MaterialSymbol",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/notification/README",
+              "path": "/sveltekit-template/api/lib/types/notification/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/notification/type-aliases/Notification",
+              "path": "/sveltekit-template/api/lib/types/notification/type-aliases/Notification",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/sse/README",
+              "path": "/sveltekit-template/api/lib/types/sse/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/sse/type-aliases/ConnectionState",
+              "path": "/sveltekit-template/api/lib/types/sse/type-aliases/ConnectionState",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/sse/variables/ConnectionStateSchema",
+              "path": "/sveltekit-template/api/lib/types/sse/variables/ConnectionStateSchema",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/struct/enumerations/DataAction",
+              "path": "/sveltekit-template/api/lib/types/struct/enumerations/DataAction",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/struct/enumerations/PropertyAction",
+              "path": "/sveltekit-template/api/lib/types/struct/enumerations/PropertyAction",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/types/struct/README",
+              "path": "/sveltekit-template/api/lib/types/struct/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/buttons/classes/ButtonCellRenderer",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/buttons/classes/ButtonCellRenderer",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/buttons/README",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/buttons/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/checkbox-select/classes/CheckBoxSelectRenderer",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/CheckBoxSelectRenderer",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/checkbox-select/classes/HeaderCheckboxRenderer",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/classes/HeaderCheckboxRenderer",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/checkbox-select/README",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/checkbox-select/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/date-time/classes/DateTimeCellEditor",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/date-time/classes/DateTimeCellEditor",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/date-time/README",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/date-time/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/search-select/classes/SearchSelectCellEditor",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/search-select/classes/SearchSelectCellEditor",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/search-select/README",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/search-select/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams",
+              "path": "/sveltekit-template/api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/clipboard/functions/copy",
+              "path": "/sveltekit-template/api/lib/utils/clipboard/functions/copy",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/clipboard/functions/copyCanvas",
+              "path": "/sveltekit-template/api/lib/utils/clipboard/functions/copyCanvas",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/clipboard/functions/copyImage",
+              "path": "/sveltekit-template/api/lib/utils/clipboard/functions/copyImage",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/clipboard/README",
+              "path": "/sveltekit-template/api/lib/utils/clipboard/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/contextmenu/functions/contextmenu",
+              "path": "/sveltekit-template/api/lib/utils/contextmenu/functions/contextmenu",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/contextmenu/README",
+              "path": "/sveltekit-template/api/lib/utils/contextmenu/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/contextmenu/type-aliases/ContextMenuOptions",
+              "path": "/sveltekit-template/api/lib/utils/contextmenu/type-aliases/ContextMenuOptions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/countdown/classes/Countdown",
+              "path": "/sveltekit-template/api/lib/utils/countdown/classes/Countdown",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/countdown/README",
+              "path": "/sveltekit-template/api/lib/utils/countdown/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/functions/downloadBlob",
+              "path": "/sveltekit-template/api/lib/utils/downloads/functions/downloadBlob",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/functions/downloadText",
+              "path": "/sveltekit-template/api/lib/utils/downloads/functions/downloadText",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/functions/downloadUrl",
+              "path": "/sveltekit-template/api/lib/utils/downloads/functions/downloadUrl",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/functions/loadFileContents",
+              "path": "/sveltekit-template/api/lib/utils/downloads/functions/loadFileContents",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/functions/loadFiles",
+              "path": "/sveltekit-template/api/lib/utils/downloads/functions/loadFiles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/downloads/README",
+              "path": "/sveltekit-template/api/lib/utils/downloads/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/files/classes/FileUploader",
+              "path": "/sveltekit-template/api/lib/utils/files/classes/FileUploader",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/files/README",
+              "path": "/sveltekit-template/api/lib/utils/files/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/fingerprint/functions/fingerprint",
+              "path": "/sveltekit-template/api/lib/utils/fingerprint/functions/fingerprint",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/fingerprint/README",
+              "path": "/sveltekit-template/api/lib/utils/fingerprint/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/form/classes/Form",
+              "path": "/sveltekit-template/api/lib/utils/form/classes/Form",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/form/classes/RangeSlider",
+              "path": "/sveltekit-template/api/lib/utils/form/classes/RangeSlider",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/form/README",
+              "path": "/sveltekit-template/api/lib/utils/form/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/fullscreen/functions/fullscreen",
+              "path": "/sveltekit-template/api/lib/utils/fullscreen/functions/fullscreen",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/fullscreen/README",
+              "path": "/sveltekit-template/api/lib/utils/fullscreen/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/generate-type/functions/toType",
+              "path": "/sveltekit-template/api/lib/utils/generate-type/functions/toType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/generate-type/functions/toZodType",
+              "path": "/sveltekit-template/api/lib/utils/generate-type/functions/toZodType",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/generate-type/README",
+              "path": "/sveltekit-template/api/lib/utils/generate-type/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/keybinds/classes/Keyboard",
+              "path": "/sveltekit-template/api/lib/utils/keybinds/classes/Keyboard",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/keybinds/README",
+              "path": "/sveltekit-template/api/lib/utils/keybinds/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/keybinds/type-aliases/KeyCombo",
+              "path": "/sveltekit-template/api/lib/utils/keybinds/type-aliases/KeyCombo",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/keybinds/type-aliases/KeyName",
+              "path": "/sveltekit-template/api/lib/utils/keybinds/type-aliases/KeyName",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/keybinds/type-aliases/Modifier",
+              "path": "/sveltekit-template/api/lib/utils/keybinds/type-aliases/Modifier",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/pages/functions/getTitle",
+              "path": "/sveltekit-template/api/lib/utils/pages/functions/getTitle",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/pages/README",
+              "path": "/sveltekit-template/api/lib/utils/pages/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/alert",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/alert",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/choose",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/choose",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/clearModals",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/clearModals",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/colorPicker",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/colorPicker",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/confirm",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/confirm",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/createButtons",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/createButtons",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/notify",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/notify",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/prompt",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/prompt",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/rawModal",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/rawModal",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/functions/select",
+              "path": "/sveltekit-template/api/lib/utils/prompts/functions/select",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/README",
+              "path": "/sveltekit-template/api/lib/utils/prompts/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/variables/history",
+              "path": "/sveltekit-template/api/lib/utils/prompts/variables/history",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/variables/modalTarget",
+              "path": "/sveltekit-template/api/lib/utils/prompts/variables/modalTarget",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/prompts/variables/notifs",
+              "path": "/sveltekit-template/api/lib/utils/prompts/variables/notifs",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/functions/get",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/get",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/functions/post",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/post",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/functions/setMeta",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/setMeta",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/functions/uploadFiles",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/functions/uploadFiles",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/README",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/type-aliases/GetConfig",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/type-aliases/GetConfig",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/type-aliases/PostConfig",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/type-aliases/PostConfig",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/namespaces/Requests/variables/metadata",
+              "path": "/sveltekit-template/api/lib/utils/requests/namespaces/Requests/variables/metadata",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/requests/README",
+              "path": "/sveltekit-template/api/lib/utils/requests/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/stack/classes/Stack",
+              "path": "/sveltekit-template/api/lib/utils/stack/classes/Stack",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/stack/README",
+              "path": "/sveltekit-template/api/lib/utils/stack/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/theme/functions/setTheme",
+              "path": "/sveltekit-template/api/lib/utils/theme/functions/setTheme",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/theme/README",
+              "path": "/sveltekit-template/api/lib/utils/theme/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/theme/variables/theme",
+              "path": "/sveltekit-template/api/lib/utils/theme/variables/theme",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/writables/classes/WritableArray",
+              "path": "/sveltekit-template/api/lib/utils/writables/classes/WritableArray",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/writables/classes/WritableBase",
+              "path": "/sveltekit-template/api/lib/utils/writables/classes/WritableBase",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/utils/writables/README",
+              "path": "/sveltekit-template/api/lib/utils/writables/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/lib/variables/ogFetch",
+              "path": "/sveltekit-template/api/lib/variables/ogFetch",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/README",
+              "path": "/sveltekit-template/api/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/+layout/README",
+              "path": "/sveltekit-template/api/routes/+layout/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/[username]/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/account/[username]/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/[username]/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/[username]/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/manage-profile/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/account/manage-profile/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/manage-profile/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/manage-profile/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/password-reset/[id]/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/password-reset/[id]/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/password-reset/[id]/+page.server/variables/actions",
+              "path": "/sveltekit-template/api/routes/account/password-reset/[id]/+page.server/variables/actions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/password-reset/[id]/+page/functions/load",
+              "path": "/sveltekit-template/api/routes/account/password-reset/[id]/+page/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/password-reset/[id]/+page/README",
+              "path": "/sveltekit-template/api/routes/account/password-reset/[id]/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/profile/+server/functions/POST",
+              "path": "/sveltekit-template/api/routes/account/profile/+server/functions/POST",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/profile/+server/README",
+              "path": "/sveltekit-template/api/routes/account/profile/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/settings/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/settings/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/settings/+page/README",
+              "path": "/sveltekit-template/api/routes/account/settings/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-in/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/sign-in/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-in/+page.server/variables/actions",
+              "path": "/sveltekit-template/api/routes/account/sign-in/+page.server/variables/actions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-out/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/account/sign-out/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-out/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/sign-out/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-out/+page.server/variables/actions",
+              "path": "/sveltekit-template/api/routes/account/sign-out/+page.server/variables/actions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-up/+page.server/README",
+              "path": "/sveltekit-template/api/routes/account/sign-up/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/account/sign-up/+page.server/variables/actions",
+              "path": "/sveltekit-template/api/routes/account/sign-up/+page.server/variables/actions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/+server/README",
+              "path": "/sveltekit-template/api/routes/api/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/oauth/sign-in/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/oauth/sign-in/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/oauth/sign-in/+server/README",
+              "path": "/sveltekit-template/api/routes/api/oauth/sign-in/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/oauth/sign-up/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/oauth/sign-up/+server/README",
+              "path": "/sveltekit-template/api/routes/api/oauth/sign-up/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/ack/[uuid]/[id]/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/sse/ack/[uuid]/[id]/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/ack/[uuid]/[id]/+server/README",
+              "path": "/sveltekit-template/api/routes/api/sse/ack/[uuid]/[id]/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/init/[uuid]/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/sse/init/[uuid]/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/init/[uuid]/+server/README",
+              "path": "/sveltekit-template/api/routes/api/sse/init/[uuid]/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/ping/[uuid]/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/api/sse/ping/[uuid]/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/api/sse/ping/[uuid]/+server/README",
+              "path": "/sveltekit-template/api/routes/api/sse/ping/[uuid]/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/assets/[...filepath]/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/assets/[...filepath]/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/assets/[...filepath]/+server/README",
+              "path": "/sveltekit-template/api/routes/assets/[...filepath]/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/+server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/[accountId]/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/[accountId]/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/[accountId]/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/[accountId]/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/+page/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/+page/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/account/+page/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/account/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/analytics/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/analytics/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/analytics/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/[struct]/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/[struct]/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/[struct]/+page/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/[struct]/+page/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/[struct]/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/data/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/data/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/logs/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/logs/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/logs/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/logs/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/[roleId]/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/[roleId]/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/[roleId]/+page/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/[roleId]/+page/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/[roleId]/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/+page.server/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/+page/functions/load",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/+page/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/dashboard/admin/role/+page/README",
+              "path": "/sveltekit-template/api/routes/dashboard/admin/role/+page/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/examples/sse/+page.server/README",
+              "path": "/sveltekit-template/api/routes/examples/sse/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/examples/struct/ssr/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/examples/struct/ssr/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/examples/struct/ssr/+page.server/README",
+              "path": "/sveltekit-template/api/routes/examples/struct/ssr/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/files/[fileId]/+server/functions/GET",
+              "path": "/sveltekit-template/api/routes/files/[fileId]/+server/functions/GET",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/files/[fileId]/+server/functions/POST",
+              "path": "/sveltekit-template/api/routes/files/[fileId]/+server/functions/POST",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/files/[fileId]/+server/README",
+              "path": "/sveltekit-template/api/routes/files/[fileId]/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/+page.server/README",
+              "path": "/sveltekit-template/api/routes/test/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/account/+page.server/functions/load",
+              "path": "/sveltekit-template/api/routes/test/account/+page.server/functions/load",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/account/+page.server/README",
+              "path": "/sveltekit-template/api/routes/test/account/+page.server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/sse/init/+server/functions/POST",
+              "path": "/sveltekit-template/api/routes/test/sse/init/+server/functions/POST",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/sse/init/+server/README",
+              "path": "/sveltekit-template/api/routes/test/sse/init/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/upload/+server/functions/POST",
+              "path": "/sveltekit-template/api/routes/test/upload/+server/functions/POST",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/routes/test/upload/+server/README",
+              "path": "/sveltekit-template/api/routes/test/upload/+server/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/tests/run-task.test/README",
+              "path": "/sveltekit-template/api/tests/run-task.test/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/tests/struct.test/README",
+              "path": "/sveltekit-template/api/tests/struct.test/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/tests/task-import/functions/test",
+              "path": "/sveltekit-template/api/tests/task-import/functions/test",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/tests/task-import/README",
+              "path": "/sveltekit-template/api/tests/task-import/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/interfaces/Error",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Error",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/interfaces/Locals",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Locals",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/interfaces/PageData",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageData",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/interfaces/PageState",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/interfaces/PageState",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/interfaces/Platform",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/interfaces/Platform",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/namespaces/App/README",
+              "path": "/sveltekit-template/api/types/app/namespaces/App/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/README",
+              "path": "/sveltekit-template/api/types/app/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/app/variables/APP_ENV",
+              "path": "/sveltekit-template/api/types/app/variables/APP_ENV",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/broprint/functions/getCurrentBrowserFingerPrint",
+              "path": "/sveltekit-template/api/types/broprint/functions/getCurrentBrowserFingerPrint",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/broprint/README",
+              "path": "/sveltekit-template/api/types/broprint/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/functions/create",
+              "path": "/sveltekit-template/api/types/document-extended/functions/create",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/functions/createDeep",
+              "path": "/sveltekit-template/api/types/document-extended/functions/createDeep",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/functions/find",
+              "path": "/sveltekit-template/api/types/document-extended/functions/find",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/functions/findAll",
+              "path": "/sveltekit-template/api/types/document-extended/functions/findAll",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/README",
+              "path": "/sveltekit-template/api/types/document-extended/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/document-extended/variables/recaptchaSiteKey",
+              "path": "/sveltekit-template/api/types/document-extended/variables/recaptchaSiteKey",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/classes/default",
+              "path": "/sveltekit-template/api/types/svelte-filepond/classes/default",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/functions/registerPlugin",
+              "path": "/sveltekit-template/api/types/svelte-filepond/functions/registerPlugin",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/functions/supported",
+              "path": "/sveltekit-template/api/types/svelte-filepond/functions/supported",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/interfaces/FilePondFile",
+              "path": "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondFile",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/interfaces/FilePondProps",
+              "path": "/sveltekit-template/api/types/svelte-filepond/interfaces/FilePondProps",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/README",
+              "path": "/sveltekit-template/api/types/svelte-filepond/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/types/svelte-filepond/type-aliases/FilePondEvent",
+              "path": "/sveltekit-template/api/types/svelte-filepond/type-aliases/FilePondEvent",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "config/index",
+              "path": "/sveltekit-template/config/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "diagrams/index",
+              "path": "/sveltekit-template/diagrams/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "e2e/index",
+              "path": "/sveltekit-template/e2e/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/sveltekit-template/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "scripts/index",
+              "path": "/sveltekit-template/scripts/",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/sveltekit-template/api/",
+                "label": "README"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

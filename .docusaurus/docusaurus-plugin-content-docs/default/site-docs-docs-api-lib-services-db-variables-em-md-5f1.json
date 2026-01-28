@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/variables/em",
+  "title": "em",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/variables/em.md",
+  "sourceDirName": "api/lib/services/db/variables",
+  "slug": "/api/lib/services/db/variables/em",
+  "permalink": "/sveltekit-template/api/lib/services/db/variables/em",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "DB",
+    "permalink": "/sveltekit-template/api/lib/services/db/variables/DB"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/services/event-stack/"
+  }
+}

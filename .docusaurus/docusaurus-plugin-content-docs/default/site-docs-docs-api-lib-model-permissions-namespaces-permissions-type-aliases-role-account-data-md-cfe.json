@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+  "title": "RoleAccountData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/type-aliases",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "EntitlementDataArr",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/EntitlementDataArr"
+  },
+  "next": {
+    "title": "RoleAccountDataArr",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/type-aliases/RoleAccountDataArr"
+  }
+}

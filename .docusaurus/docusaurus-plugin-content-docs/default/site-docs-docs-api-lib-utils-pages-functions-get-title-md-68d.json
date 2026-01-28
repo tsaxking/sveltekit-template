@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/pages/functions/getTitle",
+  "title": "getTitle",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/pages/functions/getTitle.md",
+  "sourceDirName": "api/lib/utils/pages/functions",
+  "slug": "/api/lib/utils/pages/functions/getTitle",
+  "permalink": "/sveltekit-template/api/lib/utils/pages/functions/getTitle",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/pages/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/"
+  }
+}

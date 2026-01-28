@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/account/sign-out/+page.server/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/account/sign-out/+page.server/README.md",
+  "sourceDirName": "api/routes/account/sign-out/+page.server",
+  "slug": "/api/routes/account/sign-out/+page.server/",
+  "permalink": "/sveltekit-template/api/routes/account/sign-out/+page.server/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "actions",
+    "permalink": "/sveltekit-template/api/routes/account/sign-in/+page.server/variables/actions"
+  },
+  "next": {
+    "title": "load",
+    "permalink": "/sveltekit-template/api/routes/account/sign-out/+page.server/functions/load"
+  }
+}

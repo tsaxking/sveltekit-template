@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/session-manager.remote/variables/closeManager",
+  "title": "closeManager",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/session-manager.remote/variables/closeManager.md",
+  "sourceDirName": "api/lib/remotes/session-manager.remote/variables",
+  "slug": "/api/lib/remotes/session-manager.remote/variables/closeManager",
+  "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/closeManager",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/"
+  },
+  "next": {
+    "title": "getActiveConnections",
+    "permalink": "/sveltekit-template/api/lib/remotes/session-manager.remote/variables/getActiveConnections"
+  }
+}

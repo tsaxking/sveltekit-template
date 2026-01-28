@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/README.md",
+  "sourceDirName": "api/lib/services/struct/struct",
+  "slug": "/api/lib/services/struct/struct/",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "VersionStructable",
+    "permalink": "/sveltekit-template/api/lib/services/struct/data-version/type-aliases/VersionStructable"
+  },
+  "next": {
+    "title": "DataError",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/classes/DataError"
+  }
+}

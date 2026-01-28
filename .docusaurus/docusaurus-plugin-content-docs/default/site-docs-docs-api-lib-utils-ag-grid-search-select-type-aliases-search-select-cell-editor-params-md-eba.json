@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams",
+  "title": "SearchSelectCellEditorParams",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams.md",
+  "sourceDirName": "api/lib/utils/ag-grid/search-select/type-aliases",
+  "slug": "/api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams",
+  "permalink": "/sveltekit-template/api/lib/utils/ag-grid/search-select/type-aliases/SearchSelectCellEditorParams",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SearchSelectCellEditor",
+    "permalink": "/sveltekit-template/api/lib/utils/ag-grid/search-select/classes/SearchSelectCellEditor"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/utils/clipboard/"
+  }
+}

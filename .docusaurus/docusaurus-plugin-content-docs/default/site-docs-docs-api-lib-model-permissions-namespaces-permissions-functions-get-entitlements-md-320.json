@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements",
+  "title": "getEntitlements",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlements",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getEntitlementGroups",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getEntitlementGroups"
+  },
+  "next": {
+    "title": "getRolePermissions",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/getRolePermissions"
+  }
+}

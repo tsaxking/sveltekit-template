@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth",
+  "title": "createAccountFromOauth",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth.md",
+  "sourceDirName": "api/lib/server/structs/account/namespaces/Account/functions",
+  "slug": "/api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccountFromOauth",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "createAccount",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/createAccount"
+  },
+  "next": {
+    "title": "getAccountInfo",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAccountInfo"
+  }
+}

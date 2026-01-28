@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/type-aliases/SchemaFieldType",
+  "title": "SchemaFieldType",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/type-aliases/SchemaFieldType.md",
+  "sourceDirName": "api/lib/services/db/type-aliases",
+  "slug": "/api/lib/services/db/type-aliases/SchemaFieldType",
+  "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldType",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SchemaFieldReturnType",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaFieldReturnType"
+  },
+  "next": {
+    "title": "TableStructable",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/TableStructable"
+  }
+}

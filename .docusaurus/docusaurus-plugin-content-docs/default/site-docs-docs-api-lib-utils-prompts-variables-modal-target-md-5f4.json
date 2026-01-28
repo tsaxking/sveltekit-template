@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/prompts/variables/modalTarget",
+  "title": "modalTarget",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/prompts/variables/modalTarget.md",
+  "sourceDirName": "api/lib/utils/prompts/variables",
+  "slug": "/api/lib/utils/prompts/variables/modalTarget",
+  "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/modalTarget",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "history",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/history"
+  },
+  "next": {
+    "title": "notifs",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/variables/notifs"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/classes/FileReceiver",
+  "title": "FileReceiver",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/classes/FileReceiver.md",
+  "sourceDirName": "api/lib/server/utils/files/classes",
+  "slug": "/api/lib/server/utils/files/classes/FileReceiver",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/classes/FileReceiver",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/"
+  },
+  "next": {
+    "title": "fileTree",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/fileTree"
+  }
+}

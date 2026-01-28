@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/account.remote/variables/getNotifications",
+  "title": "getNotifications",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/account.remote/variables/getNotifications.md",
+  "sourceDirName": "api/lib/remotes/account.remote/variables",
+  "slug": "/api/lib/remotes/account.remote/variables/getNotifications",
+  "permalink": "/sveltekit-template/api/lib/remotes/account.remote/variables/getNotifications",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/remotes/account.remote/"
+  },
+  "next": {
+    "title": "getOwnNotifs",
+    "permalink": "/sveltekit-template/api/lib/remotes/account.remote/variables/getOwnNotifs"
+  }
+}

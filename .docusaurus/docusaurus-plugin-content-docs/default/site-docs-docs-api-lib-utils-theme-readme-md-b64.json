@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/theme/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/theme/README.md",
+  "sourceDirName": "api/lib/utils/theme",
+  "slug": "/api/lib/utils/theme/",
+  "permalink": "/sveltekit-template/api/lib/utils/theme/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Stack",
+    "permalink": "/sveltekit-template/api/lib/utils/stack/classes/Stack"
+  },
+  "next": {
+    "title": "setTheme",
+    "permalink": "/sveltekit-template/api/lib/utils/theme/functions/setTheme"
+  }
+}

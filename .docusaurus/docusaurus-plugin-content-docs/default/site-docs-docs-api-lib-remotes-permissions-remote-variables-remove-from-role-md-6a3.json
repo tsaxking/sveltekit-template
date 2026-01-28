@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/permissions.remote/variables/removeFromRole",
+  "title": "removeFromRole",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/permissions.remote/variables/removeFromRole.md",
+  "sourceDirName": "api/lib/remotes/permissions.remote/variables",
+  "slug": "/api/lib/remotes/permissions.remote/variables/removeFromRole",
+  "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/removeFromRole",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "permissionsFromRole",
+    "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/permissionsFromRole"
+  },
+  "next": {
+    "title": "revokeAccountPermission",
+    "permalink": "/sveltekit-template/api/lib/remotes/permissions.remote/variables/revokeAccountPermission"
+  }
+}

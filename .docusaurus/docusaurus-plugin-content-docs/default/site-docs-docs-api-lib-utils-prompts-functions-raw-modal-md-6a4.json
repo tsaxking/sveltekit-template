@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/prompts/functions/rawModal",
+  "title": "rawModal",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/prompts/functions/rawModal.md",
+  "sourceDirName": "api/lib/utils/prompts/functions",
+  "slug": "/api/lib/utils/prompts/functions/rawModal",
+  "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/rawModal",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "prompt",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/prompt"
+  },
+  "next": {
+    "title": "select",
+    "permalink": "/sveltekit-template/api/lib/utils/prompts/functions/select"
+  }
+}

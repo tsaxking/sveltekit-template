@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/pages/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/pages/README.md",
+  "sourceDirName": "api/lib/utils/pages",
+  "slug": "/api/lib/utils/pages/",
+  "permalink": "/sveltekit-template/api/lib/utils/pages/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Modifier",
+    "permalink": "/sveltekit-template/api/lib/utils/keybinds/type-aliases/Modifier"
+  },
+  "next": {
+    "title": "getTitle",
+    "permalink": "/sveltekit-template/api/lib/utils/pages/functions/getTitle"
+  }
+}

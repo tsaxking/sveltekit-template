@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/account/namespaces/Account/functions/getAdmins",
+  "title": "getAdmins",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/account/namespaces/Account/functions/getAdmins.md",
+  "sourceDirName": "api/lib/server/structs/account/namespaces/Account/functions",
+  "slug": "/api/lib/server/structs/account/namespaces/Account/functions/getAdmins",
+  "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAdmins",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getAccountInfo",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getAccountInfo"
+  },
+  "next": {
+    "title": "getDevelopers",
+    "permalink": "/sveltekit-template/api/lib/server/structs/account/namespaces/Account/functions/getDevelopers"
+  }
+}

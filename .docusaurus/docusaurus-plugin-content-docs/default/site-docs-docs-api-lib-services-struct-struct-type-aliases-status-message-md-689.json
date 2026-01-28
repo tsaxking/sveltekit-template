@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/struct/struct/type-aliases/StatusMessage",
+  "title": "StatusMessage",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/struct/struct/type-aliases/StatusMessage.md",
+  "sourceDirName": "api/lib/services/struct/struct/type-aliases",
+  "slug": "/api/lib/services/struct/struct/type-aliases/StatusMessage",
+  "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StatusMessage",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SafePartialStructable",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/SafePartialStructable"
+  },
+  "next": {
+    "title": "StructBuilder",
+    "permalink": "/sveltekit-template/api/lib/services/struct/struct/type-aliases/StructBuilder"
+  }
+}

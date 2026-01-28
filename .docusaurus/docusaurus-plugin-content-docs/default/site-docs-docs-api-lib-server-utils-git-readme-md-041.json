@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/git/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/git/README.md",
+  "sourceDirName": "api/lib/server/utils/git",
+  "slug": "/api/lib/server/utils/git/",
+  "permalink": "/sveltekit-template/api/lib/server/utils/git/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "signFingerprint",
+    "permalink": "/sveltekit-template/api/lib/server/utils/fingerprint/functions/signFingerprint"
+  },
+  "next": {
+    "title": "branch",
+    "permalink": "/sveltekit-template/api/lib/server/utils/git/functions/branch"
+  }
+}

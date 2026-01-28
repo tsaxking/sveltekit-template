@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/testing/variables/testPermissions",
+  "title": "testPermissions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/testing/variables/testPermissions.md",
+  "sourceDirName": "api/lib/server/structs/testing/variables",
+  "slug": "/api/lib/server/structs/testing/variables/testPermissions",
+  "permalink": "/sveltekit-template/api/lib/server/structs/testing/variables/testPermissions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "test",
+    "permalink": "/sveltekit-template/api/lib/server/structs/testing/variables/test"
+  },
+  "next": {
+    "title": "testVersion",
+    "permalink": "/sveltekit-template/api/lib/server/structs/testing/variables/testVersion"
+  }
+}

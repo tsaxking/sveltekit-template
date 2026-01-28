@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/env/functions/domain",
+  "title": "domain",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/env/functions/domain.md",
+  "sourceDirName": "api/lib/server/utils/env/functions",
+  "slug": "/api/lib/server/utils/env/functions/domain",
+  "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/domain",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "bool",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/bool"
+  },
+  "next": {
+    "title": "get",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/get"
+  }
+}

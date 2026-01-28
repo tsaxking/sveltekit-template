@@ -1,0 +1,25 @@
+{
+  "id": "config/index",
+  "title": "Config",
+  "description": "config",
+  "source": "@site/docs/docs/config/index.md",
+  "sourceDirName": "config",
+  "slug": "/config/",
+  "permalink": "/sveltekit-template/config/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "title": "Config"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "FilePondEvent",
+    "permalink": "/sveltekit-template/api/types/svelte-filepond/type-aliases/FilePondEvent"
+  },
+  "next": {
+    "title": "Diagrams",
+    "permalink": "/sveltekit-template/diagrams/"
+  }
+}

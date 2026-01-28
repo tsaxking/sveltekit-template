@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/clipboard/functions/copyCanvas",
+  "title": "copyCanvas",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/clipboard/functions/copyCanvas.md",
+  "sourceDirName": "api/lib/utils/clipboard/functions",
+  "slug": "/api/lib/utils/clipboard/functions/copyCanvas",
+  "permalink": "/sveltekit-template/api/lib/utils/clipboard/functions/copyCanvas",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "copy",
+    "permalink": "/sveltekit-template/api/lib/utils/clipboard/functions/copy"
+  },
+  "next": {
+    "title": "copyImage",
+    "permalink": "/sveltekit-template/api/lib/utils/clipboard/functions/copyImage"
+  }
+}

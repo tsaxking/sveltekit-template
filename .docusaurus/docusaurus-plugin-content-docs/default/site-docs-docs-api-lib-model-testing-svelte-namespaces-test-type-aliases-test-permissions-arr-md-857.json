@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr",
+  "title": "TestPermissionsArr",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr.md",
+  "sourceDirName": "api/lib/model/testing.svelte/namespaces/Test/type-aliases",
+  "slug": "/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr",
+  "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsArr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "TestData",
+    "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestData"
+  },
+  "next": {
+    "title": "TestPermissionsData",
+    "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/type-aliases/TestPermissionsData"
+  }
+}

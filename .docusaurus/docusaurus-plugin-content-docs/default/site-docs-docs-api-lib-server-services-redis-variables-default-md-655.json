@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/services/redis/variables/default",
+  "title": "default",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/services/redis/variables/default.md",
+  "sourceDirName": "api/lib/server/services/redis/variables",
+  "slug": "/api/lib/server/services/redis/variables/default",
+  "permalink": "/sveltekit-template/api/lib/server/services/redis/variables/default",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/redis/"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/server/services/session-manager/"
+  }
+}

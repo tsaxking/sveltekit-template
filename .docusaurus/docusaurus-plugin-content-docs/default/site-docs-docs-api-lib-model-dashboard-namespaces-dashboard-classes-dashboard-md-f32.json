@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard",
+  "title": "Dashboard",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard.md",
+  "sourceDirName": "api/lib/model/dashboard/namespaces/Dashboard/classes",
+  "slug": "/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard",
+  "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Dashboard",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Card",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/classes/Card"
+  },
+  "next": {
+    "title": "getGridSize",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/namespaces/Dashboard/functions/getGridSize"
+  }
+}

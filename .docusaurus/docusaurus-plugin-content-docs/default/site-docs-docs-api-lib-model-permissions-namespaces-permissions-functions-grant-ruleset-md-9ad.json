@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset",
+  "title": "grantRuleset",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset.md",
+  "sourceDirName": "api/lib/model/permissions/namespaces/Permissions/functions",
+  "slug": "/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset",
+  "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantRuleset",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "grantAccountPermission",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/grantAccountPermission"
+  },
+  "next": {
+    "title": "removeFromRole",
+    "permalink": "/sveltekit-template/api/lib/model/permissions/namespaces/Permissions/functions/removeFromRole"
+  }
+}

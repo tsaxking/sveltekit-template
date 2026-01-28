@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+  "title": "AccountRulesetData",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData.md",
+  "sourceDirName": "api/lib/server/structs/permissions/namespaces/Permissions/type-aliases",
+  "slug": "/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+  "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/AccountRulesetData",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "startHierarchy",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/functions/startHierarchy"
+  },
+  "next": {
+    "title": "EntitlementData",
+    "permalink": "/sveltekit-template/api/lib/server/structs/permissions/namespaces/Permissions/type-aliases/EntitlementData"
+  }
+}

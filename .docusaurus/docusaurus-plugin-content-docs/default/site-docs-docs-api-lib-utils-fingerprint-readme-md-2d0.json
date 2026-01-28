@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/utils/fingerprint/README",
+  "title": "README",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/utils/fingerprint/README.md",
+  "sourceDirName": "api/lib/utils/fingerprint",
+  "slug": "/api/lib/utils/fingerprint/",
+  "permalink": "/sveltekit-template/api/lib/utils/fingerprint/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "FileUploader",
+    "permalink": "/sveltekit-template/api/lib/utils/files/classes/FileUploader"
+  },
+  "next": {
+    "title": "fingerprint",
+    "permalink": "/sveltekit-template/api/lib/utils/fingerprint/functions/fingerprint"
+  }
+}

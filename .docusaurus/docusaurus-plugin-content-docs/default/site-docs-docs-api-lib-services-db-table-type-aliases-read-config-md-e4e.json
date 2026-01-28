@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/table/type-aliases/ReadConfig",
+  "title": "ReadConfig",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/table/type-aliases/ReadConfig.md",
+  "sourceDirName": "api/lib/services/db/table/type-aliases",
+  "slug": "/api/lib/services/db/table/type-aliases/ReadConfig",
+  "permalink": "/sveltekit-template/api/lib/services/db/table/type-aliases/ReadConfig",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "TableDataArr",
+    "permalink": "/sveltekit-template/api/lib/services/db/table/classes/TableDataArr"
+  },
+  "next": {
+    "title": "SchemaDefinition",
+    "permalink": "/sveltekit-template/api/lib/services/db/type-aliases/SchemaDefinition"
+  }
+}

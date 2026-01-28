@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions",
+  "title": "TestPermissions",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions.md",
+  "sourceDirName": "api/lib/model/testing.svelte/namespaces/Test/variables",
+  "slug": "/api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions",
+  "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/TestPermissions",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Test",
+    "permalink": "/sveltekit-template/api/lib/model/testing.svelte/namespaces/Test/variables/Test"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/remotes/account.remote/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/account/namespaces/Account/type-aliases/AccountArr",
+  "title": "AccountArr",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/account/namespaces/Account/type-aliases/AccountArr.md",
+  "sourceDirName": "api/lib/model/account/namespaces/Account/type-aliases",
+  "slug": "/api/lib/model/account/namespaces/Account/type-aliases/AccountArr",
+  "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountArr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "usernameExists",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/functions/usernameExists"
+  },
+  "next": {
+    "title": "AccountData",
+    "permalink": "/sveltekit-template/api/lib/model/account/namespaces/Account/type-aliases/AccountData"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/routes/files/[fileId]/+server/functions/POST",
+  "title": "POST",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/routes/files/[fileId]/+server/functions/POST.md",
+  "sourceDirName": "api/routes/files/[fileId]/+server/functions",
+  "slug": "/api/routes/files/[fileId]/+server/functions/POST",
+  "permalink": "/sveltekit-template/api/routes/files/[fileId]/+server/functions/POST",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "GET",
+    "permalink": "/sveltekit-template/api/routes/files/[fileId]/+server/functions/GET"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/routes/test/+page.server/"
+  }
+}

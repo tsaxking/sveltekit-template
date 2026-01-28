@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/remotes/account.remote/variables/search",
+  "title": "search",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/remotes/account.remote/variables/search.md",
+  "sourceDirName": "api/lib/remotes/account.remote/variables",
+  "slug": "/api/lib/remotes/account.remote/variables/search",
+  "permalink": "/sveltekit-template/api/lib/remotes/account.remote/variables/search",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "getOwnNotifs",
+    "permalink": "/sveltekit-template/api/lib/remotes/account.remote/variables/getOwnNotifs"
+  },
+  "next": {
+    "title": "self",
+    "permalink": "/sveltekit-template/api/lib/remotes/account.remote/variables/self"
+  }
+}

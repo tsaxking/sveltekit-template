@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers",
+  "title": "ViolationTiers",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers.md",
+  "sourceDirName": "api/lib/server/structs/limiting/namespaces/Limiting/variables",
+  "slug": "/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers",
+  "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/ViolationTiers",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "PageRuleset",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/PageRuleset"
+  },
+  "next": {
+    "title": "limits",
+    "permalink": "/sveltekit-template/api/lib/server/structs/limiting/namespaces/Limiting/variables/limits"
+  }
+}

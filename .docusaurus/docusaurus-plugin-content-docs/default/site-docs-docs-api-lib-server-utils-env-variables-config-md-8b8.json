@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/env/variables/config",
+  "title": "config",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/env/variables/config.md",
+  "sourceDirName": "api/lib/server/utils/env/variables",
+  "slug": "/api/lib/server/utils/env/variables/config",
+  "permalink": "/sveltekit-template/api/lib/server/utils/env/variables/config",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "str",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/functions/str"
+  },
+  "next": {
+    "title": "env",
+    "permalink": "/sveltekit-template/api/lib/server/utils/env/variables/env"
+  }
+}

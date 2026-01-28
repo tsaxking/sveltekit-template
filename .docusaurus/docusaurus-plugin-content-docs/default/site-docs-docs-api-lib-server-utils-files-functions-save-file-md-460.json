@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/server/utils/files/functions/saveFile",
+  "title": "saveFile",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/server/utils/files/functions/saveFile.md",
+  "sourceDirName": "api/lib/server/utils/files/functions",
+  "slug": "/api/lib/server/utils/files/functions/saveFile",
+  "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/saveFile",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "renderSearchResultHtml",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/renderSearchResultHtml"
+  },
+  "next": {
+    "title": "searchFile",
+    "permalink": "/sveltekit-template/api/lib/server/utils/files/functions/searchFile"
+  }
+}

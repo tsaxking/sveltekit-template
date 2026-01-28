@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/model/analytics/namespaces/Analytics/variables/Links",
+  "title": "Links",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/model/analytics/namespaces/Analytics/variables/Links.md",
+  "sourceDirName": "api/lib/model/analytics/namespaces/Analytics/variables",
+  "slug": "/api/lib/model/analytics/namespaces/Analytics/variables/Links",
+  "permalink": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/variables/Links",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "LinkData",
+    "permalink": "/sveltekit-template/api/lib/model/analytics/namespaces/Analytics/type-aliases/LinkData"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/sveltekit-template/api/lib/model/dashboard/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "api/lib/services/db/table/classes/TableDataArr",
+  "title": "TableDataArr",
+  "description": "my-app",
+  "source": "@site/docs/docs/api/lib/services/db/table/classes/TableDataArr.md",
+  "sourceDirName": "api/lib/services/db/table/classes",
+  "slug": "/api/lib/services/db/table/classes/TableDataArr",
+  "permalink": "/sveltekit-template/api/lib/services/db/table/classes/TableDataArr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "TableData",
+    "permalink": "/sveltekit-template/api/lib/services/db/table/classes/TableData"
+  },
+  "next": {
+    "title": "ReadConfig",
+    "permalink": "/sveltekit-template/api/lib/services/db/table/type-aliases/ReadConfig"
+  }
+}
