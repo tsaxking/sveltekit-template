@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"baseUrl": ".",
+		"paths": {
+			"$lib/*": ["src/lib/*"]
+		},
+		"allowJs": true,
+		"checkJs": false,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"allowImportingTsExtensions": true
+	},
+	"include": ["src/**/*", "cli/**/*", "scripts/**/*", "types/**/*"],
+	"exclude": [
+		"node_modules",
+		"build",
+		"dist",
+		".svelte-kit",
+		"docs",
+		"test-results",
+		"tmp",
+		"private",
+		"drizzle",
+		"static",
+		"logs"
+	]
+}

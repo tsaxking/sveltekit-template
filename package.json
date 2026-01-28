@@ -11,6 +11,7 @@
 		"debug": "vite --debug",
 		"preview": "vite preview",
 		"build": "pnpm route-tree && vite build",
+		"build:docs": "pnpm script build-docs",
 		"build:email": "pnpm script mjml-batch",
 		"check:system": "pnpm run format && pnpm run lint && pnpm run check && pnpm run test",
 		"system:check": "pnpm run check:system",
@@ -32,7 +33,8 @@
 		"fix-readme": "pnpm script fix-readme.ts",
 		"route-tree": "pnpm script create-route-tree.ts",
 		"backup": "pnpm script backup",
-		"restore": "pnpm script restore"
+		"restore": "pnpm script restore",
+		"dev:docs": "vitepress preview docs"
 	},
 	"packageManager": "pnpm@10.16.0",
 	"engines": {
@@ -81,7 +83,10 @@
 		"ts-node": "^10.9.2",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.38.0",
+		"typedoc": "^0.28.1",
+		"typedoc-plugin-markdown": "^4.9.0",
 		"vite": "^5.4.19",
+		"vitepress": "^1.6.3",
 		"vitest": "^2.1.9"
 	},
 	"dependencies": {
