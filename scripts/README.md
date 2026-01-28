@@ -7,7 +7,7 @@ This folder contains project maintenance and automation scripts executed via the
 
 Use the script runner:
 
-- `pnpm script <script-name>`
+- `pnpm script <script-name> <...args>`
 
 The runner lives at scripts/index.ts and is wired in package.json as the script command.
 
@@ -23,5 +23,7 @@ The runner lives at scripts/index.ts and is wired in package.json as the script 
 
 ## Notes
 
-- Some scripts read config.json or env files; ensure configuration is set up before running.
-- For ad-hoc scripts, add a new file in this folder and wire it through scripts/index.ts.
+
+- The arguments passed to the script can be accessed as separate string parameters in the default export function.
+- To generate a script, create a new TypeScript file in the `scripts/` directory and ensure it has a default export function.
+- The arguments passed to the script can be accessed as separate string parameters in the default export function.

@@ -30,3 +30,9 @@
 - src/lib/server/structs/* (DB schema + rules)
 - scripts/create-route-tree.ts (route tree generation)
 - config/config.schema.json and src/lib/server/utils/env.ts (config/env)
+
+## Custom Scripting
+- Custom scripts are located in the `scripts/` directory.
+- These scripts can be executed using the command `pnpm script <script-name> <... args>`
+- To generate a script, create a new TypeScript file in the `scripts/` directory and ensure it has a default export function.
+- The arguments passed to the script can be accessed as separate string parameters in the default export function.
