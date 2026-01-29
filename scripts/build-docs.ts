@@ -653,7 +653,7 @@ const eachDoc = async (fn: (content: string) => Promise<void> | void) => {
 		cwd: DOCS_DIR,
 		ignore: ['**/node_modules/**', '**/.vitepress/**'],
 		nodir: true
-	});
+	}).sort();
 
 	for (const relPath of docs) {
 		const absPath = path.join(DOCS_DIR, relPath);
@@ -689,12 +689,13 @@ export default async () => {
 	}
 
 	terminal.log('Generating Copilot instructions...');
-	await eachDoc(pipeToInstructions).catch(async (err) => console.error('Pipe error:', err));
-
+	await eachDoc(pipeToInstructions).catch(async (err) => {
+		endInstructions();
+		await terminal.error(`Failed to generate Copilot instructions: ${err.message}`);
+	});
 	terminal.log('Building static site...');
 	await writeSidebar();
 	const siteResult = await buildSite();
-
 	endInstructions();
 
 	if (siteResult.isErr()) {

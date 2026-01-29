@@ -53,4 +53,4 @@
 
 ## Docs
 
-The below docs are auto-generated from the `scripts/build-docs.ts` script and are designed to work with github pages. Only external links will work correctly.
+The below docs are auto-generated from the `scripts/build-docs.ts` script and are designed to work with GitHub Pages. Only external links will work correctly.
