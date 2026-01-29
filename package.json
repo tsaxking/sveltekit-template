@@ -135,7 +135,7 @@
 		"dexie": "^4.2.1",
 		"dotenv": "^16.6.1",
 		"drizzle-orm": "^0.38.4",
-		"drizzle-struct": "github:tsaxking/drizzle-struct#2026-01-26-TK-UpdateTypes",
+		"drizzle-struct": "github:tsaxking/drizzle-struct#v2.1.0",
 		"drizzle-zod": "^0.6.1",
 		"express": "^5.1.0",
 		"filepond": "^4.32.8",
