@@ -43,5 +43,5 @@ jobs:
       - name: Run
         run: |
           echo "Running formatter..."
-          pnpm run format
+          pnpm run format --check
           pnpm run lint

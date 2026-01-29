@@ -105,7 +105,7 @@ type Input<T extends keyof Inputs> = {
  * - Bootstrap styling integration
  * - Modal integration for prompts
  * - Memory leak prevention with proper cleanup
- * 
+ *
  * @example Basic usage
  * ```typescript
  * const form = new Form()
@@ -715,7 +715,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		}
 	}
 
-
 	/**
 	 * Validate all fields and show errors in the UI.
 	 *
@@ -751,7 +750,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	getErrors(): FieldError[] {
 		return [...this._errors];
 	}
-
 
 	/**
 	 * Extract current form values with proper typing.
@@ -790,7 +788,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		};
 	}
 
-
 	/**
 	 * Submit the form programmatically using the configured action and method.
 	 *
@@ -807,7 +804,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		form.submit();
 		// document.body.removeChild(form);
 	}
-
 
 	/**
 	 * Display the form in a modal dialog and resolve with the form values or submit to the server.

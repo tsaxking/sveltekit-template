@@ -296,6 +296,16 @@ sudo docker run <image>
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes. Make sure to follow the existing code style and include tests for any new functionality.
 
+All branches must follow this naming convention:
+
+```
+YYYY-MM-DD-<INITIALS>-ShortDescription
+```
+
+All pull requests must be linked to an issue. If there is no issue, create one before submitting the pull request.
+
+Before any branches are merged into main, they must pass all tests and code quality checks.
+
 ## License
 
 This software is licensed under the Polyform Noncommercial License 1.0.0.
