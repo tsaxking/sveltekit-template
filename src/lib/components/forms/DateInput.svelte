@@ -1,17 +1,3 @@
-<script lang="ts">
-	interface Props {
-		data: string;
-		header: string;
-		onChange: (value: string) => void;
-	}
-
-	let {
-		data = $bindable(),
-		// header,
-		onChange
-	}: Props = $props();
-</script>
-
 <!--
 @component
 Datetime input that normalizes to an ISO string on change.
@@ -26,6 +12,19 @@ Datetime input that normalizes to an ISO string on change.
 <DateInput bind:data onChange={(v) => console.log(v)} />
 ```
 -->
+<script lang="ts">
+	interface Props {
+		data: string;
+		header: string;
+		onChange: (value: string) => void;
+	}
+
+	let {
+		data = $bindable(),
+		// header,
+		onChange
+	}: Props = $props();
+</script>
 
 <input
 	type="datetime-local"

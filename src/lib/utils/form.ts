@@ -9,7 +9,7 @@ import Modal from '../components/bootstrap/Modal.svelte';
 import { createRawSnippet, mount } from 'svelte';
 import { modalTarget, createButtons, clearModals } from './prompts';
 import { attemptAsync } from 'ts-utils/check';
-import { WritableBase } from './writables';
+import { WritableBase } from '../services/writables';
 
 type Option =
 	| string
@@ -97,6 +97,15 @@ type Input<T extends keyof Inputs> = {
 /**
  * Type-safe form builder with validation, accessibility, and state management
  *
+ * Features:
+ * - Type-safe input definitions and return values
+ * - Built-in validation with custom rules
+ * - ARIA accessibility attributes
+ * - Form state management (dirty/pristine tracking)
+ * - Bootstrap styling integration
+ * - Modal integration for prompts
+ * - Memory leak prevention with proper cleanup
+ * 
  * @example Basic usage
  * ```typescript
  * const form = new Form()
@@ -136,15 +145,31 @@ type Input<T extends keyof Inputs> = {
  *     ]
  *   });
  * ```
+ * @example
+ * // Basic usage
+ * const form = new Form()
+ *   .input('username', {
+ *     type: 'text',
+ *     label: 'Username',
+ *     required: true,
+ *     validation: [
+ *       { type: 'required', message: 'Username required' },
+ *       { type: 'minLength', value: 3, message: 'At least 3 characters' }
+ *     ]
+ *   })
+ *   .input('email', {
+ *     type: 'email',
+ *     label: 'Email',
+ *     required: true,
+ *     validation: [
+ *       { type: 'required', message: 'Email required' },
+ *       { type: 'email', message: 'Invalid email' }
+ *     ]
+ *   });
  *
- * Features:
- * - Type-safe input definitions and return values
- * - Built-in validation with custom rules
- * - ARIA accessibility attributes
- * - Form state management (dirty/pristine tracking)
- * - Bootstrap styling integration
- * - Modal integration for prompts
- * - Memory leak prevention with proper cleanup
+ * // Show as modal
+ * const result = await form.prompt({ title: 'Sign Up', send: false });
+ * console.log(result.value); // { username: string, email: string }
  */
 export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	private eventListeners: { element: HTMLElement; type: string; listener: EventListener }[] = [];
@@ -258,6 +283,26 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	 * @param input - Input configuration with type, label, validation, etc.
 	 * @returns New form instance with added input (immutable)
 	 */
+	/**
+	 * Add an input field to the form using a fluent builder pattern.
+	 *
+	 * @template Name - The name of the field.
+	 * @template I - The input type key.
+	 * @param {Name} name - Unique field name.
+	 * @param {Input<I>} input - Input configuration (type, label, validation, etc).
+	 * @returns {Form<T & { [key in Name]: Input<I> }>} New form instance with the added input (immutable).
+	 *
+	 * @example
+	 * const form = new Form()
+	 *   .input('password', {
+	 *     type: 'password',
+	 *     label: 'Password',
+	 *     required: true,
+	 *     validation: [
+	 *       { type: 'minLength', value: 8, message: 'At least 8 characters' }
+	 *     ]
+	 *   });
+	 */
 	input<Name extends string, I extends keyof Inputs>(
 		name: Name,
 		input: Input<I>
@@ -275,6 +320,19 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	 * @param config.submit - Whether to include a submit button
 	 * @param config.cached - Whether to return cached form element if available
 	 * @returns HTMLFormElement with all inputs and styling
+	 */
+	/**
+	 * Render the form as an HTMLFormElement.
+	 *
+	 * @param {Object} [config] - Rendering options.
+	 * @param {boolean} [config.addListeners] - Whether to add change event listeners for dirty state and error clearing.
+	 * @param {boolean} [config.submit] - Whether to include a submit button.
+	 * @param {boolean} [config.cached] - Whether to return a cached form element if available.
+	 * @returns {HTMLFormElement} The rendered form element.
+	 *
+	 * @example
+	 * const form = new Form().input('name', { type: 'text', label: 'Name', required: true });
+	 * document.body.appendChild(form.render({ submit: true }));
 	 */
 	render(
 		config?: Partial<{
@@ -499,8 +557,11 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clean up event listeners to prevent memory leaks
-	 * Call this when the form is no longer needed
+	 * Clean up all event listeners to prevent memory leaks.
+	 * Call this when the form is no longer needed or before removing from DOM.
+	 *
+	 * @example
+	 * form.destroy();
 	 */
 	destroy() {
 		this.eventListeners.forEach(({ element, type, listener }) => {
@@ -510,14 +571,22 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Check if the form has unsaved changes
+	 * Check if the form has unsaved changes (dirty state).
+	 *
+	 * @returns {boolean} True if form values differ from initial values.
+	 *
+	 * @example
+	 * if (form.isDirty()) { ... }
 	 */
 	isDirty(): boolean {
 		return this._isDirty;
 	}
 
 	/**
-	 * Reset form to initial values
+	 * Reset the form to its initial values and clear errors.
+	 *
+	 * @example
+	 * form.reset();
 	 */
 	reset(): void {
 		this._currentValues = { ...this._initialValues };
@@ -549,7 +618,12 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Set form values programmatically
+	 * Set form values programmatically.
+	 *
+	 * @param {Partial<Record<keyof T, string | string[]>>} values - Object mapping field names to values.
+	 *
+	 * @example
+	 * form.setValues({ name: 'Alice', email: 'alice@example.com' });
 	 */
 	setValues(values: Partial<Record<keyof T, string | string[]>>): void {
 		for (const [name, value] of Object.entries(values)) {
@@ -588,7 +662,13 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Show validation error for a specific field
+	 * Show a validation error for a specific field.
+	 *
+	 * @param {string} fieldName - The field name.
+	 * @param {string} message - The error message to display.
+	 *
+	 * @example
+	 * form.showFieldError('email', 'Invalid email');
 	 */
 	showFieldError(fieldName: string, message: string): void {
 		// Remove existing error for this field
@@ -612,7 +692,10 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clear all validation errors
+	 * Clear all validation errors from the form and UI.
+	 *
+	 * @example
+	 * form.clearErrors();
 	 */
 	clearErrors(): void {
 		this._errors = [];
@@ -632,8 +715,14 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		}
 	}
 
+
 	/**
-	 * Validate all fields and show errors
+	 * Validate all fields and show errors in the UI.
+	 *
+	 * @returns {boolean} True if all fields are valid, false otherwise.
+	 *
+	 * @example
+	 * if (form.validate()) { ... }
 	 */
 	validate(): boolean {
 		this.clearErrors();
@@ -652,15 +741,26 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Get current validation errors
+	 * Get the current validation errors.
+	 *
+	 * @returns {FieldError[]} Array of field error objects.
+	 *
+	 * @example
+	 * const errors = form.getErrors();
 	 */
 	getErrors(): FieldError[] {
 		return [...this._errors];
 	}
 
+
 	/**
-	 * Extract current form values with proper typing
-	 * @returns Object with field names as keys and typed values
+	 * Extract current form values with proper typing.
+	 *
+	 * @returns {Object} Object with field names as keys and typed values.
+	 *
+	 * @example
+	 * const values = form.value();
+	 * // { name: string, email: string }
 	 */
 	value(): {
 		[key in keyof T]: InputReturnType<T[key]['type']>;
@@ -690,9 +790,12 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		};
 	}
 
+
 	/**
-	 * Submit the form programmatically
-	 * Uses the configured action and method
+	 * Submit the form programmatically using the configured action and method.
+	 *
+	 * @example
+	 * form.submit();
 	 */
 	submit() {
 		const form = this.render({
@@ -705,12 +808,18 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		// document.body.removeChild(form);
 	}
 
+
 	/**
-	 * Display the form in a modal dialog
-	 * @param config - Modal configuration
-	 * @param config.title - Modal title text
-	 * @param config.send - Whether to submit to server (true) or return values (false)
-	 * @returns Promise resolving to form values and HTMLFormElement
+	 * Display the form in a modal dialog and resolve with the form values or submit to the server.
+	 *
+	 * @param {Object} config - Modal configuration.
+	 * @param {string} config.title - Modal title text.
+	 * @param {boolean} config.send - Whether to submit to server (true) or return values (false).
+	 * @returns {Promise<{ value: { [key in keyof T]: InputReturnType<T[key]['type']> }, form: HTMLFormElement }>} Promise resolving to form values and the form element.
+	 *
+	 * @example
+	 * const result = await form.prompt({ title: 'Sign Up', send: false });
+	 * console.log(result.value);
 	 */
 	prompt(config: { title: string; send: boolean }) {
 		const self = this;
@@ -847,6 +956,21 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 }
 
+/**
+ * Accessible, keyboard- and mouse-friendly range slider for selecting a numeric interval.
+ *
+ * @example
+ * const slider = new RangeSlider({
+ *   min: 0,
+ *   max: 100,
+ *   step: 5,
+ *   target: document.getElementById('slider-container'),
+ *   init: [10, 90],
+ *   lineColor: '#ccc',
+ *   handleColor: '#007bff'
+ * });
+ * slider.render();
+ */
 export class RangeSlider extends WritableBase<{
 	min: number;
 	max: number;
@@ -873,6 +997,16 @@ export class RangeSlider extends WritableBase<{
 		}
 	}
 
+	/**
+	 * Render the range slider into the configured target element.
+	 *
+	 * @returns {Function} Cleanup function to remove event listeners and animation.
+	 *
+	 * @example
+	 * const cleanup = slider.render();
+	 * // ...later
+	 * cleanup();
+	 */
 	render() {
 		const HANDLE_DIAMETER = 20;
 		const HANDLE_RADIUS = HANDLE_DIAMETER / 2;
@@ -1181,6 +1315,12 @@ export class RangeSlider extends WritableBase<{
 		};
 	}
 
+	/**
+	 * Revert the slider to its initial or configured min/max values.
+	 *
+	 * @example
+	 * slider.revert();
+	 */
 	revert() {
 		this.set({
 			min: this.config.init ? this.config.init[0] : this.config.min,

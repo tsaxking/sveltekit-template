@@ -11,7 +11,7 @@ Admin roles list page at `/dashboard/admin/role`.
 	import { contextmenu } from '$lib/utils/contextmenu.js';
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
-	import nav from '$lib/imports/admin.js';
+	import nav from '$lib/nav/admin.js';
 	import {
 		TextFilterModule,
 		NumberFilterModule,

@@ -12,7 +12,7 @@ import {
 	type GlobalCols
 } from './index';
 import { attemptAsync } from 'ts-utils/check';
-import { WritableBase } from '$lib/utils/writables';
+import { WritableBase } from '$lib/services/writables';
 import * as remote from '$lib/remotes/struct.remote';
 
 /**

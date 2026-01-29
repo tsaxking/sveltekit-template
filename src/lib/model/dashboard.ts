@@ -17,7 +17,7 @@ import { EventEmitter } from 'ts-utils/event-emitter';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 import type { Icon } from '$lib/types/icons';
-import { WritableArray, WritableBase } from '$lib/utils/writables';
+import { WritableArray, WritableBase } from '$lib/services/writables';
 
 /**
  * Dashboard data models and helpers.

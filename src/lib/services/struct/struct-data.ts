@@ -17,7 +17,7 @@ import {
 } from './index';
 import { type Readable } from 'svelte/store';
 import { StructDataVersion, type VersionStructable } from './data-version';
-import { WritableArray, WritableBase } from '$lib/utils/writables';
+import { WritableArray, WritableBase } from '$lib/services/writables';
 import * as remote from '$lib/remotes/struct.remote';
 
 /**

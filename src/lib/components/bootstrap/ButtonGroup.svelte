@@ -1,16 +1,3 @@
-<script lang="ts">
-	import type { Snippet } from 'svelte';
-
-	interface Props {
-		size?: 'sm' | 'md' | 'lg';
-		vertical?: boolean;
-		label?: string;
-		buttons: Snippet;
-	}
-
-	const { size = 'sm', vertical = false, label = '', buttons }: Props = $props();
-</script>
-
 <!--
 @component
 Bootstrap button group wrapper.
@@ -31,6 +18,18 @@ Bootstrap button group wrapper.
 </ButtonGroup>
 ```
 -->
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		size?: 'sm' | 'md' | 'lg';
+		vertical?: boolean;
+		label?: string;
+		buttons: Snippet;
+	}
+
+	const { size = 'sm', vertical = false, label = '', buttons }: Props = $props();
+</script>
 
 <div
 	class="btn-group btn-group-{size}"

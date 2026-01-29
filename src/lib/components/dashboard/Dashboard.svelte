@@ -1,23 +1,3 @@
-<script lang="ts">
-	import { capitalize } from 'ts-utils/text';
-	import { onMount, type Snippet } from 'svelte';
-	import MinimizedCards from './MinimizedCards.svelte';
-	import { Dashboard } from '$lib/model/dashboard';
-
-	interface Props {
-		body: Snippet<[Dashboard.Card[]]>;
-		dashboard: Dashboard.Dashboard;
-	}
-
-	const { body, dashboard }: Props = $props();
-
-	const cards = $derived(dashboard.orderedCards);
-
-	onMount(() => {
-		dashboard.init();
-	});
-</script>
-
 <!--
 @component
 Dashboard layout wrapper that renders cards grid.
@@ -37,6 +17,25 @@ Dashboard layout wrapper that renders cards grid.
 </Dashboard>
 ```
 -->
+<script lang="ts">
+	import { capitalize } from 'ts-utils/text';
+	import { onMount, type Snippet } from 'svelte';
+	import MinimizedCards from './MinimizedCards.svelte';
+	import { Dashboard } from '$lib/model/dashboard';
+
+	interface Props {
+		body: Snippet<[Dashboard.Card[]]>;
+		dashboard: Dashboard.Dashboard;
+	}
+
+	const { body, dashboard }: Props = $props();
+
+	const cards = $derived(dashboard.orderedCards);
+
+	onMount(() => {
+		dashboard.init();
+	});
+</script>
 
 <div class="container-fluid layer-1">
 	<h1>{capitalize(dashboard.name)}</h1>

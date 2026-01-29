@@ -8,7 +8,7 @@
  */
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
-import { Keyboard } from './keybinds';
+import { Keyboard } from '../services/keybinds';
 import { EventEmitter } from 'ts-utils/event-emitter';
 
 /**

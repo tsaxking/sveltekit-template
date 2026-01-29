@@ -1,3 +1,15 @@
+<!--
+@component
+Username change input with availability checks.
+
+**Props**
+- `account`: `Account.AccountData` — Current account.
+
+**Example**
+```svelte
+<UsernameChange {account} />
+```
+-->
 <script lang="ts">
 	import { Account } from '$lib/model/account';
 
@@ -32,19 +44,6 @@
 		}, 500);
 	};
 </script>
-
-<!--
-@component
-Username change input with availability checks.
-
-**Props**
-- `account`: `Account.AccountData` — Current account.
-
-**Example**
-```svelte
-<UsernameChange {account} />
-```
--->
 
 <div class="form-floating mb-3">
 	<input

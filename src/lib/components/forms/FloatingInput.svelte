@@ -1,3 +1,22 @@
+<!--
+@component
+Floating label input supporting text, textarea, and select.
+
+**Props**
+- `type`: `'text' | 'textarea' | 'select'` — Input type.
+- `placeholder`: `string` — Placeholder text.
+- `label`: `string` — Floating label text.
+- `value`: `string` — Current value (bindable).
+- `name`?: `string` — Input name.
+- `onInput`?: `(value: string) => void` — Input handler.
+- `onChange`?: `(value: string) => void` — Change handler.
+- `options`?: `Snippet` — Options markup for `select`.
+
+**Example**
+```svelte
+<FloatingInput type="text" label="Name" placeholder="Jane" bind:value />
+```
+-->
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
@@ -30,26 +49,6 @@
 		Math.random().toString(36).substring(2, 15) +
 		Math.random().toString(36).substring(2, 15);
 </script>
-
-<!--
-@component
-Floating label input supporting text, textarea, and select.
-
-**Props**
-- `type`: `'text' | 'textarea' | 'select'` — Input type.
-- `placeholder`: `string` — Placeholder text.
-- `label`: `string` — Floating label text.
-- `value`: `string` — Current value (bindable).
-- `name`?: `string` — Input name.
-- `onInput`?: `(value: string) => void` — Input handler.
-- `onChange`?: `(value: string) => void` — Change handler.
-- `options`?: `Snippet` — Options markup for `select`.
-
-**Example**
-```svelte
-<FloatingInput type="text" label="Name" placeholder="Jane" bind:value />
-```
--->
 
 <div class="form-floating">
 	{#if type === 'textarea'}

@@ -22,7 +22,7 @@ import {
 import { attemptAsync, sleep } from 'ts-utils';
 import { sse } from './sse';
 import z from 'zod';
-import { WritableArray, WritableBase } from '$lib/utils/writables';
+import { WritableArray, WritableBase } from '$lib/services/writables';
 import { ConnectionStateSchema, type ConnectionState } from '$lib/types/sse';
 
 /**
