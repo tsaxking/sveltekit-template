@@ -52,6 +52,8 @@ beforeAll(async () => {
 
 	await Permissions.grantRole(hierarchy.role, account).unwrap();
 
+	await Test.TestPermissions.clear().unwrap();
+
 	await Promise.all(
 		Array.from({ length: 5 }).map(async () => {
 			const res = await Test.TestPermissions.new({
@@ -73,14 +75,7 @@ afterAll(async () => {
 		await hierarchy.role.delete().unwrap();
 		await Promise.all(hierarchy.rulesets.map((rs) => rs.delete().unwrap()));
 	}
-	const tests = await Test.TestPermissions.get(
-		{ name: `Test User ${id}` },
-		{
-			type: 'all'
-		}
-	).unwrap();
-
-	await Promise.all(tests.map((t) => t.delete().unwrap()));
+	await Test.TestPermissions.clear().unwrap();
 });
 
 describe('Log in as user with specific permissions', () => {

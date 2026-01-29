@@ -89,6 +89,7 @@ jobs:
           touch .env
           echo "OAUTH2_CLIENT_ID=1234567890" >> .env
           echo "OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echo "FINGERPRINT_SECRET=local-fingerprint-secret" >> .env
           export $(cat .env | xargs)
 
       - name: Send pull-request

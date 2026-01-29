@@ -65,6 +65,7 @@ jobs:
           touch .env
           echo "OAUTH2_CLIENT_ID=1234567890" >> .env
           echo "OAUTH2_CLIENT_SECRET=1234567890" >> .env
+          echp "FINGERPRINT_SECRET=e2e-fingerprint-secret" >> .env
           export $(cat .env | xargs)
 
       - name: Run migrations

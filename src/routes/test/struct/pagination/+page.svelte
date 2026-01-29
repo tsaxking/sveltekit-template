@@ -13,7 +13,7 @@ Struct pagination test page at `/test/struct/pagination`.
 		data = Test.Test.all({
 			type: 'pagination',
 			pagination: {
-				page: 0,
+				page: 1,
 				size: 10
 			}
 		});
