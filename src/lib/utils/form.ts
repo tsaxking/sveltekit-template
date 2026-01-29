@@ -97,6 +97,15 @@ type Input<T extends keyof Inputs> = {
 /**
  * Type-safe form builder with validation, accessibility, and state management
  *
+ * Features:
+ * - Type-safe input definitions and return values
+ * - Built-in validation with custom rules
+ * - ARIA accessibility attributes
+ * - Form state management (dirty/pristine tracking)
+ * - Bootstrap styling integration
+ * - Modal integration for prompts
+ * - Memory leak prevention with proper cleanup
+ * 
  * @example Basic usage
  * ```typescript
  * const form = new Form()
@@ -136,23 +145,6 @@ type Input<T extends keyof Inputs> = {
  *     ]
  *   });
  * ```
- *
- * Features:
- * - Type-safe input definitions and return values
- * - Built-in validation with custom rules
- * - ARIA accessibility attributes
- * - Form state management (dirty/pristine tracking)
- * - Bootstrap styling integration
- * - Modal integration for prompts
- * - Memory leak prevention with proper cleanup
- */
-/**
- * Type-safe, accessible, and extensible form builder for Svelte apps.
- *
- * Provides a fluent API for building forms with validation, state management, and modal integration.
- *
- * @template T - The shape of the form's input fields.
- *
  * @example
  * // Basic usage
  * const form = new Form()
@@ -565,10 +557,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clean up event listeners to prevent memory leaks
-	 * Call this when the form is no longer needed
-	 */
-	/**
 	 * Clean up all event listeners to prevent memory leaks.
 	 * Call this when the form is no longer needed or before removing from DOM.
 	 *
@@ -583,9 +571,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Check if the form has unsaved changes
-	 */
-	/**
 	 * Check if the form has unsaved changes (dirty state).
 	 *
 	 * @returns {boolean} True if form values differ from initial values.
@@ -597,9 +582,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		return this._isDirty;
 	}
 
-	/**
-	 * Reset form to initial values
-	 */
 	/**
 	 * Reset the form to its initial values and clear errors.
 	 *
@@ -635,9 +617,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		}
 	}
 
-	/**
-	 * Set form values programmatically
-	 */
 	/**
 	 * Set form values programmatically.
 	 *
@@ -683,9 +662,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Show validation error for a specific field
-	 */
-	/**
 	 * Show a validation error for a specific field.
 	 *
 	 * @param {string} fieldName - The field name.
@@ -716,9 +692,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clear all validation errors
-	 */
-	/**
 	 * Clear all validation errors from the form and UI.
 	 *
 	 * @example
@@ -742,9 +715,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		}
 	}
 
-	/**
-	 * Validate all fields and show errors
-	 */
+
 	/**
 	 * Validate all fields and show errors in the UI.
 	 *
@@ -770,9 +741,6 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Get current validation errors
-	 */
-	/**
 	 * Get the current validation errors.
 	 *
 	 * @returns {FieldError[]} Array of field error objects.
@@ -784,10 +752,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		return [...this._errors];
 	}
 
-	/**
-	 * Extract current form values with proper typing
-	 * @returns Object with field names as keys and typed values
-	 */
+
 	/**
 	 * Extract current form values with proper typing.
 	 *
@@ -825,10 +790,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		};
 	}
 
-	/**
-	 * Submit the form programmatically
-	 * Uses the configured action and method
-	 */
+
 	/**
 	 * Submit the form programmatically using the configured action and method.
 	 *
@@ -846,13 +808,7 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 		// document.body.removeChild(form);
 	}
 
-	/**
-	 * Display the form in a modal dialog
-	 * @param config - Modal configuration
-	 * @param config.title - Modal title text
-	 * @param config.send - Whether to submit to server (true) or return values (false)
-	 * @returns Promise resolving to form values and HTMLFormElement
-	 */
+
 	/**
 	 * Display the form in a modal dialog and resolve with the form values or submit to the server.
 	 *
