@@ -527,9 +527,110 @@ const buildSite = async () => {
 	return result;
 };
 
+const ensureVitepressScaffold = async (vitepressDir: string) => {
+	const configPath = path.join(vitepressDir, 'config.ts');
+	const themeDir = path.join(vitepressDir, 'theme');
+	const themeIndex = path.join(themeDir, 'index.ts');
+	const themeCss = path.join(themeDir, 'custom.css');
+
+	await ensureDir(vitepressDir);
+	await ensureDir(themeDir);
+
+	try {
+		await fs.access(configPath);
+	} catch {
+		const configContents = `import { defineConfig } from 'vitepress';
+import { sidebar } from './sidebar.generated';
+
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const base = repoName ? '/' + repoName + '/' : '/docs/.vitepress/dist/';
+const useRelativeLinks = base.startsWith('./');
+
+type SidebarItem = {
+	text: string;
+	link?: string;
+	items?: SidebarItem[];
+};
+
+const normalizeLink = (link?: string) => {
+	if (!link) return link;
+	if (link.startsWith('http://') || link.startsWith('https://')) return link;
+	if (useRelativeLinks) {
+		if (link === '/') return './';
+		return link.replace(/^\\//, './');
+	}
+	return link;
+};
+
+const normalizeItems = (items?: SidebarItem[]): SidebarItem[] | undefined => {
+	if (!items) return items;
+	return items.map((item) => ({
+		...item,
+		link: normalizeLink(item.link),
+		items: normalizeItems(item.items)
+	}));
+};
+
+const normalizedSidebar = Object.fromEntries(
+	Object.entries(sidebar).map(([key, items]) => [key, normalizeItems(items as SidebarItem[])])
+);
+
+export default defineConfig({
+	base,
+	appearance: 'dark',
+	title: 'Project Docs',
+	description: 'Generated documentation from JSDoc and Markdown',
+	cleanUrls: false,
+	markdown: {
+		html: false
+	},
+	ignoreDeadLinks: true,
+	themeConfig: {
+		nav: [
+			{ text: 'Home', link: normalizeLink('/') },
+			{ text: 'API', link: normalizeLink('/api/') },
+			{ text: 'Notes', link: normalizeLink('/notes/') }
+		],
+		search: {
+			provider: 'local'
+		},
+		sidebar: normalizedSidebar
+	}
+});
+`;
+		await fs.writeFile(configPath, configContents);
+	}
+
+	try {
+		await fs.access(themeIndex);
+	} catch {
+		await fs.writeFile(
+			themeIndex,
+			`import DefaultTheme from 'vitepress/theme';\nimport './custom.css';\n\nexport default {\n\t...DefaultTheme,\n\tenhanceApp(ctx) {\n\t\tDefaultTheme.enhanceApp?.(ctx);\n\t}\n};\n`
+		);
+	}
+
+	try {
+		await fs.access(themeCss);
+	} catch {
+		await fs.writeFile(
+			themeCss,
+			`:root {\n\t--vp-c-brand-1: #60a5fa;\n\t--vp-c-brand-2: #3b82f6;\n\t--vp-c-brand-3: #2563eb;\n\t--vp-c-brand-soft: rgba(96, 165, 250, 0.16);\n\t--vp-c-bg: #0b0f17;\n\t--vp-c-bg-alt: #0f172a;\n\t--vp-c-bg-soft: #111827;\n\t--vp-c-bg-soft-up: #1f2937;\n\t--vp-c-border: #1f2937;\n\t--vp-c-divider: #1f2937;\n\t--vp-c-text-1: #e5e7eb;\n\t--vp-c-text-2: #9ca3af;\n\t--vp-c-text-3: #6b7280;\n\t--vp-code-block-bg: #0f172a;\n}\n\nhtml {\n\tcolor-scheme: dark;\n}\n\n.VPNavBar .VPNavBarTitle {\n\tfont-weight: 700;\n}\n\n.VPHome .VPHomeHero .name {\n\tletter-spacing: -0.02em;\n}\n\n.VPHome .VPHomeHero .text {\n\tmax-width: 52rem;\n}\n\n.VPContent h1,\n.VPContent h2,\n.VPContent h3 {\n\tletter-spacing: -0.015em;\n}\n\n.VPSidebarItem .text {\n\tline-height: 1.4;\n}\n\n.VPNavBar {\n\tbackdrop-filter: blur(12px);\n}\n\n.VPButton.brand {\n\tbox-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);\n}\n`
+		);
+	}
+};
+
 export default async () => {
+	const vitepressDir = path.join(DOCS_DIR, '.vitepress');
+
+	await fs.rm(path.join(vitepressDir, 'dist'), { recursive: true, force: true });
 	await fs.rm(API_DIR, { recursive: true, force: true });
 	await fs.rm(NOTES_DIR, { recursive: true, force: true });
+	await fs.rm(path.join(DOCS_DIR, 'index.md'), { force: true });
+	await fs.rm(path.join(vitepressDir, 'sidebar.generated.ts'), { force: true });
+
+	await ensureDir(DOCS_DIR);
+	await ensureVitepressScaffold(vitepressDir);
 	await ensureDir(API_DIR);
 	await ensureDir(NOTES_DIR);
 
