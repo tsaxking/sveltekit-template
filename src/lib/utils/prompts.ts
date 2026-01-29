@@ -753,7 +753,7 @@ type NotificationConfig = {
  * Svelte store for managing notification history
  * Contains an array of notification configuration objects
  */
-export const history = writable<(NotificationConfig & { id: number; })[]>([]);
+export const history = writable<(NotificationConfig & { id: number })[]>([]);
 
 /**
  * Shows a toast-style notification that appears in the document body

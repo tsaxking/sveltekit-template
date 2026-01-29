@@ -61,7 +61,7 @@ export default ts.config(
 			'svelte/require-each-key': 'warn',
 			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/prefer-writable-derived': 'warn',
-			'svelte/prefer-svelte-reactivity': 'warn',
+			'svelte/prefer-svelte-reactivity': 'warn'
 		}
 	}
 );

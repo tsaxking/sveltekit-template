@@ -29,7 +29,7 @@ Popup notification history list.
 					color: 'danger',
 					message: 'Hi',
 					title: 'Hello',
-					id: 1,
+					id: 1
 				}
 			]);
 		}
