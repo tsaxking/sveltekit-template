@@ -54,7 +54,7 @@ beforeAll(async () => {
 
 	await Test.TestPermissions.clear().unwrap();
 
-	await Promise.all(
+	const res = await Promise.all(
 		Array.from({ length: 5 }).map(async () => {
 			const res = await Test.TestPermissions.new({
 				name: `Test User ${id}`,
@@ -62,8 +62,11 @@ beforeAll(async () => {
 			}).unwrap();
 
 			await res.setAttributes([id]).unwrap();
+			return res;
 		})
 	);
+
+	console.log('Created test entries:', res.map(r => r.data.name));
 });
 
 afterAll(async () => {
@@ -109,6 +112,7 @@ describe('Log in as user with specific permissions', () => {
 		await sleep(5000);
 
 		const items = await page.locator('li').all();
+		console.log('Found items:', await Promise.all(items.map(i => i.textContent())));
 
 		expect(items.length).toBe(5);
 	});
