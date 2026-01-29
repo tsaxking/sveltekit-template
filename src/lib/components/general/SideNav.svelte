@@ -1,3 +1,18 @@
+<!--
+@component
+Side navigation offcanvas that renders sections from the navbar registry.
+
+**Props**
+- `id`: `string` — Offcanvas element id.
+
+**Exports**
+- `hide()`: close any open offcanvas menus.
+
+**Example**
+```svelte
+<SideNav id="pages" />
+```
+-->
 <script lang="ts">
 	import { Navbar } from '$lib/model/navbar';
 	import { onMount } from 'svelte';
@@ -37,22 +52,6 @@
 
 	let offcanvas: HTMLDivElement;
 </script>
-
-<!--
-@component
-Side navigation offcanvas that renders sections from the navbar registry.
-
-**Props**
-- `id`: `string` — Offcanvas element id.
-
-**Exports**
-- `hide()`: close any open offcanvas menus.
-
-**Example**
-```svelte
-<SideNav id="pages" />
-```
--->
 
 <div
 	bind:this={offcanvas}

@@ -10,7 +10,7 @@
  * });
  */
 import type { Icon } from '$lib/types/icons';
-import { WritableArray } from '$lib/utils/writables';
+import { WritableArray } from '$lib/services/writables';
 
 /**
  * Navbar section registry.

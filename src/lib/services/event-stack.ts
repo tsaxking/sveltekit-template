@@ -10,7 +10,7 @@
  */
 import { attemptAsync } from 'ts-utils/check';
 import { StateStack } from 'ts-utils/statestack';
-import { Keyboard, type KeyCombo } from '../utils/keybinds';
+import { Keyboard, type KeyCombo } from './keybinds';
 
 /**
  * Command that can be executed and undone.

@@ -1,3 +1,26 @@
+<!--
+@component
+Floating alert notification card.
+
+**Props**
+- `title`: `string` — Alert title.
+- `message`: `string` — Alert body text.
+- `color`: `BootstrapColor` — Bootstrap contextual color.
+- `autoHide`: `number` — Auto-hide timeout in milliseconds.
+- `icon`?: `Snippet` — Optional icon snippet.
+- `onHide`?: `() => void` — Called after hide.
+- `onShow`?: `() => void` — Called after show.
+
+**Exports**
+- `show()`: show alert.
+- `hide()`: hide alert.
+- `destroy()`: cleanup timers.
+
+**Example**
+```svelte
+<Alert title="Saved" message="Settings updated" color="success" autoHide={3000} />
+```
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import type { BootstrapColor } from 'colors/color';
@@ -78,30 +101,6 @@
 		show();
 	});
 </script>
-
-<!--
-@component
-Floating alert notification card.
-
-**Props**
-- `title`: `string` — Alert title.
-- `message`: `string` — Alert body text.
-- `color`: `BootstrapColor` — Bootstrap contextual color.
-- `autoHide`: `number` — Auto-hide timeout in milliseconds.
-- `icon`?: `Snippet` — Optional icon snippet.
-- `onHide`?: `() => void` — Called after hide.
-- `onShow`?: `() => void` — Called after show.
-
-**Exports**
-- `show()`: show alert.
-- `hide()`: hide alert.
-- `destroy()`: cleanup timers.
-
-**Example**
-```svelte
-<Alert title="Saved" message="Settings updated" color="success" autoHide={3000} />
-```
--->
 
 <div
 	bind:this={alert}

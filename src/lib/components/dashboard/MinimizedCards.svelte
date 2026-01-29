@@ -1,15 +1,3 @@
-<script lang="ts">
-	import { Dashboard } from '$lib/model/dashboard';
-
-	interface Props {
-		dashboard: Dashboard.Dashboard;
-	}
-
-	const { dashboard }: Props = $props();
-
-	const cards = $derived(dashboard.hiddenCards);
-</script>
-
 <!--
 @component
 Row of minimized dashboard cards for quick restore.
@@ -22,6 +10,17 @@ Row of minimized dashboard cards for quick restore.
 <MinimizedCards {dashboard} />
 ```
 -->
+<script lang="ts">
+	import { Dashboard } from '$lib/model/dashboard';
+
+	interface Props {
+		dashboard: Dashboard.Dashboard;
+	}
+
+	const { dashboard }: Props = $props();
+
+	const cards = $derived(dashboard.hiddenCards);
+</script>
 
 {#if $cards.size > 0}
 	<div class="w-100 d-flex align-items-center">

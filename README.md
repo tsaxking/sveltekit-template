@@ -16,9 +16,10 @@ A full-featured SvelteKit application template with database integration, authen
 - [Usage](#usage)
   - [Set up](#set-up)
   - [Database](#database)
+    - [Services](#setup-services)
+    - [Docker](#setup-docker)
   - [Development](#development)
   - [Production](#production)
-  - [Testing](#testing)
 - [Development Mode](#development-mode)
 - [pnpm Scripts](#pnpm-scripts)
   - [Development](#development-1)
@@ -26,8 +27,6 @@ A full-featured SvelteKit application template with database integration, authen
   - [Code Quality](#code-quality)
   - [Testing](#testing-1)
 - [Build](#build)
-- [Database (pnpm db:)](#database-pnpm-db)
-  - [Database Setup](#database-setup)
 - [Additional Scripts](#additional-scripts)
 - [Contributing](#contributing)
 - [License](#license)
@@ -109,6 +108,75 @@ To set up the project, copy the .env.example file to .env and fill in the requir
 
 ### Database
 
+We use postgres as the database and drizzle-orm as a wrapper around it.
+
+#### Setup (services)
+
+```sh
+# Do this any time you need to install something
+# sudo is basically the system administrator, so you're executing the "apt update" command with admin priviliges
+# apt is your software package installer essentially
+sudo apt update
+
+# Install 2 dependencies. You don't need the -y, if you don't put it, it'll just ask you for permission to install it.
+sudo apt install postgresql postgresql-contrib -y
+
+# Check if the postgresql is running
+# "service" is basically all the different running background processes that you have access to
+# Your installer, ssh, etc., are all on there
+service postgresql status
+# You should see a green "active (exited)" now. If not, something went wrong.
+
+# Switch to the postgres user account and enter into postgres's CLI (command line interface)
+sudo -u postgres psql
+
+# Create an admin account
+# This is good practice because if you don't, you can accidentally cause some pretty significant issues if you're not careful
+CREATE ROLE admin WITH NOLOGIN;
+
+# Now create your account
+CREATE ROLE keyton WITH LOGIN;
+# Add your password
+ALTER ROLE keyton WITH PASSWORD "<your password here>";
+# Grant admin privileges to your account
+GRANT admin TO keyton;
+
+# Create your development databases
+CREATE DATABASE tators_dashboard_dev WITH OWNER keyton;
+CREATE DATABASE scouting_app_dev WITH OWNER keyton;
+
+# Leave the psl CLI
+\q
+
+# Now you need to allow your servers to connect to this locally
+cd /etc/postgresql/
+ls
+# you'll see 1 folder here
+cd ./<version>/main/
+ls
+# edit the postgresql.conf file using nano
+sudo nano postgresql.conf
+# Scroll to "CONNECTIONS AND AUTHENTICATION"
+# Remove the "#" before listen_addresses
+ctrl+x # exit
+y # do save
+enter # same file name
+
+# restart postgres
+service postgresql restart
+# view its status
+service postgresql status
+```
+
+#### Setup (docker)
+
+1. Ensure Docker is installed and running ([Docker](#docker-optional))
+2. Copy .env.example to .env and configure database settings
+3. Start the database: pnpm db:start
+4. Push initial schema: pnpm db:push
+
+#### Commands
+
 Run the following commands to initialize the database
 
 ```bash
@@ -135,8 +203,8 @@ pnpm dev
 To start the production server, run the following command:
 
 ```bash
-pnpm build
-pnpm start
+pnpm build # Generates the production code in /build
+pnpm start # Runs the production code
 ```
 
 ### Testing
@@ -155,21 +223,6 @@ pnpm lint # ESLint linting
 pnpm check # TypeScript type checking
 pnpm test:unit # Vitest Unit tests
 pnpm test:e2e # Playwright End-to-end tests
-```
-
-## Development Mode
-
-Start the development server:
-
-```bash
-# Start development server
-pnpm dev
-
-# Start with debugging
-pnpm debug
-
-# Start server with inspection for debugging
-pnpm tools
 ```
 
 ## pnpm Scripts
@@ -194,65 +247,54 @@ This project uses pnpm as the package manager. Key commands include:
 - pnpm check - Run Svelte type checking
 - pnpm check:watch - Run Svelte type checking in watch mode
 
-### Testing
-
-- pnpm test - Run all tests (schema, unit, e2e)
-- pnpm test:unit - Run unit tests
-- pnpm test:e2e - Run end-to-end tests
-- pnpm check:system - Run complete system check (lint, check, test)
-
-## Build
-
-To create a production version of your app:
-
-```bash
-pnpm build
-```
-
-The build process includes:
-
-1. Route tree generation
-2. Vite production build
-3. SvelteKit adapter compilation
-
-Preview the production build:
-
-```bash
-pnpm preview
-```
-
-## Database (pnpm db:)
-
-This project includes database integration with Drizzle ORM. Available database commands:
-
-```bash
-# Start database with Docker Compose
-pnpm db:start
-
-# Push schema changes to database
-pnpm db:push
-
-# Run database migrations
-pnpm db:migrate
-
-# Open Drizzle Studio (database GUI)
-pnpm db:studio
-```
-
-### Database Setup
-
-1. Ensure Docker is installed and running
-2. Copy .env.example to .env and configure database settings
-3. Start the database: pnpm db:start
-4. Push initial schema: pnpm db:push
-
 ## Additional Scripts
 
 - pnpm start - Start production server
 - pnpm cli - Run CLI tools
 - pnpm script <script-name> - Run custom scripts from /scripts directory
 
+## Docker (optional)
+
+```sh
+sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
+
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+### Managing
+
+```sh
+sudo systemctl <start|stop|enable|status|restart> docker
+```
+
+### Running containers
+
+```sh
+# Run specific image
+sudo docker run <image>
+```
+
 ## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request with your changes. Make sure to follow the existing code style and include tests for any new functionality.
 
 ## License
 

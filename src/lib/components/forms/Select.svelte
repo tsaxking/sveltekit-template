@@ -1,24 +1,3 @@
-<script lang="ts">
-	interface Props {
-		options: string[];
-		value?: string;
-		default?: string;
-		onChange: (index: number) => void;
-	}
-
-	const { options, value = $bindable(), default: defaultValue, onChange }: Props = $props();
-
-	let selected = $state(value);
-	export const select = (value: string) => {
-		selected = value;
-	};
-
-	const handleChange = () => {
-		if (!selected) return onChange(-1);
-		onChange(options.indexOf(selected));
-	};
-</script>
-
 <!--
 @component
 Simple select control with optional placeholder option.
@@ -42,6 +21,26 @@ Simple select control with optional placeholder option.
 />
 ```
 -->
+<script lang="ts">
+	interface Props {
+		options: string[];
+		value?: string;
+		default?: string;
+		onChange: (index: number) => void;
+	}
+
+	const { options, value = $bindable(), default: defaultValue, onChange }: Props = $props();
+
+	let selected = $state(value);
+	export const select = (value: string) => {
+		selected = value;
+	};
+
+	const handleChange = () => {
+		if (!selected) return onChange(-1);
+		onChange(options.indexOf(selected));
+	};
+</script>
 
 <select class="form-select" bind:value={selected} onchange={handleChange}>
 	{#if defaultValue}

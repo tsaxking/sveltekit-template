@@ -28,7 +28,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
 	import { match } from 'ts-utils/match';
 	import Flatpickr from '$lib/components/forms/Flatpickr.svelte';
-	import nav from '$lib/imports/admin';
+	import nav from '$lib/nav/admin.js';
 	import { v4 as uuid } from 'uuid';
 	import { StructDataStage } from '$lib/services/struct';
 

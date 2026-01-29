@@ -1,3 +1,19 @@
+<!--
+@component
+Role ruleset editor grouped by entitlement.
+
+**Props**
+- `role`: `Permissions.RoleData` — Role being edited.
+- `saveOnChange`: `boolean` — Save immediately on changes.
+
+**Exports**
+- `save()`: persist all rule changes.
+
+**Example**
+```svelte
+<RoleRulesetEditor {role} saveOnChange={false} />
+```
+-->
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 	import { onMount } from 'svelte';
@@ -85,23 +101,6 @@
 		}
 	};
 </script>
-
-<!--
-@component
-Role ruleset editor grouped by entitlement.
-
-**Props**
-- `role`: `Permissions.RoleData` — Role being edited.
-- `saveOnChange`: `boolean` — Save immediately on changes.
-
-**Exports**
-- `save()`: persist all rule changes.
-
-**Example**
-```svelte
-<RoleRulesetEditor {role} saveOnChange={false} />
-```
--->
 
 <div class="container">
 	{#each Object.entries(groups).filter(([, g]) => g.filter((i) => i.ruleset).length) as [name, group]}

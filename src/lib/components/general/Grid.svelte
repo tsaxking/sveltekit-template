@@ -1,3 +1,44 @@
+<!--
+@component
+AG Grid wrapper with optional filter input and selection helpers.
+See AG Grid docs: https://www.ag-grid.com/javascript-data-grid/getting-started/
+
+**Props**
+- `filter`?: `boolean` — Show quick filter input.
+- `opts`: `Omit<GridOptions<T>, 'rowData'>` — Grid options without row data.
+- `data`: `Readable<T[]>` — Store of row data.
+- `style`?: `string` — Additional container styles.
+- `rowNumbers`?: `boolean | { start: number }` — Show row numbers.
+- `layer`?: `number` — Theme layer for CSS variables.
+- `height`: `string | number` — Grid height.
+- `modules`?: `Module[]` — Extra AG Grid modules.
+- `multiSelect`?: `boolean` — Enable checkbox selection.
+
+**Exports**
+- `on(event)`: subscribe to `'filter' | 'init' | 'ready'` events.
+- `off(event)`: unsubscribe.
+- `getGrid()`: return the grid API instance.
+- `getSelection()`: return selected rows.
+- `rerender()`: refresh visible cells.
+
+**Example**
+```svelte
+<Grid
+	{data}
+	opts={{
+		columnDefs: [
+			{ field: 'name', sortable: true, filter: true },
+			{ field: 'status', valueFormatter: (p) => String(p.value ?? '') }
+		],
+		defaultColDef: { resizable: true, flex: 1 },
+		rowSelection: 'single',
+		animateRows: true
+	}}
+	height="400px"
+	filter
+/>
+```
+-->
 <script lang="ts" generics="T">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -209,48 +250,6 @@
 		};
 	});
 </script>
-
-<!--
-@component
-AG Grid wrapper with optional filter input and selection helpers.
-See AG Grid docs: https://www.ag-grid.com/javascript-data-grid/getting-started/
-
-**Props**
-- `filter`?: `boolean` — Show quick filter input.
-- `opts`: `Omit<GridOptions<T>, 'rowData'>` — Grid options without row data.
-- `data`: `Readable<T[]>` — Store of row data.
-- `style`?: `string` — Additional container styles.
-- `rowNumbers`?: `boolean | { start: number }` — Show row numbers.
-- `layer`?: `number` — Theme layer for CSS variables.
-- `height`: `string | number` — Grid height.
-- `modules`?: `Module[]` — Extra AG Grid modules.
-- `multiSelect`?: `boolean` — Enable checkbox selection.
-
-**Exports**
-- `on(event)`: subscribe to `'filter' | 'init' | 'ready'` events.
-- `off(event)`: unsubscribe.
-- `getGrid()`: return the grid API instance.
-- `getSelection()`: return selected rows.
-- `rerender()`: refresh visible cells.
-
-**Example**
-```svelte
-<Grid
-	{data}
-	opts={{
-		columnDefs: [
-			{ field: 'name', sortable: true, filter: true },
-			{ field: 'status', valueFormatter: (p) => String(p.value ?? '') }
-		],
-		defaultColDef: { resizable: true, flex: 1 },
-		rowSelection: 'single',
-		animateRows: true
-	}}
-	height="400px"
-	filter
-/>
-```
--->
 
 <!-- Grid Container -->
 {#if filter}

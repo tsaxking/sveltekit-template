@@ -1,3 +1,25 @@
+<!--
+@component
+File upload modal backed by Uppy dashboard.
+
+**Props**
+- `multiple`?: `boolean` — Allow multiple file selection.
+- `message`?: `string` — Button and modal title.
+- `endpoint`: `string` — Upload endpoint URL.
+- `allowedFileTypes`?: `string[]` — Restrict file types.
+- `allowLocal`?: `boolean` — Allow local file selection.
+- `btnClasses`?: `string` — Button CSS classes.
+
+**Exports**
+- `on(event, handler)`: subscribe to `'load' | 'error'` events.
+- `getUppy()`: return the Uppy instance.
+- `show()`: open the modal.
+
+**Example**
+```svelte
+<FileUploader endpoint="/api/upload" />
+```
+-->
 <script lang="ts">
 	import Uppy from '@uppy/core';
 	import Dashboard from '@uppy/svelte/dashboard';
@@ -75,29 +97,6 @@
 		modal.show();
 	};
 </script>
-
-<!--
-@component
-File upload modal backed by Uppy dashboard.
-
-**Props**
-- `multiple`?: `boolean` — Allow multiple file selection.
-- `message`?: `string` — Button and modal title.
-- `endpoint`: `string` — Upload endpoint URL.
-- `allowedFileTypes`?: `string[]` — Restrict file types.
-- `allowLocal`?: `boolean` — Allow local file selection.
-- `btnClasses`?: `string` — Button CSS classes.
-
-**Exports**
-- `on(event, handler)`: subscribe to `'load' | 'error'` events.
-- `getUppy()`: return the Uppy instance.
-- `show()`: open the modal.
-
-**Example**
-```svelte
-<FileUploader endpoint="/api/upload" />
-```
--->
 
 <button type="button" class={btnClasses} onclick={() => modal.show()}>
 	<i class="material-icons">add</i>

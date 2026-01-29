@@ -1,3 +1,15 @@
+<!--
+@component
+Top navigation bar with stack controls, theme toggle, account menu, and notifications.
+
+**Props**
+- `title`: `string` — Brand/title text.
+
+**Example**
+```svelte
+<Navbar title="Dashboard" />
+```
+-->
 <script lang="ts">
 	import SideNav from './SideNav.svelte';
 	import Notifications from './Notifications.svelte';
@@ -16,19 +28,6 @@
 	let notifs = $state(0);
 	const self = Account.getSelf();
 </script>
-
-<!--
-@component
-Top navigation bar with stack controls, theme toggle, account menu, and notifications.
-
-**Props**
-- `title`: `string` — Brand/title text.
-
-**Example**
-```svelte
-<Navbar title="Dashboard" />
-```
--->
 
 <nav class="navbar navbar-expand-lg layer-2">
 	<div class="d-flex justify-content-between w-100">
