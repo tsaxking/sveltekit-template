@@ -5,4 +5,4 @@ This directory contains the `Struct` service, which is responsible for managing 
 ## Conventions
 
 - All `Struct` instances must be created inside namespaces inside the `src/lib/model` directory. (View `src/lib/model/README.md` for struct conventions and an example).
-- Utilize best practices for reactivity when using structs in Svelte components. Do not mutate struct data directly, instead use the methods provided by `src/lib/utils/writables` `WritableBase` methods to ensure proper reactivity.
+- Utilize best practices for reactivity when using structs in Svelte components. Do not mutate struct data directly, instead use the methods provided by `src/lib/services/writables` `WritableBase` methods to ensure proper reactivity.
