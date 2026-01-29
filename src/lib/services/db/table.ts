@@ -348,7 +348,7 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 							.offset(page * pageSize)
 							.limit(pageSize)
 							.toArray();
-						return datas.map((data) => this.Generator(data));
+						return datas.map((d) => this.Generator(d));
 					},
 					async () => {
 						return await this.table().where(data).count();
