@@ -34,6 +34,7 @@ jobs:
           PORT=3000
           OAUTH2_CLIENT_ID=1234567890
           OAUTH2_CLIENT_SECRET=1234567890
+          FINGERPRINT_SECRET=docker-fingerprint-secret
           EOF
 
           cp config.example.json config.json
@@ -42,6 +43,7 @@ jobs:
           PORT=3000
           OAUTH2_CLIENT_ID=1234567890
           OAUTH2_CLIENT_SECRET=1234567890
+          FINGERPRINT_SECRET=local-fingerprint-secret
           EOF
 
       - name: Setup Node.js

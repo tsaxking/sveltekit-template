@@ -31,6 +31,6 @@ Example struct cache page at `/examples/struct-cache`.
 	Make new stuff
 </button>
 
-{#each $data as d}
+{#each $data as d (d.data.id)}
 	<div>{d.data.name}</div>
 {/each}

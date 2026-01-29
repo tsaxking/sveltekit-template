@@ -15,6 +15,6 @@ Client-side struct example page at `/examples/struct/csr`.
 	});
 </script>
 
-{#each $data as item}
+{#each $data as item (item.data.id)}
 	<p>{item.data.name} | {item.data.age}</p>
 {/each}

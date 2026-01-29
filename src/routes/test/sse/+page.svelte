@@ -32,7 +32,7 @@ SSE test page at `/test/sse`.
 	<button type="button" class="btn btn-primary" onclick={start}>Start</button>
 
 	<pre>
-	{#each messages as message}
+	{#each messages as message (message.data)}
 			{message.event}: {message.data}
 		{/each}
 	</pre>

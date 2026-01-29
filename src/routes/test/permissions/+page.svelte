@@ -16,7 +16,7 @@ Permissions test page at `/test/permissions`.
 </script>
 
 <ul class="list-group">
-	{#each $arr as data}
+	{#each $arr as data (data.data.id)}
 		<li class="p-3 mb-2 bg-light border list-group-item">{data.data.name} - {data.data.age}</li>
 	{/each}
 </ul>
