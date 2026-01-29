@@ -53,7 +53,7 @@ Role search list with selection handler.
 		<label for="role-search-{id}">Search Roles</label>
 	</div>
 	<ul class="list-group">
-		{#each $roles as role}
+		{#each $roles as role (role.data.id)}
 			<li class="list-group-item p-0">
 				<button type="button" class="btn btn-dark w-100 h-100" onclick={() => onselect(role)}>
 					{role.data.name}

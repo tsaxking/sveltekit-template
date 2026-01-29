@@ -78,7 +78,7 @@ Admin logs page at `/dashboard/admin/logs`.
 				}}
 			>
 				<option value="" selected={struct === undefined}>All</option>
-				{#each structs as s}
+				{#each structs as s (s)}
 					<option value={s} selected={s === struct}>{capitalize(fromSnakeCase(s))}</option>
 				{/each}
 			</select>
@@ -241,7 +241,7 @@ Admin logs page at `/dashboard/admin/logs`.
 						</tr>
 					</thead>
 					<tbody>
-						{#each logs as log, i}
+						{#each logs as log, i (log.id)}
 							<tr>
 								<td>{(page - 1) * limit + i + 1}</td>
 								<td>

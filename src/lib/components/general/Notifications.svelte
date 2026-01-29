@@ -80,7 +80,7 @@ Notifications offcanvas panel with unread count binding.
 	</div>
 	<div class="offcanvas-body layer-1">
 		<ul class="list-unstyled">
-			{#each $notifications as notification}
+			{#each $notifications as notification (notification.data.id)}
 				<Notification {notification} />
 			{/each}
 			<li class="w-100">

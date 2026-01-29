@@ -233,7 +233,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 						}}
 						value={limit}
 					>
-						{#each [10, 25, 50, 100, 250, 500] as lim}
+						{#each [10, 25, 50, 100, 250, 500] as lim (lim)}
 							<option value={lim}>{lim}</option>
 						{/each}
 					</select>
@@ -264,7 +264,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 				<div class="form-floating" style="width: 200px;">
 					<select name="floating-column" id="column" class="form-select" bind:value={column}>
 						<option value="" selected>All Columns</option>
-						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value]}
+						{#each Object.entries(structType).filter(([k]) => !safes?.includes(k)) as [key, _value] (key)}
 							<option value={key}>{capitalize(fromCamelCase(key))}</option>
 						{/each}
 					</select>
@@ -487,7 +487,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 <Modal bind:this={createModal} title="Create New Item" size="lg">
 	{#snippet body()}
 		<div class="container-fluid">
-			{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value]}
+			{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value] (key)}
 				<div class="row mb-3">
 					{#if value === 'text'}
 						<div class="form-floating">
@@ -582,7 +582,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 	{#snippet body()}
 		<div class="container-fluid">
 			{#key editStage}
-				{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value]}
+				{#each Object.entries(structType).filter(([k]) => !globalCols.includes(k)) as [key, value] (key)}
 					<div class="row mb-3">
 						{#if value === 'text'}
 							<div class="form-floating">

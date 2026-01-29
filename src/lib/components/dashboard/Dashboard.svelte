@@ -10,7 +10,7 @@ Dashboard layout wrapper that renders cards grid.
 ```svelte
 <Dashboard {dashboard}>
 	{#snippet body(cards)}
-		{#each cards as card}
+		{#each cards as card (card.config.name)}
 			<Card {card}>{#snippet body()}...{/snippet}</Card>
 		{/each}
 	{/snippet}

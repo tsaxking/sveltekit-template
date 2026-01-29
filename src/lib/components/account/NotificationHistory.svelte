@@ -28,7 +28,8 @@ Popup notification history list.
 					autoHide: 1,
 					color: 'danger',
 					message: 'Hi',
-					title: 'Hello'
+					title: 'Hello',
+					id: 1,
 				}
 			]);
 		}
@@ -37,7 +38,7 @@ Popup notification history list.
 
 <div class="container-fluid">
 	{#if $history.length}
-		{#each $history as popup}
+		{#each $history as popup (popup.id)}
 			<div class="row mb-3">
 				<div class="card">
 					<div
