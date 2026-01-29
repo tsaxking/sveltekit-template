@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs/promises';
+import { createWriteStream } from 'fs';
 import { glob } from 'glob';
 import terminal from '../src/lib/server/utils/terminal';
 import { runTask } from '../src/lib/server/utils/task';
@@ -620,6 +621,47 @@ export default defineConfig({
 	}
 };
 
+const resetInstructions = async () => {
+	const template = await fs.readFile(
+		path.resolve(ROOT, 'private', 'copilot-instructions-template.md'),
+		'utf-8'
+	);
+	await fs.writeFile(path.resolve(ROOT, '.github', 'copilot-instructions.md'), template);
+};
+
+let instructions: ReturnType<typeof createWriteStream> | null = null;
+
+const pipeToInstructions = (content: string) => {
+	if (!instructions) {
+		instructions = createWriteStream(path.resolve(ROOT, '.github', 'copilot-instructions.md'), {
+			flags: 'a'
+		});
+	}
+
+	instructions.write(content + '\n\n');
+};
+
+const endInstructions = () => {
+	if (instructions) {
+		instructions.end();
+		instructions = null;
+	}
+};
+
+const eachDoc = async (fn: (content: string) => Promise<void> | void) => {
+	const docs = glob.sync('**/*.md', {
+		cwd: DOCS_DIR,
+		ignore: ['**/node_modules/**', '**/.vitepress/**'],
+		nodir: true
+	});
+
+	for (const relPath of docs) {
+		const absPath = path.join(DOCS_DIR, relPath);
+		const content = await fs.readFile(absPath, 'utf-8');
+		await fn(content);
+	}
+};
+
 export default async () => {
 	const vitepressDir = path.join(DOCS_DIR, '.vitepress');
 
@@ -628,6 +670,7 @@ export default async () => {
 	await fs.rm(NOTES_DIR, { recursive: true, force: true });
 	await fs.rm(path.join(DOCS_DIR, 'index.md'), { force: true });
 	await fs.rm(path.join(vitepressDir, 'sidebar.generated.ts'), { force: true });
+	await resetInstructions();
 
 	await ensureDir(DOCS_DIR);
 	await ensureVitepressScaffold(vitepressDir);
@@ -645,9 +688,15 @@ export default async () => {
 		return apiResult;
 	}
 
+	terminal.log('Generating Copilot instructions...');
+	await eachDoc(pipeToInstructions).catch(async (err) => console.error('Pipe error:', err));
+
 	terminal.log('Building static site...');
 	await writeSidebar();
 	const siteResult = await buildSite();
+
+	endInstructions();
+
 	if (siteResult.isErr()) {
 		return siteResult;
 	}
