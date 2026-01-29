@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Analytics RPC layer for shared client/server access.
+ *
+ * Each `query()`/`command()` curries a handler with a Zod schema that validates
+ * inputs at the boundary, enabling type-safe and permission-safe usage on both
+ * client and server.
+ *
+ * @example
+ * import * as analyticsRemote from '$lib/remotes/analytics.remote';
+ * const links = await analyticsRemote.myLinks({ limit: 10, page: 0 });
+ */
 import { command, getRequestEvent, query } from '$app/server';
 import z from 'zod';
 import { getAccount, getSession } from './index.remote';
@@ -8,6 +19,11 @@ import { domain } from '$lib/server/utils/env';
 import ignore from 'ignore';
 import { getManifesto } from '$lib/server/utils/manifesto';
 
+/**
+ * Returns analytics links for the current account.
+ *
+ * @param {{ limit?: number; page?: number }} data - Paging payload.
+ */
 export const myLinks = query(
 	z.object({
 		limit: z.number().min(1).max(100).default(10),
@@ -28,6 +44,9 @@ export const myLinks = query(
 	}
 );
 
+/**
+ * Returns a distinct link count for the current account or session.
+ */
 export const count = query(async () => {
 	const account = await getAccount();
 	if (account) {
@@ -46,6 +65,11 @@ export const count = query(async () => {
 	}
 });
 
+/**
+ * Stores a fingerprint for the current session and sets the signed cookie.
+ *
+ * @param {{ fingerprint: number }} data - Fingerprint payload.
+ */
 export const fingerprint = command(
 	z.object({
 		fingerprint: z.number()
@@ -81,6 +105,11 @@ export const fingerprint = command(
 const ig = ignore();
 ig.add(getManifesto());
 
+/**
+ * Records a page close event with duration if not ignored by the manifesto.
+ *
+ * @param {{ page: string; duration: number }} data - Page close payload.
+ */
 export const close = command(
 	z.object({
 		page: z.string().min(1).max(200),

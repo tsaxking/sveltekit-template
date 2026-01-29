@@ -1,11 +1,15 @@
 /**
- * Keyboard shortcut management system
+ * @fileoverview Keyboard shortcut management system.
  *
  * Provides a flexible system for managing keyboard shortcuts with support for:
  * - Multiple keyboard contexts that can be switched between
  * - Global shortcuts that work across all contexts
  * - Modifier key combinations (ctrl, shift, alt, meta)
  * - Automatic event handling and prevention of default browser behavior
+ *
+ * @example
+ * import { Keyboard } from '$lib/utils/keybinds';
+ * Keyboard.on('ctrl+s', () => console.log('save'));
  */
 import { browser } from '$app/environment';
 

@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Server-side file utilities for uploads and search indexing.
+ *
+ * Includes multipart upload handling, file tree generation, search file
+ * generation, and JSON parsing helpers.
+ *
+ * @example
+ * import { FileReceiver, fileTree } from '$lib/server/utils/files';
+ * const receiver = new FileReceiver({ maxFileSize: 10_000_000, maxFiles: 5 });
+ */
 import { Readable } from 'stream';
 import Busboy from 'busboy';
 import path from 'path';

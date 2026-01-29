@@ -1,3 +1,0 @@
-# assets
-
-This directory contains:

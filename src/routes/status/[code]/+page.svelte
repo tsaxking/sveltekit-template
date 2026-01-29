@@ -1,3 +1,7 @@
+<!--
+@component
+Status page for `/status/[code]`.
+-->
 <script lang="ts">
 	import { page } from '$app/state';
 	import codes from 'http-status-codes';

@@ -1,3 +1,7 @@
+<!--
+@component
+Admin data index page at `/dashboard/admin/data`.
+-->
 <script lang="ts">
 	import '$lib/model/account';
 	import '$lib/model/analytics';

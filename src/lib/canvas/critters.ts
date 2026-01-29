@@ -1,13 +1,47 @@
+/**
+ * @fileoverview Critter animation with glowing particles and trailing paths.
+ *
+ * The animation runs in normalized coordinates (0–1) and is scaled to the
+ * target canvas by the `Canvas` helper. Critters move in cardinal directions
+ * and leave fading trails.
+ *
+ * @example
+ * import { render } from '$lib/canvas/critters';
+ * const canvas = document.querySelector('canvas');
+ * if (canvas) render(canvas);
+ */
 import { Canvas } from 'canvas/canvas';
 import { Drawable } from 'canvas/drawable';
 import { Random } from 'ts-utils/math';
 import { Color } from 'colors/color';
 import { Path } from 'canvas/path';
 
+/**
+ * Glowing square particle that expands then fades out.
+ *
+ * @property {number} growSize - Growth amount applied per tick.
+ * @property {number} actualSize - Current rendered size.
+ * @property {number} x - Normalized x position (0–1).
+ * @property {number} y - Normalized y position (0–1).
+ * @property {number} size - Maximum size (canvas pixels in draw step).
+ * @property {string} color - Glow color.
+ * @property {number} lifetime - Ticks until the square begins to shrink.
+ */
 class Square extends Drawable {
-	growSize = 0.2; // How much the square grows each tick
+	/** How much the square grows each tick. */
+	growSize = 0.2;
+	/** Current rendered size. */
 	actualSize = this.growSize;
 
+	/**
+	 * Creates a square particle.
+	 *
+	 * @param {number} x - Normalized x position (0–1).
+	 * @param {number} y - Normalized y position (0–1).
+	 * @param {number} size - Maximum size in pixels.
+	 * @param {string} color - Glow color.
+	 * @param {number} lifetime - Ticks to persist before shrinking.
+	 */
 	constructor(
 		public readonly x: number,
 		public readonly y: number,
@@ -18,6 +52,11 @@ class Square extends Drawable {
 		super();
 	}
 
+	/**
+	 * Draws the square and updates its size/lifetime.
+	 *
+	 * @param {CanvasRenderingContext2D} ctx - Rendering context.
+	 */
 	draw(ctx: CanvasRenderingContext2D) {
 		ctx.save();
 
@@ -67,10 +106,23 @@ class Square extends Drawable {
 	}
 }
 
+/**
+ * Fading trail for a critter.
+ *
+ * @property {number} _tailAlpha - Base alpha for tail segments.
+ * @property {Path} path - Underlying polyline path.
+ */
 class CritterPath extends Drawable {
-	_tailAlpha = 0.1; // Alpha for the tail segments
+	/** Base alpha for the tail segments. */
+	_tailAlpha = 0.1;
+	/** Underlying path instance. */
 	public readonly path = new Path([]);
 
+	/**
+	 * Creates a trail starting at the given position.
+	 *
+	 * @param {[number, number]} start - Normalized start position.
+	 */
 	constructor(start: [number, number]) {
 		super();
 
@@ -78,6 +130,11 @@ class CritterPath extends Drawable {
 		this.path.add(start);
 	}
 
+	/**
+	 * Updates the latest trail point.
+	 *
+	 * @param {[number, number]} pos - Normalized position.
+	 */
 	pos(pos: [number, number]) {
 		this.path.points[this.path.points.length - 1] = pos;
 	}
@@ -108,6 +165,11 @@ class CritterPath extends Drawable {
 
 	// 	ctx.restore();
 	// }
+	/**
+	 * Draws a fading trail from oldest to newest points.
+	 *
+	 * @param {CanvasRenderingContext2D} ctx - Rendering context.
+	 */
 	draw(ctx: CanvasRenderingContext2D) {
 		if (this.path.points.length < 2) return;
 
@@ -137,6 +199,9 @@ class CritterPath extends Drawable {
 		ctx.restore();
 	}
 
+	/**
+	 * Adds a new segment anchored at the last position.
+	 */
 	set() {
 		const last = this.path.points[this.path.points.length - 1];
 		this.path.points.push(last);
@@ -147,9 +212,33 @@ class CritterPath extends Drawable {
 	}
 }
 
+/**
+ * Moving critter with glowing body and trail.
+ *
+ * @property {CritterPath} path - Trail renderer.
+ * @property {object} config - Configuration for position and motion.
+ * @property {number} config.x - Normalized x position (0–1).
+ * @property {number} config.y - Normalized y position (0–1).
+ * @property {number} config.size - Radius in pixels.
+ * @property {string} config.color - Glow color.
+ * @property {number} config.speed - Movement speed in pixels per tick.
+ * @property {'up'|'down'|'left'|'right'} config.direction - Movement direction.
+ */
 class Critter extends Drawable {
+	/** Trail renderer. */
 	public readonly path: CritterPath;
 
+	/**
+	 * Creates a critter with an initial configuration.
+	 *
+	 * @param {object} config - Critter configuration.
+	 * @param {number} config.x - Normalized x position (0–1).
+	 * @param {number} config.y - Normalized y position (0–1).
+	 * @param {number} config.size - Radius in pixels.
+	 * @param {string} config.color - Glow color.
+	 * @param {number} config.speed - Movement speed in pixels per tick.
+	 * @param {'up'|'down'|'left'|'right'} config.direction - Movement direction.
+	 */
 	constructor(
 		public readonly config: {
 			x: number;
@@ -165,6 +254,11 @@ class Critter extends Drawable {
 		this.path.set();
 	}
 
+	/**
+	 * Draws the critter and updates its trail.
+	 *
+	 * @param {CanvasRenderingContext2D} ctx - Rendering context.
+	 */
 	draw(ctx: CanvasRenderingContext2D) {
 		ctx.save();
 
@@ -199,6 +293,9 @@ class Critter extends Drawable {
 		ctx.restore();
 	}
 
+	/**
+	 * Randomly switches direction and appends a new trail segment.
+	 */
 	changeDirection() {
 		if (['up', 'down'].includes(this.config.direction)) {
 			this.config.direction = Random.choose(['left', 'right']);
@@ -209,6 +306,12 @@ class Critter extends Drawable {
 	}
 }
 
+/**
+ * Starts the critter animation loop on the provided canvas.
+ *
+ * @param {HTMLCanvasElement} canvas - Target canvas element.
+ * @returns {unknown} The animation handle returned by `Canvas.animate()`.
+ */
 export const render = (canvas: HTMLCanvasElement) => {
 	const ctx = canvas.getContext('2d', {
 		willReadFrequently: false

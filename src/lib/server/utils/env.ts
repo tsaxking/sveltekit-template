@@ -1,3 +1,15 @@
+/**
+ * @fileoverview Environment and configuration helpers with .env example generation.
+ *
+ * Loads config.json, provides typed access to environment variables, and keeps
+ * .env.example in sync with requested keys during development.
+ *
+ * @example
+ * import { get, num, env, config } from '$lib/server/utils/env';
+ * const apiKey = get('API_KEY', { required: true });
+ * const port = num('PORT', false) ?? config.network.port;
+ * console.log(env);
+ */
 import { config as dotenv } from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -18,6 +30,9 @@ const keys = new Map<
 
 const cache = new Map<string, unknown>();
 
+/**
+ * Error thrown for invalid or missing environment configuration.
+ */
 export class EnvironmentError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -25,6 +40,9 @@ export class EnvironmentError extends Error {
 	}
 }
 
+/**
+ * Parsed and validated application configuration.
+ */
 export const config = (() => {
 	if (!fs.existsSync(path.join(process.cwd(), 'config.json'))) {
 		throw new EnvironmentError('config.json does not exist');
@@ -34,6 +52,16 @@ export const config = (() => {
 	return openJSONSync(path.join(process.cwd(), 'config.json'), configSchema).unwrap();
 })();
 
+/**
+ * Options for `get()` environment accessor.
+ *
+ * @property {boolean} [required] - Whether the env var must be present.
+ * @property {T} [default] - Default value when missing.
+ * @property {T} [devDefault] - Default value in development when missing.
+ * @property {string[]} [values] - Allowed raw string values.
+ * @property {(val: string) => T} [parser] - Parser for raw value.
+ * @property {string} [type] - Human-readable type for .env.example.
+ */
 type EnvConfig<T> = {
 	required?: boolean;
 	default?: T;
@@ -53,8 +81,14 @@ try {
 	console.log('.env.example does not exist, will create it automatically');
 }
 
+/**
+ * Current environment name.
+ */
 export const env = config.environment;
 
+/**
+ * Schedules a .env.example update based on requested keys.
+ */
 function generateExample() {
 	if (timeout) clearTimeout(timeout);
 	timeout = setTimeout(async () => {
@@ -85,6 +119,12 @@ function generateExample() {
 }
 
 // Overloads for get()
+/**
+ * Gets an environment variable with optional parsing/validation.
+ *
+ * @param {string} key - Environment key (case-insensitive).
+ * @param {EnvConfig<T>} [config] - Accessor config.
+ */
 export function get<T = string>(key: string, config: EnvConfig<T> & { required: true }): T;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined;
 export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefined {
@@ -146,6 +186,12 @@ export function get<T = string>(key: string, config?: EnvConfig<T>): T | undefin
 // ===== Helper functions with correct typing =====
 
 // Number helpers
+/**
+ * Reads a numeric env var.
+ *
+ * @param {string} key - Environment key.
+ * @param {boolean} required - Whether the key is required.
+ */
 export function num(key: string, required: true): number;
 export function num(key: string, required: false): number | undefined;
 export function num(key: string, required: boolean): number | undefined {
@@ -162,6 +208,12 @@ export function num(key: string, required: boolean): number | undefined {
 }
 
 // Boolean helpers
+/**
+ * Reads a boolean env var.
+ *
+ * @param {string} key - Environment key.
+ * @param {boolean} required - Whether the key is required.
+ */
 export function bool(key: string, required: true): boolean;
 export function bool(key: string, required: false): boolean | undefined;
 export function bool(key: string, required: boolean): boolean | undefined {
@@ -174,12 +226,23 @@ export function bool(key: string, required: boolean): boolean | undefined {
 }
 
 // String helpers
+/**
+ * Reads a string env var.
+ *
+ * @param {string} key - Environment key.
+ * @param {boolean} required - Whether the key is required.
+ */
 export function str(key: string, required: true): string;
 export function str(key: string, required: false): string | undefined;
 export function str(key: string, required: boolean): string | undefined {
 	return get<string>(key, { required: required ?? false });
 }
 
+/**
+ * Builds a public domain string from config.
+ *
+ * @param {{ port: boolean; protocol: boolean }} domainConfig - Formatting options.
+ */
 export function domain(domainConfig: { port: boolean; protocol: boolean }) {
 	const host = config.network.host;
 	const port = config.network.port;
@@ -188,6 +251,9 @@ export function domain(domainConfig: { port: boolean; protocol: boolean }) {
 	return `${domainConfig.protocol ? protocol : ''}${host}${domainConfig.port ? `:${port}` : ''}`;
 }
 
+/**
+ * Fetches the public IPv4 address for the running instance.
+ */
 export const getPublicIp = () => {
 	return attemptAsync(async () => {
 		const res = await fetch('https://api.ipify.org?format=json');

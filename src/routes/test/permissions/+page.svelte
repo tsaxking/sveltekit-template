@@ -1,3 +1,7 @@
+<!--
+@component
+Permissions test page at `/test/permissions`.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte';
 	import { onMount } from 'svelte';

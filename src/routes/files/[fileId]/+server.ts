@@ -1,3 +1,6 @@
+/**
+ * @fileoverview File download/upload endpoint at `/files/[fileId]`.
+ */
 import { json, error } from '@sveltejs/kit';
 import fs from 'fs/promises';
 import path from 'path';

@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Permissions and role-based access control structs.
+ *
+ * Defines roles, entitlements, rulesets, and helpers for permission checks.
+ *
+ * @example
+ * import { Permissions } from '$lib/server/structs/permissions';
+ * const roles = await Permissions.searchRoles('admin', { offset: 0, limit: 10 }).unwrap();
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // See /diagrams/permissions.excalidraw for the diagram of this file
@@ -43,9 +52,13 @@ export namespace Permissions {
 	export const Role = new Struct({
 		name: 'role',
 		structure: {
+			/** Role name. */
 			name: text('name').notNull(),
+			/** Role description. */
 			description: text('description').notNull(),
+			/** Parent role ID for hierarchy. */
 			parent: text('parent').notNull().default(''), // Parent role for hierarchy. A parent role can manage its child roles.
+			/** UI color hex code. */
 			color: text('color').notNull().default('#000000') // Color for UI purposes
 		}
 	});
@@ -159,7 +172,9 @@ export namespace Permissions {
 	export const RoleAccount = new Struct({
 		name: 'role_account',
 		structure: {
+			/** Role ID. */
 			role: text('role').notNull(),
+			/** Account ID. */
 			account: text('account').notNull()
 		}
 	});
@@ -171,12 +186,19 @@ export namespace Permissions {
 	export const Entitlement = new Struct({
 		name: 'entitlements',
 		structure: {
+			/** Unique entitlement name. */
 			name: text('name').notNull().unique(),
+			/** Entitlement description. */
 			description: text('description').notNull().default(''),
+			/** JSON string of struct names. */
 			structs: text('structs').notNull().default('[]'), // JSON string of struct names
+			/** JSON string of permission rules. */
 			permissions: text('permissions').notNull().default('[]'), // JSON string of permissions
+			/** Group name for UI organization. */
 			group: text('group').notNull(), // Group name for UI organization
+			/** JSON string of features enabled by this entitlement. */
 			features: text('features').notNull().default('[]'), // JSON string of features that this entitlement enables
+			/** Default feature scope list (JSON string). */
 			defaultFeatureScopes: text('default_feature_scopes').notNull().default('[]') // Default feature scope for this entitlement
 		}
 	});
@@ -188,12 +210,19 @@ export namespace Permissions {
 	export const RoleRuleset = new Struct({
 		name: 'role_rulesets',
 		structure: {
+			/** Ruleset name. */
 			name: text('name').notNull(),
+			/** Ruleset description. */
 			description: text('description').notNull(),
+			/** Role ID the ruleset belongs to. */
 			role: text('role').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]'),
+			/** Parent ruleset ID. */
 			parent: text('parent').notNull().default('') // parent ruleset id
 		}
 	});
@@ -380,6 +409,11 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a ruleset to a role.
+	 *
+	 * @param {{ role: RoleData; entitlement: Entitlement; targetAttribute: string; featureScopes: string[]; parentRuleset?: RoleRulesetData; name: string; description: string }} config
+	 */
 	export const grantRoleRuleset = (config: {
 		role: RoleData;
 		entitlement: Entitlement;
@@ -410,6 +444,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a role to an account.
+	 *
+	 * @param {RoleData} role - Role to grant.
+	 * @param {Account.AccountData} account - Account to receive the role.
+	 */
 	export const grantRole = (role: RoleData, account: Account.AccountData) => {
 		return RoleAccount.new({
 			role: role.id,
@@ -417,6 +457,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a role from an account.
+	 *
+	 * @param {RoleData} role - Role to revoke.
+	 * @param {Account.AccountData} account - Account to remove from the role.
+	 */
 	export const revokeRole = (role: RoleData, account: Account.AccountData) => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -433,6 +479,13 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a ruleset from a role.
+	 *
+	 * @param {RoleData} role - Role to update.
+	 * @param {Entitlement} entitlement - Entitlement name.
+	 * @param {string} targetAttribute - Target attribute selector.
+	 */
 	export const revokeRoleRuleset = (
 		role: RoleData,
 		entitlement: Entitlement,
@@ -450,9 +503,13 @@ export namespace Permissions {
 	export const AccountRuleset = new Struct({
 		name: 'account_rulesets',
 		structure: {
+			/** Account ID the ruleset is scoped to. */
 			account: text('account').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]')
 		}
 	});

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Route manifesto reader and matcher utilities.
+ *
+ * @example
+ * import { getManifestoInstance } from '$lib/server/utils/manifesto';
+ * const match = getManifestoInstance('/users/123');
+ */
 import fs from 'fs';
 import path from 'path';
 

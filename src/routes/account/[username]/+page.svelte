@@ -1,3 +1,10 @@
+<!--
+@component
+Account public profile page for `/account/[username]`.
+
+Renders public-facing account details and related UI for the specified username.
+Designed as a top-level page route and does not export component props.
+-->
 <script lang="ts">
 	import Profile from '$lib/components/account/Profile.svelte';
 	import { Account } from '$lib/model/account.js';

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Context menu helper for UI actions.
+ *
+ * @example
+ * import { contextmenu } from '$lib/utils/contextmenu';
+ * contextmenu(event, { options: [] });
+ */
 import { type Icon } from '../types/icons';
 
 /**

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview CLI prompting, selection, and menu utilities.
+ */
 import { attemptAsync } from 'ts-utils/check';
 import * as inquirer from '@inquirer/prompts';
 import FuzzySearch from 'fuzzy-search';
@@ -7,11 +10,23 @@ import terminal from '../src/lib/server/utils/terminal';
 import chalk from 'chalk';
 import { getPublicIp } from '$lib/server/utils/env';
 
+/**
+ * Shared prompt configuration.
+ */
 type GlobalConfig = {
 	message: string;
 	clear?: boolean;
 };
 
+/**
+ * Prompt for a single line of input.
+ *
+ * @param config - Prompt configuration.
+ * @returns Result wrapper containing the input string.
+ *
+ * @example
+ * const name = (await prompt({ message: 'Enter name' })).unwrap();
+ */
 export const prompt = (
 	config: GlobalConfig & {
 		default?: string;
@@ -29,6 +44,12 @@ export const prompt = (
 		return res;
 	});
 
+/**
+ * Prompt for input with optional validation and retry.
+ *
+ * @param config - Prompt configuration with validation.
+ * @returns Result wrapper containing the input string.
+ */
 export const repeatPrompt = (
 	config: GlobalConfig & {
 		validate?: (output: string) => boolean;
@@ -58,6 +79,11 @@ export const repeatPrompt = (
 		return run();
 	});
 
+/**
+ * Display a message and wait for any key press.
+ *
+ * @param config - Alert configuration.
+ */
 export const alert = (config: GlobalConfig) => {
 	return new Promise<void>((res) => {
 		if (config.clear) console.clear();
@@ -73,11 +99,20 @@ export const alert = (config: GlobalConfig) => {
 	});
 };
 
+/**
+ * Select option entry.
+ */
 type Option<T> = {
 	value: T;
 	name: string;
 };
 
+/**
+ * Prompt to select a single option.
+ *
+ * @param config - Selection configuration.
+ * @returns Result wrapper with selected value.
+ */
 export const select = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
@@ -122,6 +157,12 @@ export const select = <T = unknown>(
 		return res;
 	});
 
+/**
+ * Prompt to select multiple options.
+ *
+ * @param config - Selection configuration.
+ * @returns Result wrapper with selected values.
+ */
 export const multiSelect = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
@@ -139,6 +180,12 @@ export const multiSelect = <T = unknown>(
 		});
 	});
 
+/**
+ * Prompt for a yes/no confirmation.
+ *
+ * @param config - Prompt configuration.
+ * @returns Result wrapper with boolean choice.
+ */
 export const confirm = (config: GlobalConfig) =>
 	attemptAsync(async () => {
 		if (config.clear) console.clear();
@@ -147,6 +194,12 @@ export const confirm = (config: GlobalConfig) =>
 		});
 	});
 
+/**
+ * Prompt for a hidden password value.
+ *
+ * @param config - Prompt configuration.
+ * @returns Result wrapper with password string.
+ */
 export const password = (config: GlobalConfig) =>
 	attemptAsync(async () => {
 		if (config.clear) console.clear();
@@ -155,6 +208,12 @@ export const password = (config: GlobalConfig) =>
 		});
 	});
 
+/**
+ * Prompt to search and select an option.
+ *
+ * @param config - Search configuration.
+ * @returns Result wrapper with selected value.
+ */
 export const search = <T = unknown>(
 	config: GlobalConfig & {
 		options: Option<T>[];
@@ -173,6 +232,12 @@ export const search = <T = unknown>(
 		});
 	});
 
+/**
+ * Render a table of records and select a row using arrow keys.
+ *
+ * @param config - Table selection configuration.
+ * @returns Result wrapper containing the selected index.
+ */
 export const selectFromTable = <T extends Record<string, unknown>>(
 	config: GlobalConfig & {
 		options: T[];
@@ -248,6 +313,12 @@ export const selectFromTable = <T extends Record<string, unknown>>(
 			})
 	);
 
+/**
+ * Render a table of records and wait for Enter to close.
+ *
+ * @param config - Table view configuration.
+ * @returns Result wrapper that resolves on close.
+ */
 export const viewTable = <T extends Record<string, unknown>>(
 	config: GlobalConfig & {
 		options: T[];
@@ -318,6 +389,9 @@ export const viewTable = <T extends Record<string, unknown>>(
 	);
 
 let id = -1;
+/**
+ * CLI menu folder that contains actions and nested folders.
+ */
 export class Folder {
 	public static home?: Folder;
 
@@ -337,6 +411,9 @@ export class Folder {
 		}
 	}
 
+	/**
+	 * Open the folder menu and execute the selected action.
+	 */
 	public action() {
 		return attemptAsync(async () => {
 			const extras: (Action | Folder)[] = [this.exit];
@@ -373,6 +450,9 @@ export class Folder {
 		});
 	}
 
+	/**
+	 * Exit action for the CLI.
+	 */
 	get exit() {
 		return new Action('Exit', 'Exit the CLI', '🚪', () => {
 			terminal.log('Exiting CLI');
@@ -381,11 +461,17 @@ export class Folder {
 		});
 	}
 
+	/**
+	 * Set the parent folder for navigation.
+	 */
 	setParent(parent: Folder) {
 		this.parent = parent;
 	}
 }
 
+/**
+ * CLI action wrapper.
+ */
 export class Action {
 	constructor(
 		public readonly name: string,
@@ -394,11 +480,20 @@ export class Action {
 		public readonly _action: () => unknown
 	) {}
 
+	/**
+	 * Execute the action callback.
+	 */
 	public action() {
 		return this._action();
 	}
 }
 
+/**
+ * Prompt for an IPv4 address, or fall back to the public IP.
+ *
+ * @param message - Prompt message.
+ * @returns Result wrapper containing the IP string.
+ */
 export const promptIp = (message: string) => {
 	return attemptAsync<string>(async () => {
 		const res = await repeatPrompt({

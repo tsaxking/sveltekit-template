@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Struct data wrapper and helpers.
+ *
+ * @example
+ * import { StructData } from '$lib/services/struct/struct-data';
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { attempt, attemptAsync } from 'ts-utils/check';
 import {

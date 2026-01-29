@@ -1,3 +1,7 @@
+<!--
+@component
+Admin struct data page at `/dashboard/admin/data/[struct]`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import Grid from '$lib/components/general/Grid.svelte';

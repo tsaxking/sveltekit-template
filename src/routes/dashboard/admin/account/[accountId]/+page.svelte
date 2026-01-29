@@ -1,3 +1,7 @@
+<!--
+@component
+Admin account detail page at `/dashboard/admin/account/[accountId]`.
+-->
 <script lang="ts">
 	import Grid from '$lib/components/general/Grid.svelte';
 	import { Account } from '$lib/model/account.js';

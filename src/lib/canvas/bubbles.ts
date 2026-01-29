@@ -1,11 +1,39 @@
+/**
+ * @fileoverview Bubble animation for HTML canvas using normalized coordinates.
+ *
+ * Each bubble is drawn in a 0–1 coordinate space and then scaled to the canvas
+ * by the `Canvas` helper. The animation updates positions, handles wall
+ * collisions, and resolves bubble-to-bubble collisions.
+ *
+ * @example
+ * import { render } from '$lib/canvas/bubbles';
+ * const canvas = document.querySelector('canvas');
+ * if (canvas) render(canvas);
+ */
 import { Canvas } from 'canvas/canvas';
 import { Drawable } from 'canvas/drawable';
 import { Color } from 'colors/color';
 import { Circle } from 'canvas/circle';
 
+/**
+ * Animated bubble particle.
+ *
+ * @property {number} size - Bubble radius in normalized units (0–1).
+ * @property {string} color - Fill color string used by the circle.
+ * @property {[number, number]} velocity - X/Y velocity per tick in normalized units.
+ */
 class Bubble extends Drawable {
 	private readonly circle: Circle;
 
+	/**
+	 * Create a bubble with a normalized position and velocity.
+	 *
+	 * @param {number} x - Initial x position (0–1).
+	 * @param {number} y - Initial y position (0–1).
+	 * @param {number} size - Radius in normalized units.
+	 * @param {string} color - Fill color.
+	 * @param {[number, number]} velocity - X/Y velocity per tick.
+	 */
 	constructor(
 		x: number,
 		y: number,
@@ -19,22 +47,39 @@ class Bubble extends Drawable {
 		this.circle.properties.fill.color = color;
 	}
 
+	/**
+	 * Sets the bubble center x position (normalized).
+	 */
 	set x(x: number) {
 		this.circle.x = x;
 	}
 
+	/**
+	 * Gets the bubble center x position (normalized).
+	 */
 	get x() {
 		return this.circle.x;
 	}
 
+	/**
+	 * Sets the bubble center y position (normalized).
+	 */
 	set y(y: number) {
 		this.circle.y = y;
 	}
 
+	/**
+	 * Gets the bubble center y position (normalized).
+	 */
 	get y() {
 		return this.circle.y;
 	}
 
+	/**
+	 * Draws the bubble on the canvas.
+	 *
+	 * @param {CanvasRenderingContext2D} ctx - Rendering context.
+	 */
 	draw(ctx: CanvasRenderingContext2D) {
 		ctx.save();
 		this.circle.draw(ctx);
@@ -42,6 +87,12 @@ class Bubble extends Drawable {
 	}
 }
 
+/**
+ * Starts the bubble animation loop on the provided canvas.
+ *
+ * @param {HTMLCanvasElement} canvas - Target canvas element.
+ * @returns {unknown} The animation handle returned by `Canvas.animate()`.
+ */
 export const render = (canvas: HTMLCanvasElement) => {
 	const ctx = canvas.getContext('2d');
 	if (!ctx) {

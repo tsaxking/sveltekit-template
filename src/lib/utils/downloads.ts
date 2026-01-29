@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Client download utilities.
+ *
+ * @example
+ * import { downloadText } from '$lib/utils/downloads';
+ * await downloadText('Hello', 'hello.txt');
+ */
 import { attempt, attemptAsync } from 'ts-utils/check';
 
 /**

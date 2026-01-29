@@ -1,3 +1,7 @@
+<!--
+@component
+Admin role detail page at `/dashboard/admin/role/[roleId]`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import nav from '$lib/imports/admin.js';

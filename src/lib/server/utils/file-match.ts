@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Path matching utility for ignore/allow rules.
+ *
+ * Supports `*`, `**`, and negation patterns similar to .gitignore.
+ *
+ * @example
+ * const matcher = pathMatch('admin/**\n!admin/public/**');
+ * matcher.test('admin/settings');
+ */
+/**
  * Enhanced ignore matcher (no external deps):
  * - Supports *, **, partial wildcards, and negation (!)
  * - Skips empty lines and comments (#)

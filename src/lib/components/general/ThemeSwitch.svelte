@@ -7,6 +7,16 @@
 	}
 </script>
 
+<!--
+@component
+Theme toggle button (light/dark).
+
+**Example**
+```svelte
+<ThemeSwitch />
+```
+-->
+
 <button type="button" class="btn" onclick={toggleTheme}>
 	<i class="material-icons">
 		{#if $theme === 'light'}

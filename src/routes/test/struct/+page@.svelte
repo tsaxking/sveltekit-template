@@ -1,3 +1,7 @@
+<!--
+@component
+Struct test page at `/test/struct`.
+-->
 <script lang="ts">
 	import '$lib/model/account';
 	import '$lib/model/analytics';

@@ -1,3 +1,7 @@
+<!--
+@component
+Client-side struct example page at `/examples/struct/csr`.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte';
 	import { onMount } from 'svelte';

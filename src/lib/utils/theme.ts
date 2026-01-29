@@ -1,8 +1,23 @@
+/**
+ * @fileoverview Theme store helpers for light/dark mode.
+ *
+ * @example
+ * import { setTheme, theme } from '$lib/utils/theme';
+ * setTheme('dark');
+ */
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 
+/**
+ * Writable theme store.
+ */
 export const theme = writable<'light' | 'dark'>('light');
 
+/**
+ * Updates the theme and persists it to localStorage.
+ *
+ * @param {'light'|'dark'} documentTheme - Theme name.
+ */
 export const setTheme = (documentTheme: 'light' | 'dark') => {
 	theme.set(documentTheme);
 	if (browser) {

@@ -38,6 +38,22 @@
 	let offcanvas: HTMLDivElement;
 </script>
 
+<!--
+@component
+Side navigation offcanvas that renders sections from the navbar registry.
+
+**Props**
+- `id`: `string` — Offcanvas element id.
+
+**Exports**
+- `hide()`: close any open offcanvas menus.
+
+**Example**
+```svelte
+<SideNav id="pages" />
+```
+-->
+
 <div
 	bind:this={offcanvas}
 	class="offcanvas offcanvas-start"

@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Client-side struct implementation with caching and batching.
+ *
+ * Provides the core Struct client API, data wrappers, and remote bindings.
+ *
+ * @example
+ * import { Struct } from '$lib/services/struct';
+ * const Users = new Struct({ name: 'users', structure: { name: 'string' }, socket: sse });
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { attempt, attemptAsync } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
@@ -1342,11 +1351,29 @@ export class Struct<T extends Blank> {
 		return arr;
 	}
 
+	/**
+	 * Gets data matching a filter as a paginated array.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<'pagination', T>} config - Pagination config.
+	 */
 	get(
 		data: PartialStructable<T & GlobalCols>,
 		config: ReadConfig<'pagination', T>
 	): PaginationDataArr<T>;
+	/**
+	 * Gets data matching a filter as a reactive store.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<'all', T>} config - Store config.
+	 */
 	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<'all', T>): DataArr<T>;
+	/**
+	 * Gets data matching a filter as a paginated array or reactive store.
+	 *
+	 * @param {PartialStructable<T & GlobalCols>} data - Filter criteria.
+	 * @param {ReadConfig<ReadConfigType, T>} config - Read config.
+	 */
 	get(data: PartialStructable<T & GlobalCols>, config: ReadConfig<ReadConfigType, T>) {
 		if (config.type === 'pagination' && 'pagination' in config) {
 			let total = 0;
@@ -1454,6 +1481,11 @@ export class Struct<T extends Blank> {
 		return arr;
 	}
 
+	/**
+	 * Creates an empty paginated data array placeholder.
+	 *
+	 * @returns {PaginationDataArr<T>} Empty pagination wrapper.
+	 */
 	pagination() {
 		return new PaginationDataArr<T>(
 			this,
@@ -1464,6 +1496,9 @@ export class Struct<T extends Blank> {
 		);
 	}
 
+	/**
+	 * Clears all data for this struct (admin only).
+	 */
 	clear() {
 		this.log('Clearing all data from struct (admin only)');
 		return remote.clear({

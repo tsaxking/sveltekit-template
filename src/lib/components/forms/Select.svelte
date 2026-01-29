@@ -19,6 +19,30 @@
 	};
 </script>
 
+<!--
+@component
+Simple select control with optional placeholder option.
+
+**Props**
+- `options`: `string[]` — Available options.
+- `value`?: `string` — Current value (bindable).
+- `default`?: `string` — Placeholder label.
+- `onChange`: `(index: number) => void` — Called with selected index.
+
+**Exports**
+- `select(value: string)`: set selected value programmatically.
+
+**Example**
+```svelte
+<Select
+	options={['A', 'B']}
+	default="Choose..."
+	bind:value
+	onChange={(i) => console.log(i)}
+/>
+```
+-->
+
 <select class="form-select" bind:value={selected} onchange={handleChange}>
 	{#if defaultValue}
 		<option value="" disabled selected={!selected}>{defaultValue}</option>

@@ -1,12 +1,31 @@
+/**
+ * @fileoverview Client-side test utilities for Struct and SSE integration.
+ *
+ * @example
+ * import { Test } from '$lib/model/testing.svelte';
+ * const tests = Test.unitTest();
+ * tests.promise.then(() => console.log('tests complete'));
+ */
 import { browser } from '$app/environment';
 import { sse } from '$lib/services/sse';
 import { Struct, StructData } from '$lib/services/struct/index';
 
+/**
+ * Test helpers and status tracking.
+ */
 export namespace Test {
+	/**
+	 * Struct used for connectivity and CRUD tests.
+	 *
+	 * @property {string} name - Test name.
+	 * @property {number} age - Test age value.
+	 */
 	export const Test = new Struct({
 		name: 'test',
 		structure: {
+			/** Test name. */
 			name: 'string',
+			/** Test age value. */
 			age: 'number'
 		},
 		socket: sse,
@@ -14,9 +33,18 @@ export namespace Test {
 		// log: true
 	});
 
+	/** Struct data shape for Test records. */
 	export type TestData = StructData<typeof Test.data.structure>;
+	/** Status lifecycle states. */
 	export type State = 'not started' | 'in progress' | 'success' | 'failure';
 
+	/**
+	 * Status object used by the test runner.
+	 *
+	 * @property state - Current state.
+	 * @property message - Optional message.
+	 * @property update - Updates state and message.
+	 */
 	export type Status = {
 		state: State;
 		message?: string;
@@ -24,6 +52,13 @@ export namespace Test {
 		update(state: State, message?: string): void;
 	};
 
+	/**
+	 * Runs a suite of client-side struct tests and returns status handles.
+	 *
+	 * @example
+	 * const tests = Test.unitTest();
+	 * tests.promise.then(() => console.log('done'));
+	 */
 	export const unitTest = () => {
 		const init = (): Status => ({
 			state: 'not started',
@@ -448,6 +483,12 @@ export namespace Test {
 		return tests;
 	};
 
+	/**
+	 * Struct used to validate permission-based read access in tests.
+	 *
+	 * @property {string} name - Test name value.
+	 * @property {number} age - Test age value.
+	 */
 	export const TestPermissions = new Struct({
 		name: 'test_permissions',
 		structure: {
@@ -459,6 +500,8 @@ export namespace Test {
 		log: true
 	});
 
+	/** Struct data shape for permission test records. */
 	export type TestPermissionsData = typeof TestPermissions.sample;
+	/** Writable array of permission test records. */
 	export type TestPermissionsArr = ReturnType<typeof TestPermissions.arr>;
 }

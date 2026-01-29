@@ -23,6 +23,19 @@
 	});
 </script>
 
+<!--
+@component
+Popup notification history list.
+
+**Props**
+- `test`: `boolean` — Populate with test data on mount.
+
+**Example**
+```svelte
+<NotificationHistory test={false} />
+```
+-->
+
 <div class="container-fluid">
 	{#if $history.length}
 		{#each $history as popup (popup.id)}

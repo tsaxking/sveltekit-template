@@ -1,3 +1,0 @@
-# oauth
-
-This directory contains:

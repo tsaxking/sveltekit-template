@@ -1,3 +1,12 @@
+/**
+ * @fileoverview IndexedDB table wrapper with reactive stores.
+ *
+ * Provides Dexie-backed CRUD helpers and Svelte store integration.
+ *
+ * @example
+ * import { Table } from '$lib/services/db/table';
+ * const users = new Table('users', { name: 'string' });
+ */
 import { type Updater, type Writable, writable, get } from 'svelte/store';
 import {
 	_init,

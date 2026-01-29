@@ -1,3 +1,16 @@
+/**
+ * @fileoverview Helpers for generating TypeScript and Zod types from data.
+ *
+ * @example
+ * import { toType, toZodType } from '$lib/utils/generate-type';
+ * const t = toType({ name: 'Jane', age: 1 });
+ * const zt = toZodType({ name: 'Jane', age: 1 });
+ */
+/**
+ * Generates a TypeScript type string from a value.
+ *
+ * @param {unknown} data - Value to infer.
+ */
 export const toType = (data: unknown): string => {
 	if (typeof data === 'object') {
 		if (Array.isArray(data)) {
@@ -19,6 +32,11 @@ export const toType = (data: unknown): string => {
 	return typeof data;
 };
 
+/**
+ * Generates a Zod schema string from a value.
+ *
+ * @param {unknown} data - Value to infer.
+ */
 export const toZodType = (data: unknown): string => {
 	if (typeof data === 'object') {
 		if (Array.isArray(data)) {

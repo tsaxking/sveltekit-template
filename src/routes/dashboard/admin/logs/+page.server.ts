@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin logs `/dashboard/admin/logs`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Logs } from '$lib/server/structs/log.js';
 import { Struct } from 'drizzle-struct';

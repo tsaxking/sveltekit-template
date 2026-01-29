@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Client load for admin roles list `/dashboard/admin/role`.
+ */
 import { Permissions } from '$lib/model/permissions.js';
 import { writable } from 'svelte/store';
 

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load/actions for `/account/sign-up`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';

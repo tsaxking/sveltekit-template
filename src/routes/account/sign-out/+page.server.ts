@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Server load/actions for `/account/sign-out`.
+ */
+/**
+ * @fileoverview Server load/actions for `/account/sign-out`.
+ */
 import { redirect } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 

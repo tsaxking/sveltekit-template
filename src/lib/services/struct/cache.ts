@@ -1,6 +1,18 @@
+/**
+ * @fileoverview Client-side struct cache backed by IndexedDB.
+ *
+ * Stores key/value entries with optional expiration to speed up struct reads.
+ *
+ * @example
+ * import { StructCache } from '$lib/services/struct/cache';
+ * await StructCache.set('account:123', account, { expires: new Date(Date.now() + 60000) });
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { Table } from '../db/table';
 
+/**
+ * Cache helpers for struct data.
+ */
 export namespace StructCache {
 	const table = new Table('struct_cache', {
 		key: 'string',
@@ -14,6 +26,11 @@ export namespace StructCache {
 		}
 	};
 
+	/**
+	 * Retrieves a cached value by key.
+	 *
+	 * @param {string} key - Cache key.
+	 */
 	export const get = (key: string) => {
 		return attemptAsync(async () => {
 			if (!__APP_ENV__.struct_cache.enabled) {
@@ -33,6 +50,13 @@ export namespace StructCache {
 		});
 	};
 
+	/**
+	 * Stores a cached value.
+	 *
+	 * @param {string} key - Cache key.
+	 * @param {unknown} value - Value to store.
+	 * @param {{ expires: Date }} config - Expiration configuration.
+	 */
 	export const set = (
 		key: string,
 		value: unknown,
@@ -69,6 +93,11 @@ export namespace StructCache {
 		});
 	};
 
+	/**
+	 * Clears a cached value by key.
+	 *
+	 * @param {string} key - Cache key.
+	 */
 	export const clear = (key: string) => {
 		return attemptAsync(async () => {
 			const record = await table.get({ key }, { pagination: false }).unwrap();

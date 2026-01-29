@@ -10,6 +10,19 @@
 	const cards = $derived(dashboard.hiddenCards);
 </script>
 
+<!--
+@component
+Row of minimized dashboard cards for quick restore.
+
+**Props**
+- `dashboard`: `Dashboard.Dashboard` — Dashboard controller.
+
+**Example**
+```svelte
+<MinimizedCards {dashboard} />
+```
+-->
+
 {#if $cards.size > 0}
 	<div class="w-100 d-flex align-items-center">
 		<p class="m-0">Minimized:</p>

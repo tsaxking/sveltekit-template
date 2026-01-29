@@ -1,3 +1,7 @@
+<!--
+@component
+Admin logs page at `/dashboard/admin/logs`.
+-->
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { copy } from '$lib/utils/clipboard.js';

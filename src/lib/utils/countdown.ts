@@ -1,6 +1,26 @@
+/**
+ * @fileoverview Countdown timer store utility.
+ *
+ * @example
+ * import { Countdown } from '$lib/utils/countdown';
+ * const countdown = new Countdown(new Date(Date.now() + 60000));
+ * const stop = countdown.start();
+ */
 import { type Writable } from 'svelte/store';
 import { Loop } from 'ts-utils/loop';
 
+/**
+ * Snapshot of countdown state.
+ *
+ * @property {boolean} reached - Whether the target time is reached.
+ * @property {Date} target - Target date.
+ * @property {number} seconds - Remaining seconds.
+ * @property {number} minutes - Remaining minutes.
+ * @property {number} hours - Remaining hours.
+ * @property {number} days - Remaining days.
+ * @property {string} string - Human readable string.
+ * @property {number} timeLeft - Remaining milliseconds.
+ */
 type CountdownType = {
 	reached: boolean;
 	target: Date;
@@ -12,9 +32,18 @@ type CountdownType = {
 	timeLeft: number;
 };
 
+/**
+ * Countdown store that updates once per second.
+ */
 export class Countdown implements Writable<CountdownType> {
+	/**
+	 * @param {Date} target - Target date/time.
+	 */
 	constructor(public target: Date) {}
 
+	/**
+	 * Computes the current countdown snapshot.
+	 */
 	getCountdown(): CountdownType {
 		const now = new Date();
 		const diff = this.target.getTime() - now.getTime();
@@ -43,8 +72,12 @@ export class Countdown implements Writable<CountdownType> {
 		};
 	}
 
+	/** Subscribers for store updates. */
 	private readonly subscribers = new Set<(value: CountdownType) => void>();
 
+	/**
+	 * Subscribes to countdown updates.
+	 */
 	subscribe(run: (value: CountdownType) => void) {
 		this.subscribers.add(run);
 		run(this.getCountdown());
@@ -53,6 +86,9 @@ export class Countdown implements Writable<CountdownType> {
 		};
 	}
 
+	/**
+	 * Notifies subscribers of the latest countdown state.
+	 */
 	inform() {
 		const countdown = this.getCountdown();
 		for (const subscriber of this.subscribers) {
@@ -60,6 +96,9 @@ export class Countdown implements Writable<CountdownType> {
 		}
 	}
 
+	/**
+	 * Sets countdown state and notifies subscribers.
+	 */
 	set(countdown: CountdownType) {
 		this.target = countdown.target;
 		for (const subscriber of this.subscribers) {
@@ -67,18 +106,29 @@ export class Countdown implements Writable<CountdownType> {
 		}
 	}
 
+	/**
+	 * Updates the target date.
+	 */
 	setTarget(target: Date) {
 		this.target = target;
 		this.inform();
 	}
 
+	/**
+	 * Updates countdown state with a callback.
+	 */
 	update(updater: (countdown: CountdownType) => CountdownType) {
 		this.set(updater(this.getCountdown()));
 	}
 
+	/** Whether the countdown loop is running. */
 	private _running = false;
+	/** Stop handler for the loop. */
 	public stop = () => {};
 
+	/**
+	 * Starts the countdown update loop.
+	 */
 	start() {
 		if (this._running) return this.stop;
 		this._running = true;

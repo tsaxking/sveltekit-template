@@ -26,6 +26,19 @@
 	};
 </script>
 
+<!--
+@component
+Notification card with read/unread and delete actions.
+
+**Props**
+- `notification`: `Account.AccountNotificationData` — Notification model.
+
+**Example**
+```svelte
+<Notification {notification} />
+```
+-->
+
 <div class="card mb-3 {!$notification.read ? 'border-' + $notification.severity : ''}">
 	<div class="card-body layer-2">
 		<div class="d-flex align-items-center mb-2">

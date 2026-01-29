@@ -1,3 +1,7 @@
+<!--
+@component
+Range component test page at `/test/component/range`.
+-->
 <script lang="ts">
 	import { RangeSlider } from '$lib/utils/form';
 	import { onMount } from 'svelte';

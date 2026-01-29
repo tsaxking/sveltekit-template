@@ -1,3 +1,7 @@
+<!--
+@component
+SSE test page at `/test/sse`.
+-->
 <script lang="ts">
 	import { sse } from '$lib/services/sse';
 

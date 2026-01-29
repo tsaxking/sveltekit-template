@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Struct event bridge for SSE and Redis.
+ *
+ * Emits struct CRUD events to connected clients and propagates events across
+ * servers via Redis.
+ *
+ * @example
+ * import { createStructEventService } from '$lib/server/services/struct-event';
+ * createStructEventService(MyStruct);
+ */
 import { Session } from '../structs/session';
 import { Struct, type Blank, StructData, type Structable, DataVersion } from 'drizzle-struct';
 import { Account } from '../structs/account';

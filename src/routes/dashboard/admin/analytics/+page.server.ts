@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin analytics page `/dashboard/admin/analytics`.
+ */
 import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account';
 import { Analytics } from '$lib/server/structs/analytics';

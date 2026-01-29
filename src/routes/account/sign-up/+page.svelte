@@ -1,3 +1,7 @@
+<!--
+@component
+Sign-up page at `/account/sign-up`.
+-->
 <script lang="ts">
 	import '$lib/styles/gsi.css';
 	import { passwordStrength } from 'check-password-strength';

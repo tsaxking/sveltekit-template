@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Server-side file upload helpers.
+ *
+ * Provides file upload receiving and stopgap XHR-based upload support.
+ *
+ * @example
+ * const uploader = new FileUploader('/tmp/uploads');
+ * const result = await uploader.receiveFile(file, account);
+ */
 import fs from 'fs/promises';
 import path from 'path';
 import { Account } from '../structs/account';

@@ -1,3 +1,7 @@
+<!--
+@component
+Session manager test page at `/test/session-manager`.
+-->
 <script lang="ts">
 	import Grid from '$lib/components/general/Grid.svelte';
 	import { SessionManager } from '$lib/services/session-manager';

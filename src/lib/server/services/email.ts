@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Email queue service for server-side notifications.
+ *
+ * Renders HTML templates and enqueues email jobs to Redis.
+ *
+ * @example
+ * import { sendEmail } from '$lib/server/services/email';
+ * await sendEmail({ type: 'test', data: { service: 'test', link: '', linkText: '' }, to: 'a@b.com', subject: 'Hello' }).unwrap();
+ */
 import { attemptAsync } from 'ts-utils/check';
 import { type Email } from '../../types/email';
 import redis from './redis';
