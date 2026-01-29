@@ -150,8 +150,8 @@ importers:
         specifier: ^0.38.4
         version: 0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1)
       drizzle-struct:
-        specifier: github:tsaxking/drizzle-struct#2026-01-26-TK-UpdateTypes
-        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452(@types/debug@4.1.12)(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(jiti@1.21.7)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)(terser@5.46.0)
+        specifier: github:tsaxking/drizzle-struct#v2.1.0
+        version: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c5574684002d51e101ce3526677e64276d4f3fef(@types/debug@4.1.12)(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(jiti@1.21.7)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)(terser@5.46.0)
       drizzle-zod:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.4(@types/pg@8.15.5)(@types/react@19.1.13)(pg@8.16.3)(postgres@3.4.7)(react@19.1.1))(zod@3.25.76)
@@ -3260,8 +3260,8 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452:
-    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452}
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c5574684002d51e101ce3526677e64276d4f3fef:
+    resolution: {tarball: https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c5574684002d51e101ce3526677e64276d4f3fef}
     version: 1.0.0
 
   drizzle-zod@0.6.1:
@@ -9263,7 +9263,7 @@ snapshots:
       postgres: 3.4.7
       react: 19.1.1
 
-  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/0d7258d4b9d49e8e99214fe68fe13f869ef82452(@types/debug@4.1.12)(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(jiti@1.21.7)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)(terser@5.46.0):
+  drizzle-struct@https://codeload.github.com/tsaxking/drizzle-struct/tar.gz/c5574684002d51e101ce3526677e64276d4f3fef(@types/debug@4.1.12)(@types/node@22.18.3)(@types/pg@8.15.5)(@types/react@19.1.13)(jiti@1.21.7)(react@19.1.1)(sass-embedded@1.92.1)(sass@1.92.1)(terser@5.46.0):
     dependencies:
       '@eslint/compat': 1.3.2(eslint@9.35.0(jiti@1.21.7))
       '@msgpack/msgpack': 3.0.0-beta3
