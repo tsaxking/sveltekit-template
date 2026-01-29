@@ -344,13 +344,14 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 					async (page, pageSize) => {
 						_init();
 						const datas = await this.table()
+							.where(data)
 							.offset(page * pageSize)
 							.limit(pageSize)
 							.toArray();
 						return datas.map((data) => this.Generator(data));
 					},
 					async () => {
-						return await this.table().count();
+						return await this.table().where(data).count();
 					}
 				);
 
