@@ -8,6 +8,7 @@ Admin logs page at `/dashboard/admin/logs`.
 	import { dateTime } from 'ts-utils/clock';
 	import { capitalize, fromSnakeCase, abbreviate } from 'ts-utils/text';
 	import nav from '$lib/nav/admin.js';
+	import { SvelteURLSearchParams } from 'svelte/reactivity';
 
 	nav();
 
@@ -33,7 +34,7 @@ Admin logs page at `/dashboard/admin/logs`.
 		page: number;
 		limit: number;
 	}) => {
-		const sp = new URLSearchParams();
+		const sp = new SvelteURLSearchParams();
 		if (config.accountId) sp.set('account', config.accountId);
 		if (config.type) sp.set('type', config.type);
 		if (config.dataId) sp.set('data', config.dataId);

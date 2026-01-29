@@ -14,21 +14,7 @@ Sign-up page at `/account/sign-up`.
 
 	let password = $state('');
 	let confirmPassword = $state('');
-	let passwordResult: {
-		id: number;
-		value: 'Too Weak' | 'Weak' | 'Medium' | 'Strong';
-		contains: ('lowercase' | 'uppercase' | 'symbol' | 'number')[];
-		length: number;
-	} = $state({
-		id: 0,
-		value: 'Too Weak',
-		contains: [],
-		length: 0
-	});
-
-	$effect(() => {
-		passwordResult = passwordStrength(password);
-	});
+	const passwordResult = $derived(passwordStrength(password));
 
 	$effect(() => {
 		if (form?.redirect && browser) {
