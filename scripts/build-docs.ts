@@ -649,11 +649,13 @@ const endInstructions = () => {
 };
 
 const eachDoc = async (fn: (content: string) => Promise<void> | void) => {
-	const docs = glob.sync('**/*.md', {
-		cwd: DOCS_DIR,
-		ignore: ['**/node_modules/**', '**/.vitepress/**'],
-		nodir: true
-	}).sort();
+	const docs = glob
+		.sync('**/*.md', {
+			cwd: DOCS_DIR,
+			ignore: ['**/node_modules/**', '**/.vitepress/**'],
+			nodir: true
+		})
+		.sort();
 
 	for (const relPath of docs) {
 		const absPath = path.join(DOCS_DIR, relPath);
