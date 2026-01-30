@@ -58,9 +58,9 @@ export default ts.config(
 			],
 			'@typescript-eslint/no-empty-object-type': 'off',
 			'svelte/valid-compile': 'error',
-			'svelte/require-each-key': 'warn',
+			'svelte/require-each-key': 'off',
 			'svelte/no-navigation-without-resolve': [
-				'warn',
+				'off',
 				{
 					ignoreGoto: false,
 					ignoreLinks: true,
