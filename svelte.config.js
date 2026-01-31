@@ -17,6 +17,11 @@ const config = {
 			remoteFunctions: true
 		}
 	},
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
+	},
 
 	extensions: ['.svelte', '.svx']
 };
