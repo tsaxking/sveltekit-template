@@ -12,7 +12,6 @@ import { attempt, attemptAsync } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
 import { match } from 'ts-utils/match';
 import { Stream } from 'ts-utils/stream';
-import { type Writable } from 'svelte/store';
 import type { ColType, globalCols } from 'drizzle-struct';
 import { z } from 'zod';
 import { StructDataVersion } from './data-version';
@@ -21,6 +20,7 @@ import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import * as remote from '$lib/remotes/struct.remote';
 import { browser } from '$app/environment';
+import { WritableBase } from '../writables';
 
 // let didCacheWarning = false;
 
@@ -332,15 +332,7 @@ export type StatusMessage<T = void> = {
  * @template {Blank} T
  * @implements {Writable<StructData<T>>}
  */
-export class SingleWritable<T extends Blank> implements Writable<StructData<T>> {
-	/**
-	 * The current data held by this writable store.
-	 *
-	 * @private
-	 * @type {StructData<T>}
-	 */
-	private data: StructData<T>;
-
+export class SingleWritable<T extends Blank> extends WritableBase<StructData<T>> {
 	/**
 	 * Creates an instance of SingleWritable.
 	 *
@@ -348,76 +340,32 @@ export class SingleWritable<T extends Blank> implements Writable<StructData<T>> 
 	 * @param {StructData<T>} defaultData
 	 */
 	constructor(defaultData: StructData<T>) {
-		this.data = defaultData;
-	}
-	/**
-	 * Runs when all subscribers have been removed
-	 *
-	 * @private
-	 * @type {?() => void}
-	 */
-	private _onAllUnsubscribe?: () => void;
-	/**
-	 *  A set of subscribers that will be notified when the data changes.
-	 *
-	 * @private
-	 * @readonly
-	 * @type {*}
-	 */
-	private readonly subscribers = new Set<(data: StructData<T>) => void>();
+		super(defaultData);
+		const offupdate = this.struct.on('update', (data) => {
+			if (data.data.id === this.data.data.id) {
+				this.set(data);
+			}
+		});
+		const offarchive = this.struct.on('archive', (data) => {
+			if (data.data.id === this.data.data.id) {
+				this.set(data);
+			}
+		});
+		const offrestore = this.struct.on('restore', (data) => {
+			if (data.data.id === this.data.data.id) {
+				this.set(data);
+			}
+		});
 
-	/**
-	 * Subscribes to changes in the data.
-	 *
-	 * @param {(data: StructData<T>) => void} fn
-	 * @returns {void) => () => void}
-	 */
-	subscribe(fn: (data: StructData<T>) => void) {
-		this.subscribers.add(fn);
-		fn(this.data);
-		return () => {
-			this.subscribers.delete(fn);
-			if (!this.subscribers.size) this._onAllUnsubscribe?.();
-		};
+		this.onAllUnsubscribe(() => {
+			offupdate();
+			offarchive();
+			offrestore();
+		});
 	}
 
-	/**
-	 * Sets a callback that runs when all subscribers have unsubscribed.
-	 *
-	 * @param {() => void} fn
-	 * @returns {void) => void}
-	 */
-	onAllUnsubscribe(fn: () => void) {
-		this._onAllUnsubscribe = fn;
-	}
-
-	/**
-	 * Sets the data to a new value and notifies all subscribers.
-	 *
-	 * @param {StructData<T>} data
-	 */
-	set(data: StructData<T>) {
-		this.data = data;
-		this.subscribers.forEach((fn) => fn(data));
-	}
-
-	/**
-	 * Updates the data using a function that receives the current data.
-	 *
-	 * @param {(data: StructData<T>) => StructData<T>} fn
-	 * @returns {StructData<T>) => void}
-	 */
-	update(fn: (data: StructData<T>) => StructData<T>) {
-		this.set(fn(this.data));
-	}
-
-	/**
-	 * Returns the current data held by this writable store.
-	 *
-	 * @returns {StructData<T>}
-	 */
-	get() {
-		return this.data;
+	get struct() {
+		return this.data.struct;
 	}
 }
 
