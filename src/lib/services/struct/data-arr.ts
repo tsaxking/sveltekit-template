@@ -62,6 +62,7 @@ export class DataArr<T extends Blank> extends WritableArray<StructData<T>> {
 	 * @param {StructData<T>[]} value
 	 */
 	private apply(value: StructData<T>[]): void {
+		value = value.filter((v, i, a) => a.indexOf(v) === i); // Remove duplicates
 		this.data = value.sort(this._sort).filter(this._filter);
 		if (this._reverse) {
 			this.data.reverse();
