@@ -11,7 +11,7 @@
  */
 import { command, query } from '$app/server';
 import z from 'zod';
-import { getAccount } from './index.remote';
+import { getAccount, isAdmin } from './index.remote';
 import { error } from '@sveltejs/kit';
 import { Permissions } from '$lib/server/structs/permissions';
 import { PropertyAction } from '$lib/types/struct';
@@ -19,6 +19,7 @@ import { Account } from '$lib/server/structs/account';
 import { DB } from '$lib/server/db';
 import { and, eq } from 'drizzle-orm';
 import { type Entitlement } from '$lib/types/entitlements';
+import terminal from '$lib/server/utils/terminal';
 
 /**
  * Searches roles by name with pagination.
@@ -52,8 +53,12 @@ export const searchRoles = query(
 			account,
 			roles.value,
 			PropertyAction.Read
-		).unwrap();
-		return res;
+		);
+		if (res.isOk()) {
+			return res.value;
+		} else {
+			return error(500, 'Internal Server Error');
+		}
 	}
 );
 
@@ -81,8 +86,11 @@ export const createRole = command(
 			return error(401, 'Unauthorized');
 		}
 
-		const parentRole = await Permissions.Role.fromId(data.parent).unwrap();
-		if (!parentRole) {
+		const parentRole = await Permissions.Role.fromId(data.parent);
+		if (parentRole.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!parentRole.value) {
 			return {
 				success: false,
 				message: 'No parent role found'
@@ -90,12 +98,15 @@ export const createRole = command(
 		}
 
 		PERMIT: {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 			// if an account has that role or higher in the hierarchy, they can create child roles.
-			const highestRole = await Permissions.getHighestLevelRole(parentRole, account, true).unwrap();
-			if (!highestRole) {
+			const highestRole = await Permissions.getHighestLevelRole(parentRole.value, account, true);
+			if (highestRole.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!highestRole.value) {
 				return {
 					success: false,
 					message:
@@ -103,13 +114,24 @@ export const createRole = command(
 				};
 			}
 
-			const canCreate = await Permissions.canCreate(
-				account,
-				Permissions.Role,
-				parentRole.getAttributes().unwrap()
-			).unwrap();
+			const attrs = parentRole.value.getAttributes();
+			if (attrs.isErr()) {
+				terminal.log(
+					'Corrupted role attributes detected',
+					'warn',
+					attrs.error,
+					'Role:',
+					parentRole.value.id
+				);
+				return error(500, 'Internal Server Error');
+			}
 
-			if (!canCreate) {
+			const canCreate = await Permissions.canCreate(account, Permissions.Role, attrs.value);
+			if (canCreate.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+
+			if (!canCreate.value) {
 				return {
 					success: false,
 					message: 'You do not have permission to create a role under this parent role'
@@ -118,11 +140,23 @@ export const createRole = command(
 
 			// Ensure there are no duplicate names within the whole system
 			const [upper, lower] = await Promise.all([
-				Permissions.getUpperHierarchy(parentRole, true).unwrap(),
-				Permissions.getLowerHierarchy(parentRole, true).unwrap()
+				Permissions.getUpperHierarchy(parentRole.value, true),
+				Permissions.getLowerHierarchy(parentRole.value, true)
 			]);
 
-			if ([...upper, ...lower].some((r) => r.data.name.toLowerCase() === data.name.toLowerCase())) {
+			if (upper.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+
+			if (lower.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+
+			if (
+				[...upper.value, ...lower.value].some(
+					(r) => r.data.name.toLowerCase() === data.name.toLowerCase()
+				)
+			) {
 				return {
 					success: false,
 					message: 'A role with this name already exists in the hierarchy.'
@@ -130,17 +164,21 @@ export const createRole = command(
 			}
 		}
 
-		await Permissions.Role.new({
+		const res = await Permissions.Role.new({
 			name: data.name,
 			description: data.description,
 			parent: data.parent,
 			color: data.color
-		}).unwrap();
+		});
 
-		return {
-			success: true,
-			data: {}
-		};
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		} else {
+			return {
+				success: true,
+				role: res.value
+			};
+		}
 	}
 );
 
@@ -160,22 +198,31 @@ const canManage = async (
 		account: Account.AccountData;
 	}
 ) => {
-	if (await Account.isAdmin(self).unwrap()) {
+	if (await isAdmin()) {
 		return true;
 	}
 
 	// account should be in the role or higher and be granted permission to manage members
-	const hierarchy = await Permissions.getUpperHierarchy(data.role, true).unwrap();
+	const hierarchy = await Permissions.getUpperHierarchy(data.role, true);
+	if (hierarchy.isErr()) {
+		return error(500, 'Internal Server Error');
+	}
 	const accountRoles = await Permissions.getRolesFromAccountWithinHierarchy(
 		data.account,
-		hierarchy
-	).unwrap();
-	if (accountRoles.length === 0) {
+		hierarchy.value
+	);
+	if (accountRoles.isErr()) {
+		return error(500, 'Internal Server Error');
+	}
+	if (accountRoles.value.length === 0) {
 		return 'You are not a member of a parent role or the role itself, you cannot manage its membership';
 	}
 
-	const rulesets = await Permissions.getRulesetsfromRoles(accountRoles).unwrap();
-	if (!rulesets.some((r) => r.data.entitlement === 'manage-members')) {
+	const rulesets = await Permissions.getRulesetsfromRoles(accountRoles.value);
+	if (rulesets.isErr()) {
+		return error(500, 'Internal Server Error');
+	}
+	if (!rulesets.value.some((r) => r.data.entitlement === 'manage-members')) {
 		return 'You do not have permission to manage members of this role';
 	}
 
@@ -200,23 +247,32 @@ export const addToRole = command(
 			return error(401, 'Unauthorized');
 		}
 
-		const role = await Permissions.Role.fromId(data.role).unwrap();
-		if (!role) {
+		const role = await Permissions.Role.fromId(data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!role.value) {
 			return {
 				success: false,
 				message: 'Role not found'
 			};
 		}
 
-		const accountToAdd = await Account.Account.fromId(data.account).unwrap();
-		if (!accountToAdd) {
+		const accountToAdd = await Account.Account.fromId(data.account);
+		if (accountToAdd.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!accountToAdd.value) {
 			return {
 				success: false,
 				message: 'Account to add not found'
 			};
 		}
 
-		const canManageResult = await canManage(account, { role: role, account: accountToAdd });
+		const canManageResult = await canManage(account, {
+			role: role.value,
+			account: accountToAdd.value
+		});
 		if (canManageResult !== true) {
 			return {
 				success: false,
@@ -224,19 +280,26 @@ export const addToRole = command(
 			};
 		}
 
-		const isInRole = await Permissions.isInRole(role, accountToAdd).unwrap();
+		const isInRole = await Permissions.isInRole(role.value, accountToAdd.value);
+		if (isInRole.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
-		if (isInRole) {
+		if (isInRole.value) {
 			return {
 				success: false,
 				message: 'Account is already in role'
 			};
 		}
 
-		await Permissions.RoleAccount.new({
-			role: role.id,
-			account: accountToAdd.id
-		}).unwrap();
+		const res = await Permissions.RoleAccount.new({
+			role: role.value.id,
+			account: accountToAdd.value.id
+		});
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return {
 			success: true
@@ -281,16 +344,22 @@ export const removeFromRole = command(
 		const ra = Permissions.RoleAccount.Generator(res[0]);
 
 		if (ra.data.account === account.id) {
-			const role = await Permissions.Role.fromId(data.role).unwrap();
-			if (!role) {
+			const role = await Permissions.Role.fromId(data.role);
+			if (role.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!role.value) {
 				return {
 					success: false,
 					message: 'Role not found'
 				};
 			}
 
-			const upper = await Permissions.getUpperHierarchy(role, false).unwrap();
-			if (upper.length === 0) {
+			const upper = await Permissions.getUpperHierarchy(role.value, false);
+			if (upper.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (upper.value.length === 0) {
 				return {
 					success: false,
 					message:
@@ -300,9 +369,12 @@ export const removeFromRole = command(
 
 			const inHigherRoles = await Permissions.getRolesFromAccountWithinHierarchy(
 				account,
-				upper
-			).unwrap();
-			if (inHigherRoles.length === 0) {
+				upper.value
+			);
+			if (inHigherRoles.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (inHigherRoles.value.length === 0) {
 				return {
 					success: false,
 					message:
@@ -311,23 +383,32 @@ export const removeFromRole = command(
 			}
 		}
 
-		const accountToRemove = await Account.Account.fromId(ra.data.account).unwrap();
-		if (!accountToRemove) {
+		const accountToRemove = await Account.Account.fromId(ra.data.account);
+		if (accountToRemove.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!accountToRemove.value) {
 			return {
 				success: false,
 				message: 'Account to remove not found'
 			};
 		}
 
-		const role = await Permissions.Role.fromId(ra.data.role).unwrap();
-		if (!role) {
+		const role = await Permissions.Role.fromId(ra.data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!role.value) {
 			return {
 				success: false,
 				message: 'Role not found'
 			};
 		}
 
-		const canManageResult = await canManage(account, { role: role, account: accountToRemove });
+		const canManageResult = await canManage(account, {
+			role: role.value,
+			account: accountToRemove.value
+		});
 		if (canManageResult !== true) {
 			return {
 				success: false,
@@ -335,7 +416,10 @@ export const removeFromRole = command(
 			};
 		}
 
-		await ra.delete().unwrap();
+		const deleteRes = await ra.delete();
+		if (deleteRes.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return {
 			success: true
 		};
@@ -351,8 +435,14 @@ export const myPermissions = query(async () => {
 		return error(401, 'Unauthorized');
 	}
 
-	const rs = await Permissions.getRulesetsFromAccount(account).unwrap();
-	return rs.filter((r) => r.struct.name === 'role_rulesets') as Permissions.RoleRulesetData[];
+	const rs = await Permissions.getRulesetsFromAccount(account);
+	if (rs.isOk()) {
+		return rs.value.filter(
+			(r) => r.struct.name === 'role_rulesets'
+		) as Permissions.RoleRulesetData[];
+	} else {
+		return error(500, 'Internal Server Error');
+	}
 });
 
 /**
@@ -371,25 +461,34 @@ export const permissionsFromRole = query(
 			return error(401, 'Unauthorized');
 		}
 
-		const role = await Permissions.Role.fromId(data.role).unwrap();
+		const role = await Permissions.Role.fromId(data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
-		if (!role) {
+		if (!role.value) {
 			return error(404, 'Role not found');
 		}
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 			// If the account is at or higher than the role's level, they can view the rulesets
-			const parent = await Permissions.getHighestLevelRole(role, account, true).unwrap();
-			if (!parent) {
+			const parent = await Permissions.getHighestLevelRole(role.value, account, true);
+			if (parent.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!parent.value) {
 				throw new Error("You do not have permission to view this role's rulesets");
 			}
 		} else {
 			throw new Error('No Authenticated account found');
 		}
 
-		return Permissions.getRulesetsFromRole(role).unwrap();
+		const res = await Permissions.getRulesetsFromRole(role.value);
+		if (res.isOk()) {
+			return res.value.map((r) => r.safe());
+		}
 	}
 );
 
@@ -409,33 +508,50 @@ export const availablePermissions = query(
 			return error(401, 'Unauthorized');
 		}
 
-		const role = await Permissions.Role.fromId(data.role).unwrap();
-		if (!role) {
+		const role = await Permissions.Role.fromId(data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!role.value) {
 			return error(404, 'Role not found');
 		}
 
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 			// If the account is higher than the role's level, they can view the rulesets
-			const parent = await Permissions.getHighestLevelRole(role, account, false).unwrap();
-			if (!parent) {
+			const parent = await Permissions.getHighestLevelRole(role.value, account, false);
+			if (parent.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!parent.value) {
 				throw new Error("You do not have permission to view this role's rulesets");
 			}
 		} else {
 			return error(401, 'Unauthorized');
 		}
 
-		if (!role.data.parent)
-			return (await Permissions.getRulesetsFromRole(role).unwrap()).map((r) => r.safe());
+		if (!role.value.data.parent) {
+			const res = await Permissions.getRulesetsFromRole(role.value);
+			if (res.isOk()) {
+				return res.value.map((r) => r.safe());
+			}
+		}
 
-		const parent = await Permissions.getParent(role).unwrap();
-		if (!parent) {
+		const parent = await Permissions.getParent(role.value);
+		if (parent.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!parent.value) {
 			return error(500, 'Parent role not found');
 		}
 
-		return (await Permissions.getRulesetsFromRole(parent).unwrap()).map((r) => r.safe());
+		const rulesets = await Permissions.getRulesetsFromRole(parent.value);
+		if (rulesets.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		return rulesets.value.map((r) => r.safe());
 	}
 );
 
@@ -457,16 +573,22 @@ export const grantRolePermission = command(
 			return error(401, 'Unauthorized');
 		}
 
-		const role = await Permissions.Role.fromId(data.role).unwrap();
-		if (!role) {
+		const role = await Permissions.Role.fromId(data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!role.value) {
 			return {
 				success: false,
 				message: 'Role not found'
 			};
 		}
 
-		const ruleset = await Permissions.RoleRuleset.fromId(data.ruleset).unwrap();
-		if (!ruleset) {
+		const ruleset = await Permissions.RoleRuleset.fromId(data.ruleset);
+		if (ruleset.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!ruleset.value) {
 			return {
 				success: false,
 				message: 'Ruleset not found'
@@ -474,19 +596,22 @@ export const grantRolePermission = command(
 		}
 
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 
 			const entitlement = await Permissions.Entitlement.get(
 				{
-					name: ruleset.data.entitlement
+					name: ruleset.value.data.entitlement
 				},
 				{
 					type: 'single'
 				}
-			).unwrap();
-			if (!entitlement) {
+			);
+			if (entitlement.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!entitlement.value) {
 				return {
 					success: false,
 					message: 'Entitlement not found'
@@ -495,8 +620,11 @@ export const grantRolePermission = command(
 
 			// Not inclusive because we want to check if the user is able to grant permissions on the role itself.
 			// A user cannot grant permissions to a role that is not in their hierarchy or is the highest level role they are a part of.
-			const highestLevelRole = await Permissions.getHighestLevelRole(role, account, false).unwrap();
-			if (!highestLevelRole) {
+			const highestLevelRole = await Permissions.getHighestLevelRole(role.value, account, false);
+			if (highestLevelRole.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!highestLevelRole.value) {
 				return {
 					success: false,
 					message: 'You do not have permission to manage permissions on this role'
@@ -505,13 +633,18 @@ export const grantRolePermission = command(
 			}
 
 			// these rulesets are the only ones that can be granted to child roles.
-			const rulesets = await Permissions.getRulesetsFromRole(highestLevelRole).unwrap();
+			const rulesets = await Permissions.getRulesetsFromRole(highestLevelRole.value);
+			if (rulesets.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			const e = entitlement.value;
+			const r = ruleset.value;
 			// Check to see if the managing account has the permission they're attempting to grant
 			if (
-				!rulesets.some(
-					(r) =>
-						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === ruleset.data.targetAttribute
+				!rulesets.value.some(
+					(rr) =>
+						rr.data.entitlement === e.data.name &&
+						rr.data.targetAttribute === r.data.targetAttribute
 				)
 			) {
 				return {
@@ -522,11 +655,14 @@ export const grantRolePermission = command(
 
 			// check to see if they already have this permission
 			const existing = await Permissions.getRoleRuleset(
-				role,
-				entitlement.data.name,
-				ruleset.data.targetAttribute
-			).unwrap();
-			if (existing) {
+				role.value,
+				entitlement.value.data.name,
+				ruleset.value.data.targetAttribute
+			);
+			if (existing.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (existing.value) {
 				return {
 					success: false,
 					message: 'This role already has this permission'
@@ -541,15 +677,19 @@ export const grantRolePermission = command(
 				// code: EventErrorCode.NoAccount,
 			};
 		}
-		Permissions.grantRoleRuleset({
-			role: role,
-			entitlement: ruleset.data.entitlement as Entitlement,
-			targetAttribute: ruleset.data.targetAttribute,
-			featureScopes: (JSON.parse(ruleset.data.featureScopes) as string[]) || [],
-			parentRuleset: ruleset,
-			name: ruleset.data.name,
-			description: ruleset.data.description
+		const res = await Permissions.grantRoleRuleset({
+			role: role.value,
+			entitlement: ruleset.value.data.entitlement as Entitlement,
+			targetAttribute: ruleset.value.data.targetAttribute,
+			featureScopes: (JSON.parse(ruleset.value.data.featureScopes) as string[]) || [],
+			parentRuleset: ruleset.value,
+			name: ruleset.value.data.name,
+			description: ruleset.value.data.description
 		});
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return {
 			success: true,
@@ -574,16 +714,22 @@ export const revokeRolePermission = command(
 			return error(401, 'Unauthorized');
 		}
 
-		const ruleset = await Permissions.RoleRuleset.fromId(data.ruleset).unwrap();
-		if (!ruleset) {
+		const ruleset = await Permissions.RoleRuleset.fromId(data.ruleset);
+		if (ruleset.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!ruleset.value) {
 			return {
 				success: false,
 				message: 'Ruleset not found'
 			};
 		}
 
-		const role = await Permissions.Role.fromId(ruleset.data.role).unwrap();
-		if (!role) {
+		const role = await Permissions.Role.fromId(ruleset.value.data.role);
+		if (role.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!role.value) {
 			return {
 				success: false,
 				message: 'Role not found'
@@ -592,13 +738,16 @@ export const revokeRolePermission = command(
 
 		const entitlement = await Permissions.Entitlement.get(
 			{
-				name: ruleset.data.entitlement
+				name: ruleset.value.data.entitlement
 			},
 			{
 				type: 'single'
 			}
-		).unwrap();
-		if (!entitlement) {
+		);
+		if (entitlement.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!entitlement.value) {
 			return {
 				success: false,
 				message: 'Entitlement not found'
@@ -606,12 +755,15 @@ export const revokeRolePermission = command(
 		}
 
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 
-			const highestLevelRole = await Permissions.getHighestLevelRole(role, account, false).unwrap();
-			if (!highestLevelRole) {
+			const highestLevelRole = await Permissions.getHighestLevelRole(role.value, account, false);
+			if (highestLevelRole.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!highestLevelRole.value) {
 				return {
 					success: false,
 					message: 'You do not have permission to manage permissions on this role'
@@ -619,12 +771,18 @@ export const revokeRolePermission = command(
 				};
 			}
 
-			const rulesets = await Permissions.getRulesetsFromRole(highestLevelRole).unwrap();
+			const rulesets = await Permissions.getRulesetsFromRole(highestLevelRole.value);
+			if (rulesets.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			const r = ruleset.value;
+			const e = entitlement.value;
+			// Check to see if the managing account has the permission they're attempting to revoke
 			if (
-				!rulesets.some(
-					(r) =>
-						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === ruleset.data.targetAttribute
+				!rulesets.value.some(
+					(rr) =>
+						rr.data.entitlement === e.data.name &&
+						rr.data.targetAttribute === r.data.targetAttribute
 				)
 			) {
 				return {
@@ -640,11 +798,15 @@ export const revokeRolePermission = command(
 			};
 		}
 
-		await Permissions.revokeRoleRuleset(
-			role,
-			entitlement.data.name as Entitlement,
-			ruleset.data.targetAttribute
-		).unwrap();
+		const res = await Permissions.revokeRoleRuleset(
+			role.value,
+			entitlement.value.data.name as Entitlement,
+			ruleset.value.data.targetAttribute
+		);
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return {
 			success: true,
@@ -666,8 +828,13 @@ export const myAccountPermissions = query(async () => {
 		throw new Error('No Authenticated account found');
 	}
 
-	const rs = await Permissions.getRulesetsFromAccount(account).unwrap();
-	return rs.filter((r) => r.struct.name === 'account_rulesets') as Permissions.AccountRulesetData[];
+	const rs = await Permissions.getRulesetsFromAccount(account);
+	if (rs.isErr()) {
+		return error(500, 'Internal Server Error');
+	}
+	return rs.value.filter(
+		(r) => r.struct.name === 'account_rulesets'
+	) as Permissions.AccountRulesetData[];
 });
 
 /**
@@ -693,7 +860,7 @@ export const grantAccountPermission = command(
 		}
 
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 
@@ -704,28 +871,37 @@ export const grantAccountPermission = command(
 				{
 					type: 'single'
 				}
-			).unwrap();
-			if (!entitlement) {
+			);
+			if (entitlement.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!entitlement.value) {
 				return {
 					success: false,
 					message: 'Entitlement not found'
 				};
 			}
 
-			const accountToGrant = await Account.Account.fromId(data.account).unwrap();
-			if (!accountToGrant) {
+			const accountToGrant = await Account.Account.fromId(data.account);
+			if (accountToGrant.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!accountToGrant.value) {
 				return {
 					success: false,
 					message: 'Account not found'
 				};
 			}
 
-			const rulesets = await Permissions.getRulesetsFromAccount(account).unwrap();
+			const rulesets = await Permissions.getRulesetsFromAccount(account);
+			if (rulesets.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			const e = entitlement.value;
 			if (
-				!rulesets.some(
-					(r) =>
-						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === data.targetAttribute
+				!rulesets.value.some(
+					(rr) =>
+						rr.data.entitlement === e.data.name && rr.data.targetAttribute === data.targetAttribute
 				)
 			) {
 				return {
@@ -741,12 +917,16 @@ export const grantAccountPermission = command(
 			};
 		}
 
-		Permissions.AccountRuleset.new({
+		const res = await Permissions.AccountRuleset.new({
 			account: data.account,
 			entitlement: data.entitlement,
 			targetAttribute: data.targetAttribute,
 			featureScopes: JSON.stringify(data.featureScopes)
-		}).unwrap();
+		});
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return {
 			success: true,
@@ -771,8 +951,11 @@ export const revokeAccountPermission = command(
 			return error(401, 'Unauthorized');
 		}
 
-		const ruleset = await Permissions.AccountRuleset.fromId(data.ruleset).unwrap();
-		if (!ruleset) {
+		const ruleset = await Permissions.AccountRuleset.fromId(data.ruleset);
+		if (ruleset.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!ruleset.value) {
 			return {
 				success: false,
 				message: 'Ruleset not found'
@@ -781,21 +964,27 @@ export const revokeAccountPermission = command(
 
 		const entitlement = await Permissions.Entitlement.get(
 			{
-				name: ruleset.data.entitlement
+				name: ruleset.value.data.entitlement
 			},
 			{
 				type: 'single'
 			}
-		).unwrap();
-		if (!entitlement) {
+		);
+		if (entitlement.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!entitlement.value) {
 			return {
 				success: false,
 				message: 'Entitlement not found'
 			};
 		}
 
-		const accountToGrant = await Account.Account.fromId(ruleset.data.account).unwrap();
-		if (!accountToGrant) {
+		const accountToGrant = await Account.Account.fromId(ruleset.value.data.account);
+		if (accountToGrant.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!accountToGrant.value) {
 			return {
 				success: false,
 				message: 'Account not found'
@@ -803,16 +992,21 @@ export const revokeAccountPermission = command(
 		}
 
 		PERMIT: if (account) {
-			if (await Account.isAdmin(account)) {
+			if (await isAdmin()) {
 				break PERMIT;
 			}
 
-			const rulesets = await Permissions.getRulesetsFromAccount(account).unwrap();
+			const rulesets = await Permissions.getRulesetsFromAccount(account);
+			if (rulesets.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			const r = ruleset.value;
+			const e = entitlement.value;
 			if (
-				!rulesets.some(
-					(r) =>
-						r.data.entitlement === entitlement.data.name &&
-						r.data.targetAttribute === ruleset.data.targetAttribute
+				!rulesets.value.some(
+					(rr) =>
+						rr.data.entitlement === e.data.name &&
+						rr.data.targetAttribute === r.data.targetAttribute
 				)
 			) {
 				return {
@@ -828,14 +1022,17 @@ export const revokeAccountPermission = command(
 			};
 		}
 
-		if (!ruleset) {
+		if (!ruleset.value) {
 			return {
 				success: false,
 				message: 'This account does not have this permission'
 			};
 		}
 
-		await ruleset.delete().unwrap();
+		const res = await ruleset.value.delete();
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return {
 			success: true,
 			message: 'Permission revoked successfully'

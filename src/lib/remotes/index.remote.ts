@@ -17,7 +17,7 @@ import { Account } from '$lib/server/structs/account';
 export const isAdmin = query(async () => {
 	const event = getRequestEvent();
 	if (!event.locals.account) return false;
-	return Account.isAdmin(event.locals.account).unwrap();
+	return Account.isAdmin(event.locals.account);
 });
 
 /**
