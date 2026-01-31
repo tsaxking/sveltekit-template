@@ -17,4 +17,3 @@ export const ntp = query(() => {
 		date: TimeService.getLastSynced()
 	};
 });
-}
