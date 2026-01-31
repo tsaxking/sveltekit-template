@@ -32,13 +32,17 @@ export const search = query(
 			return error(401, 'Unauthorized');
 		}
 
-		return (
-			await Account.searchAccounts(data.query, {
-				type: 'array',
-				limit: data.limit,
-				offset: data.page * data.limit
-			}).unwrap()
-		).map((a) => a.safe());
+		const res = await Account.searchAccounts(data.query, {
+			type: 'array',
+			limit: data.limit,
+			offset: data.page * data.limit
+		});
+
+		if (res.isOk()) {
+			return res.value.map((a) => a.safe());
+		} else {
+			return error(500, 'Internal Server Error');
+		}
 	}
 );
 
@@ -61,14 +65,17 @@ export const usernameExists = query(
 		username: z.string().min(3).max(32)
 	}),
 	async (data) => {
-		const account = await Account.Account.get(
+		const count = await Account.Account.get(
 			{ username: data.username },
 			{
 				type: 'count'
 			}
-		).unwrap();
-
-		return account > 0;
+		);
+		if (count.isOk()) {
+			return count.value > 0;
+		} else {
+			return error(500, 'Internal Server Error');
+		}
 	}
 );
 
@@ -86,21 +93,23 @@ export const getOwnNotifs = query(
 		const account = await getAccount();
 		if (!account) return error(401, 'Unauthorized');
 
-		return (
-			await Account.AccountNotification.get(
-				{
-					accountId: account.id,
-					read: false
-				},
-				{
-					type: 'array',
-					limit: limit,
-					offset: page * limit
-				}
-			)
-		)
-			.unwrap()
-			.map((n) => n.safe());
+		const res = await Account.AccountNotification.get(
+			{
+				accountId: account.id,
+				read: false
+			},
+			{
+				type: 'array',
+				limit: limit,
+				offset: page * limit
+			}
+		);
+
+		if (res.isOk()) {
+			return res.value.map((n) => n.safe());
+		} else {
+			return error(500, 'Internal Server Error');
+		}
 	}
 );
 
@@ -109,7 +118,12 @@ export const getOwnNotifs = query(
  */
 export const signOut = command(async () => {
 	const session = await getSession();
-	await Session.signOut(session).unwrap();
+	const res = await Session.signOut(session);
+	if (res.isOk()) {
+		return true;
+	} else {
+		return error(500, 'Internal Server Error');
+	}
 });
 
 /**
@@ -126,19 +140,21 @@ export const getNotifications = query(
 		const account = await getAccount();
 		if (!account) return error(401, 'Unauthorized');
 
-		return (
-			await Account.AccountNotification.get(
-				{
-					accountId: account.id
-				},
-				{
-					type: 'array',
-					limit: data.limit,
-					offset: data.page * data.limit
-				}
-			)
-		)
-			.unwrap()
-			.map((n) => n.safe());
+		const res = await Account.AccountNotification.get(
+			{
+				accountId: account.id
+			},
+			{
+				type: 'array',
+				limit: data.limit,
+				offset: data.page * data.limit
+			}
+		);
+
+		if (res.isOk()) {
+			return res.value.map((n) => n.safe());
+		} else {
+			return error(500, 'Internal Server Error');
+		}
 	}
 );

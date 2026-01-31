@@ -53,18 +53,28 @@ export const create = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Create, account).unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(DataAction.Create, account);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`Create action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.Create, account).unwrap()) {
+			const isBypassed = registry.isBypassed(DataAction.Create, account);
+			if (isBypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (isBypassed.value) {
 				break PERMIT;
 			}
 
-			const canDo = await Permissions.canCreate(account, registry.struct, data.attributes).unwrap();
-			if (!canDo) {
+			const canDo = await Permissions.canCreate(account, registry.struct, data.attributes);
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (!canDo.value) {
 				return error(403, 'Unauthorized');
 			}
 		}
@@ -87,12 +97,14 @@ export const create = command(
 			return error(400, 'Invalid data');
 		}
 
-		await registry.struct
-			.new({
-				...data.data,
-				attributes: JSON.stringify(data.attributes)
-			})
-			.unwrap();
+		const res = await registry.struct.new({
+			...data.data,
+			attributes: JSON.stringify(data.attributes)
+		});
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return {
 			success: true
@@ -174,8 +186,11 @@ export const update = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(data.id).unwrap();
-		if (!targetData) {
+		const targetData = await registry.struct.fromId(data.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
 			return error(404, `Data with id ${data.id} not found`);
 		}
 
@@ -210,7 +225,10 @@ export const update = command(
 		}
 
 		if (data.struct === 'test') {
-			await targetData.update(data.data as any).unwrap();
+			const res = await targetData.value.update(data.data as any);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
 			return { success: true };
 		}
 
@@ -220,11 +238,13 @@ export const update = command(
 			return error(403, 'Unauthorized');
 		}
 
-		const isAdmin = await Account.isAdmin(account).unwrap();
-
 		BLOCKS: {
-			if (isAdmin) break BLOCKS;
-			if (await registry.isBlocked(PropertyAction.Update, account, targetData).unwrap()) {
+			if (await isAdmin()) break BLOCKS;
+			const blocked = registry.isBlocked(PropertyAction.Update, account, targetData.value);
+			if (blocked.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (blocked.value) {
 				terminal.error(`Update action is blocked for struct ${data.struct}`);
 				return error(403, 'Unauthorized');
 			}
@@ -232,11 +252,14 @@ export const update = command(
 
 		const filtered = await Permissions.filterPropertyActionFromAccount(
 			account,
-			[targetData],
+			[targetData.value],
 			PropertyAction.Update
-		).unwrap();
+		);
+		if (filtered.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
-		const [canUpdate] = filtered;
+		const [canUpdate] = filtered.value;
 		if (!canUpdate || Object.keys(canUpdate).length === 0) {
 			return error(403, 'Unauthorized');
 		}
@@ -248,12 +271,14 @@ export const update = command(
 			}
 		}
 
-		if (Date.now() < targetData.updated.getTime()) {
+		if (Date.now() < targetData.value.updated.getTime()) {
 			terminal.error(`Data with id ${data.id} has a newer updated timestamp than the server time`);
 		}
 
-		await targetData.update(toUpdate as any).unwrap();
-
+		const res = await targetData.value.update(toUpdate as any);
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -276,8 +301,11 @@ export const archive = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(data.id).unwrap();
-		if (!targetData) {
+		const targetData = await registry.struct.fromId(data.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
 			return error(404, `Data with id ${data.id} not found`);
 		}
 
@@ -289,28 +317,38 @@ export const archive = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Archive, account, targetData).unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(DataAction.Archive, account, targetData.value);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`Archive action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.Archive, account, targetData).unwrap()) {
+			const bypassed = registry.isBypassed(DataAction.Archive, account, targetData.value);
+			if (bypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (bypassed.value) {
 				break PERMIT;
 			}
 
-			const canDo = await Permissions.accountCanDo(
-				account,
-				[targetData],
-				DataAction.Archive
-			).unwrap();
+			const canDo = await Permissions.accountCanDo(account, [targetData.value], DataAction.Archive);
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
 
-			if (!canDo[0]) {
+			if (!canDo.value[0]) {
 				return error(403, 'Unauthorized');
 			}
 		}
 
-		await targetData.setArchive(true).unwrap();
+		const res = await targetData.value.setArchive(true);
+
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		return { success: true };
 	}
@@ -334,8 +372,11 @@ export const restoreArchive = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(data.id).unwrap();
-		if (!targetData) {
+		const targetData = await registry.struct.fromId(data.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
 			return error(404, `Data with id ${data.id} not found`);
 		}
 
@@ -347,31 +388,42 @@ export const restoreArchive = command(
 			}
 
 			{
-				const blocked = await registry
-					.isBlocked(DataAction.RestoreArchive, account, targetData)
-					.unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(DataAction.RestoreArchive, account, targetData.value);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`RestoreArchive action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.RestoreArchive, account, targetData).unwrap()) {
+			const bypassed = registry.isBypassed(DataAction.RestoreArchive, account, targetData.value);
+			if (bypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (bypassed.value) {
 				// Bypass permissions
 				break PERMIT;
 			}
 
 			const canDo = await Permissions.accountCanDo(
 				account,
-				[targetData],
+				[targetData.value],
 				DataAction.RestoreArchive
-			).unwrap();
+			);
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
 
-			if (!canDo[0]) {
+			if (!canDo.value[0]) {
 				return error(403, 'Unauthorized');
 			}
 		}
 
-		await targetData.setArchive(false).unwrap();
+		const res = await targetData.value.setArchive(false);
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -396,7 +448,10 @@ export const clear = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		await registry.struct.clear().unwrap();
+		const res = await registry.struct.clear();
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -419,14 +474,20 @@ export const restoreVersion = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const version = await registry.struct.fromVhId(data.vhId).unwrap();
-		if (!version) {
+		const version = await registry.struct.fromVhId(data.vhId);
+		if (version.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!version.value) {
 			return error(404, `Version with vhId ${data.vhId} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(version.id).unwrap();
-		if (!targetData) {
-			return error(404, `Data with id ${version.id} not found`);
+		const targetData = await registry.struct.fromId(version.value.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
+			return error(404, `Data with id ${version.value.id} not found`);
 		}
 
 		const account = await getAccount();
@@ -437,31 +498,43 @@ export const restoreVersion = command(
 			}
 
 			{
-				const blocked = await registry
-					.isBlocked(DataAction.RestoreVersion, account, targetData)
-					.unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(DataAction.RestoreVersion, account, targetData.value);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`RestoreVersion action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.RestoreVersion, account, targetData).unwrap()) {
+			const bypassed = registry.isBypassed(DataAction.RestoreVersion, account, targetData.value);
+			if (bypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (bypassed.value) {
 				// Bypass permissions
 				break PERMIT;
 			}
 
 			const canDo = await Permissions.accountCanDo(
 				account,
-				[targetData],
+				[targetData.value],
 				DataAction.RestoreVersion
-			).unwrap();
+			);
 
-			if (!canDo[0]) {
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+
+			if (!canDo.value[0]) {
 				return error(403, 'Unauthorized');
 			}
 		}
 
-		await version.restore().unwrap();
+		const res = await version.value.restore();
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -484,8 +557,11 @@ export const remove = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(data.id).unwrap();
-		if (!targetData) {
+		const targetData = await registry.struct.fromId(data.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
 			return error(404, `Data with id ${data.id} not found`);
 		}
 
@@ -497,28 +573,37 @@ export const remove = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Delete, account, targetData).unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(DataAction.Delete, account, targetData.value);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`Delete action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.Delete, account, targetData).unwrap()) {
+			const bypassed = registry.isBypassed(DataAction.Delete, account, targetData.value);
+			if (bypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (bypassed.value) {
 				break PERMIT;
 			}
 
-			const canDo = await Permissions.accountCanDo(
-				account,
-				[targetData],
-				DataAction.Delete
-			).unwrap();
+			const canDo = await Permissions.accountCanDo(account, [targetData.value], DataAction.Delete);
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
 
-			if (!canDo[0]) {
+			if (!canDo.value[0]) {
 				return error(403, 'Unauthorized');
 			}
 		}
 
-		await targetData.delete().unwrap();
+		const res = await targetData.value.delete();
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -541,14 +626,20 @@ export const removeVersion = command(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		const version = await registry.struct.fromVhId(data.vhId).unwrap();
-		if (!version) {
+		const version = await registry.struct.fromVhId(data.vhId);
+		if (version.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!version.value) {
 			return error(404, `Version with vhId ${data.vhId} not found`);
 		}
 
-		const targetData = await registry.struct.fromId(version.id).unwrap();
-		if (!targetData) {
-			return error(404, `Data with id ${version.id} not found`);
+		const targetData = await registry.struct.fromId(version.value.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
+			return error(404, `Data with id ${version.value.id} not found`);
 		}
 
 		const account = await getAccount();
@@ -559,30 +650,45 @@ export const removeVersion = command(
 			}
 
 			{
-				const blocked = await registry
-					.isBlocked(DataAction.DeleteVersion, account, targetData)
-					.unwrap();
-				if (blocked) {
+				const blocked = registry.isBlocked(
+					DataAction.DeleteVersion,
+					account,
+					targetData.value
+				);
+				if (blocked.isErr()) {
+					return error(500, 'Internal Server Error');
+				}
+				if (blocked.value) {
 					terminal.error(`DeleteVersion action is blocked for struct ${data.struct}`);
 					return error(403, 'Unauthorized');
 				}
 			}
-			if (await registry.isBypassed(DataAction.DeleteVersion, account, targetData).unwrap()) {
+			const bypassed = registry.isBypassed(DataAction.DeleteVersion, account, targetData.value);
+			if (bypassed.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			if (bypassed.value) {
 				break PERMIT;
 			}
 
 			const canDo = await Permissions.accountCanDo(
 				account,
-				[targetData],
+				[targetData.value],
 				DataAction.DeleteVersion
-			).unwrap();
+			);
+			if (canDo.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
 
-			if (!canDo[0]) {
+			if (!canDo.value[0]) {
 				return error(403, 'Unauthorized');
 			}
 		}
 
-		await version.delete().unwrap();
+		const res = await version.value.delete();
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 		return { success: true };
 	}
 );
@@ -625,18 +731,23 @@ export const all = query(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		let retrieved = await registry.struct
-			.all({
-				type: 'all'
-			})
-			.unwrap();
+		const retrieved = await registry.struct.all({
+			type: 'all'
+		});
+
+		if (retrieved.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+
+		let value = retrieved.value;
+
 		if (data.pagination) {
-			retrieved = retrieved.slice(
+			value = value.slice(
 				(data.pagination.page - 1) * data.pagination.limit,
 				data.pagination.page * data.pagination.limit
 			);
 		}
-		const filtered = retrieved.filter((d) => !data.cached.includes(d.id));
+		const filtered = value.filter((d) => !data.cached.includes(d.id));
 
 		let payload: Record<string, unknown>[] = [];
 		const account = await getAccount();
@@ -647,11 +758,15 @@ export const all = query(
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			payload = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
 				filtered,
 				PropertyAction.Read
-			).unwrap();
+			);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			payload = res.value;
 		}
 		if (data.keys.length > 0) {
 			payload = payload.map(filterKeys(data.keys));
@@ -693,18 +808,20 @@ export const get = query(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		let retrieved = await registry.struct
-			.get(data.data as any, {
-				type: 'all'
-			})
-			.unwrap();
+		const retrieved = await registry.struct.get(data.data as any, {
+			type: 'all'
+		});
+		if (retrieved.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		let value = retrieved.value;
 		if (data.pagination) {
-			retrieved = retrieved.slice(
+			value = value.slice(
 				(data.pagination.page - 1) * data.pagination.limit,
 				data.pagination.page * data.pagination.limit
 			);
 		}
-		const filtered = retrieved.filter((d) => !data.cached.includes(d.id));
+		const filtered = value.filter((d) => !data.cached.includes(d.id));
 
 		let payload: Record<string, unknown>[] = [];
 		const account = await getAccount();
@@ -715,11 +832,15 @@ export const get = query(
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			payload = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
 				filtered,
 				PropertyAction.Read
-			).unwrap();
+			);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			payload = res.value;
 		}
 		if (data.keys.length > 0) {
 			payload = payload.map(filterKeys(data.keys));
@@ -751,29 +872,36 @@ export const fromId = query(
 		}
 		const account = await getAccount();
 
-		const retrieved = await registry.struct.fromId(data.id).unwrap();
-		if (!retrieved) {
+		const retrieved = await registry.struct.fromId(data.id);
+		if (retrieved.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!retrieved.value) {
 			return error(404, `Data not found`);
 		}
 
 		if (data.struct === 'test') {
-			return retrieved.data;
+			return retrieved.value.data;
 		} else {
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			const [res] = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
-				[retrieved],
+				[retrieved.value],
 				PropertyAction.Read
-			).unwrap();
-			if (!res || Object.keys(res).length === 0) {
+			);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			const [val] = res.value;
+			if (!val || Object.keys(val).length === 0) {
 				return error(403, 'Unauthorized');
 			}
 			if (data.keys.length > 0) {
-				return filterKeys(data.keys)(res);
+				return filterKeys(data.keys)(val);
 			}
-			return res;
+			return val;
 		}
 	}
 );
@@ -805,18 +933,20 @@ export const fromIds = query(
 		}
 		const account = await getAccount();
 
-		let retrieved = await registry.struct
-			.fromIds(data.ids, {
-				type: 'all'
-			})
-			.unwrap();
+		const retrieved = await registry.struct.fromIds(data.ids, {
+			type: 'all'
+		});
+		if (retrieved.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		let value = retrieved.value;
 		if (data.pagination) {
-			retrieved = retrieved.slice(
+			value = value.slice(
 				(data.pagination.page - 1) * data.pagination.limit,
 				data.pagination.page * data.pagination.limit
 			);
 		}
-		const filtered = retrieved.filter((d) => !data.cached.includes(d.id));
+		const filtered = value.filter((d) => !data.cached.includes(d.id));
 
 		let payload: Record<string, unknown>[] = [];
 		if (data.struct === 'test') {
@@ -825,11 +955,15 @@ export const fromIds = query(
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			payload = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
 				filtered,
 				PropertyAction.Read
-			).unwrap();
+			);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			payload = res.value;
 		}
 		if (data.keys.length > 0) {
 			payload = payload.map(filterKeys(data.keys));
@@ -868,20 +1002,23 @@ export const archived = query(
 			return error(404, `Struct ${data.struct} not found`);
 		}
 
-		let retrieved = await registry.struct
-			.archived({
-				type: 'all'
-			})
-			.unwrap();
+		const retrieved = await registry.struct.archived({
+			type: 'all'
+		});
 
+		if (retrieved.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+
+		let value = retrieved.value;
 		if (data.pagination) {
-			retrieved = retrieved.slice(
+			value = value.slice(
 				(data.pagination.page - 1) * data.pagination.limit,
 				data.pagination.page * data.pagination.limit
 			);
 		}
 
-		const filtered = retrieved.filter((d) => !data.cached.includes(d.id));
+		const filtered = value.filter((d) => !data.cached.includes(d.id));
 
 		let payload: Record<string, unknown>[] = [];
 		const account = await getAccount();
@@ -892,11 +1029,17 @@ export const archived = query(
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			payload = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
 				filtered,
 				PropertyAction.ReadArchive
-			).unwrap();
+			);
+
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+
+			payload = res.value;
 		}
 		if (data.keys.length > 0) {
 			payload = payload.map(filterKeys(data.keys));
@@ -928,25 +1071,35 @@ export const versionHistory = query(
 		}
 		const account = await getAccount();
 
-		const targetData = await registry.struct.fromId(data.id).unwrap();
-		if (!targetData) {
+		const targetData = await registry.struct.fromId(data.id);
+		if (targetData.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
+		if (!targetData.value) {
 			return error(404, `Data with id ${data.id} not found`);
 		}
 
-		const versions = await targetData.getVersions().unwrap();
+		const versions = await targetData.value.getVersions();
+		if (versions.isErr()) {
+			return error(500, 'Internal Server Error');
+		}
 
 		let payload: Record<string, unknown>[] = [];
 		if (data.struct === 'test') {
-			payload = versions.map((d) => d.data);
+			payload = versions.value.map((d) => d.data);
 		} else {
 			if (!account) {
 				return error(403, 'Unauthorized');
 			}
-			payload = await Permissions.filterPropertyActionFromAccount(
+			const res = await Permissions.filterPropertyActionFromAccount(
 				account,
-				versions,
+				versions.value,
 				PropertyAction.ReadVersionHistory
-			).unwrap();
+			);
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
+			}
+			payload = res.value;
 		}
 		if (data.keys.length > 0) {
 			payload = payload.map(filterKeys(data.keys));

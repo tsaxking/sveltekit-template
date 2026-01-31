@@ -10,6 +10,7 @@
  */
 import { getRequestEvent, query } from '$app/server';
 import { Account } from '$lib/server/structs/account';
+import { error } from '@sveltejs/kit';
 
 /**
  * Returns true when the current account is an administrator.
@@ -17,7 +18,12 @@ import { Account } from '$lib/server/structs/account';
 export const isAdmin = query(async () => {
 	const event = getRequestEvent();
 	if (!event.locals.account) return false;
-	return Account.isAdmin(event.locals.account).unwrap();
+	const res = await Account.isAdmin(event.locals.account);
+	if (res.isErr()) {
+		return error(500, 'Internal Server Error');
+	} else {
+		return res.value;
+	}
 });
 
 /**
