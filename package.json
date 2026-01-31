@@ -34,7 +34,8 @@
 		"route-tree": "pnpm script create-route-tree.ts",
 		"backup": "pnpm script backup",
 		"restore": "pnpm script restore",
-		"dev:docs": "vitepress preview docs"
+		"dev:docs": "vitepress preview docs",
+		"prepare": "husky install"
 	},
 	"packageManager": "pnpm@10.16.0",
 	"engines": {
@@ -73,6 +74,7 @@
 		"eslint-config-prettier": "^9.1.2",
 		"eslint-plugin-svelte": "^3.14.0",
 		"globals": "^15.15.0",
+		"husky": "^8.0.0",
 		"mdsvex": "^0.11.2",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
@@ -81,10 +83,10 @@
 		"svelte": "^5.46.4",
 		"svelte-check": "^4.3.5",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.38.0",
 		"typedoc": "^0.28.1",
 		"typedoc-plugin-markdown": "^4.9.0",
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.38.0",
 		"vite": "^5.4.19",
 		"vitepress": "^1.6.3",
 		"vitest": "^2.1.9"
