@@ -27,25 +27,16 @@ export class WritableBase<T> implements Writable<T> {
 	 * @param {T} data - Initial data value
 	 * @param {object} [_config] - Optional configuration
 	 * @param {number} [_config.debounceMs=0] - Debounce delay in milliseconds for updates
-	 * @param {boolean} [_config.debug=false] - Enable debug logging
 	 */
 	constructor(
 		private _data: T,
 		private _config?: {
 			debounceMs?: number;
-			debug?: boolean;
 		}
 	) {
 		this._informDebounced = debounce(() => {
 			this._informImmediate();
 		}, this._config?.debounceMs ?? 0);
-
-		if (this._config?.debug) {
-			this.log('Initialized with data:', this._data);
-			this.subscribe((val) => {
-				this.log('Updated data to:', val);
-			});
-		}
 	}
 
 	get data(): T {
@@ -53,19 +44,6 @@ export class WritableBase<T> implements Writable<T> {
 	}
 
 	set data(value: T) {
-		for (const interceptor of this.interceptors) {
-			this.log('Intercepting value:', value);
-			value = interceptor(value);
-			this.log('Value after interception:', value);
-		}
-		for (const validator of this.validators) {
-			if (!validator(value)) {
-				this.log('Validation failed for value:', value);
-				return;
-			} else {
-				this.log('Validation passed for value:', value);
-			}
-		}
 		this._data = value;
 		this.inform();
 	}
@@ -98,14 +76,6 @@ export class WritableBase<T> implements Writable<T> {
 				for (const callback of this._onAllUnsubscribeCallbacks) {
 					callback();
 				}
-			}
-			// if we are in debug mode, it starts with 1 subscriber, so it's ready to be destroyed.
-			if (this.subscribers.size === 1 && this._config?.debug) {
-				this.log('Last subscriber removed');
-				for (const callback of this._onAllUnsubscribeCallbacks) {
-					callback();
-				}
-				this.subscribers.clear();
 			}
 		};
 	}
@@ -225,33 +195,6 @@ export class WritableBase<T> implements Writable<T> {
 				}, timeout);
 			});
 		});
-	}
-
-	private readonly interceptors = new Set<(value: T) => T>();
-
-	/**
-	 * Adds an interceptor function that modifies values before they are set
-	 * @param fn - Interceptor function that receives the value and returns the modified value
-	 */
-	intercept(fn: (value: T) => T) {
-		this.interceptors.add(fn);
-		return () => this.interceptors.delete(fn);
-	}
-
-	private readonly validators = new Set<(value: T) => boolean>();
-
-	/**
-	 * Adds a validator function that checks values before they are set
-	 * @param fn - Validator function that receives the value and returns true if valid, false otherwise
-	 */
-	addValidator(fn: (value: T) => boolean): void {
-		this.validators.add(fn);
-	}
-
-	private log(...args: unknown[]): void {
-		if (this._config?.debug) {
-			console.log('[WritableBase]', ...args);
-		}
 	}
 }
 

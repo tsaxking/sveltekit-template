@@ -20,7 +20,6 @@ import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
 import * as remote from '$lib/remotes/struct.remote';
-import { browser } from '$app/environment';
 
 // let didCacheWarning = false;
 
@@ -1151,20 +1150,15 @@ export class Struct<T extends Blank> {
 			return !data.data.archived;
 		});
 
-		if (browser) {
-			remote
-				.all({
-					struct: this.data.name,
-					cached: Array.from(this.cache.keys()),
-					keys: config.keys || []
-				})
-				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => !d.data.archived)
-						.map(([, d]) => d);
-					newArr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
-				});
-		}
+		remote
+			.all({
+				struct: this.data.name,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				newArr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return newArr;
 	}
@@ -1196,7 +1190,7 @@ export class Struct<T extends Blank> {
 				async (page, limit) => {
 					const res = await remote.archived({
 						struct: this.data.name,
-						cached: [],
+						cached: Array.from(this.cache.keys()),
 						keys: config.keys || [],
 						pagination: {
 							page,
@@ -1232,20 +1226,15 @@ export class Struct<T extends Blank> {
 			true
 		); // includeArchived = true for archived data arrays
 
-		if (browser) {
-			remote
-				.archived({
-					struct: this.data.name,
-					cached: Array.from(this.cache.keys()),
-					keys: config.keys || []
-				})
-				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => d.data.archived)
-						.map(([, d]) => d);
-					newArr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
-				});
-		}
+		remote
+			.archived({
+				struct: this.data.name,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				newArr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return newArr;
 	}
@@ -1348,21 +1337,16 @@ export class Struct<T extends Blank> {
 			return ids.includes(data.data.id) && !data.data.archived;
 		});
 
-		if (browser) {
-			remote
-				.fromIds({
-					struct: this.data.name,
-					ids,
-					cached: Array.from(this.cache.keys()),
-					keys: config.keys || []
-				})
-				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => ids.includes(String(d.data.id)) && !d.data.archived)
-						.map(([, d]) => d);
-					arr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
-				});
-		}
+		remote
+			.fromIds({
+				struct: this.data.name,
+				ids,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				arr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return arr;
 	}
@@ -1443,26 +1427,16 @@ export class Struct<T extends Blank> {
 			return !d.data.archived;
 		});
 
-		if (browser) {
-			remote
-				.get({
-					struct: this.data.name,
-					data,
-					cached: Array.from(this.cache.keys()),
-					keys: config.keys || []
-				})
-				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => {
-							for (const [key, value] of Object.entries(data)) {
-								if ((d.data as any)[key] !== value) return false;
-							}
-							return !d.data.archived;
-						})
-						.map(([, d]) => d);
-					arr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
-				});
-		}
+		remote
+			.get({
+				struct: this.data.name,
+				data,
+				cached: Array.from(this.cache.keys()),
+				keys: config.keys || []
+			})
+			.then((res) => {
+				arr.set(res.items.map((d) => this.Generator(d as any)));
+			});
 
 		return arr;
 	}
