@@ -484,3 +484,23 @@ export class WritableArray<T> extends WritableBase<T[]> {
 		});
 	}
 }
+
+
+export class Divergable<T> extends WritableBase<T> {
+	private readonly init: T;
+
+	constructor(
+		public readonly base: WritableBase<T>,
+	) {
+		super(base.data);
+		this.init = base.data;
+	};
+
+	commit() {
+		this.base.data = this.data;
+	}
+
+	pull() {
+		this.data = this.base.data;
+	}
+}
