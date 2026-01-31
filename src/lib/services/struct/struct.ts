@@ -1159,10 +1159,7 @@ export class Struct<T extends Blank> {
 					keys: config.keys || []
 				})
 				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => !d.data.archived)
-						.map(([, d]) => d);
-					newArr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
+					newArr.add(...res.items.map((d) => this.Generator(d as any)));
 				});
 		}
 
@@ -1240,10 +1237,7 @@ export class Struct<T extends Blank> {
 					keys: config.keys || []
 				})
 				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => d.data.archived)
-						.map(([, d]) => d);
-					newArr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
+					newArr.add(...res.items.map((d) => this.Generator(d as any)));
 				});
 		}
 
@@ -1357,10 +1351,7 @@ export class Struct<T extends Blank> {
 					keys: config.keys || []
 				})
 				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => ids.includes(String(d.data.id)) && !d.data.archived)
-						.map(([, d]) => d);
-					arr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
+					arr.add(...res.items.map((d) => this.Generator(d as any)));
 				});
 		}
 
@@ -1452,15 +1443,7 @@ export class Struct<T extends Blank> {
 					keys: config.keys || []
 				})
 				.then((res) => {
-					const cached = Array.from(this.cache)
-						.filter(([, d]) => {
-							for (const [key, value] of Object.entries(data)) {
-								if ((d.data as any)[key] !== value) return false;
-							}
-							return !d.data.archived;
-						})
-						.map(([, d]) => d);
-					arr.set([...cached, ...res.items.map((d) => this.Generator(d as any))]);
+					arr.add(...res.items.map((d) => this.Generator(d as any)));
 				});
 		}
 
