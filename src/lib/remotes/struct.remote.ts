@@ -650,11 +650,7 @@ export const removeVersion = command(
 			}
 
 			{
-				const blocked = registry.isBlocked(
-					DataAction.DeleteVersion,
-					account,
-					targetData.value
-				);
+				const blocked = registry.isBlocked(DataAction.DeleteVersion, account, targetData.value);
 				if (blocked.isErr()) {
 					return error(500, 'Internal Server Error');
 				}
