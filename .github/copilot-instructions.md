@@ -271,7 +271,7 @@ CLI helpers and menu actions for account management. /
 
 > **selectAccount**(`filter?`): `ResultPromise`\<`void` \| `StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>, `Error`\>
 
-Defined in: [cli/accounts.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/accounts.ts#L21)
+Defined in: [cli/accounts.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/accounts.ts#L21)
 
 Prompt the user to select an account from all accounts, optionally filtered.
 
@@ -323,7 +323,7 @@ const account = (await selectAccount((a) => a.data.verified)).unwrap();
 
 > **default**: [`Folder`](../../utils/classes/Folder.md)
 
-Defined in: [cli/accounts.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/accounts.ts#L50)
+Defined in: [cli/accounts.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/accounts.ts#L50)
 
 Accounts CLI folder with common account maintenance actions.
 
@@ -356,7 +356,7 @@ ANSI color escape codes used by CLI rendering. /
 
 # Enumeration: Colors
 
-Defined in: [cli/colors.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L12)
+Defined in: [cli/colors.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L12)
 
 All terminal colors
 
@@ -372,7 +372,7 @@ All terminal colors
 
 > **BgBlack**: "\u001b\[40m"
 
-Defined in: [cli/colors.ts:29](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L29)
+Defined in: [cli/colors.ts:29](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L29)
 
 ***
 
@@ -380,7 +380,7 @@ Defined in: [cli/colors.ts:29](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgBlue**: "\u001b\[44m"
 
-Defined in: [cli/colors.ts:33](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L33)
+Defined in: [cli/colors.ts:33](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L33)
 
 ***
 
@@ -388,7 +388,7 @@ Defined in: [cli/colors.ts:33](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgCyan**: "\u001b\[46m"
 
-Defined in: [cli/colors.ts:35](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L35)
+Defined in: [cli/colors.ts:35](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L35)
 
 ***
 
@@ -396,7 +396,7 @@ Defined in: [cli/colors.ts:35](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgGreen**: "\u001b\[42m"
 
-Defined in: [cli/colors.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L31)
+Defined in: [cli/colors.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L31)
 
 ***
 
@@ -404,7 +404,7 @@ Defined in: [cli/colors.ts:31](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgMagenta**: "\u001b\[45m"
 
-Defined in: [cli/colors.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L34)
+Defined in: [cli/colors.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L34)
 
 ***
 
@@ -412,7 +412,7 @@ Defined in: [cli/colors.ts:34](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgRed**: "\u001b\[41m"
 
-Defined in: [cli/colors.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L30)
+Defined in: [cli/colors.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L30)
 
 ***
 
@@ -420,7 +420,7 @@ Defined in: [cli/colors.ts:30](https://github.com/tsaxking/sveltekit-template/bl
 
 > **BgYellow**: "\u001b\[43m"
 
-Defined in: [cli/colors.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L32)
+Defined in: [cli/colors.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L32)
 
 ***
 
@@ -428,7 +428,7 @@ Defined in: [cli/colors.ts:32](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Blink**: "\u001b\[5m"
 
-Defined in: [cli/colors.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L17)
+Defined in: [cli/colors.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L17)
 
 ***
 
@@ -436,7 +436,7 @@ Defined in: [cli/colors.ts:17](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Bright**: "\u001b\[1m"
 
-Defined in: [cli/colors.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L14)
+Defined in: [cli/colors.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L14)
 
 ***
 
@@ -444,7 +444,7 @@ Defined in: [cli/colors.ts:14](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Dim**: "\u001b\[2m"
 
-Defined in: [cli/colors.ts:15](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L15)
+Defined in: [cli/colors.ts:15](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L15)
 
 ***
 
@@ -452,7 +452,7 @@ Defined in: [cli/colors.ts:15](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgBlack**: "\u001b\[30m"
 
-Defined in: [cli/colors.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L21)
+Defined in: [cli/colors.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L21)
 
 ***
 
@@ -460,7 +460,7 @@ Defined in: [cli/colors.ts:21](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgBlue**: "\u001b\[34m"
 
-Defined in: [cli/colors.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L25)
+Defined in: [cli/colors.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L25)
 
 ***
 
@@ -468,7 +468,7 @@ Defined in: [cli/colors.ts:25](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgCyan**: "\u001b\[36m"
 
-Defined in: [cli/colors.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L27)
+Defined in: [cli/colors.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L27)
 
 ***
 
@@ -476,7 +476,7 @@ Defined in: [cli/colors.ts:27](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgGreen**: "\u001b\[32m"
 
-Defined in: [cli/colors.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L23)
+Defined in: [cli/colors.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L23)
 
 ***
 
@@ -484,7 +484,7 @@ Defined in: [cli/colors.ts:23](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgMagenta**: "\u001b\[35m"
 
-Defined in: [cli/colors.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L26)
+Defined in: [cli/colors.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L26)
 
 ***
 
@@ -492,7 +492,7 @@ Defined in: [cli/colors.ts:26](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgRed**: "\u001b\[31m"
 
-Defined in: [cli/colors.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L22)
+Defined in: [cli/colors.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L22)
 
 ***
 
@@ -500,7 +500,7 @@ Defined in: [cli/colors.ts:22](https://github.com/tsaxking/sveltekit-template/bl
 
 > **FgYellow**: "\u001b\[33m"
 
-Defined in: [cli/colors.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L24)
+Defined in: [cli/colors.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L24)
 
 ***
 
@@ -508,7 +508,7 @@ Defined in: [cli/colors.ts:24](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Hidden**: "\u001b\[8m"
 
-Defined in: [cli/colors.ts:19](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L19)
+Defined in: [cli/colors.ts:19](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L19)
 
 ***
 
@@ -516,7 +516,7 @@ Defined in: [cli/colors.ts:19](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Reset**: "\u001b\[0m"
 
-Defined in: [cli/colors.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L13)
+Defined in: [cli/colors.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L13)
 
 ***
 
@@ -524,7 +524,7 @@ Defined in: [cli/colors.ts:13](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Reverse**: "\u001b\[7m"
 
-Defined in: [cli/colors.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L18)
+Defined in: [cli/colors.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L18)
 
 ***
 
@@ -532,7 +532,7 @@ Defined in: [cli/colors.ts:18](https://github.com/tsaxking/sveltekit-template/bl
 
 > **Underscore**: "\u001b\[4m"
 
-Defined in: [cli/colors.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/colors.ts#L16)
+Defined in: [cli/colors.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/colors.ts#L16)
 
 
 [**my-app**](../../README.md)
@@ -620,7 +620,7 @@ Placeholder for future Logs CLI folder. /
 
 > **default**: [`Folder`](../../utils/classes/Folder.md)
 
-Defined in: [cli/page-limiting.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/page-limiting.ts#L10)
+Defined in: [cli/page-limiting.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/page-limiting.ts#L10)
 
 
 [**my-app**](../../README.md)
@@ -659,7 +659,7 @@ Defined in: [cli/page-limiting.ts:10](https://github.com/tsaxking/sveltekit-temp
 
 > **default**: [`Folder`](../../utils/classes/Folder.md)
 
-Defined in: [cli/server-controller.ts:3](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/server-controller.ts#L3)
+Defined in: [cli/server-controller.ts:3](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/server-controller.ts#L3)
 
 
 [**my-app**](../../README.md)
@@ -700,7 +700,7 @@ Defined in: [cli/server-controller.ts:3](https://github.com/tsaxking/sveltekit-t
 
 > **openStructs**(): `ResultPromise`\<`Struct`\<`any`, `any`\>[], `Error`\>
 
-Defined in: [cli/struct.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L18)
+Defined in: [cli/struct.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L18)
 
 ## Returns
 
@@ -717,7 +717,7 @@ Defined in: [cli/struct.ts:18](https://github.com/tsaxking/sveltekit-template/bl
 
 > **selectData**\<`T`\>(`data`, `message?`, `options?`): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [cli/struct.ts:76](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L76)
+Defined in: [cli/struct.ts:76](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L76)
 
 ## Type Parameters
 
@@ -756,7 +756,7 @@ keyof `T`\[`"data"`\][]
 
 > **selectDataAction**(`data`, `next?`): `ResultPromise`\<`void` \| `Result`\<`Result`\<void \| Result\<void \| Result\<void, Error\>, Error\>, `Error`\>, `Error`\> \| `Result`\<`void` \| () => `Promise`\<`void`\>, `Error`\>, `Error`\>
 
-Defined in: [cli/struct.ts:556](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L556)
+Defined in: [cli/struct.ts:556](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L556)
 
 ## Parameters
 
@@ -783,7 +783,7 @@ Defined in: [cli/struct.ts:556](https://github.com/tsaxking/sveltekit-template/b
 
 > **selectDataPipe**\<`S`\>(`struct`, `data`, `next?`, `options?`): `ResultPromise`\<`void` \| `Result`\<void \| Result\<Result\<void \| Result\<void \| Result\<void, Error\>, Error\>, Error\>, Error\> \| Result\<void \| (() =\> Promise\<...\>), Error\>, `Error`\>, `Error`\>
 
-Defined in: [cli/struct.ts:105](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L105)
+Defined in: [cli/struct.ts:105](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L105)
 
 ## Type Parameters
 
@@ -826,7 +826,7 @@ Defined in: [cli/struct.ts:105](https://github.com/tsaxking/sveltekit-template/b
 
 > **selectStruct**(`structs`, `message?`): `ResultPromise`\<`Struct`\<`any`, `any`\>, `Error`\>
 
-Defined in: [cli/struct.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L66)
+Defined in: [cli/struct.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L66)
 
 ## Parameters
 
@@ -853,7 +853,7 @@ Defined in: [cli/struct.ts:66](https://github.com/tsaxking/sveltekit-template/bl
 
 > **selectStuctAction**(`struct`, `next?`): `ResultPromise`\<`void` \| `Result`\<void \| Result\<void \| Result\<Result\<void \| Result\<void \| Result\<void, Error\>, Error\>, Error\>, Error\> \| Result\<void \| (() =\> Promise\<...\>), Error\>, Error\>, `Error`\> \| () => `Promise`\<`void`\>, `Error`\>
 
-Defined in: [cli/struct.ts:248](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L248)
+Defined in: [cli/struct.ts:248](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L248)
 
 ## Parameters
 
@@ -880,7 +880,7 @@ Defined in: [cli/struct.ts:248](https://github.com/tsaxking/sveltekit-template/b
 
 > **selectVersion**(`versions`, `message?`): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [cli/struct.ts:641](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L641)
+Defined in: [cli/struct.ts:641](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L641)
 
 ## Parameters
 
@@ -907,7 +907,7 @@ Defined in: [cli/struct.ts:641](https://github.com/tsaxking/sveltekit-template/b
 
 > **selectVersionAction**(`version`, `next?`): `ResultPromise`\<`void` \| `Result`\<`void`, `Error`\>, `Error`\>
 
-Defined in: [cli/struct.ts:648](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L648)
+Defined in: [cli/struct.ts:648](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L648)
 
 ## Parameters
 
@@ -934,7 +934,7 @@ Defined in: [cli/struct.ts:648](https://github.com/tsaxking/sveltekit-template/b
 
 > **selectVersionPipe**(`versions`, `next?`): `ResultPromise`\<`void` \| `Result`\<void \| Result\<void, Error\>, `Error`\>, `Error`\>
 
-Defined in: [cli/struct.ts:668](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L668)
+Defined in: [cli/struct.ts:668](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L668)
 
 ## Parameters
 
@@ -961,7 +961,7 @@ Defined in: [cli/struct.ts:668](https://github.com/tsaxking/sveltekit-template/b
 
 > **viewData**\<`T`\>(`data`, `message?`, `options?`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [cli/struct.ts:90](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L90)
+Defined in: [cli/struct.ts:90](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L90)
 
 ## Type Parameters
 
@@ -1028,7 +1028,7 @@ keyof `T`\[`"data"`\][]
 
 > `const` **dataActions**: `object`
 
-Defined in: [cli/struct.ts:268](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L268)
+Defined in: [cli/struct.ts:268](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L268)
 
 ## Type Declaration
 
@@ -1217,7 +1217,7 @@ Defined in: [cli/struct.ts:268](https://github.com/tsaxking/sveltekit-template/b
 
 > `const` **structActions**: `object`
 
-Defined in: [cli/struct.ts:130](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L130)
+Defined in: [cli/struct.ts:130](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L130)
 
 ## Type Declaration
 
@@ -1344,7 +1344,7 @@ Defined in: [cli/struct.ts:130](https://github.com/tsaxking/sveltekit-template/b
 
 > `const` **versionActions**: `object`
 
-Defined in: [cli/struct.ts:576](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/struct.ts#L576)
+Defined in: [cli/struct.ts:576](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/struct.ts#L576)
 
 ## Type Declaration
 
@@ -1426,7 +1426,7 @@ CLI prompting, selection, and menu utilities. /
 
 # Class: Action
 
-Defined in: [cli/utils.ts:475](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L475)
+Defined in: [cli/utils.ts:475](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L475)
 
 CLI action wrapper.
 
@@ -1436,7 +1436,7 @@ CLI action wrapper.
 
 > **new Action**(`name`, `description`, `icon`, `_action`): `Action`
 
-Defined in: [cli/utils.ts:476](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L476)
+Defined in: [cli/utils.ts:476](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L476)
 
 #### Parameters
 
@@ -1466,7 +1466,7 @@ Defined in: [cli/utils.ts:476](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **\_action**: () => `unknown`
 
-Defined in: [cli/utils.ts:480](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L480)
+Defined in: [cli/utils.ts:480](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L480)
 
 #### Returns
 
@@ -1478,7 +1478,7 @@ Defined in: [cli/utils.ts:480](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **description**: `string`
 
-Defined in: [cli/utils.ts:478](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L478)
+Defined in: [cli/utils.ts:478](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L478)
 
 ***
 
@@ -1486,7 +1486,7 @@ Defined in: [cli/utils.ts:478](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **icon**: `string`
 
-Defined in: [cli/utils.ts:479](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L479)
+Defined in: [cli/utils.ts:479](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L479)
 
 ***
 
@@ -1494,7 +1494,7 @@ Defined in: [cli/utils.ts:479](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **name**: `string`
 
-Defined in: [cli/utils.ts:477](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L477)
+Defined in: [cli/utils.ts:477](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L477)
 
 ## Methods
 
@@ -1502,7 +1502,7 @@ Defined in: [cli/utils.ts:477](https://github.com/tsaxking/sveltekit-template/bl
 
 > **action**(): `unknown`
 
-Defined in: [cli/utils.ts:486](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L486)
+Defined in: [cli/utils.ts:486](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L486)
 
 Execute the action callback.
 
@@ -1519,7 +1519,7 @@ Execute the action callback.
 
 # Class: Folder
 
-Defined in: [cli/utils.ts:395](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L395)
+Defined in: [cli/utils.ts:395](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L395)
 
 CLI menu folder that contains actions and nested folders.
 
@@ -1529,7 +1529,7 @@ CLI menu folder that contains actions and nested folders.
 
 > **new Folder**(`name`, `description`, `icon`, `actions`): `Folder`
 
-Defined in: [cli/utils.ts:401](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L401)
+Defined in: [cli/utils.ts:401](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L401)
 
 #### Parameters
 
@@ -1559,7 +1559,7 @@ Defined in: [cli/utils.ts:401](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **actions**: (`Folder` \| [`Action`](Action.md))[]
 
-Defined in: [cli/utils.ts:405](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L405)
+Defined in: [cli/utils.ts:405](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L405)
 
 ***
 
@@ -1567,7 +1567,7 @@ Defined in: [cli/utils.ts:405](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **description**: `string`
 
-Defined in: [cli/utils.ts:403](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L403)
+Defined in: [cli/utils.ts:403](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L403)
 
 ***
 
@@ -1575,7 +1575,7 @@ Defined in: [cli/utils.ts:403](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **icon**: `string`
 
-Defined in: [cli/utils.ts:404](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L404)
+Defined in: [cli/utils.ts:404](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L404)
 
 ***
 
@@ -1583,7 +1583,7 @@ Defined in: [cli/utils.ts:404](https://github.com/tsaxking/sveltekit-template/bl
 
 > `readonly` **name**: `string`
 
-Defined in: [cli/utils.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L402)
+Defined in: [cli/utils.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L402)
 
 ***
 
@@ -1591,7 +1591,7 @@ Defined in: [cli/utils.ts:402](https://github.com/tsaxking/sveltekit-template/bl
 
 > `static` `optional` **home**: `Folder`
 
-Defined in: [cli/utils.ts:396](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L396)
+Defined in: [cli/utils.ts:396](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L396)
 
 ## Accessors
 
@@ -1601,7 +1601,7 @@ Defined in: [cli/utils.ts:396](https://github.com/tsaxking/sveltekit-template/bl
 
 > **get** **exit**(): [`Action`](Action.md)
 
-Defined in: [cli/utils.ts:456](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L456)
+Defined in: [cli/utils.ts:456](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L456)
 
 Exit action for the CLI.
 
@@ -1615,7 +1615,7 @@ Exit action for the CLI.
 
 > **action**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [cli/utils.ts:417](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L417)
+Defined in: [cli/utils.ts:417](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L417)
 
 Open the folder menu and execute the selected action.
 
@@ -1629,7 +1629,7 @@ Open the folder menu and execute the selected action.
 
 > **setParent**(`parent`): `void`
 
-Defined in: [cli/utils.ts:467](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L467)
+Defined in: [cli/utils.ts:467](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L467)
 
 Set the parent folder for navigation.
 
@@ -1654,7 +1654,7 @@ Set the parent folder for navigation.
 
 > **alert**(`config`): `Promise`\<`void`\>
 
-Defined in: [cli/utils.ts:87](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L87)
+Defined in: [cli/utils.ts:87](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L87)
 
 Display a message and wait for any key press.
 
@@ -1681,7 +1681,7 @@ Alert configuration.
 
 > **confirm**(`config`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [cli/utils.ts:189](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L189)
+Defined in: [cli/utils.ts:189](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L189)
 
 Prompt for a yes/no confirmation.
 
@@ -1710,7 +1710,7 @@ Result wrapper with boolean choice.
 
 > **multiSelect**\<`T`\>(`config`): `ResultPromise`\<`T`[], `Error`\>
 
-Defined in: [cli/utils.ts:166](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L166)
+Defined in: [cli/utils.ts:166](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L166)
 
 Prompt to select multiple options.
 
@@ -1745,7 +1745,7 @@ Result wrapper with selected values.
 
 > **password**(`config`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [cli/utils.ts:203](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L203)
+Defined in: [cli/utils.ts:203](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L203)
 
 Prompt for a hidden password value.
 
@@ -1774,7 +1774,7 @@ Result wrapper with password string.
 
 > **prompt**(`config`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [cli/utils.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L30)
+Defined in: [cli/utils.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L30)
 
 Prompt for a single line of input.
 
@@ -1809,7 +1809,7 @@ const name = (await prompt({ message: 'Enter name' })).unwrap();
 
 > **promptIp**(`message`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [cli/utils.ts:497](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L497)
+Defined in: [cli/utils.ts:497](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L497)
 
 Prompt for an IPv4 address, or fall back to the public IP.
 
@@ -1838,7 +1838,7 @@ Result wrapper containing the IP string.
 
 > **repeatPrompt**(`config`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [cli/utils.ts:53](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L53)
+Defined in: [cli/utils.ts:53](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L53)
 
 Prompt for input with optional validation and retry.
 
@@ -1867,7 +1867,7 @@ Result wrapper containing the input string.
 
 > **search**\<`T`\>(`config`): `ResultPromise`\<`T`, `Error`\>
 
-Defined in: [cli/utils.ts:217](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L217)
+Defined in: [cli/utils.ts:217](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L217)
 
 Prompt to search and select an option.
 
@@ -1902,7 +1902,7 @@ Result wrapper with selected value.
 
 > **select**\<`T`\>(`config`): `ResultPromise`\<`T`, `Error`\>
 
-Defined in: [cli/utils.ts:116](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L116)
+Defined in: [cli/utils.ts:116](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L116)
 
 Prompt to select a single option.
 
@@ -1937,7 +1937,7 @@ Result wrapper with selected value.
 
 > **selectFromTable**\<`T`\>(`config`): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [cli/utils.ts:241](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L241)
+Defined in: [cli/utils.ts:241](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L241)
 
 Render a table of records and select a row using arrow keys.
 
@@ -1972,7 +1972,7 @@ Result wrapper containing the selected index.
 
 > **viewTable**\<`T`\>(`config`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [cli/utils.ts:322](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/utils.ts#L322)
+Defined in: [cli/utils.ts:322](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/utils.ts#L322)
 
 Render a table of records and wait for Enter to close.
 
@@ -2035,7 +2035,7 @@ Result wrapper that resolves on close.
 
 > `const` **home**: [`Folder`](../utils/classes/Folder.md)
 
-Defined in: [cli/index.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/cli/index.ts#L16)
+Defined in: [cli/index.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/cli/index.ts#L16)
 
 Root CLI folder containing core tools and submenus.
 
@@ -3079,7 +3079,7 @@ Generated API documentation.
 
 > `const` **BACKUP\_DIR**: `string`
 
-Defined in: [scripts/backup.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/backup.ts#L10)
+Defined in: [scripts/backup.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/backup.ts#L10)
 
 
 [**my-app**](../../../README.md)
@@ -3092,7 +3092,7 @@ Defined in: [scripts/backup.ts:10](https://github.com/tsaxking/sveltekit-templat
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/backup.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/backup.ts#L12)
+Defined in: [scripts/backup.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/backup.ts#L12)
 
 ## Returns
 
@@ -3140,7 +3140,7 @@ Defined in: [scripts/backup.ts:12](https://github.com/tsaxking/sveltekit-templat
 
 > **default**: () => `Promise`\<`Err`\<`Error`, `string`\> \| `"Docs build complete: docs/.vitepress/dist"`\>
 
-Defined in: [scripts/build-docs.ts:667](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/build-docs.ts#L667)
+Defined in: [scripts/build-docs.ts:667](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/build-docs.ts#L667)
 
 ## Returns
 
@@ -3183,7 +3183,7 @@ Defined in: [scripts/build-docs.ts:667](https://github.com/tsaxking/sveltekit-te
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/clear-sessions.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/clear-sessions.ts#L4)
+Defined in: [scripts/clear-sessions.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/clear-sessions.ts#L4)
 
 ## Returns
 
@@ -3226,7 +3226,7 @@ Defined in: [scripts/clear-sessions.ts:4](https://github.com/tsaxking/sveltekit-
 
 > **default**: () => `Promise`\<`string`\>
 
-Defined in: [scripts/create-route-tree.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/create-route-tree.ts#L5)
+Defined in: [scripts/create-route-tree.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/create-route-tree.ts#L5)
 
 ## Returns
 
@@ -3269,7 +3269,7 @@ Defined in: [scripts/create-route-tree.ts:5](https://github.com/tsaxking/sveltek
 
 > **default**: (`num`) => `Promise`\<`void`\>
 
-Defined in: [scripts/create-test-data.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/create-test-data.ts#L5)
+Defined in: [scripts/create-test-data.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/create-test-data.ts#L5)
 
 ## Parameters
 
@@ -3318,7 +3318,7 @@ Defined in: [scripts/create-test-data.ts:5](https://github.com/tsaxking/svelteki
 
 > **default**: (`roleName`) => `Promise`\<`void`\>
 
-Defined in: [scripts/create-test-role.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/create-test-role.ts#L8)
+Defined in: [scripts/create-test-role.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/create-test-role.ts#L8)
 
 ## Parameters
 
@@ -3367,7 +3367,7 @@ Defined in: [scripts/create-test-role.ts:8](https://github.com/tsaxking/svelteki
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/enable-timestamp-schema.ts:99](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/enable-timestamp-schema.ts#L99)
+Defined in: [scripts/enable-timestamp-schema.ts:99](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/enable-timestamp-schema.ts#L99)
 
 ## Returns
 
@@ -3410,7 +3410,7 @@ Defined in: [scripts/enable-timestamp-schema.ts:99](https://github.com/tsaxking/
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/generate-hashes.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/generate-hashes.ts#L5)
+Defined in: [scripts/generate-hashes.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/generate-hashes.ts#L5)
 
 ## Returns
 
@@ -3462,7 +3462,7 @@ Defined in: [scripts/generate-hashes.ts:5](https://github.com/tsaxking/sveltekit
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/ip-limit.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/ip-limit.ts#L5)
+Defined in: [scripts/ip-limit.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/ip-limit.ts#L5)
 
 ## Returns
 
@@ -3505,7 +3505,7 @@ Defined in: [scripts/ip-limit.ts:5](https://github.com/tsaxking/sveltekit-templa
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/lowercase-username.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/lowercase-username.ts#L4)
+Defined in: [scripts/lowercase-username.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/lowercase-username.ts#L4)
 
 ## Returns
 
@@ -3548,7 +3548,7 @@ Defined in: [scripts/lowercase-username.ts:4](https://github.com/tsaxking/svelte
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/mjml-batch.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/mjml-batch.ts#L10)
+Defined in: [scripts/mjml-batch.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/mjml-batch.ts#L10)
 
 ## Returns
 
@@ -3591,7 +3591,7 @@ Defined in: [scripts/mjml-batch.ts:10](https://github.com/tsaxking/sveltekit-tem
 
 > **default**: (...`args`) => `Promise`\<`void`\>
 
-Defined in: [scripts/premerge-render.ts:6](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/premerge-render.ts#L6)
+Defined in: [scripts/premerge-render.ts:6](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/premerge-render.ts#L6)
 
 ## Parameters
 
@@ -3640,7 +3640,7 @@ Defined in: [scripts/premerge-render.ts:6](https://github.com/tsaxking/sveltekit
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/remove-universes.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/remove-universes.ts#L5)
+Defined in: [scripts/remove-universes.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/remove-universes.ts#L5)
 
 ## Returns
 
@@ -3683,7 +3683,7 @@ Defined in: [scripts/remove-universes.ts:5](https://github.com/tsaxking/svelteki
 
 > **default**: (`file?`) => `Promise`\<`void`\>
 
-Defined in: [scripts/restore.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/restore.ts#L10)
+Defined in: [scripts/restore.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/restore.ts#L10)
 
 ## Parameters
 
@@ -3732,7 +3732,7 @@ Defined in: [scripts/restore.ts:10](https://github.com/tsaxking/sveltekit-templa
 
 > **default**: (`email`) => `Promise`\<`void`\>
 
-Defined in: [scripts/test-email.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/test-email.ts#L4)
+Defined in: [scripts/test-email.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/test-email.ts#L4)
 
 ## Parameters
 
@@ -3781,7 +3781,7 @@ Defined in: [scripts/test-email.ts:4](https://github.com/tsaxking/sveltekit-temp
 
 > **default**: () => `Promise`\<`void`\>
 
-Defined in: [scripts/test-integration.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/test-integration.ts#L4)
+Defined in: [scripts/test-integration.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/test-integration.ts#L4)
 
 ## Returns
 
@@ -3824,7 +3824,7 @@ Defined in: [scripts/test-integration.ts:4](https://github.com/tsaxking/svelteki
 
 > **default**: (`build`) => `Promise`\<`boolean`\>
 
-Defined in: [scripts/test-schema.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/scripts/test-schema.ts#L7)
+Defined in: [scripts/test-schema.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/scripts/test-schema.ts#L7)
 
 ## Parameters
 
@@ -3873,7 +3873,7 @@ Defined in: [scripts/test-schema.ts:7](https://github.com/tsaxking/sveltekit-tem
 
 > `const` **handle**: `Handle`
 
-Defined in: [src/hooks.server.ts:53](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/hooks.server.ts#L53)
+Defined in: [src/hooks.server.ts:53](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/hooks.server.ts#L53)
 
 
 [**my-app**](../../README.md)
@@ -3917,7 +3917,7 @@ Bubble animation for HTML canvas using normalized coordinates. Each bubble is dr
 
 > **render**(`canvas`): () => `void`
 
-Defined in: [src/lib/canvas/bubbles.ts:96](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/canvas/bubbles.ts#L96)
+Defined in: [src/lib/canvas/bubbles.ts:96](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/canvas/bubbles.ts#L96)
 
 Starts the bubble animation loop on the provided canvas.
 
@@ -3981,7 +3981,7 @@ Critter animation with glowing particles and trailing paths. The animation runs 
 
 > **render**(`canvas`): () => `void`
 
-Defined in: [src/lib/canvas/critters.ts:315](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/canvas/critters.ts#L315)
+Defined in: [src/lib/canvas/critters.ts:315](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/canvas/critters.ts#L315)
 
 Starts the critter animation loop on the provided canvas.
 
@@ -4801,7 +4801,7 @@ Account-related models and client helpers.
 
 > **getNotifs**(`config?`): [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<\{ `accountId`: `"string"`; `icon`: `"string"`; `iconType`: `"string"`; `link`: `"string"`; `message`: `"string"`; `read`: `"boolean"`; `severity`: `"string"`; `title`: `"string"`; \}\>
 
-Defined in: [src/lib/model/account.ts:189](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L189)
+Defined in: [src/lib/model/account.ts:189](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L189)
 
 Fetches the current account's notifications.
 
@@ -4840,7 +4840,7 @@ const notifs = Account.getNotifs({ limit: 10, page: 0 });
 
 > **getSelf**(): [`SingleWritable`](../../../../../services/struct/struct/classes/SingleWritable.md)\<\{ `email`: `"string"`; `firstName`: `"string"`; `lastLogin`: `"string"`; `lastName`: `"string"`; `username`: `"string"`; `verified`: `"boolean"`; \}\>
 
-Defined in: [src/lib/model/account.ts:178](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L178)
+Defined in: [src/lib/model/account.ts:178](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L178)
 
 Returns the singleton writable for the current account.
 
@@ -4859,7 +4859,7 @@ Returns the singleton writable for the current account.
 
 > **search**(`query`, `config`): [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<\{ `email`: `"string"`; `firstName`: `"string"`; `lastLogin`: `"string"`; `lastName`: `"string"`; `username`: `"string"`; `verified`: `"boolean"`; \}\>
 
-Defined in: [src/lib/model/account.ts:226](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L226)
+Defined in: [src/lib/model/account.ts:226](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L226)
 
 Searches accounts with pagination.
 
@@ -4898,7 +4898,7 @@ Pagination config.
 
 > **searchAccountsModal**(`config?`): `Promise`\<[`AccountData`](../type-aliases/AccountData.md)\>
 
-Defined in: [src/lib/model/account.ts:258](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L258)
+Defined in: [src/lib/model/account.ts:258](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L258)
 
 Opens a modal to select an account.
 
@@ -4935,7 +4935,7 @@ const account = await Account.searchAccountsModal({
 
 > **signOut**(): `ResultPromise`\<`Response`, `Error`\>
 
-Defined in: [src/lib/model/account.ts:281](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L281)
+Defined in: [src/lib/model/account.ts:281](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L281)
 
 Signs out the current session.
 
@@ -4954,7 +4954,7 @@ Signs out the current session.
 
 > **signOutOfSession**(`sessionId`): `ResultPromise`\<`Response`, `Error`\>
 
-Defined in: [src/lib/model/account.ts:296](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L296)
+Defined in: [src/lib/model/account.ts:296](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L296)
 
 Signs out a specific session id.
 
@@ -4979,7 +4979,7 @@ Signs out a specific session id.
 
 > **usernameExists**(`username`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/model/account.ts:212](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L212)
+Defined in: [src/lib/model/account.ts:212](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L212)
 
 Checks whether a username already exists.
 
@@ -5040,7 +5040,7 @@ Account-related models and client helpers.
 
 > **AccountArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `Account.data.structure`\>
 
-Defined in: [src/lib/model/account.ts:70](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L70)
+Defined in: [src/lib/model/account.ts:70](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L70)
 
 Writable array of account records.
 
@@ -5055,7 +5055,7 @@ Writable array of account records.
 
 > **AccountData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `Account.data.structure`\>
 
-Defined in: [src/lib/model/account.ts:68](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L68)
+Defined in: [src/lib/model/account.ts:68](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L68)
 
 Struct data shape for accounts.
 
@@ -5070,7 +5070,7 @@ Struct data shape for accounts.
 
 > **AccountInfoData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `AccountInfo.data.structure` & [`GlobalCols`](../../../../../services/struct/struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/model/account.ts:106](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L106)
+Defined in: [src/lib/model/account.ts:106](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L106)
 
 Struct data shape for account info including global columns.
 
@@ -5085,7 +5085,7 @@ Struct data shape for account info including global columns.
 
 > **AccountNotificationArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `AccountNotification.data.structure`\>
 
-Defined in: [src/lib/model/account.ts:147](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L147)
+Defined in: [src/lib/model/account.ts:147](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L147)
 
 Writable array of notifications.
 
@@ -5100,7 +5100,7 @@ Writable array of notifications.
 
 > **AccountNotificationData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `AccountNotification.data.structure`\>
 
-Defined in: [src/lib/model/account.ts:145](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L145)
+Defined in: [src/lib/model/account.ts:145](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L145)
 
 Struct data shape for account notifications.
 
@@ -5115,7 +5115,7 @@ Struct data shape for account notifications.
 
 > `const` **Account**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `email`: `"string"`; `firstName`: `"string"`; `lastLogin`: `"string"`; `lastName`: `"string"`; `username`: `"string"`; `verified`: `"boolean"`; \}\>
 
-Defined in: [src/lib/model/account.ts:43](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L43)
+Defined in: [src/lib/model/account.ts:43](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L43)
 
 Struct for accounts.
 
@@ -5130,7 +5130,7 @@ Struct for accounts.
 
 > `const` **AccountInfo**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `accountId`: `"string"`; `bio`: `"string"`; `picture`: `"string"`; `socials`: `"string"`; `theme`: `"string"`; `viewOnline`: `"string"`; `website`: `"string"`; \}\>
 
-Defined in: [src/lib/model/account.ts:83](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L83)
+Defined in: [src/lib/model/account.ts:83](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L83)
 
 Struct for profile details associated with an account.
 
@@ -5145,7 +5145,7 @@ Struct for profile details associated with an account.
 
 > `const` **AccountNotification**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `accountId`: `"string"`; `icon`: `"string"`; `iconType`: `"string"`; `link`: `"string"`; `message`: `"string"`; `read`: `"boolean"`; `severity`: `"string"`; `title`: `"string"`; \}\>
 
-Defined in: [src/lib/model/account.ts:120](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L120)
+Defined in: [src/lib/model/account.ts:120](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L120)
 
 Struct for account notifications.
 
@@ -5160,7 +5160,7 @@ Struct for account notifications.
 
 > `const` **self**: [`SingleWritable`](../../../../../services/struct/struct/classes/SingleWritable.md)\<\{ `email`: `"string"`; `firstName`: `"string"`; `lastLogin`: `"string"`; `lastName`: `"string"`; `username`: `"string"`; `verified`: `"boolean"`; \}\>
 
-Defined in: [src/lib/model/account.ts:154](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/account.ts#L154)
+Defined in: [src/lib/model/account.ts:154](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/account.ts#L154)
 
 Singleton writable for the current account.
 
@@ -5232,7 +5232,7 @@ Analytics client helpers.
 
 > **count**(): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [src/lib/model/analytics.ts:61](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/analytics.ts#L61)
+Defined in: [src/lib/model/analytics.ts:61](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/analytics.ts#L61)
 
 Returns a count of distinct links for the current session/account.
 
@@ -5251,7 +5251,7 @@ Returns a count of distinct links for the current session/account.
 
 > **myLinks**(`config`): `ResultPromise`\<`Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[], `Error`\>
 
-Defined in: [src/lib/model/analytics.ts:52](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/analytics.ts#L52)
+Defined in: [src/lib/model/analytics.ts:52](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/analytics.ts#L52)
 
 Fetches the current user's analytics links.
 
@@ -5308,7 +5308,7 @@ Analytics client helpers.
 
 > **LinkData** = *typeof* `Links.sample`
 
-Defined in: [src/lib/model/analytics.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/analytics.ts#L45)
+Defined in: [src/lib/model/analytics.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/analytics.ts#L45)
 
 Sample data type for analytics links.
 
@@ -5323,7 +5323,7 @@ Sample data type for analytics links.
 
 > `const` **Links**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `account`: `"string"`; `duration`: `"number"`; `session`: `"string"`; `url`: `"string"`; \}\>
 
-Defined in: [src/lib/model/analytics.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/analytics.ts#L28)
+Defined in: [src/lib/model/analytics.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/analytics.ts#L28)
 
 Struct for analytics link records.
 
@@ -5391,7 +5391,7 @@ Dashboard data models and helpers.
 
 # Class: Card
 
-Defined in: [src/lib/model/dashboard.ts:229](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L229)
+Defined in: [src/lib/model/dashboard.ts:229](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L229)
 
 Dashboard card state and configuration.
 
@@ -5405,7 +5405,7 @@ Dashboard card state and configuration.
 
 > **new Card**(`config`): `Card`
 
-Defined in: [src/lib/model/dashboard.ts:249](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L249)
+Defined in: [src/lib/model/dashboard.ts:249](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L249)
 
 Creates a dashboard card.
 
@@ -5431,7 +5431,7 @@ Card configuration.
 
 > `readonly` **config**: `CardConfig`
 
-Defined in: [src/lib/model/dashboard.ts:249](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L249)
+Defined in: [src/lib/model/dashboard.ts:249](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L249)
 
 Card configuration.
 
@@ -5441,7 +5441,7 @@ Card configuration.
 
 > `readonly` **emit**: `any`
 
-Defined in: [src/lib/model/dashboard.ts:242](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L242)
+Defined in: [src/lib/model/dashboard.ts:242](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L242)
 
 ***
 
@@ -5449,7 +5449,7 @@ Defined in: [src/lib/model/dashboard.ts:242](https://github.com/tsaxking/sveltek
 
 > `readonly` **off**: `any`
 
-Defined in: [src/lib/model/dashboard.ts:240](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L240)
+Defined in: [src/lib/model/dashboard.ts:240](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L240)
 
 ***
 
@@ -5457,7 +5457,7 @@ Defined in: [src/lib/model/dashboard.ts:240](https://github.com/tsaxking/sveltek
 
 > `readonly` **on**: `any`
 
-Defined in: [src/lib/model/dashboard.ts:239](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L239)
+Defined in: [src/lib/model/dashboard.ts:239](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L239)
 
 ***
 
@@ -5465,7 +5465,7 @@ Defined in: [src/lib/model/dashboard.ts:239](https://github.com/tsaxking/sveltek
 
 > `readonly` **once**: `any`
 
-Defined in: [src/lib/model/dashboard.ts:241](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L241)
+Defined in: [src/lib/model/dashboard.ts:241](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L241)
 
 ***
 
@@ -5473,7 +5473,7 @@ Defined in: [src/lib/model/dashboard.ts:241](https://github.com/tsaxking/sveltek
 
 > **state**: `CardData`
 
-Defined in: [src/lib/model/dashboard.ts:232](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L232)
+Defined in: [src/lib/model/dashboard.ts:232](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L232)
 
 ***
 
@@ -5481,7 +5481,7 @@ Defined in: [src/lib/model/dashboard.ts:232](https://github.com/tsaxking/sveltek
 
 > **subscribers**: `Set`\<`Subscriber`\<`CardData`\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -5495,7 +5495,7 @@ Set of active subscribers to this writable store
 
 > `readonly` `static` **cards**: `Map`\<`string`, `Card`\>
 
-Defined in: [src/lib/model/dashboard.ts:230](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L230)
+Defined in: [src/lib/model/dashboard.ts:230](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L230)
 
 ## Accessors
 
@@ -5505,7 +5505,7 @@ Defined in: [src/lib/model/dashboard.ts:230](https://github.com/tsaxking/sveltek
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -5515,7 +5515,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -5539,7 +5539,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **height**(): `number`
 
-Defined in: [src/lib/model/dashboard.ts:317](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L317)
+Defined in: [src/lib/model/dashboard.ts:317](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L317)
 
 Default height for the card.
 
@@ -5555,7 +5555,7 @@ Default height for the card.
 
 > **get** **width**(): `number`
 
-Defined in: [src/lib/model/dashboard.ts:312](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L312)
+Defined in: [src/lib/model/dashboard.ts:312](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L312)
 
 Default width for the card.
 
@@ -5569,7 +5569,7 @@ Default width for the card.
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -5595,7 +5595,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<`CardData`\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -5623,7 +5623,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **getOrder**(): `number`
 
-Defined in: [src/lib/model/dashboard.ts:305](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L305)
+Defined in: [src/lib/model/dashboard.ts:305](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L305)
 
 Display order for the active breakpoint.
 
@@ -5637,7 +5637,7 @@ Display order for the active breakpoint.
 
 > **getSize**(): `object`
 
-Defined in: [src/lib/model/dashboard.ts:278](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L278)
+Defined in: [src/lib/model/dashboard.ts:278](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L278)
 
 Returns the current size for the active breakpoint.
 
@@ -5663,7 +5663,7 @@ Returns the current size for the active breakpoint.
 
 > **hide**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:332](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L332)
+Defined in: [src/lib/model/dashboard.ts:332](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L332)
 
 Hides the card and emits a `show` event.
 
@@ -5677,7 +5677,7 @@ Hides the card and emits a `show` event.
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -5703,7 +5703,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -5733,7 +5733,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **maximize**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:348](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L348)
+Defined in: [src/lib/model/dashboard.ts:348](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L348)
 
 Sets the maximized state and emits `maximized`.
 
@@ -5747,7 +5747,7 @@ Sets the maximized state and emits `maximized`.
 
 > **minimize**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L342)
+Defined in: [src/lib/model/dashboard.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L342)
 
 Clears the maximized state and emits `maximized`.
 
@@ -5761,7 +5761,7 @@ Clears the maximized state and emits `maximized`.
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -5795,7 +5795,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -5823,7 +5823,7 @@ The writable store to pipe from
 
 > **resize**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:354](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L354)
+Defined in: [src/lib/model/dashboard.ts:354](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L354)
 
 Recomputes size based on the current breakpoint.
 
@@ -5837,7 +5837,7 @@ Recomputes size based on the current breakpoint.
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -5869,7 +5869,7 @@ store.set('new value');
 
 > **show**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:322](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L322)
+Defined in: [src/lib/model/dashboard.ts:322](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L322)
 
 Shows the card and emits a `show` event.
 
@@ -5883,7 +5883,7 @@ Shows the card and emits a `show` event.
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -5918,7 +5918,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -5953,7 +5953,7 @@ store.update(current => current + 1);
 
 # Class: Dashboard
 
-Defined in: [src/lib/model/dashboard.ts:126](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L126)
+Defined in: [src/lib/model/dashboard.ts:126](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L126)
 
 Dashboard container managing a collection of cards.
 
@@ -5967,7 +5967,7 @@ Dashboard container managing a collection of cards.
 
 > **new Dashboard**(`config`): `Dashboard`
 
-Defined in: [src/lib/model/dashboard.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L134)
+Defined in: [src/lib/model/dashboard.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L134)
 
 Creates a dashboard.
 
@@ -5993,7 +5993,7 @@ Dashboard configuration.
 
 > `readonly` **config**: `DashboardConfig`
 
-Defined in: [src/lib/model/dashboard.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L134)
+Defined in: [src/lib/model/dashboard.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L134)
 
 Dashboard configuration.
 
@@ -6003,7 +6003,7 @@ Dashboard configuration.
 
 > **hiddenCards**: `Writable`\<`Set`\<[`Card`](Card.md)\>\>
 
-Defined in: [src/lib/model/dashboard.ts:189](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L189)
+Defined in: [src/lib/model/dashboard.ts:189](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L189)
 
 Set of currently hidden cards.
 
@@ -6013,7 +6013,7 @@ Set of currently hidden cards.
 
 > **subscribers**: `Set`\<`Subscriber`\<[`Card`](Card.md)[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -6029,7 +6029,7 @@ Set of active subscribers to this writable store
 
 > **get** **cards**(): [`Card`](Card.md)[]
 
-Defined in: [src/lib/model/dashboard.ts:169](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L169)
+Defined in: [src/lib/model/dashboard.ts:169](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L169)
 
 Managed card instances.
 
@@ -6045,7 +6045,7 @@ Managed card instances.
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -6055,7 +6055,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -6079,7 +6079,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **id**(): `string`
 
-Defined in: [src/lib/model/dashboard.ts:159](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L159)
+Defined in: [src/lib/model/dashboard.ts:159](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L159)
 
 Dashboard id used for storage keys.
 
@@ -6095,7 +6095,7 @@ Dashboard id used for storage keys.
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -6117,7 +6117,7 @@ Number of elements in the array
 
 > **get** **name**(): `string`
 
-Defined in: [src/lib/model/dashboard.ts:164](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L164)
+Defined in: [src/lib/model/dashboard.ts:164](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L164)
 
 Dashboard display name.
 
@@ -6133,7 +6133,7 @@ Dashboard display name.
 
 > **get** **orderedCards**(): [`WritableArray`](../../../../../services/writables/classes/WritableArray.md)\<[`Card`](Card.md)\>
 
-Defined in: [src/lib/model/dashboard.ts:174](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L174)
+Defined in: [src/lib/model/dashboard.ts:174](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L174)
 
 Cards sorted by order.
 
@@ -6147,7 +6147,7 @@ Cards sorted by order.
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -6173,7 +6173,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`Card`](Card.md)[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -6201,7 +6201,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -6219,7 +6219,7 @@ Removes all elements from the array
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -6245,7 +6245,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -6278,7 +6278,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(): `void`
 
-Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L444)
+Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L444)
 
 Notifies subscribers with filtered, sorted, and optionally reversed data
 
@@ -6296,7 +6296,7 @@ Notifies subscribers with filtered, sorted, and optionally reversed data
 
 > **init**(): `void`
 
-Defined in: [src/lib/model/dashboard.ts:218](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L218)
+Defined in: [src/lib/model/dashboard.ts:218](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L218)
 
 Attaches resize listeners for reflow.
 
@@ -6310,7 +6310,7 @@ Attaches resize listeners for reflow.
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -6340,7 +6340,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../../../../services/writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -6382,7 +6382,7 @@ const strings = numbers.map(n => n.toString());
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -6416,7 +6416,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -6444,7 +6444,7 @@ The writable store to pipe from
 
 > **pop**(): [`Card`](Card.md)
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -6464,7 +6464,7 @@ The removed item, or undefined if array is empty
 
 > **pull**(): `Set`\<[`Card`](Card.md)\>
 
-Defined in: [src/lib/model/dashboard.ts:203](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L203)
+Defined in: [src/lib/model/dashboard.ts:203](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L203)
 
 Restores hidden cards from localStorage.
 
@@ -6478,7 +6478,7 @@ Restores hidden cards from localStorage.
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -6523,7 +6523,7 @@ store.remove(item1, item2, item3);
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L500)
+Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L500)
 
 Removes items from the array based on a predicate function
 
@@ -6554,7 +6554,7 @@ store.remove(item => item.id === targetId);
 
 > **remove**(...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L513)
+Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L513)
 
 Removes specific items from the array
 
@@ -6589,7 +6589,7 @@ store.remove(item1, item2, item3);
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -6607,7 +6607,7 @@ Toggles the reverse order of the array display
 
 > **save**(): `Result`\<`void`, `Error`\>
 
-Defined in: [src/lib/model/dashboard.ts:192](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L192)
+Defined in: [src/lib/model/dashboard.ts:192](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L192)
 
 Persists hidden card ids to localStorage.
 
@@ -6621,7 +6621,7 @@ Persists hidden card ids to localStorage.
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -6653,7 +6653,7 @@ store.set('new value');
 
 > **shift**(): [`Card`](Card.md)
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -6673,7 +6673,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -6706,7 +6706,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -6744,7 +6744,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -6779,7 +6779,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -6805,7 +6805,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -6837,7 +6837,7 @@ store.update(current => current + 1);
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../../../../services/writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -6885,7 +6885,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 > **getGridSize**(): `"xl"` \| `"xs"` \| `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [src/lib/model/dashboard.ts:29](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L29)
+Defined in: [src/lib/model/dashboard.ts:29](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L29)
 
 Returns the current grid size bucket based on window width.
 
@@ -6928,7 +6928,7 @@ Dashboard data models and helpers.
 
 > `const` **sizes**: `object`
 
-Defined in: [src/lib/model/dashboard.ts:49](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/dashboard.ts#L49)
+Defined in: [src/lib/model/dashboard.ts:49](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/dashboard.ts#L49)
 
 Default column counts per breakpoint.
 
@@ -7016,7 +7016,7 @@ Provides a writable registry to manage navigation sections and links.
 
 > **addSection**(`section`): `void`
 
-Defined in: [src/lib/model/navbar.ts:68](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/navbar.ts#L68)
+Defined in: [src/lib/model/navbar.ts:68](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/navbar.ts#L68)
 
 Adds or replaces a section and maintains sort order.
 
@@ -7053,7 +7053,7 @@ Navbar.addSection({
 
 > **clear**(): `void`
 
-Defined in: [src/lib/model/navbar.ts:108](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/navbar.ts#L108)
+Defined in: [src/lib/model/navbar.ts:108](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/navbar.ts#L108)
 
 Clears all sections.
 
@@ -7072,7 +7072,7 @@ Clears all sections.
 
 > **getSections**(): `Sections`
 
-Defined in: [src/lib/model/navbar.ts:87](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/navbar.ts#L87)
+Defined in: [src/lib/model/navbar.ts:87](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/navbar.ts#L87)
 
 Returns the writable list of sections.
 
@@ -7093,7 +7093,7 @@ Writable sections store.
 
 > **removeSection**(`section`): `void`
 
-Defined in: [src/lib/model/navbar.ts:95](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/navbar.ts#L95)
+Defined in: [src/lib/model/navbar.ts:95](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/navbar.ts#L95)
 
 Removes a section by name.
 
@@ -7222,7 +7222,7 @@ permission operations such as role search and ruleset assignment.
 
 > **addToRole**(`role`, `account`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:454](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L454)
+Defined in: [src/lib/model/permissions.ts:454](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L454)
 
 Adds an account to a role.
 
@@ -7263,7 +7263,7 @@ await Permissions.addToRole(role, account).unwrap();
 
 > **createChildRolePopup**(`parent`): `Promise`\<`Result`\<\{ `message`: `string`; `role?`: `undefined`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `role`: `StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>; `success`: `boolean`; \}, `Error`\>\>
 
-Defined in: [src/lib/model/permissions.ts:411](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L411)
+Defined in: [src/lib/model/permissions.ts:411](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L411)
 
 Opens a UI prompt to create a child role.
 
@@ -7298,7 +7298,7 @@ await Permissions.createChildRolePopup(parent).unwrap();
 
 > **createRole**(`parent`, `config`): `ResultPromise`\<\{ `message`: `string`; `role?`: `undefined`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `role`: `StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:387](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L387)
+Defined in: [src/lib/model/permissions.ts:387](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L387)
 
 Creates a role under a parent.
 
@@ -7349,7 +7349,7 @@ await Permissions.createRole(parent, { name: 'Editor', description: 'Can edit', 
 
 > **getAvailableRolePermissions**(`role`): `Result`\<[`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<\{ `description`: `"string"`; `entitlement`: `"string"`; `featureScopes`: `"string"`; `name`: `"string"`; `parent`: `"string"`; `role`: `"string"`; `targetAttribute`: `"string"`; \}\>, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:206](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L206)
+Defined in: [src/lib/model/permissions.ts:206](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L206)
 
 Fetches available permissions for a role.
 
@@ -7384,7 +7384,7 @@ const rulesets = Permissions.getAvailableRolePermissions(role);
 
 > **getEntitlementGroups**(): `ResultPromise`\<`string`[], `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:244](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L244)
+Defined in: [src/lib/model/permissions.ts:244](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L244)
 
 Collects entitlement group names.
 
@@ -7411,7 +7411,7 @@ const groups = await Permissions.getEntitlementGroups().unwrap();
 
 > **getEntitlements**(): [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<\{ `defaultFeatureScopes`: `"string"`; `description`: `"string"`; `features`: `"string"`; `group`: `"string"`; `name`: `"string"`; `permissions`: `"string"`; `structs`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:230](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L230)
+Defined in: [src/lib/model/permissions.ts:230](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L230)
 
 Returns all entitlements.
 
@@ -7438,7 +7438,7 @@ const entitlements = Permissions.getEntitlements();
 
 > **getRolePermissions**(`role`): `ResultPromise`\<`Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[], `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:189](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L189)
+Defined in: [src/lib/model/permissions.ts:189](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L189)
 
 Fetches permissions for a role.
 
@@ -7473,7 +7473,7 @@ const perms = await Permissions.getRolePermissions(role).unwrap();
 
 > **grantAccountPermission**(`account`, `entitlement`, `targetAttribute`, `featureScopes?`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:311](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L311)
+Defined in: [src/lib/model/permissions.ts:311](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L311)
 
 Grants an entitlement to an account.
 
@@ -7526,7 +7526,7 @@ await Permissions.grantAccountPermission(account, entitlement, 'role', ['all']).
 
 > **grantRuleset**(`role`, `ruleset`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:270](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L270)
+Defined in: [src/lib/model/permissions.ts:270](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L270)
 
 Grants a ruleset to a role.
 
@@ -7567,7 +7567,7 @@ await Permissions.grantRuleset(role, ruleset).unwrap();
 
 > **removeFromRole**(`role`, `account`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:475](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L475)
+Defined in: [src/lib/model/permissions.ts:475](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L475)
 
 Removes an account from a role.
 
@@ -7608,7 +7608,7 @@ await Permissions.removeFromRole(role, account).unwrap();
 
 > **revokeAccountPermission**(`ruleset`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:338](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L338)
+Defined in: [src/lib/model/permissions.ts:338](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L338)
 
 Revokes an account ruleset.
 
@@ -7643,7 +7643,7 @@ await Permissions.revokeAccountPermission(ruleset).unwrap();
 
 > **revokeRolePermission**(`ruleset`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/model/permissions.ts:290](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L290)
+Defined in: [src/lib/model/permissions.ts:290](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L290)
 
 Revokes a ruleset from a role.
 
@@ -7678,7 +7678,7 @@ await Permissions.revokeRolePermission(ruleset).unwrap();
 
 > **searchRoles**(`searchKey`, `config`): [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<\{ `color`: `"string"`; `description`: `"string"`; `name`: `"string"`; `parent`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L357)
+Defined in: [src/lib/model/permissions.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L357)
 
 Searches roles by name.
 
@@ -7776,7 +7776,7 @@ permission operations such as role search and ruleset assignment.
 
 > **AccountRulesetData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `AccountRuleset.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:176](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L176)
+Defined in: [src/lib/model/permissions.ts:176](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L176)
 
 Struct data shape for account rulesets.
 
@@ -7791,7 +7791,7 @@ Struct data shape for account rulesets.
 
 > **AccountRulesetDataArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `AccountRuleset.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:178](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L178)
+Defined in: [src/lib/model/permissions.ts:178](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L178)
 
 Writable array of account rulesets.
 
@@ -7806,7 +7806,7 @@ Writable array of account rulesets.
 
 > **EntitlementData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `Entitlement.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:109](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L109)
+Defined in: [src/lib/model/permissions.ts:109](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L109)
 
 Struct data shape for entitlements.
 
@@ -7821,7 +7821,7 @@ Struct data shape for entitlements.
 
 > **EntitlementDataArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `Entitlement.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:111](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L111)
+Defined in: [src/lib/model/permissions.ts:111](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L111)
 
 Writable array of entitlements.
 
@@ -7836,7 +7836,7 @@ Writable array of entitlements.
 
 > **RoleAccountData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `RoleAccount.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:71](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L71)
+Defined in: [src/lib/model/permissions.ts:71](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L71)
 
 Struct data shape for role-account bindings.
 
@@ -7851,7 +7851,7 @@ Struct data shape for role-account bindings.
 
 > **RoleAccountDataArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `RoleAccount.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:73](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L73)
+Defined in: [src/lib/model/permissions.ts:73](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L73)
 
 Writable array of role-account bindings.
 
@@ -7866,7 +7866,7 @@ Writable array of role-account bindings.
 
 > **RoleData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `Role.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:48](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L48)
+Defined in: [src/lib/model/permissions.ts:48](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L48)
 
 Struct data shape for roles.
 
@@ -7881,7 +7881,7 @@ Struct data shape for roles.
 
 > **RoleDataArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `Role.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L50)
+Defined in: [src/lib/model/permissions.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L50)
 
 Writable array of role records.
 
@@ -7896,7 +7896,7 @@ Writable array of role records.
 
 > **RoleRulesetData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `RoleRuleset.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:147](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L147)
+Defined in: [src/lib/model/permissions.ts:147](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L147)
 
 Struct data shape for role rulesets.
 
@@ -7911,7 +7911,7 @@ Struct data shape for role rulesets.
 
 > **RoleRulesetDataArr** = [`DataArr`](../../../../../services/struct/data-arr/classes/DataArr.md)\<*typeof* `RoleRuleset.data.structure`\>
 
-Defined in: [src/lib/model/permissions.ts:149](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L149)
+Defined in: [src/lib/model/permissions.ts:149](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L149)
 
 Writable array of role rulesets.
 
@@ -7926,7 +7926,7 @@ Writable array of role rulesets.
 
 > `const` **AccountRuleset**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `account`: `"string"`; `entitlement`: `"string"`; `featureScopes`: `"string"`; `targetAttribute`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:159](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L159)
+Defined in: [src/lib/model/permissions.ts:159](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L159)
 
 Struct for account rulesets.
 
@@ -7941,7 +7941,7 @@ Struct for account rulesets.
 
 > `const` **Entitlement**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `defaultFeatureScopes`: `"string"`; `description`: `"string"`; `features`: `"string"`; `group`: `"string"`; `name`: `"string"`; `permissions`: `"string"`; `structs`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L86)
+Defined in: [src/lib/model/permissions.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L86)
 
 Struct for entitlements.
 
@@ -7956,7 +7956,7 @@ Struct for entitlements.
 
 > `const` **Role**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `color`: `"string"`; `description`: `"string"`; `name`: `"string"`; `parent`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L31)
+Defined in: [src/lib/model/permissions.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L31)
 
 Struct for roles.
 
@@ -7971,7 +7971,7 @@ Struct for roles.
 
 > `const` **RoleAccount**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `account`: `"string"`; `role`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L58)
+Defined in: [src/lib/model/permissions.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L58)
 
 Struct mapping roles to accounts.
 
@@ -7986,7 +7986,7 @@ Struct mapping roles to accounts.
 
 > `const` **RoleRuleset**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `description`: `"string"`; `entitlement`: `"string"`; `featureScopes`: `"string"`; `name`: `"string"`; `parent`: `"string"`; `role`: `"string"`; `targetAttribute`: `"string"`; \}\>
 
-Defined in: [src/lib/model/permissions.ts:124](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/permissions.ts#L124)
+Defined in: [src/lib/model/permissions.ts:124](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/permissions.ts#L124)
 
 Struct for role rulesets.
 
@@ -8060,7 +8060,7 @@ Test helpers and status tracking.
 
 > **unitTest**(): `object`
 
-Defined in: [src/lib/model/testing.svelte.ts:62](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L62)
+Defined in: [src/lib/model/testing.svelte.ts:62](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L62)
 
 Runs a suite of client-side struct tests and returns status handles.
 
@@ -8198,7 +8198,7 @@ Test helpers and status tracking.
 
 > **State** = `"not started"` \| `"in progress"` \| `"success"` \| `"failure"`
 
-Defined in: [src/lib/model/testing.svelte.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L39)
+Defined in: [src/lib/model/testing.svelte.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L39)
 
 Status lifecycle states.
 
@@ -8213,7 +8213,7 @@ Status lifecycle states.
 
 > **Status** = `object`
 
-Defined in: [src/lib/model/testing.svelte.ts:48](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L48)
+Defined in: [src/lib/model/testing.svelte.ts:48](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L48)
 
 Status object used by the test runner.
 
@@ -8223,7 +8223,7 @@ Status object used by the test runner.
 
 > `optional` **message**: `string`
 
-Defined in: [src/lib/model/testing.svelte.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L50)
+Defined in: [src/lib/model/testing.svelte.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L50)
 
 Optional message.
 
@@ -8233,7 +8233,7 @@ Optional message.
 
 > **state**: [`State`](State.md)
 
-Defined in: [src/lib/model/testing.svelte.ts:49](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L49)
+Defined in: [src/lib/model/testing.svelte.ts:49](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L49)
 
 Current state.
 
@@ -8243,7 +8243,7 @@ Current state.
 
 > **update**(`state`, `message?`): `void`
 
-Defined in: [src/lib/model/testing.svelte.ts:52](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L52)
+Defined in: [src/lib/model/testing.svelte.ts:52](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L52)
 
 Updates state and message.
 
@@ -8272,7 +8272,7 @@ Updates state and message.
 
 > **TestData** = [`StructData`](../../../../../services/struct/struct-data/classes/StructData.md)\<*typeof* `Test.data.structure`\>
 
-Defined in: [src/lib/model/testing.svelte.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L37)
+Defined in: [src/lib/model/testing.svelte.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L37)
 
 Struct data shape for Test records.
 
@@ -8287,7 +8287,7 @@ Struct data shape for Test records.
 
 > **TestPermissionsArr** = `ReturnType`\<*typeof* `TestPermissions.arr`\>
 
-Defined in: [src/lib/model/testing.svelte.ts:506](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L506)
+Defined in: [src/lib/model/testing.svelte.ts:506](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L506)
 
 Writable array of permission test records.
 
@@ -8302,7 +8302,7 @@ Writable array of permission test records.
 
 > **TestPermissionsData** = *typeof* `TestPermissions.sample`
 
-Defined in: [src/lib/model/testing.svelte.ts:504](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L504)
+Defined in: [src/lib/model/testing.svelte.ts:504](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L504)
 
 Struct data shape for permission test records.
 
@@ -8317,7 +8317,7 @@ Struct data shape for permission test records.
 
 > `const` **Test**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `age`: `"number"`; `name`: `"string"`; \}\>
 
-Defined in: [src/lib/model/testing.svelte.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L23)
+Defined in: [src/lib/model/testing.svelte.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L23)
 
 Struct used for connectivity and CRUD tests.
 
@@ -8332,7 +8332,7 @@ Struct used for connectivity and CRUD tests.
 
 > `const` **TestPermissions**: [`Struct`](../../../../../services/struct/struct/classes/Struct.md)\<\{ `age`: `"number"`; `name`: `"string"`; \}\>
 
-Defined in: [src/lib/model/testing.svelte.ts:492](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/model/testing.svelte.ts#L492)
+Defined in: [src/lib/model/testing.svelte.ts:492](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/model/testing.svelte.ts#L492)
 
 Struct used to validate permission-based read access in tests.
 
@@ -8373,7 +8373,7 @@ Struct used to validate permission-based read access in tests.
 
 > **default**: () => `void`
 
-Defined in: [src/lib/nav/admin.ts:3](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/nav/admin.ts#L3)
+Defined in: [src/lib/nav/admin.ts:3](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/nav/admin.ts#L3)
 
 ## Returns
 
@@ -8431,7 +8431,7 @@ Account RPC layer for shared client/server access. Each `query()`/`command()` cu
 
 > `const` **getNotifications**: `RemoteQueryFunction`\<\{ `limit?`: `number`; `page?`: `number`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/account.remote.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L134)
+Defined in: [src/lib/remotes/account.remote.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L134)
 
 Returns all notifications for the current account.
 
@@ -8450,7 +8450,7 @@ Paging payload.
 
 > `const` **getOwnNotifs**: `RemoteQueryFunction`\<\{ `limit?`: `number`; `page?`: `number`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/account.remote.ts:87](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L87)
+Defined in: [src/lib/remotes/account.remote.ts:87](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L87)
 
 Returns unread notifications for the current account.
 
@@ -8469,7 +8469,7 @@ Paging payload.
 
 > `const` **search**: `RemoteQueryFunction`\<\{ `limit?`: `number`; `page?`: `number`; `query?`: `string`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/account.remote.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L24)
+Defined in: [src/lib/remotes/account.remote.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L24)
 
 Searches accounts by username or profile fields.
 
@@ -8488,7 +8488,7 @@ Search payload.
 
 > `const` **self**: `RemoteQueryFunction`\<`void`, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>\>
 
-Defined in: [src/lib/remotes/account.remote.ts:52](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L52)
+Defined in: [src/lib/remotes/account.remote.ts:52](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L52)
 
 Returns the current account or 401 if not signed in.
 
@@ -8503,7 +8503,7 @@ Returns the current account or 401 if not signed in.
 
 > `const` **signOut**: `RemoteCommand`\<`void`, `Promise`\<`boolean`\>\>
 
-Defined in: [src/lib/remotes/account.remote.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L119)
+Defined in: [src/lib/remotes/account.remote.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L119)
 
 Signs out the current session.
 
@@ -8518,7 +8518,7 @@ Signs out the current session.
 
 > `const` **usernameExists**: `RemoteQueryFunction`\<\{ `username?`: `string`; \}, `boolean`\>
 
-Defined in: [src/lib/remotes/account.remote.ts:63](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/account.remote.ts#L63)
+Defined in: [src/lib/remotes/account.remote.ts:63](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/account.remote.ts#L63)
 
 Checks whether a username already exists.
 
@@ -8574,7 +8574,7 @@ Analytics RPC layer for shared client/server access. Each `query()`/`command()` 
 
 > `const` **close**: `RemoteCommand`\<\{ `duration?`: `number`; `page?`: `string`; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/analytics.remote.ts:128](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/analytics.remote.ts#L128)
+Defined in: [src/lib/remotes/analytics.remote.ts:128](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/analytics.remote.ts#L128)
 
 Records a page close event with duration if not ignored by the manifesto.
 
@@ -8593,7 +8593,7 @@ Page close payload.
 
 > `const` **count**: `RemoteQueryFunction`\<`void`, `number`\>
 
-Defined in: [src/lib/remotes/analytics.remote.ts:53](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/analytics.remote.ts#L53)
+Defined in: [src/lib/remotes/analytics.remote.ts:53](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/analytics.remote.ts#L53)
 
 Returns a distinct link count for the current account or session.
 
@@ -8608,7 +8608,7 @@ Returns a distinct link count for the current account or session.
 
 > `const` **fingerprint**: `RemoteCommand`\<\{ `fingerprint?`: `number`; \}, `Promise`\<`never`\>\>
 
-Defined in: [src/lib/remotes/analytics.remote.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/analytics.remote.ts#L86)
+Defined in: [src/lib/remotes/analytics.remote.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/analytics.remote.ts#L86)
 
 Stores a fingerprint for the current session and sets the signed cookie.
 
@@ -8627,7 +8627,7 @@ Fingerprint payload.
 
 > `const` **myLinks**: `RemoteQueryFunction`\<\{ `limit?`: `number`; `page?`: `number`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/analytics.remote.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/analytics.remote.ts#L27)
+Defined in: [src/lib/remotes/analytics.remote.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/analytics.remote.ts#L27)
 
 Returns analytics links for the current account.
 
@@ -8685,7 +8685,7 @@ Base RPC helpers for session/account context. These remotes provide safe access 
 
 > `const` **getAccount**: `RemoteQueryFunction`\<`void`, `StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>\>
 
-Defined in: [src/lib/remotes/index.remote.ts:40](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/index.remote.ts#L40)
+Defined in: [src/lib/remotes/index.remote.ts:40](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/index.remote.ts#L40)
 
 Returns the current account or null.
 
@@ -8700,7 +8700,7 @@ Returns the current account or null.
 
 > `const` **getSSE**: `RemoteQueryFunction`\<`void`, [`Connection`](../../../server/services/sse/classes/Connection.md)\>
 
-Defined in: [src/lib/remotes/index.remote.ts:56](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/index.remote.ts#L56)
+Defined in: [src/lib/remotes/index.remote.ts:56](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/index.remote.ts#L56)
 
 Returns the current SSE connection if available.
 
@@ -8715,7 +8715,7 @@ Returns the current SSE connection if available.
 
 > `const` **getSession**: `RemoteQueryFunction`\<`void`, `StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>\>
 
-Defined in: [src/lib/remotes/index.remote.ts:48](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/index.remote.ts#L48)
+Defined in: [src/lib/remotes/index.remote.ts:48](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/index.remote.ts#L48)
 
 Returns the current session data.
 
@@ -8730,7 +8730,7 @@ Returns the current session data.
 
 > `const` **isAdmin**: `RemoteQueryFunction`\<`void`, `boolean`\>
 
-Defined in: [src/lib/remotes/index.remote.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/index.remote.ts#L18)
+Defined in: [src/lib/remotes/index.remote.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/index.remote.ts#L18)
 
 Returns true when the current account is an administrator.
 
@@ -8745,7 +8745,7 @@ Returns true when the current account is an administrator.
 
 > `const` **isLoggedIn**: `RemoteQueryFunction`\<`void`, `boolean`\>
 
-Defined in: [src/lib/remotes/index.remote.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/index.remote.ts#L32)
+Defined in: [src/lib/remotes/index.remote.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/index.remote.ts#L32)
 
 Returns true when a user is signed in.
 
@@ -8791,7 +8791,7 @@ Time sync RPC endpoints for shared client/server access.
 
 > `const` **ntp**: `RemoteQueryFunction`\<`void`, \{ `date`: `number`; `time`: `number`; \}\>
 
-Defined in: [src/lib/remotes/ntp.remote.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/ntp.remote.ts#L14)
+Defined in: [src/lib/remotes/ntp.remote.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/ntp.remote.ts#L14)
 
 Returns server time and last sync date.
 
@@ -8859,7 +8859,7 @@ Permission management RPC endpoints (roles, rulesets, entitlements). Each `query
 
 > `const` **addToRole**: `RemoteCommand`\<\{ `account?`: `string`; `role?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:239](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L239)
+Defined in: [src/lib/remotes/permissions.remote.ts:239](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L239)
 
 Adds an account to a role if the caller can manage membership.
 
@@ -8886,7 +8886,7 @@ Account id.
 
 > `const` **availablePermissions**: `RemoteQueryFunction`\<\{ `role?`: `string`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:502](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L502)
+Defined in: [src/lib/remotes/permissions.remote.ts:502](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L502)
 
 Returns available permissions a role can be granted.
 
@@ -8909,7 +8909,7 @@ Role id.
 
 > `const` **createRole**: `RemoteCommand`\<\{ `color?`: `string`; `description?`: `string`; `name?`: `string`; `parent?`: `string`; \}, `Promise`\<\{ `message`: `string`; `role?`: `undefined`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `role`: `StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:74](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L74)
+Defined in: [src/lib/remotes/permissions.remote.ts:74](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L74)
 
 Creates a role under a parent, enforcing hierarchy permissions.
 
@@ -8944,7 +8944,7 @@ Hex color string.
 
 > `const` **grantAccountPermission**: `RemoteCommand`\<\{ `account?`: `string`; `entitlement?`: `string`; `featureScopes?`: `string`[]; `targetAttribute?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:851](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L851)
+Defined in: [src/lib/remotes/permissions.remote.ts:851](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L851)
 
 Grants an entitlement to an account.
 
@@ -8979,7 +8979,7 @@ Feature scopes.
 
 > `const` **grantRolePermission**: `RemoteCommand`\<\{ `role?`: `string`; `ruleset?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:567](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L567)
+Defined in: [src/lib/remotes/permissions.remote.ts:567](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L567)
 
 Grants a ruleset to a role.
 
@@ -9006,7 +9006,7 @@ Ruleset id.
 
 > `const` **myAccountPermissions**: `RemoteQueryFunction`\<`void`, `StructData`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"account_rulesets"`\>[]\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:823](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L823)
+Defined in: [src/lib/remotes/permissions.remote.ts:823](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L823)
 
 Returns account-specific rulesets for the current account.
 
@@ -9021,7 +9021,7 @@ Returns account-specific rulesets for the current account.
 
 > `const` **myPermissions**: `RemoteQueryFunction`\<`void`, `StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>[]\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:432](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L432)
+Defined in: [src/lib/remotes/permissions.remote.ts:432](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L432)
 
 Returns permissions for the current account.
 
@@ -9036,7 +9036,7 @@ Returns permissions for the current account.
 
 > `const` **permissionsFromRole**: `RemoteQueryFunction`\<\{ `role?`: `string`; \}, `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:454](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L454)
+Defined in: [src/lib/remotes/permissions.remote.ts:454](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L454)
 
 Returns rulesets/permissions for a given role.
 
@@ -9059,7 +9059,7 @@ Role id.
 
 > `const` **removeFromRole**: `RemoteCommand`\<\{ `account?`: `string`; `role?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| \{ `message?`: `undefined`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:317](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L317)
+Defined in: [src/lib/remotes/permissions.remote.ts:317](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L317)
 
 Removes an account from a role if the caller can manage membership.
 
@@ -9086,7 +9086,7 @@ Account id.
 
 > `const` **revokeAccountPermission**: `RemoteCommand`\<\{ `ruleset?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:946](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L946)
+Defined in: [src/lib/remotes/permissions.remote.ts:946](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L946)
 
 Revokes an account ruleset.
 
@@ -9109,7 +9109,7 @@ Ruleset id.
 
 > `const` **revokeRolePermission**: `RemoteCommand`\<\{ `ruleset?`: `string`; \}, `Promise`\<\{ `message`: `string`; `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:709](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L709)
+Defined in: [src/lib/remotes/permissions.remote.ts:709](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L709)
 
 Revokes a ruleset from a role.
 
@@ -9132,7 +9132,7 @@ Ruleset id.
 
 > `const` **searchRoles**: `RemoteQueryFunction`\<\{ `limit?`: `number`; `page?`: `number`; `searchKey?`: `string`; \}, `Partial`\<`Structable`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}\>\>[]\>
 
-Defined in: [src/lib/remotes/permissions.remote.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/permissions.remote.ts#L32)
+Defined in: [src/lib/remotes/permissions.remote.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/permissions.remote.ts#L32)
 
 Searches roles by name with pagination.
 
@@ -9212,7 +9212,7 @@ Session manager RPC endpoints for SSE connection orchestration. Each `query()`/`
 
 > `const` **closeManager**: `RemoteCommand`\<`string`, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:78](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L78)
+Defined in: [src/lib/remotes/session-manager.remote.ts:78](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L78)
 
 Closes and deletes a session manager.
 
@@ -9231,7 +9231,7 @@ Manager id.
 
 > `const` **getActiveConnections**: `RemoteQueryFunction`\<`void`, `object`[]\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:174](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L174)
+Defined in: [src/lib/remotes/session-manager.remote.ts:174](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L174)
 
 Returns a flat list of active connections.
 
@@ -9246,7 +9246,7 @@ Returns a flat list of active connections.
 
 > `const` **getManagerConnections**: `RemoteQueryFunction`\<`string`, `object`[][]\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:91](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L91)
+Defined in: [src/lib/remotes/session-manager.remote.ts:91](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L91)
 
 Returns grouped connections for a manager.
 
@@ -9265,7 +9265,7 @@ Manager id.
 
 > `const` **isOwner**: `RemoteQueryFunction`\<`string`, `boolean`\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L26)
+Defined in: [src/lib/remotes/session-manager.remote.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L26)
 
 Checks whether the current SSE connection is the owner of a manager.
 
@@ -9284,7 +9284,7 @@ Session manager id.
 
 > `const` **managerSend**: `RemoteCommand`\<\{ `data?`: `unknown`; `event?`: `string`; `manager?`: `string`; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:57](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L57)
+Defined in: [src/lib/remotes/session-manager.remote.ts:57](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L57)
 
 Sends an event to all connections in a manager.
 
@@ -9315,7 +9315,7 @@ Event payload.
 
 > `const` **redirectConnection**: `RemoteCommand`\<\{ `id?`: `string`; `reason?`: `string`; `url?`: `string`; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:115](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L115)
+Defined in: [src/lib/remotes/session-manager.remote.ts:115](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L115)
 
 Sends a redirect command to an SSE connection.
 
@@ -9346,7 +9346,7 @@ Optional reason.
 
 > `const` **reloadConnection**: `RemoteCommand`\<\{ `id?`: `string`; `reason?`: `string`; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:136](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L136)
+Defined in: [src/lib/remotes/session-manager.remote.ts:136](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L136)
 
 Requests a connection reload.
 
@@ -9373,7 +9373,7 @@ Optional reason.
 
 > `const` **reportState**: `RemoteCommand`\<\{ `state?`: \{ \}; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:190](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L190)
+Defined in: [src/lib/remotes/session-manager.remote.ts:190](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L190)
 
 Reports connection state back to the server when enabled.
 
@@ -9396,7 +9396,7 @@ Connection state payload.
 
 > `const` **sendToConnection**: `RemoteCommand`\<\{ `data?`: `unknown`; `event?`: `string`; `id?`: `string`; \}, `Promise`\<`void`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L157)
+Defined in: [src/lib/remotes/session-manager.remote.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L157)
 
 Sends a custom event to a single connection.
 
@@ -9427,7 +9427,7 @@ Event payload.
 
 > `const` **startManager**: `RemoteCommand`\<`void`, `Promise`\<`string`\>\>
 
-Defined in: [src/lib/remotes/session-manager.remote.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/session-manager.remote.ts#L37)
+Defined in: [src/lib/remotes/session-manager.remote.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/session-manager.remote.ts#L37)
 
 Creates and starts a new session manager.
 
@@ -9505,7 +9505,7 @@ Struct RPC endpoints for shared client/server access. Each `query()`/`command()`
 
 > `const` **all**: `RemoteQueryFunction`\<\{ `cached?`: `string`[]; `keys?`: `string`[]; `pagination?`: \{ `limit?`: `number`; `page?`: `number`; \}; `struct?`: `string`; \}, \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:712](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L712)
+Defined in: [src/lib/remotes/struct.remote.ts:712](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L712)
 
 Returns records based on query type and pagination.
 
@@ -9544,7 +9544,7 @@ Cached ids on the client.
 
 > `const` **archive**: `RemoteCommand`\<\{ `id?`: `string`; `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:293](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L293)
+Defined in: [src/lib/remotes/struct.remote.ts:293](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L293)
 
 Archives a struct record by id.
 
@@ -9571,7 +9571,7 @@ Record id.
 
 > `const` **archived**: `RemoteQueryFunction`\<\{ `cached?`: `string`[]; `keys?`: `string`[]; `pagination?`: \{ `limit?`: `number`; `page?`: `number`; \}; `struct?`: `string`; \}, \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:983](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L983)
+Defined in: [src/lib/remotes/struct.remote.ts:983](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L983)
 
 Returns archived records.
 
@@ -9606,7 +9606,7 @@ Offset for pagination.
 
 > `const` **batchCommand**: `RemoteCommand`\<`object`[], `Promise`\<`object`[]\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:1119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L1119)
+Defined in: [src/lib/remotes/struct.remote.ts:1119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L1119)
 
 Executes multiple commands in a single request.
 
@@ -9633,7 +9633,7 @@ Commands list.
 
 > `const` **batchQuery**: `RemoteQueryFunction`\<`object`[], (`Record`\<`string`, `unknown`\> \| \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \})[]\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:1193](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L1193)
+Defined in: [src/lib/remotes/struct.remote.ts:1193](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L1193)
 
 Executes multiple queries in a single request.
 
@@ -9660,7 +9660,7 @@ Queries list.
 
 > `const` **clear**: `RemoteCommand`\<\{ `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:437](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L437)
+Defined in: [src/lib/remotes/struct.remote.ts:437](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L437)
 
 Clears all data from a struct.
 
@@ -9683,7 +9683,7 @@ Struct name.
 
 > `const` **connect**: `RemoteQueryFunction`\<\{ `struct?`: `string`; `structure?`: `Record`\<`string`, `string`\>; \}, \{ `message`: `string`; `success`: `boolean`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:122](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L122)
+Defined in: [src/lib/remotes/struct.remote.ts:122](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L122)
 
 Validates the client-side structure for a struct.
 
@@ -9710,7 +9710,7 @@ Client structure map.
 
 > `const` **create**: `RemoteCommand`\<\{ `attributes?`: `string`[]; `data?`: `Record`\<`string`, `unknown`\>; `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L36)
+Defined in: [src/lib/remotes/struct.remote.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L36)
 
 Creates a new struct record.
 
@@ -9741,7 +9741,7 @@ Attribute list.
 
 > `const` **fromId**: `RemoteQueryFunction`\<\{ `id?`: `string`; `keys?`: `string`[]; `struct?`: `string`; \}, `Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:858](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L858)
+Defined in: [src/lib/remotes/struct.remote.ts:858](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L858)
 
 Returns a record by id.
 
@@ -9768,7 +9768,7 @@ Record id.
 
 > `const` **fromIds**: `RemoteQueryFunction`\<\{ `cached?`: `string`[]; `ids?`: `string`[]; `keys?`: `string`[]; `pagination?`: \{ `limit?`: `number`; `page?`: `number`; \}; `struct?`: `string`; \}, \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:912](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L912)
+Defined in: [src/lib/remotes/struct.remote.ts:912](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L912)
 
 Returns records by a list of ids.
 
@@ -9795,7 +9795,7 @@ Record ids.
 
 > `const` **get**: `RemoteQueryFunction`\<\{ `cached?`: `string`[]; `data?`: `Record`\<`string`, `unknown`\>; `keys?`: `string`[]; `pagination?`: \{ `limit?`: `number`; `page?`: `number`; \}; `struct?`: `string`; \}, \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:788](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L788)
+Defined in: [src/lib/remotes/struct.remote.ts:788](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L788)
 
 Returns records matching a property filter.
 
@@ -9838,7 +9838,7 @@ Cached ids on the client.
 
 > `const` **remove**: `RemoteCommand`\<\{ `id?`: `string`; `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:549](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L549)
+Defined in: [src/lib/remotes/struct.remote.ts:549](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L549)
 
 Permanently deletes a record.
 
@@ -9865,7 +9865,7 @@ Record id.
 
 > `const` **removeVersion**: `RemoteCommand`\<\{ `struct?`: `string`; `vhId?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:618](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L618)
+Defined in: [src/lib/remotes/struct.remote.ts:618](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L618)
 
 Permanently deletes a version history entry.
 
@@ -9892,7 +9892,7 @@ Version history id.
 
 > `const` **restoreArchive**: `RemoteCommand`\<\{ `id?`: `string`; `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:364](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L364)
+Defined in: [src/lib/remotes/struct.remote.ts:364](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L364)
 
 Restores an archived struct record.
 
@@ -9919,7 +9919,7 @@ Record id.
 
 > `const` **restoreVersion**: `RemoteCommand`\<\{ `struct?`: `string`; `vhId?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:466](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L466)
+Defined in: [src/lib/remotes/struct.remote.ts:466](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L466)
 
 Restores a record to a version history entry.
 
@@ -9946,7 +9946,7 @@ Version history id.
 
 > `const` **update**: `RemoteCommand`\<\{ `data?`: `Record`\<`string`, `unknown`\>; `id?`: `string`; `struct?`: `string`; \}, `Promise`\<\{ `success`: `boolean`; \}\>\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:177](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L177)
+Defined in: [src/lib/remotes/struct.remote.ts:177](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L177)
 
 Updates a struct record by id.
 
@@ -9977,7 +9977,7 @@ Partial update data.
 
 > `const` **versionHistory**: `RemoteQueryFunction`\<\{ `id?`: `string`; `keys?`: `string`[]; `struct?`: `string`; \}, \{ `items`: `Record`\<`string`, `unknown`\>[]; `total`: `number`; \}\>
 
-Defined in: [src/lib/remotes/struct.remote.ts:1057](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/remotes/struct.remote.ts#L1057)
+Defined in: [src/lib/remotes/struct.remote.ts:1057](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/remotes/struct.remote.ts#L1057)
 
 Returns version history for a record.
 
@@ -10045,7 +10045,7 @@ Record id.
 
 > `const` **DB**: `PostgresJsDatabase`\<`Record`\<`string`, `never`\>\> & `object`
 
-Defined in: [src/lib/server/db/index.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/db/index.ts#L31)
+Defined in: [src/lib/server/db/index.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/db/index.ts#L31)
 
 Drizzle ORM instance bound to the Postgres client.
 
@@ -10066,7 +10066,7 @@ Drizzle ORM instance bound to the Postgres client.
 
 > `const` **client**: `Sql`\<\{ \}\>
 
-Defined in: [src/lib/server/db/index.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/db/index.ts#L21)
+Defined in: [src/lib/server/db/index.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/db/index.ts#L21)
 
 Postgres client configured from server env.
 
@@ -10107,7 +10107,7 @@ Helper utilities for struct event API responses. Defines standard error/success 
 
 # Enumeration: EventErrorCode
 
-Defined in: [src/lib/server/event-handler.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L20)
+Defined in: [src/lib/server/event-handler.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L20)
 
 Standard error codes for event responses.
 
@@ -10117,7 +10117,7 @@ Standard error codes for event responses.
 
 > **Blocked**: `"blocked"`
 
-Defined in: [src/lib/server/event-handler.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L30)
+Defined in: [src/lib/server/event-handler.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L30)
 
 ***
 
@@ -10125,7 +10125,7 @@ Defined in: [src/lib/server/event-handler.ts:30](https://github.com/tsaxking/sve
 
 > **InternalError**: `"internal_error"`
 
-Defined in: [src/lib/server/event-handler.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L25)
+Defined in: [src/lib/server/event-handler.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L25)
 
 ***
 
@@ -10133,7 +10133,7 @@ Defined in: [src/lib/server/event-handler.ts:25](https://github.com/tsaxking/sve
 
 > **InvalidAction**: `"invalid_action"`
 
-Defined in: [src/lib/server/event-handler.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L28)
+Defined in: [src/lib/server/event-handler.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L28)
 
 ***
 
@@ -10141,7 +10141,7 @@ Defined in: [src/lib/server/event-handler.ts:28](https://github.com/tsaxking/sve
 
 > **InvalidBody**: `"invalid_body"`
 
-Defined in: [src/lib/server/event-handler.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L23)
+Defined in: [src/lib/server/event-handler.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L23)
 
 ***
 
@@ -10149,7 +10149,7 @@ Defined in: [src/lib/server/event-handler.ts:23](https://github.com/tsaxking/sve
 
 > **NoAccount**: `"no_account"`
 
-Defined in: [src/lib/server/event-handler.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L22)
+Defined in: [src/lib/server/event-handler.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L22)
 
 ***
 
@@ -10157,7 +10157,7 @@ Defined in: [src/lib/server/event-handler.ts:22](https://github.com/tsaxking/sve
 
 > **NoData**: `"no_data"`
 
-Defined in: [src/lib/server/event-handler.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L24)
+Defined in: [src/lib/server/event-handler.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L24)
 
 ***
 
@@ -10165,7 +10165,7 @@ Defined in: [src/lib/server/event-handler.ts:24](https://github.com/tsaxking/sve
 
 > **NoStruct**: `"no_struct"`
 
-Defined in: [src/lib/server/event-handler.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L21)
+Defined in: [src/lib/server/event-handler.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L21)
 
 ***
 
@@ -10173,7 +10173,7 @@ Defined in: [src/lib/server/event-handler.ts:21](https://github.com/tsaxking/sve
 
 > **NotPermitted**: `"not_permitted"`
 
-Defined in: [src/lib/server/event-handler.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L26)
+Defined in: [src/lib/server/event-handler.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L26)
 
 ***
 
@@ -10181,7 +10181,7 @@ Defined in: [src/lib/server/event-handler.ts:26](https://github.com/tsaxking/sve
 
 > **NoVersion**: `"no_version"`
 
-Defined in: [src/lib/server/event-handler.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L27)
+Defined in: [src/lib/server/event-handler.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L27)
 
 ***
 
@@ -10189,7 +10189,7 @@ Defined in: [src/lib/server/event-handler.ts:27](https://github.com/tsaxking/sve
 
 > **Unknown**: `"unknown"`
 
-Defined in: [src/lib/server/event-handler.ts:29](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L29)
+Defined in: [src/lib/server/event-handler.ts:29](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L29)
 
 
 [**my-app**](../../../../../README.md)
@@ -10200,7 +10200,7 @@ Defined in: [src/lib/server/event-handler.ts:29](https://github.com/tsaxking/sve
 
 # Enumeration: EventSuccessCode
 
-Defined in: [src/lib/server/event-handler.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L36)
+Defined in: [src/lib/server/event-handler.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L36)
 
 Standard success codes for event responses.
 
@@ -10210,7 +10210,7 @@ Standard success codes for event responses.
 
 > **OK**: `"ok"`
 
-Defined in: [src/lib/server/event-handler.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L37)
+Defined in: [src/lib/server/event-handler.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L37)
 
 
 [**my-app**](../../../../../README.md)
@@ -10223,7 +10223,7 @@ Defined in: [src/lib/server/event-handler.ts:37](https://github.com/tsaxking/sve
 
 > **status**(`status`, `init`): `Response`
 
-Defined in: [src/lib/server/event-handler.ts:52](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L52)
+Defined in: [src/lib/server/event-handler.ts:52](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L52)
 
 Creates a JSON response using the standard status shape.
 
@@ -10311,7 +10311,7 @@ HTTP status code.
 
 > `const` **Errors**: `object`
 
-Defined in: [src/lib/server/event-handler.ts:70](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L70)
+Defined in: [src/lib/server/event-handler.ts:70](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L70)
 
 Error response helpers.
 
@@ -10542,7 +10542,7 @@ Error message.
 
 > `const` **Success**: `object`
 
-Defined in: [src/lib/server/event-handler.ts:274](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/event-handler.ts#L274)
+Defined in: [src/lib/server/event-handler.ts:274](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/event-handler.ts#L274)
 
 Success response helpers.
 
@@ -10577,7 +10577,7 @@ Optional payload.
 
 > **postBuild**(): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/index.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/index.ts#L25)
+Defined in: [src/lib/server/index.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/index.ts#L25)
 
 Executes tasks that should run after all structs have been built.
 
@@ -10630,7 +10630,7 @@ Email queue service for server-side notifications. Renders HTML templates and en
 
 > **sendEmail**\<`T`\>(`config`): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/server/services/email.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/email.ts#L58)
+Defined in: [src/lib/server/services/email.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/email.ts#L58)
 
 ## Type Parameters
 
@@ -10718,7 +10718,7 @@ Server-side file upload helpers. Provides file upload receiving and stopgap XHR-
 
 # Class: FileUploader
 
-Defined in: [src/lib/server/services/file-upload.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/file-upload.ts#L18)
+Defined in: [src/lib/server/services/file-upload.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/file-upload.ts#L18)
 
 ## Extends
 
@@ -10730,7 +10730,7 @@ Defined in: [src/lib/server/services/file-upload.ts:18](https://github.com/tsaxk
 
 > **new FileUploader**(`uploadDir`): `FileUploader`
 
-Defined in: [src/lib/server/services/file-upload.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/file-upload.ts#L24)
+Defined in: [src/lib/server/services/file-upload.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/file-upload.ts#L24)
 
 #### Parameters
 
@@ -10764,7 +10764,7 @@ Defined in: node\_modules/.pnpm/ts-utils@https+++codeload.github.com+tsaxking+gl
 
 > **uploadDir**: `string`
 
-Defined in: [src/lib/server/services/file-upload.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/file-upload.ts#L22)
+Defined in: [src/lib/server/services/file-upload.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/file-upload.ts#L22)
 
 ## Methods
 
@@ -10997,7 +10997,7 @@ The zero-argument callback to invoke
 
 > **receiveFile**(`file`, `account`): `Promise`\<\{ `url`: `string`; \}\>
 
-Defined in: [src/lib/server/services/file-upload.ts:38](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/file-upload.ts#L38)
+Defined in: [src/lib/server/services/file-upload.ts:38](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/file-upload.ts#L38)
 
 File Upload Receiver
 
@@ -11056,7 +11056,7 @@ The event name
 
 > **uploadFile**(`file`, `endpoint`): `Promise`\<\{ `url`: `string`; \}\>
 
-Defined in: [src/lib/server/services/file-upload.ts:80](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/file-upload.ts#L80)
+Defined in: [src/lib/server/services/file-upload.ts:80](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/file-upload.ts#L80)
 
 File Uploader
 
@@ -11144,7 +11144,7 @@ Global event emitter for server-side cross-module events. Extend the `Events` ty
 
 > **Events** = `object`
 
-Defined in: [src/lib/server/services/global-events.ts:15](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/global-events.ts#L15)
+Defined in: [src/lib/server/services/global-events.ts:15](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/global-events.ts#L15)
 
 Map of event names to payload types.
 
@@ -11159,7 +11159,7 @@ Map of event names to payload types.
 
 > **default**: `ComplexEventEmitter`\<[`Events`](../type-aliases/Events.md)\>
 
-Defined in: [src/lib/server/services/global-events.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/global-events.ts#L20)
+Defined in: [src/lib/server/services/global-events.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/global-events.ts#L20)
 
 Shared event emitter instance.
 
@@ -11222,7 +11222,7 @@ Time synchronization helpers.
 
 > **getLastSynced**(): `number`
 
-Defined in: [src/lib/server/services/ntp.ts:73](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/ntp.ts#L73)
+Defined in: [src/lib/server/services/ntp.ts:73](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/ntp.ts#L73)
 
 Returns the last sync timestamp (performance time).
 
@@ -11241,7 +11241,7 @@ Returns the last sync timestamp (performance time).
 
 > **getTime**(): `number`
 
-Defined in: [src/lib/server/services/ntp.ts:64](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/ntp.ts#L64)
+Defined in: [src/lib/server/services/ntp.ts:64](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/ntp.ts#L64)
 
 Returns the current estimated time based on last sync.
 
@@ -11260,7 +11260,7 @@ Returns the current estimated time based on last sync.
 
 > **init**(): `Promise`\<`Result`\<`void`, `Error`\>\>
 
-Defined in: [src/lib/server/services/ntp.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/ntp.ts#L32)
+Defined in: [src/lib/server/services/ntp.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/ntp.ts#L32)
 
 Initializes the time listener and SSE broadcaster.
 
@@ -11327,7 +11327,7 @@ Redis service instance configured from environment settings. The exported instan
 
 > **default**: `Redis`\<`string`\>
 
-Defined in: [src/lib/server/services/redis.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/redis.ts#L20)
+Defined in: [src/lib/server/services/redis.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/redis.ts#L20)
 
 Preconfigured Redis client.
 
@@ -11358,7 +11358,7 @@ Manages session groups and broadcasts connection lifecycle events. A `SessionMan
 
 # Class: SessionManager
 
-Defined in: [src/lib/server/services/session-manager.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L28)
+Defined in: [src/lib/server/services/session-manager.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L28)
 
 Tracks a group of sessions and emits SSE connection events.
 
@@ -11368,7 +11368,7 @@ Tracks a group of sessions and emits SSE connection events.
 
 > **new SessionManager**(`id`, `owner`, `sessions`, `config`): `SessionManager`
 
-Defined in: [src/lib/server/services/session-manager.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L54)
+Defined in: [src/lib/server/services/session-manager.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L54)
 
 Creates a new manager for a set of session IDs.
 
@@ -11410,7 +11410,7 @@ Lifetime configuration.
 
 > `readonly` **config**: `object`
 
-Defined in: [src/lib/server/services/session-manager.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L58)
+Defined in: [src/lib/server/services/session-manager.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L58)
 
 Manager configuration.
 
@@ -11424,7 +11424,7 @@ Manager configuration.
 
 > **emit**: `any`
 
-Defined in: [src/lib/server/services/session-manager.ts:44](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L44)
+Defined in: [src/lib/server/services/session-manager.ts:44](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L44)
 
 Emits a session manager event.
 
@@ -11434,7 +11434,7 @@ Emits a session manager event.
 
 > `readonly` **id**: `string`
 
-Defined in: [src/lib/server/services/session-manager.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L55)
+Defined in: [src/lib/server/services/session-manager.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L55)
 
 Unique manager identifier.
 
@@ -11444,7 +11444,7 @@ Unique manager identifier.
 
 > `readonly` **off**: `any`
 
-Defined in: [src/lib/server/services/session-manager.ts:42](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L42)
+Defined in: [src/lib/server/services/session-manager.ts:42](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L42)
 
 Removes a previously registered listener.
 
@@ -11454,7 +11454,7 @@ Removes a previously registered listener.
 
 > `readonly` **on**: `any`
 
-Defined in: [src/lib/server/services/session-manager.ts:40](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L40)
+Defined in: [src/lib/server/services/session-manager.ts:40](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L40)
 
 Registers a listener for session events.
 
@@ -11464,7 +11464,7 @@ Registers a listener for session events.
 
 > `readonly` **owner**: [`Connection`](../../sse/classes/Connection.md)
 
-Defined in: [src/lib/server/services/session-manager.ts:56](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L56)
+Defined in: [src/lib/server/services/session-manager.ts:56](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L56)
 
 SSE connection that receives updates.
 
@@ -11474,7 +11474,7 @@ SSE connection that receives updates.
 
 > `readonly` **sessions**: `string`[]
 
-Defined in: [src/lib/server/services/session-manager.ts:57](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L57)
+Defined in: [src/lib/server/services/session-manager.ts:57](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L57)
 
 Session IDs included in the group.
 
@@ -11484,7 +11484,7 @@ Session IDs included in the group.
 
 > `readonly` `static` **managers**: `Map`\<`string`, `SessionManager`\>
 
-Defined in: [src/lib/server/services/session-manager.ts:29](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L29)
+Defined in: [src/lib/server/services/session-manager.ts:29](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L29)
 
 ## Methods
 
@@ -11492,7 +11492,7 @@ Defined in: [src/lib/server/services/session-manager.ts:29](https://github.com/t
 
 > **addSession**(`session`): `void`
 
-Defined in: [src/lib/server/services/session-manager.ts:115](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L115)
+Defined in: [src/lib/server/services/session-manager.ts:115](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L115)
 
 Adds a session to this manager.
 
@@ -11514,7 +11514,7 @@ Session to add.
 
 > **delete**(): `void`
 
-Defined in: [src/lib/server/services/session-manager.ts:148](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L148)
+Defined in: [src/lib/server/services/session-manager.ts:148](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L148)
 
 Closes the manager, clears sessions, and notifies the owner.
 
@@ -11528,7 +11528,7 @@ Closes the manager, clears sessions, and notifies the owner.
 
 > **getConnections**(): `ConnectionArray`[]
 
-Defined in: [src/lib/server/services/session-manager.ts:106](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L106)
+Defined in: [src/lib/server/services/session-manager.ts:106](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L106)
 
 Returns SSE connections for all tracked sessions.
 
@@ -11542,7 +11542,7 @@ Returns SSE connections for all tracked sessions.
 
 > **init**(): `void`
 
-Defined in: [src/lib/server/services/session-manager.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L66)
+Defined in: [src/lib/server/services/session-manager.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L66)
 
 Initializes manager state and hooks SSE lifecycle listeners.
 
@@ -11556,7 +11556,7 @@ Initializes manager state and hooks SSE lifecycle listeners.
 
 > **removeSession**(`sessionId`): `void`
 
-Defined in: [src/lib/server/services/session-manager.ts:125](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L125)
+Defined in: [src/lib/server/services/session-manager.ts:125](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L125)
 
 Removes a session from this manager.
 
@@ -11578,7 +11578,7 @@ Session ID to remove.
 
 > **send**(`event`, `data`): `void`
 
-Defined in: [src/lib/server/services/session-manager.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/session-manager.ts#L139)
+Defined in: [src/lib/server/services/session-manager.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/session-manager.ts#L139)
 
 Sends a message to all connections associated with the manager.
 
@@ -11645,7 +11645,7 @@ Server-side SSE manager for client connections. Handles connection lifecycle, me
 
 # Class: Connection
 
-Defined in: [src/lib/server/services/sse.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L54)
+Defined in: [src/lib/server/services/sse.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L54)
 
 Represents a single Server-Sent Events (SSE) connection to a client.
 Handles message delivery, caching, acknowledgments, and connection lifecycle.
@@ -11671,7 +11671,7 @@ Features:
 
 > **new Connection**(`uuid`, `sessionId`, `controller`, `url`, `sse`): `Connection`
 
-Defined in: [src/lib/server/services/sse.ts:91](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L91)
+Defined in: [src/lib/server/services/sse.ts:91](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L91)
 
 Creates a new SSE connection instance
 
@@ -11713,7 +11713,7 @@ ReadableStream controller for sending data
 
 > `readonly` **emit**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:67](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L67)
+Defined in: [src/lib/server/services/sse.ts:67](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L67)
 
 ***
 
@@ -11721,7 +11721,7 @@ Defined in: [src/lib/server/services/sse.ts:67](https://github.com/tsaxking/svel
 
 > **lastPing**: `number`
 
-Defined in: [src/lib/server/services/sse.ts:56](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L56)
+Defined in: [src/lib/server/services/sse.ts:56](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L56)
 
 Timestamp of the last ping received from this connection
 
@@ -11731,7 +11731,7 @@ Timestamp of the last ping received from this connection
 
 > `readonly` **off**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L66)
+Defined in: [src/lib/server/services/sse.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L66)
 
 ***
 
@@ -11739,7 +11739,7 @@ Defined in: [src/lib/server/services/sse.ts:66](https://github.com/tsaxking/svel
 
 > `readonly` **on**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:65](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L65)
+Defined in: [src/lib/server/services/sse.ts:65](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L65)
 
 ***
 
@@ -11747,7 +11747,7 @@ Defined in: [src/lib/server/services/sse.ts:65](https://github.com/tsaxking/svel
 
 > `readonly` **once**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:68](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L68)
+Defined in: [src/lib/server/services/sse.ts:68](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L68)
 
 ***
 
@@ -11755,7 +11755,7 @@ Defined in: [src/lib/server/services/sse.ts:68](https://github.com/tsaxking/svel
 
 > `readonly` **sessionId**: `string`
 
-Defined in: [src/lib/server/services/sse.ts:93](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L93)
+Defined in: [src/lib/server/services/sse.ts:93](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L93)
 
 ID of the associated user session
 
@@ -11765,7 +11765,7 @@ ID of the associated user session
 
 > `readonly` **sse**: [`SSE`](SSE.md)
 
-Defined in: [src/lib/server/services/sse.ts:96](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L96)
+Defined in: [src/lib/server/services/sse.ts:96](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L96)
 
 ***
 
@@ -11773,7 +11773,7 @@ Defined in: [src/lib/server/services/sse.ts:96](https://github.com/tsaxking/svel
 
 > **state**: `object`
 
-Defined in: [src/lib/server/services/sse.ts:82](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L82)
+Defined in: [src/lib/server/services/sse.ts:82](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L82)
 
 ***
 
@@ -11781,7 +11781,7 @@ Defined in: [src/lib/server/services/sse.ts:82](https://github.com/tsaxking/svel
 
 > `readonly` **url**: `string`
 
-Defined in: [src/lib/server/services/sse.ts:95](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L95)
+Defined in: [src/lib/server/services/sse.ts:95](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L95)
 
 ***
 
@@ -11789,7 +11789,7 @@ Defined in: [src/lib/server/services/sse.ts:95](https://github.com/tsaxking/svel
 
 > `readonly` **uuid**: `string`
 
-Defined in: [src/lib/server/services/sse.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L92)
+Defined in: [src/lib/server/services/sse.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L92)
 
 Unique identifier for this connection
 
@@ -11801,7 +11801,7 @@ Unique identifier for this connection
 
 > **get** **connected**(): `boolean`
 
-Defined in: [src/lib/server/services/sse.ts:103](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L103)
+Defined in: [src/lib/server/services/sse.ts:103](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L103)
 
 Checks if the connection is still active
 
@@ -11819,7 +11819,7 @@ True if the connection can accept data
 
 > **get** **generalizedUrl**(): `string`
 
-Defined in: [src/lib/server/services/sse.ts:107](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L107)
+Defined in: [src/lib/server/services/sse.ts:107](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L107)
 
 ##### Returns
 
@@ -11831,7 +11831,7 @@ Defined in: [src/lib/server/services/sse.ts:107](https://github.com/tsaxking/sve
 
 > **ack**(`id`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L134)
+Defined in: [src/lib/server/services/sse.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L134)
 
 Acknowledges receipt of messages up to the specified ID
 Removes acknowledged messages from the cache
@@ -11854,7 +11854,7 @@ ID of the last acknowledged message
 
 > **closeConnection**(): `Result`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:168](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L168)
+Defined in: [src/lib/server/services/sse.ts:168](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L168)
 
 Closes the connection and performs cleanup
 Clears cache, closes controller, and notifies listeners
@@ -11871,7 +11871,7 @@ Result indicating success or failure
 
 > **getSession**(): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:194](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L194)
+Defined in: [src/lib/server/services/sse.ts:194](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L194)
 
 Retrieves the session associated with this connection
 
@@ -11887,7 +11887,7 @@ Promise resolving to the session object
 
 > **notify**(`notif`): `Result`\<`number`, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:186](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L186)
+Defined in: [src/lib/server/services/sse.ts:186](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L186)
 
 Sends a notification to the client
 
@@ -11911,7 +11911,7 @@ Result containing the message ID or error
 
 > **ping**(): `void`
 
-Defined in: [src/lib/server/services/sse.ts:158](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L158)
+Defined in: [src/lib/server/services/sse.ts:158](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L158)
 
 Sends a ping message to keep the connection alive
 Updates the lastPing timestamp
@@ -11926,7 +11926,7 @@ Updates the lastPing timestamp
 
 > **redirect**(`url`, `reason?`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:203](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L203)
+Defined in: [src/lib/server/services/sse.ts:203](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L203)
 
 Sends a redirect command to the client
 
@@ -11954,7 +11954,7 @@ Optional reason for the redirect
 
 > **reload**(`reason?`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:207](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L207)
+Defined in: [src/lib/server/services/sse.ts:207](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L207)
 
 #### Parameters
 
@@ -11972,7 +11972,7 @@ Defined in: [src/lib/server/services/sse.ts:207](https://github.com/tsaxking/sve
 
 > **reportState**(`state`): `Result`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:211](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L211)
+Defined in: [src/lib/server/services/sse.ts:211](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L211)
 
 #### Parameters
 
@@ -11988,7 +11988,7 @@ Defined in: [src/lib/server/services/sse.ts:211](https://github.com/tsaxking/sve
 
 > **retryCached**(`now`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:143](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L143)
+Defined in: [src/lib/server/services/sse.ts:143](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L143)
 
 Retries sending cached messages that haven't been acknowledged
 Removes messages that are too old or have been retried too many times
@@ -12011,7 +12011,7 @@ Current timestamp for age calculation
 
 > **send**(`event`, `data`): `Result`\<`number`, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:117](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L117)
+Defined in: [src/lib/server/services/sse.ts:117](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L117)
 
 Sends an event to the client via Server-Sent Events
 
@@ -12044,7 +12044,7 @@ Result containing the message ID or error
 
 # Class: SSE
 
-Defined in: [src/lib/server/services/sse.ts:328](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L328)
+Defined in: [src/lib/server/services/sse.ts:328](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L328)
 
 Server-Side Events (SSE) service for real-time communication with clients.
 Manages multiple connections, handles message delivery, and provides monitoring capabilities.
@@ -12083,7 +12083,7 @@ Features:
 
 > **new SSE**(): `SSE`
 
-Defined in: [src/lib/server/services/sse.ts:350](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L350)
+Defined in: [src/lib/server/services/sse.ts:350](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L350)
 
 Creates a new SSE service instance
 Sets up process signal handlers and starts the cleanup interval
@@ -12098,7 +12098,7 @@ Sets up process signal handlers and starts the cleanup interval
 
 > `readonly` **connections**: `Map`\<`string`, [`Connection`](Connection.md)\>
 
-Defined in: [src/lib/server/services/sse.ts:330](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L330)
+Defined in: [src/lib/server/services/sse.ts:330](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L330)
 
 Map of active connections indexed by UUID
 
@@ -12108,7 +12108,7 @@ Map of active connections indexed by UUID
 
 > `readonly` **off**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:344](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L344)
+Defined in: [src/lib/server/services/sse.ts:344](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L344)
 
 ***
 
@@ -12116,7 +12116,7 @@ Defined in: [src/lib/server/services/sse.ts:344](https://github.com/tsaxking/sve
 
 > `readonly` **on**: `any`
 
-Defined in: [src/lib/server/services/sse.ts:343](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L343)
+Defined in: [src/lib/server/services/sse.ts:343](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L343)
 
 Event listener registration methods
 
@@ -12126,7 +12126,7 @@ Event listener registration methods
 
 > **connect**(`event`): `ResultPromise`\<`Response`, `Error`\>
 
-Defined in: [src/lib/server/services/sse.ts:385](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L385)
+Defined in: [src/lib/server/services/sse.ts:385](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L385)
 
 Handles new SSE connection requests from clients
 Creates a new Connection instance and sets up the ReadableStream
@@ -12151,7 +12151,7 @@ Promise resolving to a Response with SSE stream
 
 > **each**(`callback`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:493](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L493)
+Defined in: [src/lib/server/services/sse.ts:493](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L493)
 
 Executes a callback for each active connection
 
@@ -12173,7 +12173,7 @@ Function to call for each connection
 
 > **forceCleanup**(`maxAge`): `number`
 
-Defined in: [src/lib/server/services/sse.ts:574](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L574)
+Defined in: [src/lib/server/services/sse.ts:574](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L574)
 
 Force cleanup of stale connections (for manual intervention)
 Useful for debugging memory issues or clearing stuck connections
@@ -12198,7 +12198,7 @@ Number of connections that were cleaned up
 
 > **fromSession**(`sessionId`): `ConnectionArray`
 
-Defined in: [src/lib/server/services/sse.ts:502](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L502)
+Defined in: [src/lib/server/services/sse.ts:502](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L502)
 
 Gets all connections associated with a specific session
 
@@ -12222,7 +12222,7 @@ ConnectionArray containing matching connections
 
 > **getConnection**(`uuid`): [`Connection`](Connection.md)
 
-Defined in: [src/lib/server/services/sse.ts:514](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L514)
+Defined in: [src/lib/server/services/sse.ts:514](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L514)
 
 Retrieves a specific connection by UUID
 
@@ -12246,7 +12246,7 @@ Connection instance or undefined if not found
 
 > **getStats**(): `object`
 
-Defined in: [src/lib/server/services/sse.ts:532](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L532)
+Defined in: [src/lib/server/services/sse.ts:532](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L532)
 
 Get connection statistics for monitoring memory usage and performance
 
@@ -12290,7 +12290,7 @@ Object containing connection metrics and memory estimates
 
 > **notify**(`notification`, `condition?`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:485](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L485)
+Defined in: [src/lib/server/services/sse.ts:485](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L485)
 
 Sends a notification to all active connections with optional filtering
 
@@ -12318,7 +12318,7 @@ Optional filter function to determine which connections receive the notification
 
 > **receivePing**(`uuid`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:523](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L523)
+Defined in: [src/lib/server/services/sse.ts:523](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L523)
 
 Updates the last ping time for a connection
 Called when a ping is received from the client
@@ -12341,7 +12341,7 @@ UUID of the connection that sent the ping
 
 > **send**(`event`, `data`, `condition?`): `void`
 
-Defined in: [src/lib/server/services/sse.ts:457](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L457)
+Defined in: [src/lib/server/services/sse.ts:457](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L457)
 
 Sends an event to all active connections with optional filtering
 Automatically removes failed or disconnected connections
@@ -12399,7 +12399,7 @@ Optional filter function to determine which connections receive the message
 
 > `const` **sse**: [`SSE`](../classes/SSE.md)
 
-Defined in: [src/lib/server/services/sse.ts:591](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/sse.ts#L591)
+Defined in: [src/lib/server/services/sse.ts:591](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/sse.ts#L591)
 
 Global SSE service instance
 
@@ -12433,7 +12433,7 @@ Struct event bridge for SSE and Redis. Emits struct CRUD events to connected cli
 
 > **createStructEventService**(`struct`): `void`
 
-Defined in: [src/lib/server/services/struct-event.ts:57](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/struct-event.ts#L57)
+Defined in: [src/lib/server/services/struct-event.ts:57](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/struct-event.ts#L57)
 
 This will start a service that listens to events from a struct and emits them to connected clients.
 If Redis is connected, it will also publish the events to the Redis ecosystem for the `createStructListenerService` to pick up.
@@ -12461,7 +12461,7 @@ The struct to create the service for.
 
 > **createStructListenerService**(`struct`): `EventEmitter`\<\{ `archive`: `StructData`\<`Blank`, `string`\>; `create`: `StructData`\<`Blank`, `string`\>; `delete`: `StructData`\<`Blank`, `string`\>; `delete-version`: `DataVersion`\<`Blank`, `string`\>; `restore`: `StructData`\<`Blank`, `string`\>; `restore-version`: `DataVersion`\<`Blank`, `string`\>; `update`: \{ `from`: `Structable`\<*typeof* `struct.data.structure`\>; `to`: `StructData`\<`Blank`, `string`\>; \}; \}\>
 
-Defined in: [src/lib/server/services/struct-event.ts:161](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/struct-event.ts#L161)
+Defined in: [src/lib/server/services/struct-event.ts:161](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/struct-event.ts#L161)
 
 This will start a service that listens to events from a struct from other servers and emits them for this server to use.
 
@@ -12535,7 +12535,7 @@ Struct registry and permission overrides. Registers server structs and configure
 
 > **default**: `FrontEndStructRegistry`
 
-Defined in: [src/lib/server/services/struct-registry.ts:73](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/struct-registry.ts#L73)
+Defined in: [src/lib/server/services/struct-registry.ts:73](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/struct-registry.ts#L73)
 
 Registry for all structs available to the front end.
 
@@ -12568,7 +12568,7 @@ UUID allocator backed by a Redis queue. UUIDs are prefetched from a Redis queue 
 
 > **uuid**(): `string`
 
-Defined in: [src/lib/server/services/uuid.ts:65](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/services/uuid.ts#L65)
+Defined in: [src/lib/server/services/uuid.ts:65](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/services/uuid.ts#L65)
 
 Returns a UUID string, preferring the cached queue.
 
@@ -12695,7 +12695,7 @@ Account domain structs, helpers, and notification utilities. This module defines
 
 > **createAccount**(`data`, `config?`): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:478](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L478)
+Defined in: [src/lib/server/structs/account.ts:478](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L478)
 
 Creates a new account with hashed credentials.
 
@@ -12746,7 +12746,7 @@ Optional struct creation config.
 
 > **createAccountFromOauth**(`data`): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:596](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L596)
+Defined in: [src/lib/server/structs/account.ts:596](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L596)
 
 Creates a new account from OAuth user info.
 
@@ -12781,7 +12781,7 @@ Creates a new account from OAuth user info.
 
 > **getAccountInfo**(`account`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `bio`: `NotNull`\<`PgTextBuilderInitial`\<`"bio"`, \[`string`, `...string[]`\]\>\>; `picture`: `NotNull`\<`PgTextBuilderInitial`\<`"picture"`, \[`string`, `...string[]`\]\>\>; `socials`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"socials"`, \[`string`, `...string[]`\]\>\>\>; `theme`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"theme"`, \[`string`, `...string[]`\]\>\>\>; `viewOnline`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"view_online"`, \[`string`, `...string[]`\]\>\>\>; `website`: `NotNull`\<`PgTextBuilderInitial`\<`"website"`, \[`string`, `...string[]`\]\>\>; \}, `"account_info"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:356](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L356)
+Defined in: [src/lib/server/structs/account.ts:356](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L356)
 
 Retrieves account info, creating a default record if missing.
 
@@ -12808,7 +12808,7 @@ Owning account.
 
 > **getAdmins**(): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:203](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L203)
+Defined in: [src/lib/server/structs/account.ts:203](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L203)
 
 Returns all admin accounts.
 
@@ -12827,7 +12827,7 @@ Returns all admin accounts.
 
 > **getDevelopers**(): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:228](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L228)
+Defined in: [src/lib/server/structs/account.ts:228](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L228)
 
 Returns all developer accounts.
 
@@ -12846,7 +12846,7 @@ Returns all developer accounts.
 
 > **getSettings**(`accountId`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `setting`: `NotNull`\<`PgTextBuilderInitial`\<`"setting"`, \[`string`, `...string[]`\]\>\>; `value`: `NotNull`\<`PgTextBuilderInitial`\<`"value"`, \[`string`, `...string[]`\]\>\>; \}, `"account_settings"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:642](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L642)
+Defined in: [src/lib/server/structs/account.ts:642](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L642)
 
 Streams all settings for the given account.
 
@@ -12873,7 +12873,7 @@ Account ID.
 
 > **hash**(`password`, `salt`): `Result`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:466](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L466)
+Defined in: [src/lib/server/structs/account.ts:466](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L466)
 
 Hashes a password using a provided salt.
 
@@ -12906,7 +12906,7 @@ Salt used for hashing.
 
 > **isAdmin**(`account`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:185](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L185)
+Defined in: [src/lib/server/structs/account.ts:185](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L185)
 
 Checks whether an account is an admin.
 
@@ -12933,7 +12933,7 @@ Account to check.
 
 > **isDeveloper**(`account`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:242](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L242)
+Defined in: [src/lib/server/structs/account.ts:242](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L242)
 
 Checks whether an account is a developer.
 
@@ -12960,7 +12960,7 @@ Account to check.
 
 > **isOnline**(`accountId`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:328](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L328)
+Defined in: [src/lib/server/structs/account.ts:328](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L328)
 
 Determines whether an account is currently online.
 
@@ -12987,7 +12987,7 @@ Account ID to check.
 
 > **newHash**(`password`): `Result`\<\{ `hash`: `string`; `salt`: `string`; \}, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:452](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L452)
+Defined in: [src/lib/server/structs/account.ts:452](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L452)
 
 Generates a new password hash and salt.
 
@@ -13014,7 +13014,7 @@ Plaintext password.
 
 > **notifyPopup**(`accountId`, `notification`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:554](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L554)
+Defined in: [src/lib/server/structs/account.ts:554](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L554)
 
 Sends a notification to active sessions via SSE.
 
@@ -13047,7 +13047,7 @@ Notification payload.
 
 > **requestPasswordReset**(`account`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:656](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L656)
+Defined in: [src/lib/server/structs/account.ts:656](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L656)
 
 Creates a password reset token and sends the reset email.
 
@@ -13074,7 +13074,7 @@ Account requesting a reset.
 
 > **searchAccounts**(`query`, `config`): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:524](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L524)
+Defined in: [src/lib/server/structs/account.ts:524](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L524)
 
 Searches accounts by username or email.
 
@@ -13117,7 +13117,7 @@ Paging config.
 
 > **sendAccountNotif**(`accountId`, `notif`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `icon`: `NotNull`\<`PgTextBuilderInitial`\<`"icon"`, \[`string`, `...string[]`\]\>\>; `iconType`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"icon_type"`, \[`string`, `...string[]`\]\>\>\>; `link`: `NotNull`\<`PgTextBuilderInitial`\<`"link"`, \[`string`, `...string[]`\]\>\>; `message`: `NotNull`\<`PgTextBuilderInitial`\<`"message"`, \[`string`, `...string[]`\]\>\>; `read`: `NotNull`\<`PgBooleanBuilderInitial`\<`"read"`\>\>; `severity`: `NotNull`\<`PgTextBuilderInitial`\<`"severity"`, \[`string`, `...string[]`\]\>\>; `title`: `NotNull`\<`PgTextBuilderInitial`\<`"title"`, \[`string`, `...string[]`\]\>\>; \}, `"account_notification"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/account.ts:571](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L571)
+Defined in: [src/lib/server/structs/account.ts:571](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L571)
 
 Persists a notification and sends it over SSE.
 
@@ -13192,7 +13192,7 @@ Notification payload.
 
 > **AccountData** = *typeof* `Account.sample`
 
-Defined in: [src/lib/server/structs/account.ts:256](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L256)
+Defined in: [src/lib/server/structs/account.ts:256](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L256)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -13205,7 +13205,7 @@ Defined in: [src/lib/server/structs/account.ts:256](https://github.com/tsaxking/
 
 > **AccountInfoData** = *typeof* `AccountInfo.sample`
 
-Defined in: [src/lib/server/structs/account.ts:299](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L299)
+Defined in: [src/lib/server/structs/account.ts:299](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L299)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -13218,7 +13218,7 @@ Defined in: [src/lib/server/structs/account.ts:299](https://github.com/tsaxking/
 
 > `const` **Account**: `Struct`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>
 
-Defined in: [src/lib/server/structs/account.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L50)
+Defined in: [src/lib/server/structs/account.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L50)
 
 Core account record.
 
@@ -13233,7 +13233,7 @@ Core account record.
 
 > `const` **AccountInfo**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `bio`: `NotNull`\<`PgTextBuilderInitial`\<`"bio"`, \[`string`, `...string[]`\]\>\>; `picture`: `NotNull`\<`PgTextBuilderInitial`\<`"picture"`, \[`string`, `...string[]`\]\>\>; `socials`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"socials"`, \[`string`, `...string[]`\]\>\>\>; `theme`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"theme"`, \[`string`, `...string[]`\]\>\>\>; `viewOnline`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"view_online"`, \[`string`, `...string[]`\]\>\>\>; `website`: `NotNull`\<`PgTextBuilderInitial`\<`"website"`, \[`string`, `...string[]`\]\>\>; \}, `"account_info"`\>
 
-Defined in: [src/lib/server/structs/account.ts:269](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L269)
+Defined in: [src/lib/server/structs/account.ts:269](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L269)
 
 Extended account profile info (versioned).
 
@@ -13248,7 +13248,7 @@ Extended account profile info (versioned).
 
 > `const` **AccountNotification**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `icon`: `NotNull`\<`PgTextBuilderInitial`\<`"icon"`, \[`string`, `...string[]`\]\>\>; `iconType`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"icon_type"`, \[`string`, `...string[]`\]\>\>\>; `link`: `NotNull`\<`PgTextBuilderInitial`\<`"link"`, \[`string`, `...string[]`\]\>\>; `message`: `NotNull`\<`PgTextBuilderInitial`\<`"message"`, \[`string`, `...string[]`\]\>\>; `read`: `NotNull`\<`PgBooleanBuilderInitial`\<`"read"`\>\>; `severity`: `NotNull`\<`PgTextBuilderInitial`\<`"severity"`, \[`string`, `...string[]`\]\>\>; `title`: `NotNull`\<`PgTextBuilderInitial`\<`"title"`, \[`string`, `...string[]`\]\>\>; \}, `"account_notification"`\>
 
-Defined in: [src/lib/server/structs/account.ts:389](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L389)
+Defined in: [src/lib/server/structs/account.ts:389](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L389)
 
 Notification record for an account.
 
@@ -13263,7 +13263,7 @@ Notification record for an account.
 
 > `const` **Admins**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; \}, `"admins"`\>
 
-Defined in: [src/lib/server/structs/account.ts:172](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L172)
+Defined in: [src/lib/server/structs/account.ts:172](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L172)
 
 Membership for admin accounts.
 
@@ -13278,7 +13278,7 @@ Membership for admin accounts.
 
 > `const` **Developers**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; \}, `"developers"`\>
 
-Defined in: [src/lib/server/structs/account.ts:217](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L217)
+Defined in: [src/lib/server/structs/account.ts:217](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L217)
 
 Membership for developer accounts.
 
@@ -13293,7 +13293,7 @@ Membership for developer accounts.
 
 > `const` **PasswordReset**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `expires`: `NotNull`\<`PgTextBuilderInitial`\<`"expires"`, \[`string`, `...string[]`\]\>\>; \}, `"password_reset"`\>
 
-Defined in: [src/lib/server/structs/account.ts:428](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L428)
+Defined in: [src/lib/server/structs/account.ts:428](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L428)
 
 Password reset token.
 
@@ -13308,7 +13308,7 @@ Password reset token.
 
 > `const` **Settings**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `setting`: `NotNull`\<`PgTextBuilderInitial`\<`"setting"`, \[`string`, `...string[]`\]\>\>; `value`: `NotNull`\<`PgTextBuilderInitial`\<`"value"`, \[`string`, `...string[]`\]\>\>; \}, `"account_settings"`\>
 
-Defined in: [src/lib/server/structs/account.ts:148](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L148)
+Defined in: [src/lib/server/structs/account.ts:148](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L148)
 
 Per-account key/value settings.
 
@@ -13323,7 +13323,7 @@ Per-account key/value settings.
 
 > `const` **\_accountInfo**: `Table`\<`object` & `object`, `"account_info"`\> = `Account.AccountInfo.table`
 
-Defined in: [src/lib/server/structs/account.ts:711](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L711)
+Defined in: [src/lib/server/structs/account.ts:711](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L711)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13336,7 +13336,7 @@ Defined in: [src/lib/server/structs/account.ts:711](https://github.com/tsaxking/
 
 > `const` **\_accountInfoVersionHistory**: `Table`\<`object` & `object` & `object`, `"account_info_history"`\> = `Account.AccountInfo.versionTable`
 
-Defined in: [src/lib/server/structs/account.ts:712](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L712)
+Defined in: [src/lib/server/structs/account.ts:712](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L712)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13349,7 +13349,7 @@ Defined in: [src/lib/server/structs/account.ts:712](https://github.com/tsaxking/
 
 > `const` **\_accountNotificationTable**: `Table`\<`object` & `object`, `"account_notification"`\> = `Account.AccountNotification.table`
 
-Defined in: [src/lib/server/structs/account.ts:708](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L708)
+Defined in: [src/lib/server/structs/account.ts:708](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L708)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13362,7 +13362,7 @@ Defined in: [src/lib/server/structs/account.ts:708](https://github.com/tsaxking/
 
 > `const` **\_accountSettings**: `Table`\<`object` & `object`, `"account_settings"`\> = `Account.Settings.table`
 
-Defined in: [src/lib/server/structs/account.ts:709](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L709)
+Defined in: [src/lib/server/structs/account.ts:709](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L709)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13375,7 +13375,7 @@ Defined in: [src/lib/server/structs/account.ts:709](https://github.com/tsaxking/
 
 > `const` **\_accountTable**: `Table`\<`object` & `object`, `"account"`\> = `Account.Account.table`
 
-Defined in: [src/lib/server/structs/account.ts:704](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L704)
+Defined in: [src/lib/server/structs/account.ts:704](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L704)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13388,7 +13388,7 @@ Defined in: [src/lib/server/structs/account.ts:704](https://github.com/tsaxking/
 
 > `const` **\_adminsTable**: `Table`\<`object` & `object`, `"admins"`\> = `Account.Admins.table`
 
-Defined in: [src/lib/server/structs/account.ts:706](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L706)
+Defined in: [src/lib/server/structs/account.ts:706](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L706)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13401,7 +13401,7 @@ Defined in: [src/lib/server/structs/account.ts:706](https://github.com/tsaxking/
 
 > `const` **\_developersTable**: `Table`\<`object` & `object`, `"developers"`\> = `Account.Developers.table`
 
-Defined in: [src/lib/server/structs/account.ts:707](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L707)
+Defined in: [src/lib/server/structs/account.ts:707](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L707)
 
 
 [**my-app**](../../../../../../README.md)
@@ -13414,7 +13414,7 @@ Defined in: [src/lib/server/structs/account.ts:707](https://github.com/tsaxking/
 
 > `const` **\_passwordReset**: `Table`\<`object` & `object`, `"password_reset"`\> = `Account.PasswordReset.table`
 
-Defined in: [src/lib/server/structs/account.ts:710](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/account.ts#L710)
+Defined in: [src/lib/server/structs/account.ts:710](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/account.ts#L710)
 
 
 [**my-app**](../../../../../README.md)
@@ -13488,7 +13488,7 @@ Analytics structures and helpers for tracking visited links. Links are recorded 
 
 > **getAccountLinks**(`account`, `config`): `ResultPromise`\<`StructData`\<\{ `account`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>\>; `duration`: `NotNull`\<`PgIntegerBuilderInitial`\<`"duration"`\>\>; `session`: `NotNull`\<`PgTextBuilderInitial`\<`"session"`, \[`string`, `...string[]`\]\>\>; `url`: `NotNull`\<`PgTextBuilderInitial`\<`"url"`, \[`string`, `...string[]`\]\>\>; \}, `"analytics_links"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/analytics.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/analytics.ts#L54)
+Defined in: [src/lib/server/structs/analytics.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/analytics.ts#L54)
 
 Returns unique links visited by an account, paged and newest-first.
 
@@ -13527,7 +13527,7 @@ Paging configuration.
 
 > **getCount**(`account`): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [src/lib/server/structs/analytics.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/analytics.ts#L86)
+Defined in: [src/lib/server/structs/analytics.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/analytics.ts#L86)
 
 Returns the total number of unique links for an account.
 
@@ -13576,7 +13576,7 @@ Account to query.
 
 > **LinkData** = *typeof* `Links.sample`
 
-Defined in: [src/lib/server/structs/analytics.ts:42](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/analytics.ts#L42)
+Defined in: [src/lib/server/structs/analytics.ts:42](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/analytics.ts#L42)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -13589,7 +13589,7 @@ Defined in: [src/lib/server/structs/analytics.ts:42](https://github.com/tsaxking
 
 > `const` **Links**: `Struct`\<\{ `account`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>\>; `duration`: `NotNull`\<`PgIntegerBuilderInitial`\<`"duration"`\>\>; `session`: `NotNull`\<`PgTextBuilderInitial`\<`"session"`, \[`string`, `...string[]`\]\>\>; `url`: `NotNull`\<`PgTextBuilderInitial`\<`"url"`, \[`string`, `...string[]`\]\>\>; \}, `"analytics_links"`\>
 
-Defined in: [src/lib/server/structs/analytics.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/analytics.ts#L28)
+Defined in: [src/lib/server/structs/analytics.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/analytics.ts#L28)
 
 Analytics link record.
 
@@ -13604,7 +13604,7 @@ Analytics link record.
 
 > `const` **\_links**: `Table`\<`object` & `object`, `"analytics_links"`\> = `Analytics.Links.table`
 
-Defined in: [src/lib/server/structs/analytics.ts:97](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/analytics.ts#L97)
+Defined in: [src/lib/server/structs/analytics.ts:97](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/analytics.ts#L97)
 
 
 [**my-app**](../../../../../README.md)
@@ -13694,7 +13694,7 @@ IP and session limiting, blocking, and rate-limit utilities. This module manages
 
 > **getFingerprint**(`request`): `string`
 
-Defined in: [src/lib/server/structs/limiting.ts:262](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L262)
+Defined in: [src/lib/server/structs/limiting.ts:262](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L262)
 
 Builds a fingerprint hash from request headers.
 
@@ -13721,7 +13721,7 @@ Incoming request.
 
 > **isBlocked**(`session`, `account?`): `ResultPromise`\<\{ `blocked`: `true`; `reason`: `string`; \} \| \{ `blocked`: `false`; \}, `Error`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:215](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L215)
+Defined in: [src/lib/server/structs/limiting.ts:215](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L215)
 
 Checks whether a session, IP, fingerprint, or account is blocked.
 
@@ -13754,7 +13754,7 @@ Optional account.
 
 > **isBlockedPage**(`page`): `Result`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:109](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L109)
+Defined in: [src/lib/server/structs/limiting.ts:109](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L109)
 
 Checks whether a page is blocked for all users.
 
@@ -13781,7 +13781,7 @@ Page path.
 
 > **isIpAllowed**(`ip`, `page`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:121](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L121)
+Defined in: [src/lib/server/structs/limiting.ts:121](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L121)
 
 Determines whether an IP is allowed to access a limited page.
 
@@ -13814,7 +13814,7 @@ Requested page path.
 
 > **isIpLimitedPage**(`page`): `Result`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:98](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L98)
+Defined in: [src/lib/server/structs/limiting.ts:98](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L98)
 
 Checks whether a page is subject to IP limiting.
 
@@ -13841,7 +13841,7 @@ Page path.
 
 > **rateLimit**(`key`): `Promise`\<`Result`\<`boolean`, `Error`\>\>
 
-Defined in: [src/lib/server/structs/limiting.ts:285](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L285)
+Defined in: [src/lib/server/structs/limiting.ts:285](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L285)
 
 Increments and checks the rate limit counter for a key.
 
@@ -13868,7 +13868,7 @@ Rate limit key (e.g., IP or session).
 
 > **violate**(`session`, `account`, `increment`, `reason`): `Promise`\<`Result`\<`"warn"` \| `"block"` \| `"perma-block"`, `Error`\>\>
 
-Defined in: [src/lib/server/structs/limiting.ts:308](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L308)
+Defined in: [src/lib/server/structs/limiting.ts:308](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L308)
 
 Increments violation counters and returns the new severity.
 
@@ -13913,7 +13913,7 @@ Reason for the violation.
 
 > **violationSeverity**(`session`, `account?`): `ResultPromise`\<`number`, `Error`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:414](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L414)
+Defined in: [src/lib/server/structs/limiting.ts:414](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L414)
 
 Returns the highest violation score for the given identifiers.
 
@@ -13976,7 +13976,7 @@ Optional account.
 
 > `const` **BlockedAccounts**: `Struct`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `reason`: `NotNull`\<`PgTextBuilderInitial`\<`"reason"`, \[`string`, `...string[]`\]\>\>; \}, `"blocked_accounts"`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:188](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L188)
+Defined in: [src/lib/server/structs/limiting.ts:188](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L188)
 
 Blocked account record.
 
@@ -13991,7 +13991,7 @@ Blocked account record.
 
 > `const` **BlockedFingerprints**: `Struct`\<\{ `fingerprint`: `NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>; `reason`: `NotNull`\<`PgTextBuilderInitial`\<`"reason"`, \[`string`, `...string[]`\]\>\>; \}, `"blocked_fingerprints"`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:172](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L172)
+Defined in: [src/lib/server/structs/limiting.ts:172](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L172)
 
 Blocked fingerprint record.
 
@@ -14006,7 +14006,7 @@ Blocked fingerprint record.
 
 > `const` **BlockedIps**: `Struct`\<\{ `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `reason`: `NotNull`\<`PgTextBuilderInitial`\<`"reason"`, \[`string`, `...string[]`\]\>\>; \}, `"blocked_ips"`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:140](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L140)
+Defined in: [src/lib/server/structs/limiting.ts:140](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L140)
 
 Blocked IP record.
 
@@ -14021,7 +14021,7 @@ Blocked IP record.
 
 > `const` **BlockedSessions**: `Struct`\<\{ `reason`: `NotNull`\<`PgTextBuilderInitial`\<`"reason"`, \[`string`, `...string[]`\]\>\>; `session`: `NotNull`\<`PgTextBuilderInitial`\<`"session"`, \[`string`, `...string[]`\]\>\>; \}, `"blocked_sessions"`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:156](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L156)
+Defined in: [src/lib/server/structs/limiting.ts:156](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L156)
 
 Blocked session record.
 
@@ -14036,7 +14036,7 @@ Blocked session record.
 
 > `const` **PageRuleset**: `Struct`\<\{ `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `page`: `NotNull`\<`PgTextBuilderInitial`\<`"page"`, \[`string`, `...string[]`\]\>\>; \}, `"page_ruleset"`\>
 
-Defined in: [src/lib/server/structs/limiting.ts:67](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L67)
+Defined in: [src/lib/server/structs/limiting.ts:67](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L67)
 
 Per-page IP allow list entry.
 
@@ -14051,7 +14051,7 @@ Per-page IP allow list entry.
 
 > `const` **ViolationTiers**: `object`
 
-Defined in: [src/lib/server/structs/limiting.ts:204](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L204)
+Defined in: [src/lib/server/structs/limiting.ts:204](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L204)
 
 Thresholds for escalating violations.
 
@@ -14076,7 +14076,7 @@ Thresholds for escalating violations.
 
 > `const` **limits**: `object`
 
-Defined in: [src/lib/server/structs/limiting.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L30)
+Defined in: [src/lib/server/structs/limiting.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L30)
 
 ## Type Declaration
 
@@ -14155,7 +14155,7 @@ Defined in: [src/lib/server/structs/limiting.ts:30](https://github.com/tsaxking/
 
 > `const` **\_blockedAccounts**: `Table`\<`object` & `object`, `"blocked_accounts"`\> = `Limiting.BlockedAccounts.table`
 
-Defined in: [src/lib/server/structs/limiting.ts:443](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L443)
+Defined in: [src/lib/server/structs/limiting.ts:443](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L443)
 
 
 [**my-app**](../../../../../../README.md)
@@ -14168,7 +14168,7 @@ Defined in: [src/lib/server/structs/limiting.ts:443](https://github.com/tsaxking
 
 > `const` **\_blockedFingerprints**: `Table`\<`object` & `object`, `"blocked_fingerprints"`\> = `Limiting.BlockedFingerprints.table`
 
-Defined in: [src/lib/server/structs/limiting.ts:442](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L442)
+Defined in: [src/lib/server/structs/limiting.ts:442](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L442)
 
 
 [**my-app**](../../../../../../README.md)
@@ -14181,7 +14181,7 @@ Defined in: [src/lib/server/structs/limiting.ts:442](https://github.com/tsaxking
 
 > `const` **\_blockedIps**: `Table`\<`object` & `object`, `"blocked_ips"`\> = `Limiting.BlockedIps.table`
 
-Defined in: [src/lib/server/structs/limiting.ts:440](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L440)
+Defined in: [src/lib/server/structs/limiting.ts:440](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L440)
 
 
 [**my-app**](../../../../../../README.md)
@@ -14194,7 +14194,7 @@ Defined in: [src/lib/server/structs/limiting.ts:440](https://github.com/tsaxking
 
 > `const` **\_blockedSessions**: `Table`\<`object` & `object`, `"blocked_sessions"`\> = `Limiting.BlockedSessions.table`
 
-Defined in: [src/lib/server/structs/limiting.ts:441](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L441)
+Defined in: [src/lib/server/structs/limiting.ts:441](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L441)
 
 
 [**my-app**](../../../../../../README.md)
@@ -14207,7 +14207,7 @@ Defined in: [src/lib/server/structs/limiting.ts:441](https://github.com/tsaxking
 
 > `const` **\_pageRuleset**: `Table`\<`object` & `object`, `"page_ruleset"`\> = `Limiting.PageRuleset.table`
 
-Defined in: [src/lib/server/structs/limiting.ts:439](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/limiting.ts#L439)
+Defined in: [src/lib/server/structs/limiting.ts:439](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/limiting.ts#L439)
 
 
 [**my-app**](../../../../../README.md)
@@ -14281,7 +14281,7 @@ Log struct and search helpers for auditing changes. Provides a log struct with v
 
 > **log**(`config`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `dataId`: `NotNull`\<`PgTextBuilderInitial`\<`"data_id"`, \[`string`, `...string[]`\]\>\>; `message`: `NotNull`\<`PgTextBuilderInitial`\<`"message"`, \[`string`, `...string[]`\]\>\>; `struct`: `NotNull`\<`PgTextBuilderInitial`\<`"struct"`, \[`string`, `...string[]`\]\>\>; `type`: `NotNull`\<`PgTextBuilderInitial`\<`"type"`, \[`string`, `...string[]`\]\>\>; \}, `"logs"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/log.ts:78](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/log.ts#L78)
+Defined in: [src/lib/server/structs/log.ts:78](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/log.ts#L78)
 
 Creates a log entry.
 
@@ -14324,7 +14324,7 @@ Creates a log entry.
 
 > **search**(`config`): `ResultPromise`\<\{ `count`: `number`; `logs`: `StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `dataId`: `NotNull`\<`PgTextBuilderInitial`\<`"data_id"`, \[`string`, `...string[]`\]\>\>; `message`: `NotNull`\<`PgTextBuilderInitial`\<`"message"`, \[`string`, `...string[]`\]\>\>; `struct`: `NotNull`\<`PgTextBuilderInitial`\<`"struct"`, \[`string`, `...string[]`\]\>\>; `type`: `NotNull`\<`PgTextBuilderInitial`\<`"type"`, \[`string`, `...string[]`\]\>\>; \}, `"logs"`\>[]; \}, `Error`\>
 
-Defined in: [src/lib/server/structs/log.ts:101](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/log.ts#L101)
+Defined in: [src/lib/server/structs/log.ts:101](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/log.ts#L101)
 
 Searches logs with include/exclude filters and pagination.
 
@@ -14397,7 +14397,7 @@ Searches logs with include/exclude filters and pagination.
 
 > **LogData** = *typeof* `Log.sample`
 
-Defined in: [src/lib/server/structs/log.ts:71](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/log.ts#L71)
+Defined in: [src/lib/server/structs/log.ts:71](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/log.ts#L71)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -14410,7 +14410,7 @@ Defined in: [src/lib/server/structs/log.ts:71](https://github.com/tsaxking/svelt
 
 > `const` **Log**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `dataId`: `NotNull`\<`PgTextBuilderInitial`\<`"data_id"`, \[`string`, `...string[]`\]\>\>; `message`: `NotNull`\<`PgTextBuilderInitial`\<`"message"`, \[`string`, `...string[]`\]\>\>; `struct`: `NotNull`\<`PgTextBuilderInitial`\<`"struct"`, \[`string`, `...string[]`\]\>\>; `type`: `NotNull`\<`PgTextBuilderInitial`\<`"type"`, \[`string`, `...string[]`\]\>\>; \}, `"logs"`\>
 
-Defined in: [src/lib/server/structs/log.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/log.ts#L36)
+Defined in: [src/lib/server/structs/log.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/log.ts#L36)
 
 Log record.
 
@@ -14425,7 +14425,7 @@ Log record.
 
 > `const` **\_logTable**: `Table`\<`object` & `object`, `"logs"`\> = `Logs.Log.table`
 
-Defined in: [src/lib/server/structs/log.ts:160](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/log.ts#L160)
+Defined in: [src/lib/server/structs/log.ts:160](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/log.ts#L160)
 
 
 [**my-app**](../../../../../README.md)
@@ -14552,7 +14552,7 @@ Permissions and role-based access control structs. Defines roles, entitlements, 
 
 # Class: CombinedEntitlementPermission
 
-Defined in: [src/lib/server/structs/permissions.ts:956](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L956)
+Defined in: [src/lib/server/structs/permissions.ts:956](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L956)
 
 ## Constructors
 
@@ -14560,7 +14560,7 @@ Defined in: [src/lib/server/structs/permissions.ts:956](https://github.com/tsaxk
 
 > **new CombinedEntitlementPermission**(`name`, `struct`, `entitlements`, `pages`): `CombinedEntitlementPermission`
 
-Defined in: [src/lib/server/structs/permissions.ts:958](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L958)
+Defined in: [src/lib/server/structs/permissions.ts:958](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L958)
 
 #### Parameters
 
@@ -14590,7 +14590,7 @@ Defined in: [src/lib/server/structs/permissions.ts:958](https://github.com/tsaxk
 
 > `readonly` **name**: [`Entitlement`](../../../../../../types/entitlements/type-aliases/Entitlement.md)
 
-Defined in: [src/lib/server/structs/permissions.ts:959](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L959)
+Defined in: [src/lib/server/structs/permissions.ts:959](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L959)
 
 ***
 
@@ -14598,7 +14598,7 @@ Defined in: [src/lib/server/structs/permissions.ts:959](https://github.com/tsaxk
 
 > `readonly` **pages**: `string`[]
 
-Defined in: [src/lib/server/structs/permissions.ts:962](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L962)
+Defined in: [src/lib/server/structs/permissions.ts:962](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L962)
 
 ***
 
@@ -14606,7 +14606,7 @@ Defined in: [src/lib/server/structs/permissions.ts:962](https://github.com/tsaxk
 
 > `readonly` **permissions**: `object`[]
 
-Defined in: [src/lib/server/structs/permissions.ts:957](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L957)
+Defined in: [src/lib/server/structs/permissions.ts:957](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L957)
 
 #### action
 
@@ -14622,7 +14622,7 @@ Defined in: [src/lib/server/structs/permissions.ts:957](https://github.com/tsaxk
 
 > `readonly` **struct**: `string`
 
-Defined in: [src/lib/server/structs/permissions.ts:960](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L960)
+Defined in: [src/lib/server/structs/permissions.ts:960](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L960)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -14633,7 +14633,7 @@ Defined in: [src/lib/server/structs/permissions.ts:960](https://github.com/tsaxk
 
 # Class: EntitlementPermission
 
-Defined in: [src/lib/server/structs/permissions.ts:975](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L975)
+Defined in: [src/lib/server/structs/permissions.ts:975](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L975)
 
 ## Constructors
 
@@ -14641,7 +14641,7 @@ Defined in: [src/lib/server/structs/permissions.ts:975](https://github.com/tsaxk
 
 > **new EntitlementPermission**(`name`, `structs`, `permissions`, `pages`, `group`): `EntitlementPermission`
 
-Defined in: [src/lib/server/structs/permissions.ts:977](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L977)
+Defined in: [src/lib/server/structs/permissions.ts:977](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L977)
 
 #### Parameters
 
@@ -14675,7 +14675,7 @@ Defined in: [src/lib/server/structs/permissions.ts:977](https://github.com/tsaxk
 
 > **\_saved**: `number`
 
-Defined in: [src/lib/server/structs/permissions.ts:991](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L991)
+Defined in: [src/lib/server/structs/permissions.ts:991](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L991)
 
 ***
 
@@ -14683,7 +14683,7 @@ Defined in: [src/lib/server/structs/permissions.ts:991](https://github.com/tsaxk
 
 > `readonly` **group**: `string`
 
-Defined in: [src/lib/server/structs/permissions.ts:982](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L982)
+Defined in: [src/lib/server/structs/permissions.ts:982](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L982)
 
 ***
 
@@ -14691,7 +14691,7 @@ Defined in: [src/lib/server/structs/permissions.ts:982](https://github.com/tsaxk
 
 > `readonly` **name**: [`Entitlement`](../../../../../../types/entitlements/type-aliases/Entitlement.md)
 
-Defined in: [src/lib/server/structs/permissions.ts:978](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L978)
+Defined in: [src/lib/server/structs/permissions.ts:978](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L978)
 
 ***
 
@@ -14699,7 +14699,7 @@ Defined in: [src/lib/server/structs/permissions.ts:978](https://github.com/tsaxk
 
 > `readonly` **pages**: `string`[]
 
-Defined in: [src/lib/server/structs/permissions.ts:981](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L981)
+Defined in: [src/lib/server/structs/permissions.ts:981](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L981)
 
 ***
 
@@ -14707,7 +14707,7 @@ Defined in: [src/lib/server/structs/permissions.ts:981](https://github.com/tsaxk
 
 > `readonly` **permissions**: `object`[]
 
-Defined in: [src/lib/server/structs/permissions.ts:976](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L976)
+Defined in: [src/lib/server/structs/permissions.ts:976](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L976)
 
 #### action
 
@@ -14727,7 +14727,7 @@ Defined in: [src/lib/server/structs/permissions.ts:976](https://github.com/tsaxk
 
 > `readonly` **structs**: `string`[]
 
-Defined in: [src/lib/server/structs/permissions.ts:979](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L979)
+Defined in: [src/lib/server/structs/permissions.ts:979](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L979)
 
 ## Methods
 
@@ -14735,7 +14735,7 @@ Defined in: [src/lib/server/structs/permissions.ts:979](https://github.com/tsaxk
 
 > **canCreate**\<`T`\>(`data`): `Result`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1028](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1028)
+Defined in: [src/lib/server/structs/permissions.ts:1028](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1028)
 
 #### Type Parameters
 
@@ -14759,7 +14759,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1028](https://github.com/tsax
 
 > **test**\<`T`\>(`data`, `action`, `property?`): `Result`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:993](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L993)
+Defined in: [src/lib/server/structs/permissions.ts:993](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L993)
 
 #### Type Parameters
 
@@ -14796,7 +14796,7 @@ keyof `T`
 
 > **accountCanDo**(`account`, `data`, `action`): `ResultPromise`\<`boolean`[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:696](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L696)
+Defined in: [src/lib/server/structs/permissions.ts:696](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L696)
 
 Checks if the account can perform a specific action on a struct data.
 
@@ -14837,7 +14837,7 @@ A promise that resolves to an array of booleans indicating if the account can pe
 
 > **canCreate**\<`T`\>(`account`, `struct`, `attributes`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:630](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L630)
+Defined in: [src/lib/server/structs/permissions.ts:630](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L630)
 
 Checks if the account can create a struct with the given attributes.
 
@@ -14884,7 +14884,7 @@ A promise that resolves to true if the account can create the struct with the gi
 
 > **canDo**\<`T`\>(`entitlement`, `targetAttribute`, `data`, `action`): `Result`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:672](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L672)
+Defined in: [src/lib/server/structs/permissions.ts:672](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L672)
 
 Checks if the account can perform a specific action on a target attribute of a struct data.
 
@@ -14937,7 +14937,7 @@ A Result that resolves to true if the account can perform the action, false othe
 
 > **canDoFeature**(`account`, `feature`, `scope?`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1213](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1213)
+Defined in: [src/lib/server/structs/permissions.ts:1213](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1213)
 
 ## Parameters
 
@@ -14968,7 +14968,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1213](https://github.com/tsax
 
 > **createChildRole**(`config`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1289](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1289)
+Defined in: [src/lib/server/structs/permissions.ts:1289](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1289)
 
 ## Parameters
 
@@ -15005,7 +15005,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1289](https://github.com/tsax
 
 > **createEntitlement**\<`S`\>(`entitlement`): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1105](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1105)
+Defined in: [src/lib/server/structs/permissions.ts:1105](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1105)
 
 Creates a new entitlement in the database.
 This function will overwrite any existing entitlement with the same name.
@@ -15068,7 +15068,7 @@ The entitlement to create.
 
 > **detectCircularHierarchy**(`role`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L86)
+Defined in: [src/lib/server/structs/permissions.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L86)
 
 ## Parameters
 
@@ -15091,7 +15091,7 @@ Defined in: [src/lib/server/structs/permissions.ts:86](https://github.com/tsaxki
 
 > **filterPropertyActionFromAccount**\<`T`\>(`account`, `data`, `action`): `ResultPromise`\<`Partial`\<`Structable`\<`T`\>\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:760](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L760)
+Defined in: [src/lib/server/structs/permissions.ts:760](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L760)
 
 Filters the properties of struct data based on the account's permissions for a specific action.
 
@@ -15138,7 +15138,7 @@ A promise that resolves to an array of filtered struct data.
 
 > **filterPropertyActionPipe**\<`T`\>(`account`, `action`, `callback`): (`data`) => `Promise`\<`void`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:850](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L850)
+Defined in: [src/lib/server/structs/permissions.ts:850](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L850)
 
 Filters the properties of struct data based on the account's permissions for a specific action.
 This is a pipe function that can be used in a StructStream to filter properties based on the account's permissions.
@@ -15196,7 +15196,7 @@ A function that takes struct data and filters its properties based on the accoun
 
 > **getAccountsFromRole**(`role`): `ResultPromise`\<`object`[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1306](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1306)
+Defined in: [src/lib/server/structs/permissions.ts:1306](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1306)
 
 ## Parameters
 
@@ -15219,7 +15219,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1306](https://github.com/tsax
 
 > **getChildren**(`role`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:267](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L267)
+Defined in: [src/lib/server/structs/permissions.ts:267](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L267)
 
 Gets the child roles of a given role.
 
@@ -15248,7 +15248,7 @@ A promise that resolves to an array of child roles.
 
 > **getEntitlements**(): `Promise`\<`Result`\<`StructData`\<\{ `defaultFeatureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"default_feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `description`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>\>; `features`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"features"`, \[`string`, `...string[]`\]\>\>\>; `group`: `NotNull`\<`PgTextBuilderInitial`\<`"group"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `permissions`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"permissions"`, \[`string`, `...string[]`\]\>\>\>; `structs`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"structs"`, \[`string`, `...string[]`\]\>\>\>; \}, `"entitlements"`\>[], `Error`\>\>
 
-Defined in: [src/lib/server/structs/permissions.ts:952](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L952)
+Defined in: [src/lib/server/structs/permissions.ts:952](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L952)
 
 Retrieves all entitlements from the database.
 
@@ -15269,7 +15269,7 @@ A promise that resolves to an array of all entitlements.
 
 > **getEntitlementsFromAccount**(`account`): `ResultPromise`\<`StructData`\<\{ `defaultFeatureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"default_feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `description`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>\>; `features`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"features"`, \[`string`, `...string[]`\]\>\>\>; `group`: `NotNull`\<`PgTextBuilderInitial`\<`"group"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `permissions`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"permissions"`, \[`string`, `...string[]`\]\>\>\>; `structs`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"structs"`, \[`string`, `...string[]`\]\>\>\>; \}, `"entitlements"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:557](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L557)
+Defined in: [src/lib/server/structs/permissions.ts:557](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L557)
 
 Gets all entitlements associated with a given account.
 
@@ -15298,7 +15298,7 @@ A promise that resolves to an array of entitlements associated with the account.
 
 > **getEntitlementsFromRole**(`role`): `ResultPromise`\<`StructData`\<\{ `defaultFeatureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"default_feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `description`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>\>; `features`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"features"`, \[`string`, `...string[]`\]\>\>\>; `group`: `NotNull`\<`PgTextBuilderInitial`\<`"group"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `permissions`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"permissions"`, \[`string`, `...string[]`\]\>\>\>; `structs`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"structs"`, \[`string`, `...string[]`\]\>\>\>; \}, `"entitlements"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:542](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L542)
+Defined in: [src/lib/server/structs/permissions.ts:542](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L542)
 
 Gets all entitlements associated with a given role.
 
@@ -15327,7 +15327,7 @@ A promise that resolves to an array of entitlements associated with the role.
 
 > **getHighestLevelRole**(`startRole`, `account`, `inclusive`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:356](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L356)
+Defined in: [src/lib/server/structs/permissions.ts:356](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L356)
 
 Gets the highest level role that the account has, starting from a given role.
 This will traverse the hierarchy from the startRole and check if the account has that role.
@@ -15371,7 +15371,7 @@ A promise that resolves to the highest level role the account has within the hie
 
 > **getLowerHierarchy**(`role`, `inclusive`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:312](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L312)
+Defined in: [src/lib/server/structs/permissions.ts:312](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L312)
 
 ## Parameters
 
@@ -15398,7 +15398,7 @@ Defined in: [src/lib/server/structs/permissions.ts:312](https://github.com/tsaxk
 
 > **getParent**(`role`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:251](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L251)
+Defined in: [src/lib/server/structs/permissions.ts:251](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L251)
 
 ## Parameters
 
@@ -15421,7 +15421,7 @@ Defined in: [src/lib/server/structs/permissions.ts:251](https://github.com/tsaxk
 
 > **getPermissionsFromEntitlement**(`entitlement`): `Result`\<[`EntitlementPermission`](../classes/EntitlementPermission.md), `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:611](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L611)
+Defined in: [src/lib/server/structs/permissions.ts:611](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L611)
 
 Converts an EntitlementData object into an EntitlementPermission object.
 
@@ -15450,7 +15450,7 @@ A Result containing the EntitlementPermission object or an error.
 
 > **getRoleRuleset**(`role`, `entitlement`, `targetAttribute`): `ResultPromise`\<`StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:375](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L375)
+Defined in: [src/lib/server/structs/permissions.ts:375](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L375)
 
 ## Parameters
 
@@ -15481,7 +15481,7 @@ Defined in: [src/lib/server/structs/permissions.ts:375](https://github.com/tsaxk
 
 > **getRolesFromAccount**(`account`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:526](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L526)
+Defined in: [src/lib/server/structs/permissions.ts:526](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L526)
 
 Gets all roles associated with a given account.
 
@@ -15510,7 +15510,7 @@ A promise that resolves to an array of roles associated with the account.
 
 > **getRolesFromAccountWithinHierarchy**(`account`, `hierarchy`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1176](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1176)
+Defined in: [src/lib/server/structs/permissions.ts:1176](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1176)
 
 ## Parameters
 
@@ -15537,7 +15537,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1176](https://github.com/tsax
 
 > **getRulesetsFromAccount**(`account`): `ResultPromise`\<(`StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\> \| `StructData`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"account_rulesets"`\>)[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:573](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L573)
+Defined in: [src/lib/server/structs/permissions.ts:573](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L573)
 
 Gets all rulesets associated with a given account.
 
@@ -15566,7 +15566,7 @@ A promise that resolves to an array of rulesets associated with the account.
 
 > **getRulesetsFromRole**(`role`): `ResultPromise`\<`StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:595](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L595)
+Defined in: [src/lib/server/structs/permissions.ts:595](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L595)
 
 Gets all rulesets associated with a given role.
 
@@ -15595,7 +15595,7 @@ A promise that resolves to an array of rulesets associated with the role.
 
 > **getRulesetsfromRoles**(`roles`): `ResultPromise`\<`StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1198](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1198)
+Defined in: [src/lib/server/structs/permissions.ts:1198](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1198)
 
 ## Parameters
 
@@ -15618,7 +15618,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1198](https://github.com/tsax
 
 > **getTopLevelRole**(`role`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:232](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L232)
+Defined in: [src/lib/server/structs/permissions.ts:232](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L232)
 
 ## Parameters
 
@@ -15641,7 +15641,7 @@ Defined in: [src/lib/server/structs/permissions.ts:232](https://github.com/tsaxk
 
 > **getUpperHierarchy**(`role`, `inclusive`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:285](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L285)
+Defined in: [src/lib/server/structs/permissions.ts:285](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L285)
 
 Gets the hierarchy of roles from the given role to its top-level admin.
 This will traverse up the hierarchy until it reaches the top-level role (the one with no parent).
@@ -15677,7 +15677,7 @@ A promise that resolves to an array of roles in the hierarchy from its local adm
 
 > **grantRole**(`role`, `account`): `ResultPromise`\<`StructData`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; \}, `"role_account"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:453](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L453)
+Defined in: [src/lib/server/structs/permissions.ts:453](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L453)
 
 Grants a role to an account.
 
@@ -15710,7 +15710,7 @@ Account to receive the role.
 
 > **grantRoleRuleset**(`config`): `ResultPromise`\<`StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:417](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L417)
+Defined in: [src/lib/server/structs/permissions.ts:417](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L417)
 
 Grants a ruleset to a role.
 
@@ -15761,7 +15761,7 @@ Grants a ruleset to a role.
 
 > **isInRole**(`role`, `account`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:335](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L335)
+Defined in: [src/lib/server/structs/permissions.ts:335](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L335)
 
 ## Parameters
 
@@ -15788,7 +15788,7 @@ Defined in: [src/lib/server/structs/permissions.ts:335](https://github.com/tsaxk
 
 > **isParent**(`child`, `potentialParent`): `ResultPromise`\<`boolean`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:401](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L401)
+Defined in: [src/lib/server/structs/permissions.ts:401](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L401)
 
 Checks if a role is a parent of another role.
 
@@ -15823,7 +15823,7 @@ A promise that resolves to true if the potentialParent is a parent of the child 
 
 > **revokeRole**(`role`, `account`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:466](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L466)
+Defined in: [src/lib/server/structs/permissions.ts:466](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L466)
 
 Revokes a role from an account.
 
@@ -15856,7 +15856,7 @@ Account to remove from the role.
 
 > **revokeRoleRuleset**(`role`, `entitlement`, `targetAttribute`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:489](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L489)
+Defined in: [src/lib/server/structs/permissions.ts:489](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L489)
 
 Revokes a ruleset from a role.
 
@@ -15895,7 +15895,7 @@ Target attribute selector.
 
 > **rolesCanDo**\<`T`\>(`roles`, `data`, `action`): `ResultPromise`\<`boolean`[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:729](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L729)
+Defined in: [src/lib/server/structs/permissions.ts:729](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L729)
 
 Checks if the roles can perform a specific action on a struct data.
 
@@ -15942,7 +15942,7 @@ A promise that resolves to an array of booleans indicating if the roles can perf
 
 > **searchRoles**(`searchKey`, `config`): `ResultPromise`\<`StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>[], `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L66)
+Defined in: [src/lib/server/structs/permissions.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L66)
 
 ## Parameters
 
@@ -15975,7 +15975,7 @@ Defined in: [src/lib/server/structs/permissions.ts:66](https://github.com/tsaxki
 
 > **startHierarchy**(`name`, `description`, `rulesets`): `ResultPromise`\<\{ `role`: `StructData`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>; `rulesets`: `StructData`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>[]; \}, `Error`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:1242](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1242)
+Defined in: [src/lib/server/structs/permissions.ts:1242](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1242)
 
 ## Parameters
 
@@ -16075,7 +16075,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1242](https://github.com/tsax
 
 > **AccountRulesetData** = *typeof* `AccountRuleset.sample`
 
-Defined in: [src/lib/server/structs/permissions.ts:519](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L519)
+Defined in: [src/lib/server/structs/permissions.ts:519](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L519)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16088,7 +16088,7 @@ Defined in: [src/lib/server/structs/permissions.ts:519](https://github.com/tsaxk
 
 > **EntitlementData** = *typeof* `Entitlement.sample`
 
-Defined in: [src/lib/server/structs/permissions.ts:208](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L208)
+Defined in: [src/lib/server/structs/permissions.ts:208](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L208)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16101,7 +16101,7 @@ Defined in: [src/lib/server/structs/permissions.ts:208](https://github.com/tsaxk
 
 > **Permission**\<`S`\> = \`$\{Extract\<S\[number\]\["data"\]\["name"\], string\>\}:$\{PropertyAction \| "\*"\}:$\{Extract\<keyof UnionToIntersection\<S\[number\]\["data"\]\["structure"\]\>, string\> \| "\*"\}\` \| `` `${Extract<S[number]["data"]["name"], string>}:${DataAction}` `` \| `"*"`
 
-Defined in: [src/lib/server/structs/permissions.ts:1066](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1066)
+Defined in: [src/lib/server/structs/permissions.ts:1066](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1066)
 
 ## Type Parameters
 
@@ -16120,7 +16120,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1066](https://github.com/tsax
 
 > **RoleAccountData** = *typeof* `RoleAccount.sample`
 
-Defined in: [src/lib/server/structs/permissions.ts:184](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L184)
+Defined in: [src/lib/server/structs/permissions.ts:184](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L184)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16133,7 +16133,7 @@ Defined in: [src/lib/server/structs/permissions.ts:184](https://github.com/tsaxk
 
 > **RoleData** = *typeof* `Role.sample`
 
-Defined in: [src/lib/server/structs/permissions.ts:170](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L170)
+Defined in: [src/lib/server/structs/permissions.ts:170](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L170)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16146,7 +16146,7 @@ Defined in: [src/lib/server/structs/permissions.ts:170](https://github.com/tsaxk
 
 > **RoleRulesetData** = *typeof* `RoleRuleset.sample`
 
-Defined in: [src/lib/server/structs/permissions.ts:501](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L501)
+Defined in: [src/lib/server/structs/permissions.ts:501](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L501)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16159,7 +16159,7 @@ Defined in: [src/lib/server/structs/permissions.ts:501](https://github.com/tsaxk
 
 > `const` **AccountRuleset**: `Struct`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"account_rulesets"`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:503](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L503)
+Defined in: [src/lib/server/structs/permissions.ts:503](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L503)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16172,7 +16172,7 @@ Defined in: [src/lib/server/structs/permissions.ts:503](https://github.com/tsaxk
 
 > `const` **Entitlement**: `Struct`\<\{ `defaultFeatureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"default_feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `description`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>\>; `features`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"features"`, \[`string`, `...string[]`\]\>\>\>; `group`: `NotNull`\<`PgTextBuilderInitial`\<`"group"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `permissions`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"permissions"`, \[`string`, `...string[]`\]\>\>\>; `structs`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"structs"`, \[`string`, `...string[]`\]\>\>\>; \}, `"entitlements"`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:186](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L186)
+Defined in: [src/lib/server/structs/permissions.ts:186](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L186)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16185,7 +16185,7 @@ Defined in: [src/lib/server/structs/permissions.ts:186](https://github.com/tsaxk
 
 > `const` **Role**: `Struct`\<\{ `color`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"color"`, \[`string`, `...string[]`\]\>\>\>; `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; \}, `"role"`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:52](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L52)
+Defined in: [src/lib/server/structs/permissions.ts:52](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L52)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16198,7 +16198,7 @@ Defined in: [src/lib/server/structs/permissions.ts:52](https://github.com/tsaxki
 
 > `const` **RoleAccount**: `Struct`\<\{ `account`: `NotNull`\<`PgTextBuilderInitial`\<`"account"`, \[`string`, `...string[]`\]\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; \}, `"role_account"`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:172](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L172)
+Defined in: [src/lib/server/structs/permissions.ts:172](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L172)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16211,7 +16211,7 @@ Defined in: [src/lib/server/structs/permissions.ts:172](https://github.com/tsaxk
 
 > `const` **RoleRuleset**: `Struct`\<\{ `description`: `NotNull`\<`PgTextBuilderInitial`\<`"description"`, \[`string`, `...string[]`\]\>\>; `entitlement`: `NotNull`\<`PgTextBuilderInitial`\<`"entitlement"`, \[`string`, `...string[]`\]\>\>; `featureScopes`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"feature_scopes"`, \[`string`, `...string[]`\]\>\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; `parent`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"parent"`, \[`string`, `...string[]`\]\>\>\>; `role`: `NotNull`\<`PgTextBuilderInitial`\<`"role"`, \[`string`, `...string[]`\]\>\>; `targetAttribute`: `NotNull`\<`PgTextBuilderInitial`\<`"target_attribute"`, \[`string`, `...string[]`\]\>\>; \}, `"role_rulesets"`\>
 
-Defined in: [src/lib/server/structs/permissions.ts:210](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L210)
+Defined in: [src/lib/server/structs/permissions.ts:210](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L210)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16224,7 +16224,7 @@ Defined in: [src/lib/server/structs/permissions.ts:210](https://github.com/tsaxk
 
 > `const` **\_accountRuleset**: `Table`\<`object` & `object`, `"account_rulesets"`\> = `Permissions.AccountRuleset.table`
 
-Defined in: [src/lib/server/structs/permissions.ts:1355](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1355)
+Defined in: [src/lib/server/structs/permissions.ts:1355](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1355)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16237,7 +16237,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1355](https://github.com/tsax
 
 > `const` **\_entitlement**: `Table`\<`object` & `object`, `"entitlements"`\> = `Permissions.Entitlement.table`
 
-Defined in: [src/lib/server/structs/permissions.ts:1353](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1353)
+Defined in: [src/lib/server/structs/permissions.ts:1353](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1353)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16250,7 +16250,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1353](https://github.com/tsax
 
 > `const` **\_role**: `Table`\<`object` & `object`, `"role"`\> = `Permissions.Role.table`
 
-Defined in: [src/lib/server/structs/permissions.ts:1351](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1351)
+Defined in: [src/lib/server/structs/permissions.ts:1351](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1351)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16263,7 +16263,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1351](https://github.com/tsax
 
 > `const` **\_roleAccount**: `Table`\<`object` & `object`, `"role_account"`\> = `Permissions.RoleAccount.table`
 
-Defined in: [src/lib/server/structs/permissions.ts:1352](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1352)
+Defined in: [src/lib/server/structs/permissions.ts:1352](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1352)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16276,7 +16276,7 @@ Defined in: [src/lib/server/structs/permissions.ts:1352](https://github.com/tsax
 
 > `const` **\_roleRuleset**: `Table`\<`object` & `object`, `"role_rulesets"`\> = `Permissions.RoleRuleset.table`
 
-Defined in: [src/lib/server/structs/permissions.ts:1354](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/permissions.ts#L1354)
+Defined in: [src/lib/server/structs/permissions.ts:1354](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/permissions.ts#L1354)
 
 
 [**my-app**](../../../../../README.md)
@@ -16352,7 +16352,7 @@ Session struct and helpers for cookie-based session tracking. Provides session c
 
 > **getAccount**(`session`): `ResultPromise`\<`StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/session.ts:149](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L149)
+Defined in: [src/lib/server/structs/session.ts:149](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L149)
 
 Loads the account associated with the session.
 
@@ -16379,7 +16379,7 @@ Session to resolve.
 
 > **getSession**(`event`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/session.ts:96](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L96)
+Defined in: [src/lib/server/structs/session.ts:96](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L96)
 
 Retrieves or creates a session based on cookies.
 
@@ -16406,7 +16406,7 @@ Request/cookie wrapper.
 
 > **signIn**(`account`, `session`): `Promise`\<`Result`\<\{ `session`: `StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>; \}, `Error`\>\>
 
-Defined in: [src/lib/server/structs/session.ts:162](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L162)
+Defined in: [src/lib/server/structs/session.ts:162](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L162)
 
 Associates a session with an account and updates last login.
 
@@ -16439,7 +16439,7 @@ Session to update.
 
 > **signOut**(`session`): `ResultPromise`\<`StructData`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>, `Error`\>
 
-Defined in: [src/lib/server/structs/session.ts:184](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L184)
+Defined in: [src/lib/server/structs/session.ts:184](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L184)
 
 Signs a session out by clearing the account ID.
 
@@ -16490,7 +16490,7 @@ Session to update.
 
 > **SessionData** = *typeof* `Session.sample`
 
-Defined in: [src/lib/server/structs/session.ts:89](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L89)
+Defined in: [src/lib/server/structs/session.ts:89](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L89)
 
 
 [**my-app**](../../../../../../../../README.md)
@@ -16503,7 +16503,7 @@ Defined in: [src/lib/server/structs/session.ts:89](https://github.com/tsaxking/s
 
 > `const` **Session**: `Struct`\<\{ `accountId`: `NotNull`\<`PgTextBuilderInitial`\<`"account_id"`, \[`string`, `...string[]`\]\>\>; `fingerprint`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"fingerprint"`, \[`string`, `...string[]`\]\>\>\>; `ip`: `NotNull`\<`PgTextBuilderInitial`\<`"ip"`, \[`string`, `...string[]`\]\>\>; `prevUrl`: `NotNull`\<`PgTextBuilderInitial`\<`"prev_url"`, \[`string`, `...string[]`\]\>\>; `requests`: `NotNull`\<`PgIntegerBuilderInitial`\<`"requests"`\>\>; `tabs`: `HasDefault`\<`NotNull`\<`PgIntegerBuilderInitial`\<`"tabs"`\>\>\>; `userAgent`: `NotNull`\<`PgTextBuilderInitial`\<`"user_agent"`, \[`string`, `...string[]`\]\>\>; \}, `"session"`\>
 
-Defined in: [src/lib/server/structs/session.ts:67](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L67)
+Defined in: [src/lib/server/structs/session.ts:67](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L67)
 
 Active session record.
 
@@ -16518,7 +16518,7 @@ Active session record.
 
 > `const` **\_sessionTable**: `Table`\<`object` & `object`, `"session"`\> = `Session.Session.table`
 
-Defined in: [src/lib/server/structs/session.ts:192](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/session.ts#L192)
+Defined in: [src/lib/server/structs/session.ts:192](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/session.ts#L192)
 
 
 [**my-app**](../../../../../README.md)
@@ -16602,7 +16602,7 @@ Test-only structs and entitlements for non-production runs. These structs are me
 
 > `const` **Test**: `Struct`\<\{ `age`: `NotNull`\<`PgIntegerBuilderInitial`\<`"age"`\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; \}, `"test"`\>
 
-Defined in: [src/lib/server/structs/testing.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/testing.ts#L30)
+Defined in: [src/lib/server/structs/testing.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/testing.ts#L30)
 
 Test struct with version history and lifetime.
 
@@ -16617,7 +16617,7 @@ Test struct with version history and lifetime.
 
 > `const` **TestPermissions**: `Struct`\<\{ `age`: `NotNull`\<`PgIntegerBuilderInitial`\<`"age"`\>\>; `name`: `NotNull`\<`PgTextBuilderInitial`\<`"name"`, \[`string`, `...string[]`\]\>\>; \}, `"test_permissions"`\>
 
-Defined in: [src/lib/server/structs/testing.ts:53](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/testing.ts#L53)
+Defined in: [src/lib/server/structs/testing.ts:53](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/testing.ts#L53)
 
 Permissions test struct.
 
@@ -16632,7 +16632,7 @@ Permissions test struct.
 
 > `const` **\_test**: `Table`\<`object` & `object`, `"test"`\> = `Test.Test.table`
 
-Defined in: [src/lib/server/structs/testing.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/testing.ts#L86)
+Defined in: [src/lib/server/structs/testing.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/testing.ts#L86)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16645,7 +16645,7 @@ Defined in: [src/lib/server/structs/testing.ts:86](https://github.com/tsaxking/s
 
 > `const` **\_testPermissions**: `Table`\<`object` & `object`, `"test_permissions"`\> = `Test.TestPermissions.table`
 
-Defined in: [src/lib/server/structs/testing.ts:88](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/testing.ts#L88)
+Defined in: [src/lib/server/structs/testing.ts:88](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/testing.ts#L88)
 
 
 [**my-app**](../../../../../../README.md)
@@ -16658,7 +16658,7 @@ Defined in: [src/lib/server/structs/testing.ts:88](https://github.com/tsaxking/s
 
 > `const` **\_testVersion**: `Table`\<`object` & `object` & `object`, `"test_history"`\> = `Test.Test.versionTable`
 
-Defined in: [src/lib/server/structs/testing.ts:87](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/structs/testing.ts#L87)
+Defined in: [src/lib/server/structs/testing.ts:87](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/structs/testing.ts#L87)
 
 
 [**my-app**](../../../../../README.md)
@@ -16702,7 +16702,7 @@ Zod schema for application configuration. Keep this schema in sync with config.s
 
 > **default**: `ZodObject`\<\{ `admin`: `ZodObject`\<\{ `email`: `ZodString`; `first_name`: `ZodString`; `last_name`: `ZodString`; `pass`: `ZodString`; `user`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `email?`: `string`; `first_name?`: `string`; `last_name?`: `string`; `pass?`: `string`; `user?`: `string`; \}, \{ `email?`: `string`; `first_name?`: `string`; `last_name?`: `string`; `pass?`: `string`; `user?`: `string`; \}\>; `app_name`: `ZodString`; `database`: `ZodObject`\<\{ `host`: `ZodString`; `name`: `ZodString`; `pass`: `ZodString`; `port`: `ZodNumber`; `user`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `host?`: `string`; `name?`: `string`; `pass?`: `string`; `port?`: `number`; `user?`: `string`; \}, \{ `host?`: `string`; `name?`: `string`; `pass?`: `string`; `port?`: `number`; `user?`: `string`; \}\>; `email`: `ZodObject`\<\{ `max_size`: `ZodNumber`; `queue_name`: `ZodString`; `support_email`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `max_size?`: `number`; `queue_name?`: `string`; `support_email?`: `string`; \}, \{ `max_size?`: `number`; `queue_name?`: `string`; `support_email?`: `string`; \}\>; `environment`: `ZodEnum`\<\[`"dev"`, `"test"`, `"prod"`, `"staging"`\]\>; `indexed_db`: `ZodObject`\<\{ `db_name`: `ZodString`; `debounce_interval_ms`: `ZodNumber`; `debug`: `ZodBoolean`; `enabled`: `ZodBoolean`; `version`: `ZodNumber`; \}, `"strip"`, `ZodTypeAny`, \{ `db_name?`: `string`; `debounce_interval_ms?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `version?`: `number`; \}, \{ `db_name?`: `string`; `debounce_interval_ms?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `version?`: `number`; \}\>; `limiting`: `ZodObject`\<\{ `enabled`: `ZodBoolean`; `requests`: `ZodNumber`; `window`: `ZodNumber`; \}, `"strip"`, `ZodTypeAny`, \{ `enabled?`: `boolean`; `requests?`: `number`; `window?`: `number`; \}, \{ `enabled?`: `boolean`; `requests?`: `number`; `window?`: `number`; \}\>; `logs`: `ZodObject`\<\{ `enabled`: `ZodBoolean`; `level`: `ZodArray`\<`ZodEnum`\<\[`"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`, `"silent"`, `"struct"`\]\>, `"many"`\>; `outdir`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `enabled?`: `boolean`; `level?`: (`"error"` \| `"struct"` \| `"trace"` \| `"debug"` \| `"info"` \| `"warn"` \| `"fatal"` \| `"silent"`)[]; `outdir?`: `string`; \}, \{ `enabled?`: `boolean`; `level?`: (`"error"` \| `"struct"` \| `"trace"` \| `"debug"` \| `"info"` \| `"warn"` \| `"fatal"` \| `"silent"`)[]; `outdir?`: `string`; \}\>; `network`: `ZodObject`\<\{ `host`: `ZodString`; `port`: `ZodNumber`; `protocol`: `ZodEnum`\<\[`"http"`, `"https"`\]\>; \}, `"strip"`, `ZodTypeAny`, \{ `host?`: `string`; `port?`: `number`; `protocol?`: `"http"` \| `"https"`; \}, \{ `host?`: `string`; `port?`: `number`; `protocol?`: `"http"` \| `"https"`; \}\>; `ntp`: `ZodObject`\<\{ `server`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `server?`: `string`; \}, \{ `server?`: `string`; \}\>; `redis`: `ZodObject`\<\{ `name`: `ZodString`; `url`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `name?`: `string`; `url?`: `string`; \}, \{ `name?`: `string`; `url?`: `string`; \}\>; `sessions`: `ZodObject`\<\{ `auto_sign_in`: `ZodOptional`\<`ZodString`\>; `duration`: `ZodNumber`; `password_request_lifetime`: `ZodNumber`; \}, `"strip"`, `ZodTypeAny`, \{ `auto_sign_in?`: `string`; `duration?`: `number`; `password_request_lifetime?`: `number`; \}, \{ `auto_sign_in?`: `string`; `duration?`: `number`; `password_request_lifetime?`: `number`; \}\>; `sse`: `ZodObject`\<\{ `debug`: `ZodBoolean`; `do_report`: `ZodBoolean`; `ping_interval_ms`: `ZodNumber`; `state_report_threshold`: `ZodNumber`; \}, `"strip"`, `ZodTypeAny`, \{ `debug?`: `boolean`; `do_report?`: `boolean`; `ping_interval_ms?`: `number`; `state_report_threshold?`: `number`; \}, \{ `debug?`: `boolean`; `do_report?`: `boolean`; `ping_interval_ms?`: `number`; `state_report_threshold?`: `number`; \}\>; `struct_batching`: `ZodObject`\<\{ `batch_size`: `ZodNumber`; `debug`: `ZodBoolean`; `enabled`: `ZodBoolean`; `interval`: `ZodNumber`; `limit`: `ZodNumber`; `timeout`: `ZodNumber`; \}, `"strip"`, `ZodTypeAny`, \{ `batch_size?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `interval?`: `number`; `limit?`: `number`; `timeout?`: `number`; \}, \{ `batch_size?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `interval?`: `number`; `limit?`: `number`; `timeout?`: `number`; \}\>; `struct_cache`: `ZodObject`\<\{ `debug`: `ZodBoolean`; `enabled`: `ZodBoolean`; \}, `"strip"`, `ZodTypeAny`, \{ `debug?`: `boolean`; `enabled?`: `boolean`; \}, \{ `debug?`: `boolean`; `enabled?`: `boolean`; \}\>; \}, `"strip"`, `ZodTypeAny`, \{ `admin?`: \{ `email?`: `string`; `first_name?`: `string`; `last_name?`: `string`; `pass?`: `string`; `user?`: `string`; \}; `app_name?`: `string`; `database?`: \{ `host?`: `string`; `name?`: `string`; `pass?`: `string`; `port?`: `number`; `user?`: `string`; \}; `email?`: \{ `max_size?`: `number`; `queue_name?`: `string`; `support_email?`: `string`; \}; `environment?`: `"dev"` \| `"test"` \| `"prod"` \| `"staging"`; `indexed_db?`: \{ `db_name?`: `string`; `debounce_interval_ms?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `version?`: `number`; \}; `limiting?`: \{ `enabled?`: `boolean`; `requests?`: `number`; `window?`: `number`; \}; `logs?`: \{ `enabled?`: `boolean`; `level?`: (`"error"` \| `"struct"` \| `"trace"` \| `"debug"` \| `"info"` \| `"warn"` \| `"fatal"` \| `"silent"`)[]; `outdir?`: `string`; \}; `network?`: \{ `host?`: `string`; `port?`: `number`; `protocol?`: `"http"` \| `"https"`; \}; `ntp?`: \{ `server?`: `string`; \}; `redis?`: \{ `name?`: `string`; `url?`: `string`; \}; `sessions?`: \{ `auto_sign_in?`: `string`; `duration?`: `number`; `password_request_lifetime?`: `number`; \}; `sse?`: \{ `debug?`: `boolean`; `do_report?`: `boolean`; `ping_interval_ms?`: `number`; `state_report_threshold?`: `number`; \}; `struct_batching?`: \{ `batch_size?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `interval?`: `number`; `limit?`: `number`; `timeout?`: `number`; \}; `struct_cache?`: \{ `debug?`: `boolean`; `enabled?`: `boolean`; \}; \}, \{ `admin?`: \{ `email?`: `string`; `first_name?`: `string`; `last_name?`: `string`; `pass?`: `string`; `user?`: `string`; \}; `app_name?`: `string`; `database?`: \{ `host?`: `string`; `name?`: `string`; `pass?`: `string`; `port?`: `number`; `user?`: `string`; \}; `email?`: \{ `max_size?`: `number`; `queue_name?`: `string`; `support_email?`: `string`; \}; `environment?`: `"dev"` \| `"test"` \| `"prod"` \| `"staging"`; `indexed_db?`: \{ `db_name?`: `string`; `debounce_interval_ms?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `version?`: `number`; \}; `limiting?`: \{ `enabled?`: `boolean`; `requests?`: `number`; `window?`: `number`; \}; `logs?`: \{ `enabled?`: `boolean`; `level?`: (`"error"` \| `"struct"` \| `"trace"` \| `"debug"` \| `"info"` \| `"warn"` \| `"fatal"` \| `"silent"`)[]; `outdir?`: `string`; \}; `network?`: \{ `host?`: `string`; `port?`: `number`; `protocol?`: `"http"` \| `"https"`; \}; `ntp?`: \{ `server?`: `string`; \}; `redis?`: \{ `name?`: `string`; `url?`: `string`; \}; `sessions?`: \{ `auto_sign_in?`: `string`; `duration?`: `number`; `password_request_lifetime?`: `number`; \}; `sse?`: \{ `debug?`: `boolean`; `do_report?`: `boolean`; `ping_interval_ms?`: `number`; `state_report_threshold?`: `number`; \}; `struct_batching?`: \{ `batch_size?`: `number`; `debug?`: `boolean`; `enabled?`: `boolean`; `interval?`: `number`; `limit?`: `number`; `timeout?`: `number`; \}; `struct_cache?`: \{ `debug?`: `boolean`; `enabled?`: `boolean`; \}; \}\>
 
-Defined in: [src/lib/server/utils/config.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/config.ts#L79)
+Defined in: [src/lib/server/utils/config.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/config.ts#L79)
 
 Configuration schema definition.
 
@@ -16747,7 +16747,7 @@ Environment and configuration helpers with .env example generation. Loads config
 
 # Class: EnvironmentError
 
-Defined in: [src/lib/server/utils/env.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L36)
+Defined in: [src/lib/server/utils/env.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L36)
 
 Error thrown for invalid or missing environment configuration.
 
@@ -16761,7 +16761,7 @@ Error thrown for invalid or missing environment configuration.
 
 > **new EnvironmentError**(`message`): `EnvironmentError`
 
-Defined in: [src/lib/server/utils/env.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L37)
+Defined in: [src/lib/server/utils/env.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L37)
 
 #### Parameters
 
@@ -16960,7 +16960,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 > **bool**(`key`, `required`): `boolean`
 
-Defined in: [src/lib/server/utils/env.ts:217](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L217)
+Defined in: [src/lib/server/utils/env.ts:217](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L217)
 
 Reads a boolean env var.
 
@@ -16986,7 +16986,7 @@ Whether the key is required.
 
 > **bool**(`key`, `required`): `boolean`
 
-Defined in: [src/lib/server/utils/env.ts:218](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L218)
+Defined in: [src/lib/server/utils/env.ts:218](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L218)
 
 Reads a boolean env var.
 
@@ -17019,7 +17019,7 @@ Whether the key is required.
 
 > **domain**(`domainConfig`): `string`
 
-Defined in: [src/lib/server/utils/env.ts:246](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L246)
+Defined in: [src/lib/server/utils/env.ts:246](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L246)
 
 Builds a public domain string from config.
 
@@ -17054,7 +17054,7 @@ Formatting options.
 
 > **get**\<`T`\>(`key`, `config?`): `T`
 
-Defined in: [src/lib/server/utils/env.ts:128](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L128)
+Defined in: [src/lib/server/utils/env.ts:128](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L128)
 
 Gets an environment variable with optional parsing/validation.
 
@@ -17086,7 +17086,7 @@ Accessor config.
 
 > **get**\<`T`\>(`key`, `config?`): `T`
 
-Defined in: [src/lib/server/utils/env.ts:129](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L129)
+Defined in: [src/lib/server/utils/env.ts:129](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L129)
 
 Gets an environment variable with optional parsing/validation.
 
@@ -17125,7 +17125,7 @@ Accessor config.
 
 > **getPublicIp**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/env.ts:257](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L257)
+Defined in: [src/lib/server/utils/env.ts:257](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L257)
 
 Fetches the public IPv4 address for the running instance.
 
@@ -17146,7 +17146,7 @@ Fetches the public IPv4 address for the running instance.
 
 > **num**(`key`, `required`): `number`
 
-Defined in: [src/lib/server/utils/env.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L195)
+Defined in: [src/lib/server/utils/env.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L195)
 
 Reads a numeric env var.
 
@@ -17172,7 +17172,7 @@ Whether the key is required.
 
 > **num**(`key`, `required`): `number`
 
-Defined in: [src/lib/server/utils/env.ts:196](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L196)
+Defined in: [src/lib/server/utils/env.ts:196](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L196)
 
 Reads a numeric env var.
 
@@ -17207,7 +17207,7 @@ Whether the key is required.
 
 > **str**(`key`, `required`): `string`
 
-Defined in: [src/lib/server/utils/env.ts:235](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L235)
+Defined in: [src/lib/server/utils/env.ts:235](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L235)
 
 Reads a string env var.
 
@@ -17233,7 +17233,7 @@ Whether the key is required.
 
 > **str**(`key`, `required`): `string`
 
-Defined in: [src/lib/server/utils/env.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L236)
+Defined in: [src/lib/server/utils/env.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L236)
 
 Reads a string env var.
 
@@ -17293,7 +17293,7 @@ Whether the key is required.
 
 > `const` **config**: `object`
 
-Defined in: [src/lib/server/utils/env.ts:46](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L46)
+Defined in: [src/lib/server/utils/env.ts:46](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L46)
 
 Parsed and validated application configuration.
 
@@ -17550,7 +17550,7 @@ Parsed and validated application configuration.
 
 > `const` **env**: `"dev"` \| `"test"` \| `"prod"` \| `"staging"` = `config.environment`
 
-Defined in: [src/lib/server/utils/env.ts:87](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/env.ts#L87)
+Defined in: [src/lib/server/utils/env.ts:87](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/env.ts#L87)
 
 Current environment name.
 
@@ -17583,7 +17583,7 @@ Path matching utility for ignore/allow rules. Supports `*`, `**`, and negation p
 
 > **pathMatch**(`lines`): `object`
 
-Defined in: [src/lib/server/utils/file-match.ts:33](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/file-match.ts#L33)
+Defined in: [src/lib/server/utils/file-match.ts:33](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/file-match.ts#L33)
 
 Matches a target path against a list of file patterns.
 
@@ -17685,7 +17685,7 @@ Server-side file utilities for uploads and search indexing. Includes multipart u
 
 # Class: FileReceiver
 
-Defined in: [src/lib/server/utils/files.ts:47](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L47)
+Defined in: [src/lib/server/utils/files.ts:47](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L47)
 
 File upload receiver that handles multipart/form-data file uploads with size and count limits.
 Uses Busboy to parse multipart data and saves files to the static/uploads directory.
@@ -17700,7 +17700,7 @@ FileReceiver
 
 > **new FileReceiver**(`config`): `FileReceiver`
 
-Defined in: [src/lib/server/utils/files.ts:56](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L56)
+Defined in: [src/lib/server/utils/files.ts:56](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L56)
 
 Creates an instance of FileReceiver.
 
@@ -17732,7 +17732,7 @@ Maximum file size in bytes
 
 > `readonly` **config**: `object`
 
-Defined in: [src/lib/server/utils/files.ts:57](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L57)
+Defined in: [src/lib/server/utils/files.ts:57](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L57)
 
 Configuration for file upload limits
 
@@ -17750,7 +17750,7 @@ Configuration for file upload limits
 
 > **receive**(`{`): `Promise`\<`Result`\<\{ `files`: `object`[]; \}, `Error`\>\>
 
-Defined in: [src/lib/server/utils/files.ts:80](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L80)
+Defined in: [src/lib/server/utils/files.ts:80](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L80)
 
 Receives and processes multipart/form-data file uploads from a request.
 Validates content type, enforces file limits, and saves files with unique names.
@@ -17796,7 +17796,7 @@ if (result.isOk()) {
 
 > **fileTree**(`dir`): `ResultPromise`\<[`FileTree`](../type-aliases/FileTree.md), `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:184](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L184)
+Defined in: [src/lib/server/utils/files.ts:184](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L184)
 
 Recursively builds a file tree structure for a given directory.
 Reads the directory contents and creates a hierarchical representation.
@@ -17839,7 +17839,7 @@ if (tree.isOk()) {
 
 > **generateSearchFile**(`dir`, `name`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:237](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L237)
+Defined in: [src/lib/server/utils/files.ts:237](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L237)
 
 Generates a searchable file by concatenating all files in a directory tree.
 Creates a single file with special markers for file boundaries to enable fast searching.
@@ -17889,7 +17889,7 @@ if (searchFile.isOk()) {
 
 > **openFile**(`filepath`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:609](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L609)
+Defined in: [src/lib/server/utils/files.ts:609](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L609)
 
 Asynchronously reads the content of a file as a UTF-8 string.
 
@@ -17927,7 +17927,7 @@ if (content.isOk()) {
 
 > **openJSON**\<`T`\>(`filePath`, `parser`): `ResultPromise`\<`T`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:590](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L590)
+Defined in: [src/lib/server/utils/files.ts:590](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L590)
 
 Asynchronously reads and parses a JSON file with Zod validation.
 Supports JSON files with comments.
@@ -17980,7 +17980,7 @@ if (config.isOk()) {
 
 > **openJSONSync**\<`T`\>(`filePath`, `parser`): `Result`\<`T`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:566](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L566)
+Defined in: [src/lib/server/utils/files.ts:566](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L566)
 
 Synchronously reads and parses a JSON file with Zod validation.
 Supports JSON files with comments.
@@ -18033,7 +18033,7 @@ if (config.isOk()) {
 
 > **parseJSON**\<`T`\>(`json`, `parser`): `Result`\<`T`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:542](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L542)
+Defined in: [src/lib/server/utils/files.ts:542](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L542)
 
 Parses a JSON string with comment support and validates it against a Zod schema.
 Uses comment-json parser to handle JSON with comments.
@@ -18087,7 +18087,7 @@ if (result.isOk()) {
 
 > **renderSearchResultHtml**(`result`, `config?`): `string`
 
-Defined in: [src/lib/server/utils/files.ts:479](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L479)
+Defined in: [src/lib/server/utils/files.ts:479](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L479)
 
 Renders a search result as HTML with highlighted matches.
 Wraps matched terms in configurable HTML tags and optionally shows file/line information.
@@ -18135,7 +18135,7 @@ const html = renderSearchResultHtml(result, {
 
 > **saveFile**(`filepath`, `content`, `config?`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:628](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L628)
+Defined in: [src/lib/server/utils/files.ts:628](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L628)
 
 Asynchronously saves content to a file, with options for directory creation and overwrite control.
 
@@ -18192,7 +18192,7 @@ await saveFile('./output/data.txt', 'Hello, World!', { recurse: true, overwrite:
 
 > **searchFile**(`searchFile`, `searchTerm`, `config?`): `ResultPromise`\<`SearchResult`[], `Error`\>
 
-Defined in: [src/lib/server/utils/files.ts:334](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L334)
+Defined in: [src/lib/server/utils/files.ts:334](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L334)
 
 Searches through a generated search file for occurrences of a term.
 Parses the special file markers and returns detailed match information.
@@ -18279,7 +18279,7 @@ if (results.isOk()) {
 
 > **FileTree** = `object`
 
-Defined in: [src/lib/server/utils/files.ts:155](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L155)
+Defined in: [src/lib/server/utils/files.ts:155](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L155)
 
 Represents a file or directory in a hierarchical tree structure
 
@@ -18291,7 +18291,7 @@ Represents a file or directory in a hierarchical tree structure
 
 > `optional` **children**: `FileTree`[]
 
-Defined in: [src/lib/server/utils/files.ts:159](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L159)
+Defined in: [src/lib/server/utils/files.ts:159](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L159)
 
 Child nodes for directories (undefined for files)
 
@@ -18301,7 +18301,7 @@ Child nodes for directories (undefined for files)
 
 > **fullPath**: `string`
 
-Defined in: [src/lib/server/utils/files.ts:165](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L165)
+Defined in: [src/lib/server/utils/files.ts:165](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L165)
 
 Absolute path to the file or directory
 
@@ -18311,7 +18311,7 @@ Absolute path to the file or directory
 
 > **name**: `string`
 
-Defined in: [src/lib/server/utils/files.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L157)
+Defined in: [src/lib/server/utils/files.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L157)
 
 Base name of the file or directory
 
@@ -18321,7 +18321,7 @@ Base name of the file or directory
 
 > **path**: `string`
 
-Defined in: [src/lib/server/utils/files.ts:161](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L161)
+Defined in: [src/lib/server/utils/files.ts:161](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L161)
 
 Relative path from the root directory
 
@@ -18331,7 +18331,7 @@ Relative path from the root directory
 
 > **type**: `"directory"` \| `"file"`
 
-Defined in: [src/lib/server/utils/files.ts:163](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/files.ts#L163)
+Defined in: [src/lib/server/utils/files.ts:163](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/files.ts#L163)
 
 Type indicator for file or directory
 
@@ -18364,7 +18364,7 @@ Server-side fingerprint signing helper.
 
 > **signFingerprint**(`fpConfig`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/fingerprint.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/fingerprint.ts#L17)
+Defined in: [src/lib/server/utils/fingerprint.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/fingerprint.ts#L17)
 
 Signs fingerprint data using HMAC SHA-256.
 
@@ -18436,7 +18436,7 @@ Git repository helper utilities.
 
 > **branch**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/git.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/git.ts#L25)
+Defined in: [src/lib/server/utils/git.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/git.ts#L25)
 
 Gets the current Git branch name.
 
@@ -18470,7 +18470,7 @@ if (currentBranch.isOk()) {
 
 > **commit**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/git.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/git.ts#L45)
+Defined in: [src/lib/server/utils/git.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/git.ts#L45)
 
 Gets the current Git commit hash (full SHA).
 
@@ -18504,7 +18504,7 @@ if (commitHash.isOk()) {
 
 > **repoName**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/git.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/git.ts#L66)
+Defined in: [src/lib/server/utils/git.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/git.ts#L66)
 
 Gets the repository name from the top-level directory.
 Extracts the directory name from the Git repository's root path.
@@ -18539,7 +18539,7 @@ if (name.isOk()) {
 
 > **repoSlug**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/git.ts:113](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/git.ts#L113)
+Defined in: [src/lib/server/utils/git.ts:113](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/git.ts#L113)
 
 Gets the repository slug in the format "owner/repository".
 Parses the origin remote URL to extract the owner and repository name.
@@ -18579,7 +18579,7 @@ if (slug.isOk()) {
 
 > **repoUrl**(): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/git.ts:90](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/git.ts#L90)
+Defined in: [src/lib/server/utils/git.ts:90](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/git.ts#L90)
 
 Gets the repository's origin remote URL.
 Returns the URL configured for the origin remote.
@@ -18652,7 +18652,7 @@ Route manifesto reader and matcher utilities.
 
 > **getManifesto**(): `string`
 
-Defined in: [src/lib/server/utils/manifesto.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/manifesto.ts#L31)
+Defined in: [src/lib/server/utils/manifesto.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/manifesto.ts#L31)
 
 Gets the route manifesto content from the route-tree.pages file.
 Caches the content after the first read for performance.
@@ -18684,7 +18684,7 @@ console.log('Available routes:', routes.split('\n'));
 
 > **getManifestoInstance**(`url`): `string`
 
-Defined in: [src/lib/server/utils/manifesto.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/manifesto.ts#L55)
+Defined in: [src/lib/server/utils/manifesto.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/manifesto.ts#L55)
 
 Finds a matching route pattern in the manifesto for a given URL.
 Supports wildcard matching where '*' in patterns can match any URL segment.
@@ -18761,7 +18761,7 @@ Task execution helpers for server-side scripts.
 
 > **runTask**(...`args`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/server/utils/task.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/task.ts#L20)
+Defined in: [src/lib/server/utils/task.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/task.ts#L20)
 
 Runs a shell command and returns the output.
 
@@ -18786,7 +18786,7 @@ Runs a shell command and returns the output.
 
 > **runTs**(`file`, `fn`, ...`params`): `ResultPromise`\<`any`, `Error`\>
 
-Defined in: [src/lib/server/utils/task.ts:41](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/task.ts#L41)
+Defined in: [src/lib/server/utils/task.ts:41](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/task.ts#L41)
 
 Runs a TypeScript file and calls a specific function with parameters.
 
@@ -18858,7 +18858,7 @@ Terminal logging helpers with file-backed log persistence. Logs to stdout/stderr
 
 > **error**(...`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/utils/terminal.ts:77](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/terminal.ts#L77)
+Defined in: [src/lib/server/utils/terminal.ts:77](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/terminal.ts#L77)
 
 Logs an error message to stderr and file.
 
@@ -18885,7 +18885,7 @@ Log arguments.
 
 > **log**(...`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/utils/terminal.ts:65](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/terminal.ts#L65)
+Defined in: [src/lib/server/utils/terminal.ts:65](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/terminal.ts#L65)
 
 Logs an informational message to stdout and file.
 
@@ -18912,7 +18912,7 @@ Log arguments.
 
 > **save**(`callsite`, `type`, ...`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/utils/terminal.ts:43](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/terminal.ts#L43)
+Defined in: [src/lib/server/utils/terminal.ts:43](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/terminal.ts#L43)
 
 Appends a log entry to a file for the specified log type.
 
@@ -18951,7 +18951,7 @@ Log arguments.
 
 > **warn**(...`args`): `Promise`\<`void`\>
 
-Defined in: [src/lib/server/utils/terminal.ts:90](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/terminal.ts#L90)
+Defined in: [src/lib/server/utils/terminal.ts:90](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/terminal.ts#L90)
 
 Logs a warning message to stdout and file.
 
@@ -18998,7 +18998,7 @@ Log arguments.
 
 > **default**: `object`
 
-Defined in: [src/lib/server/utils/terminal.ts:105](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/terminal.ts#L105)
+Defined in: [src/lib/server/utils/terminal.ts:105](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/terminal.ts#L105)
 
 Convenience logger with `log`, `error`, and `warn` methods.
 
@@ -19087,7 +19087,7 @@ UUID v4 generator utility.
 
 > **uuid**(): `string`
 
-Defined in: [src/lib/server/utils/uuid.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/server/utils/uuid.ts#L13)
+Defined in: [src/lib/server/utils/uuid.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/server/utils/uuid.ts#L13)
 
 Returns a UUID v4 string.
 
@@ -19137,7 +19137,7 @@ Client-side analytics activity tracker. Tracks active time on a page and reports
 
 > **init**(): `Result`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/analytics.ts:44](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/analytics.ts#L44)
+Defined in: [src/lib/services/analytics.ts:44](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/analytics.ts#L44)
 
 Initializes browser activity tracking.
 
@@ -19195,7 +19195,7 @@ Initializes browser activity tracking.
 
 > **\_define**\<`T`\>(`name`, `schema`): () => `Table`\<\{ \[K in string \| number \| symbol\]: SchemaFieldReturnType\<T\[K\]\> \} & `object`, `IndexableType`, \{ \[K in string \| number \| symbol\]: SchemaFieldReturnType\<T\[K\]\> \} & `object`\>
 
-Defined in: [src/lib/services/db/index.ts:86](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L86)
+Defined in: [src/lib/services/db/index.ts:86](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L86)
 
 Defines a table schema before initialization.
 
@@ -19238,7 +19238,7 @@ Schema definition.
 
 > **\_init**(): `Promise`\<`Dexie`\>
 
-Defined in: [src/lib/services/db/index.ts:107](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L107)
+Defined in: [src/lib/services/db/index.ts:107](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L107)
 
 Initializes the IndexedDB database with registered schemas.
 
@@ -19306,7 +19306,7 @@ IndexedDB table wrapper with reactive stores. Provides Dexie-backed CRUD helpers
 
 # Class: PaginatedTableData\<Name, Type\>
 
-Defined in: [src/lib/services/db/table.ts:676](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L676)
+Defined in: [src/lib/services/db/table.ts:676](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L676)
 
 Paginated extension of TableDataArr that provides pagination functionality.
 Manages page state, total counts, and automatic data refresh on navigation.
@@ -19339,7 +19339,7 @@ The schema definition
 
 > **new PaginatedTableData**\<`Name`, `Type`\>(`table`, `data`, `total`, `page`, `pageSize`, `getter`, `getTotal`): `PaginatedTableData`\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:706](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L706)
+Defined in: [src/lib/services/db/table.ts:706](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L706)
 
 Creates an instance of PaginatedTableData.
 
@@ -19401,7 +19401,7 @@ Function to get total count
 
 > **emit**: `any`
 
-Defined in: [src/lib/services/db/table.ts:550](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L550)
+Defined in: [src/lib/services/db/table.ts:550](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L550)
 
 Emit array events
 
@@ -19415,7 +19415,7 @@ Emit array events
 
 > `readonly` **info**: `Writable`\<\{ `page`: `number`; `pageSize`: `number`; \}\>
 
-Defined in: [src/lib/services/db/table.ts:687](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L687)
+Defined in: [src/lib/services/db/table.ts:687](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L687)
 
 Reactive pagination information store
 
@@ -19425,7 +19425,7 @@ Reactive pagination information store
 
 > **off**: `any`
 
-Defined in: [src/lib/services/db/table.ts:546](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L546)
+Defined in: [src/lib/services/db/table.ts:546](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L546)
 
 Remove event listener
 
@@ -19439,7 +19439,7 @@ Remove event listener
 
 > **on**: `any`
 
-Defined in: [src/lib/services/db/table.ts:544](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L544)
+Defined in: [src/lib/services/db/table.ts:544](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L544)
 
 Event listener for 'add' and 'remove' events
 
@@ -19453,7 +19453,7 @@ Event listener for 'add' and 'remove' events
 
 > **once**: `any`
 
-Defined in: [src/lib/services/db/table.ts:548](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L548)
+Defined in: [src/lib/services/db/table.ts:548](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L548)
 
 Listen once for event
 
@@ -19467,7 +19467,7 @@ Listen once for event
 
 > **subscribers**: `Set`\<`Subscriber`\<[`TableData`](TableData.md)\<`Name`, `Type`\>[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -19481,7 +19481,7 @@ Set of active subscribers to this writable store
 
 > **table**: [`Table`](Table.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:560](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L560)
+Defined in: [src/lib/services/db/table.ts:560](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L560)
 
 Reference to the parent table
 
@@ -19495,7 +19495,7 @@ Reference to the parent table
 
 > `readonly` **total**: `Writable`\<`number`\>
 
-Defined in: [src/lib/services/db/table.ts:692](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L692)
+Defined in: [src/lib/services/db/table.ts:692](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L692)
 
 ## Accessors
 
@@ -19505,7 +19505,7 @@ Defined in: [src/lib/services/db/table.ts:692](https://github.com/tsaxking/svelt
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -19515,7 +19515,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -19539,7 +19539,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -19561,7 +19561,7 @@ Number of elements in the array
 
 > **get** **page**(): `number`
 
-Defined in: [src/lib/services/db/table.ts:776](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L776)
+Defined in: [src/lib/services/db/table.ts:776](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L776)
 
 Gets the current page number (0-based)
 
@@ -19575,7 +19575,7 @@ Current page number
 
 > **set** **page**(`p`): `void`
 
-Defined in: [src/lib/services/db/table.ts:785](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L785)
+Defined in: [src/lib/services/db/table.ts:785](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L785)
 
 Sets the page number and triggers data refresh
 
@@ -19599,7 +19599,7 @@ New page number (0-based)
 
 > **get** **pageSize**(): `number`
 
-Defined in: [src/lib/services/db/table.ts:755](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L755)
+Defined in: [src/lib/services/db/table.ts:755](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L755)
 
 Gets the current page size
 
@@ -19613,7 +19613,7 @@ Current page size
 
 > **set** **pageSize**(`size`): `void`
 
-Defined in: [src/lib/services/db/table.ts:764](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L764)
+Defined in: [src/lib/services/db/table.ts:764](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L764)
 
 Sets the page size and triggers data refresh
 
@@ -19635,7 +19635,7 @@ New page size
 
 > **add**(`item`): `void`
 
-Defined in: [src/lib/services/db/table.ts:610](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L610)
+Defined in: [src/lib/services/db/table.ts:610](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L610)
 
 Adds an item to the array, ensuring uniqueness by ID
 
@@ -19661,7 +19661,7 @@ Item to add to the array
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -19687,7 +19687,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`TableData`](TableData.md)\<`Name`, `Type`\>[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -19715,7 +19715,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -19733,7 +19733,7 @@ Removes all elements from the array
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -19759,7 +19759,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -19792,7 +19792,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/db/table.ts:596](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L596)
+Defined in: [src/lib/services/db/table.ts:596](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L596)
 
 Public inform method that uses debounced updates by default
 
@@ -19818,7 +19818,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -19848,7 +19848,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -19890,7 +19890,7 @@ const strings = numbers.map(n => n.toString());
 
 > **next**(): `void`
 
-Defined in: [src/lib/services/db/table.ts:802](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L802)
+Defined in: [src/lib/services/db/table.ts:802](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L802)
 
 Navigates to the next page if available
 
@@ -19912,7 +19912,7 @@ if (pagination.page < Math.ceil(pagination.total / pagination.pageSize) - 1) {
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -19946,7 +19946,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -19974,7 +19974,7 @@ The writable store to pipe from
 
 > **pop**(): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -19994,7 +19994,7 @@ The removed item, or undefined if array is empty
 
 > **prev**(): `void`
 
-Defined in: [src/lib/services/db/table.ts:822](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L822)
+Defined in: [src/lib/services/db/table.ts:822](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L822)
 
 Navigates to the previous page if available
 
@@ -20016,7 +20016,7 @@ if (pagination.page > 0) {
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -20050,7 +20050,7 @@ Predicate function or specific items to remove
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/db/table.ts:624](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L624)
+Defined in: [src/lib/services/db/table.ts:624](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L624)
 
 Removes items from the array based on a predicate function
 
@@ -20074,7 +20074,7 @@ Predicate function to determine which items to remove
 
 > **remove**(...`items`): `void`
 
-Defined in: [src/lib/services/db/table.ts:629](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L629)
+Defined in: [src/lib/services/db/table.ts:629](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L629)
 
 Removes specific items from the array by ID
 
@@ -20100,7 +20100,7 @@ Items to remove from the array
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -20118,7 +20118,7 @@ Toggles the reverse order of the array display
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -20150,7 +20150,7 @@ store.set('new value');
 
 > **shift**(): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -20170,7 +20170,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -20203,7 +20203,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -20241,7 +20241,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -20276,7 +20276,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -20302,7 +20302,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -20334,7 +20334,7 @@ store.update(current => current + 1);
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -20380,7 +20380,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 # Class: Table\<Name, Type\>
 
-Defined in: [src/lib/services/db/table.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L54)
+Defined in: [src/lib/services/db/table.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L54)
 
 Table class that provides a reactive wrapper around IndexedDB tables with Dexie.
 Offers real-time synchronization, caching, pagination, and Svelte store integration.
@@ -20409,7 +20409,7 @@ The schema definition for the table
 
 > **new Table**\<`Name`, `Type`\>(`name`, `schema`): `Table`\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L134)
+Defined in: [src/lib/services/db/table.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L134)
 
 Creates an instance of Table.
 
@@ -20437,7 +20437,7 @@ The schema definition for the table structure
 
 > **emit**: `any`
 
-Defined in: [src/lib/services/db/table.ts:125](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L125)
+Defined in: [src/lib/services/db/table.ts:125](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L125)
 
 Emit table events
 
@@ -20447,7 +20447,7 @@ Emit table events
 
 > **name**: `Name`
 
-Defined in: [src/lib/services/db/table.ts:135](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L135)
+Defined in: [src/lib/services/db/table.ts:135](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L135)
 
 The name of the table
 
@@ -20457,7 +20457,7 @@ The name of the table
 
 > **off**: `any`
 
-Defined in: [src/lib/services/db/table.ts:109](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L109)
+Defined in: [src/lib/services/db/table.ts:109](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L109)
 
 Unsubscribe from table events
 
@@ -20467,7 +20467,7 @@ Unsubscribe from table events
 
 > **on**: `any`
 
-Defined in: [src/lib/services/db/table.ts:101](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L101)
+Defined in: [src/lib/services/db/table.ts:101](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L101)
 
 Subscribe to table events
 
@@ -20477,7 +20477,7 @@ Subscribe to table events
 
 > **once**: `any`
 
-Defined in: [src/lib/services/db/table.ts:117](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L117)
+Defined in: [src/lib/services/db/table.ts:117](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L117)
 
 Subscribe to table events once
 
@@ -20487,7 +20487,7 @@ Subscribe to table events once
 
 > **schema**: `Type`
 
-Defined in: [src/lib/services/db/table.ts:136](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L136)
+Defined in: [src/lib/services/db/table.ts:136](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L136)
 
 The schema definition for the table structure
 
@@ -20497,7 +20497,7 @@ The schema definition for the table structure
 
 > **table**: () => `Table`\<\{ \[K in string \| number \| symbol\]: SchemaFieldReturnType\<Type\[K\]\> \} & `object`, `IndexableType`, \{ \[K in string \| number \| symbol\]: SchemaFieldReturnType\<Type\[K\]\> \} & `object`\>
 
-Defined in: [src/lib/services/db/table.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L79)
+Defined in: [src/lib/services/db/table.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L79)
 
 The underlying Dexie table instance
 
@@ -20513,7 +20513,7 @@ The underlying Dexie table instance
 
 > **get** **sample**(): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:281](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L281)
+Defined in: [src/lib/services/db/table.ts:281](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L281)
 
 Returns a sample TableData instance for TypeScript type inference.
 This is only used for development and type checking - never call at runtime.
@@ -20540,7 +20540,7 @@ Configuration object specifying pagination behavior
 
 > **all**(`config`): `ResultPromise`\<[`TableDataArr`](TableDataArr.md)\<`Name`, `Type`\>\>
 
-Defined in: [src/lib/services/db/table.ts:188](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L188)
+Defined in: [src/lib/services/db/table.ts:188](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L188)
 
 Retrieves all records as a reactive data array
 
@@ -20562,7 +20562,7 @@ Promise resolving to a reactive data array
 
 > **all**(`config`): `ResultPromise`\<[`PaginatedTableData`](PaginatedTableData.md)\<`Name`, `Type`\>\>
 
-Defined in: [src/lib/services/db/table.ts:196](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L196)
+Defined in: [src/lib/services/db/table.ts:196](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L196)
 
 Retrieves all records as a paginated reactive data array
 
@@ -20586,7 +20586,7 @@ Promise resolving to a paginated data array
 
 > **arr**(): [`TableDataArr`](TableDataArr.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:319](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L319)
+Defined in: [src/lib/services/db/table.ts:319](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L319)
 
 Creates an empty reactive data array for this table
 
@@ -20602,7 +20602,7 @@ Empty reactive data array
 
 > **clear**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:307](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L307)
+Defined in: [src/lib/services/db/table.ts:307](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L307)
 
 Clears all records from the table
 
@@ -20618,7 +20618,7 @@ Promise that resolves when the table is cleared
 
 > **fromId**(`id`): `ResultPromise`\<[`TableData`](TableData.md)\<`Name`, `Type`\>, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L171)
+Defined in: [src/lib/services/db/table.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L171)
 
 Retrieves a single record by its ID, with caching support
 
@@ -20642,7 +20642,7 @@ Promise resolving to the table data or error if not found
 
 > **Generator**(`data`): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:292](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L292)
+Defined in: [src/lib/services/db/table.ts:292](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L292)
 
 Creates or retrieves a cached TableData instance for the given data.
 Ensures singleton behavior for each record to maintain referential equality.
@@ -20667,7 +20667,7 @@ Wrapped table data instance
 
 > **get**(`data`, `config`): `ResultPromise`\<[`TableDataArr`](TableDataArr.md)\<`Name`, `Type`\> \| [`PaginatedTableData`](PaginatedTableData.md)\<`Name`, `Type`\>\>
 
-Defined in: [src/lib/services/db/table.ts:323](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L323)
+Defined in: [src/lib/services/db/table.ts:323](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L323)
 
 #### Parameters
 
@@ -20689,7 +20689,7 @@ Defined in: [src/lib/services/db/table.ts:323](https://github.com/tsaxking/svelt
 
 > **new**(`data`): `ResultPromise`\<[`TableData`](TableData.md)\<`Name`, `Type`\>, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:147](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L147)
+Defined in: [src/lib/services/db/table.ts:147](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L147)
 
 Creates a new record in the table with auto-generated metadata
 
@@ -20716,7 +20716,7 @@ Promise resolving to the created table data
 
 # Class: TableData\<Name, Type\>
 
-Defined in: [src/lib/services/db/table.ts:424](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L424)
+Defined in: [src/lib/services/db/table.ts:424](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L424)
 
 Reactive wrapper for individual table records that implements Svelte's Writable store interface.
 Provides automatic persistence and event emission when data changes.
@@ -20751,7 +20751,7 @@ The schema definition
 
 > **new TableData**\<`Name`, `Type`\>(`table`, `data`): `TableData`\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L434)
+Defined in: [src/lib/services/db/table.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L434)
 
 Creates an instance of TableData.
 
@@ -20783,7 +20783,7 @@ The actual data object
 
 > **subscribers**: `Set`\<`Subscriber`\<[`TableStructable`](../../type-aliases/TableStructable.md)\<`Type`\>\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -20797,7 +20797,7 @@ Set of active subscribers to this writable store
 
 > **table**: [`Table`](Table.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:435](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L435)
+Defined in: [src/lib/services/db/table.ts:435](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L435)
 
 Reference to the parent table
 
@@ -20809,7 +20809,7 @@ Reference to the parent table
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -20819,7 +20819,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -20841,7 +20841,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -20867,7 +20867,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`TableStructable`](../../type-aliases/TableStructable.md)\<`Type`\>\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -20895,7 +20895,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **delete**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:508](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L508)
+Defined in: [src/lib/services/db/table.ts:508](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L508)
 
 Deletes this record from the database and emits delete event
 
@@ -20918,7 +20918,7 @@ console.log('User deleted');
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -20944,7 +20944,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -20974,7 +20974,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -21008,7 +21008,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -21036,7 +21036,7 @@ The writable store to pipe from
 
 > **set**(`value`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:455](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L455)
+Defined in: [src/lib/services/db/table.ts:455](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L455)
 
 Sets the entire record data and persists to database (Svelte store interface)
 
@@ -21074,7 +21074,7 @@ await user.set({
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -21109,7 +21109,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/db/table.ts:476](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L476)
+Defined in: [src/lib/services/db/table.ts:476](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L476)
 
 Updates the record using an updater function and persists to database (Svelte store interface)
 
@@ -21150,7 +21150,7 @@ await user.update(data => ({
 
 # Class: TableDataArr\<Name, Type\>
 
-Defined in: [src/lib/services/db/table.ts:528](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L528)
+Defined in: [src/lib/services/db/table.ts:528](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L528)
 
 Reactive array of table records that implements Svelte's Writable store interface.
 Provides automatic synchronization with database changes and event-driven updates.
@@ -21189,7 +21189,7 @@ The schema definition
 
 > **new TableDataArr**\<`Name`, `Type`\>(`table`, `data`): `TableDataArr`\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:559](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L559)
+Defined in: [src/lib/services/db/table.ts:559](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L559)
 
 Creates an instance of TableDataArr.
 
@@ -21221,7 +21221,7 @@ Initial array of table data
 
 > **emit**: `any`
 
-Defined in: [src/lib/services/db/table.ts:550](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L550)
+Defined in: [src/lib/services/db/table.ts:550](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L550)
 
 Emit array events
 
@@ -21231,7 +21231,7 @@ Emit array events
 
 > **off**: `any`
 
-Defined in: [src/lib/services/db/table.ts:546](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L546)
+Defined in: [src/lib/services/db/table.ts:546](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L546)
 
 Remove event listener
 
@@ -21241,7 +21241,7 @@ Remove event listener
 
 > **on**: `any`
 
-Defined in: [src/lib/services/db/table.ts:544](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L544)
+Defined in: [src/lib/services/db/table.ts:544](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L544)
 
 Event listener for 'add' and 'remove' events
 
@@ -21251,7 +21251,7 @@ Event listener for 'add' and 'remove' events
 
 > **once**: `any`
 
-Defined in: [src/lib/services/db/table.ts:548](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L548)
+Defined in: [src/lib/services/db/table.ts:548](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L548)
 
 Listen once for event
 
@@ -21261,7 +21261,7 @@ Listen once for event
 
 > **subscribers**: `Set`\<`Subscriber`\<[`TableData`](TableData.md)\<`Name`, `Type`\>[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -21275,7 +21275,7 @@ Set of active subscribers to this writable store
 
 > **table**: [`Table`](Table.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/db/table.ts:560](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L560)
+Defined in: [src/lib/services/db/table.ts:560](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L560)
 
 Reference to the parent table
 
@@ -21287,7 +21287,7 @@ Reference to the parent table
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -21297,7 +21297,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -21321,7 +21321,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -21341,7 +21341,7 @@ Number of elements in the array
 
 > **add**(`item`): `void`
 
-Defined in: [src/lib/services/db/table.ts:610](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L610)
+Defined in: [src/lib/services/db/table.ts:610](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L610)
 
 Adds an item to the array, ensuring uniqueness by ID
 
@@ -21363,7 +21363,7 @@ Item to add to the array
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -21389,7 +21389,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`TableData`](TableData.md)\<`Name`, `Type`\>[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -21417,7 +21417,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -21435,7 +21435,7 @@ Removes all elements from the array
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -21461,7 +21461,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -21494,7 +21494,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/db/table.ts:596](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L596)
+Defined in: [src/lib/services/db/table.ts:596](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L596)
 
 Public inform method that uses debounced updates by default
 
@@ -21520,7 +21520,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -21550,7 +21550,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -21592,7 +21592,7 @@ const strings = numbers.map(n => n.toString());
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -21626,7 +21626,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -21654,7 +21654,7 @@ The writable store to pipe from
 
 > **pop**(): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -21674,7 +21674,7 @@ The removed item, or undefined if array is empty
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -21708,7 +21708,7 @@ Predicate function or specific items to remove
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/db/table.ts:624](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L624)
+Defined in: [src/lib/services/db/table.ts:624](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L624)
 
 Removes items from the array based on a predicate function
 
@@ -21732,7 +21732,7 @@ Predicate function to determine which items to remove
 
 > **remove**(...`items`): `void`
 
-Defined in: [src/lib/services/db/table.ts:629](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L629)
+Defined in: [src/lib/services/db/table.ts:629](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L629)
 
 Removes specific items from the array by ID
 
@@ -21758,7 +21758,7 @@ Items to remove from the array
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -21776,7 +21776,7 @@ Toggles the reverse order of the array display
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -21808,7 +21808,7 @@ store.set('new value');
 
 > **shift**(): [`TableData`](TableData.md)\<`Name`, `Type`\>
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -21828,7 +21828,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -21861,7 +21861,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -21899,7 +21899,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -21934,7 +21934,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -21960,7 +21960,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -21992,7 +21992,7 @@ store.update(current => current + 1);
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -22060,7 +22060,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 > **ReadConfig**\<`Paginated`\> = `object`
 
-Defined in: [src/lib/services/db/table.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L30)
+Defined in: [src/lib/services/db/table.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L30)
 
 Configuration object for read operations that determines pagination behavior
 
@@ -22080,7 +22080,7 @@ Whether pagination is enabled
 
 > **pagination**: `Paginated` *extends* `true` ? `object` : `false`
 
-Defined in: [src/lib/services/db/table.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/table.ts#L34)
+Defined in: [src/lib/services/db/table.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/table.ts#L34)
 
 Pagination configuration - required when Paginated is true, must be false otherwise
 
@@ -22095,7 +22095,7 @@ Pagination configuration - required when Paginated is true, must be false otherw
 
 > **SchemaDefinition** = `object`
 
-Defined in: [src/lib/services/db/index.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L55)
+Defined in: [src/lib/services/db/index.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L55)
 
 Schema definition mapping field names to types.
 
@@ -22114,7 +22114,7 @@ Schema definition mapping field names to types.
 
 > **SchemaFieldReturnType**\<`T`\> = `T` *extends* `"string"` ? `string` : `T` *extends* `"number"` ? `number` : `T` *extends* `"boolean"` ? `boolean` : `T` *extends* `"date"` ? `Date` : `T` *extends* `"array"` ? `unknown`[] : `T` *extends* `"object"` ? `Record`\<`string`, `unknown`\> : `T` *extends* `"unknown"` ? `unknown` : `never`
 
-Defined in: [src/lib/services/db/index.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L36)
+Defined in: [src/lib/services/db/index.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L36)
 
 Maps schema field types to their runtime value types.
 
@@ -22135,7 +22135,7 @@ Maps schema field types to their runtime value types.
 
 > **SchemaFieldType** = `"string"` \| `"number"` \| `"boolean"` \| `"date"` \| `"array"` \| `"object"` \| `"unknown"`
 
-Defined in: [src/lib/services/db/index.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L24)
+Defined in: [src/lib/services/db/index.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L24)
 
 Supported schema field types.
 
@@ -22150,7 +22150,7 @@ Supported schema field types.
 
 > **TableStructable**\<`T`\> = `{ [K in keyof T]: SchemaFieldReturnType<T[K]> }` & `object`
 
-Defined in: [src/lib/services/db/index.ts:72](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L72)
+Defined in: [src/lib/services/db/index.ts:72](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L72)
 
 Typed table record for a schema definition.
 
@@ -22185,7 +22185,7 @@ Typed table record for a schema definition.
 
 > `const` **DB**: `Dexie`
 
-Defined in: [src/lib/services/db/index.ts:19](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L19)
+Defined in: [src/lib/services/db/index.ts:19](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L19)
 
 Dexie database instance.
 
@@ -22200,7 +22200,7 @@ Dexie database instance.
 
 > `const` **em**: `ComplexEventEmitter`\<\{ `init`: `void`; \}\>
 
-Defined in: [src/lib/services/db/index.ts:129](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/db/index.ts#L129)
+Defined in: [src/lib/services/db/index.ts:129](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/db/index.ts#L129)
 
 Emits lifecycle events for IndexedDB.
 
@@ -22240,7 +22240,7 @@ Command stack with undo/redo and keyboard shortcuts. Uses a `StateStack` to mana
 
 # Class: EventStack
 
-Defined in: [src/lib/services/event-stack.ts:33](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L33)
+Defined in: [src/lib/services/event-stack.ts:33](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L33)
 
 Undo/redo stack with keyboard bindings.
 
@@ -22250,7 +22250,7 @@ Undo/redo stack with keyboard bindings.
 
 > **new EventStack**(`max`, `keyboard?`): `EventStack`
 
-Defined in: [src/lib/services/event-stack.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L45)
+Defined in: [src/lib/services/event-stack.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L45)
 
 #### Parameters
 
@@ -22276,7 +22276,7 @@ Keyboard instance or DOM selector.
 
 > `static` `optional` **current**: `EventStack`
 
-Defined in: [src/lib/services/event-stack.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L34)
+Defined in: [src/lib/services/event-stack.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L34)
 
 Active stack instance.
 
@@ -22288,7 +22288,7 @@ Active stack instance.
 
 > **get** **canRedo**(): `boolean`
 
-Defined in: [src/lib/services/event-stack.ts:155](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L155)
+Defined in: [src/lib/services/event-stack.ts:155](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L155)
 
 Whether this stack can redo.
 
@@ -22304,7 +22304,7 @@ Whether this stack can redo.
 
 > **get** **canUndo**(): `boolean`
 
-Defined in: [src/lib/services/event-stack.ts:148](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L148)
+Defined in: [src/lib/services/event-stack.ts:148](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L148)
 
 Whether this stack can undo.
 
@@ -22320,7 +22320,7 @@ Whether this stack can undo.
 
 > **get** **off**(): `any`
 
-Defined in: [src/lib/services/event-stack.ts:169](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L169)
+Defined in: [src/lib/services/event-stack.ts:169](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L169)
 
 Event listener removal.
 
@@ -22336,7 +22336,7 @@ Event listener removal.
 
 > **get** **on**(): `any`
 
-Defined in: [src/lib/services/event-stack.ts:162](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L162)
+Defined in: [src/lib/services/event-stack.ts:162](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L162)
 
 Event listener registration.
 
@@ -22352,7 +22352,7 @@ Event listener registration.
 
 > **get** **once**(): `any`
 
-Defined in: [src/lib/services/event-stack.ts:176](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L176)
+Defined in: [src/lib/services/event-stack.ts:176](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L176)
 
 One-time event listener registration.
 
@@ -22366,7 +22366,7 @@ One-time event listener registration.
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/event-stack.ts:131](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L131)
+Defined in: [src/lib/services/event-stack.ts:131](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L131)
 
 Clears all stack states.
 
@@ -22380,7 +22380,7 @@ Clears all stack states.
 
 > **dispose**(): `void`
 
-Defined in: [src/lib/services/event-stack.ts:78](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L78)
+Defined in: [src/lib/services/event-stack.ts:78](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L78)
 
 Removes bindings and deactivates the stack.
 
@@ -22394,7 +22394,7 @@ Removes bindings and deactivates the stack.
 
 > **execute**(`command`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/event-stack.ts:95](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L95)
+Defined in: [src/lib/services/event-stack.ts:95](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L95)
 
 Executes a command and pushes it to the stack.
 
@@ -22416,7 +22416,7 @@ Command to execute.
 
 > **init**(): `void`
 
-Defined in: [src/lib/services/event-stack.ts:57](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L57)
+Defined in: [src/lib/services/event-stack.ts:57](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L57)
 
 Initializes bindings and marks this stack as current.
 
@@ -22430,7 +22430,7 @@ Initializes bindings and marks this stack as current.
 
 > **redo**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/event-stack.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L119)
+Defined in: [src/lib/services/event-stack.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L119)
 
 Redoes the next command.
 
@@ -22444,7 +22444,7 @@ Redoes the next command.
 
 > **undo**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/event-stack.ts:106](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L106)
+Defined in: [src/lib/services/event-stack.ts:106](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L106)
 
 Undoes the current command.
 
@@ -22463,7 +22463,7 @@ Undoes the current command.
 
 > **createOverrideStack**(): `object`
 
-Defined in: [src/lib/services/event-stack.ts:184](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L184)
+Defined in: [src/lib/services/event-stack.ts:184](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L184)
 
 Creates a temporary override stack that can be activated/deactivated.
 
@@ -22502,7 +22502,7 @@ Creates a temporary override stack that can be activated/deactivated.
 
 > **useCommandStack**(`name`, `onMount`, `onDestroy`): [`EventStack`](../classes/EventStack.md)
 
-Defined in: [src/lib/services/event-stack.ts:209](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L209)
+Defined in: [src/lib/services/event-stack.ts:209](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L209)
 
 Creates and binds a command stack to a component lifecycle.
 
@@ -22563,7 +22563,7 @@ Destroy hook.
 
 > **Command** = `object`
 
-Defined in: [src/lib/services/event-stack.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L22)
+Defined in: [src/lib/services/event-stack.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L22)
 
 Command that can be executed and undone.
 
@@ -22573,7 +22573,7 @@ Command that can be executed and undone.
 
 > **do**: () => `Promise`\<`void`\> \| `void`
 
-Defined in: [src/lib/services/event-stack.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L24)
+Defined in: [src/lib/services/event-stack.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L24)
 
 Execute the command.
 
@@ -22587,7 +22587,7 @@ Execute the command.
 
 > `optional` **label**: `string`
 
-Defined in: [src/lib/services/event-stack.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L23)
+Defined in: [src/lib/services/event-stack.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L23)
 
 Optional label for UI usage.
 
@@ -22597,7 +22597,7 @@ Optional label for UI usage.
 
 > **undo**: () => `Promise`\<`void`\> \| `void`
 
-Defined in: [src/lib/services/event-stack.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/event-stack.ts#L25)
+Defined in: [src/lib/services/event-stack.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/event-stack.ts#L25)
 
 Undo the command.
 
@@ -22638,7 +22638,7 @@ Keyboard shortcut management system. Provides a flexible system for managing key
 
 # Class: Keyboard
 
-Defined in: [src/lib/services/keybinds.ts:99](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L99)
+Defined in: [src/lib/services/keybinds.ts:99](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L99)
 
 Keyboard shortcut management system supporting multiple contexts and global shortcuts.
 
@@ -22654,7 +22654,7 @@ Features:
 
 > **new Keyboard**(`name`): `Keyboard`
 
-Defined in: [src/lib/services/keybinds.ts:173](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L173)
+Defined in: [src/lib/services/keybinds.ts:173](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L173)
 
 Creates a new keyboard context
 
@@ -22676,7 +22676,7 @@ Unique name for this keyboard context
 
 > `readonly` **name**: `string`
 
-Defined in: [src/lib/services/keybinds.ts:173](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L173)
+Defined in: [src/lib/services/keybinds.ts:173](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L173)
 
 Unique name for this keyboard context
 
@@ -22688,7 +22688,7 @@ Unique name for this keyboard context
 
 > **get** `static` **all**(): `Keyboard`[]
 
-Defined in: [src/lib/services/keybinds.ts:112](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L112)
+Defined in: [src/lib/services/keybinds.ts:112](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L112)
 
 Gets all registered keyboard instances
 
@@ -22704,7 +22704,7 @@ Gets all registered keyboard instances
 
 > **get** `static` **current**(): `Keyboard`
 
-Defined in: [src/lib/services/keybinds.ts:126](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L126)
+Defined in: [src/lib/services/keybinds.ts:126](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L126)
 
 Gets the currently active keyboard instance
 
@@ -22720,7 +22720,7 @@ Gets the currently active keyboard instance
 
 > **get** `static` **default**(): `Keyboard`
 
-Defined in: [src/lib/services/keybinds.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L119)
+Defined in: [src/lib/services/keybinds.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L119)
 
 Gets the default keyboard instance
 
@@ -22734,7 +22734,7 @@ Gets the default keyboard instance
 
 > **combine**(...`keyboard`): `void`
 
-Defined in: [src/lib/services/keybinds.ts:209](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L209)
+Defined in: [src/lib/services/keybinds.ts:209](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L209)
 
 Merges shortcuts from other keyboard contexts into this one
 
@@ -22756,7 +22756,7 @@ One or more keyboard contexts to merge
 
 > **init**(): `void`
 
-Defined in: [src/lib/services/keybinds.ts:221](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L221)
+Defined in: [src/lib/services/keybinds.ts:221](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L221)
 
 Makes this keyboard context the active one
 
@@ -22770,7 +22770,7 @@ Makes this keyboard context the active one
 
 > **off**(`key`, `fn`): `void`
 
-Defined in: [src/lib/services/keybinds.ts:199](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L199)
+Defined in: [src/lib/services/keybinds.ts:199](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L199)
 
 Removes a keyboard shortcut from this context
 
@@ -22798,7 +22798,7 @@ The specific function to remove
 
 > **on**(`key`, `fn`): () => `void`
 
-Defined in: [src/lib/services/keybinds.ts:186](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L186)
+Defined in: [src/lib/services/keybinds.ts:186](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L186)
 
 Registers a keyboard shortcut for this specific context
 
@@ -22832,7 +22832,7 @@ Cleanup function to remove this shortcut
 
 > `static` **get**(`key`): `KeyFn`[]
 
-Defined in: [src/lib/services/keybinds.ts:165](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L165)
+Defined in: [src/lib/services/keybinds.ts:165](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L165)
 
 Gets all handlers for a key combination from current context or global
 
@@ -22856,7 +22856,7 @@ Array of handler functions, or undefined if none found
 
 > `static` **off**(`key`, `fn`): `void`
 
-Defined in: [src/lib/services/keybinds.ts:154](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L154)
+Defined in: [src/lib/services/keybinds.ts:154](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L154)
 
 Removes a global keyboard shortcut
 
@@ -22884,7 +22884,7 @@ The specific function to remove
 
 > `static` **on**(`key`, `fn`): `void`
 
-Defined in: [src/lib/services/keybinds.ts:143](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L143)
+Defined in: [src/lib/services/keybinds.ts:143](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L143)
 
 Registers a global keyboard shortcut that works in any context
 
@@ -22912,7 +22912,7 @@ The function to call when the shortcut is triggered
 
 > `static` **use**(`keyboard`): `void`
 
-Defined in: [src/lib/services/keybinds.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L134)
+Defined in: [src/lib/services/keybinds.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L134)
 
 Sets the active keyboard context
 
@@ -22958,7 +22958,7 @@ The keyboard instance to make active
 
 > **KeyCombo** = `` `${ComboPrefix}${KeyName}` ``
 
-Defined in: [src/lib/services/keybinds.ts:85](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L85)
+Defined in: [src/lib/services/keybinds.ts:85](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L85)
 
 A keyboard combination string (e.g., 'ctrl+z', 'ctrl+shift+s', 'Enter')
 Modifiers are separated by '+' and must come before the key name
@@ -22974,7 +22974,7 @@ Modifiers are separated by '+' and must come before the key name
 
 > **KeyName** = `"a"` \| `"b"` \| `"c"` \| `"d"` \| `"e"` \| `"f"` \| `"g"` \| `"h"` \| `"i"` \| `"j"` \| `"k"` \| `"l"` \| `"m"` \| `"n"` \| `"o"` \| `"p"` \| `"q"` \| `"r"` \| `"s"` \| `"t"` \| `"u"` \| `"v"` \| `"w"` \| `"x"` \| `"y"` \| `"z"` \| `"ArrowUp"` \| `"ArrowDown"` \| `"ArrowLeft"` \| `"ArrowRight"` \| `"Enter"` \| `"Escape"` \| `"Tab"` \| `"Backspace"` \| `"Delete"` \| `"Home"` \| `"End"` \| `"PageUp"` \| `"PageDown"` \| `"F1"` \| `"F2"` \| `"F3"` \| `"F4"` \| `"F5"` \| `"F6"` \| `"F7"` \| `"F8"` \| `"F9"` \| `"F10"` \| `"F11"` \| `"F12"` \| `" "`
 
-Defined in: [src/lib/services/keybinds.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L20)
+Defined in: [src/lib/services/keybinds.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L20)
 
 Supported key names for keyboard shortcuts
 
@@ -22989,7 +22989,7 @@ Supported key names for keyboard shortcuts
 
 > **Modifier** = `"ctrl"` \| `"shift"` \| `"alt"` \| `"meta"`
 
-Defined in: [src/lib/services/keybinds.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/keybinds.ts#L17)
+Defined in: [src/lib/services/keybinds.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/keybinds.ts#L17)
 
 Supported modifier keys for keyboard combinations
 
@@ -23059,7 +23059,7 @@ Time synchronization utilities.
 
 > **forceSync**(): `Promise`\<`Result`\<`number`, `Error`\>\>
 
-Defined in: [src/lib/services/ntp.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L79)
+Defined in: [src/lib/services/ntp.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L79)
 
 Forces a sync by calling the NTP API.
 
@@ -23078,7 +23078,7 @@ Forces a sync by calling the NTP API.
 
 > **getLastSynced**(): `number`
 
-Defined in: [src/lib/services/ntp.ts:74](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L74)
+Defined in: [src/lib/services/ntp.ts:74](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L74)
 
 Returns the last sync performance timestamp.
 
@@ -23097,7 +23097,7 @@ Returns the last sync performance timestamp.
 
 > **getTime**(): `number`
 
-Defined in: [src/lib/services/ntp.ts:70](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L70)
+Defined in: [src/lib/services/ntp.ts:70](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L70)
 
 Returns the current estimated time in milliseconds.
 
@@ -23116,7 +23116,7 @@ Returns the current estimated time in milliseconds.
 
 > **init**(): `Promise`\<`Result`\<`void`, `Error`\>\>
 
-Defined in: [src/lib/services/ntp.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L39)
+Defined in: [src/lib/services/ntp.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L39)
 
 Initializes SSE listeners for time updates.
 
@@ -23159,7 +23159,7 @@ Time synchronization utilities.
 
 > `const` **off**: `any`
 
-Defined in: [src/lib/services/ntp.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L32)
+Defined in: [src/lib/services/ntp.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L32)
 
 Unsubscribe from time updates.
 
@@ -23174,7 +23174,7 @@ Unsubscribe from time updates.
 
 > `const` **on**: `any`
 
-Defined in: [src/lib/services/ntp.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L30)
+Defined in: [src/lib/services/ntp.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L30)
 
 Subscribe to time updates.
 
@@ -23189,7 +23189,7 @@ Subscribe to time updates.
 
 > `const` **once**: `any`
 
-Defined in: [src/lib/services/ntp.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/ntp.ts#L34)
+Defined in: [src/lib/services/ntp.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/ntp.ts#L34)
 
 Subscribe once to time updates.
 
@@ -23221,7 +23221,7 @@ Client-side session manager for SSE connections. Wraps remote session manager AP
 
 # Class: Connection
 
-Defined in: [src/lib/services/session-manager.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L54)
+Defined in: [src/lib/services/session-manager.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L54)
 
 Writable connection wrapper with remote actions.
 
@@ -23235,7 +23235,7 @@ Writable connection wrapper with remote actions.
 
 > **new Connection**(`data`): `Connection`
 
-Defined in: [src/lib/services/session-manager.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L55)
+Defined in: [src/lib/services/session-manager.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L55)
 
 #### Parameters
 
@@ -23257,7 +23257,7 @@ Defined in: [src/lib/services/session-manager.ts:55](https://github.com/tsaxking
 
 > **subscribers**: `Set`\<`Subscriber`\<`ConnectionData`\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -23273,7 +23273,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -23283,7 +23283,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -23307,7 +23307,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **generalizedUrl**(): `string`
 
-Defined in: [src/lib/services/session-manager.ts:83](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L83)
+Defined in: [src/lib/services/session-manager.ts:83](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L83)
 
 Generalized URL pattern, if available.
 
@@ -23325,7 +23325,7 @@ Generalized URL.
 
 > **get** **id**(): `string`
 
-Defined in: [src/lib/services/session-manager.ts:62](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L62)
+Defined in: [src/lib/services/session-manager.ts:62](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L62)
 
 Connection UUID.
 
@@ -23343,7 +23343,7 @@ Connection UUID.
 
 > **get** **self**(): `boolean`
 
-Defined in: [src/lib/services/session-manager.ts:90](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L90)
+Defined in: [src/lib/services/session-manager.ts:90](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L90)
 
 Whether this connection represents the current client.
 
@@ -23361,7 +23361,7 @@ Whether the connection is the current client.
 
 > **get** **sessionId**(): `string`
 
-Defined in: [src/lib/services/session-manager.ts:69](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L69)
+Defined in: [src/lib/services/session-manager.ts:69](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L69)
 
 Owning session ID.
 
@@ -23379,7 +23379,7 @@ Session ID.
 
 > **get** **url**(): `string`
 
-Defined in: [src/lib/services/session-manager.ts:76](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L76)
+Defined in: [src/lib/services/session-manager.ts:76](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L76)
 
 Full URL for the connection.
 
@@ -23395,7 +23395,7 @@ Current URL.
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -23421,7 +23421,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<`ConnectionData`\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -23449,7 +23449,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -23475,7 +23475,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -23505,7 +23505,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -23539,7 +23539,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -23567,7 +23567,7 @@ The writable store to pipe from
 
 > **redirect**(`url`, `reason?`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:100](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L100)
+Defined in: [src/lib/services/session-manager.ts:100](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L100)
 
 Redirects the connection to a new URL.
 
@@ -23595,7 +23595,7 @@ Optional reason message.
 
 > **reload**(`reason?`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:115](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L115)
+Defined in: [src/lib/services/session-manager.ts:115](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L115)
 
 Reloads the connection.
 
@@ -23617,7 +23617,7 @@ Optional reason message.
 
 > **send**(`event`, `data`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:130](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L130)
+Defined in: [src/lib/services/session-manager.ts:130](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L130)
 
 Sends a custom event to the connection.
 
@@ -23645,7 +23645,7 @@ Payload.
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -23677,7 +23677,7 @@ store.set('new value');
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -23712,7 +23712,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -23747,7 +23747,7 @@ store.update(current => current + 1);
 
 # Class: SessionManager
 
-Defined in: [src/lib/services/session-manager.ts:147](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L147)
+Defined in: [src/lib/services/session-manager.ts:147](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L147)
 
 Client-side session manager wrapper.
 
@@ -23761,7 +23761,7 @@ Client-side session manager wrapper.
 
 > **new SessionManager**(): `SessionManager`
 
-Defined in: [src/lib/services/session-manager.ts:173](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L173)
+Defined in: [src/lib/services/session-manager.ts:173](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L173)
 
 #### Returns
 
@@ -23777,7 +23777,7 @@ Defined in: [src/lib/services/session-manager.ts:173](https://github.com/tsaxkin
 
 > **id**: `string` = `null`
 
-Defined in: [src/lib/services/session-manager.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L171)
+Defined in: [src/lib/services/session-manager.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L171)
 
 Current manager ID.
 
@@ -23787,7 +23787,7 @@ Current manager ID.
 
 > `readonly` **state**: [`WritableBase`](../../writables/classes/WritableBase.md)\<`"Connecting..."` \| `"Connected"` \| `"Disconnected"`\>
 
-Defined in: [src/lib/services/session-manager.ts:164](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L164)
+Defined in: [src/lib/services/session-manager.ts:164](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L164)
 
 ***
 
@@ -23795,7 +23795,7 @@ Defined in: [src/lib/services/session-manager.ts:164](https://github.com/tsaxkin
 
 > **subscribers**: `Set`\<`Subscriber`\<[`Connection`](Connection.md)[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -23809,7 +23809,7 @@ Set of active subscribers to this writable store
 
 > `readonly` `static` **connections**: [`WritableArray`](../../writables/classes/WritableArray.md)\<[`Connection`](Connection.md)\>
 
-Defined in: [src/lib/services/session-manager.ts:149](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L149)
+Defined in: [src/lib/services/session-manager.ts:149](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L149)
 
 Global connections list.
 
@@ -23819,7 +23819,7 @@ Global connections list.
 
 > `readonly` `static` **managers**: `Map`\<`string`, `SessionManager`\>
 
-Defined in: [src/lib/services/session-manager.ts:148](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L148)
+Defined in: [src/lib/services/session-manager.ts:148](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L148)
 
 Active managers by ID.
 
@@ -23831,7 +23831,7 @@ Active managers by ID.
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -23841,7 +23841,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -23865,7 +23865,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -23885,7 +23885,7 @@ Number of elements in the array
 
 > **addConnection**(`data`): `void`
 
-Defined in: [src/lib/services/session-manager.ts:259](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L259)
+Defined in: [src/lib/services/session-manager.ts:259](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L259)
 
 Adds a connection to the manager's list.
 
@@ -23907,7 +23907,7 @@ Connection to add.
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -23933,7 +23933,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`Connection`](Connection.md)[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -23961,7 +23961,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -23979,7 +23979,7 @@ Removes all elements from the array
 
 > **close**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:217](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L217)
+Defined in: [src/lib/services/session-manager.ts:217](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L217)
 
 Closes the remote session manager.
 
@@ -23993,7 +23993,7 @@ Closes the remote session manager.
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -24019,7 +24019,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -24052,7 +24052,7 @@ store.filter(n => n % 2 === 0);
 
 > **getConnections**(): `ResultPromise`\<[`Connection`](Connection.md)[], `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:245](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L245)
+Defined in: [src/lib/services/session-manager.ts:245](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L245)
 
 Fetches all connections associated with this manager.
 
@@ -24066,7 +24066,7 @@ Fetches all connections associated with this manager.
 
 > **hasSession**(`sessionId`): `boolean`
 
-Defined in: [src/lib/services/session-manager.ts:283](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L283)
+Defined in: [src/lib/services/session-manager.ts:283](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L283)
 
 Checks whether a session ID is managed.
 
@@ -24088,7 +24088,7 @@ Session ID to check.
 
 > **inform**(): `void`
 
-Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L444)
+Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L444)
 
 Notifies subscribers with filtered, sorted, and optionally reversed data
 
@@ -24106,7 +24106,7 @@ Notifies subscribers with filtered, sorted, and optionally reversed data
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -24136,7 +24136,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -24178,7 +24178,7 @@ const strings = numbers.map(n => n.toString());
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -24212,7 +24212,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -24240,7 +24240,7 @@ The writable store to pipe from
 
 > **pop**(): [`Connection`](Connection.md)
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -24260,7 +24260,7 @@ The removed item, or undefined if array is empty
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -24305,7 +24305,7 @@ store.remove(item1, item2, item3);
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L500)
+Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L500)
 
 Removes items from the array based on a predicate function
 
@@ -24336,7 +24336,7 @@ store.remove(item => item.id === targetId);
 
 > **remove**(...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L513)
+Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L513)
 
 Removes specific items from the array
 
@@ -24371,7 +24371,7 @@ store.remove(item1, item2, item3);
 
 > **removeConnection**(`connectionId`): `void`
 
-Defined in: [src/lib/services/session-manager.ts:270](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L270)
+Defined in: [src/lib/services/session-manager.ts:270](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L270)
 
 Removes a connection from the manager's list.
 
@@ -24393,7 +24393,7 @@ Connection ID to remove.
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -24411,7 +24411,7 @@ Toggles the reverse order of the array display
 
 > **send**(`event`, `data`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:231](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L231)
+Defined in: [src/lib/services/session-manager.ts:231](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L231)
 
 Sends a message to all connections managed by this manager.
 
@@ -24439,7 +24439,7 @@ Payload.
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -24471,7 +24471,7 @@ store.set('new value');
 
 > **shift**(): [`Connection`](Connection.md)
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -24491,7 +24491,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -24524,7 +24524,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -24562,7 +24562,7 @@ Elements to add to the array
 
 > **start**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:180](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L180)
+Defined in: [src/lib/services/session-manager.ts:180](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L180)
 
 Starts the remote session manager with retry/backoff.
 
@@ -24576,7 +24576,7 @@ Starts the remote session manager with retry/backoff.
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -24611,7 +24611,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -24637,7 +24637,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -24669,7 +24669,7 @@ store.update(current => current + 1);
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -24712,7 +24712,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 > `static` **init**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/session-manager.ts:154](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/session-manager.ts#L154)
+Defined in: [src/lib/services/session-manager.ts:154](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/session-manager.ts#L154)
 
 Loads existing active connections into the global list.
 
@@ -24776,7 +24776,7 @@ Client-side SSE manager for realtime updates.
 
 > `const` **sse**: `SSE`
 
-Defined in: [src/lib/services/sse.ts:359](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/sse.ts#L359)
+Defined in: [src/lib/services/sse.ts:359](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/sse.ts#L359)
 
 Global SSE client instance - automatically initializes in browser environment
 
@@ -25013,7 +25013,7 @@ Batching utilities for struct updates.
 
 > **add**(...`structBatch`): `ResultPromise`\<`object`[], `Error`\>
 
-Defined in: [src/lib/services/struct/batching.ts:112](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L112)
+Defined in: [src/lib/services/struct/batching.ts:112](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L112)
 
 Persists and enqueues struct updates to be batched.
 
@@ -25060,7 +25060,7 @@ Batching utilities for struct updates.
 
 > **Batch** = *typeof* `table.sample`
 
-Defined in: [src/lib/services/struct/batching.ts:33](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L33)
+Defined in: [src/lib/services/struct/batching.ts:33](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L33)
 
 Stored batch record type.
 
@@ -25075,7 +25075,7 @@ Stored batch record type.
 
 > **StructBatch** = `object`
 
-Defined in: [src/lib/services/struct/batching.ts:43](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L43)
+Defined in: [src/lib/services/struct/batching.ts:43](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L43)
 
 Struct update payload.
 
@@ -25085,7 +25085,7 @@ Struct update payload.
 
 > **data**: `unknown`
 
-Defined in: [src/lib/services/struct/batching.ts:46](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L46)
+Defined in: [src/lib/services/struct/batching.ts:46](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L46)
 
 Payload data.
 
@@ -25095,7 +25095,7 @@ Payload data.
 
 > `optional` **date**: `Date`
 
-Defined in: [src/lib/services/struct/batching.ts:47](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L47)
+Defined in: [src/lib/services/struct/batching.ts:47](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L47)
 
 Optional timestamp.
 
@@ -25105,7 +25105,7 @@ Optional timestamp.
 
 > **struct**: [`Struct`](../../../../struct/classes/Struct.md)\<[`Blank`](../../../../struct/type-aliases/Blank.md)\>
 
-Defined in: [src/lib/services/struct/batching.ts:44](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L44)
+Defined in: [src/lib/services/struct/batching.ts:44](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L44)
 
 Target struct.
 
@@ -25115,7 +25115,7 @@ Target struct.
 
 > **type**: [`DataAction`](../../../../../../types/struct/enumerations/DataAction.md) \| [`PropertyAction`](../../../../../../types/struct/enumerations/PropertyAction.md) \| `string`
 
-Defined in: [src/lib/services/struct/batching.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/batching.ts#L45)
+Defined in: [src/lib/services/struct/batching.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/batching.ts#L45)
 
 Action type.
 
@@ -25178,7 +25178,7 @@ Cache helpers for struct data.
 
 > **clear**(`key`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/cache.ts:101](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/cache.ts#L101)
+Defined in: [src/lib/services/struct/cache.ts:101](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/cache.ts#L101)
 
 Clears a cached value by key.
 
@@ -25205,7 +25205,7 @@ Cache key.
 
 > **get**(`key`): `ResultPromise`\<`unknown`, `Error`\>
 
-Defined in: [src/lib/services/struct/cache.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/cache.ts#L34)
+Defined in: [src/lib/services/struct/cache.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/cache.ts#L34)
 
 Retrieves a cached value by key.
 
@@ -25232,7 +25232,7 @@ Cache key.
 
 > **set**(`key`, `value`, `config`): `ResultPromise`\<`unknown`, `Error`\>
 
-Defined in: [src/lib/services/struct/cache.ts:60](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/cache.ts#L60)
+Defined in: [src/lib/services/struct/cache.ts:60](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/cache.ts#L60)
 
 Stores a cached value.
 
@@ -25307,7 +25307,7 @@ Reactive struct data arrays and pagination helpers.
 
 # Class: DataArr\<T\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L23)
+Defined in: [src/lib/services/struct/data-arr.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L23)
 
 Svelte store data array, used to store multiple data points and automatically update the view
 
@@ -25337,7 +25337,7 @@ DataArr
 
 > **new DataArr**\<`T`\>(`struct`, `data`): `DataArr`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L50)
+Defined in: [src/lib/services/struct/data-arr.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L50)
 
 Creates an instance of DataArr.
 
@@ -25365,7 +25365,7 @@ Creates an instance of DataArr.
 
 > **off**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L39)
+Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L39)
 
 ***
 
@@ -25373,7 +25373,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking
 
 > **on**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L38)
+Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L38)
 
 ***
 
@@ -25381,7 +25381,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking
 
 > **once**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L41)
+Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L41)
 
 ***
 
@@ -25389,7 +25389,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking
 
 > `readonly` **struct**: [`Struct`](../../struct/classes/Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L51)
+Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L51)
 
 ***
 
@@ -25397,7 +25397,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking
 
 > **subscribers**: `Set`\<`Subscriber`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -25413,7 +25413,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -25423,7 +25423,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -25447,7 +25447,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -25467,7 +25467,7 @@ Number of elements in the array
 
 > **add**(...`values`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:80](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L80)
+Defined in: [src/lib/services/struct/data-arr.ts:80](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L80)
 
 Adds data to the array and updates the subscribers
 
@@ -25487,7 +25487,7 @@ Adds data to the array and updates the subscribers
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -25513,7 +25513,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -25541,7 +25541,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -25559,7 +25559,7 @@ Removes all elements from the array
 
 > **clone**(): `DataArr`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:172](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L172)
+Defined in: [src/lib/services/struct/data-arr.ts:172](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L172)
 
 Clones the current DataArr instance.
 
@@ -25575,7 +25575,7 @@ A new DataArr instance with the same struct and data.
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -25601,7 +25601,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -25634,7 +25634,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L139)
+Defined in: [src/lib/services/struct/data-arr.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L139)
 
 Informs the array to emit updates without any local changes
 
@@ -25658,7 +25658,7 @@ Informs the array to emit updates without any local changes
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -25688,7 +25688,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -25730,7 +25730,7 @@ const strings = numbers.map(n => n.toString());
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -25764,7 +25764,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -25792,7 +25792,7 @@ The writable store to pipe from
 
 > **pop**(): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -25812,7 +25812,7 @@ The removed item, or undefined if array is empty
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -25846,7 +25846,7 @@ Predicate function or specific items to remove
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L92)
+Defined in: [src/lib/services/struct/data-arr.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L92)
 
 Removes data from the array based on a predicate function
 
@@ -25870,7 +25870,7 @@ Predicate function to determine which items to remove
 
 > **remove**(...`values`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:97](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L97)
+Defined in: [src/lib/services/struct/data-arr.ts:97](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L97)
 
 Removes specific data items from the array
 
@@ -25896,7 +25896,7 @@ The items to remove
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -25914,7 +25914,7 @@ Toggles the reverse order of the array display
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:153](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L153)
+Defined in: [src/lib/services/struct/data-arr.ts:153](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L153)
 
 Sets the data array to a new value and updates the subscribers.
 
@@ -25938,7 +25938,7 @@ Sets the data array to a new value and updates the subscribers.
 
 > **shift**(): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -25958,7 +25958,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -25991,7 +25991,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -26029,7 +26029,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -26064,7 +26064,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -26090,7 +26090,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:164](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L164)
+Defined in: [src/lib/services/struct/data-arr.ts:164](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L164)
 
 Updates the data array using a function that receives the current data.
 
@@ -26114,7 +26114,7 @@ Updates the data array using a function that receives the current data.
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -26160,7 +26160,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 # Class: PaginationDataArr\<T\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:193](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L193)
+Defined in: [src/lib/services/struct/data-arr.ts:193](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L193)
 
 Paginated extension of DataArr that provides pagination functionality for struct data.
 Automatically handles data fetching, total count management, and page navigation.
@@ -26187,7 +26187,7 @@ The struct type definition
 
 > **new PaginationDataArr**\<`T`\>(`struct`, `page`, `pageSize`, `getter`, `getTotal`): `PaginationDataArr`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:226](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L226)
+Defined in: [src/lib/services/struct/data-arr.ts:226](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L226)
 
 Creates an instance of PaginationDataArr.
 Sets up automatic data fetching when pagination info changes and event handlers for data updates.
@@ -26238,7 +26238,7 @@ Function to get total record count
 
 > `readonly` **info**: [`WritableBase`](../../../writables/classes/WritableBase.md)\<\{ `page`: `number`; `pageSize`: `number`; \}\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:201](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L201)
+Defined in: [src/lib/services/struct/data-arr.ts:201](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L201)
 
 Reactive store containing pagination information (page and pageSize)
 
@@ -26248,7 +26248,7 @@ Reactive store containing pagination information (page and pageSize)
 
 > **off**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L39)
+Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L39)
 
 #### Inherited from
 
@@ -26260,7 +26260,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:39](https://github.com/tsaxking
 
 > **on**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L38)
+Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L38)
 
 #### Inherited from
 
@@ -26272,7 +26272,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:38](https://github.com/tsaxking
 
 > **once**: `any`
 
-Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L41)
+Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L41)
 
 #### Inherited from
 
@@ -26284,7 +26284,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:41](https://github.com/tsaxking
 
 > `readonly` **struct**: [`Struct`](../../struct/classes/Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L51)
+Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L51)
 
 #### Inherited from
 
@@ -26296,7 +26296,7 @@ Defined in: [src/lib/services/struct/data-arr.ts:51](https://github.com/tsaxking
 
 > **subscribers**: `Set`\<`Subscriber`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -26310,7 +26310,7 @@ Set of active subscribers to this writable store
 
 > `readonly` **total**: [`WritableBase`](../../../writables/classes/WritableBase.md)\<`number`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:213](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L213)
+Defined in: [src/lib/services/struct/data-arr.ts:213](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L213)
 
 Reactive store containing the total number of records across all pages
 
@@ -26322,7 +26322,7 @@ Reactive store containing the total number of records across all pages
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -26332,7 +26332,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -26356,7 +26356,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -26378,7 +26378,7 @@ Number of elements in the array
 
 > **get** **page**(): `number`
 
-Defined in: [src/lib/services/struct/data-arr.ts:320](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L320)
+Defined in: [src/lib/services/struct/data-arr.ts:320](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L320)
 
 Gets the current page number (0-based)
 
@@ -26392,7 +26392,7 @@ Current page number
 
 > **set** **page**(`page`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:329](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L329)
+Defined in: [src/lib/services/struct/data-arr.ts:329](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L329)
 
 Sets the page number and triggers data refresh
 
@@ -26416,7 +26416,7 @@ New page number (0-based)
 
 > **get** **pageSize**(): `number`
 
-Defined in: [src/lib/services/struct/data-arr.ts:299](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L299)
+Defined in: [src/lib/services/struct/data-arr.ts:299](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L299)
 
 Gets the current page size
 
@@ -26430,7 +26430,7 @@ Current page size
 
 > **set** **pageSize**(`size`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:308](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L308)
+Defined in: [src/lib/services/struct/data-arr.ts:308](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L308)
 
 Sets the page size and triggers data refresh
 
@@ -26452,7 +26452,7 @@ New page size
 
 > **add**(...`values`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:80](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L80)
+Defined in: [src/lib/services/struct/data-arr.ts:80](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L80)
 
 Adds data to the array and updates the subscribers
 
@@ -26476,7 +26476,7 @@ Adds data to the array and updates the subscribers
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -26502,7 +26502,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -26530,7 +26530,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -26548,7 +26548,7 @@ Removes all elements from the array
 
 > **clone**(): `PaginationDataArr`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-arr.ts:278](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L278)
+Defined in: [src/lib/services/struct/data-arr.ts:278](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L278)
 
 Creates a clone of the current PaginationDataArr instance.
 Note: Uses static data from current instance rather than preserving original getter functions.
@@ -26569,7 +26569,7 @@ A new PaginationDataArr instance with current data and settings
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -26595,7 +26595,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -26628,7 +26628,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L139)
+Defined in: [src/lib/services/struct/data-arr.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L139)
 
 Informs the array to emit updates without any local changes
 
@@ -26652,7 +26652,7 @@ Informs the array to emit updates without any local changes
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -26682,7 +26682,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -26724,7 +26724,7 @@ const strings = numbers.map(n => n.toString());
 
 > **next**(): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:349](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L349)
+Defined in: [src/lib/services/struct/data-arr.ts:349](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L349)
 
 Navigates to the next page if available
 
@@ -26748,7 +26748,7 @@ if (paginatedData.page < totalPages - 1) {
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -26782,7 +26782,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -26810,7 +26810,7 @@ The writable store to pipe from
 
 > **pop**(): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -26830,7 +26830,7 @@ The removed item, or undefined if array is empty
 
 > **prev**(): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:370](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L370)
+Defined in: [src/lib/services/struct/data-arr.ts:370](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L370)
 
 Navigates to the previous page if available
 
@@ -26853,7 +26853,7 @@ if (paginatedData.page > 0) {
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -26887,7 +26887,7 @@ Predicate function or specific items to remove
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L92)
+Defined in: [src/lib/services/struct/data-arr.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L92)
 
 Removes data from the array based on a predicate function
 
@@ -26911,7 +26911,7 @@ Predicate function to determine which items to remove
 
 > **remove**(...`values`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:97](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L97)
+Defined in: [src/lib/services/struct/data-arr.ts:97](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L97)
 
 Removes specific data items from the array
 
@@ -26937,7 +26937,7 @@ The items to remove
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -26955,7 +26955,7 @@ Toggles the reverse order of the array display
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:153](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L153)
+Defined in: [src/lib/services/struct/data-arr.ts:153](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L153)
 
 Sets the data array to a new value and updates the subscribers.
 
@@ -26979,7 +26979,7 @@ Sets the data array to a new value and updates the subscribers.
 
 > **shift**(): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -26999,7 +26999,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -27032,7 +27032,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -27070,7 +27070,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -27105,7 +27105,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -27131,7 +27131,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/struct/data-arr.ts:164](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-arr.ts#L164)
+Defined in: [src/lib/services/struct/data-arr.ts:164](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-arr.ts#L164)
 
 Updates the data array using a function that receives the current data.
 
@@ -27155,7 +27155,7 @@ Updates the data array using a function that receives the current data.
 
 > `static` **from**\<`T`\>(`arr`): [`WritableArray`](../../../writables/classes/WritableArray.md)\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -27233,7 +27233,7 @@ Struct data staging and conflict resolution. Provides local staging of struct da
 
 # Class: StructDataStage\<T\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L119)
+Defined in: [src/lib/services/struct/data-staging.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L119)
 
 A Staging wrapper for StructData that allows local changes to be staged
 before being saved to the backend. It tracks both local and remote changes.
@@ -27262,7 +27262,7 @@ The shape of the base struct (excluding global columns).
 
 > **new StructDataStage**\<`T`\>(`structData`, `config`): `StructDataStage`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:141](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L141)
+Defined in: [src/lib/services/struct/data-staging.ts:141](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L141)
 
 #### Parameters
 
@@ -27290,7 +27290,7 @@ The live backend-backed StructData instance to Staging.
 
 > **base**: [`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:128](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L128)
+Defined in: [src/lib/services/struct/data-staging.ts:128](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L128)
 
 The base data structure, which is a snapshot of the remote data
 
@@ -27300,7 +27300,7 @@ The base data structure, which is a snapshot of the remote data
 
 > `readonly` **config**: `StructDataStageConfig`\<`T`\> = `{}`
 
-Defined in: [src/lib/services/struct/data-staging.ts:143](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L143)
+Defined in: [src/lib/services/struct/data-staging.ts:143](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L143)
 
 ***
 
@@ -27308,7 +27308,7 @@ Defined in: [src/lib/services/struct/data-staging.ts:143](https://github.com/tsa
 
 > `readonly` **deleted**: `Writable`\<`boolean`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:136](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L136)
+Defined in: [src/lib/services/struct/data-staging.ts:136](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L136)
 
 ***
 
@@ -27316,7 +27316,7 @@ Defined in: [src/lib/services/struct/data-staging.ts:136](https://github.com/tsa
 
 > `readonly` **localUpdated**: `Writable`\<`boolean`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:134](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L134)
+Defined in: [src/lib/services/struct/data-staging.ts:134](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L134)
 
 Tracks whether the local data has been modified since the last save or pull.
 
@@ -27326,7 +27326,7 @@ Tracks whether the local data has been modified since the last save or pull.
 
 > `readonly` **remoteUpdated**: `Writable`\<`boolean`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:131](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L131)
+Defined in: [src/lib/services/struct/data-staging.ts:131](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L131)
 
 Tracks whether the backend (remote) data has changed since the last pull.
 
@@ -27336,7 +27336,7 @@ Tracks whether the backend (remote) data has changed since the last pull.
 
 > `readonly` **structData**: [`StructData`](../../struct-data/classes/StructData.md)\<`T` \| `T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:142](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L142)
+Defined in: [src/lib/services/struct/data-staging.ts:142](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L142)
 
 The live backend-backed StructData instance to Staging.
 
@@ -27346,7 +27346,7 @@ The live backend-backed StructData instance to Staging.
 
 > **subscribers**: `Set`\<`Subscriber`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -27362,7 +27362,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -27372,7 +27372,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -27394,7 +27394,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -27420,7 +27420,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -27448,7 +27448,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **getMergeState**(): `MergeState`\<`T`, keyof `T`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:462](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L462)
+Defined in: [src/lib/services/struct/data-staging.ts:462](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L462)
 
 #### Returns
 
@@ -27462,7 +27462,7 @@ The current merge state, including status and any conflicts.
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -27488,7 +27488,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -27518,7 +27518,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **isDirty**(): `boolean`
 
-Defined in: [src/lib/services/struct/data-staging.ts:290](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L290)
+Defined in: [src/lib/services/struct/data-staging.ts:290](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L290)
 
 Returns whether the local or remote data has diverged
 from the current proxied state.
@@ -27535,7 +27535,7 @@ from the current proxied state.
 
 > **localChanged**(): `boolean`
 
-Defined in: [src/lib/services/struct/data-staging.ts:304](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L304)
+Defined in: [src/lib/services/struct/data-staging.ts:304](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L304)
 
 Returns whether the local data has been changed since the last `save()` or `pull()`.
 
@@ -27549,7 +27549,7 @@ Returns whether the local data has been changed since the last `save()` or `pull
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -27583,7 +27583,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -27611,7 +27611,7 @@ The writable store to pipe from
 
 > **pull**(): `void`
 
-Defined in: [src/lib/services/struct/data-staging.ts:230](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L230)
+Defined in: [src/lib/services/struct/data-staging.ts:230](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L230)
 
 Resets the local state to match the backend data,
 clearing both local and remote change flags.
@@ -27626,7 +27626,7 @@ clearing both local and remote change flags.
 
 > **remoteChanged**(): `boolean`
 
-Defined in: [src/lib/services/struct/data-staging.ts:297](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L297)
+Defined in: [src/lib/services/struct/data-staging.ts:297](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L297)
 
 Returns whether the backend (remote) has changed since the last `pull()`.
 
@@ -27640,7 +27640,7 @@ Returns whether the backend (remote) has changed since the last `pull()`.
 
 > **rollback**(...`properties`): `Result`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:249](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L249)
+Defined in: [src/lib/services/struct/data-staging.ts:249](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L249)
 
 Reverts local changes, resetting data to the base snapshot.
 This is a **local-only** operation; it does not affect the backend or pull the current remote state.
@@ -27674,7 +27674,7 @@ If a given property does not exist in the base snapshot.
 
 > **save**(`config`): `Promise`\<`Result`\<`void`, `Error`\>\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:346](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L346)
+Defined in: [src/lib/services/struct/data-staging.ts:346](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L346)
 
 Attempts to save local changes to the underlying struct data, resolving any conflicts
 using the specified strategy.
@@ -27699,7 +27699,7 @@ A conflict is defined as a property where:
 
 > **set**(`data`): [`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:204](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L204)
+Defined in: [src/lib/services/struct/data-staging.ts:204](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L204)
 
 Replaces the current local data with a new object.
 Triggers change tracking and subscribers.
@@ -27728,7 +27728,7 @@ The newly proxied data object.
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -27763,7 +27763,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): [`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/services/struct/data-staging.ts:218](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-staging.ts#L218)
+Defined in: [src/lib/services/struct/data-staging.ts:218](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-staging.ts#L218)
 
 Applies a transformation function to the local data.
 Triggers change tracking and subscribers.
@@ -27830,7 +27830,7 @@ Struct data version wrappers.
 
 # Class: StructDataVersion\<T\>
 
-Defined in: [src/lib/services/struct/data-version.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L39)
+Defined in: [src/lib/services/struct/data-version.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L39)
 
 Version history point of a data.
 
@@ -27854,7 +27854,7 @@ StructDataVersion
 
 > **new StructDataVersion**\<`T`\>(`struct`, `data`): `StructDataVersion`\<`T`\>
 
-Defined in: [src/lib/services/struct/data-version.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L50)
+Defined in: [src/lib/services/struct/data-version.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L50)
 
 Creates an instance of StructDataVersion.
 
@@ -27882,7 +27882,7 @@ Creates an instance of StructDataVersion.
 
 > `readonly` **struct**: [`Struct`](../../struct/classes/Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/data-version.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L51)
+Defined in: [src/lib/services/struct/data-version.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L51)
 
 ***
 
@@ -27890,7 +27890,7 @@ Defined in: [src/lib/services/struct/data-version.ts:51](https://github.com/tsax
 
 > **subscribers**: `Set`\<`Subscriber`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T`\>\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -27906,7 +27906,7 @@ Set of active subscribers to this writable store
 
 > **get** **archived**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L119)
+Defined in: [src/lib/services/struct/data-version.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L119)
 
 Whether the data is archived
 
@@ -27922,7 +27922,7 @@ Whether the data is archived
 
 > **get** **created**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:99](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L99)
+Defined in: [src/lib/services/struct/data-version.ts:99](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L99)
 
 Date the data was created
 
@@ -27938,7 +27938,7 @@ Date the data was created
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -27948,7 +27948,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -27972,7 +27972,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **id**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L79)
+Defined in: [src/lib/services/struct/data-version.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L79)
 
 Id of the data this relates to
 
@@ -27988,7 +27988,7 @@ Id of the data this relates to
 
 > **get** **lifetime**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:129](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L129)
+Defined in: [src/lib/services/struct/data-version.ts:129](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L129)
 
 Lifespan of the data in milliseconds
 
@@ -28004,7 +28004,7 @@ Lifespan of the data in milliseconds
 
 > **get** **updated**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:109](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L109)
+Defined in: [src/lib/services/struct/data-version.ts:109](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L109)
 
 Date the data was last updated
 
@@ -28020,7 +28020,7 @@ Date the data was last updated
 
 > **get** **vhCreated**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:89](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L89)
+Defined in: [src/lib/services/struct/data-version.ts:89](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L89)
 
 Date the version was created
 
@@ -28036,7 +28036,7 @@ Date the version was created
 
 > **get** **vhId**(): [`ColTsType`](../../struct/type-aliases/ColTsType.md)\<`T`\[`string`\]\>
 
-Defined in: [src/lib/services/struct/data-version.ts:69](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L69)
+Defined in: [src/lib/services/struct/data-version.ts:69](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L69)
 
 unique version history id
 
@@ -28050,7 +28050,7 @@ unique version history id
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -28076,7 +28076,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T`\>\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -28104,7 +28104,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **delete**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/data-version.ts:138](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L138)
+Defined in: [src/lib/services/struct/data-version.ts:138](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L138)
 
 Delete the version
 
@@ -28118,7 +28118,7 @@ Delete the version
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -28144,7 +28144,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -28174,7 +28174,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -28208,7 +28208,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -28236,7 +28236,7 @@ The writable store to pipe from
 
 > **restore**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/data-version.ts:153](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L153)
+Defined in: [src/lib/services/struct/data-version.ts:153](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L153)
 
 Restore the version
 
@@ -28250,7 +28250,7 @@ Restore the version
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -28282,7 +28282,7 @@ store.set('new value');
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -28317,7 +28317,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -28371,7 +28371,7 @@ store.update(current => current + 1);
 
 > **VersionStructable**\<`T`\> = [`Structable`](../../struct/type-aliases/Structable.md)\<\{ `vhCreated`: `"date"`; `vhId`: `"string"`; \}\> & [`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>
 
-Defined in: [src/lib/services/struct/data-version.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/data-version.ts#L25)
+Defined in: [src/lib/services/struct/data-version.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/data-version.ts#L25)
 
 Version history of a data, requiring global columns and a version history id and created date
 
@@ -28581,7 +28581,7 @@ Struct data wrapper and helpers.
 
 # Class: StructData\<T\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L32)
+Defined in: [src/lib/services/struct/struct-data.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L32)
 
 Struct data for a single data point
 
@@ -28605,7 +28605,7 @@ StructData
 
 > **new StructData**\<`T`\>(`struct`, `data`): `StructData`\<`T`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:40](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L40)
+Defined in: [src/lib/services/struct/struct-data.ts:40](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L40)
 
 Creates an instance of StructData.
 
@@ -28633,7 +28633,7 @@ Creates an instance of StructData.
 
 > `readonly` **struct**: [`Struct`](../../struct/classes/Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:41](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L41)
+Defined in: [src/lib/services/struct/struct-data.ts:41](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L41)
 
 ***
 
@@ -28641,7 +28641,7 @@ Defined in: [src/lib/services/struct/struct-data.ts:41](https://github.com/tsaxk
 
 > **subscribers**: `Set`\<`Subscriber`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -28657,7 +28657,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -28667,7 +28667,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -28689,7 +28689,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -28715,7 +28715,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`PartialStructable`](../../struct/type-aliases/PartialStructable.md)\<`T` & [`GlobalCols`](../../struct/type-aliases/GlobalCols.md)\>\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -28743,7 +28743,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **delete**(): `ResultPromise`\<\{ `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:94](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L94)
+Defined in: [src/lib/services/struct/struct-data.ts:94](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L94)
 
 Delete the data
 
@@ -28757,7 +28757,7 @@ Delete the data
 
 > **getAttributes**(): `Result`\<`string`[], `Error`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:180](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L180)
+Defined in: [src/lib/services/struct/struct-data.ts:180](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L180)
 
 Retrieves all attributes the data has
 
@@ -28771,7 +28771,7 @@ Retrieves all attributes the data has
 
 > **getVersions**(`config?`): `ResultPromise`\<[`WritableArray`](../../../writables/classes/WritableArray.md)\<[`StructDataVersion`](../../data-version/classes/StructDataVersion.md)\<`T`\>\>, `Error`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L195)
+Defined in: [src/lib/services/struct/struct-data.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L195)
 
 Retrieves all versions of the data
 
@@ -28801,7 +28801,7 @@ Retrieves all versions of the data
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -28827,7 +28827,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -28857,7 +28857,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -28891,7 +28891,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -28919,7 +28919,7 @@ The writable store to pipe from
 
 > **pull**\<`Key`\>(...`keys`): `void` \| `PartialReadable`\<`T`, `Key`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:135](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L135)
+Defined in: [src/lib/services/struct/struct-data.ts:135](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L135)
 
 Pull specific properties from the data, if the user does not have permission to read the property it will throw an error.
 This is not wrapped in an attempt(() => {}), so you will need to handle errors yourself. This will return a svelte store.
@@ -28946,7 +28946,7 @@ This is not wrapped in an attempt(() => {}), so you will need to handle errors y
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -28978,7 +28978,7 @@ store.set('new value');
 
 > **setArchive**(`archive`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:110](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L110)
+Defined in: [src/lib/services/struct/struct-data.ts:110](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L110)
 
 Archive or restore the data
 
@@ -28998,7 +28998,7 @@ Archive or restore the data
 
 > **staging**(): [`StructDataStage`](../../data-staging/classes/StructDataStage.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:215](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L215)
+Defined in: [src/lib/services/struct/struct-data.ts:215](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L215)
 
 #### Returns
 
@@ -29010,7 +29010,7 @@ Defined in: [src/lib/services/struct/struct-data.ts:215](https://github.com/tsax
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -29045,7 +29045,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `Promise`\<`Result`\<\{ `undo`: () => Promise\<Result\<\{ undo: () =\> Promise\<Result\<..., Error\>\>; \}, Error\>\>; \}, `Error`\>\>
 
-Defined in: [src/lib/services/struct/struct-data.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct-data.ts#L58)
+Defined in: [src/lib/services/struct/struct-data.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct-data.ts#L58)
 
 Update the data in the backend, this will not update the subscribers as the backend will send the update back
 
@@ -29133,7 +29133,7 @@ Client-side struct implementation with caching and batching. Provides the core S
 
 # Class: DataError
 
-Defined in: [src/lib/services/struct/struct.ts:93](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L93)
+Defined in: [src/lib/services/struct/struct.ts:93](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L93)
 
 Error if the data is an invalid state
 
@@ -29151,7 +29151,7 @@ DataError
 
 > **new DataError**(`message`): `DataError`
 
-Defined in: [src/lib/services/struct/struct.ts:100](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L100)
+Defined in: [src/lib/services/struct/struct.ts:100](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L100)
 
 Creates an instance of DataError.
 
@@ -29348,7 +29348,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 # Class: FatalDataError
 
-Defined in: [src/lib/services/struct/struct.ts:135](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L135)
+Defined in: [src/lib/services/struct/struct.ts:135](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L135)
 
 Error if the data is an invalid state, this should crash the application so use sparingly
 
@@ -29366,7 +29366,7 @@ FatalDataError
 
 > **new FatalDataError**(`message`): `FatalDataError`
 
-Defined in: [src/lib/services/struct/struct.ts:142](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L142)
+Defined in: [src/lib/services/struct/struct.ts:142](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L142)
 
 Creates an instance of FatalDataError.
 
@@ -29563,7 +29563,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 # Class: FatalStructError
 
-Defined in: [src/lib/services/struct/struct.ts:156](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L156)
+Defined in: [src/lib/services/struct/struct.ts:156](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L156)
 
 Error if the struct is an invalid state, this should crash the application so use sparingly
 
@@ -29581,7 +29581,7 @@ FatalStructError
 
 > **new FatalStructError**(`message`): `FatalStructError`
 
-Defined in: [src/lib/services/struct/struct.ts:163](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L163)
+Defined in: [src/lib/services/struct/struct.ts:163](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L163)
 
 Creates an instance of FatalStructError.
 
@@ -29778,7 +29778,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 # Class: SingleWritable\<T\>
 
-Defined in: [src/lib/services/struct/struct.ts:335](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L335)
+Defined in: [src/lib/services/struct/struct.ts:335](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L335)
 
 Writable store that holds a single StructData item and allows updates to it.
 This is useful for managing a single piece of data that can be updated and subscribed to.
@@ -29815,7 +29815,7 @@ SingleWritable
 
 > **new SingleWritable**\<`T`\>(`defaultData`): `SingleWritable`\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L342)
+Defined in: [src/lib/services/struct/struct.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L342)
 
 Creates an instance of SingleWritable.
 
@@ -29839,7 +29839,7 @@ Creates an instance of SingleWritable.
 
 > **subscribers**: `Set`\<`Subscriber`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -29855,7 +29855,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -29865,7 +29865,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -29889,7 +29889,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **struct**(): [`Struct`](Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:367](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L367)
+Defined in: [src/lib/services/struct/struct.ts:367](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L367)
 
 ##### Returns
 
@@ -29901,7 +29901,7 @@ Defined in: [src/lib/services/struct/struct.ts:367](https://github.com/tsaxking/
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -29927,7 +29927,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -29955,7 +29955,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -29981,7 +29981,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -30011,7 +30011,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -30045,7 +30045,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -30073,7 +30073,7 @@ The writable store to pipe from
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -30105,7 +30105,7 @@ store.set('new value');
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -30140,7 +30140,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -30175,7 +30175,7 @@ store.update(current => current + 1);
 
 # Class: Struct\<T\>
 
-Defined in: [src/lib/services/struct/struct.ts:474](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L474)
+Defined in: [src/lib/services/struct/struct.ts:474](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L474)
 
 Struct class that communicates with the server
 
@@ -30195,7 +30195,7 @@ Struct
 
 > **new Struct**\<`T`\>(`data`): `Struct`\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:621](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L621)
+Defined in: [src/lib/services/struct/struct.ts:621](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L621)
 
 Creates an instance of Struct.
 
@@ -30215,7 +30215,7 @@ Creates an instance of Struct.
 
 > `readonly` **cacheUpdates**: `boolean`
 
-Defined in: [src/lib/services/struct/struct.ts:575](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L575)
+Defined in: [src/lib/services/struct/struct.ts:575](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L575)
 
 Whether to cache updates for this struct.
 
@@ -30225,7 +30225,7 @@ Whether to cache updates for this struct.
 
 > `readonly` **data**: [`StructBuilder`](../type-aliases/StructBuilder.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:621](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L621)
+Defined in: [src/lib/services/struct/struct.ts:621](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L621)
 
 ***
 
@@ -30233,7 +30233,7 @@ Defined in: [src/lib/services/struct/struct.ts:621](https://github.com/tsaxking/
 
 > `readonly` **emit**: `any`
 
-Defined in: [src/lib/services/struct/struct.ts:604](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L604)
+Defined in: [src/lib/services/struct/struct.ts:604](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L604)
 
 Emits an event
 
@@ -30243,7 +30243,7 @@ Emits an event
 
 > `readonly` **off**: `any`
 
-Defined in: [src/lib/services/struct/struct.ts:590](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L590)
+Defined in: [src/lib/services/struct/struct.ts:590](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L590)
 
 Stops listening to an event
 
@@ -30253,7 +30253,7 @@ Stops listening to an event
 
 > `readonly` **on**: `any`
 
-Defined in: [src/lib/services/struct/struct.ts:583](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L583)
+Defined in: [src/lib/services/struct/struct.ts:583](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L583)
 
 Listens to an event
 
@@ -30263,7 +30263,7 @@ Listens to an event
 
 > `readonly` **once**: `any`
 
-Defined in: [src/lib/services/struct/struct.ts:597](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L597)
+Defined in: [src/lib/services/struct/struct.ts:597](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L597)
 
 Listens to an event once
 
@@ -30273,7 +30273,7 @@ Listens to an event once
 
 > `static` **getDate**: () => `number`
 
-Defined in: [src/lib/services/struct/struct.ts:481](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L481)
+Defined in: [src/lib/services/struct/struct.ts:481](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L481)
 
 A changable function that can be used to get the current date.
 This is used for syncing date with the server through NTP
@@ -30288,7 +30288,7 @@ This is used for syncing date with the server through NTP
 
 > `readonly` `static` **headers**: `Map`\<`string`, `string`\>
 
-Defined in: [src/lib/services/struct/struct.ts:491](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L491)
+Defined in: [src/lib/services/struct/struct.ts:491](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L491)
 
 Headers that are sent with every request to the server from the struct
 
@@ -30300,7 +30300,7 @@ Headers that are sent with every request to the server from the struct
 
 > `readonly` `static` **structs**: `Map`\<`string`, `Struct`\<[`Blank`](../type-aliases/Blank.md)\>\>
 
-Defined in: [src/lib/services/struct/struct.ts:500](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L500)
+Defined in: [src/lib/services/struct/struct.ts:500](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L500)
 
 All structs that are accessible
 
@@ -30314,7 +30314,7 @@ All structs that are accessible
 
 > **get** **sample**(): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:649](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L649)
+Defined in: [src/lib/services/struct/struct.ts:649](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L649)
 
 Updates an existing data point, if permitted
 This should never be used in production, just for testing types
@@ -30331,7 +30331,7 @@ This should never be used in production, just for testing types
 
 > **get** **vhSample**(): [`StructDataVersion`](../../data-version/classes/StructDataVersion.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:660](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L660)
+Defined in: [src/lib/services/struct/struct.ts:660](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L660)
 
 Returns a sample of the struct data, which is a StructData object
 This is used for testing and development purposes only.
@@ -30354,7 +30354,7 @@ Returns a stream if true, svelte store if false
 
 > **all**(`config`): [`PaginationDataArr`](../../data-arr/classes/PaginationDataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1050](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1050)
+Defined in: [src/lib/services/struct/struct.ts:1050](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1050)
 
 Gets all data as a paginated array
 
@@ -30402,7 +30402,7 @@ keyof `T` & `"id"` \| `"created"` \| `"updated"` \| `"archived"` \| `"attributes
 
 > **all**(`config`): [`DataArr`](../../data-arr/classes/DataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1057](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1057)
+Defined in: [src/lib/services/struct/struct.ts:1057](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1057)
 
 Gets all data as an svelte store
 
@@ -30454,7 +30454,7 @@ Returns a stream if true, svelte store if false
 
 > **archived**(`config`): [`PaginationDataArr`](../../data-arr/classes/PaginationDataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1120](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1120)
+Defined in: [src/lib/services/struct/struct.ts:1120](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1120)
 
 Gets all archived data as a paginated array
 
@@ -30502,7 +30502,7 @@ keyof `T` & `"id"` \| `"created"` \| `"updated"` \| `"archived"` \| `"attributes
 
 > **archived**(`config`): [`DataArr`](../../data-arr/classes/DataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1127](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1127)
+Defined in: [src/lib/services/struct/struct.ts:1127](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1127)
 
 Gets all archived data
 
@@ -30546,7 +30546,7 @@ Determines the return type: true returns a StructStream, false returns a DataArr
 
 > **arr**(`dataArray?`, `satisfies?`): [`DataArr`](../../data-arr/classes/DataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1420](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1420)
+Defined in: [src/lib/services/struct/struct.ts:1420](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1420)
 
 Creates a new DataArr instance with the given data array.d
 This does not cache the data, so it is not stored in the writables map.
@@ -30571,7 +30571,7 @@ This does not cache the data, so it is not stored in the writables map.
 
 > **build**(): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1015](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1015)
+Defined in: [src/lib/services/struct/struct.ts:1015](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1015)
 
 Builds the struct
 
@@ -30585,7 +30585,7 @@ Builds the struct
 
 > **clear**(): `Promise`\<\{ `success`: `boolean`; \}\> & `object`
 
-Defined in: [src/lib/services/struct/struct.ts:1459](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1459)
+Defined in: [src/lib/services/struct/struct.ts:1459](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1459)
 
 Clears all data for this struct (admin only).
 
@@ -30599,7 +30599,7 @@ Clears all data for this struct (admin only).
 
 > **connect**(): `ResultPromise`\<\{ `message`: `string`; `success`: `boolean`; \}, `Error`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1033](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1033)
+Defined in: [src/lib/services/struct/struct.ts:1033](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1033)
 
 Connects to the backend struct, confirming the front end and backend types are valid
 
@@ -30613,7 +30613,7 @@ Connects to the backend struct, confirming the front end and backend types are v
 
 > **fromId**(`id`, `config?`): `ResultPromise`\<[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>, `Error`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1201](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1201)
+Defined in: [src/lib/services/struct/struct.ts:1201](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1201)
 
 Gets data from a specific id
 
@@ -30661,7 +30661,7 @@ Gets data from specific ids as a stream or svelte store
 
 > **fromIds**(`ids`, `config`): [`PaginationDataArr`](../../data-arr/classes/PaginationDataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1230](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1230)
+Defined in: [src/lib/services/struct/struct.ts:1230](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1230)
 
 Gets data from specific ids as a paginated array
 
@@ -30713,7 +30713,7 @@ keyof `T` & `"id"` \| `"created"` \| `"updated"` \| `"archived"` \| `"attributes
 
 > **fromIds**(`ids`, `config`): [`DataArr`](../../data-arr/classes/DataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1236)
+Defined in: [src/lib/services/struct/struct.ts:1236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1236)
 
 Gets data from specific ids as a svelte store
 
@@ -30761,7 +30761,7 @@ Determines the return type: true returns a StructStream, false returns a DataArr
 
 > **Generator**(`data`): [`StructData`](../../struct-data/classes/StructData.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:879](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L879)
+Defined in: [src/lib/services/struct/struct.ts:879](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L879)
 
 Generates a StructData object from the given data, or returns the cached version if it exists.
 
@@ -30793,7 +30793,7 @@ Read config.
 
 > **get**(`data`, `config`): [`PaginationDataArr`](../../data-arr/classes/PaginationDataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1315](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1315)
+Defined in: [src/lib/services/struct/struct.ts:1315](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1315)
 
 Gets data matching a filter as a paginated array.
 
@@ -30849,7 +30849,7 @@ keyof `T` & `"id"` \| `"created"` \| `"updated"` \| `"archived"` \| `"attributes
 
 > **get**(`data`, `config`): [`DataArr`](../../data-arr/classes/DataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1325](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1325)
+Defined in: [src/lib/services/struct/struct.ts:1325](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1325)
 
 Gets data matching a filter as a reactive store.
 
@@ -30901,7 +30901,7 @@ Determines the return type: true returns a StructStream, false returns a DataArr
 
 > **getZodSchema**(`config?`): `ZodObject`\<`any`, `"strip"`, `ZodTypeAny`, \{\[`key`: `string`\]: `any`; \}, \{\[`key`: `string`\]: `any`; \}\>
 
-Defined in: [src/lib/services/struct/struct.ts:961](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L961)
+Defined in: [src/lib/services/struct/struct.ts:961](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L961)
 
 Generates a Zod schema for the struct data.
 
@@ -30927,7 +30927,7 @@ Generates a Zod schema for the struct data.
 
 > **new**(`data`, `attributes`): `ResultPromise`\<[`StatusMessage`](../type-aliases/StatusMessage.md)\<`void`\>, `Error`\>
 
-Defined in: [src/lib/services/struct/struct.ts:632](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L632)
+Defined in: [src/lib/services/struct/struct.ts:632](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L632)
 
 Creates a new data point, if permitted
 
@@ -30951,7 +30951,7 @@ Creates a new data point, if permitted
 
 > **pagination**(): [`PaginationDataArr`](../../data-arr/classes/PaginationDataArr.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:1446](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L1446)
+Defined in: [src/lib/services/struct/struct.ts:1446](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L1446)
 
 Creates an empty paginated data array placeholder.
 
@@ -30967,7 +30967,7 @@ Empty pagination wrapper.
 
 > **Stage**(`data`): [`StructDataStage`](../../data-staging/classes/StructDataStage.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:929](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L929)
+Defined in: [src/lib/services/struct/struct.ts:929](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L929)
 
 Creates a StructDataProxy from the given data.
 
@@ -30987,7 +30987,7 @@ Creates a StructDataProxy from the given data.
 
 > **validate**(`data`): `data is PartialStructable<T & GlobalCols>`
 
-Defined in: [src/lib/services/struct/struct.ts:939](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L939)
+Defined in: [src/lib/services/struct/struct.ts:939](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L939)
 
 Validates the data
 
@@ -31007,7 +31007,7 @@ Validates the data
 
 > `static` **buildAll**(): `void`
 
-Defined in: [src/lib/services/struct/struct.ts:522](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L522)
+Defined in: [src/lib/services/struct/struct.ts:522](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L522)
 
 Builds all structs that are registered in the system.
 
@@ -31023,7 +31023,7 @@ Builds all structs that are registered in the system.
 
 > `static` **each**(`fn`): `void`
 
-Defined in: [src/lib/services/struct/struct.ts:510](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L510)
+Defined in: [src/lib/services/struct/struct.ts:510](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L510)
 
 Iterates over all structs and runs a function on each one.
 
@@ -31048,7 +31048,7 @@ Iterates over all structs and runs a function on each one.
 
 # Class: StructError
 
-Defined in: [src/lib/services/struct/struct.ts:114](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L114)
+Defined in: [src/lib/services/struct/struct.ts:114](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L114)
 
 Error if the struct is an invalid state
 
@@ -31066,7 +31066,7 @@ StructError
 
 > **new StructError**(`message`): `StructError`
 
-Defined in: [src/lib/services/struct/struct.ts:121](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L121)
+Defined in: [src/lib/services/struct/struct.ts:121](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L121)
 
 Creates an instance of StructError.
 
@@ -31263,7 +31263,7 @@ https://v8.dev/docs/stack-trace-api#customizing-stack-traces
 
 # Class: StructStream\<T\>
 
-Defined in: [src/lib/services/struct/struct.ts:381](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L381)
+Defined in: [src/lib/services/struct/struct.ts:381](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L381)
 
 Stream of StructData
 
@@ -31287,7 +31287,7 @@ StructStream
 
 > **new StructStream**\<`T`\>(`struct`): `StructStream`\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:388](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L388)
+Defined in: [src/lib/services/struct/struct.ts:388](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L388)
 
 Creates an instance of StructStream.
 
@@ -31415,7 +31415,7 @@ Defined in: node\_modules/.pnpm/ts-utils@https+++codeload.github.com+tsaxking+gl
 
 > `readonly` **struct**: [`Struct`](Struct.md)\<`T`\>
 
-Defined in: [src/lib/services/struct/struct.ts:388](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L388)
+Defined in: [src/lib/services/struct/struct.ts:388](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L388)
 
 ## Methods
 
@@ -31534,7 +31534,7 @@ Defined in: node\_modules/.pnpm/ts-utils@https+++codeload.github.com+tsaxking+gl
 
 # Enumeration: FetchActions
 
-Defined in: [src/lib/services/struct/struct.ts:42](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L42)
+Defined in: [src/lib/services/struct/struct.ts:42](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L42)
 
 All actions that can be performed on the data
 
@@ -31546,7 +31546,7 @@ All actions that can be performed on the data
 
 > **Archive**: `"archive"`
 
-Defined in: [src/lib/services/struct/struct.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L54)
+Defined in: [src/lib/services/struct/struct.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L54)
 
 Archive a data point
 
@@ -31556,7 +31556,7 @@ Archive a data point
 
 > **Create**: `"create"`
 
-Defined in: [src/lib/services/struct/struct.ts:46](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L46)
+Defined in: [src/lib/services/struct/struct.ts:46](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L46)
 
 Create a new data point
 
@@ -31566,7 +31566,7 @@ Create a new data point
 
 > **Delete**: `"delete"`
 
-Defined in: [src/lib/services/struct/struct.ts:50](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L50)
+Defined in: [src/lib/services/struct/struct.ts:50](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L50)
 
 Delete a data point
 
@@ -31576,7 +31576,7 @@ Delete a data point
 
 > **DeleteVersion**: `"delete-version"`
 
-Defined in: [src/lib/services/struct/struct.ts:66](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L66)
+Defined in: [src/lib/services/struct/struct.ts:66](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L66)
 
 Delete a version of a data point
 
@@ -31586,7 +31586,7 @@ Delete a version of a data point
 
 > **Read**: `"read"`
 
-Defined in: [src/lib/services/struct/struct.ts:78](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L78)
+Defined in: [src/lib/services/struct/struct.ts:78](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L78)
 
 Read a data
 
@@ -31596,7 +31596,7 @@ Read a data
 
 > **ReadArchive**: `"read-archive"`
 
-Defined in: [src/lib/services/struct/struct.ts:74](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L74)
+Defined in: [src/lib/services/struct/struct.ts:74](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L74)
 
 Get the archived data
 
@@ -31606,7 +31606,7 @@ Get the archived data
 
 > **ReadVersionHistory**: `"read-version-history"`
 
-Defined in: [src/lib/services/struct/struct.ts:70](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L70)
+Defined in: [src/lib/services/struct/struct.ts:70](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L70)
 
 Retrieve a data's version history
 
@@ -31616,7 +31616,7 @@ Retrieve a data's version history
 
 > **RestoreArchive**: `"restore-archive"`
 
-Defined in: [src/lib/services/struct/struct.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L58)
+Defined in: [src/lib/services/struct/struct.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L58)
 
 Restore an archived data point
 
@@ -31626,7 +31626,7 @@ Restore an archived data point
 
 > **RestoreVersion**: `"restore-version"`
 
-Defined in: [src/lib/services/struct/struct.ts:62](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L62)
+Defined in: [src/lib/services/struct/struct.ts:62](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L62)
 
 Restore a version of a data point
 
@@ -31636,7 +31636,7 @@ Restore a version of a data point
 
 > **Update**: `"update"`
 
-Defined in: [src/lib/services/struct/struct.ts:82](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L82)
+Defined in: [src/lib/services/struct/struct.ts:82](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L82)
 
 Update a data point
 
@@ -31690,7 +31690,7 @@ Update a data point
 
 # Interface: Socket
 
-Defined in: [src/lib/services/struct/struct.ts:176](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L176)
+Defined in: [src/lib/services/struct/struct.ts:176](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L176)
 
 Websocket/SSE connection to the server
 
@@ -31704,7 +31704,7 @@ Socket
 
 > **on**(`event`, `lisener`): `void`
 
-Defined in: [src/lib/services/struct/struct.ts:183](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L183)
+Defined in: [src/lib/services/struct/struct.ts:183](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L183)
 
 Event listener for the socket
 
@@ -31733,7 +31733,7 @@ Event listener for the socket
 
 > **Blank** = `Record`\<`string`, `ColType`\>
 
-Defined in: [src/lib/services/struct/struct.ts:245](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L245)
+Defined in: [src/lib/services/struct/struct.ts:245](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L245)
 
 Blank struct type
 
@@ -31750,7 +31750,7 @@ Blank struct type
 
 > **ColTsType**\<`t`\> = `t` *extends* `"string"` ? `string` : `t` *extends* `"number"` ? `number` : `t` *extends* `"boolean"` ? `boolean` : `t` *extends* `"array"` ? `unknown`[] : `t` *extends* `"json"` ? `unknown` : `t` *extends* `"date"` ? `Date` : `t` *extends* `"bigint"` ? `bigint` : `t` *extends* `"custom"` ? `unknown` : `t` *extends* `"buffer"` ? `Buffer` : `never`
 
-Defined in: [src/lib/services/struct/struct.ts:193](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L193)
+Defined in: [src/lib/services/struct/struct.ts:193](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L193)
 
 Generates a type from a column type
 
@@ -31773,7 +31773,7 @@ Generates a type from a column type
 
 > **GlobalCols** = `object`
 
-Defined in: [src/lib/services/struct/struct.ts:415](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L415)
+Defined in: [src/lib/services/struct/struct.ts:415](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L415)
 
 Global columns that are required for all data
 
@@ -31783,7 +31783,7 @@ Global columns that are required for all data
 
 > **archived**: `"boolean"`
 
-Defined in: [src/lib/services/struct/struct.ts:419](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L419)
+Defined in: [src/lib/services/struct/struct.ts:419](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L419)
 
 ***
 
@@ -31791,7 +31791,7 @@ Defined in: [src/lib/services/struct/struct.ts:419](https://github.com/tsaxking/
 
 > **attributes**: `"string"`
 
-Defined in: [src/lib/services/struct/struct.ts:420](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L420)
+Defined in: [src/lib/services/struct/struct.ts:420](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L420)
 
 ***
 
@@ -31799,7 +31799,7 @@ Defined in: [src/lib/services/struct/struct.ts:420](https://github.com/tsaxking/
 
 > **canUpdate**: `"boolean"`
 
-Defined in: [src/lib/services/struct/struct.ts:422](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L422)
+Defined in: [src/lib/services/struct/struct.ts:422](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L422)
 
 ***
 
@@ -31807,7 +31807,7 @@ Defined in: [src/lib/services/struct/struct.ts:422](https://github.com/tsaxking/
 
 > **created**: `"date"`
 
-Defined in: [src/lib/services/struct/struct.ts:417](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L417)
+Defined in: [src/lib/services/struct/struct.ts:417](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L417)
 
 ***
 
@@ -31815,7 +31815,7 @@ Defined in: [src/lib/services/struct/struct.ts:417](https://github.com/tsaxking/
 
 > **hash**: `"string"`
 
-Defined in: [src/lib/services/struct/struct.ts:423](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L423)
+Defined in: [src/lib/services/struct/struct.ts:423](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L423)
 
 ***
 
@@ -31823,7 +31823,7 @@ Defined in: [src/lib/services/struct/struct.ts:423](https://github.com/tsaxking/
 
 > **id**: `"string"`
 
-Defined in: [src/lib/services/struct/struct.ts:416](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L416)
+Defined in: [src/lib/services/struct/struct.ts:416](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L416)
 
 ***
 
@@ -31831,7 +31831,7 @@ Defined in: [src/lib/services/struct/struct.ts:416](https://github.com/tsaxking/
 
 > **lifetime**: `"number"`
 
-Defined in: [src/lib/services/struct/struct.ts:421](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L421)
+Defined in: [src/lib/services/struct/struct.ts:421](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L421)
 
 ***
 
@@ -31839,7 +31839,7 @@ Defined in: [src/lib/services/struct/struct.ts:421](https://github.com/tsaxking/
 
 > **updated**: `"date"`
 
-Defined in: [src/lib/services/struct/struct.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L418)
+Defined in: [src/lib/services/struct/struct.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L418)
 
 
 [**my-app**](../../../../../../README.md)
@@ -31852,7 +31852,7 @@ Defined in: [src/lib/services/struct/struct.ts:418](https://github.com/tsaxking/
 
 > **PartialStructable**\<`T`\> = `{ [K in keyof T]?: ColTsType<T[K]> }`
 
-Defined in: [src/lib/services/struct/struct.ts:287](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L287)
+Defined in: [src/lib/services/struct/struct.ts:287](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L287)
 
 Not all users may have full read access to data, so all properties will be optional
 
@@ -31875,7 +31875,7 @@ Not all users may have full read access to data, so all properties will be optio
 
 > **ReadConfig**\<`AsStream`, `T`\> = `AsStream` *extends* `"all"` ? `object` : `object`
 
-Defined in: [src/lib/services/struct/struct.ts:435](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L435)
+Defined in: [src/lib/services/struct/struct.ts:435](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L435)
 
 Configuration object for read operations that determines return type and caching behavior
 
@@ -31902,7 +31902,7 @@ Configuration object for read operations that determines return type and caching
 
 > **SafeColTsType**\<`t`\> = `t` *extends* `"string"` ? `string` : `t` *extends* `"number"` ? `number` : `t` *extends* `"boolean"` ? `boolean` : `t` *extends* `"array"` ? `unknown`[] : `t` *extends* `"json"` ? `unknown` : `t` *extends* `"date"` ? `string` : `t` *extends* `"bigint"` ? `bigint` : `t` *extends* `"custom"` ? `unknown` : `t` *extends* `"buffer"` ? `Buffer` : `never`
 
-Defined in: [src/lib/services/struct/struct.ts:219](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L219)
+Defined in: [src/lib/services/struct/struct.ts:219](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L219)
 
 Generates a safe type from a column type
 
@@ -31925,7 +31925,7 @@ Generates a safe type from a column type
 
 > **SafePartialStructable**\<`T`\> = `{ [K in keyof T]?: SafeColTsType<T[K]> }`
 
-Defined in: [src/lib/services/struct/struct.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L291)
+Defined in: [src/lib/services/struct/struct.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L291)
 
 ## Type Parameters
 
@@ -31944,7 +31944,7 @@ Defined in: [src/lib/services/struct/struct.ts:291](https://github.com/tsaxking/
 
 > **StatusMessage**\<`T`\> = `object`
 
-Defined in: [src/lib/services/struct/struct.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L313)
+Defined in: [src/lib/services/struct/struct.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L313)
 
 General status message for all actions. Use this format when generating your eventHandler() on the back end
 
@@ -31962,7 +31962,7 @@ General status message for all actions. Use this format when generating your eve
 
 > `optional` **data**: `T`
 
-Defined in: [src/lib/services/struct/struct.ts:315](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L315)
+Defined in: [src/lib/services/struct/struct.ts:315](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L315)
 
 ***
 
@@ -31970,7 +31970,7 @@ Defined in: [src/lib/services/struct/struct.ts:315](https://github.com/tsaxking/
 
 > `optional` **message**: `string`
 
-Defined in: [src/lib/services/struct/struct.ts:316](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L316)
+Defined in: [src/lib/services/struct/struct.ts:316](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L316)
 
 ***
 
@@ -31978,7 +31978,7 @@ Defined in: [src/lib/services/struct/struct.ts:316](https://github.com/tsaxking/
 
 > **success**: `boolean`
 
-Defined in: [src/lib/services/struct/struct.ts:314](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L314)
+Defined in: [src/lib/services/struct/struct.ts:314](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L314)
 
 
 [**my-app**](../../../../../../README.md)
@@ -31991,7 +31991,7 @@ Defined in: [src/lib/services/struct/struct.ts:314](https://github.com/tsaxking/
 
 > **StructBuilder**\<`T`\> = `object`
 
-Defined in: [src/lib/services/struct/struct.ts:254](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L254)
+Defined in: [src/lib/services/struct/struct.ts:254](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L254)
 
 Configuration for a struct
 
@@ -32009,7 +32009,7 @@ Configuration for a struct
 
 > **browser**: `boolean`
 
-Defined in: [src/lib/services/struct/struct.ts:275](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L275)
+Defined in: [src/lib/services/struct/struct.ts:275](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L275)
 
 Whether the struct is a browser struct, this is used to prevent fetch requests on the server when sveltekit is doing SSR
 
@@ -32019,7 +32019,7 @@ Whether the struct is a browser struct, this is used to prevent fetch requests o
 
 > `optional` **cacheUpdates**: `boolean`
 
-Defined in: [src/lib/services/struct/struct.ts:277](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L277)
+Defined in: [src/lib/services/struct/struct.ts:277](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L277)
 
 ***
 
@@ -32027,7 +32027,7 @@ Defined in: [src/lib/services/struct/struct.ts:277](https://github.com/tsaxking/
 
 > `optional` **log**: `boolean`
 
-Defined in: [src/lib/services/struct/struct.ts:270](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L270)
+Defined in: [src/lib/services/struct/struct.ts:270](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L270)
 
 Log all actions to the console (only use for development because this could log sensitive data and may slow down the application)
 
@@ -32037,7 +32037,7 @@ Log all actions to the console (only use for development because this could log 
 
 > **name**: `string`
 
-Defined in: [src/lib/services/struct/struct.ts:258](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L258)
+Defined in: [src/lib/services/struct/struct.ts:258](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L258)
 
 Name of the struct, this is used to identify the struct between the front and back ends
 
@@ -32047,7 +32047,7 @@ Name of the struct, this is used to identify the struct between the front and ba
 
 > **socket**: [`Socket`](../interfaces/Socket.md)
 
-Defined in: [src/lib/services/struct/struct.ts:266](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L266)
+Defined in: [src/lib/services/struct/struct.ts:266](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L266)
 
 Websocket/SSE connection to the server, must be present if the struct is to be used
 
@@ -32057,7 +32057,7 @@ Websocket/SSE connection to the server, must be present if the struct is to be u
 
 > **structure**: `T`
 
-Defined in: [src/lib/services/struct/struct.ts:262](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L262)
+Defined in: [src/lib/services/struct/struct.ts:262](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L262)
 
 Structure of the struct, this is used to validate the data and typing
 
@@ -32072,7 +32072,7 @@ Structure of the struct, this is used to validate the data and typing
 
 > **StructEvents**\<`T`\> = `object`
 
-Defined in: [src/lib/services/struct/struct.ts:400](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L400)
+Defined in: [src/lib/services/struct/struct.ts:400](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L400)
 
 All events that can be received from the server
 
@@ -32090,7 +32090,7 @@ All events that can be received from the server
 
 > **archive**: \[[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\]
 
-Defined in: [src/lib/services/struct/struct.ts:404](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L404)
+Defined in: [src/lib/services/struct/struct.ts:404](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L404)
 
 ***
 
@@ -32098,7 +32098,7 @@ Defined in: [src/lib/services/struct/struct.ts:404](https://github.com/tsaxking/
 
 > **connect**: `void`
 
-Defined in: [src/lib/services/struct/struct.ts:407](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L407)
+Defined in: [src/lib/services/struct/struct.ts:407](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L407)
 
 ***
 
@@ -32106,7 +32106,7 @@ Defined in: [src/lib/services/struct/struct.ts:407](https://github.com/tsaxking/
 
 > **delete**: \[[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\]
 
-Defined in: [src/lib/services/struct/struct.ts:403](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L403)
+Defined in: [src/lib/services/struct/struct.ts:403](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L403)
 
 ***
 
@@ -32114,7 +32114,7 @@ Defined in: [src/lib/services/struct/struct.ts:403](https://github.com/tsaxking/
 
 > **new**: \[[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\]
 
-Defined in: [src/lib/services/struct/struct.ts:401](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L401)
+Defined in: [src/lib/services/struct/struct.ts:401](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L401)
 
 ***
 
@@ -32122,7 +32122,7 @@ Defined in: [src/lib/services/struct/struct.ts:401](https://github.com/tsaxking/
 
 > **restore**: \[[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\]
 
-Defined in: [src/lib/services/struct/struct.ts:405](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L405)
+Defined in: [src/lib/services/struct/struct.ts:405](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L405)
 
 ***
 
@@ -32130,7 +32130,7 @@ Defined in: [src/lib/services/struct/struct.ts:405](https://github.com/tsaxking/
 
 > **update**: \[[`StructData`](../../struct-data/classes/StructData.md)\<`T`\>\]
 
-Defined in: [src/lib/services/struct/struct.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L402)
+Defined in: [src/lib/services/struct/struct.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L402)
 
 
 [**my-app**](../../../../../../README.md)
@@ -32143,7 +32143,7 @@ Defined in: [src/lib/services/struct/struct.ts:402](https://github.com/tsaxking/
 
 > **Structable**\<`T`\> = `{ [K in keyof T]: ColTsType<T[K]> }`
 
-Defined in: [src/lib/services/struct/struct.ts:302](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/struct/struct.ts#L302)
+Defined in: [src/lib/services/struct/struct.ts:302](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/struct/struct.ts#L302)
 
 All users may have full read access to some data, so all properties will be required from this type
 
@@ -32183,7 +32183,7 @@ Writable store helpers with debouncing and utilities.
 
 # Class: WritableArray\<T\>
 
-Defined in: [src/lib/services/writables.ts:268](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L268)
+Defined in: [src/lib/services/writables.ts:268](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L268)
 
 Writable array store that extends WritableBase with array-specific operations.
 Provides reactive array manipulation with filtering, sorting, and standard array methods.
@@ -32217,7 +32217,7 @@ The type of elements in the array
 
 > **new WritableArray**\<`T`\>(`_data`, `_config?`): `WritableArray`\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L32)
+Defined in: [src/lib/services/writables.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L32)
 
 Creates an instance of WritableBase.
 
@@ -32257,7 +32257,7 @@ Enable debug logging
 
 > **subscribers**: `Set`\<`Subscriber`\<`T`[]\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -32273,7 +32273,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -32283,7 +32283,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -32307,7 +32307,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **get** **length**(): `number`
 
-Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L291)
+Defined in: [src/lib/services/writables.ts:291](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L291)
 
 Gets the current length of the array
 
@@ -32323,7 +32323,7 @@ Number of elements in the array
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -32349,7 +32349,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<`T`[]\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -32377,7 +32377,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **clear**(): `void`
 
-Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L369)
+Defined in: [src/lib/services/writables.ts:369](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L369)
 
 Removes all elements from the array
 
@@ -32391,7 +32391,7 @@ Removes all elements from the array
 
 > **each**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L484)
+Defined in: [src/lib/services/writables.ts:484](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L484)
 
 Executes a provided function once for each array element
 
@@ -32413,7 +32413,7 @@ Function to execute for each element
 
 > **filter**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L434)
+Defined in: [src/lib/services/writables.ts:434](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L434)
 
 Sets the filter function for the array display
 
@@ -32442,7 +32442,7 @@ store.filter(n => n % 2 === 0);
 
 > **inform**(): `void`
 
-Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L444)
+Defined in: [src/lib/services/writables.ts:444](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L444)
 
 Notifies subscribers with filtered, sorted, and optionally reversed data
 
@@ -32460,7 +32460,7 @@ Notifies subscribers with filtered, sorted, and optionally reversed data
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -32490,7 +32490,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **map**\<`U`\>(`fn`): `WritableArray`\<`U`\>
 
-Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L469)
+Defined in: [src/lib/services/writables.ts:469](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L469)
 
 Creates a new WritableArray with the results of calling a function on every element
 Note: Filter, sort, and reverse settings are copied to the new array
@@ -32528,7 +32528,7 @@ const strings = numbers.map(n => n.toString());
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -32562,7 +32562,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -32590,7 +32590,7 @@ The writable store to pipe from
 
 > **pop**(): `T`
 
-Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L313)
+Defined in: [src/lib/services/writables.ts:313](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L313)
 
 Removes and returns the last item from the array
 
@@ -32606,7 +32606,7 @@ The removed item, or undefined if array is empty
 
 > **push**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L301)
+Defined in: [src/lib/services/writables.ts:301](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L301)
 
 Adds an item to the end of the array and notifies subscribers
 
@@ -32647,7 +32647,7 @@ store.remove(item1, item2, item3);
 
 > **remove**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L500)
+Defined in: [src/lib/services/writables.ts:500](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L500)
 
 Removes items from the array based on a predicate function
 
@@ -32674,7 +32674,7 @@ store.remove(item => item.id === targetId);
 
 > **remove**(...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L513)
+Defined in: [src/lib/services/writables.ts:513](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L513)
 
 Removes specific items from the array
 
@@ -32705,7 +32705,7 @@ store.remove(item1, item2, item3);
 
 > **reverse**(): `void`
 
-Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L402)
+Defined in: [src/lib/services/writables.ts:402](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L402)
 
 Toggles the reverse order of the array display
 
@@ -32719,7 +32719,7 @@ Toggles the reverse order of the array display
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -32751,7 +32751,7 @@ store.set('new value');
 
 > **shift**(): `T`
 
-Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L327)
+Defined in: [src/lib/services/writables.ts:327](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L327)
 
 Removes and returns the first item from the array
 
@@ -32767,7 +32767,7 @@ The removed item, or undefined if array is empty
 
 > **sort**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L418)
+Defined in: [src/lib/services/writables.ts:418](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L418)
 
 Sets the sort function for the array display
 
@@ -32796,7 +32796,7 @@ store.sort((a, b) => a - b);
 
 > **splice**(`start`, `deleteCount`, ...`items`): `void`
 
-Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L357)
+Defined in: [src/lib/services/writables.ts:357](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L357)
 
 Changes the contents of the array by removing/replacing existing elements and/or adding new elements
 
@@ -32830,7 +32830,7 @@ Elements to add to the array
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -32865,7 +32865,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **unshift**(`item`): `void`
 
-Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L342)
+Defined in: [src/lib/services/writables.ts:342](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L342)
 
 Adds an item to the beginning of the array and notifies subscribers
 
@@ -32887,7 +32887,7 @@ Item to add to the beginning of the array
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -32919,7 +32919,7 @@ store.update(current => current + 1);
 
 > `static` **from**\<`T`\>(`arr`): `WritableArray`\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L282)
+Defined in: [src/lib/services/writables.ts:282](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L282)
 
 Creates a WritableArray from any iterable
 
@@ -32961,7 +32961,7 @@ const fromSet = WritableArray.from(new Set(['a', 'b', 'c']));
 
 # Class: WritableBase\<T\>
 
-Defined in: [src/lib/services/writables.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L22)
+Defined in: [src/lib/services/writables.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L22)
 
 Base writable store implementation with debounced updates and lifecycle management.
 Provides a foundation for reactive data stores with performance optimizations.
@@ -33002,7 +33002,7 @@ The type of data stored in this writable
 
 > **new WritableBase**\<`T`\>(`_data`, `_config?`): `WritableBase`\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L32)
+Defined in: [src/lib/services/writables.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L32)
 
 Creates an instance of WritableBase.
 
@@ -33038,7 +33038,7 @@ Enable debug logging
 
 > **subscribers**: `Set`\<`Subscriber`\<`T`\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -33050,7 +33050,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -33060,7 +33060,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -33078,7 +33078,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -33100,7 +33100,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<`T`\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -33124,7 +33124,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -33146,7 +33146,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -33172,7 +33172,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -33202,7 +33202,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -33226,7 +33226,7 @@ The writable store to pipe from
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -33258,7 +33258,7 @@ store.set('new value');
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -33293,7 +33293,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -33375,7 +33375,7 @@ Email template payload types. Each key maps to the data shape required by the ma
 
 > **Email** = `object`
 
-Defined in: [src/lib/types/email.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/email.ts#L13)
+Defined in: [src/lib/types/email.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/email.ts#L13)
 
 ## Fileoverview
 
@@ -33399,7 +33399,7 @@ const payload: Email['forgot-password'] = {
 
 > **forgot-password**: `object`
 
-Defined in: [src/lib/types/email.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/email.ts#L17)
+Defined in: [src/lib/types/email.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/email.ts#L17)
 
 Password reset email payload.
 
@@ -33417,7 +33417,7 @@ Password reset email payload.
 
 > **test**: `object`
 
-Defined in: [src/lib/types/email.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/email.ts#L24)
+Defined in: [src/lib/types/email.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/email.ts#L24)
 
 Test email payload.
 
@@ -33474,7 +33474,7 @@ Test email payload.
 
 > **Entitlement** = `"view-roles"` \| `"test-permission-view"` \| `"manage-roles"` \| `"manage-members"` \| `"test-permission-manage"`
 
-Defined in: [src/lib/types/entitlements.ts:1](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/entitlements.ts#L1)
+Defined in: [src/lib/types/entitlements.ts:1](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/entitlements.ts#L1)
 
 
 [**my-app**](../../../../../README.md)
@@ -33487,7 +33487,7 @@ Defined in: [src/lib/types/entitlements.ts:1](https://github.com/tsaxking/svelte
 
 > **Features** = `"manage-roles"`
 
-Defined in: [src/lib/types/entitlements.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/entitlements.ts#L8)
+Defined in: [src/lib/types/entitlements.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/entitlements.ts#L8)
 
 
 [**my-app**](../../../../../README.md)
@@ -33500,7 +33500,7 @@ Defined in: [src/lib/types/entitlements.ts:8](https://github.com/tsaxking/svelte
 
 > **Group** = `"Roles"` \| `"Testing"`
 
-Defined in: [src/lib/types/entitlements.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/entitlements.ts#L7)
+Defined in: [src/lib/types/entitlements.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/entitlements.ts#L7)
 
 
 [**my-app**](../../../../README.md)
@@ -33554,7 +33554,7 @@ Icon name unions for supported icon sets.
 
 > **BootstrapIcon** = `"0-circle"` \| `"0-circle-fill"` \| `"0-square"` \| `"0-square-fill"` \| `"1-circle"` \| `"1-circle-fill"` \| `"1-square"` \| `"1-square-fill"` \| `"123"` \| `"2-circle"` \| `"2-circle-fill"` \| `"2-square"` \| `"2-square-fill"` \| `"3-circle"` \| `"3-circle-fill"` \| `"3-square"` \| `"3-square-fill"` \| `"4-circle"` \| `"4-circle-fill"` \| `"4-square"` \| `"4-square-fill"` \| `"5-circle"` \| `"5-circle-fill"` \| `"5-square"` \| `"5-square-fill"` \| `"6-circle"` \| `"6-circle-fill"` \| `"6-square"` \| `"6-square-fill"` \| `"7-circle"` \| `"7-circle-fill"` \| `"7-square"` \| `"7-square-fill"` \| `"8-circle"` \| `"8-circle-fill"` \| `"8-square"` \| `"8-square-fill"` \| `"9-circle"` \| `"9-circle-fill"` \| `"9-square"` \| `"9-square-fill"` \| `"activity"` \| `"airplane"` \| `"airplane-engines"` \| `"airplane-engines-fill"` \| `"airplane-fill"` \| `"alarm"` \| `"alarm-fill"` \| `"alexa"` \| `"align-bottom"` \| `"align-center"` \| `"align-end"` \| `"align-middle"` \| `"align-start"` \| `"align-top"` \| `"alipay"` \| `"alphabet"` \| `"alphabet-uppercase"` \| `"alt"` \| `"amazon"` \| `"amd"` \| `"android"` \| `"android2"` \| `"anthropic"` \| `"app"` \| `"app-indicator"` \| `"apple"` \| `"apple-music"` \| `"archive"` \| `"archive-fill"` \| `"arrow-90deg-down"` \| `"arrow-90deg-left"` \| `"arrow-90deg-right"` \| `"arrow-90deg-up"` \| `"arrow-bar-down"` \| `"arrow-bar-left"` \| `"arrow-bar-right"` \| `"arrow-bar-up"` \| `"arrow-clockwise"` \| `"arrow-counterclockwise"` \| `"arrow-down"` \| `"arrow-down-circle"` \| `"arrow-down-circle-fill"` \| `"arrow-down-left-circle"` \| `"arrow-down-left-circle-fill"` \| `"arrow-down-left-square"` \| `"arrow-down-left-square-fill"` \| `"arrow-down-right-circle"` \| `"arrow-down-right-circle-fill"` \| `"arrow-down-right-square"` \| `"arrow-down-right-square-fill"` \| `"arrow-down-square"` \| `"arrow-down-square-fill"` \| `"arrow-down-left"` \| `"arrow-down-right"` \| `"arrow-down-short"` \| `"arrow-down-up"` \| `"arrow-left"` \| `"arrow-left-circle"` \| `"arrow-left-circle-fill"` \| `"arrow-left-square"` \| `"arrow-left-square-fill"` \| `"arrow-left-right"` \| `"arrow-left-short"` \| `"arrow-repeat"` \| `"arrow-return-left"` \| `"arrow-return-right"` \| `"arrow-right"` \| `"arrow-right-circle"` \| `"arrow-right-circle-fill"` \| `"arrow-right-square"` \| `"arrow-right-square-fill"` \| `"arrow-right-short"` \| `"arrow-through-heart"` \| `"arrow-through-heart-fill"` \| `"arrow-up"` \| `"arrow-up-circle"` \| `"arrow-up-circle-fill"` \| `"arrow-up-left-circle"` \| `"arrow-up-left-circle-fill"` \| `"arrow-up-left-square"` \| `"arrow-up-left-square-fill"` \| `"arrow-up-right-circle"` \| `"arrow-up-right-circle-fill"` \| `"arrow-up-right-square"` \| `"arrow-up-right-square-fill"` \| `"arrow-up-square"` \| `"arrow-up-square-fill"` \| `"arrow-up-left"` \| `"arrow-up-right"` \| `"arrow-up-short"` \| `"arrows"` \| `"arrows-angle-contract"` \| `"arrows-angle-expand"` \| `"arrows-collapse"` \| `"arrows-collapse-vertical"` \| `"arrows-expand"` \| `"arrows-expand-vertical"` \| `"arrows-fullscreen"` \| `"arrows-move"` \| `"arrows-vertical"` \| `"aspect-ratio"` \| `"aspect-ratio-fill"` \| `"asterisk"` \| `"at"` \| `"award"` \| `"award-fill"` \| `"back"` \| `"backpack"` \| `"backpack-fill"` \| `"backpack2"` \| `"backpack2-fill"` \| `"backpack3"` \| `"backpack3-fill"` \| `"backpack4"` \| `"backpack4-fill"` \| `"backspace"` \| `"backspace-fill"` \| `"backspace-reverse"` \| `"backspace-reverse-fill"` \| `"badge-3d"` \| `"badge-3d-fill"` \| `"badge-4k"` \| `"badge-4k-fill"` \| `"badge-8k"` \| `"badge-8k-fill"` \| `"badge-ad"` \| `"badge-ad-fill"` \| `"badge-ar"` \| `"badge-ar-fill"` \| `"badge-cc"` \| `"badge-cc-fill"` \| `"badge-hd"` \| `"badge-hd-fill"` \| `"badge-sd"` \| `"badge-sd-fill"` \| `"badge-tm"` \| `"badge-tm-fill"` \| `"badge-vo"` \| `"badge-vo-fill"` \| `"badge-vr"` \| `"badge-vr-fill"` \| `"badge-wc"` \| `"badge-wc-fill"` \| `"bag"` \| `"bag-check"` \| `"bag-check-fill"` \| `"bag-dash"` \| `"bag-dash-fill"` \| `"bag-fill"` \| `"bag-heart"` \| `"bag-heart-fill"` \| `"bag-plus"` \| `"bag-plus-fill"` \| `"bag-x"` \| `"bag-x-fill"` \| `"balloon"` \| `"balloon-fill"` \| `"balloon-heart"` \| `"balloon-heart-fill"` \| `"ban"` \| `"ban-fill"` \| `"bandaid"` \| `"bandaid-fill"` \| `"bank"` \| `"bank2"` \| `"bar-chart"` \| `"bar-chart-fill"` \| `"bar-chart-line"` \| `"bar-chart-line-fill"` \| `"bar-chart-steps"` \| `"basket"` \| `"basket-fill"` \| `"basket2"` \| `"basket2-fill"` \| `"basket3"` \| `"basket3-fill"` \| `"battery"` \| `"battery-charging"` \| `"battery-full"` \| `"battery-half"` \| `"battery-low"` \| `"beaker"` \| `"beaker-fill"` \| `"behance"` \| `"bell"` \| `"bell-fill"` \| `"bell-slash"` \| `"bell-slash-fill"` \| `"bezier"` \| `"bezier2"` \| `"bicycle"` \| `"bing"` \| `"binoculars"` \| `"binoculars-fill"` \| `"blockquote-left"` \| `"blockquote-right"` \| `"bluesky"` \| `"bluetooth"` \| `"body-text"` \| `"book"` \| `"book-fill"` \| `"book-half"` \| `"bookmark"` \| `"bookmark-check"` \| `"bookmark-check-fill"` \| `"bookmark-dash"` \| `"bookmark-dash-fill"` \| `"bookmark-fill"` \| `"bookmark-heart"` \| `"bookmark-heart-fill"` \| `"bookmark-plus"` \| `"bookmark-plus-fill"` \| `"bookmark-star"` \| `"bookmark-star-fill"` \| `"bookmark-x"` \| `"bookmark-x-fill"` \| `"bookmarks"` \| `"bookmarks-fill"` \| `"bookshelf"` \| `"boombox"` \| `"boombox-fill"` \| `"bootstrap"` \| `"bootstrap-fill"` \| `"bootstrap-reboot"` \| `"border"` \| `"border-all"` \| `"border-bottom"` \| `"border-center"` \| `"border-inner"` \| `"border-left"` \| `"border-middle"` \| `"border-outer"` \| `"border-right"` \| `"border-style"` \| `"border-top"` \| `"border-width"` \| `"bounding-box"` \| `"bounding-box-circles"` \| `"box"` \| `"box-arrow-down-left"` \| `"box-arrow-down-right"` \| `"box-arrow-down"` \| `"box-arrow-in-down"` \| `"box-arrow-in-down-left"` \| `"box-arrow-in-down-right"` \| `"box-arrow-in-left"` \| `"box-arrow-in-right"` \| `"box-arrow-in-up"` \| `"box-arrow-in-up-left"` \| `"box-arrow-in-up-right"` \| `"box-arrow-left"` \| `"box-arrow-right"` \| `"box-arrow-up"` \| `"box-arrow-up-left"` \| `"box-arrow-up-right"` \| `"box-fill"` \| `"box-seam"` \| `"box-seam-fill"` \| `"box2"` \| `"box2-fill"` \| `"box2-heart"` \| `"box2-heart-fill"` \| `"boxes"` \| `"braces"` \| `"braces-asterisk"` \| `"bricks"` \| `"briefcase"` \| `"briefcase-fill"` \| `"brightness-alt-high"` \| `"brightness-alt-high-fill"` \| `"brightness-alt-low"` \| `"brightness-alt-low-fill"` \| `"brightness-high"` \| `"brightness-high-fill"` \| `"brightness-low"` \| `"brightness-low-fill"` \| `"brilliance"` \| `"broadcast"` \| `"broadcast-pin"` \| `"browser-chrome"` \| `"browser-edge"` \| `"browser-firefox"` \| `"browser-safari"` \| `"brush"` \| `"brush-fill"` \| `"bucket"` \| `"bucket-fill"` \| `"bug"` \| `"bug-fill"` \| `"building"` \| `"building-add"` \| `"building-check"` \| `"building-dash"` \| `"building-down"` \| `"building-exclamation"` \| `"building-fill"` \| `"building-fill-add"` \| `"building-fill-check"` \| `"building-fill-dash"` \| `"building-fill-down"` \| `"building-fill-exclamation"` \| `"building-fill-gear"` \| `"building-fill-lock"` \| `"building-fill-slash"` \| `"building-fill-up"` \| `"building-fill-x"` \| `"building-gear"` \| `"building-lock"` \| `"building-slash"` \| `"building-up"` \| `"building-x"` \| `"buildings"` \| `"buildings-fill"` \| `"bullseye"` \| `"bus-front"` \| `"bus-front-fill"` \| `"c-circle"` \| `"c-circle-fill"` \| `"c-square"` \| `"c-square-fill"` \| `"cake"` \| `"cake-fill"` \| `"cake2"` \| `"cake2-fill"` \| `"calculator"` \| `"calculator-fill"` \| `"calendar"` \| `"calendar-check"` \| `"calendar-check-fill"` \| `"calendar-date"` \| `"calendar-date-fill"` \| `"calendar-day"` \| `"calendar-day-fill"` \| `"calendar-event"` \| `"calendar-event-fill"` \| `"calendar-fill"` \| `"calendar-heart"` \| `"calendar-heart-fill"` \| `"calendar-minus"` \| `"calendar-minus-fill"` \| `"calendar-month"` \| `"calendar-month-fill"` \| `"calendar-plus"` \| `"calendar-plus-fill"` \| `"calendar-range"` \| `"calendar-range-fill"` \| `"calendar-week"` \| `"calendar-week-fill"` \| `"calendar-x"` \| `"calendar-x-fill"` \| `"calendar2"` \| `"calendar2-check"` \| `"calendar2-check-fill"` \| `"calendar2-date"` \| `"calendar2-date-fill"` \| `"calendar2-day"` \| `"calendar2-day-fill"` \| `"calendar2-event"` \| `"calendar2-event-fill"` \| `"calendar2-fill"` \| `"calendar2-heart"` \| `"calendar2-heart-fill"` \| `"calendar2-minus"` \| `"calendar2-minus-fill"` \| `"calendar2-month"` \| `"calendar2-month-fill"` \| `"calendar2-plus"` \| `"calendar2-plus-fill"` \| `"calendar2-range"` \| `"calendar2-range-fill"` \| `"calendar2-week"` \| `"calendar2-week-fill"` \| `"calendar2-x"` \| `"calendar2-x-fill"` \| `"calendar3"` \| `"calendar3-event"` \| `"calendar3-event-fill"` \| `"calendar3-fill"` \| `"calendar3-range"` \| `"calendar3-range-fill"` \| `"calendar3-week"` \| `"calendar3-week-fill"` \| `"calendar4"` \| `"calendar4-event"` \| `"calendar4-range"` \| `"calendar4-week"` \| `"camera"` \| `"camera2"` \| `"camera-fill"` \| `"camera-reels"` \| `"camera-reels-fill"` \| `"camera-video"` \| `"camera-video-fill"` \| `"camera-video-off"` \| `"camera-video-off-fill"` \| `"capslock"` \| `"capslock-fill"` \| `"capsule"` \| `"capsule-pill"` \| `"car-front"` \| `"car-front-fill"` \| `"card-checklist"` \| `"card-heading"` \| `"card-image"` \| `"card-list"` \| `"card-text"` \| `"caret-down"` \| `"caret-down-fill"` \| `"caret-down-square"` \| `"caret-down-square-fill"` \| `"caret-left"` \| `"caret-left-fill"` \| `"caret-left-square"` \| `"caret-left-square-fill"` \| `"caret-right"` \| `"caret-right-fill"` \| `"caret-right-square"` \| `"caret-right-square-fill"` \| `"caret-up"` \| `"caret-up-fill"` \| `"caret-up-square"` \| `"caret-up-square-fill"` \| `"cart"` \| `"cart-check"` \| `"cart-check-fill"` \| `"cart-dash"` \| `"cart-dash-fill"` \| `"cart-fill"` \| `"cart-plus"` \| `"cart-plus-fill"` \| `"cart-x"` \| `"cart-x-fill"` \| `"cart2"` \| `"cart3"` \| `"cart4"` \| `"cash"` \| `"cash-coin"` \| `"cash-stack"` \| `"cassette"` \| `"cassette-fill"` \| `"cast"` \| `"cc-circle"` \| `"cc-circle-fill"` \| `"cc-square"` \| `"cc-square-fill"` \| `"chat"` \| `"chat-dots"` \| `"chat-dots-fill"` \| `"chat-fill"` \| `"chat-heart"` \| `"chat-heart-fill"` \| `"chat-left"` \| `"chat-left-dots"` \| `"chat-left-dots-fill"` \| `"chat-left-fill"` \| `"chat-left-heart"` \| `"chat-left-heart-fill"` \| `"chat-left-quote"` \| `"chat-left-quote-fill"` \| `"chat-left-text"` \| `"chat-left-text-fill"` \| `"chat-quote"` \| `"chat-quote-fill"` \| `"chat-right"` \| `"chat-right-dots"` \| `"chat-right-dots-fill"` \| `"chat-right-fill"` \| `"chat-right-heart"` \| `"chat-right-heart-fill"` \| `"chat-right-quote"` \| `"chat-right-quote-fill"` \| `"chat-right-text"` \| `"chat-right-text-fill"` \| `"chat-square"` \| `"chat-square-dots"` \| `"chat-square-dots-fill"` \| `"chat-square-fill"` \| `"chat-square-heart"` \| `"chat-square-heart-fill"` \| `"chat-square-quote"` \| `"chat-square-quote-fill"` \| `"chat-square-text"` \| `"chat-square-text-fill"` \| `"chat-text"` \| `"chat-text-fill"` \| `"check"` \| `"check-all"` \| `"check-circle"` \| `"check-circle-fill"` \| `"check-lg"` \| `"check-square"` \| `"check-square-fill"` \| `"check2"` \| `"check2-all"` \| `"check2-circle"` \| `"check2-square"` \| `"chevron-bar-contract"` \| `"chevron-bar-down"` \| `"chevron-bar-expand"` \| `"chevron-bar-left"` \| `"chevron-bar-right"` \| `"chevron-bar-up"` \| `"chevron-compact-down"` \| `"chevron-compact-left"` \| `"chevron-compact-right"` \| `"chevron-compact-up"` \| `"chevron-contract"` \| `"chevron-double-down"` \| `"chevron-double-left"` \| `"chevron-double-right"` \| `"chevron-double-up"` \| `"chevron-down"` \| `"chevron-expand"` \| `"chevron-left"` \| `"chevron-right"` \| `"chevron-up"` \| `"circle"` \| `"circle-fill"` \| `"circle-half"` \| `"slash-circle"` \| `"circle-square"` \| `"claude"` \| `"clipboard"` \| `"clipboard-check"` \| `"clipboard-check-fill"` \| `"clipboard-data"` \| `"clipboard-data-fill"` \| `"clipboard-fill"` \| `"clipboard-heart"` \| `"clipboard-heart-fill"` \| `"clipboard-minus"` \| `"clipboard-minus-fill"` \| `"clipboard-plus"` \| `"clipboard-plus-fill"` \| `"clipboard-pulse"` \| `"clipboard-x"` \| `"clipboard-x-fill"` \| `"clipboard2"` \| `"clipboard2-check"` \| `"clipboard2-check-fill"` \| `"clipboard2-data"` \| `"clipboard2-data-fill"` \| `"clipboard2-fill"` \| `"clipboard2-heart"` \| `"clipboard2-heart-fill"` \| `"clipboard2-minus"` \| `"clipboard2-minus-fill"` \| `"clipboard2-plus"` \| `"clipboard2-plus-fill"` \| `"clipboard2-pulse"` \| `"clipboard2-pulse-fill"` \| `"clipboard2-x"` \| `"clipboard2-x-fill"` \| `"clock"` \| `"clock-fill"` \| `"clock-history"` \| `"cloud"` \| `"cloud-arrow-down"` \| `"cloud-arrow-down-fill"` \| `"cloud-arrow-up"` \| `"cloud-arrow-up-fill"` \| `"cloud-check"` \| `"cloud-check-fill"` \| `"cloud-download"` \| `"cloud-download-fill"` \| `"cloud-drizzle"` \| `"cloud-drizzle-fill"` \| `"cloud-fill"` \| `"cloud-fog"` \| `"cloud-fog-fill"` \| `"cloud-fog2"` \| `"cloud-fog2-fill"` \| `"cloud-hail"` \| `"cloud-hail-fill"` \| `"cloud-haze"` \| `"cloud-haze-fill"` \| `"cloud-haze2"` \| `"cloud-haze2-fill"` \| `"cloud-lightning"` \| `"cloud-lightning-fill"` \| `"cloud-lightning-rain"` \| `"cloud-lightning-rain-fill"` \| `"cloud-minus"` \| `"cloud-minus-fill"` \| `"cloud-moon"` \| `"cloud-moon-fill"` \| `"cloud-plus"` \| `"cloud-plus-fill"` \| `"cloud-rain"` \| `"cloud-rain-fill"` \| `"cloud-rain-heavy"` \| `"cloud-rain-heavy-fill"` \| `"cloud-slash"` \| `"cloud-slash-fill"` \| `"cloud-sleet"` \| `"cloud-sleet-fill"` \| `"cloud-snow"` \| `"cloud-snow-fill"` \| `"cloud-sun"` \| `"cloud-sun-fill"` \| `"cloud-upload"` \| `"cloud-upload-fill"` \| `"clouds"` \| `"clouds-fill"` \| `"cloudy"` \| `"cloudy-fill"` \| `"code"` \| `"code-slash"` \| `"code-square"` \| `"coin"` \| `"collection"` \| `"collection-fill"` \| `"collection-play"` \| `"collection-play-fill"` \| `"columns"` \| `"columns-gap"` \| `"command"` \| `"compass"` \| `"compass-fill"` \| `"cone"` \| `"cone-striped"` \| `"controller"` \| `"cookie"` \| `"copy"` \| `"cpu"` \| `"cpu-fill"` \| `"credit-card"` \| `"credit-card-2-back"` \| `"credit-card-2-back-fill"` \| `"credit-card-2-front"` \| `"credit-card-2-front-fill"` \| `"credit-card-fill"` \| `"crop"` \| `"crosshair"` \| `"crosshair2"` \| `"css"` \| `"cup"` \| `"cup-fill"` \| `"cup-hot"` \| `"cup-hot-fill"` \| `"cup-straw"` \| `"currency-bitcoin"` \| `"currency-dollar"` \| `"currency-euro"` \| `"currency-exchange"` \| `"currency-pound"` \| `"currency-rupee"` \| `"currency-yen"` \| `"cursor"` \| `"cursor-fill"` \| `"cursor-text"` \| `"dash"` \| `"dash-circle"` \| `"dash-circle-dotted"` \| `"dash-circle-fill"` \| `"dash-lg"` \| `"dash-square"` \| `"dash-square-dotted"` \| `"dash-square-fill"` \| `"database"` \| `"database-add"` \| `"database-check"` \| `"database-dash"` \| `"database-down"` \| `"database-exclamation"` \| `"database-fill"` \| `"database-fill-add"` \| `"database-fill-check"` \| `"database-fill-dash"` \| `"database-fill-down"` \| `"database-fill-exclamation"` \| `"database-fill-gear"` \| `"database-fill-lock"` \| `"database-fill-slash"` \| `"database-fill-up"` \| `"database-fill-x"` \| `"database-gear"` \| `"database-lock"` \| `"database-slash"` \| `"database-up"` \| `"database-x"` \| `"device-hdd"` \| `"device-hdd-fill"` \| `"device-ssd"` \| `"device-ssd-fill"` \| `"diagram-2"` \| `"diagram-2-fill"` \| `"diagram-3"` \| `"diagram-3-fill"` \| `"diamond"` \| `"diamond-fill"` \| `"diamond-half"` \| `"dice-1"` \| `"dice-1-fill"` \| `"dice-2"` \| `"dice-2-fill"` \| `"dice-3"` \| `"dice-3-fill"` \| `"dice-4"` \| `"dice-4-fill"` \| `"dice-5"` \| `"dice-5-fill"` \| `"dice-6"` \| `"dice-6-fill"` \| `"disc"` \| `"disc-fill"` \| `"discord"` \| `"display"` \| `"display-fill"` \| `"displayport"` \| `"displayport-fill"` \| `"distribute-horizontal"` \| `"distribute-vertical"` \| `"door-closed"` \| `"door-closed-fill"` \| `"door-open"` \| `"door-open-fill"` \| `"dot"` \| `"download"` \| `"dpad"` \| `"dpad-fill"` \| `"dribbble"` \| `"dropbox"` \| `"droplet"` \| `"droplet-fill"` \| `"droplet-half"` \| `"duffle"` \| `"duffle-fill"` \| `"ear"` \| `"ear-fill"` \| `"earbuds"` \| `"easel"` \| `"easel-fill"` \| `"easel2"` \| `"easel2-fill"` \| `"easel3"` \| `"easel3-fill"` \| `"egg"` \| `"egg-fill"` \| `"egg-fried"` \| `"eject"` \| `"eject-fill"` \| `"emoji-angry"` \| `"emoji-angry-fill"` \| `"emoji-astonished"` \| `"emoji-astonished-fill"` \| `"emoji-dizzy"` \| `"emoji-dizzy-fill"` \| `"emoji-expressionless"` \| `"emoji-expressionless-fill"` \| `"emoji-frown"` \| `"emoji-frown-fill"` \| `"emoji-grimace"` \| `"emoji-grimace-fill"` \| `"emoji-grin"` \| `"emoji-grin-fill"` \| `"emoji-heart-eyes"` \| `"emoji-heart-eyes-fill"` \| `"emoji-kiss"` \| `"emoji-kiss-fill"` \| `"emoji-laughing"` \| `"emoji-laughing-fill"` \| `"emoji-neutral"` \| `"emoji-neutral-fill"` \| `"emoji-smile"` \| `"emoji-smile-fill"` \| `"emoji-smile-upside-down"` \| `"emoji-smile-upside-down-fill"` \| `"emoji-sunglasses"` \| `"emoji-sunglasses-fill"` \| `"emoji-surprise"` \| `"emoji-surprise-fill"` \| `"emoji-tear"` \| `"emoji-tear-fill"` \| `"emoji-wink"` \| `"emoji-wink-fill"` \| `"envelope"` \| `"envelope-arrow-down"` \| `"envelope-arrow-down-fill"` \| `"envelope-arrow-up"` \| `"envelope-arrow-up-fill"` \| `"envelope-at"` \| `"envelope-at-fill"` \| `"envelope-check"` \| `"envelope-check-fill"` \| `"envelope-dash"` \| `"envelope-dash-fill"` \| `"envelope-exclamation"` \| `"envelope-exclamation-fill"` \| `"envelope-fill"` \| `"envelope-heart"` \| `"envelope-heart-fill"` \| `"envelope-open"` \| `"envelope-open-fill"` \| `"envelope-open-heart"` \| `"envelope-open-heart-fill"` \| `"envelope-paper"` \| `"envelope-paper-fill"` \| `"envelope-paper-heart"` \| `"envelope-paper-heart-fill"` \| `"envelope-plus"` \| `"envelope-plus-fill"` \| `"envelope-slash"` \| `"envelope-slash-fill"` \| `"envelope-x"` \| `"envelope-x-fill"` \| `"eraser"` \| `"eraser-fill"` \| `"escape"` \| `"ethernet"` \| `"ev-front"` \| `"ev-front-fill"` \| `"ev-station"` \| `"ev-station-fill"` \| `"exclamation"` \| `"exclamation-circle"` \| `"exclamation-circle-fill"` \| `"exclamation-diamond"` \| `"exclamation-diamond-fill"` \| `"exclamation-lg"` \| `"exclamation-octagon"` \| `"exclamation-octagon-fill"` \| `"exclamation-square"` \| `"exclamation-square-fill"` \| `"exclamation-triangle"` \| `"exclamation-triangle-fill"` \| `"exclude"` \| `"explicit"` \| `"explicit-fill"` \| `"exposure"` \| `"eye"` \| `"eye-fill"` \| `"eye-slash"` \| `"eye-slash-fill"` \| `"eyedropper"` \| `"eyeglasses"` \| `"facebook"` \| `"fan"` \| `"fast-forward"` \| `"fast-forward-btn"` \| `"fast-forward-btn-fill"` \| `"fast-forward-circle"` \| `"fast-forward-circle-fill"` \| `"fast-forward-fill"` \| `"feather"` \| `"feather2"` \| `"file"` \| `"file-arrow-down"` \| `"file-arrow-down-fill"` \| `"file-arrow-up"` \| `"file-arrow-up-fill"` \| `"file-bar-graph"` \| `"file-bar-graph-fill"` \| `"file-binary"` \| `"file-binary-fill"` \| `"file-break"` \| `"file-break-fill"` \| `"file-check"` \| `"file-check-fill"` \| `"file-code"` \| `"file-code-fill"` \| `"file-diff"` \| `"file-diff-fill"` \| `"file-earmark"` \| `"file-earmark-arrow-down"` \| `"file-earmark-arrow-down-fill"` \| `"file-earmark-arrow-up"` \| `"file-earmark-arrow-up-fill"` \| `"file-earmark-bar-graph"` \| `"file-earmark-bar-graph-fill"` \| `"file-earmark-binary"` \| `"file-earmark-binary-fill"` \| `"file-earmark-break"` \| `"file-earmark-break-fill"` \| `"file-earmark-check"` \| `"file-earmark-check-fill"` \| `"file-earmark-code"` \| `"file-earmark-code-fill"` \| `"file-earmark-diff"` \| `"file-earmark-diff-fill"` \| `"file-earmark-easel"` \| `"file-earmark-easel-fill"` \| `"file-earmark-excel"` \| `"file-earmark-excel-fill"` \| `"file-earmark-fill"` \| `"file-earmark-font"` \| `"file-earmark-font-fill"` \| `"file-earmark-image"` \| `"file-earmark-image-fill"` \| `"file-earmark-lock"` \| `"file-earmark-lock-fill"` \| `"file-earmark-lock2"` \| `"file-earmark-lock2-fill"` \| `"file-earmark-medical"` \| `"file-earmark-medical-fill"` \| `"file-earmark-minus"` \| `"file-earmark-minus-fill"` \| `"file-earmark-music"` \| `"file-earmark-music-fill"` \| `"file-earmark-pdf"` \| `"file-earmark-pdf-fill"` \| `"file-earmark-person"` \| `"file-earmark-person-fill"` \| `"file-earmark-play"` \| `"file-earmark-play-fill"` \| `"file-earmark-plus"` \| `"file-earmark-plus-fill"` \| `"file-earmark-post"` \| `"file-earmark-post-fill"` \| `"file-earmark-ppt"` \| `"file-earmark-ppt-fill"` \| `"file-earmark-richtext"` \| `"file-earmark-richtext-fill"` \| `"file-earmark-ruled"` \| `"file-earmark-ruled-fill"` \| `"file-earmark-slides"` \| `"file-earmark-slides-fill"` \| `"file-earmark-spreadsheet"` \| `"file-earmark-spreadsheet-fill"` \| `"file-earmark-text"` \| `"file-earmark-text-fill"` \| `"file-earmark-word"` \| `"file-earmark-word-fill"` \| `"file-earmark-x"` \| `"file-earmark-x-fill"` \| `"file-earmark-zip"` \| `"file-earmark-zip-fill"` \| `"file-easel"` \| `"file-easel-fill"` \| `"file-excel"` \| `"file-excel-fill"` \| `"file-fill"` \| `"file-font"` \| `"file-font-fill"` \| `"file-image"` \| `"file-image-fill"` \| `"file-lock"` \| `"file-lock-fill"` \| `"file-lock2"` \| `"file-lock2-fill"` \| `"file-medical"` \| `"file-medical-fill"` \| `"file-minus"` \| `"file-minus-fill"` \| `"file-music"` \| `"file-music-fill"` \| `"file-pdf"` \| `"file-pdf-fill"` \| `"file-person"` \| `"file-person-fill"` \| `"file-play"` \| `"file-play-fill"` \| `"file-plus"` \| `"file-plus-fill"` \| `"file-post"` \| `"file-post-fill"` \| `"file-ppt"` \| `"file-ppt-fill"` \| `"file-richtext"` \| `"file-richtext-fill"` \| `"file-ruled"` \| `"file-ruled-fill"` \| `"file-slides"` \| `"file-slides-fill"` \| `"file-spreadsheet"` \| `"file-spreadsheet-fill"` \| `"file-text"` \| `"file-text-fill"` \| `"file-word"` \| `"file-word-fill"` \| `"file-x"` \| `"file-x-fill"` \| `"file-zip"` \| `"file-zip-fill"` \| `"files"` \| `"files-alt"` \| `"filetype-aac"` \| `"filetype-ai"` \| `"filetype-bmp"` \| `"filetype-cs"` \| `"filetype-css"` \| `"filetype-csv"` \| `"filetype-doc"` \| `"filetype-docx"` \| `"filetype-exe"` \| `"filetype-gif"` \| `"filetype-heic"` \| `"filetype-html"` \| `"filetype-java"` \| `"filetype-jpg"` \| `"filetype-js"` \| `"filetype-json"` \| `"filetype-jsx"` \| `"filetype-key"` \| `"filetype-m4p"` \| `"filetype-md"` \| `"filetype-mdx"` \| `"filetype-mov"` \| `"filetype-mp3"` \| `"filetype-mp4"` \| `"filetype-otf"` \| `"filetype-pdf"` \| `"filetype-php"` \| `"filetype-png"` \| `"filetype-ppt"` \| `"filetype-pptx"` \| `"filetype-psd"` \| `"filetype-py"` \| `"filetype-raw"` \| `"filetype-rb"` \| `"filetype-sass"` \| `"filetype-scss"` \| `"filetype-sh"` \| `"filetype-sql"` \| `"filetype-svg"` \| `"filetype-tiff"` \| `"filetype-tsx"` \| `"filetype-ttf"` \| `"filetype-txt"` \| `"filetype-wav"` \| `"filetype-woff"` \| `"filetype-xls"` \| `"filetype-xlsx"` \| `"filetype-xml"` \| `"filetype-yml"` \| `"film"` \| `"filter"` \| `"filter-circle"` \| `"filter-circle-fill"` \| `"filter-left"` \| `"filter-right"` \| `"filter-square"` \| `"filter-square-fill"` \| `"fingerprint"` \| `"fire"` \| `"flag"` \| `"flag-fill"` \| `"flask"` \| `"flask-fill"` \| `"flask-florence"` \| `"flask-florence-fill"` \| `"floppy"` \| `"floppy-fill"` \| `"floppy2"` \| `"floppy2-fill"` \| `"flower1"` \| `"flower2"` \| `"flower3"` \| `"folder"` \| `"folder-check"` \| `"folder-fill"` \| `"folder-minus"` \| `"folder-plus"` \| `"folder-symlink"` \| `"folder-symlink-fill"` \| `"folder-x"` \| `"folder2"` \| `"folder2-open"` \| `"fonts"` \| `"fork-knife"` \| `"forward"` \| `"forward-fill"` \| `"front"` \| `"fuel-pump"` \| `"fuel-pump-diesel"` \| `"fuel-pump-diesel-fill"` \| `"fuel-pump-fill"` \| `"fullscreen"` \| `"fullscreen-exit"` \| `"funnel"` \| `"funnel-fill"` \| `"gear"` \| `"gear-fill"` \| `"gear-wide"` \| `"gear-wide-connected"` \| `"gem"` \| `"gender-ambiguous"` \| `"gender-female"` \| `"gender-male"` \| `"gender-neuter"` \| `"gender-trans"` \| `"geo"` \| `"geo-alt"` \| `"geo-alt-fill"` \| `"geo-fill"` \| `"gift"` \| `"gift-fill"` \| `"git"` \| `"github"` \| `"gitlab"` \| `"globe"` \| `"globe-americas"` \| `"globe-americas-fill"` \| `"globe-asia-australia"` \| `"globe-asia-australia-fill"` \| `"globe-central-south-asia"` \| `"globe-central-south-asia-fill"` \| `"globe-europe-africa"` \| `"globe-europe-africa-fill"` \| `"globe2"` \| `"google"` \| `"google-play"` \| `"gpu-card"` \| `"graph-down"` \| `"graph-down-arrow"` \| `"graph-up"` \| `"graph-up-arrow"` \| `"grid"` \| `"grid-1x2"` \| `"grid-1x2-fill"` \| `"grid-3x2"` \| `"grid-3x2-gap"` \| `"grid-3x2-gap-fill"` \| `"grid-3x3"` \| `"grid-3x3-gap"` \| `"grid-3x3-gap-fill"` \| `"grid-fill"` \| `"grip-horizontal"` \| `"grip-vertical"` \| `"h-circle"` \| `"h-circle-fill"` \| `"h-square"` \| `"h-square-fill"` \| `"hammer"` \| `"hand-index"` \| `"hand-index-fill"` \| `"hand-index-thumb"` \| `"hand-index-thumb-fill"` \| `"hand-thumbs-down"` \| `"hand-thumbs-down-fill"` \| `"hand-thumbs-up"` \| `"hand-thumbs-up-fill"` \| `"handbag"` \| `"handbag-fill"` \| `"hash"` \| `"hdd"` \| `"hdd-fill"` \| `"hdd-network"` \| `"hdd-network-fill"` \| `"hdd-rack"` \| `"hdd-rack-fill"` \| `"hdd-stack"` \| `"hdd-stack-fill"` \| `"hdmi"` \| `"hdmi-fill"` \| `"headphones"` \| `"headset"` \| `"headset-vr"` \| `"heart"` \| `"heart-arrow"` \| `"heart-fill"` \| `"heart-half"` \| `"heart-pulse"` \| `"heart-pulse-fill"` \| `"heartbreak"` \| `"heartbreak-fill"` \| `"hearts"` \| `"heptagon"` \| `"heptagon-fill"` \| `"heptagon-half"` \| `"hexagon"` \| `"hexagon-fill"` \| `"hexagon-half"` \| `"highlighter"` \| `"highlights"` \| `"hospital"` \| `"hospital-fill"` \| `"hourglass"` \| `"hourglass-bottom"` \| `"hourglass-split"` \| `"hourglass-top"` \| `"house"` \| `"house-add"` \| `"house-add-fill"` \| `"house-check"` \| `"house-check-fill"` \| `"house-dash"` \| `"house-dash-fill"` \| `"house-door"` \| `"house-door-fill"` \| `"house-down"` \| `"house-down-fill"` \| `"house-exclamation"` \| `"house-exclamation-fill"` \| `"house-fill"` \| `"house-gear"` \| `"house-gear-fill"` \| `"house-heart"` \| `"house-heart-fill"` \| `"house-lock"` \| `"house-lock-fill"` \| `"house-slash"` \| `"house-slash-fill"` \| `"house-up"` \| `"house-up-fill"` \| `"house-x"` \| `"house-x-fill"` \| `"houses"` \| `"houses-fill"` \| `"hr"` \| `"hurricane"` \| `"hypnotize"` \| `"image"` \| `"image-alt"` \| `"image-fill"` \| `"images"` \| `"inbox"` \| `"inbox-fill"` \| `"inboxes-fill"` \| `"inboxes"` \| `"incognito"` \| `"indent"` \| `"infinity"` \| `"info"` \| `"info-circle"` \| `"info-circle-fill"` \| `"info-lg"` \| `"info-square"` \| `"info-square-fill"` \| `"input-cursor"` \| `"input-cursor-text"` \| `"instagram"` \| `"intersect"` \| `"javascript"` \| `"journal"` \| `"journal-album"` \| `"journal-arrow-down"` \| `"journal-arrow-up"` \| `"journal-bookmark"` \| `"journal-bookmark-fill"` \| `"journal-check"` \| `"journal-code"` \| `"journal-medical"` \| `"journal-minus"` \| `"journal-plus"` \| `"journal-richtext"` \| `"journal-text"` \| `"journal-x"` \| `"journals"` \| `"joystick"` \| `"justify"` \| `"justify-left"` \| `"justify-right"` \| `"kanban"` \| `"kanban-fill"` \| `"key"` \| `"key-fill"` \| `"keyboard"` \| `"keyboard-fill"` \| `"ladder"` \| `"lamp"` \| `"lamp-fill"` \| `"laptop"` \| `"laptop-fill"` \| `"layer-backward"` \| `"layer-forward"` \| `"layers"` \| `"layers-fill"` \| `"layers-half"` \| `"layout-sidebar"` \| `"layout-sidebar-inset-reverse"` \| `"layout-sidebar-inset"` \| `"layout-sidebar-reverse"` \| `"layout-split"` \| `"layout-text-sidebar"` \| `"layout-text-sidebar-reverse"` \| `"layout-text-window"` \| `"layout-text-window-reverse"` \| `"layout-three-columns"` \| `"layout-wtf"` \| `"leaf"` \| `"leaf-fill"` \| `"life-preserver"` \| `"lightbulb"` \| `"lightbulb-fill"` \| `"lightbulb-off"` \| `"lightbulb-off-fill"` \| `"lightning"` \| `"lightning-charge"` \| `"lightning-charge-fill"` \| `"lightning-fill"` \| `"line"` \| `"link"` \| `"link-45deg"` \| `"linkedin"` \| `"list"` \| `"list-check"` \| `"list-columns"` \| `"list-columns-reverse"` \| `"list-nested"` \| `"list-ol"` \| `"list-stars"` \| `"list-task"` \| `"list-ul"` \| `"lock"` \| `"lock-fill"` \| `"luggage"` \| `"luggage-fill"` \| `"lungs"` \| `"lungs-fill"` \| `"magic"` \| `"magnet"` \| `"magnet-fill"` \| `"mailbox"` \| `"mailbox-flag"` \| `"mailbox2"` \| `"mailbox2-flag"` \| `"map"` \| `"map-fill"` \| `"markdown"` \| `"markdown-fill"` \| `"marker-tip"` \| `"mask"` \| `"mastodon"` \| `"measuring-cup"` \| `"measuring-cup-fill"` \| `"medium"` \| `"megaphone"` \| `"megaphone-fill"` \| `"memory"` \| `"menu-app"` \| `"menu-app-fill"` \| `"menu-button"` \| `"menu-button-fill"` \| `"menu-button-wide"` \| `"menu-button-wide-fill"` \| `"menu-down"` \| `"menu-up"` \| `"messenger"` \| `"meta"` \| `"mic"` \| `"mic-fill"` \| `"mic-mute"` \| `"mic-mute-fill"` \| `"microsoft"` \| `"microsoft-teams"` \| `"minecart"` \| `"minecart-loaded"` \| `"modem"` \| `"modem-fill"` \| `"moisture"` \| `"moon"` \| `"moon-fill"` \| `"moon-stars"` \| `"moon-stars-fill"` \| `"mortarboard"` \| `"mortarboard-fill"` \| `"motherboard"` \| `"motherboard-fill"` \| `"mouse"` \| `"mouse-fill"` \| `"mouse2"` \| `"mouse2-fill"` \| `"mouse3"` \| `"mouse3-fill"` \| `"music-note"` \| `"music-note-beamed"` \| `"music-note-list"` \| `"music-player"` \| `"music-player-fill"` \| `"newspaper"` \| `"nintendo-switch"` \| `"node-minus"` \| `"node-minus-fill"` \| `"node-plus"` \| `"node-plus-fill"` \| `"noise-reduction"` \| `"nut"` \| `"nut-fill"` \| `"nvidia"` \| `"nvme"` \| `"nvme-fill"` \| `"octagon"` \| `"octagon-fill"` \| `"octagon-half"` \| `"openai"` \| `"opencollective"` \| `"optical-audio"` \| `"optical-audio-fill"` \| `"option"` \| `"outlet"` \| `"p-circle"` \| `"p-circle-fill"` \| `"p-square"` \| `"p-square-fill"` \| `"paint-bucket"` \| `"palette"` \| `"palette-fill"` \| `"palette2"` \| `"paperclip"` \| `"paragraph"` \| `"pass"` \| `"pass-fill"` \| `"passport"` \| `"passport-fill"` \| `"patch-check"` \| `"patch-check-fill"` \| `"patch-exclamation"` \| `"patch-exclamation-fill"` \| `"patch-minus"` \| `"patch-minus-fill"` \| `"patch-plus"` \| `"patch-plus-fill"` \| `"patch-question"` \| `"patch-question-fill"` \| `"pause"` \| `"pause-btn"` \| `"pause-btn-fill"` \| `"pause-circle"` \| `"pause-circle-fill"` \| `"pause-fill"` \| `"paypal"` \| `"pc"` \| `"pc-display"` \| `"pc-display-horizontal"` \| `"pc-horizontal"` \| `"pci-card"` \| `"pci-card-network"` \| `"pci-card-sound"` \| `"peace"` \| `"peace-fill"` \| `"pen"` \| `"pen-fill"` \| `"pencil"` \| `"pencil-fill"` \| `"pencil-square"` \| `"pentagon"` \| `"pentagon-fill"` \| `"pentagon-half"` \| `"people"` \| `"person-circle"` \| `"people-fill"` \| `"percent"` \| `"perplexity"` \| `"person"` \| `"person-add"` \| `"person-arms-up"` \| `"person-badge"` \| `"person-badge-fill"` \| `"person-bounding-box"` \| `"person-check"` \| `"person-check-fill"` \| `"person-dash"` \| `"person-dash-fill"` \| `"person-down"` \| `"person-exclamation"` \| `"person-fill"` \| `"person-fill-add"` \| `"person-fill-check"` \| `"person-fill-dash"` \| `"person-fill-down"` \| `"person-fill-exclamation"` \| `"person-fill-gear"` \| `"person-fill-lock"` \| `"person-fill-slash"` \| `"person-fill-up"` \| `"person-fill-x"` \| `"person-gear"` \| `"person-heart"` \| `"person-hearts"` \| `"person-lines-fill"` \| `"person-lock"` \| `"person-plus"` \| `"person-plus-fill"` \| `"person-raised-hand"` \| `"person-rolodex"` \| `"person-slash"` \| `"person-square"` \| `"person-standing"` \| `"person-standing-dress"` \| `"person-up"` \| `"person-vcard"` \| `"person-vcard-fill"` \| `"person-video"` \| `"person-video2"` \| `"person-video3"` \| `"person-walking"` \| `"person-wheelchair"` \| `"person-workspace"` \| `"person-x"` \| `"person-x-fill"` \| `"phone"` \| `"phone-fill"` \| `"phone-flip"` \| `"phone-landscape"` \| `"phone-landscape-fill"` \| `"phone-vibrate"` \| `"phone-vibrate-fill"` \| `"pie-chart"` \| `"pie-chart-fill"` \| `"piggy-bank"` \| `"piggy-bank-fill"` \| `"pin"` \| `"pin-angle"` \| `"pin-angle-fill"` \| `"pin-fill"` \| `"pin-map"` \| `"pin-map-fill"` \| `"pinterest"` \| `"pip"` \| `"pip-fill"` \| `"play"` \| `"play-btn"` \| `"play-btn-fill"` \| `"play-circle"` \| `"play-circle-fill"` \| `"play-fill"` \| `"playstation"` \| `"plug"` \| `"plug-fill"` \| `"plugin"` \| `"plus"` \| `"plus-circle"` \| `"plus-circle-dotted"` \| `"plus-circle-fill"` \| `"plus-lg"` \| `"plus-slash-minus"` \| `"plus-square"` \| `"plus-square-dotted"` \| `"plus-square-fill"` \| `"postage"` \| `"postage-fill"` \| `"postage-heart"` \| `"postage-heart-fill"` \| `"postcard"` \| `"postcard-fill"` \| `"postcard-heart"` \| `"postcard-heart-fill"` \| `"power"` \| `"prescription"` \| `"prescription2"` \| `"printer"` \| `"printer-fill"` \| `"projector"` \| `"projector-fill"` \| `"puzzle"` \| `"puzzle-fill"` \| `"qr-code"` \| `"qr-code-scan"` \| `"question"` \| `"question-circle"` \| `"question-diamond"` \| `"question-diamond-fill"` \| `"question-circle-fill"` \| `"question-lg"` \| `"question-octagon"` \| `"question-octagon-fill"` \| `"question-square"` \| `"question-square-fill"` \| `"quora"` \| `"quote"` \| `"r-circle"` \| `"r-circle-fill"` \| `"r-square"` \| `"r-square-fill"` \| `"radar"` \| `"radioactive"` \| `"rainbow"` \| `"receipt"` \| `"receipt-cutoff"` \| `"reception-0"` \| `"reception-1"` \| `"reception-2"` \| `"reception-3"` \| `"reception-4"` \| `"record"` \| `"record-btn"` \| `"record-btn-fill"` \| `"record-circle"` \| `"record-circle-fill"` \| `"record-fill"` \| `"record2"` \| `"record2-fill"` \| `"recycle"` \| `"reddit"` \| `"regex"` \| `"repeat"` \| `"repeat-1"` \| `"reply"` \| `"reply-all"` \| `"reply-all-fill"` \| `"reply-fill"` \| `"rewind"` \| `"rewind-btn"` \| `"rewind-btn-fill"` \| `"rewind-circle"` \| `"rewind-circle-fill"` \| `"rewind-fill"` \| `"robot"` \| `"rocket"` \| `"rocket-fill"` \| `"rocket-takeoff"` \| `"rocket-takeoff-fill"` \| `"router"` \| `"router-fill"` \| `"rss"` \| `"rss-fill"` \| `"rulers"` \| `"safe"` \| `"safe-fill"` \| `"safe2"` \| `"safe2-fill"` \| `"save"` \| `"save-fill"` \| `"save2"` \| `"save2-fill"` \| `"scissors"` \| `"scooter"` \| `"screwdriver"` \| `"sd-card"` \| `"sd-card-fill"` \| `"search"` \| `"search-heart"` \| `"search-heart-fill"` \| `"segmented-nav"` \| `"send"` \| `"send-arrow-down"` \| `"send-arrow-down-fill"` \| `"send-arrow-up"` \| `"send-arrow-up-fill"` \| `"send-check"` \| `"send-check-fill"` \| `"send-dash"` \| `"send-dash-fill"` \| `"send-exclamation"` \| `"send-exclamation-fill"` \| `"send-fill"` \| `"send-plus"` \| `"send-plus-fill"` \| `"send-slash"` \| `"send-slash-fill"` \| `"send-x"` \| `"send-x-fill"` \| `"server"` \| `"shadows"` \| `"share"` \| `"share-fill"` \| `"shield"` \| `"shield-check"` \| `"shield-exclamation"` \| `"shield-fill"` \| `"shield-fill-check"` \| `"shield-fill-exclamation"` \| `"shield-fill-minus"` \| `"shield-fill-plus"` \| `"shield-fill-x"` \| `"shield-lock"` \| `"shield-lock-fill"` \| `"shield-minus"` \| `"shield-plus"` \| `"shield-shaded"` \| `"shield-slash"` \| `"shield-slash-fill"` \| `"shield-x"` \| `"shift"` \| `"shift-fill"` \| `"shop"` \| `"shop-window"` \| `"shuffle"` \| `"sign-dead-end"` \| `"sign-dead-end-fill"` \| `"sign-do-not-enter"` \| `"sign-do-not-enter-fill"` \| `"sign-intersection"` \| `"sign-intersection-fill"` \| `"sign-intersection-side"` \| `"sign-intersection-side-fill"` \| `"sign-intersection-t"` \| `"sign-intersection-t-fill"` \| `"sign-intersection-y"` \| `"sign-intersection-y-fill"` \| `"sign-merge-left"` \| `"sign-merge-left-fill"` \| `"sign-merge-right"` \| `"sign-merge-right-fill"` \| `"sign-no-left-turn"` \| `"sign-no-left-turn-fill"` \| `"sign-no-parking"` \| `"sign-no-parking-fill"` \| `"sign-no-right-turn"` \| `"sign-no-right-turn-fill"` \| `"sign-railroad"` \| `"sign-railroad-fill"` \| `"sign-stop"` \| `"sign-stop-fill"` \| `"sign-stop-lights"` \| `"sign-stop-lights-fill"` \| `"sign-turn-left"` \| `"sign-turn-left-fill"` \| `"sign-turn-right"` \| `"sign-turn-right-fill"` \| `"sign-turn-slight-left"` \| `"sign-turn-slight-left-fill"` \| `"sign-turn-slight-right"` \| `"sign-turn-slight-right-fill"` \| `"sign-yield"` \| `"sign-yield-fill"` \| `"signal"` \| `"signpost"` \| `"signpost-2"` \| `"signpost-2-fill"` \| `"signpost-fill"` \| `"signpost-split"` \| `"signpost-split-fill"` \| `"sim"` \| `"sim-fill"` \| `"sim-slash"` \| `"sim-slash-fill"` \| `"sina-weibo"` \| `"skip-backward"` \| `"skip-backward-btn"` \| `"skip-backward-btn-fill"` \| `"skip-backward-circle"` \| `"skip-backward-circle-fill"` \| `"skip-backward-fill"` \| `"skip-end"` \| `"skip-end-btn"` \| `"skip-end-btn-fill"` \| `"skip-end-circle"` \| `"skip-end-circle-fill"` \| `"skip-end-fill"` \| `"skip-forward"` \| `"skip-forward-btn"` \| `"skip-forward-btn-fill"` \| `"skip-forward-circle"` \| `"skip-forward-circle-fill"` \| `"skip-forward-fill"` \| `"skip-start"` \| `"skip-start-btn"` \| `"skip-start-btn-fill"` \| `"skip-start-circle"` \| `"skip-start-circle-fill"` \| `"skip-start-fill"` \| `"skype"` \| `"slack"` \| `"slash"` \| `"slash-circle-fill"` \| `"slash-lg"` \| `"slash-square"` \| `"slash-square-fill"` \| `"sliders"` \| `"sliders2"` \| `"sliders2-vertical"` \| `"smartwatch"` \| `"snapchat"` \| `"snow"` \| `"snow2"` \| `"snow3"` \| `"sort-alpha-down"` \| `"sort-alpha-down-alt"` \| `"sort-alpha-up"` \| `"sort-alpha-up-alt"` \| `"sort-down"` \| `"sort-down-alt"` \| `"sort-numeric-down"` \| `"sort-numeric-down-alt"` \| `"sort-numeric-up"` \| `"sort-numeric-up-alt"` \| `"sort-up"` \| `"sort-up-alt"` \| `"soundwave"` \| `"sourceforge"` \| `"speaker"` \| `"speaker-fill"` \| `"speedometer"` \| `"speedometer2"` \| `"spellcheck"` \| `"spotify"` \| `"square"` \| `"square-fill"` \| `"square-half"` \| `"stack"` \| `"stack-overflow"` \| `"star"` \| `"star-fill"` \| `"star-half"` \| `"stars"` \| `"steam"` \| `"stickies"` \| `"stickies-fill"` \| `"sticky"` \| `"sticky-fill"` \| `"stop"` \| `"stop-btn"` \| `"stop-btn-fill"` \| `"stop-circle"` \| `"stop-circle-fill"` \| `"stop-fill"` \| `"stoplights"` \| `"stoplights-fill"` \| `"stopwatch"` \| `"stopwatch-fill"` \| `"strava"` \| `"stripe"` \| `"subscript"` \| `"substack"` \| `"subtract"` \| `"suit-club"` \| `"suit-club-fill"` \| `"suit-diamond"` \| `"suit-diamond-fill"` \| `"suit-heart"` \| `"suit-heart-fill"` \| `"suit-spade"` \| `"suit-spade-fill"` \| `"suitcase"` \| `"suitcase-fill"` \| `"suitcase-lg"` \| `"suitcase-lg-fill"` \| `"suitcase2"` \| `"suitcase2-fill"` \| `"sun"` \| `"sun-fill"` \| `"sunglasses"` \| `"sunrise"` \| `"sunrise-fill"` \| `"sunset"` \| `"sunset-fill"` \| `"superscript"` \| `"symmetry-horizontal"` \| `"symmetry-vertical"` \| `"table"` \| `"tablet"` \| `"tablet-fill"` \| `"tablet-landscape"` \| `"tablet-landscape-fill"` \| `"tag"` \| `"tag-fill"` \| `"tags"` \| `"tags-fill"` \| `"taxi-front"` \| `"taxi-front-fill"` \| `"telegram"` \| `"telephone"` \| `"telephone-fill"` \| `"telephone-forward"` \| `"telephone-forward-fill"` \| `"telephone-inbound"` \| `"telephone-inbound-fill"` \| `"telephone-minus"` \| `"telephone-minus-fill"` \| `"telephone-outbound"` \| `"telephone-outbound-fill"` \| `"telephone-plus"` \| `"telephone-plus-fill"` \| `"telephone-x"` \| `"telephone-x-fill"` \| `"tencent-qq"` \| `"terminal"` \| `"terminal-dash"` \| `"terminal-fill"` \| `"terminal-plus"` \| `"terminal-split"` \| `"terminal-x"` \| `"text-center"` \| `"text-indent-left"` \| `"text-indent-right"` \| `"text-left"` \| `"text-paragraph"` \| `"text-right"` \| `"text-wrap"` \| `"textarea"` \| `"textarea-resize"` \| `"textarea-t"` \| `"thermometer"` \| `"thermometer-half"` \| `"thermometer-high"` \| `"thermometer-low"` \| `"thermometer-snow"` \| `"thermometer-sun"` \| `"threads"` \| `"threads-fill"` \| `"three-dots"` \| `"three-dots-vertical"` \| `"thunderbolt"` \| `"thunderbolt-fill"` \| `"ticket"` \| `"ticket-detailed"` \| `"ticket-detailed-fill"` \| `"ticket-fill"` \| `"ticket-perforated"` \| `"ticket-perforated-fill"` \| `"tiktok"` \| `"toggle-off"` \| `"toggle-on"` \| `"toggle2-off"` \| `"toggle2-on"` \| `"toggles"` \| `"toggles2"` \| `"tools"` \| `"tornado"` \| `"train-freight-front"` \| `"train-freight-front-fill"` \| `"train-front"` \| `"train-front-fill"` \| `"train-lightrail-front"` \| `"train-lightrail-front-fill"` \| `"translate"` \| `"transparency"` \| `"trash"` \| `"trash-fill"` \| `"trash2"` \| `"trash2-fill"` \| `"trash3"` \| `"trash3-fill"` \| `"tree"` \| `"tree-fill"` \| `"trello"` \| `"triangle"` \| `"triangle-fill"` \| `"triangle-half"` \| `"trophy"` \| `"trophy-fill"` \| `"tropical-storm"` \| `"truck"` \| `"truck-flatbed"` \| `"truck-front"` \| `"truck-front-fill"` \| `"tsunami"` \| `"tux"` \| `"tv"` \| `"tv-fill"` \| `"twitch"` \| `"twitter"` \| `"twitter-x"` \| `"type"` \| `"type-bold"` \| `"type-h1"` \| `"type-h2"` \| `"type-h3"` \| `"type-h4"` \| `"type-h5"` \| `"type-h6"` \| `"type-italic"` \| `"type-strikethrough"` \| `"type-underline"` \| `"typescript"` \| `"ubuntu"` \| `"ui-checks"` \| `"ui-checks-grid"` \| `"ui-radios"` \| `"ui-radios-grid"` \| `"umbrella"` \| `"umbrella-fill"` \| `"unindent"` \| `"union"` \| `"unity"` \| `"universal-access"` \| `"universal-access-circle"` \| `"unlock"` \| `"unlock-fill"` \| `"unlock2"` \| `"unlock2-fill"` \| `"upc"` \| `"upc-scan"` \| `"upload"` \| `"usb"` \| `"usb-c"` \| `"usb-c-fill"` \| `"usb-drive"` \| `"usb-drive-fill"` \| `"usb-fill"` \| `"usb-micro"` \| `"usb-micro-fill"` \| `"usb-mini"` \| `"usb-mini-fill"` \| `"usb-plug"` \| `"usb-plug-fill"` \| `"usb-symbol"` \| `"valentine"` \| `"valentine2"` \| `"vector-pen"` \| `"view-list"` \| `"view-stacked"` \| `"vignette"` \| `"vimeo"` \| `"vinyl"` \| `"vinyl-fill"` \| `"virus"` \| `"virus2"` \| `"voicemail"` \| `"volume-down"` \| `"volume-down-fill"` \| `"volume-mute"` \| `"volume-mute-fill"` \| `"volume-off"` \| `"volume-off-fill"` \| `"volume-up"` \| `"volume-up-fill"` \| `"vr"` \| `"wallet"` \| `"wallet-fill"` \| `"wallet2"` \| `"watch"` \| `"water"` \| `"webcam"` \| `"webcam-fill"` \| `"wechat"` \| `"whatsapp"` \| `"wifi"` \| `"wifi-1"` \| `"wifi-2"` \| `"wifi-off"` \| `"wikipedia"` \| `"wind"` \| `"window"` \| `"window-dash"` \| `"window-desktop"` \| `"window-dock"` \| `"window-fullscreen"` \| `"window-plus"` \| `"window-sidebar"` \| `"window-split"` \| `"window-stack"` \| `"window-x"` \| `"windows"` \| `"wordpress"` \| `"wrench"` \| `"wrench-adjustable"` \| `"wrench-adjustable-circle"` \| `"wrench-adjustable-circle-fill"` \| `"x"` \| `"x-circle"` \| `"x-circle-fill"` \| `"x-diamond"` \| `"x-diamond-fill"` \| `"x-lg"` \| `"x-octagon"` \| `"x-octagon-fill"` \| `"x-square"` \| `"x-square-fill"` \| `"xbox"` \| `"yelp"` \| `"yin-yang"` \| `"youtube"` \| `"zoom-in"` \| `"zoom-out"`
 
-Defined in: [src/lib/types/icons.ts:5812](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L5812)
+Defined in: [src/lib/types/icons.ts:5812](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L5812)
 
 
 [**my-app**](../../../../../README.md)
@@ -33567,7 +33567,7 @@ Defined in: [src/lib/types/icons.ts:5812](https://github.com/tsaxking/sveltekit-
 
 > **FontAwesomeIcon** = `"address-book"` \| `"address-book-o"` \| `"address-card"` \| `"address-card-o"` \| `"bandcamp"` \| `"bath"` \| `"bathtub"` \| `"drivers-license"` \| `"drivers-license-o"` \| `"eercast"` \| `"envelope-open"` \| `"envelope-open-o"` \| `"etsy"` \| `"free-code-camp"` \| `"grav"` \| `"handshake-o"` \| `"id-badge"` \| `"id-card"` \| `"id-card-o"` \| `"imdb"` \| `"linode"` \| `"meetup"` \| `"microchip"` \| `"podcast"` \| `"quora"` \| `"ravelry"` \| `"s15"` \| `"shower"` \| `"snowflake-o"` \| `"superpowers"` \| `"telegram"` \| `"thermometer"` \| `"thermometer-0"` \| `"thermometer-1"` \| `"thermometer-2"` \| `"thermometer-3"` \| `"thermometer-4"` \| `"thermometer-empty"` \| `"thermometer-full"` \| `"thermometer-half"` \| `"thermometer-quarter"` \| `"thermometer-three-quarters"` \| `"times-rectangle"` \| `"times-rectangle-o"` \| `"user-circle"` \| `"user-circle-o"` \| `"user-o"` \| `"vcard"` \| `"vcard-o"` \| `"window-close"` \| `"window-close-o"` \| `"window-maximize"` \| `"window-minimize"` \| `"window-restore"` \| `"wpexplorer"` \| `"address-book"` \| `"address-book-o"` \| `"address-card"` \| `"address-card-o"` \| `"adjust"` \| `"american-sign-language-interpreting"` \| `"anchor"` \| `"archive"` \| `"area-chart"` \| `"arrows"` \| `"arrows-h"` \| `"arrows-v"` \| `"asl-interpreting"` \| `"assistive-listening-systems"` \| `"asterisk"` \| `"at"` \| `"audio-description"` \| `"automobile"` \| `"balance-scale"` \| `"ban"` \| `"bank"` \| `"bar-chart"` \| `"bar-chart-o"` \| `"barcode"` \| `"bars"` \| `"bath"` \| `"bathtub"` \| `"battery"` \| `"battery-0"` \| `"battery-1"` \| `"battery-2"` \| `"battery-3"` \| `"battery-4"` \| `"battery-empty"` \| `"battery-full"` \| `"battery-half"` \| `"battery-quarter"` \| `"battery-three-quarters"` \| `"bed"` \| `"beer"` \| `"bell"` \| `"bell-o"` \| `"bell-slash"` \| `"bell-slash-o"` \| `"bicycle"` \| `"binoculars"` \| `"birthday-cake"` \| `"blind"` \| `"bluetooth"` \| `"bluetooth-b"` \| `"bolt"` \| `"bomb"` \| `"book"` \| `"bookmark"` \| `"bookmark-o"` \| `"braille"` \| `"briefcase"` \| `"bug"` \| `"building"` \| `"building-o"` \| `"bullhorn"` \| `"bullseye"` \| `"bus"` \| `"cab"` \| `"calculator"` \| `"calendar"` \| `"calendar-check-o"` \| `"calendar-minus-o"` \| `"calendar-o"` \| `"calendar-plus-o"` \| `"calendar-times-o"` \| `"camera"` \| `"camera-retro"` \| `"car"` \| `"caret-square-o-down"` \| `"caret-square-o-left"` \| `"caret-square-o-right"` \| `"caret-square-o-up"` \| `"cart-arrow-down"` \| `"cart-plus"` \| `"cc"` \| `"certificate"` \| `"check"` \| `"check-circle"` \| `"check-circle-o"` \| `"check-square"` \| `"check-square-o"` \| `"child"` \| `"circle"` \| `"circle-o"` \| `"circle-o-notch"` \| `"circle-thin"` \| `"clock-o"` \| `"clone"` \| `"close"` \| `"cloud"` \| `"cloud-download"` \| `"cloud-upload"` \| `"code"` \| `"code-fork"` \| `"coffee"` \| `"cog"` \| `"cogs"` \| `"comment"` \| `"comment-o"` \| `"commenting"` \| `"commenting-o"` \| `"comments"` \| `"comments-o"` \| `"compass"` \| `"copyright"` \| `"creative-commons"` \| `"credit-card"` \| `"credit-card-alt"` \| `"crop"` \| `"crosshairs"` \| `"cube"` \| `"cubes"` \| `"cutlery"` \| `"dashboard"` \| `"database"` \| `"deaf"` \| `"deafness"` \| `"desktop"` \| `"diamond"` \| `"dot-circle-o"` \| `"download"` \| `"drivers-license"` \| `"drivers-license-o"` \| `"edit"` \| `"ellipsis-h"` \| `"ellipsis-v"` \| `"envelope"` \| `"envelope-o"` \| `"envelope-open"` \| `"envelope-open-o"` \| `"envelope-square"` \| `"eraser"` \| `"exchange"` \| `"exclamation"` \| `"exclamation-circle"` \| `"exclamation-triangle"` \| `"external-link"` \| `"external-link-square"` \| `"eye"` \| `"eye-slash"` \| `"eyedropper"` \| `"fax"` \| `"feed"` \| `"female"` \| `"fighter-jet"` \| `"file-archive-o"` \| `"file-audio-o"` \| `"file-code-o"` \| `"file-excel-o"` \| `"file-image-o"` \| `"file-movie-o"` \| `"file-pdf-o"` \| `"file-photo-o"` \| `"file-picture-o"` \| `"file-powerpoint-o"` \| `"file-sound-o"` \| `"file-video-o"` \| `"file-word-o"` \| `"file-zip-o"` \| `"film"` \| `"filter"` \| `"fire"` \| `"fire-extinguisher"` \| `"flag"` \| `"flag-checkered"` \| `"flag-o"` \| `"flash"` \| `"flask"` \| `"folder"` \| `"folder-o"` \| `"folder-open"` \| `"folder-open-o"` \| `"frown-o"` \| `"futbol-o"` \| `"gamepad"` \| `"gavel"` \| `"gear"` \| `"gears"` \| `"gift"` \| `"glass"` \| `"globe"` \| `"graduation-cap"` \| `"group"` \| `"hand-grab-o"` \| `"hand-lizard-o"` \| `"hand-paper-o"` \| `"hand-peace-o"` \| `"hand-pointer-o"` \| `"hand-rock-o"` \| `"hand-scissors-o"` \| `"hand-spock-o"` \| `"hand-stop-o"` \| `"handshake-o"` \| `"hard-of-hearing"` \| `"hashtag"` \| `"hdd-o"` \| `"headphones"` \| `"heart"` \| `"heart-o"` \| `"heartbeat"` \| `"history"` \| `"home"` \| `"hotel"` \| `"hourglass"` \| `"hourglass-1"` \| `"hourglass-2"` \| `"hourglass-3"` \| `"hourglass-end"` \| `"hourglass-half"` \| `"hourglass-o"` \| `"hourglass-start"` \| `"i-cursor"` \| `"id-badge"` \| `"id-card"` \| `"id-card-o"` \| `"image"` \| `"inbox"` \| `"industry"` \| `"info"` \| `"info-circle"` \| `"institution"` \| `"key"` \| `"keyboard-o"` \| `"language"` \| `"laptop"` \| `"leaf"` \| `"legal"` \| `"lemon-o"` \| `"level-down"` \| `"level-up"` \| `"life-bouy"` \| `"life-buoy"` \| `"life-ring"` \| `"life-saver"` \| `"lightbulb-o"` \| `"line-chart"` \| `"location-arrow"` \| `"lock"` \| `"low-vision"` \| `"magic"` \| `"magnet"` \| `"mail-forward"` \| `"mail-reply"` \| `"mail-reply-all"` \| `"male"` \| `"map"` \| `"map-marker"` \| `"map-o"` \| `"map-pin"` \| `"map-signs"` \| `"meh-o"` \| `"microchip"` \| `"microphone"` \| `"microphone-slash"` \| `"minus"` \| `"minus-circle"` \| `"minus-square"` \| `"minus-square-o"` \| `"mobile"` \| `"mobile-phone"` \| `"money"` \| `"moon-o"` \| `"mortar-board"` \| `"motorcycle"` \| `"mouse-pointer"` \| `"music"` \| `"navicon"` \| `"newspaper-o"` \| `"object-group"` \| `"object-ungroup"` \| `"paint-brush"` \| `"paper-plane"` \| `"paper-plane-o"` \| `"paw"` \| `"pencil"` \| `"pencil-square"` \| `"pencil-square-o"` \| `"percent"` \| `"phone"` \| `"phone-square"` \| `"photo"` \| `"picture-o"` \| `"pie-chart"` \| `"plane"` \| `"plug"` \| `"plus"` \| `"plus-circle"` \| `"plus-square"` \| `"plus-square-o"` \| `"podcast"` \| `"power-off"` \| `"print"` \| `"puzzle-piece"` \| `"qrcode"` \| `"question"` \| `"question-circle"` \| `"question-circle-o"` \| `"quote-left"` \| `"quote-right"` \| `"random"` \| `"recycle"` \| `"refresh"` \| `"registered"` \| `"remove"` \| `"reorder"` \| `"reply"` \| `"reply-all"` \| `"retweet"` \| `"road"` \| `"rocket"` \| `"rss"` \| `"rss-square"` \| `"s15"` \| `"search"` \| `"search-minus"` \| `"search-plus"` \| `"send"` \| `"send-o"` \| `"server"` \| `"share"` \| `"share-alt"` \| `"share-alt-square"` \| `"share-square"` \| `"share-square-o"` \| `"shield"` \| `"ship"` \| `"shopping-bag"` \| `"shopping-basket"` \| `"shopping-cart"` \| `"shower"` \| `"sign-in"` \| `"sign-language"` \| `"sign-out"` \| `"signal"` \| `"signing"` \| `"sitemap"` \| `"sliders"` \| `"smile-o"` \| `"snowflake-o"` \| `"soccer-ball-o"` \| `"sort"` \| `"sort-alpha-asc"` \| `"sort-alpha-desc"` \| `"sort-amount-asc"` \| `"sort-amount-desc"` \| `"sort-asc"` \| `"sort-desc"` \| `"sort-down"` \| `"sort-numeric-asc"` \| `"sort-numeric-desc"` \| `"sort-up"` \| `"space-shuttle"` \| `"spinner"` \| `"spoon"` \| `"square"` \| `"square-o"` \| `"star"` \| `"star-half"` \| `"star-half-empty"` \| `"star-half-full"` \| `"star-half-o"` \| `"star-o"` \| `"sticky-note"` \| `"sticky-note-o"` \| `"street-view"` \| `"suitcase"` \| `"sun-o"` \| `"support"` \| `"tablet"` \| `"tachometer"` \| `"tag"` \| `"tags"` \| `"tasks"` \| `"taxi"` \| `"television"` \| `"terminal"` \| `"thermometer"` \| `"thermometer-0"` \| `"thermometer-1"` \| `"thermometer-2"` \| `"thermometer-3"` \| `"thermometer-4"` \| `"thermometer-empty"` \| `"thermometer-full"` \| `"thermometer-half"` \| `"thermometer-quarter"` \| `"thermometer-three-quarters"` \| `"thumb-tack"` \| `"thumbs-down"` \| `"thumbs-o-down"` \| `"thumbs-o-up"` \| `"thumbs-up"` \| `"ticket"` \| `"times"` \| `"times-circle"` \| `"times-circle-o"` \| `"times-rectangle"` \| `"times-rectangle-o"` \| `"tint"` \| `"toggle-down"` \| `"toggle-left"` \| `"toggle-off"` \| `"toggle-on"` \| `"toggle-right"` \| `"toggle-up"` \| `"trademark"` \| `"trash"` \| `"trash-o"` \| `"tree"` \| `"trophy"` \| `"truck"` \| `"tty"` \| `"tv"` \| `"umbrella"` \| `"universal-access"` \| `"university"` \| `"unlock"` \| `"unlock-alt"` \| `"unsorted"` \| `"upload"` \| `"user"` \| `"user-circle"` \| `"user-circle-o"` \| `"user-o"` \| `"user-plus"` \| `"user-secret"` \| `"user-times"` \| `"users"` \| `"vcard"` \| `"vcard-o"` \| `"video-camera"` \| `"volume-control-phone"` \| `"volume-down"` \| `"volume-off"` \| `"volume-up"` \| `"warning"` \| `"wheelchair"` \| `"wheelchair-alt"` \| `"wifi"` \| `"window-close"` \| `"window-close-o"` \| `"window-maximize"` \| `"window-minimize"` \| `"window-restore"` \| `"wrench"` \| `"american-sign-language-interpreting"` \| `"asl-interpreting"` \| `"assistive-listening-systems"` \| `"audio-description"` \| `"blind"` \| `"braille"` \| `"cc"` \| `"deaf"` \| `"deafness"` \| `"hard-of-hearing"` \| `"low-vision"` \| `"question-circle-o"` \| `"sign-language"` \| `"signing"` \| `"tty"` \| `"universal-access"` \| `"volume-control-phone"` \| `"wheelchair"` \| `"wheelchair-alt"` \| `"hand-grab-o"` \| `"hand-lizard-o"` \| `"hand-o-down"` \| `"hand-o-left"` \| `"hand-o-right"` \| `"hand-o-up"` \| `"hand-paper-o"` \| `"hand-peace-o"` \| `"hand-pointer-o"` \| `"hand-rock-o"` \| `"hand-scissors-o"` \| `"hand-spock-o"` \| `"hand-stop-o"` \| `"thumbs-down"` \| `"thumbs-o-down"` \| `"thumbs-o-up"` \| `"thumbs-up"` \| `"ambulance"` \| `"automobile"` \| `"bicycle"` \| `"bus"` \| `"cab"` \| `"car"` \| `"fighter-jet"` \| `"motorcycle"` \| `"plane"` \| `"rocket"` \| `"ship"` \| `"space-shuttle"` \| `"subway"` \| `"taxi"` \| `"train"` \| `"truck"` \| `"wheelchair"` \| `"wheelchair-alt"` \| `"genderless"` \| `"intersex"` \| `"mars"` \| `"mars-double"` \| `"mars-stroke"` \| `"mars-stroke-h"` \| `"mars-stroke-v"` \| `"mercury"` \| `"neuter"` \| `"transgender"` \| `"transgender-alt"` \| `"venus"` \| `"venus-double"` \| `"venus-mars"` \| `"file"` \| `"file-archive-o"` \| `"file-audio-o"` \| `"file-code-o"` \| `"file-excel-o"` \| `"file-image-o"` \| `"file-movie-o"` \| `"file-o"` \| `"file-pdf-o"` \| `"file-photo-o"` \| `"file-picture-o"` \| `"file-powerpoint-o"` \| `"file-sound-o"` \| `"file-text"` \| `"file-text-o"` \| `"file-video-o"` \| `"file-word-o"` \| `"file-zip-o"` \| `"circle-o-notch"` \| `"cog"` \| `"gear"` \| `"refresh"` \| `"spinner"` \| `"check-square"` \| `"check-square-o"` \| `"circle"` \| `"circle-o"` \| `"dot-circle-o"` \| `"minus-square"` \| `"minus-square-o"` \| `"plus-square"` \| `"plus-square-o"` \| `"square"` \| `"square-o"` \| `"cc-amex"` \| `"cc-diners-club"` \| `"cc-discover"` \| `"cc-jcb"` \| `"cc-mastercard"` \| `"cc-paypal"` \| `"cc-stripe"` \| `"cc-visa"` \| `"credit-card"` \| `"credit-card-alt"` \| `"google-wallet"` \| `"paypal"` \| `"area-chart"` \| `"bar-chart"` \| `"bar-chart-o"` \| `"line-chart"` \| `"pie-chart"` \| `"bitcoin"` \| `"btc"` \| `"cny"` \| `"dollar"` \| `"eur"` \| `"euro"` \| `"gbp"` \| `"gg"` \| `"gg-circle"` \| `"ils"` \| `"inr"` \| `"jpy"` \| `"krw"` \| `"money"` \| `"rmb"` \| `"rouble"` \| `"rub"` \| `"ruble"` \| `"rupee"` \| `"shekel"` \| `"sheqel"` \| `"try"` \| `"turkish-lira"` \| `"usd"` \| `"viacoin"` \| `"won"` \| `"yen"` \| `"align-center"` \| `"align-justify"` \| `"align-left"` \| `"align-right"` \| `"bold"` \| `"chain"` \| `"chain-broken"` \| `"clipboard"` \| `"columns"` \| `"copy"` \| `"cut"` \| `"dedent"` \| `"eraser"` \| `"file"` \| `"file-o"` \| `"file-text"` \| `"file-text-o"` \| `"files-o"` \| `"floppy-o"` \| `"font"` \| `"header"` \| `"indent"` \| `"italic"` \| `"link"` \| `"list"` \| `"list-alt"` \| `"list-ol"` \| `"list-ul"` \| `"outdent"` \| `"paperclip"` \| `"paragraph"` \| `"paste"` \| `"repeat"` \| `"rotate-left"` \| `"rotate-right"` \| `"save"` \| `"scissors"` \| `"strikethrough"` \| `"subscript"` \| `"superscript"` \| `"table"` \| `"text-height"` \| `"text-width"` \| `"th"` \| `"th-large"` \| `"th-list"` \| `"underline"` \| `"undo"` \| `"unlink"` \| `"angle-double-down"` \| `"angle-double-left"` \| `"angle-double-right"` \| `"angle-double-up"` \| `"angle-down"` \| `"angle-left"` \| `"angle-right"` \| `"angle-up"` \| `"arrow-circle-down"` \| `"arrow-circle-left"` \| `"arrow-circle-o-down"` \| `"arrow-circle-o-left"` \| `"arrow-circle-o-right"` \| `"arrow-circle-o-up"` \| `"arrow-circle-right"` \| `"arrow-circle-up"` \| `"arrow-down"` \| `"arrow-left"` \| `"arrow-right"` \| `"arrow-up"` \| `"arrows"` \| `"arrows-alt"` \| `"arrows-h"` \| `"arrows-v"` \| `"caret-down"` \| `"caret-left"` \| `"caret-right"` \| `"caret-square-o-down"` \| `"caret-square-o-left"` \| `"caret-square-o-right"` \| `"caret-square-o-up"` \| `"caret-up"` \| `"chevron-circle-down"` \| `"chevron-circle-left"` \| `"chevron-circle-right"` \| `"chevron-circle-up"` \| `"chevron-down"` \| `"chevron-left"` \| `"chevron-right"` \| `"chevron-up"` \| `"exchange"` \| `"hand-o-down"` \| `"hand-o-left"` \| `"hand-o-right"` \| `"hand-o-up"` \| `"long-arrow-down"` \| `"long-arrow-left"` \| `"long-arrow-right"` \| `"long-arrow-up"` \| `"toggle-down"` \| `"toggle-left"` \| `"toggle-right"` \| `"toggle-up"` \| `"arrows-alt"` \| `"backward"` \| `"compress"` \| `"eject"` \| `"expand"` \| `"fast-backward"` \| `"fast-forward"` \| `"forward"` \| `"pause"` \| `"pause-circle"` \| `"pause-circle-o"` \| `"play"` \| `"play-circle"` \| `"play-circle-o"` \| `"random"` \| `"step-backward"` \| `"step-forward"` \| `"stop"` \| `"stop-circle"` \| `"stop-circle-o"` \| `"youtube-play"` \| `"500px"` \| `"adn"` \| `"amazon"` \| `"android"` \| `"angellist"` \| `"apple"` \| `"bandcamp"` \| `"behance"` \| `"behance-square"` \| `"bitbucket"` \| `"bitbucket-square"` \| `"bitcoin"` \| `"black-tie"` \| `"bluetooth"` \| `"bluetooth-b"` \| `"btc"` \| `"buysellads"` \| `"cc-amex"` \| `"cc-diners-club"` \| `"cc-discover"` \| `"cc-jcb"` \| `"cc-mastercard"` \| `"cc-paypal"` \| `"cc-stripe"` \| `"cc-visa"` \| `"chrome"` \| `"codepen"` \| `"codiepie"` \| `"connectdevelop"` \| `"contao"` \| `"css3"` \| `"dashcube"` \| `"delicious"` \| `"deviantart"` \| `"digg"` \| `"dribbble"` \| `"dropbox"` \| `"drupal"` \| `"edge"` \| `"eercast"` \| `"empire"` \| `"envira"` \| `"etsy"` \| `"expeditedssl"` \| `"fa"` \| `"facebook"` \| `"facebook-f"` \| `"facebook-official"` \| `"facebook-square"` \| `"firefox"` \| `"first-order"` \| `"flickr"` \| `"font-awesome"` \| `"fonticons"` \| `"fort-awesome"` \| `"forumbee"` \| `"foursquare"` \| `"free-code-camp"` \| `"ge"` \| `"get-pocket"` \| `"gg"` \| `"gg-circle"` \| `"git"` \| `"git-square"` \| `"github"` \| `"github-alt"` \| `"github-square"` \| `"gitlab"` \| `"gittip"` \| `"glide"` \| `"glide-g"` \| `"google"` \| `"google-plus"` \| `"google-plus-circle"` \| `"google-plus-official"` \| `"google-plus-square"` \| `"google-wallet"` \| `"gratipay"` \| `"grav"` \| `"hacker-news"` \| `"houzz"` \| `"html5"` \| `"imdb"` \| `"instagram"` \| `"internet-explorer"` \| `"ioxhost"` \| `"joomla"` \| `"jsfiddle"` \| `"lastfm"` \| `"lastfm-square"` \| `"leanpub"` \| `"linkedin"` \| `"linkedin-square"` \| `"linode"` \| `"linux"` \| `"maxcdn"` \| `"meanpath"` \| `"medium"` \| `"meetup"` \| `"mixcloud"` \| `"modx"` \| `"odnoklassniki"` \| `"odnoklassniki-square"` \| `"opencart"` \| `"openid"` \| `"opera"` \| `"optin-monster"` \| `"pagelines"` \| `"paypal"` \| `"pied-piper"` \| `"pied-piper-alt"` \| `"pied-piper-pp"` \| `"pinterest"` \| `"pinterest-p"` \| `"pinterest-square"` \| `"product-hunt"` \| `"qq"` \| `"quora"` \| `"ra"` \| `"ravelry"` \| `"rebel"` \| `"reddit"` \| `"reddit-alien"` \| `"reddit-square"` \| `"renren"` \| `"resistance"` \| `"safari"` \| `"scribd"` \| `"sellsy"` \| `"share-alt"` \| `"share-alt-square"` \| `"shirtsinbulk"` \| `"simplybuilt"` \| `"skyatlas"` \| `"skype"` \| `"slack"` \| `"slideshare"` \| `"snapchat"` \| `"snapchat-ghost"` \| `"snapchat-square"` \| `"soundcloud"` \| `"spotify"` \| `"stack-exchange"` \| `"stack-overflow"` \| `"steam"` \| `"steam-square"` \| `"stumbleupon"` \| `"stumbleupon-circle"` \| `"superpowers"` \| `"telegram"` \| `"tencent-weibo"` \| `"themeisle"` \| `"trello"` \| `"tripadvisor"` \| `"tumblr"` \| `"tumblr-square"` \| `"twitch"` \| `"twitter"` \| `"twitter-square"` \| `"usb"` \| `"viacoin"` \| `"viadeo"` \| `"viadeo-square"` \| `"vimeo"` \| `"vimeo-square"` \| `"vine"` \| `"vk"` \| `"wechat"` \| `"weibo"` \| `"weixin"` \| `"whatsapp"` \| `"wikipedia-w"` \| `"windows"` \| `"wordpress"` \| `"wpbeginner"` \| `"wpexplorer"` \| `"wpforms"` \| `"xing"` \| `"xing-square"` \| `"y-combinator"` \| `"y-combinator-square"` \| `"yahoo"` \| `"yc"` \| `"yc-square"` \| `"yelp"` \| `"yoast"` \| `"youtube"` \| `"youtube-play"` \| `"youtube-square"` \| `"ambulance"` \| `"h-square"` \| `"heart"` \| `"heart-o"` \| `"heartbeat"` \| `"hospital-o"` \| `"medkit"` \| `"plus-square"` \| `"stethoscope"` \| `"user-md"` \| `"wheelchair"` \| `"wheelchair-alt"` \| `"user-tag"` \| `"user-times"` \| `"user-check"`
 
-Defined in: [src/lib/types/icons.ts:7892](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L7892)
+Defined in: [src/lib/types/icons.ts:7892](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L7892)
 
 
 [**my-app**](../../../../../README.md)
@@ -33580,7 +33580,7 @@ Defined in: [src/lib/types/icons.ts:7892](https://github.com/tsaxking/sveltekit-
 
 > **Icon** = \{ `name`: [`MaterialIcon`](MaterialIcon.md); `type`: `"material-icons"`; \} \| \{ `name`: [`MaterialSymbol`](MaterialSymbol.md); `type`: `"material-symbols"`; \} \| \{ `name`: [`BootstrapIcon`](BootstrapIcon.md); `type`: `"bootstrap"`; \} \| \{ `name`: `string`; `type`: `"svg"`; \} \| \{ `name`: [`FontAwesomeIcon`](FontAwesomeIcon.md); `type`: `"fontawesome"`; \}
 
-Defined in: [src/lib/types/icons.ts:8875](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L8875)
+Defined in: [src/lib/types/icons.ts:8875](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L8875)
 
 
 [**my-app**](../../../../../README.md)
@@ -33593,7 +33593,7 @@ Defined in: [src/lib/types/icons.ts:8875](https://github.com/tsaxking/sveltekit-
 
 > **IconTypes** = `"material-icons"` \| `"material-symbols"` \| `"bootstrap"` \| `"svg"` \| `"fontawesome"`
 
-Defined in: [src/lib/types/icons.ts:8873](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L8873)
+Defined in: [src/lib/types/icons.ts:8873](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L8873)
 
 
 [**my-app**](../../../../../README.md)
@@ -33606,7 +33606,7 @@ Defined in: [src/lib/types/icons.ts:8873](https://github.com/tsaxking/sveltekit-
 
 > **MaterialIcon** = `"search"` \| `"search"` \| `"home"` \| `"account_circle"` \| `"settings"` \| `"done"` \| `"info"` \| `"check_circle"` \| `"delete"` \| `"visibility"` \| `"shopping_cart"` \| `"favorite"` \| `"description"` \| `"logout"` \| `"favorite_border"` \| `"lock"` \| `"schedule"` \| `"language"` \| `"help_outline"` \| `"face"` \| `"verified"` \| `"manage_accounts"` \| `"thumb_up"` \| `"filter_alt"` \| `"event"` \| `"dashboard"` \| `"fingerprint"` \| `"list"` \| `"check_circle_outline"` \| `"visibility_off"` \| `"login"` \| `"calendar_today"` \| `"highlight_off"` \| `"help"` \| `"paid"` \| `"task_alt"` \| `"question_answer"` \| `"date_range"` \| `"article"` \| `"open_in_new"` \| `"shopping_bag"` \| `"lightbulb"` \| `"credit_card"` \| `"history"` \| `"perm_identity"` \| `"trending_up"` \| `"account_balance"` \| `"delete_outline"` \| `"verified_user"` \| `"fact_check"` \| `"assignment"` \| `"report_problem"` \| `"star_rate"` \| `"calendar_month"` \| `"arrow_right_alt"` \| `"account_balance_wallet"` \| `"autorenew"` \| `"build"` \| `"view_list"` \| `"store"` \| `"work"` \| `"print"` \| `"analytics"` \| `"delete_forever"` \| `"today"` \| `"admin_panel_settings"` \| `"lock_open"` \| `"watch_later"` \| `"grade"` \| `"update"` \| `"savings"` \| `"room"` \| `"code"` \| `"add_shopping_cart"` \| `"contact_support"` \| `"receipt"` \| `"power_settings_new"` \| `"done_all"` \| `"pets"` \| `"explore"` \| `"bookmark"` \| `"account_box"` \| `"note_add"` \| `"pending_actions"` \| `"reorder"` \| `"bookmark_border"` \| `"shopping_basket"` \| `"payment"` \| `"launch"` \| `"touch_app"` \| `"drag_indicator"` \| `"supervisor_account"` \| `"pending"` \| `"zoom_in"` \| `"assessment"` \| `"leaderboard"` \| `"thumb_up_off_alt"` \| `"open_in_full"` \| `"done_outline"` \| `"preview"` \| `"assignment_ind"` \| `"published_with_changes"` \| `"exit_to_app"` \| `"card_giftcard"` \| `"view_in_ar"` \| `"tips_and_updates"` \| `"feedback"` \| `"label"` \| `"swap_horiz"` \| `"timeline"` \| `"stars"` \| `"assignment_turned_in"` \| `"sync_alt"` \| `"dns"` \| `"work_outline"` \| `"flight_takeoff"` \| `"alarm"` \| `"space_dashboard"` \| `"cached"` \| `"contact_page"` \| `"bug_report"` \| `"book"` \| `"translate"` \| `"rocket_launch"` \| `"gavel"` \| `"question_mark"` \| `"edit_calendar"` \| `"pan_tool"` \| `"supervised_user_circle"` \| `"minimize"` \| `"extension"` \| `"android"` \| `"record_voice_over"` \| `"get_app"` \| `"accessibility"` \| `"add_task"` \| `"hourglass_empty"` \| `"help_center"` \| `"trending_flat"` \| `"rule"` \| `"thumb_down"` \| `"accessibility_new"` \| `"ads_click"` \| `"swap_vert"` \| `"settings_applications"` \| `"source"` \| `"sticky_note_2"` \| `"find_in_page"` \| `"dashboard_customize"` \| `"redeem"` \| `"arrow_circle_right"` \| `"loyalty"` \| `"support"` \| `"announcement"` \| `"close_fullscreen"` \| `"flutter_dash"` \| `"restore"` \| `"view_headline"` \| `"currency_exchange"` \| `"dangerous"` \| `"euro_symbol"` \| `"sensors"` \| `"group_work"` \| `"table_view"` \| `"compare_arrows"` \| `"disabled_by_default"` \| `"subject"` \| `"privacy_tip"` \| `"nightlight_round"` \| `"bookmarks"` \| `"https"` \| `"arrow_circle_up"` \| `"toc"` \| `"track_changes"` \| `"input"` \| `"view_module"` \| `"api"` \| `"grading"` \| `"query_builder"` \| `"perm_media"` \| `"copyright"` \| `"build_circle"` \| `"perm_contact_calendar"` \| `"zoom_out"` \| `"settings_phone"` \| `"backup"` \| `"open_with"` \| `"circle_notifications"` \| `"perm_phone_msg"` \| `"label_important"` \| `"speaker_notes"` \| `"wysiwyg"` \| `"card_membership"` \| `"book_online"` \| `"arrow_circle_down"` \| `"file_present"` \| `"pageview"` \| `"percent"` \| `"trending_down"` \| `"upgrade"` \| `"change_history"` \| `"integration_instructions"` \| `"3d_rotation"` \| `"accessible"` \| `"class"` \| `"swipe"` \| `"g_translate"` \| `"arrow_circle_left"` \| `"settings_accessibility"` \| `"offline_bolt"` \| `"settings_backup_restore"` \| `"production_quantity_limits"` \| `"expand"` \| `"view_column"` \| `"aspect_ratio"` \| `"model_training"` \| `"donut_large"` \| `"segment"` \| `"alarm_on"` \| `"schedule_send"` \| `"calendar_view_month"` \| `"maximize"` \| `"settings_ethernet"` \| `"thumbs_up_down"` \| `"bookmark_add"` \| `"theaters"` \| `"view_agenda"` \| `"thumb_down_off_alt"` \| `"important_devices"` \| `"unpublished"` \| `"system_update_alt"` \| `"opacity"` \| `"shopping_cart_checkout"` \| `"commute"` \| `"open_in_browser"` \| `"no_accounts"` \| `"invert_colors"` \| `"addchart"` \| `"history_toggle_off"` \| `"view_week"` \| `"tour"` \| `"youtube_searched_for"` \| `"hide_source"` \| `"search_off"` \| `"filter_alt_off"` \| `"not_started"` \| `"bookmark_added"` \| `"balance"` \| `"shop"` \| `"mark_as_unread"` \| `"plagiarism"` \| `"assignment_return"` \| `"settings_input_antenna"` \| `"flight_land"` \| `"turned_in"` \| `"hotel_class"` \| `"assignment_late"` \| `"donut_small"` \| `"contactless"` \| `"rocket"` \| `"highlight_alt"` \| `"saved_search"` \| `"settings_input_component"` \| `"view_carousel"` \| `"view_quilt"` \| `"all_inbox"` \| `"settings_remote"` \| `"anchor"` \| `"hourglass_full"` \| `"edit_off"` \| `"mediation"` \| `"terminal"` \| `"fit_screen"` \| `"turned_in_not"` \| `"remove_shopping_cart"` \| `"flaky"` \| `"toll"` \| `"lock_reset"` \| `"swap_horizontal_circle"` \| `"view_sidebar"` \| `"lock_clock"` \| `"vertical_split"` \| `"settings_voice"` \| `"data_exploration"` \| `"online_prediction"` \| `"event_seat"` \| `"next_plan"` \| `"restore_from_trash"` \| `"pregnant_woman"` \| `"camera_enhance"` \| `"token"` \| `"request_page"` \| `"view_stream"` \| `"dynamic_form"` \| `"markunread_mailbox"` \| `"tab"` \| `"calendar_view_week"` \| `"smart_button"` \| `"remove_done"` \| `"accessible_forward"` \| `"settings_power"` \| `"density_medium"` \| `"add_to_drive"` \| `"add_card"` \| `"try"` \| `"work_history"` \| `"outbox"` \| `"card_travel"` \| `"offline_pin"` \| `"fax"` \| `"compress"` \| `"find_replace"` \| `"assured_workload"` \| `"assignment_returned"` \| `"123"` \| `"calendar_view_day"` \| `"chrome_reader_mode"` \| `"rowing"` \| `"generating_tokens"` \| `"outlet"` \| `"http"` \| `"free_cancellation"` \| `"new_label"` \| `"settings_brightness"` \| `"backup_table"` \| `"spellcheck"` \| `"pan_tool_alt"` \| `"restore_page"` \| `"event_repeat"` \| `"noise_control_off"` \| `"alarm_add"` \| `"credit_card_off"` \| `"wifi_protected_setup"` \| `"display_settings"` \| `"play_for_work"` \| `"disabled_visible"` \| `"manage_history"` \| `"view_timeline"` \| `"settings_overscan"` \| `"outbound"` \| `"switch_access_shortcut"` \| `"cancel_schedule_send"` \| `"webhook"` \| `"swap_vertical_circle"` \| `"gif"` \| `"satellite_alt"` \| `"settings_input_composite"` \| `"quickreply"` \| `"troubleshoot"` \| `"view_day"` \| `"comment_bank"` \| `"line_weight"` \| `"horizontal_split"` \| `"output"` \| `"picture_in_picture"` \| `"polymer"` \| `"batch_prediction"` \| `"send_and_archive"` \| `"html"` \| `"code_off"` \| `"bookmark_remove"` \| `"settings_bluetooth"` \| `"shop_two"` \| `"flip_to_front"` \| `"gif_box"` \| `"speaker_notes_off"` \| `"eject"` \| `"alarm_off"` \| `"perm_data_setting"` \| `"switch_access_shortcut_add"` \| `"settings_input_hdmi"` \| `"hourglass_disabled"` \| `"perm_scan_wifi"` \| `"sensors_off"` \| `"work_off"` \| `"join_full"` \| `"picture_in_picture_alt"` \| `"app_blocking"` \| `"settings_cell"` \| `"abc"` \| `"javascript"` \| `"lightbulb_circle"` \| `"line_style"` \| `"perm_device_information"` \| `"app_shortcut"` \| `"update_disabled"` \| `"subtitles_off"` \| `"swipe_left"` \| `"arrow_outward"` \| `"private_connectivity"` \| `"voice_over_off"` \| `"join_inner"` \| `"install_desktop"` \| `"swipe_right"` \| `"settings_input_svideo"` \| `"swipe_up"` \| `"flip_to_back"` \| `"view_array"` \| `"open_in_new_off"` \| `"density_small"` \| `"all_out"` \| `"shop_2"` \| `"data_thresholding"` \| `"label_off"` \| `"lock_person"` \| `"commit"` \| `"tab_unselected"` \| `"rounded_corner"` \| `"view_kanban"` \| `"text_rotate_vertical"` \| `"install_mobile"` \| `"spatial_audio_off"` \| `"explore_off"` \| `"css"` \| `"swipe_down"` \| `"text_rotation_none"` \| `"join_left"` \| `"not_accessible"` \| `"noise_aware"` \| `"pin_invoke"` \| `"pinch"` \| `"swipe_vertical"` \| `"extension_off"` \| `"perm_camera_mic"` \| `"view_cozy"` \| `"join_right"` \| `"pin_end"` \| `"swipe_right_alt"` \| `"browse_gallery"` \| `"php"` \| `"view_comfy_alt"` \| `"text_rotate_up"` \| `"text_rotation_angledown"` \| `"text_rotation_angleup"` \| `"add_home"` \| `"text_rotation_down"` \| `"unfold_more_double"` \| `"view_compact_alt"` \| `"network_ping"` \| `"swipe_down_alt"` \| `"on_device_training"` \| `"density_large"` \| `"spatial_tracking"` \| `"swipe_left_alt"` \| `"spatial_audio"` \| `"swipe_up_alt"` \| `"unfold_less_double"` \| `"repartition"` \| `"width_full"` \| `"transcribe"` \| `"width_normal"` \| `"width_wide"` \| `"hls_off"` \| `"hls"` \| `"face_unlock"` \| `"close"` \| `"close"` \| `"menu"` \| `"expand_more"` \| `"arrow_back"` \| `"chevron_right"` \| `"arrow_forward_ios"` \| `"arrow_back_ios"` \| `"cancel"` \| `"arrow_drop_down"` \| `"more_vert"` \| `"arrow_forward"` \| `"chevron_left"` \| `"expand_less"` \| `"check"` \| `"more_horiz"` \| `"refresh"` \| `"apps"` \| `"payments"` \| `"arrow_upward"` \| `"east"` \| `"campaign"` \| `"arrow_back_ios_new"` \| `"arrow_downward"` \| `"arrow_right"` \| `"menu_open"` \| `"fullscreen"` \| `"arrow_drop_up"` \| `"unfold_more"` \| `"double_arrow"` \| `"maps_home_work"` \| `"west"` \| `"expand_circle_down"` \| `"arrow_left"` \| `"south"` \| `"north_east"` \| `"north"` \| `"first_page"` \| `"home_work"` \| `"fullscreen_exit"` \| `"last_page"` \| `"arrow_drop_down_circle"` \| `"unfold_less"` \| `"subdirectory_arrow_right"` \| `"legend_toggle"` \| `"south_east"` \| `"app_settings_alt"` \| `"subdirectory_arrow_left"` \| `"assistant_direction"` \| `"north_west"` \| `"switch_left"` \| `"waterfall_chart"` \| `"south_west"` \| `"pivot_table_chart"` \| `"switch_right"` \| `"apps_outage"` \| `"offline_share"` \| `"add_home_work"` \| `"person"` \| `"person"` \| `"notifications"` \| `"groups"` \| `"people"` \| `"share"` \| `"school"` \| `"person_outline"` \| `"person_add"` \| `"public"` \| `"emoji_events"` \| `"group"` \| `"engineering"` \| `"notifications_active"` \| `"construction"` \| `"people_alt"` \| `"group_add"` \| `"psychology"` \| `"thumb_up_alt"` \| `"health_and_safety"` \| `"water_drop"` \| `"travel_explore"` \| `"notifications_none"` \| `"emoji_emotions"` \| `"sports_esports"` \| `"workspace_premium"` \| `"sentiment_very_satisfied"` \| `"location_city"` \| `"ios_share"` \| `"precision_manufacturing"` \| `"science"` \| `"sentiment_satisfied"` \| `"person_add_alt"` \| `"military_tech"` \| `"emoji_objects"` \| `"history_edu"` \| `"cake"` \| `"handshake"` \| `"sentiment_dissatisfied"` \| `"sentiment_very_dissatisfied"` \| `"emoji_people"` \| `"self_improvement"` \| `"person_remove"` \| `"coronavirus"` \| `"poll"` \| `"whatshot"` \| `"sports_soccer"` \| `"domain"` \| `"recommend"` \| `"mood"` \| `"people_outline"` \| `"recycling"` \| `"female"` \| `"person_off"` \| `"male"` \| `"person_add_alt_1"` \| `"sentiment_neutral"` \| `"connect_without_contact"` \| `"thumb_down_alt"` \| `"waving_hand"` \| `"real_estate_agent"` \| `"back_hand"` \| `"hiking"` \| `"architecture"` \| `"notifications_off"` \| `"luggage"` \| `"masks"` \| `"front_hand"` \| `"vaccines"` \| `"mood_bad"` \| `"compost"` \| `"diversity_3"` \| `"emoji_nature"` \| `"switch_account"` \| `"nights_stay"` \| `"interests"` \| `"king_bed"` \| `"catching_pokemon"` \| `"sports_basketball"` \| `"notification_add"` \| `"cruelty_free"` \| `"man"` \| `"sports_kabaddi"` \| `"sports"` \| `"reduce_capacity"` \| `"emoji_food_beverage"` \| `"sick"` \| `"emoji_symbols"` \| `"diversity_1"` \| `"heart_broken"` \| `"emoji_transportation"` \| `"wallet"` \| `"cookie"` \| `"sports_tennis"` \| `"add_reaction"` \| `"personal_injury"` \| `"woman"` \| `"elderly"` \| `"add_moderator"` \| `"scale"` \| `"transgender"` \| `"outdoor_grill"` \| `"deck"` \| `"follow_the_signs"` \| `"plus_one"` \| `"social_distance"` \| `"fireplace"` \| `"pix"` \| `"clean_hands"` \| `"piano"` \| `"psychology_alt"` \| `"groups_2"` \| `"sports_motorsports"` \| `"surfing"` \| `"sanitizer"` \| `"hive"` \| `"sports_handball"` \| `"sports_baseball"` \| `"edit_notifications"` \| `"sports_volleyball"` \| `"diversity_2"` \| `"pages"` \| `"sports_football"` \| `"group_remove"` \| `"downhill_skiing"` \| `"kayaking"` \| `"co2"` \| `"public_off"` \| `"single_bed"` \| `"remove_moderator"` \| `"boy"` \| `"domain_add"` \| `"notifications_paused"` \| `"skateboarding"` \| `"fitbit"` \| `"person_remove_alt_1"` \| `"safety_divider"` \| `"thunderstorm"` \| `"group_off"` \| `"groups_3"` \| `"sports_cricket"` \| `"sports_martial_arts"` \| `"sports_mma"` \| `"sports_golf"` \| `"girl"` \| `"nordic_walking"` \| `"face_6"` \| `"sports_gymnastics"` \| `"paragliding"` \| `"face_3"` \| `"party_mode"` \| `"snowboarding"` \| `"6_ft_apart"` \| `"kitesurfing"` \| `"south_america"` \| `"snowshoeing"` \| `"sports_hockey"` \| `"ice_skating"` \| `"elderly_woman"` \| `"person_2"` \| `"sports_rugby"` \| `"scoreboard"` \| `"face_2"` \| `"face_4"` \| `"sledding"` \| `"sign_language"` \| `"cyclone"` \| `"person_4"` \| `"face_5"` \| `"person_3"` \| `"flood"` \| `"no_luggage"` \| `"scuba_diving"` \| `"tsunami"` \| `"severe_cold"` \| `"piano_off"` \| `"roller_skating"` \| `"tornado"` \| `"assist_walker"` \| `"man_2"` \| `"landslide"` \| `"woman_2"` \| `"blind"` \| `"18_up_rating"` \| `"volcano"` \| `"no_adult_content"` \| `"man_4"` \| `"man_3"` \| `"add"` \| `"add"` \| `"add_circle_outline"` \| `"content_copy"` \| `"add_circle"` \| `"send"` \| `"clear"` \| `"save"` \| `"mail"` \| `"link"` \| `"remove"` \| `"filter_list"` \| `"inventory_2"` \| `"inventory"` \| `"insights"` \| `"remove_circle_outline"` \| `"bolt"` \| `"sort"` \| `"flag"` \| `"reply"` \| `"add_box"` \| `"push_pin"` \| `"remove_circle"` \| `"block"` \| `"calculate"` \| `"create"` \| `"undo"` \| `"how_to_reg"` \| `"content_paste"` \| `"report"` \| `"file_copy"` \| `"backspace"` \| `"shield"` \| `"archive"` \| `"save_alt"` \| `"policy"` \| `"change_circle"` \| `"tag"` \| `"redo"` \| `"forward"` \| `"content_cut"` \| `"outlined_flag"` \| `"inbox"` \| `"link_off"` \| `"ballot"` \| `"drafts"` \| `"biotech"` \| `"report_gmailerrorred"` \| `"delete_sweep"` \| `"stacked_bar_chart"` \| `"square_foot"` \| `"markunread"` \| `"add_link"` \| `"stream"` \| `"copy_all"` \| `"dynamic_feed"` \| `"move_to_inbox"` \| `"where_to_vote"` \| `"waves"` \| `"content_paste_search"` \| `"unarchive"` \| `"reply_all"` \| `"select_all"` \| `"low_priority"` \| `"save_as"` \| `"text_format"` \| `"font_download"` \| `"weekend"` \| `"how_to_vote"` \| `"upcoming"` \| `"gesture"` \| `"attribution"` \| `"flag_circle"` \| `"content_paste_go"` \| `"filter_list_off"` \| `"next_week"` \| `"content_paste_off"` \| `"web_stories"` \| `"report_off"` \| `"deselect"` \| `"font_download_off"` \| `"edit"` \| `"edit"` \| `"navigate_next"` \| `"photo_camera"` \| `"image"` \| `"tune"` \| `"picture_as_pdf"` \| `"receipt_long"` \| `"circle"` \| `"timer"` \| `"auto_awesome"` \| `"auto_stories"` \| `"collections"` \| `"navigate_before"` \| `"add_a_photo"` \| `"palette"` \| `"remove_red_eye"` \| `"music_note"` \| `"add_photo_alternate"` \| `"wb_sunny"` \| `"brush"` \| `"euro"` \| `"flash_on"` \| `"auto_fix_high"` \| `"looks_one"` \| `"control_point"` \| `"style"` \| `"adjust"` \| `"straighten"` \| `"photo_library"` \| `"camera"` \| `"portrait"` \| `"camera_alt"` \| `"audiotrack"` \| `"color_lens"` \| `"grid_on"` \| `"rotate_right"` \| `"timelapse"` \| `"crop_free"` \| `"currency_rupee"` \| `"video_camera_front"` \| `"landscape"` \| `"slideshow"` \| `"panorama_fish_eye"` \| `"looks_two"` \| `"crop_square"` \| `"collections_bookmark"` \| `"lens"` \| `"looks_3"` \| `"compare"` \| `"filter_vintage"` \| `"filter_drama"` \| `"image_search"` \| `"healing"` \| `"rotate_left"` \| `"center_focus_strong"` \| `"assistant"` \| `"auto_awesome_motion"` \| `"blur_on"` \| `"crop"` \| `"wb_incandescent"` \| `"face_retouching_natural"` \| `"broken_image"` \| `"flare"` \| `"cases"` \| `"wb_cloudy"` \| `"filter_none"` \| `"colorize"` \| `"auto_fix_normal"` \| `"crop_original"` \| `"filter_center_focus"` \| `"dehaze"` \| `"brightness_4"` \| `"nature_people"` \| `"photo"` \| `"flash_off"` \| `"tag_faces"` \| `"auto_awesome_mosaic"` \| `"brightness_6"` \| `"brightness_1"` \| `"grain"` \| `"brightness_5"` \| `"details"` \| `"flip_camera_android"` \| `"flip"` \| `"view_comfy"` \| `"image_not_supported"` \| `"loupe"` \| `"bedtime"` \| `"filter_1"` \| `"flip_camera_ios"` \| `"add_to_photos"` \| `"movie_creation"` \| `"looks_4"` \| `"animation"` \| `"center_focus_weak"` \| `"panorama"` \| `"movie_filter"` \| `"crop_din"` \| `"currency_bitcoin"` \| `"currency_yen"` \| `"view_compact"` \| `"control_point_duplicate"` \| `"leak_add"` \| `"brightness_7"` \| `"filter"` \| `"incomplete_circle"` \| `"nature"` \| `"texture"` \| `"contrast"` \| `"timer_off"` \| `"transform"` \| `"photo_size_select_actual"` \| `"video_camera_back"` \| `"looks_5"` \| `"motion_photos_on"` \| `"rotate_90_degrees_ccw"` \| `"photo_camera_front"` \| `"mic_external_on"` \| `"wb_twilight"` \| `"currency_pound"` \| `"gradient"` \| `"assistant_photo"` \| `"hide_image"` \| `"exposure_plus_1"` \| `"music_off"` \| `"crop_16_9"` \| `"exposure"` \| `"filter_2"` \| `"thermostat_auto"` \| `"shutter_speed"` \| `"photo_album"` \| `"filter_tilt_shift"` \| `"looks_6"` \| `"looks"` \| `"brightness_3"` \| `"hdr_strong"` \| `"linked_camera"` \| `"vrpano"` \| `"blur_circular"` \| `"crop_portrait"` \| `"flash_auto"` \| `"photo_filter"` \| `"motion_photos_auto"` \| `"iso"` \| `"brightness_2"` \| `"crop_7_5"` \| `"rotate_90_degrees_cw"` \| `"photo_size_select_small"` \| `"tonality"` \| `"filter_hdr"` \| `"currency_ruble"` \| `"exposure_zero"` \| `"crop_rotate"` \| `"photo_size_select_large"` \| `"filter_3"` \| `"hdr_weak"` \| `"camera_front"` \| `"crop_5_4"` \| `"burst_mode"` \| `"filter_frames"` \| `"logo_dev"` \| `"camera_roll"` \| `"blur_linear"` \| `"filter_b_and_w"` \| `"crop_landscape"` \| `"crop_3_2"` \| `"switch_camera"` \| `"switch_video"` \| `"filter_7"` \| `"filter_4"` \| `"filter_9_plus"` \| `"exposure_plus_2"` \| `"wb_iridescent"` \| `"grid_off"` \| `"photo_camera_back"` \| `"motion_photos_paused"` \| `"auto_fix_off"` \| `"monochrome_photos"` \| `"filter_5"` \| `"exposure_neg_1"` \| `"face_retouching_off"` \| `"leak_remove"` \| `"panorama_photosphere"` \| `"filter_8"` \| `"filter_9"` \| `"timer_10"` \| `"video_stable"` \| `"filter_6"` \| `"deblur"` \| `"raw_on"` \| `"wb_shade"` \| `"blur_off"` \| `"motion_photos_off"` \| `"motion_photos_pause"` \| `"vignette"` \| `"hdr_on"` \| `"panorama_horizontal"` \| `"dirty_lens"` \| `"image_aspect_ratio"` \| `"30fps_select"` \| `"camera_rear"` \| `"currency_yuan"` \| `"currency_lira"` \| `"timer_3"` \| `"60fps_select"` \| `"panorama_wide_angle_select"` \| `"24mp"` \| `"exposure_neg_2"` \| `"autofps_select"` \| `"panorama_horizontal_select"` \| `"panorama_photosphere_select"` \| `"panorama_wide_angle"` \| `"wb_auto"` \| `"hdr_plus"` \| `"panorama_vertical_select"` \| `"mic_external_off"` \| `"currency_franc"` \| `"12mp"` \| `"panorama_vertical"` \| `"mp"` \| `"hdr_enhanced_select"` \| `"hevc"` \| `"bedtime_off"` \| `"18mp"` \| `"10mp"` \| `"23mp"` \| `"raw_off"` \| `"hdr_off"` \| `"11mp"` \| `"20mp"` \| `"3mp"` \| `"5mp"` \| `"13mp"` \| `"16mp"` \| `"15mp"` \| `"21mp"` \| `"2mp"` \| `"17mp"` \| `"22mp"` \| `"14mp"` \| `"19mp"` \| `"7mp"` \| `"8mp"` \| `"4mp"` \| `"9mp"` \| `"6mp"` \| `"email"` \| `"email"` \| `"location_on"` \| `"call"` \| `"phone"` \| `"business"` \| `"chat"` \| `"mail_outline"` \| `"list_alt"` \| `"qr_code_scanner"` \| `"vpn_key"` \| `"chat_bubble_outline"` \| `"alternate_email"` \| `"forum"` \| `"chat_bubble"` \| `"textsms"` \| `"person_search"` \| `"contact_mail"` \| `"sentiment_satisfied_alt"` \| `"qr_code"` \| `"qr_code_2"` \| `"message"` \| `"contacts"` \| `"comment"` \| `"key"` \| `"import_contacts"` \| `"app_registration"` \| `"contact_phone"` \| `"import_export"` \| `"live_help"` \| `"forward_to_inbox"` \| `"hourglass_bottom"` \| `"hourglass_top"` \| `"rss_feed"` \| `"mark_email_read"` \| `"hub"` \| `"read_more"` \| `"document_scanner"` \| `"more_time"` \| `"mark_email_unread"` \| `"call_end"` \| `"clear_all"` \| `"dialpad"` \| `"phone_enabled"` \| `"mark_chat_unread"` \| `"cancel_presentation"` \| `"3p"` \| `"call_made"` \| `"screen_share"` \| `"call_split"` \| `"unsubscribe"` \| `"co_present"` \| `"domain_verification"` \| `"present_to_all"` \| `"mark_chat_read"` \| `"add_ic_call"` \| `"phonelink_ring"` \| `"call_received"` \| `"stay_current_portrait"` \| `"phonelink_lock"` \| `"cell_tower"` \| `"phone_disabled"` \| `"ring_volume"` \| `"location_off"` \| `"phonelink_setup"` \| `"duo"` \| `"swap_calls"` \| `"stay_primary_portrait"` \| `"voicemail"` \| `"call_merge"` \| `"phonelink_erase"` \| `"mobile_screen_share"` \| `"domain_disabled"` \| `"person_add_disabled"` \| `"contact_emergency"` \| `"spoke"` \| `"call_missed_outgoing"` \| `"speaker_phone"` \| `"desktop_access_disabled"` \| `"mark_unread_chat_alt"` \| `"cell_wifi"` \| `"stop_screen_share"` \| `"print_disabled"` \| `"call_missed"` \| `"pause_presentation"` \| `"comments_disabled"` \| `"dialer_sip"` \| `"invert_colors_off"` \| `"wifi_calling"` \| `"rtt"` \| `"portable_wifi_off"` \| `"mail_lock"` \| `"send_time_extension"` \| `"stay_current_landscape"` \| `"sip"` \| `"nat"` \| `"key_off"` \| `"stay_primary_landscape"` \| `"no_sim"` \| `"vpn_key_off"` \| `"local_shipping"` \| `"local_shipping"` \| `"place"` \| `"menu_book"` \| `"local_offer"` \| `"badge"` \| `"map"` \| `"category"` \| `"restaurant"` \| `"directions_car"` \| `"local_fire_department"` \| `"volunteer_activism"` \| `"my_location"` \| `"flight"` \| `"local_mall"` \| `"near_me"` \| `"handyman"` \| `"directions_run"` \| `"restaurant_menu"` \| `"layers"` \| `"medical_services"` \| `"directions_walk"` \| `"local_hospital"` \| `"celebration"` \| `"lunch_dining"` \| `"local_library"` \| `"pin_drop"` \| `"park"` \| `"local_atm"` \| `"local_activity"` \| `"directions_bus"` \| `"design_services"` \| `"person_pin"` \| `"local_cafe"` \| `"rate_review"` \| `"delivery_dining"` \| `"local_police"` \| `"fastfood"` \| `"directions_bike"` \| `"directions_car_filled"` \| `"home_repair_service"` \| `"cleaning_services"` \| `"zoom_out_map"` \| `"hotel"` \| `"local_grocery_store"` \| `"local_phone"` \| `"miscellaneous_services"` \| `"diamond"` \| `"navigation"` \| `"local_gas_station"` \| `"train"` \| `"factory"` \| `"local_parking"` \| `"local_florist"` \| `"person_pin_circle"` \| `"money"` \| `"local_post_office"` \| `"two_wheeler"` \| `"directions"` \| `"route"` \| `"add_business"` \| `"electrical_services"` \| `"warehouse"` \| `"traffic"` \| `"directions_boat"` \| `"local_bar"` \| `"alt_route"` \| `"agriculture"` \| `"beenhere"` \| `"emergency"` \| `"pedal_bike"` \| `"360"` \| `"liquor"` \| `"moving"` \| `"local_airport"` \| `"sailing"` \| `"add_location_alt"` \| `"local_dining"` \| `"maps_ugc"` \| `"local_taxi"` \| `"local_laundry_service"` \| `"trip_origin"` \| `"directions_bus_filled"` \| `"ramen_dining"` \| `"local_drink"` \| `"local_printshop"` \| `"hail"` \| `"theater_comedy"` \| `"forest"` \| `"local_pizza"` \| `"not_listed_location"` \| `"transfer_within_a_station"` \| `"add_location"` \| `"dinner_dining"` \| `"bakery_dining"` \| `"wine_bar"` \| `"terrain"` \| `"multiple_stop"` \| `"takeout_dining"` \| `"store_mall_directory"` \| `"icecream"` \| `"museum"` \| `"nightlife"` \| `"local_pharmacy"` \| `"hardware"` \| `"departure_board"` \| `"set_meal"` \| `"add_road"` \| `"ev_station"` \| `"electric_car"` \| `"medical_information"` \| `"local_see"` \| `"festival"` \| `"plumbing"` \| `"car_rental"` \| `"layers_clear"` \| `"attractions"` \| `"zoom_in_map"` \| `"edit_location"` \| `"pest_control"` \| `"local_convenience_store"` \| `"run_circle"` \| `"church"` \| `"dry_cleaning"` \| `"edit_road"` \| `"edit_attributes"` \| `"edit_location_alt"` \| `"car_repair"` \| `"wrong_location"` \| `"moped"` \| `"local_movies"` \| `"directions_boat_filled"` \| `"signpost"` \| `"satellite"` \| `"soup_kitchen"` \| `"tram"` \| `"taxi_alert"` \| `"crisis_alert"` \| `"merge"` \| `"breakfast_dining"` \| `"straight"` \| `"subway"` \| `"atm"` \| `"transit_enterexit"` \| `"brunch_dining"` \| `"connecting_airports"` \| `"hvac"` \| `"electric_bike"` \| `"directions_transit"` \| `"egg"` \| `"safety_check"` \| `"electric_scooter"` \| `"stadium"` \| `"bus_alert"` \| `"mode_of_travel"` \| `"local_hotel"` \| `"local_car_wash"` \| `"castle"` \| `"car_crash"` \| `"streetview"` \| `"mosque"` \| `"directions_subway"` \| `"turn_right"` \| `"compass_calibration"` \| `"electric_rickshaw"` \| `"airline_stops"` \| `"fork_right"` \| `"directions_railway"` \| `"no_crash"` \| `"no_meals"` \| `"railway_alert"` \| `"electric_moped"` \| `"local_play"` \| `"turn_left"` \| `"u_turn_left"` \| `"airlines"` \| `"pest_control_rodent"` \| `"egg_alt"` \| `"bike_scooter"` \| `"tire_repair"` \| `"near_me_disabled"` \| `"sos"` \| `"snowmobile"` \| `"directions_transit_filled"` \| `"minor_crash"` \| `"kebab_dining"` \| `"no_transfer"` \| `"flight_class"` \| `"fort"` \| `"fire_truck"` \| `"directions_subway_filled"` \| `"temple_buddhist"` \| `"emergency_share"` \| `"directions_railway_filled"` \| `"u_turn_right"` \| `"temple_hindu"` \| `"fork_left"` \| `"synagogue"` \| `"screen_rotation_alt"` \| `"remove_road"` \| `"turn_sharp_right"` \| `"roundabout_right"` \| `"turn_slight_right"` \| `"turn_slight_left"` \| `"emergency_recording"` \| `"roundabout_left"` \| `"turn_sharp_left"` \| `"ramp_left"` \| `"ramp_right"` \| `"fire_hydrant_alt"` \| `"file_download"` \| `"file_download"` \| `"file_upload"` \| `"download"` \| `"folder"` \| `"grid_view"` \| `"upload_file"` \| `"cloud_upload"` \| `"folder_open"` \| `"cloud"` \| `"text_snippet"` \| `"request_quote"` \| `"cloud_download"` \| `"drive_file_rename_outline"` \| `"upload"` \| `"attachment"` \| `"newspaper"` \| `"download_for_offline"` \| `"create_new_folder"` \| `"downloading"` \| `"folder_shared"` \| `"cloud_done"` \| `"cloud_queue"` \| `"workspaces"` \| `"topic"` \| `"approval"` \| `"download_done"` \| `"cloud_off"` \| `"file_open"` \| `"drive_file_move"` \| `"drive_folder_upload"` \| `"file_download_done"` \| `"cloud_sync"` \| `"attach_email"` \| `"rule_folder"` \| `"folder_zip"` \| `"folder_copy"` \| `"cloud_circle"` \| `"difference"` \| `"snippet_folder"` \| `"file_download_off"` \| `"folder_delete"` \| `"drive_file_move_rtl"` \| `"folder_off"` \| `"format_overline"` \| `"play_arrow"` \| `"play_arrow"` \| `"play_circle_filled"` \| `"videocam"` \| `"play_circle"` \| `"mic"` \| `"volume_up"` \| `"pause"` \| `"play_circle_outline"` \| `"replay"` \| `"library_books"` \| `"volume_off"` \| `"skip_next"` \| `"fiber_manual_record"` \| `"speed"` \| `"stop"` \| `"movie"` \| `"skip_previous"` \| `"new_releases"` \| `"playlist_add"` \| `"loop"` \| `"equalizer"` \| `"fast_forward"` \| `"web"` \| `"playlist_add_check"` \| `"video_library"` \| `"library_add"` \| `"pause_circle"` \| `"mic_off"` \| `"stop_circle"` \| `"subscriptions"` \| `"repeat"` \| `"volume_mute"` \| `"video_call"` \| `"not_interested"` \| `"shuffle"` \| `"sort_by_alpha"` \| `"fast_rewind"` \| `"mic_none"` \| `"library_music"` \| `"volume_down"` \| `"videocam_off"` \| `"recent_actors"` \| `"web_asset"` \| `"library_add_check"` \| `"hearing"` \| `"queue_music"` \| `"pause_circle_filled"` \| `"pause_circle_outline"` \| `"fiber_new"` \| `"subtitles"` \| `"note"` \| `"av_timer"` \| `"album"` \| `"playlist_play"` \| `"queue"` \| `"games"` \| `"radio"` \| `"replay_circle_filled"` \| `"branding_watermark"` \| `"forward_10"` \| `"replay_10"` \| `"closed_caption"` \| `"video_settings"` \| `"high_quality"` \| `"featured_play_list"` \| `"playlist_add_check_circle"` \| `"control_camera"` \| `"playlist_remove"` \| `"slow_motion_video"` \| `"add_to_queue"` \| `"repeat_one"` \| `"airplay"` \| `"call_to_action"` \| `"snooze"` \| `"hd"` \| `"replay_30"` \| `"repeat_on"` \| `"closed_caption_off"` \| `"featured_video"` \| `"audio_file"` \| `"shuffle_on"` \| `"interpreter_mode"` \| `"forward_30"` \| `"playlist_add_circle"` \| `"5g"` \| `"music_video"` \| `"queue_play_next"` \| `"replay_5"` \| `"video_file"` \| `"art_track"` \| `"hearing_disabled"` \| `"forward_5"` \| `"explicit"` \| `"video_label"` \| `"4k"` \| `"fiber_smart_record"` \| `"repeat_one_on"` \| `"surround_sound"` \| `"remove_from_queue"` \| `"closed_caption_disabled"` \| `"play_disabled"` \| `"web_asset_off"` \| `"lyrics"` \| `"sd"` \| `"missed_video_call"` \| `"10k"` \| `"fiber_pin"` \| `"fiber_dvr"` \| `"4k_plus"` \| `"1k"` \| `"2k"` \| `"1k_plus"` \| `"8k"` \| `"5k"` \| `"8k_plus"` \| `"9k_plus"` \| `"3k"` \| `"5k_plus"` \| `"7k"` \| `"9k"` \| `"2k_plus"` \| `"3k_plus"` \| `"6k"` \| `"7k_plus"` \| `"6k_plus"` \| `"star"` \| `"star"` \| `"check_box"` \| `"check_box_outline_blank"` \| `"radio_button_unchecked"` \| `"radio_button_checked"` \| `"star_border"` \| `"toggle_on"` \| `"star_outline"` \| `"toggle_off"` \| `"star_half"` \| `"indeterminate_check_box"` \| `"star_purple500"` \| `"star_border_purple500"` \| `"warning"` \| `"warning"` \| `"error"` \| `"error_outline"` \| `"warning_amber"` \| `"notification_important"` \| `"add_alert"` \| `"auto_delete"` \| `"support_agent"` \| `"support_agent"` \| `"wifi"` \| `"account_tree"` \| `"sync"` \| `"priority_high"` \| `"event_available"` \| `"confirmation_number"` \| `"event_note"` \| `"sms"` \| `"live_tv"` \| `"ondemand_video"` \| `"drive_eta"` \| `"wifi_off"` \| `"event_busy"` \| `"do_not_disturb_on"` \| `"wc"` \| `"more"` \| `"power"` \| `"do_not_disturb"` \| `"sync_problem"` \| `"time_to_leave"` \| `"do_disturb_on"` \| `"vpn_lock"` \| `"running_with_errors"` \| `"folder_special"` \| `"enhanced_encryption"` \| `"do_disturb"` \| `"sms_failed"` \| `"network_check"` \| `"phone_callback"` \| `"adb"` \| `"phone_forwarded"` \| `"power_off"` \| `"system_update"` \| `"personal_video"` \| `"voice_chat"` \| `"airline_seat_recline_normal"` \| `"vibration"` \| `"do_disturb_alt"` \| `"do_not_disturb_alt"` \| `"sync_disabled"` \| `"tap_and_play"` \| `"no_encryption"` \| `"sd_card"` \| `"phone_missed"` \| `"airline_seat_recline_extra"` \| `"imagesearch_roller"` \| `"mms"` \| `"sync_lock"` \| `"disc_full"` \| `"no_encryption_gmailerrorred"` \| `"bluetooth_audio"` \| `"sd_card_alert"` \| `"sim_card_alert"` \| `"do_not_disturb_off"` \| `"airline_seat_individual_suite"` \| `"phone_paused"` \| `"do_disturb_off"` \| `"airline_seat_flat"` \| `"phone_locked"` \| `"network_locked"` \| `"tv_off"` \| `"phone_bluetooth_speaker"` \| `"airline_seat_flat_angled"` \| `"directions_off"` \| `"airline_seat_legroom_normal"` \| `"airline_seat_legroom_extra"` \| `"airline_seat_legroom_reduced"` \| `"video_chat"` \| `"attach_money"` \| `"attach_money"` \| `"edit_note"` \| `"format_list_bulleted"` \| `"mode_edit"` \| `"attach_file"` \| `"monetization_on"` \| `"post_add"` \| `"bar_chart"` \| `"checklist"` \| `"drag_handle"` \| `"show_chart"` \| `"insert_drive_file"` \| `"format_quote"` \| `"query_stats"` \| `"format_list_numbered"` \| `"table_chart"` \| `"border_color"` \| `"pie_chart"` \| `"notes"` \| `"checklist_rtl"` \| `"text_fields"` \| `"format_bold"` \| `"table_rows"` \| `"publish"` \| `"title"` \| `"insert_emoticon"` \| `"auto_graph"` \| `"insert_photo"` \| `"draw"` \| `"insert_chart_outlined"` \| `"mode"` \| `"mode_comment"` \| `"functions"` \| `"insert_link"` \| `"mode_edit_outline"` \| `"horizontal_rule"` \| `"insert_invitation"` \| `"format_align_left"` \| `"format_italic"` \| `"format_color_fill"` \| `"add_comment"` \| `"insert_chart"` \| `"linear_scale"` \| `"stacked_line_chart"` \| `"format_size"` \| `"money_off"` \| `"insert_comment"` \| `"vertical_align_bottom"` \| `"format_underlined"` \| `"bubble_chart"` \| `"height"` \| `"schema"` \| `"vertical_align_top"` \| `"square"` \| `"format_align_center"` \| `"area_chart"` \| `"format_paint"` \| `"format_color_text"` \| `"format_align_right"` \| `"scatter_plot"` \| `"format_list_numbered_rtl"` \| `"data_object"` \| `"highlight"` \| `"format_align_justify"` \| `"merge_type"` \| `"add_chart"` \| `"numbers"` \| `"format_shapes"` \| `"money_off_csred"` \| `"pie_chart_outline"` \| `"format_indent_increase"` \| `"move_up"` \| `"short_text"` \| `"format_color_reset"` \| `"strikethrough_s"` \| `"vertical_align_center"` \| `"hexagon"` \| `"align_horizontal_left"` \| `"rectangle"` \| `"move_down"` \| `"multiline_chart"` \| `"polyline"` \| `"score"` \| `"text_increase"` \| `"border_all"` \| `"format_indent_decrease"` \| `"format_clear"` \| `"space_bar"` \| `"format_line_spacing"` \| `"candlestick_chart"` \| `"horizontal_distribute"` \| `"align_vertical_bottom"` \| `"align_horizontal_center"` \| `"vertical_distribute"` \| `"align_horizontal_right"` \| `"format_strikethrough"` \| `"superscript"` \| `"data_array"` \| `"margin"` \| `"pentagon"` \| `"wrap_text"` \| `"align_vertical_top"` \| `"align_vertical_center"` \| `"text_decrease"` \| `"border_clear"` \| `"subscript"` \| `"border_style"` \| `"padding"` \| `"border_outer"` \| `"line_axis"` \| `"insert_page_break"` \| `"shape_line"` \| `"border_inner"` \| `"border_left"` \| `"border_bottom"` \| `"format_textdirection_l_to_r"` \| `"border_vertical"` \| `"border_horizontal"` \| `"format_textdirection_r_to_l"` \| `"border_top"` \| `"border_right"` \| `"type_specimen"` \| `"keyboard_arrow_down"` \| `"keyboard_arrow_down"` \| `"phone_iphone"` \| `"smartphone"` \| `"computer"` \| `"keyboard_arrow_right"` \| `"security"` \| `"desktop_windows"` \| `"smart_display"` \| `"keyboard_backspace"` \| `"phone_android"` \| `"keyboard_arrow_up"` \| `"keyboard_return"` \| `"keyboard_double_arrow_right"` \| `"laptop"` \| `"smart_toy"` \| `"keyboard_arrow_left"` \| `"memory"` \| `"headphones"` \| `"point_of_sale"` \| `"keyboard"` \| `"headset_mic"` \| `"tv"` \| `"keyboard_double_arrow_left"` \| `"keyboard_double_arrow_down"` \| `"mouse"` \| `"developer_board"` \| `"keyboard_voice"` \| `"start"` \| `"router"` \| `"videogame_asset"` \| `"keyboard_double_arrow_up"` \| `"cast_for_education"` \| `"device_hub"` \| `"headset"` \| `"laptop_mac"` \| `"cast"` \| `"watch"` \| `"tablet_mac"` \| `"devices_other"` \| `"desktop_mac"` \| `"keyboard_tab"` \| `"laptop_chromebook"` \| `"phonelink"` \| `"monitor"` \| `"speaker"` \| `"toys"` \| `"gamepad"` \| `"sim_card"` \| `"keyboard_alt"` \| `"connected_tv"` \| `"tablet_android"` \| `"cast_connected"` \| `"laptop_windows"` \| `"browser_updated"` \| `"device_unknown"` \| `"keyboard_hide"` \| `"scanner"` \| `"tablet"` \| `"speaker_group"` \| `"earbuds"` \| `"keyboard_capslock"` \| `"headset_off"` \| `"keyboard_command_key"` \| `"home_max"` \| `"dock"` \| `"headphones_battery"` \| `"smart_screen"` \| `"power_input"` \| `"browser_not_supported"` \| `"earbuds_battery"` \| `"phonelink_off"` \| `"home_mini"` \| `"adf_scanner"` \| `"developer_board_off"` \| `"videogame_asset_off"` \| `"keyboard_control_key"` \| `"watch_off"` \| `"keyboard_option_key"` \| `"light_mode"` \| `"light_mode"` \| `"restart_alt"` \| `"dark_mode"` \| `"task"` \| `"summarize"` \| `"password"` \| `"sell"` \| `"signal_cellular_alt"` \| `"devices"` \| `"settings_suggest"` \| `"quiz"` \| `"widgets"` \| `"storage"` \| `"credit_score"` \| `"thermostat"` \| `"battery_full"` \| `"gps_fixed"` \| `"price_check"` \| `"medication"` \| `"pin"` \| `"gpp_good"` \| `"battery_charging_full"` \| `"price_change"` \| `"fmd_good"` \| `"reviews"` \| `"tungsten"` \| `"air"` \| `"note_alt"` \| `"monitor_heart"` \| `"bluetooth"` \| `"graphic_eq"` \| `"dvr"` \| `"nightlight"` \| `"access_time"` \| `"sports_score"` \| `"water"` \| `"share_location"` \| `"gpp_maybe"` \| `"cable"` \| `"location_searching"` \| `"cameraswitch"` \| `"discount"` \| `"shortcut"` \| `"airplane_ticket"` \| `"radar"` \| `"device_thermostat"` \| `"wallpaper"` \| `"gpp_bad"` \| `"data_usage"` \| `"monitor_weight"` \| `"signal_wifi_4_bar"` \| `"developer_mode"` \| `"mode_night"` \| `"wifi_tethering"` \| `"bloodtype"` \| `"battery_std"` \| `"lan"` \| `"signal_cellular_4_bar"` \| `"fmd_bad"` \| `"splitscreen"` \| `"flashlight_on"` \| `"network_wifi"` \| `"sim_card_download"` \| `"access_time_filled"` \| `"airplanemode_active"` \| `"mobile_friendly"` \| `"usb"` \| `"send_to_mobile"` \| `"battery_alert"` \| `"lens_blur"` \| `"screen_search_desktop"` \| `"signal_wifi_statusbar_4_bar"` \| `"screen_rotation"` \| `"signal_wifi_statusbar_connected_no_internet_4"` \| `"gps_not_fixed"` \| `"system_security_update_good"` \| `"bluetooth_connected"` \| `"battery_5_bar"` \| `"nfc"` \| `"remember_me"` \| `"mode_standby"` \| `"pattern"` \| `"brightness_high"` \| `"battery_saver"` \| `"play_lesson"` \| `"data_saver_off"` \| `"storm"` \| `"data_saver_on"` \| `"brightness_medium"` \| `"bluetooth_searching"` \| `"signal_wifi_0_bar"` \| `"grid_4x4"` \| `"ssid_chart"` \| `"brightness_low"` \| `"ad_units"` \| `"bluetooth_disabled"` \| `"battery_4_bar"` \| `"mobiledata_off"` \| `"screenshot"` \| `"network_cell"` \| `"battery_0_bar"` \| `"wifi_calling_3"` \| `"hdr_auto"` \| `"security_update_good"` \| `"battery_unknown"` \| `"battery_6_bar"` \| `"signal_wifi_off"` \| `"settings_system_daydream"` \| `"battery_3_bar"` \| `"access_alarms"` \| `"signal_wifi_bad"` \| `"signal_wifi_connected_no_internet_4"` \| `"access_alarm"` \| `"medication_liquid"` \| `"battery_1_bar"` \| `"aod"` \| `"flashlight_off"` \| `"signal_cellular_0_bar"` \| `"add_to_home_screen"` \| `"signal_wifi_statusbar_null"` \| `"punch_clock"` \| `"gps_off"` \| `"security_update"` \| `"sd_storage"` \| `"grid_3x3"` \| `"reset_tv"` \| `"dataset"` \| `"4g_mobiledata"` \| `"brightness_auto"` \| `"battery_2_bar"` \| `"signal_cellular_connected_no_internet_4_bar"` \| `"screenshot_monitor"` \| `"wifi_lock"` \| `"do_not_disturb_on_total_silence"` \| `"phishing"` \| `"nearby_error"` \| `"airplanemode_inactive"` \| `"1x_mobiledata"` \| `"security_update_warning"` \| `"signal_cellular_connected_no_internet_0_bar"` \| `"screen_lock_portrait"` \| `"wifi_password"` \| `"system_security_update_warning"` \| `"system_security_update"` \| `"wifi_tethering_off"` \| `"edgesensor_high"` \| `"network_wifi_1_bar"` \| `"signal_cellular_nodata"` \| `"30fps"` \| `"wifi_find"` \| `"signal_cellular_off"` \| `"add_alarm"` \| `"4g_plus_mobiledata"` \| `"network_wifi_3_bar"` \| `"signal_wifi_4_bar_lock"` \| `"lte_mobiledata"` \| `"location_disabled"` \| `"signal_cellular_null"` \| `"mobile_off"` \| `"bluetooth_drive"` \| `"media_bluetooth_on"` \| `"rsvp"` \| `"edgesensor_low"` \| `"grid_goldenratio"` \| `"usb_off"` \| `"dataset_linked"` \| `"3g_mobiledata"` \| `"network_wifi_2_bar"` \| `"screen_lock_rotation"` \| `"screen_lock_landscape"` \| `"60fps"` \| `"signal_cellular_alt_1_bar"` \| `"lte_plus_mobiledata"` \| `"wifi_2_bar"` \| `"signal_cellular_alt_2_bar"` \| `"timer_10_select"` \| `"wifi_tethering_error"` \| `"signal_cellular_no_sim"` \| `"wifi_1_bar"` \| `"wifi_channel"` \| `"g_mobiledata"` \| `"timer_3_select"` \| `"h_mobiledata"` \| `"media_bluetooth_off"` \| `"e_mobiledata"` \| `"r_mobiledata"` \| `"h_plus_mobiledata"` \| `"hdr_on_select"` \| `"hdr_auto_select"` \| `"devices_fold"` \| `"nearby_off"` \| `"hdr_off_select"` \| `"fluorescent"` \| `"macro_off"` \| `"storefront"` \| `"storefront"` \| `"apartment"` \| `"fitness_center"` \| `"business_center"` \| `"spa"` \| `"meeting_room"` \| `"house"` \| `"corporate_fare"` \| `"ac_unit"` \| `"cottage"` \| `"family_restroom"` \| `"checkroom"` \| `"other_houses"` \| `"all_inclusive"` \| `"grass"` \| `"airport_shuttle"` \| `"child_care"` \| `"beach_access"` \| `"pool"` \| `"kitchen"` \| `"casino"` \| `"holiday_village"` \| `"room_service"` \| `"roofing"` \| `"room_preferences"` \| `"sports_bar"` \| `"free_breakfast"` \| `"escalator_warning"` \| `"bathtub"` \| `"child_friendly"` \| `"foundation"` \| `"food_bank"` \| `"gite"` \| `"villa"` \| `"night_shelter"` \| `"golf_course"` \| `"no_photography"` \| `"stairs"` \| `"microwave"` \| `"backpack"` \| `"elevator"` \| `"wash"` \| `"smoking_rooms"` \| `"cabin"` \| `"house_siding"` \| `"hot_tub"` \| `"countertops"` \| `"fire_extinguisher"` \| `"water_damage"` \| `"carpenter"` \| `"rv_hookup"` \| `"charging_station"` \| `"baby_changing_station"` \| `"soap"` \| `"smoke_free"` \| `"umbrella"` \| `"do_not_touch"` \| `"tapas"` \| `"rice_bowl"` \| `"fence"` \| `"tty"` \| `"balcony"` \| `"no_food"` \| `"houseboat"` \| `"bento"` \| `"wheelchair_pickup"` \| `"iron"` \| `"bungalow"` \| `"crib"` \| `"chalet"` \| `"do_not_step"` \| `"no_meeting_room"` \| `"escalator"` \| `"dry"` \| `"stroller"` \| `"no_drinks"` \| `"no_cell"` \| `"no_flash"` \| `"no_backpack"` \| `"no_stroller"` \| `"vaping_rooms"` \| `"desk"` \| `"vape_free"` \| `"manage_search"` \| `"manage_search"` \| `"feed"` \| `"chair"` \| `"bed"` \| `"podcasts"` \| `"coffee"` \| `"shower"` \| `"yard"` \| `"window"` \| `"light"` \| `"door_front"` \| `"garage"` \| `"dining"` \| `"flatware"` \| `"coffee_maker"` \| `"table_restaurant"` \| `"blender"` \| `"bedroom_parent"` \| `"bedroom_baby"` \| `"camera_indoor"` \| `"bathroom"` \| `"door_sliding"` \| `"chair_alt"` \| `"camera_outdoor"` \| `"door_back"` \| `"living"` \| `"doorbell"` \| `"table_bar"` \| `"bedroom_child"` \| `"sensor_door"` \| `"sensor_door"` \| `"electric_bolt"` \| `"energy_savings_leaf"` \| `"auto_mode"` \| `"sensor_window"` \| `"solar_power"` \| `"shield_moon"` \| `"oil_barrel"` \| `"wind_power"` \| `"sensor_occupied"` \| `"electric_meter"` \| `"heat_pump"` \| `"gas_meter"` \| `"propane_tank"` \| `"mode_fan_off"` \| `"roller_shades"` \| `"broadcast_on_personal"` \| `"propane"` \| `"blinds"` \| `"roller_shades_closed"` \| `"blinds_closed"` \| `"curtains"` \| `"curtains_closed"` \| `"vertical_shades_closed"` \| `"broadcast_on_home"` \| `"vertical_shades"` \| `"nest_cam_wired_stand"`
 
-Defined in: [src/lib/types/icons.ts:3669](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L3669)
+Defined in: [src/lib/types/icons.ts:3669](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L3669)
 
 
 [**my-app**](../../../../../README.md)
@@ -33619,7 +33619,7 @@ Defined in: [src/lib/types/icons.ts:3669](https://github.com/tsaxking/sveltekit-
 
 > **MaterialSymbol** = `"search"` \| `"search"` \| `"home"` \| `"menu"` \| `"close"` \| `"settings"` \| `"check_circle"` \| `"favorite"` \| `"add"` \| `"delete"` \| `"arrow_back"` \| `"star"` \| `"chevron_right"` \| `"logout"` \| `"arrow_forward_ios"` \| `"add_circle"` \| `"cancel"` \| `"arrow_back_ios"` \| `"arrow_forward"` \| `"arrow_drop_down"` \| `"more_vert"` \| `"check"` \| `"check_box"` \| `"open_in_new"` \| `"toggle_on"` \| `"refresh"` \| `"check_box_outline_blank"` \| `"login"` \| `"chevron_left"` \| `"radio_button_unchecked"` \| `"more_horiz"` \| `"download"` \| `"apps"` \| `"arrow_right_alt"` \| `"radio_button_checked"` \| `"filter_alt"` \| `"remove"` \| `"bolt"` \| `"arrow_upward"` \| `"toggle_off"` \| `"filter_list"` \| `"delete_forever"` \| `"autorenew"` \| `"key"` \| `"block"` \| `"sync"` \| `"arrow_downward"` \| `"sort"` \| `"add_box"` \| `"arrow_back_ios_new"` \| `"restart_alt"` \| `"shopping_cart_checkout"` \| `"menu_open"` \| `"expand_circle_down"` \| `"undo"` \| `"backspace"` \| `"arrow_circle_right"` \| `"done_all"` \| `"arrow_right"` \| `"do_not_disturb_on"` \| `"open_in_full"` \| `"manage_search"` \| `"double_arrow"` \| `"sync_alt"` \| `"done_outline"` \| `"zoom_in"` \| `"drag_indicator"` \| `"fullscreen"` \| `"ios_share"` \| `"star_half"` \| `"keyboard_double_arrow_right"` \| `"settings_accessibility"` \| `"reply"` \| `"arrow_drop_up"` \| `"unfold_more"` \| `"exit_to_app"` \| `"cached"` \| `"library_add"` \| `"terminal"` \| `"select_check_box"` \| `"change_circle"` \| `"disabled_by_default"` \| `"swap_horiz"` \| `"swap_vert"` \| `"close_fullscreen"` \| `"dataset"` \| `"app_registration"` \| `"arrow_circle_up"` \| `"download_for_offline"` \| `"add_task"` \| `"arrow_circle_left"` \| `"minimize"` \| `"open_with"` \| `"file_open"` \| `"start"` \| `"keyboard_double_arrow_left"` \| `"keyboard_double_arrow_down"` \| `"create_new_folder"` \| `"upload"` \| `"forward"` \| `"compare_arrows"` \| `"downloading"` \| `"settings_applications"` \| `"redo"` \| `"publish"` \| `"zoom_out"` \| `"arrow_left"` \| `"token"` \| `"html"` \| `"switch_access_shortcut"` \| `"fullscreen_exit"` \| `"arrow_circle_down"` \| `"sort_by_alpha"` \| `"indeterminate_check_box"` \| `"delete_sweep"` \| `"view_timeline"` \| `"first_page"` \| `"keyboard_double_arrow_up"` \| `"sync_problem"` \| `"settings_backup_restore"` \| `"assistant_navigation"` \| `"heart_plus"` \| `"arrow_drop_down_circle"` \| `"clear_all"` \| `"expand"` \| `"density_medium"` \| `"arrow_outward"` \| `"subdirectory_arrow_right"` \| `"unfold_less"` \| `"filter_alt_off"` \| `"last_page"` \| `"download_done"` \| `"123"` \| `"swipe_left"` \| `"saved_search"` \| `"system_update_alt"` \| `"output"` \| `"place_item"` \| `"javascript"` \| `"search_off"` \| `"select_all"` \| `"check_small"` \| `"maximize"` \| `"swipe_up"` \| `"fit_screen"` \| `"hide_source"` \| `"dynamic_form"` \| `"swipe_right"` \| `"browse_gallery"` \| `"switch_access_shortcut_add"` \| `"density_small"` \| `"assistant_direction"` \| `"css"` \| `"move_up"` \| `"youtube_searched_for"` \| `"data_thresholding"` \| `"swap_horizontal_circle"` \| `"abc"` \| `"dataset_linked"` \| `"move_down"` \| `"restore_from_trash"` \| `"browse_activity"` \| `"enable"` \| `"install_desktop"` \| `"keyboard_command_key"` \| `"view_kanban"` \| `"reply_all"` \| `"star_rate"` \| `"switch_left"` \| `"compress"` \| `"swipe_down"` \| `"apps_outage"` \| `"swap_vertical_circle"` \| `"remove_done"` \| `"filter_list_off"` \| `"hide"` \| `"sync_disabled"` \| `"keyboard_control_key"` \| `"swipe_vertical"` \| `"tab"` \| `"pinch"` \| `"more_up"` \| `"switch_right"` \| `"progress_activity"` \| `"eject"` \| `"view_cozy"` \| `"key_off"` \| `"php"` \| `"subdirectory_arrow_left"` \| `"transcribe"` \| `"cycle"` \| `"do_not_disturb_off"` \| `"send_time_extension"` \| `"width_normal"` \| `"view_comfy_alt"` \| `"heart_minus"` \| `"share_reviews"` \| `"width_full"` \| `"file_download_off"` \| `"unfold_more_double"` \| `"view_compact_alt"` \| `"expand_content"` \| `"check_indeterminate_small"` \| `"open_in_new_off"` \| `"extension_off"` \| `"more_down"` \| `"width_wide"` \| `"repartition"` \| `"density_large"` \| `"swipe_left_alt"` \| `"swipe_down_alt"` \| `"unfold_less_double"` \| `"swipe_right_alt"` \| `"swipe_up_alt"` \| `"keyboard_option_key"` \| `"deployed_code"` \| `"expand_all"` \| `"rebase"` \| `"tab_unselected"` \| `"hls"` \| `"hls_off"` \| `"quick_reference_all"` \| `"file_upload_off"` \| `"collapse_all"` \| `"rebase_edit"` \| `"prompt_suggestion"` \| `"stacks"` \| `"arrow_split"` \| `"acute"` \| `"collapse_content"` \| `"page_info"` \| `"stack"` \| `"data_check"` \| `"stat_0"` \| `"clock_loader_60"` \| `"arrow_upward_alt"` \| `"empty_dashboard"` \| `"rule_settings"` \| `"sync_saved_locally"` \| `"quick_reference"` \| `"left_click"` \| `"arrow_downward_alt"` \| `"captive_portal"` \| `"clock_loader_40"` \| `"arrow_insert"` \| `"heart_check"` \| `"linked_services"` \| `"question_exchange"` \| `"data_alert"` \| `"point_scan"` \| `"clock_loader_10"` \| `"search_check"` \| `"switches"` \| `"unknown_med"` \| `"directory_sync"` \| `"expand_circle_right"` \| `"action_key"` \| `"chevron_forward"` \| `"move_item"` \| `"close_small"` \| `"side_navigation"` \| `"step"` \| `"stack_star"` \| `"data_info_alert"` \| `"steppers"` \| `"cards"` \| `"deployed_code_update"` \| `"stat_minus_1"` \| `"event_list"` \| `"preliminary"` \| `"arrow_left_alt"` \| `"drag_pan"` \| `"expand_circle_up"` \| `"arrow_range"` \| `"stat_3"` \| `"bubble"` \| `"star_rate_half"` \| `"right_panel_open"` \| `"sweep"` \| `"recenter"` \| `"highlight_mouse_cursor"` \| `"left_panel_open"` \| `"new_window"` \| `"clock_loader_80"` \| `"clock_loader_90"` \| `"category_search"` \| `"clock_loader_20"` \| `"patient_list"` \| `"radio_button_partial"` \| `"responsive_layout"` \| `"settings_heart"` \| `"add_2"` \| `"file_export"` \| `"capture"` \| `"right_panel_close"` \| `"toolbar"` \| `"expansion_panels"` \| `"share_windows"` \| `"chevron_backward"` \| `"dialogs"` \| `"pip"` \| `"all_match"` \| `"resize"` \| `"left_panel_close"` \| `"modeling"` \| `"move_group"` \| `"input_circle"` \| `"step_over"` \| `"page_control"` \| `"stat_2"` \| `"deployed_code_account"` \| `"key_vertical"` \| `"search_check_2"` \| `"step_into"` \| `"iframe"` \| `"unknown_5"` \| `"download_2"` \| `"deployed_code_history"` \| `"right_click"` \| `"stat_1"` \| `"arrow_and_edge"` \| `"stat_minus_2"` \| `"arrow_upload_progress"` \| `"open_run"` \| `"dropdown"` \| `"sliders"` \| `"arrow_back_2"` \| `"chronic"` \| `"stat_minus_3"` \| `"drag_click"` \| `"bottom_navigation"` \| `"upload_2"` \| `"tab_close"` \| `"bubbles"` \| `"tab_duplicate"` \| `"bottom_panel_open"` \| `"switch_access_2"` \| `"arrows_outward"` \| `"buttons_alt"` \| `"tabs"` \| `"chip_extraction"` \| `"magnification_small"` \| `"partner_reports"` \| `"borg"` \| `"app_badging"` \| `"arrow_upload_ready"` \| `"arrows_output"` \| `"file_json"` \| `"magnification_large"` \| `"switch_access"` \| `"tab_group"` \| `"multimodal_hand_eye"` \| `"open_in_new_down"` \| `"arrows_input"` \| `"subheader"` \| `"toast"` \| `"pip_exit"` \| `"step_out"` \| `"bottom_drawer"` \| `"stack_off"` \| `"amend"` \| `"go_to_line"` \| `"reopen_window"` \| `"shelf_position"` \| `"back_to_tab"` \| `"error_med"` \| `"bottom_panel_close"` \| `"jump_to_element"` \| `"deployed_code_alert"` \| `"output_circle"` \| `"splitscreen_landscape"` \| `"tab_new_right"` \| `"arrow_or_edge"` \| `"bottom_sheets"` \| `"chips"` \| `"arrow_top_right"` \| `"float_landscape_2"` \| `"shelf_auto_hide"` \| `"filter_arrow_right"` \| `"move_selection_right"` \| `"position_top_right"` \| `"arrow_top_left"` \| `"bottom_right_click"` \| `"desktop_landscape"` \| `"arrow_menu_close"` \| `"move_selection_left"` \| `"widget_small"` \| `"ripples"` \| `"splitscreen_portrait"` \| `"tab_move"` \| `"tab_recent"` \| `"tab_inactive"` \| `"arrow_menu_open"` \| `"position_bottom_right"` \| `"rotate_auto"` \| `"highlight_keyboard_focus"` \| `"iframe_off"` \| `"widget_medium"` \| `"widget_width"` \| `"position_bottom_left"` \| `"sync_desktop"` \| `"move_selection_up"` \| `"stack_group"` \| `"view_apps"` \| `"hourglass_arrow_down"` \| `"tab_search"` \| `"thermostat_arrow_down"` \| `"tile_large"` \| `"tile_small"` \| `"fullscreen_portrait"` \| `"hourglass_arrow_up"` \| `"timer_arrow_down"` \| `"highlight_text_cursor"` \| `"tab_close_inactive"` \| `"tab_close_right"` \| `"tile_medium"` \| `"bottom_app_bar"` \| `"desktop_landscape_add"` \| `"sync_arrow_down"` \| `"thermostat_arrow_up"` \| `"timer_arrow_up"` \| `"clock_arrow_up"` \| `"desktop_portrait"` \| `"float_portrait_2"` \| `"accessible_menu"` \| `"edit_arrow_down"` \| `"move_selection_down"` \| `"switch_access_3"` \| `"check_circle_unread"` \| `"clock_arrow_down"` \| `"sync_arrow_up"` \| `"edit_arrow_up"` \| `"person"` \| `"person"` \| `"group"` \| `"groups"` \| `"share"` \| `"thumb_up"` \| `"public"` \| `"person_add"` \| `"handshake"` \| `"support_agent"` \| `"face"` \| `"sentiment_satisfied"` \| `"rocket_launch"` \| `"group_add"` \| `"workspace_premium"` \| `"psychology"` \| `"diversity_3"` \| `"emoji_objects"` \| `"travel_explore"` \| `"pets"` \| `"water_drop"` \| `"eco"` \| `"mood"` \| `"sunny"` \| `"sentiment_dissatisfied"` \| `"quiz"` \| `"health_and_safety"` \| `"sentiment_very_satisfied"` \| `"thumb_down"` \| `"military_tech"` \| `"gavel"` \| `"diamond"` \| `"recycling"` \| `"monitor_heart"` \| `"emoji_people"` \| `"diversity_1"` \| `"workspaces"` \| `"recommend"` \| `"vaccines"` \| `"compost"` \| `"forest"` \| `"waving_hand"` \| `"wc"` \| `"psychology_alt"` \| `"person_remove"` \| `"sentiment_neutral"` \| `"sentiment_very_dissatisfied"` \| `"diversity_2"` \| `"group_work"` \| `"medication"` \| `"front_hand"` \| `"add_reaction"` \| `"cruelty_free"` \| `"man"` \| `"rocket"` \| `"medical_information"` \| `"coronavirus"` \| `"potted_plant"` \| `"female"` \| `"rainy"` \| `"emoji_nature"` \| `"cookie"` \| `"communication"` \| `"thumbs_up_down"` \| `"groups_2"` \| `"person_off"` \| `"bedtime"` \| `"connect_without_contact"` \| `"woman"` \| `"mood_bad"` \| `"male"` \| `"partly_cloudy_day"` \| `"thunderstorm"` \| `"solar_power"` \| `"sentiment_extremely_dissatisfied"` \| `"masks"` \| `"heart_broken"` \| `"hive"` \| `"clear_day"` \| `"boy"` \| `"whatshot"` \| `"face_6"` \| `"wind_power"` \| `"emoji_food_beverage"` \| `"emoji_transportation"` \| `"elderly"` \| `"reduce_capacity"` \| `"groups_3"` \| `"face_3"` \| `"partner_exchange"` \| `"sick"` \| `"skull"` \| `"face_4"` \| `"pregnant_woman"` \| `"egg"` \| `"bloodtype"` \| `"group_remove"` \| `"medication_liquid"` \| `"co2"` \| `"follow_the_signs"` \| `"weight"` \| `"oil_barrel"` \| `"elderly_woman"` \| `"transgender"` \| `"sanitizer"` \| `"person_2"` \| `"clean_hands"` \| `"bring_your_own_ip"` \| `"face_2"` \| `"public_off"` \| `"routine"` \| `"south_america"` \| `"social_distance"` \| `"identity_platform"` \| `"sign_language"` \| `"sunny_snowing"` \| `"flood"` \| `"emoji_symbols"` \| `"face_5"` \| `"garden_cart"` \| `"egg_alt"` \| `"cyclone"` \| `"girl"` \| `"person_4"` \| `"dentistry"` \| `"tsunami"` \| `"group_off"` \| `"severe_cold"` \| `"outdoor_garden"` \| `"partly_cloudy_night"` \| `"person_3"` \| `"snowing"` \| `"tornado"` \| `"safety_divider"` \| `"foggy"` \| `"vaping_rooms"` \| `"landslide"` \| `"woman_2"` \| `"tactic"` \| `"no_adult_content"` \| `"volcano"` \| `"man_2"` \| `"blind"` \| `"18_up_rating"` \| `"6_ft_apart"` \| `"cognition"` \| `"not_accessible"` \| `"vape_free"` \| `"man_4"` \| `"radiology"` \| `"person_raised_hand"` \| `"psychiatry"` \| `"strategy"` \| `"rib_cage"` \| `"hand_bones"` \| `"bedtime_off"` \| `"neurology"` \| `"eyeglasses"` \| `"social_leaderboard"` \| `"rheumatology"` \| `"communities"` \| `"diversity_4"` \| `"labs"` \| `"man_3"` \| `"editor_choice"` \| `"orthopedics"` \| `"digital_wellbeing"` \| `"skeleton"` \| `"tibia"` \| `"mystery"` \| `"vital_signs"` \| `"crowdsource"` \| `"footprint"` \| `"person_alert"` \| `"humerus"` \| `"nutrition"` \| `"foot_bones"` \| `"agender"` \| `"tibia_alt"` \| `"femur"` \| `"sentiment_sad"` \| `"femur_alt"` \| `"person_check"` \| `"stethoscope"` \| `"humerus_alt"` \| `"chess"` \| `"ulna_radius"` \| `"ulna_radius_alt"` \| `"specific_gravity"` \| `"breastfeeding"` \| `"demography"` \| `"mountain_flag"` \| `"clinical_notes"` \| `"destruction"` \| `"sentiment_excited"` \| `"cognition_2"` \| `"raven"` \| `"cardiology"` \| `"sentiment_calm"` \| `"sentiment_stressed"` \| `"genetics"` \| `"lab_research"` \| `"conditions"` \| `"domino_mask"` \| `"pill"` \| `"cheer"` \| `"cookie_off"` \| `"deceased"` \| `"crossword"` \| `"taunt"` \| `"altitude"` \| `"folded_hands"` \| `"weather_hail"` \| `"kid_star"` \| `"earthquake"` \| `"family_star"` \| `"sentiment_frustrated"` \| `"cardio_load"` \| `"share_off"` \| `"emoticon"` \| `"star_shine"` \| `"barefoot"` \| `"bomb"` \| `"crown"` \| `"guardian"` \| `"weather_mix"` \| `"pulse_alert"` \| `"sentiment_content"` \| `"comic_bubble"` \| `"home_health"` \| `"explosion"` \| `"prescriptions"` \| `"comedy_mask"` \| `"owl"` \| `"playing_cards"` \| `"chess_pawn"` \| `"person_cancel"` \| `"blood_pressure"` \| `"falling"` \| `"simulation"` \| `"person_apron"` \| `"wrist"` \| `"glucose"` \| `"microbiology"` \| `"diamond_shine"` \| `"eyeglasses_2"` \| `"lab_panel"` \| `"not_accessible_forward"` \| `"sentiment_worried"` \| `"orbit"` \| `"sword_rose"` \| `"brick"` \| `"helicopter"` \| `"mist"` \| `"pulmonology"` \| `"recent_patient"` \| `"ent"` \| `"snowing_heavy"` \| `"water_bottle"` \| `"metabolism"` \| `"poker_chip"` \| `"water_lux"` \| `"chef_hat"` \| `"manga"` \| `"siren"` \| `"prayer_times"` \| `"allergy"` \| `"rainy_snow"` \| `"planet"` \| `"stars_2"` \| `"candle"` \| `"dermatology"` \| `"infrared"` \| `"pediatrics"` \| `"dew_point"` \| `"globe_book"` \| `"mixture_med"` \| `"pregnancy"` \| `"stethoscope_check"` \| `"syringe"` \| `"oxygen_saturation"` \| `"skull_list"` \| `"allergies"` \| `"moon_stars"` \| `"nephrology"` \| `"symptoms"` \| `"body_system"` \| `"ophthalmology"` \| `"rainy_light"` \| `"gynecology"` \| `"humidity_percentage"` \| `"admin_meds"` \| `"oncology"` \| `"respiratory_rate"` \| `"ward"` \| `"body_fat"` \| `"congenital"` \| `"face_shake"` \| `"gastroenterology"` \| `"rainy_heavy"` \| `"siren_check"` \| `"surgical"` \| `"water_do"` \| `"water_orp"` \| `"face_nod"` \| `"oral_disease"` \| `"outpatient"` \| `"procedure"` \| `"water_ec"` \| `"water_ph"` \| `"hematology"` \| `"moving_beds"` \| `"short_stay"` \| `"square_dot"` \| `"cannabis"` \| `"face_down"` \| `"medical_mask"` \| `"water_bottle_large"` \| `"wounds_injuries"` \| `"endocrinology"` \| `"face_right"` \| `"health_cross"` \| `"immunology"` \| `"stethoscope_arrow"` \| `"water_voc"` \| `"fluid_balance"` \| `"salinity"` \| `"face_up"` \| `"massage"` \| `"outpatient_med"` \| `"siren_open"` \| `"urology"` \| `"face_left"` \| `"fluid"` \| `"heart_smile"` \| `"inpatient"` \| `"pill_off"` \| `"siren_question"` \| `"total_dissolved_solids"` \| `"acupuncture"` \| `"fluid_med"` \| `"hand_meal"` \| `"person_heart"` \| `"shield_watch"` \| `"calendar_meal"` \| `"dine_in"` \| `"hand_package"` \| `"menu_book_2"` \| `"playground"` \| `"playground_2"` \| `"account_circle"` \| `"account_circle"` \| `"info"` \| `"visibility"` \| `"calendar_month"` \| `"schedule"` \| `"warning"` \| `"help"` \| `"language"` \| `"lock"` \| `"error"` \| `"visibility_off"` \| `"verified"` \| `"manage_accounts"` \| `"history"` \| `"task_alt"` \| `"event"` \| `"bookmark"` \| `"calendar_today"` \| `"lightbulb"` \| `"question_mark"` \| `"fingerprint"` \| `"category"` \| `"update"` \| `"code"` \| `"priority_high"` \| `"lock_open"` \| `"build"` \| `"date_range"` \| `"supervisor_account"` \| `"upload_file"` \| `"ads_click"` \| `"event_available"` \| `"touch_app"` \| `"power_settings_new"` \| `"bug_report"` \| `"today"` \| `"pending"` \| `"preview"` \| `"stars"` \| `"celebration"` \| `"translate"` \| `"account_box"` \| `"how_to_reg"` \| `"alarm"` \| `"edit_calendar"` \| `"edit_square"` \| `"label"` \| `"extension"` \| `"record_voice_over"` \| `"web"` \| `"rate_review"` \| `"hourglass_empty"` \| `"event_note"` \| `"published_with_changes"` \| `"support"` \| `"notification_important"` \| `"accessibility_new"` \| `"help_center"` \| `"bookmarks"` \| `"dangerous"` \| `"pan_tool_alt"` \| `"interests"` \| `"all_inclusive"` \| `"supervised_user_circle"` \| `"collections_bookmark"` \| `"rule"` \| `"priority"` \| `"change_history"` \| `"api"` \| `"event_upcoming"` \| `"build_circle"` \| `"wysiwyg"` \| `"pan_tool"` \| `"hotel_class"` \| `"web_asset"` \| `"circle_notifications"` \| `"manage_history"` \| `"model_training"` \| `"upgrade"` \| `"accessible"` \| `"input"` \| `"bookmark_add"` \| `"lock_reset"` \| `"event_busy"` \| `"more_time"` \| `"backup"` \| `"flutter_dash"` \| `"save_as"` \| `"pageview"` \| `"home_app_logo"` \| `"accessibility"` \| `"dynamic_feed"` \| `"alarm_on"` \| `"label_important"` \| `"approval"` \| `"perm_contact_calendar"` \| `"square_foot"` \| `"history_toggle_off"` \| `"swipe"` \| `"more"` \| `"component_exchange"` \| `"event_repeat"` \| `"bookmark_added"` \| `"unpublished"` \| `"open_in_browser"` \| `"notification_add"` \| `"offline_bolt"` \| `"no_accounts"` \| `"running_with_errors"` \| `"target"` \| `"background_replace"` \| `"free_cancellation"` \| `"webhook"` \| `"feedback"` \| `"anchor"` \| `"3d_rotation"` \| `"lock_person"` \| `"new_label"` \| `"lock_clock"` \| `"accessible_forward"` \| `"auto_delete"` \| `"add_alert"` \| `"domain_verification"` \| `"gesture"` \| `"outbound"` \| `"hand_gesture"` \| `"manufacturing"` \| `"online_prediction"` \| `"chrome_reader_mode"` \| `"settings_power"` \| `"lightbulb_circle"` \| `"find_replace"` \| `"edit_notifications"` \| `"offline_pin"` \| `"http"` \| `"backup_table"` \| `"wifi_protected_setup"` \| `"alarm_add"` \| `"bookmark_remove"` \| `"pinch_zoom_out"` \| `"on_device_training"` \| `"web_traffic"` \| `"snooze"` \| `"batch_prediction"` \| `"code_off"` \| `"keep"` \| `"commit"` \| `"pinch_zoom_in"` \| `"hourglass_disabled"` \| `"code_blocks"` \| `"settings_overscan"` \| `"youtube_activity"` \| `"polymer"` \| `"logo_dev"` \| `"arrow_selector_tool"` \| `"voice_over_off"` \| `"alarm_off"` \| `"time_auto"` \| `"timer_10_alt_1"` \| `"update_disabled"` \| `"person_add_disabled"` \| `"rounded_corner"` \| `"label_off"` \| `"timer_3_alt_1"` \| `"all_out"` \| `"rsvp"` \| `"web_asset_off"` \| `"pin_invoke"` \| `"approval_delegation"` \| `"pin_end"` \| `"developer_guide"` \| `"license"` \| `"contacts_product"` \| `"problem"` \| `"lists"` \| `"award_star"` \| `"sdk"` \| `"feature_search"` \| `"calendar_clock"` \| `"release_alert"` \| `"reminder"` \| `"user_attributes"` \| `"hourglass"` \| `"keep_off"` \| `"lock_open_right"` \| `"data_loss_prevention"` \| `"flutter"` \| `"browse"` \| `"select_window"` \| `"visibility_lock"` \| `"settings_account_box"` \| `"ad_group"` \| `"indeterminate_question_box"` \| `"delete_history"` \| `"ad"` \| `"pan_zoom"` \| `"search_hands_free"` \| `"account_child_invert"` \| `"search_activity"` \| `"info_i"` \| `"person_edit"` \| `"gesture_select"` \| `"keep_public"` \| `"select_window_2"` \| `"circles_ext"` \| `"account_circle_off"` \| `"shift"` \| `"account_child"` \| `"draft_orders"` \| `"add_ad"` \| `"watch_screentime"` \| `"touch_long"` \| `"trackpad_input"` \| `"bookmark_manager"` \| `"shadow"` \| `"ad_group_off"` \| `"circles"` \| `"help_clinic"` \| `"bookmark_star"` \| `"wand_stars"` \| `"bookmark_flag"` \| `"fingerprint_off"` \| `"pinboard"` \| `"history_2"` \| `"history_off"` \| `"water_lock"` \| `"timer_pause"` \| `"bookmark_check"` \| `"measuring_tape"` \| `"shadow_add"` \| `"ad_off"` \| `"book_ribbon"` \| `"scrollable_header"` \| `"select_window_off"` \| `"unlicense"` \| `"preview_off"` \| `"alarm_smart_wake"` \| `"supervised_user_circle_off"` \| `"timer_play"` \| `"wand_shine"` \| `"approval_delegation_off"` \| `"bookmark_heart"` \| `"domain_verification_off"` \| `"shift_lock"` \| `"shadow_minus"` \| `"warning_off"` \| `"lock_open_circle"` \| `"alarm_pause"` \| `"bookmark_bag"` \| `"power_settings_circle"` \| `"touch_double"` \| `"hourglass_pause"` \| `"offline_pin_off"` \| `"pinboard_unread"` \| `"touch_triple"` \| `"hand_gesture_off"` \| `"verified_off"` \| `"shift_lock_off"` \| `"trackpad_input_3"` \| `"trackpad_input_2"` \| `"mail"` \| `"mail"` \| `"call"` \| `"notifications"` \| `"send"` \| `"chat"` \| `"link"` \| `"forum"` \| `"inventory_2"` \| `"chat_bubble"` \| `"contact_support"` \| `"phone_in_talk"` \| `"notifications_active"` \| `"alternate_email"` \| `"sms"` \| `"hub"` \| `"comment"` \| `"person_search"` \| `"import_contacts"` \| `"contacts"` \| `"contact_mail"` \| `"live_help"` \| `"forward_to_inbox"` \| `"reviews"` \| `"lan"` \| `"mark_email_unread"` \| `"hourglass_top"` \| `"contact_phone"` \| `"mode_comment"` \| `"inbox"` \| `"drafts"` \| `"outgoing_mail"` \| `"hourglass_bottom"` \| `"mark_email_read"` \| `"link_off"` \| `"calendar_add_on"` \| `"g_translate"` \| `"add_comment"` \| `"phone_enabled"` \| `"speaker_notes"` \| `"co_present"` \| `"perm_phone_msg"` \| `"notifications_off"` \| `"call_end"` \| `"cell_tower"` \| `"topic"` \| `"network_intelligence"` \| `"mark_chat_unread"` \| `"schedule_send"` \| `"satellite_alt"` \| `"dialpad"` \| `"call_made"` \| `"mark_unread_chat_alt"` \| `"3p"` \| `"unarchive"` \| `"cancel_presentation"` \| `"move_to_inbox"` \| `"next_plan"` \| `"mark_as_unread"` \| `"attach_email"` \| `"unsubscribe"` \| `"present_to_all"` \| `"phone_callback"` \| `"call_received"` \| `"call_split"` \| `"settings_phone"` \| `"add_call"` \| `"phone_forwarded"` \| `"voice_chat"` \| `"all_inbox"` \| `"markunread_mailbox"` \| `"mail_lock"` \| `"voicemail"` \| `"attribution"` \| `"contact_emergency"` \| `"mark_chat_read"` \| `"duo"` \| `"upcoming"` \| `"phone_disabled"` \| `"picture_in_picture_alt"` \| `"swap_calls"` \| `"outbox"` \| `"ring_volume"` \| `"spoke"` \| `"cancel_schedule_send"` \| `"notifications_paused"` \| `"quickreply"` \| `"chat_add_on"` \| `"threat_intelligence"` \| `"picture_in_picture"` \| `"phone_missed"` \| `"comment_bank"` \| `"send_and_archive"` \| `"settings_bluetooth"` \| `"comments_disabled"` \| `"video_chat"` \| `"score"` \| `"pause_presentation"` \| `"call_merge"` \| `"speaker_phone"` \| `"auto_read_play"` \| `"cell_wifi"` \| `"speaker_notes_off"` \| `"mms"` \| `"play_for_work"` \| `"call_missed_outgoing"` \| `"call_missed"` \| `"wifi_channel"` \| `"phone_paused"` \| `"calendar_apps_script"` \| `"rtt"` \| `"auto_read_pause"` \| `"wifi_calling"` \| `"phone_locked"` \| `"chat_apps_script"` \| `"dialer_sip"` \| `"sip"` \| `"nat"` \| `"e911_avatar"` \| `"phone_bluetooth_speaker"` \| `"inbox_customize"` \| `"stacked_email"` \| `"chat_info"` \| `"tooltip"` \| `"network_intel_node"` \| `"for_you"` \| `"notifications_unread"` \| `"chat_error"` \| `"business_messages"` \| `"chat_paste_go"` \| `"group_search"` \| `"thread_unread"` \| `"call_quality"` \| `"network_intelligence_history"` \| `"notification_multiple"` \| `"tooltip_2"` \| `"mail_off"` \| `"ods"` \| `"call_log"` \| `"network_intelligence_update"` \| `"stacked_inbox"` \| `"network_manage"` \| `"picture_in_picture_small"` \| `"outbox_alt"` \| `"picture_in_picture_center"` \| `"wifi_add"` \| `"picture_in_picture_off"` \| `"signal_cellular_add"` \| `"picture_in_picture_mobile"` \| `"odt"` \| `"inbox_text"` \| `"notification_settings"` \| `"inbox_text_person"` \| `"picture_in_picture_medium"` \| `"wifi_proxy"` \| `"inbox_text_asterisk"` \| `"chat_paste_go_2"` \| `"mobile_sound"` \| `"picture_in_picture_large"` \| `"inbox_text_share"` \| `"notification_sound"` \| `"mobile_cancel"` \| `"mobile_sound_off"` \| `"voicemail_2"` \| `"edit"` \| `"edit"` \| `"photo_camera"` \| `"image"` \| `"tune"` \| `"timer"` \| `"picture_as_pdf"` \| `"circle"` \| `"palette"` \| `"add_a_photo"` \| `"photo_library"` \| `"auto_stories"` \| `"add_photo_alternate"` \| `"brush"` \| `"imagesmode"` \| `"nature"` \| `"flash_on"` \| `"wb_sunny"` \| `"camera"` \| `"looks_one"` \| `"straighten"` \| `"landscape"` \| `"timelapse"` \| `"slideshow"` \| `"crop_square"` \| `"grid_on"` \| `"rotate_right"` \| `"aspect_ratio"` \| `"crop_free"` \| `"adjust"` \| `"style"` \| `"brightness_6"` \| `"photo"` \| `"image_search"` \| `"nature_people"` \| `"filter_vintage"` \| `"crop"` \| `"center_focus_strong"` \| `"blur_on"` \| `"compare"` \| `"contrast"` \| `"looks_two"` \| `"flare"` \| `"colorize"` \| `"wb_incandescent"` \| `"rotate_left"` \| `"filter_none"` \| `"wb_twilight"` \| `"filter_drama"` \| `"healing"` \| `"looks_3"` \| `"animation"` \| `"brightness_5"` \| `"invert_colors"` \| `"broken_image"` \| `"incomplete_circle"` \| `"opacity"` \| `"filter_center_focus"` \| `"center_focus_weak"` \| `"auto_awesome_motion"` \| `"flip"` \| `"brightness_4"` \| `"flash_off"` \| `"flip_camera_android"` \| `"no_photography"` \| `"web_stories"` \| `"lens_blur"` \| `"mic_external_on"` \| `"grain"` \| `"details"` \| `"panorama"` \| `"flaky"` \| `"gif_box"` \| `"exposure_plus_1"` \| `"loupe"` \| `"dehaze"` \| `"auto_awesome_mosaic"` \| `"settings_brightness"` \| `"looks_4"` \| `"texture"` \| `"filter_1"` \| `"timer_off"` \| `"flip_camera_ios"` \| `"filter"` \| `"brightness_1"` \| `"hide_image"` \| `"transform"` \| `"brightness_7"` \| `"view_compact"` \| `"control_point_duplicate"` \| `"photo_camera_front"` \| `"photo_album"` \| `"view_comfy"` \| `"linked_camera"` \| `"crop_16_9"` \| `"looks"` \| `"looks_5"` \| `"gif"` \| `"rotate_90_degrees_ccw"` \| `"exposure"` \| `"filter_hdr"` \| `"leak_add"` \| `"brightness_3"` \| `"hdr_auto"` \| `"hdr_strong"` \| `"gradient"` \| `"crop_7_5"` \| `"vrpano"` \| `"crop_portrait"` \| `"motion_photos_auto"` \| `"camera_roll"` \| `"blur_circular"` \| `"rotate_90_degrees_cw"` \| `"photo_size_select_small"` \| `"brightness_2"` \| `"shutter_speed"` \| `"looks_6"` \| `"flash_auto"` \| `"deblur"` \| `"filter_2"` \| `"crop_landscape"` \| `"filter_tilt_shift"` \| `"monochrome_photos"` \| `"night_sight_auto"` \| `"tonality"` \| `"motion_photos_paused"` \| `"crop_5_4"` \| `"crop_rotate"` \| `"hdr_weak"` \| `"ev_shadow"` \| `"filter_4"` \| `"photo_frame"` \| `"filter_3"` \| `"crop_3_2"` \| `"fluorescent"` \| `"exposure_zero"` \| `"photo_size_select_large"` \| `"switch_camera"` \| `"raw_on"` \| `"macro_off"` \| `"face_retouching_off"` \| `"filter_frames"` \| `"party_mode"` \| `"motion_blur"` \| `"panorama_horizontal"` \| `"filter_b_and_w"` \| `"motion_photos_off"` \| `"blur_linear"` \| `"exposure_neg_1"` \| `"wb_iridescent"` \| `"exposure_plus_2"` \| `"photo_camera_back"` \| `"hdr_on"` \| `"switch_video"` \| `"burst_mode"` \| `"blur_medium"` \| `"filter_5"` \| `"invert_colors_off"` \| `"panorama_photosphere"` \| `"filter_7"` \| `"timer_10"` \| `"grid_off"` \| `"filter_9_plus"` \| `"filter_8"` \| `"dirty_lens"` \| `"blur_short"` \| `"timer_3"` \| `"filter_9"` \| `"wb_shade"` \| `"trail_length"` \| `"image_aspect_ratio"` \| `"vignette"` \| `"no_flash"` \| `"filter_6"` \| `"exposure_neg_2"` \| `"leak_remove"` \| `"blur_off"` \| `"perm_camera_mic"` \| `"60fps_select"` \| `"30fps_select"` \| `"trail_length_medium"` \| `"trail_length_short"` \| `"mic_external_off"` \| `"autofps_select"` \| `"panorama_vertical"` \| `"night_sight_auto_off"` \| `"panorama_wide_angle"` \| `"hdr_off"` \| `"hdr_enhanced_select"` \| `"mp"` \| `"gallery_thumbnail"` \| `"hdr_on_select"` \| `"24mp"` \| `"22mp"` \| `"10mp"` \| `"12mp"` \| `"18mp"` \| `"hdr_plus"` \| `"hdr_auto_select"` \| `"hevc"` \| `"wb_auto"` \| `"raw_off"` \| `"9mp"` \| `"13mp"` \| `"20mp"` \| `"5mp"` \| `"15mp"` \| `"19mp"` \| `"7mp"` \| `"masked_transitions"` \| `"settings_b_roll"` \| `"23mp"` \| `"3mp"` \| `"hdr_off_select"` \| `"16mp"` \| `"2mp"` \| `"8mp"` \| `"14mp"` \| `"6mp"` \| `"11mp"` \| `"21mp"` \| `"4mp"` \| `"17mp"` \| `"photo_prints"` \| `"motion_photos_on"` \| `"reset_settings"` \| `"settings_photo_camera"` \| `"vr180_create2d"` \| `"planner_banner_ad_pt"` \| `"settings_video_camera"` \| `"landscape_2"` \| `"photo_auto_merge"` \| `"settings_timelapse"` \| `"transition_fade"` \| `"settings_night_sight"` \| `"unknown_2"` \| `"crop_9_16"` \| `"50mp"` \| `"settings_cinematic_blur"` \| `"settings_panorama"` \| `"transition_push"` \| `"motion_mode"` \| `"transition_dissolve"` \| `"macro_auto"` \| `"transition_slide"` \| `"vr180_create2d_off"` \| `"background_grid_small"` \| `"gif_2"` \| `"settings_motion_mode"` \| `"high_res"` \| `"settings_slow_motion"` \| `"reset_focus"` \| `"background_dot_small"` \| `"filter_retrolux"` \| `"background_dot_large"` \| `"high_density"` \| `"reset_iso"` \| `"texture_add"` \| `"texture_minus"` \| `"motion_play"` \| `"shutter_speed_add"` \| `"image_arrow_up"` \| `"shutter_speed_minus"` \| `"contrast_circle"` \| `"file_png"` \| `"landscape_2_off"` \| `"dropper_eye"` \| `"masked_transitions_add"` \| `"reset_brightness"` \| `"low_density"` \| `"view_real_size"` \| `"contrast_square"` \| `"tonality_2"` \| `"transition_chop"` \| `"contrast_rtl_off"` \| `"ev_shadow_add"` \| `"reset_shadow"` \| `"timer_1"` \| `"vignette_2"` \| `"landscape_2_edit"` \| `"timer_2"` \| `"ev_shadow_minus"` \| `"hdr_plus_off"` \| `"reset_shutter_speed"` \| `"reset_white_balance"` \| `"24fps_select"` \| `"mobile_camera_front"` \| `"mobile_camera_rear"` \| `"shopping_cart"` \| `"shopping_cart"` \| `"payments"` \| `"monitoring"` \| `"shopping_bag"` \| `"credit_card"` \| `"attach_money"` \| `"receipt_long"` \| `"database"` \| `"trending_up"` \| `"storefront"` \| `"sell"` \| `"account_balance"` \| `"work"` \| `"paid"` \| `"analytics"` \| `"account_balance_wallet"` \| `"query_stats"` \| `"savings"` \| `"store"` \| `"bar_chart"` \| `"calculate"` \| `"account_tree"` \| `"qr_code_scanner"` \| `"add_shopping_cart"` \| `"redeem"` \| `"receipt"` \| `"currency_exchange"` \| `"trending_flat"` \| `"shopping_basket"` \| `"qr_code_2"` \| `"domain"` \| `"precision_manufacturing"` \| `"leaderboard"` \| `"qr_code"` \| `"timeline"` \| `"corporate_fare"` \| `"wallet"` \| `"insert_chart"` \| `"show_chart"` \| `"currency_rupee"` \| `"meeting_room"` \| `"work_history"` \| `"euro"` \| `"credit_score"` \| `"barcode_scanner"` \| `"loyalty"` \| `"pie_chart"` \| `"conversion_path"` \| `"trending_down"` \| `"copyright"` \| `"barcode"` \| `"track_changes"` \| `"price_check"` \| `"schema"` \| `"euro_symbol"` \| `"add_business"` \| `"add_card"` \| `"card_membership"` \| `"currency_bitcoin"` \| `"price_change"` \| `"donut_large"` \| `"production_quantity_limits"` \| `"tenancy"` \| `"data_exploration"` \| `"contactless"` \| `"bubble_chart"` \| `"donut_small"` \| `"money"` \| `"stacked_line_chart"` \| `"stacked_bar_chart"` \| `"money_off"` \| `"toll"` \| `"cases"` \| `"currency_yen"` \| `"area_chart"` \| `"atr"` \| `"currency_pound"` \| `"remove_shopping_cart"` \| `"room_preferences"` \| `"add_chart"` \| `"shop"` \| `"domain_add"` \| `"grouped_bar_chart"` \| `"scatter_plot"` \| `"card_travel"` \| `"legend_toggle"` \| `"mediation"` \| `"ssid_chart"` \| `"credit_card_off"` \| `"candlestick_chart"` \| `"waterfall_chart"` \| `"domain_disabled"` \| `"full_stacked_bar_chart"` \| `"currency_ruble"` \| `"troubleshoot"` \| `"strikethrough_s"` \| `"atm"` \| `"shop_two"` \| `"next_week"` \| `"multiline_chart"` \| `"shoppingmode"` \| `"search_insights"` \| `"finance_mode"` \| `"currency_lira"` \| `"bar_chart_4_bars"` \| `"currency_yuan"` \| `"no_meeting_room"` \| `"data_table"` \| `"currency_franc"` \| `"finance"` \| `"chart_data"` \| `"network_node"` \| `"enterprise"` \| `"orders"` \| `"source_environment"` \| `"bid_landscape"` \| `"flowchart"` \| `"family_history"` \| `"podium"` \| `"conveyor_belt"` \| `"flowsheet"` \| `"universal_currency_alt"` \| `"planner_review"` \| `"order_approve"` \| `"contactless_off"` \| `"money_bag"` \| `"box"` \| `"graph_2"` \| `"graph_3"` \| `"delivery_truck_speed"` \| `"cards_star"` \| `"quick_reorder"` \| `"checkbook"` \| `"graph_5"` \| `"database_search"` \| `"energy"` \| `"universal_currency"` \| `"send_money"` \| `"mintmark"` \| `"graph_4"` \| `"graph_7"` \| `"mitre"` \| `"database_upload"` \| `"graph_1"` \| `"currency_rupee_circle"` \| `"forklift"` \| `"credit_card_clock"` \| `"credit_card_heart"` \| `"trolley"` \| `"delivery_truck_bolt"` \| `"front_loader"` \| `"inactive_order"` \| `"qr_code_2_add"` \| `"work_alert"` \| `"pallet"` \| `"box_add"` \| `"work_update"` \| `"enterprise_off"` \| `"conversion_path_off"` \| `"order_play"` \| `"upi_pay"` \| `"bar_chart_off"` \| `"barcode_reader"` \| `"graph_6"` \| `"credit_card_gear"` \| `"bid_landscape_disabled"` \| `"payment_arrow_down"` \| `"shopping_bag_speed"` \| `"box_edit"` \| `"database_off"` \| `"receipt_long_off"` \| `"shopping_cart_off"` \| `"payment_card"` \| `"pin_drop"` \| `"pin_drop"` \| `"location_on"` \| `"map"` \| `"home_pin"` \| `"explore"` \| `"restaurant"` \| `"flag"` \| `"my_location"` \| `"local_fire_department"` \| `"person_pin_circle"` \| `"local_mall"` \| `"near_me"` \| `"where_to_vote"` \| `"business_center"` \| `"east"` \| `"handyman"` \| `"factory"` \| `"local_library"` \| `"medical_services"` \| `"layers"` \| `"local_activity"` \| `"home_work"` \| `"emergency"` \| `"share_location"` \| `"north_east"` \| `"add_location"` \| `"fastfood"` \| `"navigation"` \| `"warehouse"` \| `"person_pin"` \| `"home_repair_service"` \| `"local_parking"` \| `"local_police"` \| `"local_hospital"` \| `"south"` \| `"zoom_out_map"` \| `"crisis_alert"` \| `"location_searching"` \| `"local_florist"` \| `"location_away"` \| `"park"` \| `"west"` \| `"local_gas_station"` \| `"maps_ugc"` \| `"cleaning_services"` \| `"360"` \| `"local_atm"` \| `"package"` \| `"flag_circle"` \| `"electrical_services"` \| `"north"` \| `"add_location_alt"` \| `"directions"` \| `"theater_comedy"` \| `"fmd_bad"` \| `"alt_route"` \| `"local_pizza"` \| `"location_home"` \| `"local_drink"` \| `"signpost"` \| `"beenhere"` \| `"not_listed_location"` \| `"wine_bar"` \| `"local_post_office"` \| `"local_convenience_store"` \| `"traffic"` \| `"tour"` \| `"trip_origin"` \| `"church"` \| `"safety_check"` \| `"local_laundry_service"` \| `"ev_station"` \| `"moving"` \| `"takeout_dining"` \| `"zoom_in_map"` \| `"pest_control"` \| `"soup_kitchen"` \| `"stadium"` \| `"location_off"` \| `"transfer_within_a_station"` \| `"connecting_airports"` \| `"wrong_location"` \| `"multiple_stop"` \| `"edit_location"` \| `"plumbing"` \| `"mode_of_travel"` \| `"minor_crash"` \| `"south_east"` \| `"add_road"` \| `"local_pharmacy"` \| `"fire_truck"` \| `"castle"` \| `"dry_cleaning"` \| `"set_meal"` \| `"baby_changing_station"` \| `"north_west"` \| `"edit_location_alt"` \| `"layers_clear"` \| `"mosque"` \| `"edit_attributes"` \| `"local_car_wash"` \| `"run_circle"` \| `"globe"` \| `"transit_enterexit"` \| `"sos"` \| `"satellite"` \| `"edit_road"` \| `"streetview"` \| `"south_west"` \| `"kebab_dining"` \| `"add_home"` \| `"airline_stops"` \| `"fire_hydrant"` \| `"local_see"` \| `"assist_walker"` \| `"remove_road"` \| `"add_home_work"` \| `"flight_class"` \| `"no_meals"` \| `"fort"` \| `"synagogue"` \| `"location_disabled"` \| `"temple_buddhist"` \| `"compass_calibration"` \| `"temple_hindu"` \| `"explore_off"` \| `"pest_control_rodent"` \| `"directions_alt"` \| `"near_me_disabled"` \| `"package_2"` \| `"globe_asia"` \| `"pergola"` \| `"flag_2"` \| `"directions_off"` \| `"things_to_do"` \| `"globe_uk"` \| `"pet_supplies"` \| `"explore_nearby"` \| `"share_eta"` \| `"flag_check"` \| `"globe_location_pin"` \| `"directions_alt_off"` \| `"file_map"` \| `"universal_local"` \| `"add_triangle"` \| `"moved_location"` \| `"moving_ministry"` \| `"move_location"` \| `"multiple_airports"` \| `"map_search"` \| `"safety_check_off"` \| `"move"` \| `"file_map_stack"` \| `"map_pin_heart"` \| `"map_pin_review"` \| `"description"` \| `"description"` \| `"content_copy"` \| `"dashboard"` \| `"edit_note"` \| `"menu_book"` \| `"grid_view"` \| `"list"` \| `"folder"` \| `"list_alt"` \| `"inventory"` \| `"folder_open"` \| `"article"` \| `"fact_check"` \| `"attach_file"` \| `"format_list_bulleted"` \| `"assignment"` \| `"checklist"` \| `"task"` \| `"cloud"` \| `"cloud_upload"` \| `"draft"` \| `"summarize"` \| `"draw"` \| `"newspaper"` \| `"file_copy"` \| `"view_list"` \| `"design_services"` \| `"note_add"` \| `"book"` \| `"history_edu"` \| `"border_color"` \| `"format_quote"` \| `"pending_actions"` \| `"post_add"` \| `"request_quote"` \| `"cloud_download"` \| `"table"` \| `"drag_handle"` \| `"contact_page"` \| `"archive"` \| `"space_dashboard"` \| `"content_paste"` \| `"percent"` \| `"attachment"` \| `"assignment_ind"` \| `"format_list_numbered"` \| `"assignment_turned_in"` \| `"tag"` \| `"table_chart"` \| `"text_fields"` \| `"integration_instructions"` \| `"dashboard_customize"` \| `"sticky_note_2"` \| `"find_in_page"` \| `"format_bold"` \| `"docs"` \| `"reorder"` \| `"text_snippet"` \| `"document_scanner"` \| `"checklist_rtl"` \| `"edit_document"` \| `"cloud_sync"` \| `"note_alt"` \| `"cloud_done"` \| `"table_rows"` \| `"perm_media"` \| `"data_object"` \| `"notes"` \| `"title"` \| `"table_view"` \| `"content_cut"` \| `"subject"` \| `"functions"` \| `"content_paste_search"` \| `"format_color_fill"` \| `"format_italic"` \| `"folder_shared"` \| `"horizontal_rule"` \| `"cloud_off"` \| `"plagiarism"` \| `"file_present"` \| `"folder_copy"` \| `"format_paint"` \| `"difference"` \| `"team_dashboard"` \| `"view_column"` \| `"ballot"` \| `"add_link"` \| `"format_align_left"` \| `"read_more"` \| `"view_agenda"` \| `"format_size"` \| `"toc"` \| `"format_underlined"` \| `"vertical_align_top"` \| `"height"` \| `"low_priority"` \| `"copy_all"` \| `"view_week"` \| `"vertical_align_bottom"` \| `"format_color_text"` \| `"assignment_late"` \| `"drive_folder_upload"` \| `"drive_file_move"` \| `"view_module"` \| `"segment"` \| `"polyline"` \| `"folder_special"` \| `"assignment_return"` \| `"calendar_view_month"` \| `"square"` \| `"format_align_center"` \| `"folder_zip"` \| `"breaking_news_alt_1"` \| `"grading"` \| `"format_align_right"` \| `"linear_scale"` \| `"view_headline"` \| `"edit_off"` \| `"view_quilt"` \| `"view_carousel"` \| `"text_increase"` \| `"request_page"` \| `"text_format"` \| `"hexagon"` \| `"pages"` \| `"view_sidebar"` \| `"calendar_view_week"` \| `"docs_add_on"` \| `"format_align_justify"` \| `"numbers"` \| `"add_to_drive"` \| `"format_shapes"` \| `"calendar_view_day"` \| `"video_file"` \| `"folder_delete"` \| `"forms_add_on"` \| `"font_download"` \| `"join_inner"` \| `"imagesearch_roller"` \| `"format_list_numbered_rtl"` \| `"counter_1"` \| `"content_paste_go"` \| `"restore_page"` \| `"vertical_split"` \| `"format_color_reset"` \| `"cloud_circle"` \| `"rectangle"` \| `"rule_folder"` \| `"files"` \| `"spellcheck"` \| `"view_stream"` \| `"format_indent_increase"` \| `"data_array"` \| `"pivot_table_chart"` \| `"assignment_returned"` \| `"merge_type"` \| `"align_horizontal_left"` \| `"text_decrease"` \| `"short_text"` \| `"pentagon"` \| `"vertical_align_center"` \| `"space_bar"` \| `"deselect"` \| `"join_left"` \| `"view_day"` \| `"format_strikethrough"` \| `"flip_to_front"` \| `"shape_line"` \| `"border_all"` \| `"format_line_spacing"` \| `"line_weight"` \| `"function"` \| `"join_right"` \| `"horizontal_split"` \| `"subtitles_off"` \| `"align_horizontal_center"` \| `"format_indent_decrease"` \| `"snippet_folder"` \| `"format_clear"` \| `"glyphs"` \| `"folder_off"` \| `"align_vertical_bottom"` \| `"align_horizontal_right"` \| `"ink_eraser"` \| `"newsmode"` \| `"content_paste_off"` \| `"line_axis"` \| `"insert_page_break"` \| `"vertical_distribute"` \| `"contract"` \| `"ink_pen"` \| `"horizontal_distribute"` \| `"line_style"` \| `"superscript"` \| `"align_vertical_center"` \| `"counter_2"` \| `"flip_to_back"` \| `"align_vertical_top"` \| `"clarify"` \| `"equal"` \| `"wrap_text"` \| `"margin"` \| `"news"` \| `"ink_highlighter"` \| `"view_array"` \| `"subscript"` \| `"frame_inspect"` \| `"note_stack"` \| `"contract_edit"` \| `"counter_3"` \| `"automation"` \| `"finance_chip"` \| `"overview"` \| `"dictionary"` \| `"border_style"` \| `"border_clear"` \| `"border_outer"` \| `"amp_stories"` \| `"join"` \| `"signature"` \| `"note_stack_add"` \| `"assignment_add"` \| `"full_coverage"` \| `"type_specimen"` \| `"text_rotate_vertical"` \| `"forms_apps_script"` \| `"padding"` \| `"docs_apps_script"` \| `"export_notes"` \| `"border_vertical"` \| `"text_rotation_none"` \| `"colors"` \| `"format_textdirection_l_to_r"` \| `"format_overline"` \| `"border_horizontal"` \| `"csv"` \| `"font_download_off"` \| `"format_textdirection_r_to_l"` \| `"lab_profile"` \| `"text_rotation_angleup"` \| `"unknown_document"` \| `"breaking_news"` \| `"view_column_2"` \| `"border_bottom"` \| `"border_left"` \| `"format_h1"` \| `"border_top"` \| `"counter_4"` \| `"border_inner"` \| `"text_rotation_down"` \| `"file_save"` \| `"select"` \| `"text_rotation_angledown"` \| `"book_2"` \| `"diagnosis"` \| `"text_rotate_up"` \| `"border_right"` \| `"rubric"` \| `"shapes"` \| `"draw_abstract"` \| `"ink_selection"` \| `"add_notes"` \| `"match_case"` \| `"grid_guides"` \| `"slide_library"` \| `"folder_limited"` \| `"counter_5"` \| `"variables"` \| `"format_list_bulleted_add"` \| `"frame_source"` \| `"text_fields_alt"` \| `"asterisk"` \| `"format_ink_highlighter"` \| `"format_underlined_squiggle"` \| `"reset_image"` \| `"book_5"` \| `"format_h2"` \| `"remove_selection"` \| `"process_chart"` \| `"voting_chip"` \| `"folder_managed"` \| `"stock_media"` \| `"article_shortcut"` \| `"format_paragraph"` \| `"cell_merge"` \| `"regular_expression"` \| `"view_object_track"` \| `"cloud_alert"` \| `"format_image_left"` \| `"table_rows_narrow"` \| `"table_chart_view"` \| `"list_alt_check"` \| `"two_pager"` \| `"drive_export"` \| `"smb_share"` \| `"custom_typography"` \| `"scan_delete"` \| `"source_notes"` \| `"ink_marker"` \| `"lasso_select"` \| `"variable_add"` \| `"document_search"` \| `"insert_text"` \| `"counter_6"` \| `"format_image_right"` \| `"line_curve"` \| `"book_4"` \| `"list_alt_add"` \| `"scan"` \| `"stylus_laser_pointer"` \| `"variable_insert"` \| `"counter_0"` \| `"sticky_note"` \| `"format_h3"` \| `"folder_code"` \| `"format_letter_spacing"` \| `"article_person"` \| `"person_book"` \| `"ungroup"` \| `"counter_7"` \| `"folder_supervised"` \| `"format_h5"` \| `"format_h6"` \| `"contract_delete"` \| `"folder_data"` \| `"line_end_circle"` \| `"attach_file_add"` \| `"format_h4"` \| `"text_ad"` \| `"cloud_lock"` \| `"fit_width"` \| `"text_compare"` \| `"brand_family"` \| `"format_letter_spacing_standard"` \| `"ink_highlighter_move"` \| `"location_chip"` \| `"table_eye"` \| `"text_select_start"` \| `"stroke_partial"` \| `"other_admission"` \| `"counter_9"` \| `"counter_8"` \| `"decimal_increase"` \| `"line_start_diamond"` \| `"flex_wrap"` \| `"format_text_overflow"` \| `"line_start_circle"` \| `"pen_size_1"` \| `"text_select_move_forward_character"` \| `"add_column_right"` \| `"business_chip"` \| `"line_end_arrow"` \| `"line_end_arrow_notch"` \| `"line_start"` \| `"markdown"` \| `"pen_size_2"` \| `"stroke_full"` \| `"file_save_off"` \| `"thumbnail_bar"` \| `"convert_to_text"` \| `"format_letter_spacing_2"` \| `"language_spanish"` \| `"draw_collage"` \| `"file_copy_off"` \| `"line_end"` \| `"post"` \| `"diagonal_line"` \| `"frame_reload"` \| `"fit_page_width"` \| `"highlighter_size_5"` \| `"language_korean_latin"` \| `"match_word"` \| `"stack_hexagon"` \| `"markdown_copy"` \| `"pageless"` \| `"text_select_move_down"` \| `"add_row_below"` \| `"dashboard_2"` \| `"folder_eye"` \| `"highlighter_size_3"` \| `"language_chinese_quick"` \| `"pen_size_3"` \| `"pen_size_5"` \| `"text_select_move_back_word"` \| `"top_panel_close"` \| `"folder_check"` \| `"letter_switch"` \| `"align_justify_space_even"` \| `"format_letter_spacing_wide"` \| `"format_letter_spacing_wider"` \| `"heap_snapshot_thumbnail"` \| `"language_international"` \| `"text_select_end"` \| `"folder_match"` \| `"line_end_diamond"` \| `"text_select_jump_to_beginning"` \| `"book_3"` \| `"fit_page"` \| `"heap_snapshot_large"` \| `"pen_size_4"` \| `"table_convert"` \| `"align_items_stretch"` \| `"fit_page_height"` \| `"folder_check_2"` \| `"folder_info"` \| `"line_start_arrow"` \| `"text_select_move_forward_word"` \| `"two_pager_store"` \| `"heap_snapshot_multiple"` \| `"ink_eraser_off"` \| `"language_french"` \| `"language_gb_english"` \| `"sheets_rtl"` \| `"table_edit"` \| `"align_justify_space_between"` \| `"flex_direction"` \| `"highlighter_size_1"` \| `"highlighter_size_2"` \| `"highlighter_size_4"` \| `"line_end_square"` \| `"page_header"` \| `"slab_serif"` \| `"text_select_move_back_character"` \| `"text_select_move_up"` \| `"top_panel_open"` \| `"tsv"` \| `"variable_remove"` \| `"align_justify_space_around"` \| `"attach_file_off"` \| `"language_japanese_kana"` \| `"text_select_jump_to_end"` \| `"unknown_7"` \| `"line_start_arrow_notch"` \| `"line_start_square"` \| `"markdown_paste"` \| `"stylus_fountain_pen"` \| `"titlecase"` \| `"eraser_size_1"` \| `"format_text_clip"` \| `"script"` \| `"special_character"` \| `"add_row_above"` \| `"align_justify_flex_start"` \| `"book_6"` \| `"format_text_wrap"` \| `"language_pinyin"` \| `"language_us"` \| `"page_footer"` \| `"serif"` \| `"add_column_left"` \| `"align_center"` \| `"align_flex_center"` \| `"align_justify_stretch"` \| `"align_self_stretch"` \| `"align_space_between"` \| `"combine_columns"` \| `"eraser_size_2"` \| `"eraser_size_4"` \| `"eraser_size_5"` \| `"language_chinese_cangjie"` \| `"language_chinese_dayi"` \| `"align_justify_center"` \| `"eraser_size_3"` \| `"flex_no_wrap"` \| `"format_quote_off"` \| `"language_chinese_pinyin"` \| `"match_case_off"` \| `"align_flex_start"` \| `"align_space_even"` \| `"align_start"` \| `"decimal_decrease"` \| `"language_chinese_wubi"` \| `"stylus_highlighter"` \| `"align_justify_flex_end"` \| `"align_space_around"` \| `"align_stretch"` \| `"language_chinese_array"` \| `"language_us_colemak"` \| `"language_us_dvorak"` \| `"stylus_brush"` \| `"stylus_pencil"` \| `"text_up"` \| `"uppercase"` \| `"align_end"` \| `"align_flex_end"` \| `"format_textdirection_vertical"` \| `"lowercase"` \| `"stylus_pen"` \| `"play_arrow"` \| `"play_arrow"` \| `"play_circle"` \| `"mic"` \| `"videocam"` \| `"volume_up"` \| `"pause"` \| `"music_note"` \| `"library_books"` \| `"movie"` \| `"speed"` \| `"skip_next"` \| `"replay"` \| `"volume_off"` \| `"pause_circle"` \| `"view_in_ar"` \| `"fiber_manual_record"` \| `"stop"` \| `"stop_circle"` \| `"skip_previous"` \| `"equalizer"` \| `"subscriptions"` \| `"video_library"` \| `"fast_forward"` \| `"playlist_add"` \| `"video_call"` \| `"repeat"` \| `"volume_mute"` \| `"mic_off"` \| `"shuffle"` \| `"hearing"` \| `"podcasts"` \| `"library_music"` \| `"playlist_add_check"` \| `"fast_rewind"` \| `"subtitles"` \| `"video_camera_front"` \| `"sound_detection_dog_barking"` \| `"queue_music"` \| `"play_pause"` \| `"volume_down"` \| `"album"` \| `"discover_tune"` \| `"radio"` \| `"av_timer"` \| `"closed_caption"` \| `"library_add_check"` \| `"videocam_off"` \| `"stream"` \| `"forward_10"` \| `"not_started"` \| `"fiber_new"` \| `"replay_10"` \| `"text_to_speech"` \| `"playlist_play"` \| `"branding_watermark"` \| `"interpreter_mode"` \| `"playlist_remove"` \| `"recent_actors"` \| `"slow_motion_video"` \| `"frame_person"` \| `"playlist_add_check_circle"` \| `"settings_voice"` \| `"video_settings"` \| `"audio_file"` \| `"sound_detection_loud_sound"` \| `"featured_play_list"` \| `"lyrics"` \| `"hd"` \| `"play_lesson"` \| `"high_quality"` \| `"call_to_action"` \| `"repeat_one"` \| `"add_to_queue"` \| `"music_off"` \| `"brand_awareness"` \| `"video_camera_back"` \| `"spatial_audio_off"` \| `"volume_down_alt"` \| `"shuffle_on"` \| `"playlist_add_circle"` \| `"speech_to_text"` \| `"featured_video"` \| `"hearing_disabled"` \| `"replay_5"` \| `"repeat_on"` \| `"queue_play_next"` \| `"spatial_audio"` \| `"art_track"` \| `"explicit"` \| `"airplay"` \| `"forward_30"` \| `"4k"` \| `"forward_5"` \| `"music_video"` \| `"replay_30"` \| `"spatial_tracking"` \| `"control_camera"` \| `"voice_selection"` \| `"closed_caption_disabled"` \| `"digital_out_of_home"` \| `"fiber_smart_record"` \| `"play_disabled"` \| `"video_label"` \| `"broadcast_on_personal"` \| `"repeat_one_on"` \| `"sd"` \| `"surround_sound"` \| `"instant_mix"` \| `"missed_video_call"` \| `"animated_images"` \| `"fiber_pin"` \| `"10k"` \| `"sound_detection_glass_break"` \| `"60fps"` \| `"broadcast_on_home"` \| `"remove_from_queue"` \| `"fiber_dvr"` \| `"30fps"` \| `"4k_plus"` \| `"video_stable"` \| `"8k"` \| `"adaptive_audio_mic"` \| `"1k"` \| `"privacy"` \| `"ar_on_you"` \| `"8k_plus"` \| `"2k"` \| `"7k"` \| `"9k_plus"` \| `"1k_plus"` \| `"9k"` \| `"resume"` \| `"music_cast"` \| `"5k"` \| `"2k_plus"` \| `"6k"` \| `"5k_plus"` \| `"6k_plus"` \| `"3k"` \| `"3k_plus"` \| `"7k_plus"` \| `"eye_tracking"` \| `"artist"` \| `"media_link"` \| `"no_sound"` \| `"genres"` \| `"hangout_video"` \| `"video_search"` \| `"autoplay"` \| `"video_camera_front_off"` \| `"movie_edit"` \| `"mic_double"` \| `"forward_media"` \| `"autopause"` \| `"cinematic_blur"` \| `"speed_2x"` \| `"adaptive_audio_mic_off"` \| `"ar_stickers"` \| `"audio_description"` \| `"hearing_aid"` \| `"replace_image"` \| `"split_scene"` \| `"speed_1_5x"` \| `"forward_circle"` \| `"select_to_speak"` \| `"video_camera_back_add"` \| `"movie_info"` \| `"full_hd"` \| `"mic_alert"` \| `"replace_audio"` \| `"2d"` \| `"ear_sound"` \| `"speed_0_5x"` \| `"speed_0_75"` \| `"speed_1_25"` \| `"edit_audio"` \| `"frame_person_mic"` \| `"autostop"` \| `"av1"` \| `"avc"` \| `"speed_0_2x"` \| `"speed_1_5"` \| `"speed_0_5"` \| `"speed_1_2x"` \| `"hangout_video_off"` \| `"speed_1_75"` \| `"closed_caption_add"` \| `"speed_0_7x"` \| `"replace_video"` \| `"videocam_alert"` \| `"speed_0_25"` \| `"frame_person_off"` \| `"music_note_add"` \| `"spatial_speaker"` \| `"speed_1_2"` \| `"hearing_aid_left"` \| `"sound_sampler"` \| `"movie_speaker"` \| `"speed_1_7x"` \| `"view_in_ar_off"` \| `"music_history"` \| `"voice_selection_off"` \| `"split_scene_right"` \| `"split_scene_up"` \| `"subtitles_gear"` \| `"hearing_aid_disabled"` \| `"movie_off"` \| `"split_scene_down"` \| `"split_scene_left"` \| `"3d"` \| `"hearing_aid_disabled_left"` \| `"local_shipping"` \| `"local_shipping"` \| `"directions_car"` \| `"flight"` \| `"directions_run"` \| `"directions_walk"` \| `"flight_takeoff"` \| `"directions_bus"` \| `"train"` \| `"directions_bike"` \| `"airport_shuttle"` \| `"pedal_bike"` \| `"directions_boat"` \| `"two_wheeler"` \| `"agriculture"` \| `"local_taxi"` \| `"sailing"` \| `"electric_car"` \| `"flight_land"` \| `"hail"` \| `"no_crash"` \| `"commute"` \| `"car_crash"` \| `"motorcycle"` \| `"tram"` \| `"departure_board"` \| `"subway"` \| `"electric_moped"` \| `"turn_right"` \| `"fork_right"` \| `"directions_subway"` \| `"electric_scooter"` \| `"tire_repair"` \| `"electric_bike"` \| `"turn_left"` \| `"rv_hookup"` \| `"bus_alert"` \| `"transportation"` \| `"airlines"` \| `"directions_railway"` \| `"taxi_alert"` \| `"u_turn_left"` \| `"electric_rickshaw"` \| `"turn_slight_right"` \| `"fork_left"` \| `"railway_alert"` \| `"u_turn_right"` \| `"turn_slight_left"` \| `"bike_scooter"` \| `"turn_sharp_right"` \| `"no_transfer"` \| `"turn_sharp_left"` \| `"snowmobile"` \| `"swap_driving_apps_wheel"` \| `"moped"` \| `"flyover"` \| `"road"` \| `"swap_driving_apps"` \| `"auto_transmission"` \| `"traffic_jam"` \| `"auto_towing"` \| `"car_tag"` \| `"hov"` \| `"ambulance"` \| `"speed_camera"` \| `"transit_ticket"` \| `"bus_railway"` \| `"unpaved_road"` \| `"car_gear"` \| `"directions_railway_2"` \| `"gondola_lift"` \| `"bike_lane"` \| `"car_fan_low_left"` \| `"metro"` \| `"car_fan_low_mid_left"` \| `"plane_contrails"` \| `"scooter"` \| `"seat_cool_left"` \| `"bike_dock"` \| `"boat_bus"` \| `"car_fan_recirculate"` \| `"fan_indirect"` \| `"monorail"` \| `"railway_alert_2"` \| `"seat_heat_left"` \| `"steering_wheel_heat"` \| `"car_fan_mid_right"` \| `"seat_heat_right"` \| `"windshield_defrost_front"` \| `"cable_car"` \| `"windshield_defrost_rear"` \| `"car_fan_low_right"` \| `"funicular"` \| `"hvac_max_defrost"` \| `"boat_railway"` \| `"car_fan_mid_left"` \| `"car_lock"` \| `"fan_focus"` \| `"trolley_cable_car"` \| `"car_defrost_left"` \| `"car_defrost_low_right"` \| `"car_defrost_mid_low_left"` \| `"car_fan_mid_low_right"` \| `"seat_cool_right"` \| `"car_defrost_low_left"` \| `"car_defrost_mid_left"` \| `"car_defrost_mid_low_right"` \| `"car_defrost_mid_right"` \| `"car_defrost_right"` \| `"car_mirror_heat"` \| `"garage_check"` \| `"garage_money"` \| `"moped_package"` \| `"parking_meter"` \| `"parking_sign"` \| `"parking_valet"` \| `"seat_vent_left"` \| `"seat_vent_right"` \| `"subway_walk"` \| `"windshield_heat_front"` \| `"school"` \| `"school"` \| `"campaign"` \| `"construction"` \| `"engineering"` \| `"volunteer_activism"` \| `"science"` \| `"sports_esports"` \| `"confirmation_number"` \| `"real_estate_agent"` \| `"cake"` \| `"self_improvement"` \| `"sports_soccer"` \| `"air"` \| `"biotech"` \| `"water"` \| `"hiking"` \| `"architecture"` \| `"sports_score"` \| `"sports_basketball"` \| `"personal_injury"` \| `"waves"` \| `"experiment"` \| `"theaters"` \| `"sports_tennis"` \| `"switch_account"` \| `"nights_stay"` \| `"sports_gymnastics"` \| `"trophy"` \| `"how_to_vote"` \| `"surfing"` \| `"backpack"` \| `"sports_motorsports"` \| `"sports_kabaddi"` \| `"piano"` \| `"sports"` \| `"toys"` \| `"phishing"` \| `"swords"` \| `"sports_baseball"` \| `"sports_volleyball"` \| `"sports_martial_arts"` \| `"camping"` \| `"downhill_skiing"` \| `"scoreboard"` \| `"kayaking"` \| `"sports_football"` \| `"sports_handball"` \| `"featured_seasonal_and_gifts"` \| `"skateboarding"` \| `"sports_golf"` \| `"sports_cricket"` \| `"toys_fan"` \| `"nordic_walking"` \| `"roller_skating"` \| `"scuba_diving"` \| `"rowing"` \| `"kitesurfing"` \| `"storm"` \| `"sports_mma"` \| `"paragliding"` \| `"sports_hockey"` \| `"snowboarding"` \| `"rewarded_ads"` \| `"ice_skating"` \| `"family_link"` \| `"snowshoeing"` \| `"sports_rugby"` \| `"sprint"` \| `"steps"` \| `"sledding"` \| `"ecg_heart"` \| `"readiness_score"` \| `"ifl"` \| `"health_metrics"` \| `"mindfulness"` \| `"piano_off"` \| `"toys_and_games"` \| `"no_backpack"` \| `"service_toolbox"` \| `"exercise"` \| `"person_celebrate"` \| `"person_play"` \| `"laps"` \| `"pace"` \| `"sports_and_outdoors"` \| `"arrow_warm_up"` \| `"cake_add"` \| `"distance"` \| `"floor"` \| `"stress_management"` \| `"avg_pace"` \| `"interactive_space"` \| `"newsstand"` \| `"arrow_cool_down"` \| `"menstrual_health"` \| `"relax"` \| `"azm"` \| `"elevation"` \| `"onsen"` \| `"books_movies_and_music"` \| `"avg_time"` \| `"water_full"` \| `"cadence"` \| `"spo2"` \| `"eda"` \| `"hr_resting"` \| `"bath_outdoor"` \| `"water_medium"` \| `"bath_private"` \| `"podiatry"` \| `"fertile"` \| `"bia"` \| `"check_in_out"` \| `"cleaning"` \| `"science_off"` \| `"water_loss"` \| `"bath_public_large"` \| `"vo2_max"` \| `"sauna"` \| `"sleep_score"` \| `"glass_cup"` \| `"monitor_weight_gain"` \| `"monitor_weight_loss"` \| `"physical_therapy"` \| `"badminton"` \| `"padel"` \| `"pickleball"` \| `"dark_mode"` \| `"dark_mode"` \| `"light_mode"` \| `"wifi"` \| `"signal_cellular_alt"` \| `"password"` \| `"widgets"` \| `"android"` \| `"storage"` \| `"pin"` \| `"battery_full"` \| `"rss_feed"` \| `"wifi_off"` \| `"bluetooth"` \| `"battery_charging_full"` \| `"graphic_eq"` \| `"thermostat"` \| `"dvr"` \| `"nightlight"` \| `"battery_5_bar"` \| `"gpp_maybe"` \| `"signal_wifi_4_bar"` \| `"cable"` \| `"gpp_bad"` \| `"radar"` \| `"data_usage"` \| `"signal_cellular_4_bar"` \| `"battery_4_bar"` \| `"battery_full_alt"` \| `"battery_0_bar"` \| `"wallpaper"` \| `"cameraswitch"` \| `"flashlight_on"` \| `"signal_disconnected"` \| `"network_check"` \| `"battery_6_bar"` \| `"charger"` \| `"wifi_tethering"` \| `"sim_card_download"` \| `"quick_phrases"` \| `"usb"` \| `"adb"` \| `"splitscreen"` \| `"battery_1_bar"` \| `"battery_3_bar"` \| `"battery_alert"` \| `"network_wifi_3_bar"` \| `"battery_low"` \| `"network_wifi"` \| `"bluetooth_searching"` \| `"bluetooth_connected"` \| `"5g"` \| `"battery_2_bar"` \| `"wifi_find"` \| `"network_cell"` \| `"nfc"` \| `"pattern"` \| `"bluetooth_disabled"` \| `"signal_wifi_statusbar_not_connected"` \| `"data_saver_on"` \| `"signal_wifi_bad"` \| `"signal_cellular_3_bar"` \| `"network_wifi_2_bar"` \| `"brightness_medium"` \| `"network_wifi_1_bar"` \| `"signal_wifi_off"` \| `"mode_standby"` \| `"noise_control_off"` \| `"battery_very_low"` \| `"battery_charging_90"` \| `"battery_saver"` \| `"signal_wifi_0_bar"` \| `"battery_charging_20"` \| `"mobiledata_off"` \| `"battery_unknown"` \| `"battery_charging_80"` \| `"grid_4x4"` \| `"flashlight_off"` \| `"settings_system_daydream"` \| `"signal_wifi_statusbar_null"` \| `"battery_charging_50"` \| `"signal_cellular_2_bar"` \| `"signal_cellular_1_bar"` \| `"screen_rotation_alt"` \| `"noise_aware"` \| `"badge_critical_battery"` \| `"wifi_lock"` \| `"1x_mobiledata"` \| `"4g_mobiledata"` \| `"do_not_disturb_on_total_silence"` \| `"signal_cellular_connected_no_internet_0_bar"` \| `"nearby_error"` \| `"battery_charging_60"` \| `"ios"` \| `"signal_cellular_0_bar"` \| `"signal_cellular_connected_no_internet_4_bar"` \| `"network_ping"` \| `"battery_charging_30"` \| `"brightness_auto"` \| `"signal_cellular_nodata"` \| `"wifi_tethering_error"` \| `"devices_fold"` \| `"grid_3x3"` \| `"airplanemode_inactive"` \| `"wifi_2_bar"` \| `"perm_data_setting"` \| `"lte_mobiledata"` \| `"signal_cellular_alt_2_bar"` \| `"bluetooth_drive"` \| `"signal_cellular_off"` \| `"media_bluetooth_on"` \| `"network_locked"` \| `"perm_scan_wifi"` \| `"4g_plus_mobiledata"` \| `"apk_install"` \| `"signal_cellular_alt_1_bar"` \| `"wifi_1_bar"` \| `"timer_10_select"` \| `"wifi_tethering_off"` \| `"3g_mobiledata"` \| `"stylus_note"` \| `"usb_off"` \| `"signal_cellular_null"` \| `"lte_plus_mobiledata"` \| `"dock_to_left"` \| `"grid_goldenratio"` \| `"noise_control_on"` \| `"apk_document"` \| `"g_mobiledata"` \| `"screen_record"` \| `"portable_wifi_off"` \| `"timer_3_select"` \| `"media_bluetooth_off"` \| `"e_mobiledata"` \| `"r_mobiledata"` \| `"nearby_off"` \| `"h_mobiledata"` \| `"brightness_alert"` \| `"h_plus_mobiledata"` \| `"dual_screen"` \| `"stylus"` \| `"overview_key"` \| `"contextual_token"` \| `"screenshot_region"` \| `"bigtop_updates"` \| `"screenshot_frame"` \| `"dock_to_right"` \| `"nearby"` \| `"brightness_empty"` \| `"splitscreen_right"` \| `"splitscreen_left"` \| `"display_external_input"` \| `"contextual_token_add"` \| `"screenshot_keyboard"` \| `"keyboard_keys"` \| `"splitscreen_add"` \| `"battery_error"` \| `"splitscreen_vertical_add"` \| `"password_2"` \| `"dock_to_bottom"` \| `"battery_status_good"` \| `"keyboard_external_input"` \| `"network_wifi_3_bar_locked"` \| `"magnify_fullscreen"` \| `"magnify_docked"` \| `"timer_5"` \| `"wallpaper_slideshow"` \| `"battery_plus"` \| `"screen_rotation_up"` \| `"screenshot_frame_2"` \| `"wifi_calling_bar_3"` \| `"wifi_home"` \| `"backlight_low"` \| `"keyboard_full"` \| `"keyboard_off"` \| `"splitscreen_bottom"` \| `"1x_mobiledata_badge"` \| `"5g_mobiledata_badge"` \| `"network_wifi_2_bar_locked"` \| `"network_wifi_locked"` \| `"splitscreen_top"` \| `"backlight_high"` \| `"keyboard_capslock_badge"` \| `"keyboard_previous_language"` \| `"backlight_high_off"` \| `"battery_change"` \| `"battery_android_6"` \| `"devices_fold_2"` \| `"keyboard_onscreen"` \| `"battery_android_plus"` \| `"e_mobiledata_badge"` \| `"mobile_wrench"` \| `"network_wifi_1_bar_locked"` \| `"nfc_off"` \| `"timer_5_shutter"` \| `"wifi_notification"` \| `"4g_mobiledata_badge"` \| `"battery_android_5"` \| `"battery_android_full"` \| `"password_2_off"` \| `"signal_cellular_pause"` \| `"battery_android_4"` \| `"battery_android_share"` \| `"battery_android_2"` \| `"battery_android_bolt"` \| `"battery_android_question"` \| `"battery_android_shield"` \| `"battery_share"` \| `"g_mobiledata_badge"` \| `"h_plus_mobiledata_badge"` \| `"3g_mobiledata_badge"` \| `"grid_3x3_off"` \| `"h_mobiledata_badge"` \| `"lte_mobiledata_badge"` \| `"lte_plus_mobiledata_badge"` \| `"wifi_calling_bar_1"` \| `"wifi_calling_bar_2"` \| `"battery_android_1"` \| `"battery_android_3"` \| `"battery_android_alert"` \| `"battery_android_0"` \| `"ev_mobiledata_badge"` \| `"mobile_sensor_hi"` \| `"mobile_sensor_lo"` \| `"save"` \| `"save"` \| `"keyboard_arrow_down"` \| `"print"` \| `"computer"` \| `"devices"` \| `"desktop_windows"` \| `"dns"` \| `"smart_display"` \| `"headphones"` \| `"keyboard_backspace"` \| `"smart_toy"` \| `"memory"` \| `"keyboard_arrow_up"` \| `"keyboard_arrow_right"` \| `"keyboard"` \| `"tv"` \| `"live_tv"` \| `"laptop_mac"` \| `"headset_mic"` \| `"device_thermostat"` \| `"balance"` \| `"route"` \| `"mouse"` \| `"watch"` \| `"point_of_sale"` \| `"laptop_chromebook"` \| `"keyboard_arrow_left"` \| `"keyboard_return"` \| `"power"` \| `"laptop_windows"` \| `"developer_board"` \| `"router"` \| `"cast"` \| `"scale"` \| `"display_settings"` \| `"fax"` \| `"videogame_asset"` \| `"cast_for_education"` \| `"device_hub"` \| `"straight"` \| `"devices_other"` \| `"screen_search_desktop"` \| `"desktop_mac"` \| `"settings_ethernet"` \| `"settings_input_antenna"` \| `"monitor"` \| `"important_devices"` \| `"tablet_mac"` \| `"settings_remote"` \| `"screen_share"` \| `"monitor_weight"` \| `"keyboard_alt"` \| `"merge"` \| `"connected_tv"` \| `"tablet"` \| `"sim_card"` \| `"speaker"` \| `"settings_input_component"` \| `"keyboard_tab"` \| `"power_off"` \| `"screenshot_monitor"` \| `"remember_me"` \| `"browser_updated"` \| `"sd_card"` \| `"cast_connected"` \| `"tablet_android"` \| `"punch_clock"` \| `"settings_input_hdmi"` \| `"scanner"` \| `"keyboard_hide"` \| `"print_disabled"` \| `"robot_2"` \| `"speaker_group"` \| `"keyboard_capslock"` \| `"disc_full"` \| `"sd_card_alert"` \| `"earbuds"` \| `"tty"` \| `"lift_to_talk"` \| `"stop_screen_share"` \| `"mobile_off"` \| `"headset_off"` \| `"desktop_access_disabled"` \| `"reset_tv"` \| `"headphones_battery"` \| `"roundabout_right"` \| `"adf_scanner"` \| `"watch_off"` \| `"settop_component"` \| `"host"` \| `"settings_input_svideo"` \| `"chromecast_device"` \| `"no_sim"` \| `"home_max"` \| `"head_mounted_device"` \| `"earbuds_battery"` \| `"power_input"` \| `"ramp_right"` \| `"robot"` \| `"tv_off"` \| `"roundabout_left"` \| `"developer_board_off"` \| `"home_mini"` \| `"devices_wearables"` \| `"ramp_left"` \| `"videogame_asset_off"` \| `"aod_tablet"` \| `"joystick"` \| `"google_home_devices"` \| `"gamepad"` \| `"rear_camera"` \| `"tv_options_edit_channels"` \| `"reset_wrench"` \| `"security_key"` \| `"developer_mode_tv"` \| `"jamboard_kiosk"` \| `"camera_video"` \| `"touchpad_mouse"` \| `"memory_alt"` \| `"hard_drive"` \| `"mimo"` \| `"aod_watch"` \| `"tv_options_input_settings"` \| `"fitness_tracker"` \| `"media_output"` \| `"devices_off"` \| `"mimo_disconnect"` \| `"lightning_stand"` \| `"tv_signin"` \| `"emoji_language"` \| `"ecg"` \| `"tv_guide"` \| `"hard_drive_2"` \| `"tv_remote"` \| `"watch_vibration"` \| `"desktop_cloud"` \| `"general_device"` \| `"missing_controller"` \| `"keyboard_tab_rtl"` \| `"night_sight_max"` \| `"p2p"` \| `"add_diamond"` \| `"desktop_cloud_stack"` \| `"hard_disk"` \| `"mobile"` \| `"mobile_arrow_down"` \| `"watch_check"` \| `"smart_card_reader"` \| `"watch_arrow"` \| `"media_output_off"` \| `"touchpad_mouse_off"` \| `"device_band"` \| `"handheld_controller"` \| `"watch_button_press"` \| `"assistant_device"` \| `"cast_warning"` \| `"deskphone"` \| `"server_person"` \| `"watch_wake"` \| `"open_jam"` \| `"mobile_hand"` \| `"tv_displays"` \| `"cast_pause"` \| `"pacemaker"` \| `"screenshot_tablet"` \| `"audio_video_receiver"` \| `"keyboard_lock"` \| `"laptop_car"` \| `"mobile_2"` \| `"mobile_lock_portrait"` \| `"plug_connect"` \| `"lda"` \| `"mobile_hand_left"` \| `"print_connect"` \| `"computer_arrow_up"` \| `"mobile_layout"` \| `"router_off"` \| `"save_clock"` \| `"tablet_camera"` \| `"computer_cancel"` \| `"mobile_3"` \| `"mobile_arrow_right"` \| `"mobile_chat"` \| `"mobile_code"` \| `"mobile_screensaver"` \| `"mobile_vibrate"` \| `"mouse_lock_off"` \| `"smart_card_reader_off"` \| `"earbuds_2"` \| `"keyboard_lock_off"` \| `"mobile_speaker"` \| `"print_add"` \| `"tv_next"` \| `"ventilator"` \| `"earbud_left"` \| `"earbud_right"` \| `"mobile_cast"` \| `"mobile_loupe"` \| `"mobile_rotate_lock"` \| `"mobile_share"` \| `"mobile_sound_2"` \| `"mouse_lock"` \| `"print_error"` \| `"print_lock"` \| `"earbud_case"` \| `"mobile_block"` \| `"mobile_camera"` \| `"mobile_check"` \| `"mobile_gear"` \| `"mobile_question"` \| `"mobile_rotate"` \| `"mobile_text"` \| `"mobile_text_2"` \| `"mobile_ticket"` \| `"mobile_alert"` \| `"mobile_arrow_up_right"` \| `"mobile_charge"` \| `"mobile_dots"` \| `"mobile_hand_left_off"` \| `"mobile_hand_off"` \| `"mobile_info"` \| `"mobile_landscape"` \| `"mobile_lock_landscape"` \| `"mobile_menu"` \| `"mobile_share_stack"` \| `"badge"` \| `"badge"` \| `"verified_user"` \| `"report"` \| `"admin_panel_settings"` \| `"security"` \| `"policy"` \| `"vpn_key"` \| `"shield"` \| `"exclamation"` \| `"assured_workload"` \| `"privacy_tip"` \| `"vpn_lock"` \| `"disabled_visible"` \| `"e911_emergency"` \| `"enhanced_encryption"` \| `"encrypted"` \| `"private_connectivity"` \| `"vpn_key_off"` \| `"add_moderator"` \| `"passkey"` \| `"no_encryption"` \| `"key_visualizer"` \| `"sync_lock"` \| `"wifi_password"` \| `"remove_moderator"` \| `"report_off"` \| `"shield_person"` \| `"shield_lock"` \| `"id_card"` \| `"shield_locked"` \| `"policy_alert"` \| `"shield_question"` \| `"identity_aware_proxy"` \| `"person_shield"` \| `"encrypted_off"` \| `"vpn_key_alert"` \| `"encrypted_add"` \| `"vpn_lock_2"` \| `"encrypted_add_circle"` \| `"encrypted_minus_circle"` \| `"shield_toggle"` \| `"apartment"` \| `"apartment"` \| `"location_city"` \| `"fitness_center"` \| `"lunch_dining"` \| `"spa"` \| `"cottage"` \| `"local_cafe"` \| `"hotel"` \| `"family_restroom"` \| `"beach_access"` \| `"local_bar"` \| `"pool"` \| `"other_houses"` \| `"luggage"` \| `"liquor"` \| `"casino"` \| `"airplane_ticket"` \| `"room_service"` \| `"sports_bar"` \| `"bakery_dining"` \| `"ramen_dining"` \| `"nightlife"` \| `"local_dining"` \| `"icecream"` \| `"holiday_village"` \| `"escalator_warning"` \| `"dinner_dining"` \| `"museum"` \| `"festival"` \| `"attractions"` \| `"night_shelter"` \| `"food_bank"` \| `"golf_course"` \| `"stairs"` \| `"villa"` \| `"smoke_free"` \| `"car_rental"` \| `"smoking_rooms"` \| `"airline_seat_recline_normal"` \| `"elevator"` \| `"gite"` \| `"child_friendly"` \| `"airline_seat_recline_extra"` \| `"breakfast_dining"` \| `"carpenter"` \| `"car_repair"` \| `"cabin"` \| `"brunch_dining"` \| `"do_not_touch"` \| `"no_food"` \| `"houseboat"` \| `"tapas"` \| `"rice_bowl"` \| `"travel"` \| `"wheelchair_pickup"` \| `"bento"` \| `"do_not_step"` \| `"no_drinks"` \| `"airline_seat_flat"` \| `"bungalow"` \| `"escalator"` \| `"airline_seat_individual_suite"` \| `"chalet"` \| `"no_luggage"` \| `"airline_seat_legroom_extra"` \| `"airline_seat_flat_angled"` \| `"airline_seat_legroom_normal"` \| `"airline_seat_legroom_reduced"` \| `"no_stroller"` \| `"flights_and_hotels"` \| `"personal_places"` \| `"trip"` \| `"concierge"` \| `"stairs_2"` \| `"travel_luggage_and_bags"` \| `"personal_bag"` \| `"personal_bag_question"` \| `"checked_bag"` \| `"carry_on_bag_question"` \| `"your_trips"` \| `"carry_on_bag_checked"` \| `"checked_bag_question"` \| `"carry_on_bag"` \| `"personal_bag_off"` \| `"japanese_curry"` \| `"beer_meal"` \| `"yoshoku"` \| `"bath_bedrock"` \| `"carry_on_bag_inactive"` \| `"japanese_flag"` \| `"mountain_steam"` \| `"okonomiyaki"` \| `"washoku"` \| `"house"` \| `"house"` \| `"bed"` \| `"ac_unit"` \| `"chair"` \| `"electric_bolt"` \| `"coffee"` \| `"sensors"` \| `"child_care"` \| `"emergency_home"` \| `"back_hand"` \| `"checkroom"` \| `"grass"` \| `"shower"` \| `"mode_fan"` \| `"mop"` \| `"kitchen"` \| `"thermometer"` \| `"styler"` \| `"yard"` \| `"energy_savings_leaf"` \| `"bathtub"` \| `"king_bed"` \| `"roofing"` \| `"valve"` \| `"window"` \| `"cooking"` \| `"foundation"` \| `"garage_home"` \| `"door_front"` \| `"mode_heat"` \| `"light"` \| `"outdoor_grill"` \| `"garage"` \| `"table_restaurant"` \| `"dining"` \| `"sensor_occupied"` \| `"deck"` \| `"weekend"` \| `"coffee_maker"` \| `"highlight"` \| `"humidity_high"` \| `"flatware"` \| `"fireplace"` \| `"tv_gen"` \| `"humidity_low"` \| `"electric_meter"` \| `"mode_night"` \| `"humidity_mid"` \| `"scene"` \| `"bedroom_parent"` \| `"chair_alt"` \| `"blender"` \| `"microwave"` \| `"bedroom_baby"` \| `"heat_pump"` \| `"oven_gen"` \| `"hardware"` \| `"single_bed"` \| `"mode_off_on"` \| `"mode_cool"` \| `"bathroom"` \| `"hot_tub"` \| `"in_home_mode"` \| `"table_bar"` \| `"sprinkler"` \| `"gas_meter"` \| `"crib"` \| `"home_iot_device"` \| `"outlet"` \| `"countertops"` \| `"fire_extinguisher"` \| `"matter"` \| `"propane_tank"` \| `"soap"` \| `"living"` \| `"gate"` \| `"remote_gen"` \| `"detector_smoke"` \| `"event_seat"` \| `"energy_program_saving"` \| `"sensor_door"` \| `"dishwasher_gen"` \| `"faucet"` \| `"air_freshener"` \| `"water_damage"` \| `"balcony"` \| `"switch"` \| `"wash"` \| `"camera_indoor"` \| `"microwave_gen"` \| `"bedroom_child"` \| `"house_siding"` \| `"door_sliding"` \| `"fence"` \| `"water_heater"` \| `"energy_program_time_used"` \| `"iron"` \| `"desk"` \| `"umbrella"` \| `"emergency_heat"` \| `"doorbell"` \| `"dresser"` \| `"hvac"` \| `"door_back"` \| `"emergency_share"` \| `"mode_fan_off"` \| `"air_purifier_gen"` \| `"camera_outdoor"` \| `"kettle"` \| `"apparel"` \| `"stroller"` \| `"curtains"` \| `"multicooker"` \| `"sensors_off"` \| `"mode_heat_cool"` \| `"shield_moon"` \| `"emergency_recording"` \| `"thermostat_auto"` \| `"smart_outlet"` \| `"blinds"` \| `"controller_gen"` \| `"roller_shades"` \| `"health_and_beauty"` \| `"family_home"` \| `"blinds_closed"` \| `"dry"` \| `"roller_shades_closed"` \| `"propane"` \| `"thermostat_carbon"` \| `"sensor_window"` \| `"doorbell_3p"` \| `"range_hood"` \| `"tv_with_assistant"` \| `"blanket"` \| `"grocery"` \| `"vertical_shades"` \| `"vertical_shades_closed"` \| `"curtains_closed"` \| `"mode_heat_off"` \| `"mode_cool_off"` \| `"lightbulb_2"` \| `"tamper_detection_off"` \| `"garage_door"` \| `"skillet"` \| `"shelves"` \| `"light_off"` \| `"thermometer_gain"` \| `"vacuum"` \| `"thermometer_add"` \| `"air_purifier"` \| `"wall_art"` \| `"home_and_garden"` \| `"household_supplies"` \| `"thermometer_loss"` \| `"dishwasher"` \| `"emergency_heat_2"` \| `"home_improvement_and_tools"` \| `"oven"` \| `"fork_spoon"` \| `"stockpot"` \| `"emergency_share_off"` \| `"hallway"` \| `"thermometer_minus"` \| `"skillet_cooktop"` \| `"fragrance"` \| `"bath_soak"` \| `"chair_counter"` \| `"chair_fireplace"` \| `"chair_umbrella"` \| `"dine_heart"` \| `"dine_lamp"` \| `"high_chair"` \| `"table_large"` \| `"stadia_controller"` \| `"stadia_controller"` \| `"door_open"` \| `"nest_eco_leaf"` \| `"nest_remote_comfort_sensor"` \| `"nest_clock_farsight_analog"` \| `"laundry"` \| `"battery_horiz_075"` \| `"shield_with_heart"` \| `"familiar_face_and_zone"` \| `"temp_preferences_eco"` \| `"tools_power_drill"` \| `"airwave"` \| `"productivity"` \| `"battery_horiz_050"` \| `"nest_display"` \| `"weather_snowy"` \| `"activity_zone"` \| `"nest_heat_link_gen_3"` \| `"cleaning_bucket"` \| `"settings_alert"` \| `"home_storage"` \| `"nest_cam_indoor"` \| `"arrows_more_up"` \| `"nest_cam_outdoor"` \| `"nest_heat_link_e"` \| `"detection_and_zone"` \| `"nest_multi_room"` \| `"light_group"` \| `"nest_secure_alarm"` \| `"google_wifi"` \| `"battery_horiz_000"` \| `"mfg_nest_yale_lock"` \| `"tools_pliers_wire_stripper"` \| `"nest_thermostat_gen_3"` \| `"early_on"` \| `"detector_alarm"` \| `"tools_ladder"` \| `"nest_hello_doorbell"` \| `"nest_cam_iq_outdoor"` \| `"nest_mini"` \| `"nest_cam_iq"` \| `"home_speaker"` \| `"nest_display_max"` \| `"floor_lamp"` \| `"nest_audio"` \| `"nest_clock_farsight_digital"` \| `"motion_sensor_active"` \| `"zone_person_urgent"` \| `"nest_wifi_router"` \| `"home_max_dots"` \| `"house_with_shield"` \| `"cool_to_dry"` \| `"self_care"` \| `"chromecast_2"` \| `"nest_farsight_weather"` \| `"shield_with_house"` \| `"battery_profile"` \| `"window_closed"` \| `"arming_countdown"` \| `"heat_pump_balance"` \| `"nest_found_savings"` \| `"detector"` \| `"window_open"` \| `"detector_status"` \| `"tools_level"` \| `"zone_person_alert"` \| `"nest_thermostat_zirconium_eu"` \| `"nest_cam_wired_stand"` \| `"arrows_more_down"` \| `"nest_cam_floodlight"` \| `"nest_true_radiant"` \| `"door_sensor"` \| `"nest_wifi_point"` \| `"climate_mini_split"` \| `"nest_detect"` \| `"detector_co"` \| `"nest_tag"` \| `"nest_doorbell_visitor"` \| `"nest_thermostat_sensor"` \| `"tools_installation_kit"` \| `"nest_connect"` \| `"nest_sunblock"` \| `"tools_phillips"` \| `"nest_thermostat_sensor_eu"` \| `"doorbell_chime"` \| `"table_lamp"` \| `"nest_thermostat_e_eu"` \| `"tools_flat_head"` \| `"detector_battery"` \| `"motion_sensor_urgent"` \| `"nest_wake_on_approach"` \| `"sensors_krx"` \| `"tamper_detection_on"` \| `"motion_sensor_alert"` \| `"nest_wake_on_press"` \| `"window_sensor"` \| `"zone_person_idle"` \| `"nest_cam_magnet_mount"` \| `"detector_offline"` \| `"nest_cam_stand"` \| `"nest_cam_wall_mount"` \| `"wall_lamp"` \| `"motion_sensor_idle"` \| `"heat"` \| `"nest_thermostat"` \| `"water_pump"` \| `"assistant_on_hub"` \| `"google_tv_remote"` \| `"mode_dual"` \| `"aq"` \| `"nest_protect"` \| `"aq_indoor"` \| `"sensors_krx_off"` \| `"nest_wifi_pro_2"` \| `"humidity_indoor"` \| `"nest_wifi_pro"` \| `"on_hub_device"` \| `"farsight_digital"` \| `"nest_farsight_cool"` \| `"nest_farsight_dual"` \| `"nest_farsight_eco"` \| `"nest_farsight_heat"` \| `"nest_farsight_seasonal"`
 
-Defined in: [src/lib/types/icons.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/icons.ts#L8)
+Defined in: [src/lib/types/icons.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/icons.ts#L8)
 
 ## Fileoverview
 
@@ -33674,7 +33674,7 @@ Notification payload type.
 
 > **Notification** = `object`
 
-Defined in: [src/lib/types/notification.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/notification.ts#L22)
+Defined in: [src/lib/types/notification.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/notification.ts#L22)
 
 Notification message payload.
 
@@ -33684,7 +33684,7 @@ Notification message payload.
 
 > `optional` **icon**: [`Icon`](../../icons/type-aliases/Icon.md)
 
-Defined in: [src/lib/types/notification.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/notification.ts#L25)
+Defined in: [src/lib/types/notification.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/notification.ts#L25)
 
 Optional icon.
 
@@ -33694,7 +33694,7 @@ Optional icon.
 
 > **message**: `string`
 
-Defined in: [src/lib/types/notification.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/notification.ts#L24)
+Defined in: [src/lib/types/notification.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/notification.ts#L24)
 
 Body message.
 
@@ -33704,7 +33704,7 @@ Body message.
 
 > **severity**: `"info"` \| `"warning"` \| `"danger"` \| `"success"`
 
-Defined in: [src/lib/types/notification.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/notification.ts#L26)
+Defined in: [src/lib/types/notification.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/notification.ts#L26)
 
 Severity level.
 
@@ -33714,7 +33714,7 @@ Severity level.
 
 > **title**: `string`
 
-Defined in: [src/lib/types/notification.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/notification.ts#L23)
+Defined in: [src/lib/types/notification.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/notification.ts#L23)
 
 Title text.
 
@@ -33768,7 +33768,7 @@ SSE connection state types.
 
 > **ConnectionState** = `z.infer`\<*typeof* [`ConnectionStateSchema`](../variables/ConnectionStateSchema.md)\>
 
-Defined in: [src/lib/types/sse.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/sse.ts#L17)
+Defined in: [src/lib/types/sse.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/sse.ts#L17)
 
 Connection state payload type.
 
@@ -33783,7 +33783,7 @@ Connection state payload type.
 
 > `const` **ConnectionStateSchema**: `ZodObject`\<\{ \}, `"strip"`, `ZodTypeAny`, \{ \}, \{ \}\>
 
-Defined in: [src/lib/types/sse.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/sse.ts#L12)
+Defined in: [src/lib/types/sse.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/sse.ts#L12)
 
 Runtime schema for connection state payloads.
 
@@ -33815,7 +33815,7 @@ Struct action enums for permission checks.
 
 # Enumeration: DataAction
 
-Defined in: [src/lib/types/struct.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L22)
+Defined in: [src/lib/types/struct.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L22)
 
 Data-level actions.
 
@@ -33825,7 +33825,7 @@ Data-level actions.
 
 > **Archive**: `"archive"`
 
-Defined in: [src/lib/types/struct.ts:25](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L25)
+Defined in: [src/lib/types/struct.ts:25](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L25)
 
 ***
 
@@ -33833,7 +33833,7 @@ Defined in: [src/lib/types/struct.ts:25](https://github.com/tsaxking/sveltekit-t
 
 > **Clear**: `"clear"`
 
-Defined in: [src/lib/types/struct.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L31)
+Defined in: [src/lib/types/struct.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L31)
 
 ***
 
@@ -33841,7 +33841,7 @@ Defined in: [src/lib/types/struct.ts:31](https://github.com/tsaxking/sveltekit-t
 
 > **Create**: `"create"`
 
-Defined in: [src/lib/types/struct.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L23)
+Defined in: [src/lib/types/struct.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L23)
 
 ***
 
@@ -33849,7 +33849,7 @@ Defined in: [src/lib/types/struct.ts:23](https://github.com/tsaxking/sveltekit-t
 
 > **Delete**: `"delete"`
 
-Defined in: [src/lib/types/struct.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L24)
+Defined in: [src/lib/types/struct.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L24)
 
 ***
 
@@ -33857,7 +33857,7 @@ Defined in: [src/lib/types/struct.ts:24](https://github.com/tsaxking/sveltekit-t
 
 > **DeleteVersion**: `"delete-version"`
 
-Defined in: [src/lib/types/struct.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L28)
+Defined in: [src/lib/types/struct.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L28)
 
 ***
 
@@ -33865,7 +33865,7 @@ Defined in: [src/lib/types/struct.ts:28](https://github.com/tsaxking/sveltekit-t
 
 > **RestoreArchive**: `"restore-archive"`
 
-Defined in: [src/lib/types/struct.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L26)
+Defined in: [src/lib/types/struct.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L26)
 
 ***
 
@@ -33873,7 +33873,7 @@ Defined in: [src/lib/types/struct.ts:26](https://github.com/tsaxking/sveltekit-t
 
 > **RestoreVersion**: `"restore-version"`
 
-Defined in: [src/lib/types/struct.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L27)
+Defined in: [src/lib/types/struct.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L27)
 
 
 [**my-app**](../../../../../README.md)
@@ -33884,7 +33884,7 @@ Defined in: [src/lib/types/struct.ts:27](https://github.com/tsaxking/sveltekit-t
 
 # Enumeration: PropertyAction
 
-Defined in: [src/lib/types/struct.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L10)
+Defined in: [src/lib/types/struct.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L10)
 
 Property-level actions.
 
@@ -33894,7 +33894,7 @@ Property-level actions.
 
 > **Read**: `"read"`
 
-Defined in: [src/lib/types/struct.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L11)
+Defined in: [src/lib/types/struct.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L11)
 
 ***
 
@@ -33902,7 +33902,7 @@ Defined in: [src/lib/types/struct.ts:11](https://github.com/tsaxking/sveltekit-t
 
 > **ReadArchive**: `"read-archive"`
 
-Defined in: [src/lib/types/struct.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L13)
+Defined in: [src/lib/types/struct.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L13)
 
 ***
 
@@ -33910,7 +33910,7 @@ Defined in: [src/lib/types/struct.ts:13](https://github.com/tsaxking/sveltekit-t
 
 > **ReadVersionHistory**: `"read-version-history"`
 
-Defined in: [src/lib/types/struct.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L14)
+Defined in: [src/lib/types/struct.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L14)
 
 ***
 
@@ -33918,7 +33918,7 @@ Defined in: [src/lib/types/struct.ts:14](https://github.com/tsaxking/sveltekit-t
 
 > **SetAttributes**: `"set-attributes"`
 
-Defined in: [src/lib/types/struct.ts:15](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L15)
+Defined in: [src/lib/types/struct.ts:15](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L15)
 
 ***
 
@@ -33926,7 +33926,7 @@ Defined in: [src/lib/types/struct.ts:15](https://github.com/tsaxking/sveltekit-t
 
 > **Update**: `"update"`
 
-Defined in: [src/lib/types/struct.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/types/struct.ts#L12)
+Defined in: [src/lib/types/struct.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/types/struct.ts#L12)
 
 
 [**my-app**](../../../../README.md)
@@ -33969,7 +33969,7 @@ AG Grid button cell renderer utilities.
 
 # Class: ButtonCellRenderer
 
-Defined in: [src/lib/utils/ag-grid/buttons.ts:41](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/buttons.ts#L41)
+Defined in: [src/lib/utils/ag-grid/buttons.ts:41](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/buttons.ts#L41)
 
 AG Grid cell renderer that displays one or more buttons.
 
@@ -33993,7 +33993,7 @@ AG Grid cell renderer that displays one or more buttons.
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/buttons.ts:99](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/buttons.ts#L99)
+Defined in: [src/lib/utils/ag-grid/buttons.ts:99](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/buttons.ts#L99)
 
 Cleanup hook (optional).
 
@@ -34011,7 +34011,7 @@ Cleanup hook (optional).
 
 > **getGui**(): `HTMLElement`
 
-Defined in: [src/lib/utils/ag-grid/buttons.ts:85](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/buttons.ts#L85)
+Defined in: [src/lib/utils/ag-grid/buttons.ts:85](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/buttons.ts#L85)
 
 Returns the root element for the renderer.
 
@@ -34029,7 +34029,7 @@ Returns the root element for the renderer.
 
 > **init**(`params`): `void`
 
-Defined in: [src/lib/utils/ag-grid/buttons.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/buttons.ts#L54)
+Defined in: [src/lib/utils/ag-grid/buttons.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/buttons.ts#L54)
 
 Initializes the renderer and builds button elements.
 
@@ -34055,7 +34055,7 @@ Renderer params.
 
 > **refresh**(): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/buttons.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/buttons.ts#L92)
+Defined in: [src/lib/utils/ag-grid/buttons.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/buttons.ts#L92)
 
 AG Grid refresh handler (no-op).
 
@@ -34108,7 +34108,7 @@ AG Grid checkbox cell and header renderers.
 
 # Class: CheckBoxSelectRenderer\<T\>
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L13)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L13)
 
 Checkbox renderer for row selection.
 
@@ -34138,7 +34138,7 @@ Checkbox renderer for row selection.
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:75](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L75)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:75](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L75)
 
 Cleanup hook.
 
@@ -34156,7 +34156,7 @@ Cleanup hook.
 
 > **getGui**(): `HTMLElement`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:58](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L58)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:58](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L58)
 
 Returns the renderer root element.
 
@@ -34174,7 +34174,7 @@ Returns the renderer root element.
 
 > **init**(`params`): `void`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:26](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L26)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:26](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L26)
 
 Initializes the renderer for a row.
 
@@ -34200,7 +34200,7 @@ Renderer params.
 
 > **refresh**(`params`): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:67](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L67)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:67](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L67)
 
 Refreshes checkbox state from node data.
 
@@ -34229,7 +34229,7 @@ Renderer params.
 
 # Class: HeaderCheckboxRenderer
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:83](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L83)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:83](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L83)
 
 Header renderer that toggles all row checkboxes.
 
@@ -34253,7 +34253,7 @@ Header renderer that toggles all row checkboxes.
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:192](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L192)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:192](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L192)
 
 Cleanup hook.
 
@@ -34271,7 +34271,7 @@ Cleanup hook.
 
 > **getGui**(): `HTMLElement`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:147](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L147)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:147](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L147)
 
 Returns the renderer root element.
 
@@ -34289,7 +34289,7 @@ Returns the renderer root element.
 
 > **init**(`params`): `void`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:96](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L96)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:96](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L96)
 
 Initializes the header checkbox renderer.
 
@@ -34315,7 +34315,7 @@ Renderer params.
 
 > **refresh**(`params`): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:156](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/checkbox-select.ts#L156)
+Defined in: [src/lib/utils/ag-grid/checkbox-select.ts:156](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/checkbox-select.ts#L156)
 
 Refreshes header checkbox state.
 
@@ -34376,7 +34376,7 @@ AG Grid date/time cell editor using flatpickr.
 
 # Class: DateTimeCellEditor
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L18)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L18)
 
 Flatpickr-based date/time editor for AG Grid.
 
@@ -34400,7 +34400,7 @@ Flatpickr-based date/time editor for AG Grid.
 
 > **afterGuiAttached**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:107](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L107)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:107](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L107)
 
 Focuses the input after the GUI is attached.
 
@@ -34418,7 +34418,7 @@ Focuses the input after the GUI is attached.
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:140](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L140)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:140](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L140)
 
 Cleans up flatpickr and event listeners.
 
@@ -34436,7 +34436,7 @@ Cleans up flatpickr and event listeners.
 
 > **getGui**(): `HTMLElement`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:100](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L100)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:100](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L100)
 
 Returns the editor root element.
 
@@ -34454,7 +34454,7 @@ Returns the editor root element.
 
 > **getValue**(): `string`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:117](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L117)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:117](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L117)
 
 Returns the edited value as an ISO string.
 
@@ -34472,7 +34472,7 @@ Returns the edited value as an ISO string.
 
 > **init**(`params`): `void`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L37)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L37)
 
 Initializes the editor and binds flatpickr.
 
@@ -34498,7 +34498,7 @@ Editor params.
 
 > **isCancelAfterEnd**(): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:133](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L133)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:133](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L133)
 
 Indicates if the edit should be canceled.
 
@@ -34516,7 +34516,7 @@ Indicates if the edit should be canceled.
 
 > **isPopup**(): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/date-time.ts:126](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/date-time.ts#L126)
+Defined in: [src/lib/utils/ag-grid/date-time.ts:126](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/date-time.ts#L126)
 
 Indicates the editor should render as a popup.
 
@@ -34572,7 +34572,7 @@ AG Grid searchable select cell editor.
 
 # Class: SearchSelectCellEditor
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L27)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L27)
 
 Searchable select editor for AG Grid.
 
@@ -34596,7 +34596,7 @@ Searchable select editor for AG Grid.
 
 > **afterGuiAttached**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:177](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L177)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:177](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L177)
 
 Focuses the input after GUI is attached.
 
@@ -34614,7 +34614,7 @@ Focuses the input after GUI is attached.
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:250](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L250)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:250](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L250)
 
 Cleanup hook.
 
@@ -34632,7 +34632,7 @@ Cleanup hook.
 
 > **filterList**(`filterText`): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:210](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L210)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:210](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L210)
 
 Filters values based on input.
 
@@ -34654,7 +34654,7 @@ Filter text.
 
 > **getGui**(): `HTMLElement`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:170](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L170)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:170](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L170)
 
 Returns the editor root element.
 
@@ -34672,7 +34672,7 @@ Returns the editor root element.
 
 > **getValue**(): `any`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:184](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L184)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:184](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L184)
 
 Returns the current value.
 
@@ -34690,7 +34690,7 @@ Returns the current value.
 
 > **init**(`params`): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:46](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L46)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:46](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L46)
 
 Initializes the editor UI and behavior.
 
@@ -34716,7 +34716,7 @@ Editor params.
 
 > `optional` **isPopup**(): `boolean`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:191](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L191)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:191](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L191)
 
 Indicates this editor is a popup.
 
@@ -34734,7 +34734,7 @@ Indicates this editor is a popup.
 
 > **renderList**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:234](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L234)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:234](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L234)
 
 Renders the dropdown list.
 
@@ -34748,7 +34748,7 @@ Renders the dropdown list.
 
 > **setValue**(`newValue`): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:200](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L200)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:200](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L200)
 
 Sets the current value.
 
@@ -34770,7 +34770,7 @@ New value.
 
 > **updateHighlight**(): `void`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:221](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L221)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:221](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L221)
 
 Updates the highlighted option.
 
@@ -34806,7 +34806,7 @@ Updates the highlighted option.
 
 > **SearchSelectCellEditorParams** = `ICellEditorParams` & `object`
 
-Defined in: [src/lib/utils/ag-grid/search-select.ts:18](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/ag-grid/search-select.ts#L18)
+Defined in: [src/lib/utils/ag-grid/search-select.ts:18](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/ag-grid/search-select.ts#L18)
 
 Configuration for the search-select editor.
 
@@ -34855,7 +34855,7 @@ Clipboard helper utilities.
 
 > **copy**(`text`, `notify`): `void`
 
-Defined in: [src/lib/utils/clipboard.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/clipboard.ts#L17)
+Defined in: [src/lib/utils/clipboard.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/clipboard.ts#L17)
 
 Copies text to the clipboard.
 
@@ -34888,7 +34888,7 @@ Whether to show a toast.
 
 > **copyCanvas**(`canvas`, `notify`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/utils/clipboard.ts:35](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/clipboard.ts#L35)
+Defined in: [src/lib/utils/clipboard.ts:35](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/clipboard.ts#L35)
 
 Copies a canvas as a PNG image to the clipboard.
 
@@ -34921,7 +34921,7 @@ Whether to show a toast.
 
 > **copyImage**(`img`, `notify`): `ResultPromise`\<`void`, `Error`\>
 
-Defined in: [src/lib/utils/clipboard.ts:60](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/clipboard.ts#L60)
+Defined in: [src/lib/utils/clipboard.ts:60](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/clipboard.ts#L60)
 
 Copies an image element or URL to the clipboard.
 
@@ -34991,7 +34991,7 @@ Context menu helper for UI actions.
 
 > **contextmenu**(`event`, `config`): () => `void`
 
-Defined in: [src/lib/utils/contextmenu.ts:53](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/contextmenu.ts#L53)
+Defined in: [src/lib/utils/contextmenu.ts:53](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/contextmenu.ts#L53)
 
 Adds a context menu to the target
 
@@ -35051,7 +35051,7 @@ Adds a context menu to the target
 
 > **ContextMenuOptions** = (\{ `action`: (`e`) => `void`; `icon`: [`Icon`](../../../types/icons/type-aliases/Icon.md); `name`: `string`; \} \| `null` \| `string`)[]
 
-Defined in: [src/lib/utils/contextmenu.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/contextmenu.ts#L17)
+Defined in: [src/lib/utils/contextmenu.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/contextmenu.ts#L17)
 
 Options for the context menu
 
@@ -35088,7 +35088,7 @@ Countdown timer store utility.
 
 # Class: Countdown
 
-Defined in: [src/lib/utils/countdown.ts:38](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L38)
+Defined in: [src/lib/utils/countdown.ts:38](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L38)
 
 Countdown store that updates once per second.
 
@@ -35102,7 +35102,7 @@ Countdown store that updates once per second.
 
 > **new Countdown**(`target`): `Countdown`
 
-Defined in: [src/lib/utils/countdown.ts:42](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L42)
+Defined in: [src/lib/utils/countdown.ts:42](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L42)
 
 #### Parameters
 
@@ -35122,7 +35122,7 @@ Target date/time.
 
 > **target**: `Date`
 
-Defined in: [src/lib/utils/countdown.ts:42](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L42)
+Defined in: [src/lib/utils/countdown.ts:42](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L42)
 
 Target date/time.
 
@@ -35132,7 +35132,7 @@ Target date/time.
 
 > **getCountdown**(): `CountdownType`
 
-Defined in: [src/lib/utils/countdown.ts:47](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L47)
+Defined in: [src/lib/utils/countdown.ts:47](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L47)
 
 Computes the current countdown snapshot.
 
@@ -35146,7 +35146,7 @@ Computes the current countdown snapshot.
 
 > **inform**(): `void`
 
-Defined in: [src/lib/utils/countdown.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L92)
+Defined in: [src/lib/utils/countdown.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L92)
 
 Notifies subscribers of the latest countdown state.
 
@@ -35160,7 +35160,7 @@ Notifies subscribers of the latest countdown state.
 
 > **set**(`countdown`): `void`
 
-Defined in: [src/lib/utils/countdown.ts:102](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L102)
+Defined in: [src/lib/utils/countdown.ts:102](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L102)
 
 Sets countdown state and notifies subscribers.
 
@@ -35184,7 +35184,7 @@ Sets countdown state and notifies subscribers.
 
 > **setTarget**(`target`): `void`
 
-Defined in: [src/lib/utils/countdown.ts:112](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L112)
+Defined in: [src/lib/utils/countdown.ts:112](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L112)
 
 Updates the target date.
 
@@ -35204,7 +35204,7 @@ Updates the target date.
 
 > **start**(): () => `void`
 
-Defined in: [src/lib/utils/countdown.ts:132](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L132)
+Defined in: [src/lib/utils/countdown.ts:132](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L132)
 
 Starts the countdown update loop.
 
@@ -35224,7 +35224,7 @@ Stop handler for the loop.
 
 > **stop**(): `void`
 
-Defined in: [src/lib/utils/countdown.ts:127](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L127)
+Defined in: [src/lib/utils/countdown.ts:127](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L127)
 
 Stop handler for the loop.
 
@@ -35238,7 +35238,7 @@ Stop handler for the loop.
 
 > **subscribe**(`run`): () => `void`
 
-Defined in: [src/lib/utils/countdown.ts:81](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L81)
+Defined in: [src/lib/utils/countdown.ts:81](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L81)
 
 Subscribes to countdown updates.
 
@@ -35266,7 +35266,7 @@ Subscribes to countdown updates.
 
 > **update**(`updater`): `void`
 
-Defined in: [src/lib/utils/countdown.ts:120](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/countdown.ts#L120)
+Defined in: [src/lib/utils/countdown.ts:120](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/countdown.ts#L120)
 
 Updates countdown state with a callback.
 
@@ -35330,7 +35330,7 @@ Client download utilities.
 
 > **downloadBlob**(`blob`, `filename`): `Promise`\<`Result`\<`Promise`\<`Result`\<`void`, `Error`\>\>, `Error`\>\>
 
-Defined in: [src/lib/utils/downloads.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/downloads.ts#L34)
+Defined in: [src/lib/utils/downloads.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/downloads.ts#L34)
 
 Downloads a blob
 
@@ -35365,7 +35365,7 @@ Downloads a blob
 
 > **downloadText**(`text`, `filename`): `Promise`\<`Result`\<`Promise`\<`Result`\<`void`, `Error`\>\>, `Error`\>\>
 
-Defined in: [src/lib/utils/downloads.ts:47](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/downloads.ts#L47)
+Defined in: [src/lib/utils/downloads.ts:47](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/downloads.ts#L47)
 
 Downloads a text file
 
@@ -35400,7 +35400,7 @@ Downloads a text file
 
 > **downloadUrl**(`url`, `filename`): `Promise`\<`Result`\<`void`, `Error`\>\>
 
-Defined in: [src/lib/utils/downloads.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/downloads.ts#L16)
+Defined in: [src/lib/utils/downloads.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/downloads.ts#L16)
 
 Download a file from a URL
 
@@ -35435,7 +35435,7 @@ Download a file from a URL
 
 > **loadFileContents**(`multiple`): `ResultPromise`\<`object`[], `Error`\>
 
-Defined in: [src/lib/utils/downloads.ts:84](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/downloads.ts#L84)
+Defined in: [src/lib/utils/downloads.ts:84](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/downloads.ts#L84)
 
 Returns the contents of files from the user
 
@@ -35464,7 +35464,7 @@ Returns the contents of files from the user
 
 > **loadFiles**(`multiple`): `ResultPromise`\<`FileList`, `Error`\>
 
-Defined in: [src/lib/utils/downloads.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/downloads.ts#L55)
+Defined in: [src/lib/utils/downloads.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/downloads.ts#L55)
 
 Returns a file list from the user
 
@@ -35526,7 +35526,7 @@ Client-side file upload helper.
 
 # Class: FileUploader
 
-Defined in: [src/lib/utils/files.ts:19](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/files.ts#L19)
+Defined in: [src/lib/utils/files.ts:19](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/files.ts#L19)
 
 Uploads files using XMLHttpRequest with progress events.
 
@@ -35536,7 +35536,7 @@ Uploads files using XMLHttpRequest with progress events.
 
 > **new FileUploader**(`endpoint`, `config`): `FileUploader`
 
-Defined in: [src/lib/utils/files.ts:20](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/files.ts#L20)
+Defined in: [src/lib/utils/files.ts:20](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/files.ts#L20)
 
 #### Parameters
 
@@ -35568,7 +35568,7 @@ Defined in: [src/lib/utils/files.ts:20](https://github.com/tsaxking/sveltekit-te
 
 > `readonly` **config**: `object`
 
-Defined in: [src/lib/utils/files.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/files.ts#L22)
+Defined in: [src/lib/utils/files.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/files.ts#L22)
 
 Request config.
 
@@ -35590,7 +35590,7 @@ Request config.
 
 > `readonly` **endpoint**: `string`
 
-Defined in: [src/lib/utils/files.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/files.ts#L21)
+Defined in: [src/lib/utils/files.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/files.ts#L21)
 
 Upload endpoint URL.
 
@@ -35600,7 +35600,7 @@ Upload endpoint URL.
 
 > **sendFile**(`file`, `fieldName`): `ResultPromise`\<\{ `abort`: () => `void`; `on`: `any`; \}, `Error`\>
 
-Defined in: [src/lib/utils/files.ts:35](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/files.ts#L35)
+Defined in: [src/lib/utils/files.ts:35](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/files.ts#L35)
 
 Sends a file using multipart/form-data.
 
@@ -35664,7 +35664,7 @@ Browser fingerprint collection and reporting.
 
 > **fingerprint**(): `ResultPromise`\<`Prmoise`\<`string` \| `number`\>, `Error`\>
 
-Defined in: [src/lib/utils/fingerprint.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/fingerprint.ts#L16)
+Defined in: [src/lib/utils/fingerprint.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/fingerprint.ts#L16)
 
 Computes a browser fingerprint and reports it to the server.
 
@@ -35713,7 +35713,7 @@ Type-safe form builder with modal prompts.
 
 # Class: Form\<T\>
 
-Defined in: [src/lib/utils/form.ts:174](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L174)
+Defined in: [src/lib/utils/form.ts:174](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L174)
 
 Type-safe form builder with validation, accessibility, and state management
 
@@ -35805,7 +35805,7 @@ console.log(result.value); // { username: string, email: string }
 
 > **new Form**\<`T`\>(`action?`, `method?`, `inputs?`): `Form`\<`T`\>
 
-Defined in: [src/lib/utils/form.ts:188](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L188)
+Defined in: [src/lib/utils/form.ts:188](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L188)
 
 Create a new form builder
 
@@ -35839,7 +35839,7 @@ Initial input definitions (typically empty for new forms)
 
 > `readonly` `optional` **action**: `string`
 
-Defined in: [src/lib/utils/form.ts:189](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L189)
+Defined in: [src/lib/utils/form.ts:189](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L189)
 
 Form action URL for submission
 
@@ -35849,7 +35849,7 @@ Form action URL for submission
 
 > `readonly` **inputs**: `T`
 
-Defined in: [src/lib/utils/form.ts:191](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L191)
+Defined in: [src/lib/utils/form.ts:191](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L191)
 
 Initial input definitions (typically empty for new forms)
 
@@ -35859,7 +35859,7 @@ Initial input definitions (typically empty for new forms)
 
 > `readonly` `optional` **method**: `"POST"` \| `"GET"`
 
-Defined in: [src/lib/utils/form.ts:190](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L190)
+Defined in: [src/lib/utils/form.ts:190](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L190)
 
 HTTP method for form submission
 
@@ -35869,7 +35869,7 @@ HTTP method for form submission
 
 > **clearErrors**(): `void`
 
-Defined in: [src/lib/utils/form.ts:700](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L700)
+Defined in: [src/lib/utils/form.ts:700](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L700)
 
 Clear all validation errors from the form and UI.
 
@@ -35889,7 +35889,7 @@ form.clearErrors();
 
 > **destroy**(): `void`
 
-Defined in: [src/lib/utils/form.ts:566](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L566)
+Defined in: [src/lib/utils/form.ts:566](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L566)
 
 Clean up all event listeners to prevent memory leaks.
 Call this when the form is no longer needed or before removing from DOM.
@@ -35910,7 +35910,7 @@ form.destroy();
 
 > **getErrors**(): `FieldError`[]
 
-Defined in: [src/lib/utils/form.ts:750](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L750)
+Defined in: [src/lib/utils/form.ts:750](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L750)
 
 Get the current validation errors.
 
@@ -35932,7 +35932,7 @@ const errors = form.getErrors();
 
 > **input**\<`Name`, `I`\>(`name`, `input`): `Form`\<`T` & `{ [key in string]: Input<I> }`\>
 
-Defined in: [src/lib/utils/form.ts:306](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L306)
+Defined in: [src/lib/utils/form.ts:306](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L306)
 
 Add an input field to the form using a fluent builder pattern.
 
@@ -35990,7 +35990,7 @@ const form = new Form()
 
 > **isDirty**(): `boolean`
 
-Defined in: [src/lib/utils/form.ts:581](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L581)
+Defined in: [src/lib/utils/form.ts:581](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L581)
 
 Check if the form has unsaved changes (dirty state).
 
@@ -36012,7 +36012,7 @@ if (form.isDirty()) { ... }
 
 > **prompt**(`config`): `ResultPromise`\<\{ `form`: `HTMLFormElement`; `value`: \{ \[key in string \| number \| symbol\]: InputReturnType\<T\[key\]\["type"\]\> \}; \}, `Error`\>
 
-Defined in: [src/lib/utils/form.ts:820](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L820)
+Defined in: [src/lib/utils/form.ts:820](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L820)
 
 Display the form in a modal dialog and resolve with the form values or submit to the server.
 
@@ -36053,7 +36053,7 @@ console.log(result.value);
 
 > **render**(`config?`): `HTMLFormElement`
 
-Defined in: [src/lib/utils/form.ts:337](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L337)
+Defined in: [src/lib/utils/form.ts:337](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L337)
 
 Render the form as an HTMLFormElement.
 
@@ -36084,7 +36084,7 @@ document.body.appendChild(form.render({ submit: true }));
 
 > **reset**(): `void`
 
-Defined in: [src/lib/utils/form.ts:591](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L591)
+Defined in: [src/lib/utils/form.ts:591](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L591)
 
 Reset the form to its initial values and clear errors.
 
@@ -36104,7 +36104,7 @@ form.reset();
 
 > **setValues**(`values`): `void`
 
-Defined in: [src/lib/utils/form.ts:628](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L628)
+Defined in: [src/lib/utils/form.ts:628](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L628)
 
 Set form values programmatically.
 
@@ -36132,7 +36132,7 @@ form.setValues({ name: 'Alice', email: 'alice@example.com' });
 
 > **showFieldError**(`fieldName`, `message`): `void`
 
-Defined in: [src/lib/utils/form.ts:673](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L673)
+Defined in: [src/lib/utils/form.ts:673](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L673)
 
 Show a validation error for a specific field.
 
@@ -36166,7 +36166,7 @@ form.showFieldError('email', 'Invalid email');
 
 > **submit**(): `void`
 
-Defined in: [src/lib/utils/form.ts:797](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L797)
+Defined in: [src/lib/utils/form.ts:797](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L797)
 
 Submit the form programmatically using the configured action and method.
 
@@ -36186,7 +36186,7 @@ form.submit();
 
 > **validate**(): `boolean`
 
-Defined in: [src/lib/utils/form.ts:726](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L726)
+Defined in: [src/lib/utils/form.ts:726](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L726)
 
 Validate all fields and show errors in the UI.
 
@@ -36208,7 +36208,7 @@ if (form.validate()) { ... }
 
 > **value**(): \{ \[key in string \| number \| symbol\]: InputReturnType\<T\[key\]\["type"\]\> \}
 
-Defined in: [src/lib/utils/form.ts:763](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L763)
+Defined in: [src/lib/utils/form.ts:763](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L763)
 
 Extract current form values with proper typing.
 
@@ -36234,7 +36234,7 @@ const values = form.value();
 
 # Class: RangeSlider
 
-Defined in: [src/lib/utils/form.ts:970](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L970)
+Defined in: [src/lib/utils/form.ts:970](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L970)
 
 Accessible, keyboard- and mouse-friendly range slider for selecting a numeric interval.
 
@@ -36263,7 +36263,7 @@ slider.render();
 
 > **new RangeSlider**(`config`): `RangeSlider`
 
-Defined in: [src/lib/utils/form.ts:974](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L974)
+Defined in: [src/lib/utils/form.ts:974](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L974)
 
 #### Parameters
 
@@ -36311,7 +36311,7 @@ Defined in: [src/lib/utils/form.ts:974](https://github.com/tsaxking/sveltekit-te
 
 > **subscribers**: `Set`\<`Subscriber`\<\{ `max`: `number`; `min`: `number`; \}\>\>
 
-Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L79)
+Defined in: [src/lib/services/writables.ts:79](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L79)
 
 Set of active subscribers to this writable store
 
@@ -36327,7 +36327,7 @@ Set of active subscribers to this writable store
 
 > **get** **data**(): `T`
 
-Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L51)
+Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L51)
 
 ##### Returns
 
@@ -36337,7 +36337,7 @@ Defined in: [src/lib/services/writables.ts:51](https://github.com/tsaxking/svelt
 
 > **set** **data**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L55)
+Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L55)
 
 ##### Parameters
 
@@ -36359,7 +36359,7 @@ Defined in: [src/lib/services/writables.ts:55](https://github.com/tsaxking/svelt
 
 > **addValidator**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L247)
+Defined in: [src/lib/services/writables.ts:247](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L247)
 
 Adds a validator function that checks values before they are set
 
@@ -36385,7 +36385,7 @@ Validator function that receives the value and returns true if valid, false othe
 
 > **await**(`timeout`): `ResultPromise`\<\{ `max`: `number`; `min`: `number`; \}\>
 
-Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L214)
+Defined in: [src/lib/services/writables.ts:214](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L214)
 
 Awaits the next update to the writable, with an optional timeout
 
@@ -36413,7 +36413,7 @@ ResultPromise that resolves with the next data value or rejects on timeout
 
 > **inform**(`immediate?`): `void`
 
-Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L139)
+Defined in: [src/lib/services/writables.ts:139](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L139)
 
 Notifies subscribers of data changes, optionally with immediate or debounced delivery
 
@@ -36439,7 +36439,7 @@ If true, notifies immediately; otherwise debounced
 
 > **intercept**(`fn`): () => `boolean`
 
-Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L236)
+Defined in: [src/lib/services/writables.ts:236](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L236)
 
 Adds an interceptor function that modifies values before they are set
 
@@ -36469,7 +36469,7 @@ Interceptor function that receives the value and returns the modified value
 
 > **onAllUnsubscribe**(`cb`): `void`
 
-Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L195)
+Defined in: [src/lib/services/writables.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L195)
 
 Registers a callback to execute when all subscribers have unsubscribed
 
@@ -36503,7 +36503,7 @@ store.onAllUnsubscribe(() => {
 
 > **pipe**(`target`): `void`
 
-Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L205)
+Defined in: [src/lib/services/writables.ts:205](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L205)
 
 Pipes updates from the target writable into this writable
 Once piped, this writable will receive updates from the target
@@ -36531,7 +36531,7 @@ The writable store to pipe from
 
 > **render**(): () => `void`
 
-Defined in: [src/lib/utils/form.ts:1006](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L1006)
+Defined in: [src/lib/utils/form.ts:1006](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L1006)
 
 Render the range slider into the configured target element.
 
@@ -36559,7 +36559,7 @@ cleanup();
 
 > **revert**(): `void`
 
-Defined in: [src/lib/utils/form.ts:1320](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/form.ts#L1320)
+Defined in: [src/lib/utils/form.ts:1320](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/form.ts#L1320)
 
 Revert the slider to its initial or configured min/max values.
 
@@ -36579,7 +36579,7 @@ slider.revert();
 
 > **set**(`value`): `void`
 
-Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L157)
+Defined in: [src/lib/services/writables.ts:157](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L157)
 
 Sets the data to a new value and notifies subscribers (Svelte store interface)
 
@@ -36617,7 +36617,7 @@ store.set('new value');
 
 > **subscribe**(`run`): `Unsubscriber`
 
-Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L92)
+Defined in: [src/lib/services/writables.ts:92](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L92)
 
 Subscribes to changes in this writable store (Svelte store interface)
 
@@ -36652,7 +36652,7 @@ const unsubscribe = store.subscribe(value => console.log(value));
 
 > **update**(`fn`): `void`
 
-Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/services/writables.ts#L171)
+Defined in: [src/lib/services/writables.ts:171](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/services/writables.ts#L171)
 
 Updates the data using an updater function and notifies subscribers (Svelte store interface)
 
@@ -36721,7 +36721,7 @@ Fullscreen helper utilities.
 
 > **fullscreen**(): () => `void`
 
-Defined in: [src/lib/utils/fullscreen.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/fullscreen.ts#L16)
+Defined in: [src/lib/utils/fullscreen.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/fullscreen.ts#L16)
 
 Creates a fullscreen request
 
@@ -36778,7 +36778,7 @@ Helpers for generating TypeScript and Zod types from data.
 
 > **toType**(`data`): `string`
 
-Defined in: [src/lib/utils/generate-type.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/generate-type.ts#L14)
+Defined in: [src/lib/utils/generate-type.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/generate-type.ts#L14)
 
 Generates a TypeScript type string from a value.
 
@@ -36805,7 +36805,7 @@ Value to infer.
 
 > **toZodType**(`data`): `string`
 
-Defined in: [src/lib/utils/generate-type.ts:40](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/generate-type.ts#L40)
+Defined in: [src/lib/utils/generate-type.ts:40](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/generate-type.ts#L40)
 
 Generates a Zod schema string from a value.
 
@@ -36864,7 +36864,7 @@ Page metadata utilities.
 
 > **getTitle**(`url`): `ResultPromise`\<`string`, `Error`\>
 
-Defined in: [src/lib/utils/pages.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/pages.ts#L16)
+Defined in: [src/lib/utils/pages.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/pages.ts#L16)
 
 Fetches a URL and returns its HTML document title.
 
@@ -36937,7 +36937,7 @@ Modal and notification system for user interactions. Provides a comprehensive se
 
 > **alert**(`message`, `config?`): `Promise`\<`void`\>
 
-Defined in: [src/lib/utils/prompts.ts:589](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L589)
+Defined in: [src/lib/utils/prompts.ts:589](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L589)
 
 Shows an alert modal with a single OK button
 
@@ -36977,7 +36977,7 @@ Promise that resolves when the alert is dismissed
 
 > **choose**\<`A`, `B`\>(`message`, `A`, `B`, `config?`): `Promise`\<`A` \| `B`\>
 
-Defined in: [src/lib/utils/prompts.ts:422](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L422)
+Defined in: [src/lib/utils/prompts.ts:422](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L422)
 
 Shows a choice modal with two options
 
@@ -37040,7 +37040,7 @@ Promise that resolves to the selected option value or null if cancelled
 
 > **clearModals**(): `Promise`\<`void`\>
 
-Defined in: [src/lib/utils/prompts.ts:46](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L46)
+Defined in: [src/lib/utils/prompts.ts:46](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L46)
 
 Clears all modal dialogs from the DOM.
 Recursively removes modal elements and handles edge cases like text nodes.
@@ -37060,7 +37060,7 @@ Recursively removes modal elements and handles edge cases like text nodes.
 
 > **colorPicker**(`message`, `config?`): `Promise`\<`string`\>
 
-Defined in: [src/lib/utils/prompts.ts:649](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L649)
+Defined in: [src/lib/utils/prompts.ts:649](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L649)
 
 Shows a color picker modal with HTML color input
 
@@ -37101,7 +37101,7 @@ Promise that resolves to the selected color hex value or null if cancelled
 
 > **confirm**(`message`, `config?`): `Promise`\<`boolean`\>
 
-Defined in: [src/lib/utils/prompts.ts:516](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L516)
+Defined in: [src/lib/utils/prompts.ts:516](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L516)
 
 Shows a confirmation modal with Yes/No buttons
 
@@ -37142,7 +37142,7 @@ Promise that resolves to true if confirmed, false if cancelled
 
 > **createButtons**(`buttons`): `Snippet`\<\[\]\>
 
-Defined in: [src/lib/utils/prompts.ts:94](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L94)
+Defined in: [src/lib/utils/prompts.ts:94](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L94)
 
 Creates multiple buttons with Bootstrap styling and click handlers
 
@@ -37171,7 +37171,7 @@ Svelte snippet containing all buttons
 
 > **notify**(`config`): `object` & `Record`\<`string`, `any`\>
 
-Defined in: [src/lib/utils/prompts.ts:772](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L772)
+Defined in: [src/lib/utils/prompts.ts:772](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L772)
 
 Shows a toast-style notification that appears in the document body
 
@@ -37209,7 +37209,7 @@ Error if called in non-browser environment
 
 > **prompt**(`message`, `config?`): `Promise`\<`string`\>
 
-Defined in: [src/lib/utils/prompts.ts:148](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L148)
+Defined in: [src/lib/utils/prompts.ts:148](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L148)
 
 Shows a prompt modal dialog for text input with validation and keyboard support
 
@@ -37251,7 +37251,7 @@ Promise that resolves to the entered text or null if cancelled
 
 > **rawModal**(`title`, `buttons`, `onMount`): `object`
 
-Defined in: [src/lib/utils/prompts.ts:813](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L813)
+Defined in: [src/lib/utils/prompts.ts:813](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L813)
 
 Creates a custom modal with raw HTML content and custom mount logic
 
@@ -37377,7 +37377,7 @@ Error if called in non-browser environment
 
 > **select**\<`T`\>(`message`, `options`, `config?`): `Promise`\<`T`\>
 
-Defined in: [src/lib/utils/prompts.ts:267](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L267)
+Defined in: [src/lib/utils/prompts.ts:267](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L267)
 
 Shows a selection modal with a dropdown of options
 
@@ -37458,7 +37458,7 @@ Promise that resolves to the selected option or null if cancelled
 
 > `const` **history**: `Writable`\<`NotificationConfig`[]\>
 
-Defined in: [src/lib/utils/prompts.ts:756](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L756)
+Defined in: [src/lib/utils/prompts.ts:756](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L756)
 
 Svelte store for managing notification history
 Contains an array of notification configuration objects
@@ -37474,7 +37474,7 @@ Contains an array of notification configuration objects
 
 > `const` **modalTarget**: `HTMLDivElement`
 
-Defined in: [src/lib/utils/prompts.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L32)
+Defined in: [src/lib/utils/prompts.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L32)
 
 Global modal container element where all modal dialogs are rendered.
 Created once and reused for all modal instances to ensure proper layering.
@@ -37490,7 +37490,7 @@ Created once and reused for all modal instances to ensure proper layering.
 
 > `const` **notifs**: `Writable`\<`number`[]\>
 
-Defined in: [src/lib/utils/prompts.ts:860](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/prompts.ts#L860)
+Defined in: [src/lib/utils/prompts.ts:860](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/prompts.ts#L860)
 
 Svelte store for managing notification state
 Contains an array of notification IDs for tracking active notifications
@@ -37562,7 +37562,7 @@ HTTP request helpers with caching, parsing, and uploads.
 
 > **get**\<`T`\>(`url`, `config`): `Promise`\<`Result`\<`T`, `Error`\>\>
 
-Defined in: [src/lib/utils/requests.ts:130](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L130)
+Defined in: [src/lib/utils/requests.ts:130](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L130)
 
 Sends a GET request and parses the response.
 
@@ -37601,7 +37601,7 @@ Request config.
 
 > **post**\<`T`\>(`url`, `config`): `Promise`\<`Result`\<`T`, `Error`\>\>
 
-Defined in: [src/lib/utils/requests.ts:154](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L154)
+Defined in: [src/lib/utils/requests.ts:154](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L154)
 
 Sends a POST request and parses the response.
 
@@ -37640,7 +37640,7 @@ Request config.
 
 > **setMeta**(`key`, `value`): `void`
 
-Defined in: [src/lib/utils/requests.ts:168](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L168)
+Defined in: [src/lib/utils/requests.ts:168](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L168)
 
 Sets metadata header value for subsequent requests.
 
@@ -37673,7 +37673,7 @@ Header value.
 
 > **uploadFiles**(`url`, `files`, `config?`): `EventEmitter`\<\{ `complete`: `ProgressEvent`\<`EventTarget`\>; `error`: `Error`; `progress`: `ProgressEvent`\<`EventTarget`\>; \}\>
 
-Defined in: [src/lib/utils/requests.ts:180](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L180)
+Defined in: [src/lib/utils/requests.ts:180](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L180)
 
 Uploads a list of files using XMLHttpRequest.
 
@@ -37743,7 +37743,7 @@ Optional config.
 
 > **GetConfig**\<`T`\> = `object`
 
-Defined in: [src/lib/utils/requests.ts:118](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L118)
+Defined in: [src/lib/utils/requests.ts:118](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L118)
 
 Configuration for GET requests.
 
@@ -37759,7 +37759,7 @@ Configuration for GET requests.
 
 > `optional` **cache**: `boolean`
 
-Defined in: [src/lib/utils/requests.ts:121](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L121)
+Defined in: [src/lib/utils/requests.ts:121](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L121)
 
 ***
 
@@ -37767,7 +37767,7 @@ Defined in: [src/lib/utils/requests.ts:121](https://github.com/tsaxking/svelteki
 
 > **expectStream**: `boolean`
 
-Defined in: [src/lib/utils/requests.ts:119](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L119)
+Defined in: [src/lib/utils/requests.ts:119](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L119)
 
 ***
 
@@ -37775,7 +37775,7 @@ Defined in: [src/lib/utils/requests.ts:119](https://github.com/tsaxking/svelteki
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [src/lib/utils/requests.ts:120](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L120)
+Defined in: [src/lib/utils/requests.ts:120](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L120)
 
 ***
 
@@ -37783,7 +37783,7 @@ Defined in: [src/lib/utils/requests.ts:120](https://github.com/tsaxking/svelteki
 
 > **parser**: `z.ZodType`\<`T`\>
 
-Defined in: [src/lib/utils/requests.ts:122](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L122)
+Defined in: [src/lib/utils/requests.ts:122](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L122)
 
 
 [**my-app**](../../../../../../../README.md)
@@ -37796,7 +37796,7 @@ Defined in: [src/lib/utils/requests.ts:122](https://github.com/tsaxking/svelteki
 
 > **PostConfig**\<`T`\> = `object`
 
-Defined in: [src/lib/utils/requests.ts:141](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L141)
+Defined in: [src/lib/utils/requests.ts:141](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L141)
 
 Configuration for POST requests.
 
@@ -37812,7 +37812,7 @@ Configuration for POST requests.
 
 > **body**: `unknown`
 
-Defined in: [src/lib/utils/requests.ts:144](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L144)
+Defined in: [src/lib/utils/requests.ts:144](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L144)
 
 ***
 
@@ -37820,7 +37820,7 @@ Defined in: [src/lib/utils/requests.ts:144](https://github.com/tsaxking/svelteki
 
 > `optional` **cache**: `boolean`
 
-Defined in: [src/lib/utils/requests.ts:145](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L145)
+Defined in: [src/lib/utils/requests.ts:145](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L145)
 
 ***
 
@@ -37828,7 +37828,7 @@ Defined in: [src/lib/utils/requests.ts:145](https://github.com/tsaxking/svelteki
 
 > **expectStream**: `boolean`
 
-Defined in: [src/lib/utils/requests.ts:142](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L142)
+Defined in: [src/lib/utils/requests.ts:142](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L142)
 
 ***
 
@@ -37836,7 +37836,7 @@ Defined in: [src/lib/utils/requests.ts:142](https://github.com/tsaxking/svelteki
 
 > `optional` **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [src/lib/utils/requests.ts:143](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L143)
+Defined in: [src/lib/utils/requests.ts:143](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L143)
 
 ***
 
@@ -37844,7 +37844,7 @@ Defined in: [src/lib/utils/requests.ts:143](https://github.com/tsaxking/svelteki
 
 > **parser**: `z.ZodType`\<`T`\>
 
-Defined in: [src/lib/utils/requests.ts:146](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L146)
+Defined in: [src/lib/utils/requests.ts:146](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L146)
 
 
 [**my-app**](../../../../../../../README.md)
@@ -37857,7 +37857,7 @@ Defined in: [src/lib/utils/requests.ts:146](https://github.com/tsaxking/svelteki
 
 > `const` **metadata**: `Record`\<`string`, `string`\> = `{}`
 
-Defined in: [src/lib/utils/requests.ts:17](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/requests.ts#L17)
+Defined in: [src/lib/utils/requests.ts:17](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/requests.ts#L17)
 
 Metadata headers applied to all requests.
 
@@ -37888,7 +37888,7 @@ Global undo/redo stack with keyboard shortcuts.
 
 # Class: Stack
 
-Defined in: [src/lib/utils/stack.ts:54](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L54)
+Defined in: [src/lib/utils/stack.ts:54](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L54)
 
 A global undo/redo stack manager that supports multiple stack instances.
 Only one stack can be active at a time, controlled via Stack.use().
@@ -37913,7 +37913,7 @@ Events emitted:
 
 > **new Stack**(`config`): `Stack`
 
-Defined in: [src/lib/utils/stack.ts:163](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L163)
+Defined in: [src/lib/utils/stack.ts:163](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L163)
 
 Creates a new Stack instance
 
@@ -37945,7 +37945,7 @@ Human-readable name for this stack (used in debugging)
 
 > `readonly` **config**: `object`
 
-Defined in: [src/lib/utils/stack.ts:164](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L164)
+Defined in: [src/lib/utils/stack.ts:164](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L164)
 
 Configuration object
 
@@ -37963,7 +37963,7 @@ Configuration object
 
 > `static` `optional` **current**: `Stack`
 
-Defined in: [src/lib/utils/stack.ts:56](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L56)
+Defined in: [src/lib/utils/stack.ts:56](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L56)
 
 The currently active stack instance
 
@@ -37973,7 +37973,7 @@ The currently active stack instance
 
 > `readonly` `static` **next**: `Writable`\<`boolean`\>
 
-Defined in: [src/lib/utils/stack.ts:132](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L132)
+Defined in: [src/lib/utils/stack.ts:132](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L132)
 
 Svelte store indicating if redo is available (true = can redo)
 
@@ -37983,7 +37983,7 @@ Svelte store indicating if redo is available (true = can redo)
 
 > `readonly` `static` **off**: `any`
 
-Defined in: [src/lib/utils/stack.ts:91](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L91)
+Defined in: [src/lib/utils/stack.ts:91](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L91)
 
 Unsubscribe from global stack events
 
@@ -38001,7 +38001,7 @@ The specific handler function to remove
 
 > `readonly` `static` **on**: `any`
 
-Defined in: [src/lib/utils/stack.ts:84](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L84)
+Defined in: [src/lib/utils/stack.ts:84](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L84)
 
 Subscribe to global stack events across all instances
 
@@ -38023,7 +38023,7 @@ Unsubscribe function
 
 > `readonly` `static` **once**: `any`
 
-Defined in: [src/lib/utils/stack.ts:99](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L99)
+Defined in: [src/lib/utils/stack.ts:99](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L99)
 
 Subscribe to a global stack event that will only fire once
 
@@ -38045,7 +38045,7 @@ Unsubscribe function
 
 > `readonly` `static` **prev**: `Writable`\<`boolean`\>
 
-Defined in: [src/lib/utils/stack.ts:135](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L135)
+Defined in: [src/lib/utils/stack.ts:135](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L135)
 
 Svelte store indicating if undo is available (true = can undo)
 
@@ -38057,7 +38057,7 @@ Svelte store indicating if undo is available (true = can undo)
 
 > **get** **items**(): `State`[]
 
-Defined in: [src/lib/utils/stack.ts:179](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L179)
+Defined in: [src/lib/utils/stack.ts:179](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L179)
 
 Read-only access to the items array
 
@@ -38073,7 +38073,7 @@ Read-only access to the items array
 
 > **get** **name**(): `string`
 
-Defined in: [src/lib/utils/stack.ts:186](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L186)
+Defined in: [src/lib/utils/stack.ts:186](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L186)
 
 Gets the name of this stack
 
@@ -38087,7 +38087,7 @@ Gets the name of this stack
 
 > **clear**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:243](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L243)
+Defined in: [src/lib/utils/stack.ts:243](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L243)
 
 Clears all items from the stack and resets the index.
 Updates the global state after clearing.
@@ -38102,7 +38102,7 @@ Updates the global state after clearing.
 
 > **log**(...`args`): `void`
 
-Defined in: [src/lib/utils/stack.ts:254](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L254)
+Defined in: [src/lib/utils/stack.ts:254](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L254)
 
 Logs debug information if debug mode is enabled
 
@@ -38124,7 +38124,7 @@ Arguments to log
 
 > **push**(`state`): `void`
 
-Defined in: [src/lib/utils/stack.ts:195](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L195)
+Defined in: [src/lib/utils/stack.ts:195](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L195)
 
 Pushes a new state onto the stack and executes it.
 This will remove any items after the current index (destroying redo history).
@@ -38147,7 +38147,7 @@ The state to add and execute
 
 > **redo**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:227](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L227)
+Defined in: [src/lib/utils/stack.ts:227](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L227)
 
 Redoes the next state if possible.
 Moves the index forward by one and calls the appropriate function.
@@ -38162,7 +38162,7 @@ Moves the index forward by one and calls the appropriate function.
 
 > **undo**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:213](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L213)
+Defined in: [src/lib/utils/stack.ts:213](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L213)
 
 Undoes the current state if possible.
 Moves the index back by one and calls the undo function.
@@ -38177,7 +38177,7 @@ Moves the index back by one and calls the undo function.
 
 > `static` **redo**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:113](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L113)
+Defined in: [src/lib/utils/stack.ts:113](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L113)
 
 Performs a redo operation on the current active stack
 
@@ -38191,7 +38191,7 @@ Performs a redo operation on the current active stack
 
 > `static` **setState**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:141](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L141)
+Defined in: [src/lib/utils/stack.ts:141](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L141)
 
 Updates the prev/next stores based on current stack state.
 Called automatically after stack operations.
@@ -38206,7 +38206,7 @@ Called automatically after stack operations.
 
 > `static` **undo**(): `void`
 
-Defined in: [src/lib/utils/stack.ts:104](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L104)
+Defined in: [src/lib/utils/stack.ts:104](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L104)
 
 Performs an undo operation on the current active stack
 
@@ -38220,7 +38220,7 @@ Performs an undo operation on the current active stack
 
 > `static` **use**(`stack`): `void`
 
-Defined in: [src/lib/utils/stack.ts:124](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/stack.ts#L124)
+Defined in: [src/lib/utils/stack.ts:124](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/stack.ts#L124)
 
 Sets the given stack as the currently active stack.
 Clears the previous stack and updates UI state.
@@ -38283,7 +38283,7 @@ Theme store helpers for light/dark mode.
 
 > **setTheme**(`documentTheme`): `void`
 
-Defined in: [src/lib/utils/theme.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/theme.ts#L21)
+Defined in: [src/lib/utils/theme.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/theme.ts#L21)
 
 Updates the theme and persists it to localStorage.
 
@@ -38327,7 +38327,7 @@ Theme name.
 
 > `const` **theme**: `Writable`\<`"dark"` \| `"light"`\>
 
-Defined in: [src/lib/utils/theme.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/utils/theme.ts#L14)
+Defined in: [src/lib/utils/theme.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/utils/theme.ts#L14)
 
 Writable theme store.
 
@@ -38342,7 +38342,7 @@ Writable theme store.
 
 > `const` **ogFetch**: \{(`input`, `init?`): `Promise`\<`Response`\>; (`input`, `init?`): `Promise`\<`Response`\>; \}
 
-Defined in: [src/lib/index.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/lib/index.ts#L12)
+Defined in: [src/lib/index.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/lib/index.ts#L12)
 
 ## Call Signature
 
@@ -38524,7 +38524,7 @@ Designed as a top-level page route and does not export component props.
 
 > **load**(`event`): `Promise`\<\{ `account`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; `info`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; \}\>
 
-Defined in: [src/routes/account/\[username\]/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/__username__/+page.server.ts#L8)
+Defined in: [src/routes/account/\[username\]/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/__username__/+page.server.ts#L8)
 
 ## Parameters
 
@@ -38588,7 +38588,7 @@ Server load/actions for `/account/manage-profile`. /
 
 > **load**(`event`): `Promise`\<\{ `account`: `any`; `info`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; \}\>
 
-Defined in: [src/routes/account/manage-profile/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/manage-profile/+page.server.ts#L8)
+Defined in: [src/routes/account/manage-profile/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/manage-profile/+page.server.ts#L8)
 
 ## Parameters
 
@@ -38661,7 +38661,7 @@ Password reset confirmation page for `/account/password-reset/[id]`.
 
 > **load**(`event`): `Promise`\<\{ `account`: `string`; \}\>
 
-Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/password-reset/__id__/+page.server.ts#L11)
+Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/password-reset/__id__/+page.server.ts#L11)
 
 ## Parameters
 
@@ -38701,7 +38701,7 @@ Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:11](https:
 
 > `const` **actions**: `object`
 
-Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/password-reset/__id__/+page.server.ts#L45)
+Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/password-reset/__id__/+page.server.ts#L45)
 
 ## Type Declaration
 
@@ -38743,7 +38743,7 @@ Defined in: [src/routes/account/password-reset/\[id\]/+page.server.ts:45](https:
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/account/password-reset/\[id\]/+page.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/password-reset/__id__/+page.ts#L4)
+Defined in: [src/routes/account/password-reset/\[id\]/+page.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/password-reset/__id__/+page.ts#L4)
 
 ## Parameters
 
@@ -38805,7 +38805,7 @@ File upload endpoint for account profile updates at `/account/profile`. /
 
 > **POST**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/account/profile/+server.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/profile/+server.ts#L7)
+Defined in: [src/routes/account/profile/+server.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/profile/+server.ts#L7)
 
 ## Parameters
 
@@ -38938,7 +38938,7 @@ Server load/actions for `/account/sign-in`. /
 
 > `const` **actions**: `object`
 
-Defined in: [src/routes/account/sign-in/+page.server.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/sign-in/+page.server.ts#L16)
+Defined in: [src/routes/account/sign-in/+page.server.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/sign-in/+page.server.ts#L16)
 
 ## Type Declaration
 
@@ -39021,7 +39021,7 @@ Server load/actions for `/account/sign-out`. /
 
 > **load**(`event`): `void`
 
-Defined in: [src/routes/account/sign-out/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/sign-out/+page.server.ts#L10)
+Defined in: [src/routes/account/sign-out/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/sign-out/+page.server.ts#L10)
 
 ## Parameters
 
@@ -39061,7 +39061,7 @@ Defined in: [src/routes/account/sign-out/+page.server.ts:10](https://github.com/
 
 > `const` **actions**: `object`
 
-Defined in: [src/routes/account/sign-out/+page.server.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/sign-out/+page.server.ts#L14)
+Defined in: [src/routes/account/sign-out/+page.server.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/sign-out/+page.server.ts#L14)
 
 ## Type Declaration
 
@@ -39131,7 +39131,7 @@ Server load/actions for `/account/sign-up`. /
 
 > `const` **actions**: `object`
 
-Defined in: [src/routes/account/sign-up/+page.server.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/account/sign-up/+page.server.ts#L12)
+Defined in: [src/routes/account/sign-up/+page.server.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/account/sign-up/+page.server.ts#L12)
 
 ## Type Declaration
 
@@ -39186,7 +39186,7 @@ Root API route handlers for `/api`. Provides a small health/metadata endpoint an
 
 > **GET**(): `Response`
 
-Defined in: [src/routes/api/+server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/+server.ts#L9)
+Defined in: [src/routes/api/+server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/+server.ts#L9)
 
 ## Returns
 
@@ -39234,7 +39234,7 @@ OAuth sign-in endpoint at `/api/oauth/sign-in`. /
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/api/oauth/sign-in/+server.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/oauth/sign-in/+server.ts#L14)
+Defined in: [src/routes/api/oauth/sign-in/+server.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/oauth/sign-in/+server.ts#L14)
 
 ## Parameters
 
@@ -39288,7 +39288,7 @@ OAuth sign-up endpoint at `/api/oauth/sign-up`. /
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/api/oauth/sign-up/+server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/oauth/sign-up/+server.ts#L11)
+Defined in: [src/routes/api/oauth/sign-up/+server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/oauth/sign-up/+server.ts#L11)
 
 ## Parameters
 
@@ -39337,7 +39337,7 @@ Defined in: [src/routes/api/oauth/sign-up/+server.ts:11](https://github.com/tsax
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/api/sse/ack/\[uuid\]/\[id\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/sse/ack/__uuid__/__id__/+server.ts#L6)
+Defined in: [src/routes/api/sse/ack/\[uuid\]/\[id\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/sse/ack/__uuid__/__id__/+server.ts#L6)
 
 ## Parameters
 
@@ -39386,7 +39386,7 @@ Defined in: [src/routes/api/sse/ack/\[uuid\]/\[id\]/+server.ts:6](https://github
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/api/sse/init/\[uuid\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/sse/init/__uuid__/+server.ts#L6)
+Defined in: [src/routes/api/sse/init/\[uuid\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/sse/init/__uuid__/+server.ts#L6)
 
 ## Parameters
 
@@ -39435,7 +39435,7 @@ Defined in: [src/routes/api/sse/init/\[uuid\]/+server.ts:6](https://github.com/t
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/api/sse/ping/\[uuid\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/api/sse/ping/__uuid__/+server.ts#L6)
+Defined in: [src/routes/api/sse/ping/\[uuid\]/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/api/sse/ping/__uuid__/+server.ts#L6)
 
 ## Parameters
 
@@ -39484,7 +39484,7 @@ Defined in: [src/routes/api/sse/ping/\[uuid\]/+server.ts:6](https://github.com/t
 
 > **GET**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/assets/\[...filepath\]/+server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/assets/__...filepath__/+server.ts#L8)
+Defined in: [src/routes/assets/\[...filepath\]/+server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/assets/__...filepath__/+server.ts#L8)
 
 ## Parameters
 
@@ -39550,7 +39550,7 @@ Admin API endpoint for `/dashboard/admin`. /
 
 > **GET**(`event`): `Promise`\<`never`\>
 
-Defined in: [src/routes/dashboard/admin/+server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/+server.ts#L8)
+Defined in: [src/routes/dashboard/admin/+server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/+server.ts#L8)
 
 ## Parameters
 
@@ -39614,7 +39614,7 @@ Server load for admin accounts list at `/dashboard/admin/account`. /
 
 > **load**(`event`): `Promise`\<\{ `accounts`: `object`[]; `limit`: `number`; `page`: `number`; `total`: `number`; \}\>
 
-Defined in: [src/routes/dashboard/admin/account/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/account/+page.server.ts#L9)
+Defined in: [src/routes/dashboard/admin/account/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/account/+page.server.ts#L9)
 
 ## Parameters
 
@@ -39668,7 +39668,7 @@ Client load for admin accounts list `/dashboard/admin/account`. /
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/dashboard/admin/account/+page.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/account/+page.ts#L7)
+Defined in: [src/routes/dashboard/admin/account/+page.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/account/+page.ts#L7)
 
 ## Parameters
 
@@ -39743,7 +39743,7 @@ Admin account detail page at `/dashboard/admin/account/[accountId]`.
 
 > **load**(`event`): `Promise`\<\{ `account`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; `limit`: `number`; `page`: `number`; `sessions`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]; `total`: `number`; \}\>
 
-Defined in: [src/routes/dashboard/admin/account/\[accountId\]/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/account/__accountId__/+page.server.ts#L9)
+Defined in: [src/routes/dashboard/admin/account/\[accountId\]/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/account/__accountId__/+page.server.ts#L9)
 
 ## Parameters
 
@@ -39807,7 +39807,7 @@ Server load for admin analytics page `/dashboard/admin/analytics`. /
 
 > **load**(`event`): `Promise`\<\{ `pages`: \{\[`k`: `string`\]: `object`; \}; \}\>
 
-Defined in: [src/routes/dashboard/admin/analytics/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/analytics/+page.server.ts#L10)
+Defined in: [src/routes/dashboard/admin/analytics/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/analytics/+page.server.ts#L10)
 
 ## Parameters
 
@@ -39871,7 +39871,7 @@ Server load for admin data index `/dashboard/admin/data`. /
 
 > **load**(`event`): `Promise`\<`void`\>
 
-Defined in: [src/routes/dashboard/admin/data/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/data/+page.server.ts#L8)
+Defined in: [src/routes/dashboard/admin/data/+page.server.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/data/+page.server.ts#L8)
 
 ## Parameters
 
@@ -39930,7 +39930,7 @@ Admin struct data page at `/dashboard/admin/data/[struct]`.
 
 > **load**(`event`): `Promise`\<\{ `data`: `Readonly`\<`Omit`\<`SafeStructable`\<`Blank` & `object`\>, `never`\>\>[]; `limit`: `number`; `page`: `number`; `safes`: `string`[]; `struct`: `string`; `structType`: \{\[`k`: `string`\]: `string`; \}; `total`: `number`; \}\>
 
-Defined in: [src/routes/dashboard/admin/data/\[struct\]/+page.server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/data/__struct__/+page.server.ts#L11)
+Defined in: [src/routes/dashboard/admin/data/\[struct\]/+page.server.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/data/__struct__/+page.server.ts#L11)
 
 ## Parameters
 
@@ -39979,7 +39979,7 @@ Defined in: [src/routes/dashboard/admin/data/\[struct\]/+page.server.ts:11](http
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/dashboard/admin/data/\[struct\]/+page.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/data/__struct__/+page.ts#L10)
+Defined in: [src/routes/dashboard/admin/data/\[struct\]/+page.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/data/__struct__/+page.ts#L10)
 
 ## Parameters
 
@@ -40071,7 +40071,7 @@ Server load for admin logs `/dashboard/admin/logs`. /
 
 > **load**(`event`): `Promise`\<\{ `accountId`: `any`; `count`: `number`; `dataId`: `any`; `limit`: `number`; `logs`: `object`[]; `message`: `any`; `page`: `number`; `struct`: `any`; `structs`: `unknown`[]; `total`: `number`; `type`: `any`; \}\>
 
-Defined in: [src/routes/dashboard/admin/logs/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/logs/+page.server.ts#L10)
+Defined in: [src/routes/dashboard/admin/logs/+page.server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/logs/+page.server.ts#L10)
 
 ## Parameters
 
@@ -40135,7 +40135,7 @@ Server load for admin roles list `/dashboard/admin/role`. /
 
 > **load**(`event`): `Promise`\<\{ `roles`: `object`[]; \}\>
 
-Defined in: [src/routes/dashboard/admin/role/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/role/+page.server.ts#L9)
+Defined in: [src/routes/dashboard/admin/role/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/role/+page.server.ts#L9)
 
 ## Parameters
 
@@ -40189,7 +40189,7 @@ Client load for admin roles list `/dashboard/admin/role`. /
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/dashboard/admin/role/+page.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/role/+page.ts#L7)
+Defined in: [src/routes/dashboard/admin/role/+page.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/role/+page.ts#L7)
 
 ## Parameters
 
@@ -40252,7 +40252,7 @@ Admin role detail page at `/dashboard/admin/role/[roleId]`.
 
 > **load**(`event`): `Promise`\<\{ `availableRulesets`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]; `children`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]; `currentRulesets`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]; `members`: `object`[]; `parent`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; `role`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>; \}\>
 
-Defined in: [src/routes/dashboard/admin/role/\[roleId\]/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/role/__roleId__/+page.server.ts#L9)
+Defined in: [src/routes/dashboard/admin/role/\[roleId\]/+page.server.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/role/__roleId__/+page.server.ts#L9)
 
 ## Parameters
 
@@ -40301,7 +40301,7 @@ Defined in: [src/routes/dashboard/admin/role/\[roleId\]/+page.server.ts:9](https
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/dashboard/admin/role/\[roleId\]/+page.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/dashboard/admin/role/__roleId__/+page.ts#L8)
+Defined in: [src/routes/dashboard/admin/role/\[roleId\]/+page.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/dashboard/admin/role/__roleId__/+page.ts#L8)
 
 ## Parameters
 
@@ -40494,7 +40494,7 @@ Server load for `/examples/struct/ssr`. /
 
 > **load**(): `Promise`\<\{ `data`: `Readonly`\<`Omit`\<`SafeStructable`\<`object` & `object`\>, `never`\>\>[]; \}\>
 
-Defined in: [src/routes/examples/struct/ssr/+page.server.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/examples/struct/ssr/+page.server.ts#L7)
+Defined in: [src/routes/examples/struct/ssr/+page.server.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/examples/struct/ssr/+page.server.ts#L7)
 
 ## Returns
 
@@ -40538,7 +40538,7 @@ Defined in: [src/routes/examples/struct/ssr/+page.server.ts:7](https://github.co
 
 > **GET**(`__namedParameters`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/files/\[fileId\]/+server.ts:32](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/files/__fileId__/+server.ts#L32)
+Defined in: [src/routes/files/\[fileId\]/+server.ts:32](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/files/__fileId__/+server.ts#L32)
 
 ## Parameters
 
@@ -40563,7 +40563,7 @@ Defined in: [src/routes/files/\[fileId\]/+server.ts:32](https://github.com/tsaxk
 
 > **POST**(`__namedParameters`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/files/\[fileId\]/+server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/files/__fileId__/+server.ts#L10)
+Defined in: [src/routes/files/\[fileId\]/+server.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/files/__fileId__/+server.ts#L10)
 
 ## Parameters
 
@@ -40724,7 +40724,7 @@ Server load for `/test/account`. /
 
 > **load**(`event`): `object`
 
-Defined in: [src/routes/test/account/+page.server.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/test/account/+page.server.ts#L4)
+Defined in: [src/routes/test/account/+page.server.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/test/account/+page.server.ts#L4)
 
 ## Parameters
 
@@ -40856,7 +40856,7 @@ Test SSE init endpoint at `/test/sse/init`. /
 
 > **POST**(`event`): `Response`
 
-Defined in: [src/routes/test/sse/init/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/test/sse/init/+server.ts#L6)
+Defined in: [src/routes/test/sse/init/+server.ts:6](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/test/sse/init/+server.ts#L6)
 
 ## Parameters
 
@@ -40940,7 +40940,7 @@ Test upload endpoint at `/test/upload`. /
 
 > **POST**(`event`): `Promise`\<`Response`\>
 
-Defined in: [src/routes/test/upload/+server.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/routes/test/upload/+server.ts#L13)
+Defined in: [src/routes/test/upload/+server.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/routes/test/upload/+server.ts#L13)
 
 ## Parameters
 
@@ -41043,7 +41043,7 @@ Defined in: [src/routes/test/upload/+server.ts:13](https://github.com/tsaxking/s
 
 > **test**(`str`): `string`
 
-Defined in: [src/tests/task-import.ts:4](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/tests/task-import.ts#L4)
+Defined in: [src/tests/task-import.ts:4](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/tests/task-import.ts#L4)
 
 ## Parameters
 
@@ -41176,7 +41176,7 @@ The interface that defines `event.locals`, which can be accessed in server [hook
 
 > `optional` **account**: `StructData`\<\{ `email`: `NotNull`\<`PgTextBuilderInitial`\<`"email"`, \[`string`, `...string[]`\]\>\>; `firstName`: `NotNull`\<`PgTextBuilderInitial`\<`"first_name"`, \[`string`, `...string[]`\]\>\>; `key`: `NotNull`\<`PgTextBuilderInitial`\<`"key"`, \[`string`, `...string[]`\]\>\>; `lastLogin`: `HasDefault`\<`NotNull`\<`PgTextBuilderInitial`\<`"last_login"`, \[`string`, `...string[]`\]\>\>\>; `lastName`: `NotNull`\<`PgTextBuilderInitial`\<`"last_name"`, \[`string`, `...string[]`\]\>\>; `salt`: `NotNull`\<`PgTextBuilderInitial`\<`"salt"`, \[`string`, `...string[]`\]\>\>; `username`: `NotNull`\<`PgTextBuilderInitial`\<`"username"`, \[`string`, `...string[]`\]\>\>; `verification`: `NotNull`\<`PgTextBuilderInitial`\<`"verification"`, \[`string`, `...string[]`\]\>\>; `verified`: `NotNull`\<`PgBooleanBuilderInitial`\<`"verified"`\>\>; \}, `"account"`\>
 
-Defined in: [src/types/app.d.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/app.d.ts#L12)
+Defined in: [src/types/app.d.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/app.d.ts#L12)
 
 ***
 
@@ -41184,7 +41184,7 @@ Defined in: [src/types/app.d.ts:12](https://github.com/tsaxking/sveltekit-templa
 
 > **session**: `StructData`
 
-Defined in: [src/types/app.d.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/app.d.ts#L13)
+Defined in: [src/types/app.d.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/app.d.ts#L13)
 
 ***
 
@@ -41192,7 +41192,7 @@ Defined in: [src/types/app.d.ts:13](https://github.com/tsaxking/sveltekit-templa
 
 > `optional` **sse**: [`Connection`](../../../../../lib/server/services/sse/classes/Connection.md)
 
-Defined in: [src/types/app.d.ts:15](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/app.d.ts#L15)
+Defined in: [src/types/app.d.ts:15](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/app.d.ts#L15)
 
 ***
 
@@ -41200,7 +41200,7 @@ Defined in: [src/types/app.d.ts:15](https://github.com/tsaxking/sveltekit-templa
 
 > **start**: `number`
 
-Defined in: [src/types/app.d.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/app.d.ts#L14)
+Defined in: [src/types/app.d.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/app.d.ts#L14)
 
 
 [**my-app**](../../../../../../README.md)
@@ -41254,7 +41254,7 @@ If your adapter provides [platform-specific context](https://svelte.dev/docs/kit
 
 > `const` **\_\_APP\_ENV\_\_**: `object`
 
-Defined in: [src/types/app.d.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/app.d.ts#L22)
+Defined in: [src/types/app.d.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/app.d.ts#L22)
 
 ## Type Declaration
 
@@ -41374,7 +41374,7 @@ Defined in: [src/types/app.d.ts:22](https://github.com/tsaxking/sveltekit-templa
 
 > **getCurrentBrowserFingerPrint**(): `Prmoise`\<`string` \| `number`\>
 
-Defined in: [src/types/broprint.d.ts:2](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/broprint.d.ts#L2)
+Defined in: [src/types/broprint.d.ts:2](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/broprint.d.ts#L2)
 
 ## Returns
 
@@ -41426,7 +41426,7 @@ Defined in: [src/types/broprint.d.ts:2](https://github.com/tsaxking/sveltekit-te
 
 > **create**\<`K`\>(`tag`, `attrs?`): `HTMLElementTagNameMap`\[`K`\]
 
-Defined in: [src/types/document-extended.d.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L11)
+Defined in: [src/types/document-extended.d.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L11)
 
 Creates an element with the specified tag name.
 
@@ -41458,7 +41458,7 @@ Creates an element with the specified tag name.
 
 > **create**\<`K`\>(`tag`, `attrs?`): `HTMLElementDeprecatedTagNameMap`\[`K`\]
 
-Defined in: [src/types/document-extended.d.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L24)
+Defined in: [src/types/document-extended.d.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L24)
 
 Creates an element with the specified tag name.
 
@@ -41490,7 +41490,7 @@ Creates an element with the specified tag name.
 
 > **create**(`tag`, `attrs?`): `HTMLElement`
 
-Defined in: [src/types/document-extended.d.ts:36](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L36)
+Defined in: [src/types/document-extended.d.ts:36](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L36)
 
 Creates an element with the specified tag name.
 
@@ -41516,7 +41516,7 @@ Creates an element with the specified tag name.
 
 > **create**(`html`, `attrs?`): `HTMLElement`
 
-Defined in: [src/types/document-extended.d.ts:45](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L45)
+Defined in: [src/types/document-extended.d.ts:45](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L45)
 
 Creates an element with the specified html.
 
@@ -41549,7 +41549,7 @@ Creates an element with the specified html.
 
 > **createDeep**(`tag`, `attrs?`): (`HTMLCanvasElement` \| `HTMLElement` \| `HTMLFormElement` \| `HTMLDivElement` \| `HTMLInputElement` \| `HTMLUListElement` \| `HTMLImageElement` \| `HTMLTitleElement` \| `HTMLUnknownElement` \| `HTMLFontElement` \| `HTMLDirectoryElement` \| `HTMLFrameElement` \| `HTMLFrameSetElement` \| `HTMLPreElement` \| `HTMLMarqueeElement` \| `HTMLParamElement` \| `HTMLObjectElement` \| `HTMLPictureElement` \| `HTMLLinkElement` \| `HTMLMapElement` \| `HTMLDataElement` \| `HTMLOutputElement` \| `HTMLSelectElement` \| `HTMLTextAreaElement` \| `HTMLLabelElement` \| `HTMLTimeElement` \| `HTMLSourceElement` \| `HTMLHtmlElement` \| `HTMLMenuElement` \| `HTMLStyleElement` \| `HTMLDetailsElement` \| `HTMLIFrameElement` \| `HTMLTableElement` \| `HTMLScriptElement` \| `HTMLHRElement` \| `HTMLMetaElement` \| `HTMLOptionElement` \| `HTMLTableCellElement` \| `HTMLAnchorElement` \| `HTMLParagraphElement` \| `HTMLQuoteElement` \| `HTMLAreaElement` \| `HTMLAudioElement` \| `HTMLBaseElement` \| `HTMLBodyElement` \| `HTMLBRElement` \| `HTMLButtonElement` \| `HTMLTableCaptionElement` \| `HTMLTableColElement` \| `HTMLDataListElement` \| `HTMLModElement` \| `HTMLDialogElement` \| `HTMLDListElement` \| `HTMLEmbedElement` \| `HTMLFieldSetElement` \| `HTMLHeadingElement` \| `HTMLHeadElement` \| `HTMLLegendElement` \| `HTMLLIElement` \| `HTMLMeterElement` \| `HTMLOListElement` \| `HTMLOptGroupElement` \| `HTMLProgressElement` \| `HTMLSlotElement` \| `HTMLSpanElement` \| `HTMLTableSectionElement` \| `HTMLTemplateElement` \| `HTMLTableRowElement` \| `HTMLTrackElement` \| `HTMLVideoElement`)[]
 
-Defined in: [src/types/document-extended.d.ts:59](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L59)
+Defined in: [src/types/document-extended.d.ts:59](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L59)
 
 Creates an element with the specified html, returning all children as an array
 
@@ -41584,7 +41584,7 @@ Creates an element with the specified html, returning all children as an array
 
 > **find**\<`K`\>(`selector`): `HTMLElementTagNameMap`\[`K`\]
 
-Defined in: [src/types/document-extended.d.ts:76](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L76)
+Defined in: [src/types/document-extended.d.ts:76](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L76)
 
 Using querySelector, returns the first element that matches the selector
 
@@ -41612,7 +41612,7 @@ Using querySelector, returns the first element that matches the selector
 
 > **find**\<`K`\>(`selector`): `HTMLElementDeprecatedTagNameMap`\[`K`\]
 
-Defined in: [src/types/document-extended.d.ts:85](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L85)
+Defined in: [src/types/document-extended.d.ts:85](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L85)
 
 Using querySelector, returns the first element that matches the selector
 
@@ -41640,7 +41640,7 @@ Using querySelector, returns the first element that matches the selector
 
 > **find**(`selector`): `HTMLElement`
 
-Defined in: [src/types/document-extended.d.ts:95](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L95)
+Defined in: [src/types/document-extended.d.ts:95](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L95)
 
 Using querySelector, returns the first element that matches the selector
 
@@ -41671,7 +41671,7 @@ Using querySelector, returns the first element that matches the selector
 
 > **findAll**\<`K`\>(`selector`): `HTMLElementTagNameMap`\[`K`\][]
 
-Defined in: [src/types/document-extended.d.ts:105](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L105)
+Defined in: [src/types/document-extended.d.ts:105](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L105)
 
 Using querySelectorAll, returns all elements that match the selector
 
@@ -41699,7 +41699,7 @@ Using querySelectorAll, returns all elements that match the selector
 
 > **findAll**\<`K`\>(`selector`): `HTMLElementDeprecatedTagNameMap`\[`K`\][]
 
-Defined in: [src/types/document-extended.d.ts:117](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L117)
+Defined in: [src/types/document-extended.d.ts:117](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L117)
 
 Using querySelectorAll, returns all elements that match the selector
 
@@ -41727,7 +41727,7 @@ Using querySelectorAll, returns all elements that match the selector
 
 > **findAll**(`selector`): `HTMLElement`[]
 
-Defined in: [src/types/document-extended.d.ts:128](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L128)
+Defined in: [src/types/document-extended.d.ts:128](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L128)
 
 Using querySelectorAll, returns all elements that match the selector
 
@@ -41776,7 +41776,7 @@ Using querySelectorAll, returns all elements that match the selector
 
 > `const` **recaptchaSiteKey**: `string`
 
-Defined in: [src/types/document-extended.d.ts:130](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/document-extended.d.ts#L130)
+Defined in: [src/types/document-extended.d.ts:130](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/document-extended.d.ts#L130)
 
 
 [**my-app**](../../../README.md)
@@ -41814,7 +41814,7 @@ Defined in: [src/types/document-extended.d.ts:130](https://github.com/tsaxking/s
 
 # Class: default
 
-Defined in: [src/types/svelte-filepond.d.ts:37](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L37)
+Defined in: [src/types/svelte-filepond.d.ts:37](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L37)
 
 ## Extends
 
@@ -42041,7 +42041,7 @@ for more info.
 
 > **registerPlugin**(...`plugins`): `void`
 
-Defined in: [src/types/svelte-filepond.d.ts:39](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L39)
+Defined in: [src/types/svelte-filepond.d.ts:39](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L39)
 
 ## Parameters
 
@@ -42064,7 +42064,7 @@ Defined in: [src/types/svelte-filepond.d.ts:39](https://github.com/tsaxking/svel
 
 > **supported**(): `boolean`
 
-Defined in: [src/types/svelte-filepond.d.ts:40](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L40)
+Defined in: [src/types/svelte-filepond.d.ts:40](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L40)
 
 ## Returns
 
@@ -42106,7 +42106,7 @@ Defined in: [src/types/svelte-filepond.d.ts:40](https://github.com/tsaxking/svel
 
 # Interface: FilePondFile
 
-Defined in: [src/types/svelte-filepond.d.ts:7](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L7)
+Defined in: [src/types/svelte-filepond.d.ts:7](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L7)
 
 ## Properties
 
@@ -42114,7 +42114,7 @@ Defined in: [src/types/svelte-filepond.d.ts:7](https://github.com/tsaxking/svelt
 
 > **file**: `File`
 
-Defined in: [src/types/svelte-filepond.d.ts:8](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L8)
+Defined in: [src/types/svelte-filepond.d.ts:8](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L8)
 
 ***
 
@@ -42122,7 +42122,7 @@ Defined in: [src/types/svelte-filepond.d.ts:8](https://github.com/tsaxking/svelt
 
 > **fileExtension**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:9](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L9)
+Defined in: [src/types/svelte-filepond.d.ts:9](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L9)
 
 ***
 
@@ -42130,7 +42130,7 @@ Defined in: [src/types/svelte-filepond.d.ts:9](https://github.com/tsaxking/svelt
 
 > **filename**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:12](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L12)
+Defined in: [src/types/svelte-filepond.d.ts:12](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L12)
 
 ***
 
@@ -42138,7 +42138,7 @@ Defined in: [src/types/svelte-filepond.d.ts:12](https://github.com/tsaxking/svel
 
 > **fileSize**: `number`
 
-Defined in: [src/types/svelte-filepond.d.ts:10](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L10)
+Defined in: [src/types/svelte-filepond.d.ts:10](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L10)
 
 ***
 
@@ -42146,7 +42146,7 @@ Defined in: [src/types/svelte-filepond.d.ts:10](https://github.com/tsaxking/svel
 
 > **fileType**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:11](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L11)
+Defined in: [src/types/svelte-filepond.d.ts:11](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L11)
 
 ***
 
@@ -42154,7 +42154,7 @@ Defined in: [src/types/svelte-filepond.d.ts:11](https://github.com/tsaxking/svel
 
 > **id**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:14](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L14)
+Defined in: [src/types/svelte-filepond.d.ts:14](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L14)
 
 ***
 
@@ -42162,7 +42162,7 @@ Defined in: [src/types/svelte-filepond.d.ts:14](https://github.com/tsaxking/svel
 
 > **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/svelte-filepond.d.ts:13](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L13)
+Defined in: [src/types/svelte-filepond.d.ts:13](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L13)
 
 ***
 
@@ -42170,7 +42170,7 @@ Defined in: [src/types/svelte-filepond.d.ts:13](https://github.com/tsaxking/svel
 
 > **origin**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:15](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L15)
+Defined in: [src/types/svelte-filepond.d.ts:15](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L15)
 
 ***
 
@@ -42178,7 +42178,7 @@ Defined in: [src/types/svelte-filepond.d.ts:15](https://github.com/tsaxking/svel
 
 > **status**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:16](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L16)
+Defined in: [src/types/svelte-filepond.d.ts:16](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L16)
 
 
 [**my-app**](../../../../README.md)
@@ -42189,7 +42189,7 @@ Defined in: [src/types/svelte-filepond.d.ts:16](https://github.com/tsaxking/svel
 
 # Interface: FilePondProps
 
-Defined in: [src/types/svelte-filepond.d.ts:19](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L19)
+Defined in: [src/types/svelte-filepond.d.ts:19](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L19)
 
 ## Extends
 
@@ -42261,7 +42261,7 @@ true
 
 > `optional` **allowMultiple**: `boolean`
 
-Defined in: [src/types/svelte-filepond.d.ts:22](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L22)
+Defined in: [src/types/svelte-filepond.d.ts:22](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L22)
 
 Enable or disable adding multiple files.
 
@@ -42494,7 +42494,7 @@ Return `false` to prevent adding it, or return a `Promise` and resolve with `tru
 
 > `optional` **bind\_this**: (`value`) => `void`
 
-Defined in: [src/types/svelte-filepond.d.ts:34](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L34)
+Defined in: [src/types/svelte-filepond.d.ts:34](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L34)
 
 #### Parameters
 
@@ -42755,7 +42755,7 @@ false
 
 > `optional` **files**: [`FilePondFile`](FilePondFile.md)[]
 
-Defined in: [src/types/svelte-filepond.d.ts:24](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L24)
+Defined in: [src/types/svelte-filepond.d.ts:24](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L24)
 
 A list of file locations that should be loaded immediately.
 See: https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-initial-files
@@ -43721,7 +43721,7 @@ The maximum number of files that can be uploaded in parallel.
 
 > `optional` **name**: `string`
 
-Defined in: [src/types/svelte-filepond.d.ts:21](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L21)
+Defined in: [src/types/svelte-filepond.d.ts:21](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L21)
 
 The input field name to use.
 
@@ -43763,7 +43763,7 @@ Defined in: node\_modules/.pnpm/filepond@4.32.9/node\_modules/filepond/types/ind
 
 > `optional` **onaddfile**: [`FilePondEvent`](../type-aliases/FilePondEvent.md)
 
-Defined in: [src/types/svelte-filepond.d.ts:28](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L28)
+Defined in: [src/types/svelte-filepond.d.ts:28](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L28)
 
 If no error, file has been successfully loaded.
 
@@ -43862,7 +43862,7 @@ file if error is related to a file object.
 
 > `optional` **oninit**: () => `void`
 
-Defined in: [src/types/svelte-filepond.d.ts:27](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L27)
+Defined in: [src/types/svelte-filepond.d.ts:27](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L27)
 
 FilePond instance has been created and is ready.
 
@@ -43910,7 +43910,7 @@ It receives the file item and the output data.
 
 > `optional` **onprocessfile**: [`FilePondEvent`](../type-aliases/FilePondEvent.md)
 
-Defined in: [src/types/svelte-filepond.d.ts:30](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L30)
+Defined in: [src/types/svelte-filepond.d.ts:30](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L30)
 
 If no error, Processing of a file has been completed.
 
@@ -44042,7 +44042,7 @@ Started processing a file.
 
 > `optional` **onremovefile**: [`FilePondEvent`](../type-aliases/FilePondEvent.md)
 
-Defined in: [src/types/svelte-filepond.d.ts:29](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L29)
+Defined in: [src/types/svelte-filepond.d.ts:29](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L29)
 
 File has been removed.
 
@@ -44080,7 +44080,7 @@ Called when the files have been reordered
 
 > `optional` **onupdatefiles**: (`files`) => `void`
 
-Defined in: [src/types/svelte-filepond.d.ts:31](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L31)
+Defined in: [src/types/svelte-filepond.d.ts:31](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L31)
 
 A file has been added or removed, receives a list of file items.
 
@@ -44159,7 +44159,7 @@ false
 
 > `optional` **server**: `string` \| \{ `fetch?`: `string` \| `ServerUrl` \| `FetchServerConfigFunction`; `headers?`: \{\[`key`: `string`\]: `string` \| `number` \| `boolean`; \}; `load?`: `string` \| `ServerUrl` \| `LoadServerConfigFunction`; `patch?`: `string` \| `ServerUrl`; `process?`: `string` \| `ServerUrl` \| `ProcessServerConfigFunction`; `remove?`: `RemoveServerConfigFunction`; `restore?`: `string` \| `ServerUrl` \| `RestoreServerConfigFunction`; `revert?`: `string` \| `ServerUrl` \| `RevertServerConfigFunction`; `timeout?`: `number`; `url?`: `string`; \}
 
-Defined in: [src/types/svelte-filepond.d.ts:23](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L23)
+Defined in: [src/types/svelte-filepond.d.ts:23](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L23)
 
 Server API Configuration.
 See: https://pqina.nl/filepond/docs/patterns/api/server
@@ -44372,7 +44372,7 @@ The position of the progress indicator.
 
 > **FilePondEvent** = (`error`, `file`) => `void`
 
-Defined in: [src/types/svelte-filepond.d.ts:5](https://github.com/tsaxking/sveltekit-template/blob/fa3903f8857e7696074c16e06a8386c386d01145/src/types/svelte-filepond.d.ts#L5)
+Defined in: [src/types/svelte-filepond.d.ts:5](https://github.com/tsaxking/sveltekit-template/blob/5c931ab8f54bd9e2e681d98c5433f1bb4d6f102a/src/types/svelte-filepond.d.ts#L5)
 
 ## Parameters
 
