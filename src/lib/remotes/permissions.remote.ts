@@ -486,9 +486,10 @@ export const permissionsFromRole = query(
 		}
 
 		const res = await Permissions.getRulesetsFromRole(role.value);
-		if (res.isOk()) {
-			return res.value.map((r) => r.safe());
+		if (res.isErr()) {
+			return error(500, 'Internal Server Error');
 		}
+		return res.value.map((r) => r.safe());
 	}
 );
 
@@ -534,9 +535,10 @@ export const availablePermissions = query(
 
 		if (!role.value.data.parent) {
 			const res = await Permissions.getRulesetsFromRole(role.value);
-			if (res.isOk()) {
-				return res.value.map((r) => r.safe());
+			if (res.isErr()) {
+				return error(500, 'Internal Server Error');
 			}
+			return res.value.map((r) => r.safe());
 		}
 
 		const parent = await Permissions.getParent(role.value);

@@ -53,7 +53,7 @@ export const create = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Create, account);
+				const blocked = registry.isBlocked(DataAction.Create, account);
 				if (blocked.isErr()) {
 					return error(500, 'Internal Server Error');
 				}
@@ -240,7 +240,7 @@ export const update = command(
 
 		BLOCKS: {
 			if (await isAdmin()) break BLOCKS;
-			const blocked = await registry.isBlocked(PropertyAction.Update, account, targetData.value);
+			const blocked = registry.isBlocked(PropertyAction.Update, account, targetData.value);
 			if (blocked.isErr()) {
 				return error(500, 'Internal Server Error');
 			}
@@ -317,7 +317,7 @@ export const archive = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Archive, account, targetData.value);
+				const blocked = registry.isBlocked(DataAction.Archive, account, targetData.value);
 				if (blocked.isErr()) {
 					return error(500, 'Internal Server Error');
 				}
@@ -326,7 +326,7 @@ export const archive = command(
 					return error(403, 'Unauthorized');
 				}
 			}
-			const bypassed = await registry.isBypassed(DataAction.Archive, account, targetData.value);
+			const bypassed = registry.isBypassed(DataAction.Archive, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');
 			}
@@ -573,7 +573,7 @@ export const remove = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(DataAction.Delete, account, targetData.value);
+				const blocked = registry.isBlocked(DataAction.Delete, account, targetData.value);
 				if (blocked.isErr()) {
 					return error(500, 'Internal Server Error');
 				}
@@ -650,7 +650,7 @@ export const removeVersion = command(
 			}
 
 			{
-				const blocked = await registry.isBlocked(
+				const blocked = registry.isBlocked(
 					DataAction.DeleteVersion,
 					account,
 					targetData.value
