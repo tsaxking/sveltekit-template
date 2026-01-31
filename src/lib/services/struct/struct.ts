@@ -330,7 +330,7 @@ export type StatusMessage<T = void> = {
  * @class SingleWritable
  * @typedef {SingleWritable}
  * @template {Blank} T
- * @implements {Writable<StructData<T>>}
+ * @extends {WritableBase<StructData<T>>}
  */
 export class SingleWritable<T extends Blank> extends WritableBase<StructData<T>> {
 	/**
