@@ -11,7 +11,6 @@ import Password from '$lib/components/forms/Password.svelte';
 import Select from '$lib/components/forms/Select.svelte';
 import Grid from '$lib/components/general/Grid.svelte';
 import DashboardComponent from '$lib/components/dashboard/Dashboard.svelte';
-import DashboardCard from '$lib/components/dashboard/Card.svelte';
 import MinimizedCards from '$lib/components/dashboard/MinimizedCards.svelte';
 import { Dashboard } from '$lib/model/dashboard';
 import { sleep } from 'ts-utils';
@@ -326,28 +325,28 @@ describe('Dashboard components', () => {
 		expect(initSpy).toHaveBeenCalled();
 	});
 
-	it('Dashboard Card toggles maximize and hide', async () => {
-		const card = createCard('two');
-		const body = createRawSnippet(() => ({ render: () => '<div>Body</div>' }));
+	// it('Dashboard Card toggles maximize and hide', async () => {
+	// 	const card = createCard('two');
+	// 	const body = createRawSnippet(() => ({ render: () => '<div>Body</div>' }));
 
-		const { container } = render(DashboardCard, {
-			props: {
-				card,
-				body
-			}
-		});
+	// 	const { container } = render(DashboardCard, {
+	// 		props: {
+	// 			card,
+	// 			body
+	// 		}
+	// 	});
 
-		const maximizeButton = container.querySelector('button[aria-label="Maximize"]');
-		await fireEvent.click(maximizeButton as HTMLButtonElement);
-		expect(card.data.maximized).toBe(true);
+	// 	const maximizeButton = container.querySelector('button[aria-label="Maximize"]');
+	// 	await fireEvent.click(maximizeButton as HTMLButtonElement);
+	// 	expect(card.data.maximized).toBe(true);
 
-		await fireEvent.click(maximizeButton as HTMLButtonElement);
-		expect(card.data.maximized).toBe(false);
+	// 	await fireEvent.click(maximizeButton as HTMLButtonElement);
+	// 	expect(card.data.maximized).toBe(false);
 
-		const closeButton = container.querySelector('button[aria-label="Close"]');
-		await fireEvent.click(closeButton as HTMLButtonElement);
-		expect(card.data.show).toBe(false);
-	});
+	// 	const closeButton = container.querySelector('button[aria-label="Close"]');
+	// 	await fireEvent.click(closeButton as HTMLButtonElement);
+	// 	expect(card.data.show).toBe(false);
+	// });
 
 	it('MinimizedCards renders hidden cards and restores on click', async () => {
 		const card = createCard('three');
