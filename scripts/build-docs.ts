@@ -620,7 +620,6 @@ export default defineConfig({
 	}
 };
 
-
 export default async () => {
 	const vitepressDir = path.join(DOCS_DIR, '.vitepress');
 
