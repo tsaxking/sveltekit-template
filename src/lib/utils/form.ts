@@ -1,7 +1,15 @@
+/**
+ * @fileoverview Type-safe form builder with modal prompts.
+ *
+ * @example
+ * import { Form } from '$lib/utils/form';
+ * const form = new Form().input('name', { type: 'text', label: 'Name', required: true });
+ */
 import Modal from '../components/bootstrap/Modal.svelte';
 import { createRawSnippet, mount } from 'svelte';
 import { modalTarget, createButtons, clearModals } from './prompts';
 import { attemptAsync } from 'ts-utils/check';
+import { WritableBase } from '../services/writables';
 
 type Option =
 	| string
@@ -89,6 +97,15 @@ type Input<T extends keyof Inputs> = {
 /**
  * Type-safe form builder with validation, accessibility, and state management
  *
+ * Features:
+ * - Type-safe input definitions and return values
+ * - Built-in validation with custom rules
+ * - ARIA accessibility attributes
+ * - Form state management (dirty/pristine tracking)
+ * - Bootstrap styling integration
+ * - Modal integration for prompts
+ * - Memory leak prevention with proper cleanup
+ *
  * @example Basic usage
  * ```typescript
  * const form = new Form()
@@ -128,15 +145,31 @@ type Input<T extends keyof Inputs> = {
  *     ]
  *   });
  * ```
+ * @example
+ * // Basic usage
+ * const form = new Form()
+ *   .input('username', {
+ *     type: 'text',
+ *     label: 'Username',
+ *     required: true,
+ *     validation: [
+ *       { type: 'required', message: 'Username required' },
+ *       { type: 'minLength', value: 3, message: 'At least 3 characters' }
+ *     ]
+ *   })
+ *   .input('email', {
+ *     type: 'email',
+ *     label: 'Email',
+ *     required: true,
+ *     validation: [
+ *       { type: 'required', message: 'Email required' },
+ *       { type: 'email', message: 'Invalid email' }
+ *     ]
+ *   });
  *
- * Features:
- * - Type-safe input definitions and return values
- * - Built-in validation with custom rules
- * - ARIA accessibility attributes
- * - Form state management (dirty/pristine tracking)
- * - Bootstrap styling integration
- * - Modal integration for prompts
- * - Memory leak prevention with proper cleanup
+ * // Show as modal
+ * const result = await form.prompt({ title: 'Sign Up', send: false });
+ * console.log(result.value); // { username: string, email: string }
  */
 export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	private eventListeners: { element: HTMLElement; type: string; listener: EventListener }[] = [];
@@ -250,6 +283,26 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	 * @param input - Input configuration with type, label, validation, etc.
 	 * @returns New form instance with added input (immutable)
 	 */
+	/**
+	 * Add an input field to the form using a fluent builder pattern.
+	 *
+	 * @template Name - The name of the field.
+	 * @template I - The input type key.
+	 * @param {Name} name - Unique field name.
+	 * @param {Input<I>} input - Input configuration (type, label, validation, etc).
+	 * @returns {Form<T & { [key in Name]: Input<I> }>} New form instance with the added input (immutable).
+	 *
+	 * @example
+	 * const form = new Form()
+	 *   .input('password', {
+	 *     type: 'password',
+	 *     label: 'Password',
+	 *     required: true,
+	 *     validation: [
+	 *       { type: 'minLength', value: 8, message: 'At least 8 characters' }
+	 *     ]
+	 *   });
+	 */
 	input<Name extends string, I extends keyof Inputs>(
 		name: Name,
 		input: Input<I>
@@ -267,6 +320,19 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	 * @param config.submit - Whether to include a submit button
 	 * @param config.cached - Whether to return cached form element if available
 	 * @returns HTMLFormElement with all inputs and styling
+	 */
+	/**
+	 * Render the form as an HTMLFormElement.
+	 *
+	 * @param {Object} [config] - Rendering options.
+	 * @param {boolean} [config.addListeners] - Whether to add change event listeners for dirty state and error clearing.
+	 * @param {boolean} [config.submit] - Whether to include a submit button.
+	 * @param {boolean} [config.cached] - Whether to return a cached form element if available.
+	 * @returns {HTMLFormElement} The rendered form element.
+	 *
+	 * @example
+	 * const form = new Form().input('name', { type: 'text', label: 'Name', required: true });
+	 * document.body.appendChild(form.render({ submit: true }));
 	 */
 	render(
 		config?: Partial<{
@@ -491,8 +557,11 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clean up event listeners to prevent memory leaks
-	 * Call this when the form is no longer needed
+	 * Clean up all event listeners to prevent memory leaks.
+	 * Call this when the form is no longer needed or before removing from DOM.
+	 *
+	 * @example
+	 * form.destroy();
 	 */
 	destroy() {
 		this.eventListeners.forEach(({ element, type, listener }) => {
@@ -502,14 +571,22 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Check if the form has unsaved changes
+	 * Check if the form has unsaved changes (dirty state).
+	 *
+	 * @returns {boolean} True if form values differ from initial values.
+	 *
+	 * @example
+	 * if (form.isDirty()) { ... }
 	 */
 	isDirty(): boolean {
 		return this._isDirty;
 	}
 
 	/**
-	 * Reset form to initial values
+	 * Reset the form to its initial values and clear errors.
+	 *
+	 * @example
+	 * form.reset();
 	 */
 	reset(): void {
 		this._currentValues = { ...this._initialValues };
@@ -541,7 +618,12 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Set form values programmatically
+	 * Set form values programmatically.
+	 *
+	 * @param {Partial<Record<keyof T, string | string[]>>} values - Object mapping field names to values.
+	 *
+	 * @example
+	 * form.setValues({ name: 'Alice', email: 'alice@example.com' });
 	 */
 	setValues(values: Partial<Record<keyof T, string | string[]>>): void {
 		for (const [name, value] of Object.entries(values)) {
@@ -580,7 +662,13 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Show validation error for a specific field
+	 * Show a validation error for a specific field.
+	 *
+	 * @param {string} fieldName - The field name.
+	 * @param {string} message - The error message to display.
+	 *
+	 * @example
+	 * form.showFieldError('email', 'Invalid email');
 	 */
 	showFieldError(fieldName: string, message: string): void {
 		// Remove existing error for this field
@@ -604,7 +692,10 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Clear all validation errors
+	 * Clear all validation errors from the form and UI.
+	 *
+	 * @example
+	 * form.clearErrors();
 	 */
 	clearErrors(): void {
 		this._errors = [];
@@ -625,7 +716,12 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Validate all fields and show errors
+	 * Validate all fields and show errors in the UI.
+	 *
+	 * @returns {boolean} True if all fields are valid, false otherwise.
+	 *
+	 * @example
+	 * if (form.validate()) { ... }
 	 */
 	validate(): boolean {
 		this.clearErrors();
@@ -644,15 +740,25 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Get current validation errors
+	 * Get the current validation errors.
+	 *
+	 * @returns {FieldError[]} Array of field error objects.
+	 *
+	 * @example
+	 * const errors = form.getErrors();
 	 */
 	getErrors(): FieldError[] {
 		return [...this._errors];
 	}
 
 	/**
-	 * Extract current form values with proper typing
-	 * @returns Object with field names as keys and typed values
+	 * Extract current form values with proper typing.
+	 *
+	 * @returns {Object} Object with field names as keys and typed values.
+	 *
+	 * @example
+	 * const values = form.value();
+	 * // { name: string, email: string }
 	 */
 	value(): {
 		[key in keyof T]: InputReturnType<T[key]['type']>;
@@ -683,8 +789,10 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Submit the form programmatically
-	 * Uses the configured action and method
+	 * Submit the form programmatically using the configured action and method.
+	 *
+	 * @example
+	 * form.submit();
 	 */
 	submit() {
 		const form = this.render({
@@ -698,11 +806,16 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 	}
 
 	/**
-	 * Display the form in a modal dialog
-	 * @param config - Modal configuration
-	 * @param config.title - Modal title text
-	 * @param config.send - Whether to submit to server (true) or return values (false)
-	 * @returns Promise resolving to form values and HTMLFormElement
+	 * Display the form in a modal dialog and resolve with the form values or submit to the server.
+	 *
+	 * @param {Object} config - Modal configuration.
+	 * @param {string} config.title - Modal title text.
+	 * @param {boolean} config.send - Whether to submit to server (true) or return values (false).
+	 * @returns {Promise<{ value: { [key in keyof T]: InputReturnType<T[key]['type']> }, form: HTMLFormElement }>} Promise resolving to form values and the form element.
+	 *
+	 * @example
+	 * const result = await form.prompt({ title: 'Sign Up', send: false });
+	 * console.log(result.value);
 	 */
 	prompt(config: { title: string; send: boolean }) {
 		const self = this;
@@ -835,6 +948,379 @@ export class Form<T extends { [key: string]: Input<keyof Inputs> }> {
 					clearModals();
 				});
 			});
+		});
+	}
+}
+
+/**
+ * Accessible, keyboard- and mouse-friendly range slider for selecting a numeric interval.
+ *
+ * @example
+ * const slider = new RangeSlider({
+ *   min: 0,
+ *   max: 100,
+ *   step: 5,
+ *   target: document.getElementById('slider-container'),
+ *   init: [10, 90],
+ *   lineColor: '#ccc',
+ *   handleColor: '#007bff'
+ * });
+ * slider.render();
+ */
+export class RangeSlider extends WritableBase<{
+	min: number;
+	max: number;
+}> {
+	constructor(
+		private readonly config: {
+			min: number;
+			max: number;
+			step: number;
+			target: HTMLElement;
+			init?: [number, number];
+			lineColor?: string;
+			handleColor?: string;
+		}
+	) {
+		super({
+			min: config.init ? config.init[0] : config.min,
+			max: config.init ? config.init[1] : config.max
+		});
+
+		// check if step is valid (both min and max should be divisible by step)
+		if (config.min % config.step !== 0 || config.max % config.step !== 0) {
+			throw new Error('RangeSlider: min and max must both be divisible by step');
+		}
+	}
+
+	/**
+	 * Render the range slider into the configured target element.
+	 *
+	 * @returns {Function} Cleanup function to remove event listeners and animation.
+	 *
+	 * @example
+	 * const cleanup = slider.render();
+	 * // ...later
+	 * cleanup();
+	 */
+	render() {
+		const HANDLE_DIAMETER = 20;
+		const HANDLE_RADIUS = HANDLE_DIAMETER / 2;
+
+		const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+		const valueToPos = (value: number, width: number) =>
+			HANDLE_RADIUS +
+			((value - this.config.min) / (this.config.max - this.config.min)) * (width - HANDLE_DIAMETER);
+		const deltaToValue = (deltaX: number, width: number) =>
+			deltaX * ((this.config.max - this.config.min) / (width - HANDLE_DIAMETER));
+		const setAria = (el: SVGCircleElement, value: number, label: string) => {
+			el.setAttribute('role', 'slider');
+			el.setAttribute('aria-valuemin', this.config.min.toString());
+			el.setAttribute('aria-valuemax', this.config.max.toString());
+			el.setAttribute('aria-valuenow', value.toString());
+			el.setAttribute('aria-label', label);
+			el.setAttribute('tabindex', '0');
+		};
+
+		const wrapper = document.createElement('div');
+		wrapper.style.width = '100%';
+		this.config.target.appendChild(wrapper);
+
+		const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		svg.setAttribute('height', '50');
+		svg.setAttribute('viewBox', `0 0 ${wrapper.clientWidth} 50`);
+		svg.style.userSelect = 'none';
+
+		// Background track line
+		const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		line.setAttribute('x1', HANDLE_RADIUS.toString());
+		line.setAttribute('y1', '25');
+		line.setAttribute('x2', `${wrapper.clientWidth - HANDLE_RADIUS}`);
+		line.setAttribute('y2', '25');
+		line.setAttribute('stroke', this.config.lineColor || '#ccc');
+		line.setAttribute('stroke-width', '4');
+		line.setAttribute('stroke-linecap', 'round');
+		svg.appendChild(line);
+
+		// Active range line (between handles)
+		const rangeLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		rangeLine.setAttribute('x1', HANDLE_RADIUS.toString());
+		rangeLine.setAttribute('y1', '25');
+		rangeLine.setAttribute('x2', `${wrapper.clientWidth - HANDLE_RADIUS}`);
+		rangeLine.setAttribute('y2', '25');
+		rangeLine.setAttribute('stroke', this.config.handleColor || '#007bff');
+		rangeLine.setAttribute('stroke-width', '4');
+		svg.appendChild(rangeLine);
+
+		const start = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		start.setAttribute('cx', HANDLE_RADIUS.toString());
+		start.setAttribute('cy', '25');
+		start.setAttribute('r', HANDLE_RADIUS.toString());
+		start.setAttribute('fill', this.config.handleColor || '#007bff');
+		start.style.cursor = 'grab';
+		svg.appendChild(start);
+
+		// Compute initial end handle position based on configuration rather than a hardcoded value.
+		// const rangeMin = this.config.min ?? this.data.min ?? 0;
+		// const rangeMax = this.config.max ?? this.data.max ?? 100;
+		// const endValue = this.config.init?.[1] ?? rangeMax;
+		// const sliderWidth = Math.max(wrapper.clientWidth - 20, 0);
+		// const normalizedEnd =
+		// rangeMax !== rangeMin ? (endValue - rangeMin) / (rangeMax - rangeMin) : 0;
+		// const clampedNormalizedEnd = Math.min(1, Math.max(0, normalizedEnd));
+		// const endCx = 10 + clampedNormalizedEnd * sliderWidth;
+
+		const end = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		end.setAttribute('cx', `${wrapper.clientWidth - HANDLE_RADIUS}`);
+		end.setAttribute('cy', '25');
+		end.setAttribute('r', HANDLE_RADIUS.toString());
+		end.setAttribute('fill', this.config.handleColor || '#007bff');
+		end.style.cursor = 'grab';
+		svg.appendChild(end);
+
+		wrapper.appendChild(svg);
+
+		const setValue = (range: { min?: number; max?: number }) => {
+			this.set({ ...this.data, min: range.min ?? this.data.min, max: range.max ?? this.data.max });
+		};
+
+		let startDragging = false;
+		let endDragging = false;
+		let dragStartX = 0;
+		let dragStartValue = 0;
+
+		const applyStartValue = (value: number, width: number) => {
+			const clamped = clamp(value, this.config.min, this.data.max);
+			const steppedValue = Math.round(clamped / this.config.step) * this.config.step;
+			const startPos = valueToPos(steppedValue, width);
+			start.setAttribute('cx', startPos.toString());
+			rangeLine.setAttribute('x1', startPos.toString());
+			setAria(start, steppedValue, 'Minimum value');
+			setValue({ min: steppedValue });
+		};
+
+		const applyEndValue = (value: number, width: number) => {
+			const clamped = clamp(value, this.data.min, this.config.max);
+			const steppedValue = Math.round(clamped / this.config.step) * this.config.step;
+			const endPos = valueToPos(steppedValue, width);
+			end.setAttribute('cx', endPos.toString());
+			rangeLine.setAttribute('x2', endPos.toString());
+			setAria(end, steppedValue, 'Maximum value');
+			setValue({ max: steppedValue });
+		};
+
+		const startMouseDown = (e: MouseEvent) => {
+			e.preventDefault();
+			startDragging = true;
+			dragStartX = e.clientX;
+			dragStartValue = this.data.min;
+			start.style.cursor = 'grabbing';
+		};
+
+		const startMouseMove = (e: MouseEvent) => {
+			if (!startDragging) return;
+			e.preventDefault();
+			const deltaX = e.clientX - dragStartX;
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyStartValue(dragStartValue + valueDelta, width);
+		};
+
+		const startMouseUp = () => {
+			startDragging = false;
+			start.style.cursor = 'grab';
+		};
+
+		const startTouchStart = (e: TouchEvent) => {
+			e.preventDefault();
+			startDragging = true;
+			dragStartX = e.touches[0].clientX;
+			dragStartValue = this.data.min;
+		};
+
+		const startTouchMove = (e: TouchEvent) => {
+			if (!startDragging) return;
+			e.preventDefault();
+			const deltaX = e.touches[0].clientX - dragStartX;
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyStartValue(dragStartValue + valueDelta, width);
+		};
+
+		const startTouchEnd = () => {
+			startDragging = false;
+		};
+
+		const endMouseDown = (e: MouseEvent) => {
+			e.preventDefault();
+			endDragging = true;
+			dragStartX = e.clientX;
+			dragStartValue = this.data.max;
+			end.style.cursor = 'grabbing';
+		};
+
+		const endMouseMove = (e: MouseEvent) => {
+			if (!endDragging) return;
+			e.preventDefault();
+			const deltaX = e.clientX - dragStartX;
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyEndValue(dragStartValue + valueDelta, width);
+		};
+
+		const endMouseUp = () => {
+			endDragging = false;
+			end.style.cursor = 'grab';
+		};
+
+		const endTouchStart = (e: TouchEvent) => {
+			e.preventDefault();
+			endDragging = true;
+			dragStartX = e.touches[0].clientX;
+			dragStartValue = this.data.max;
+		};
+
+		const handleKey = (e: KeyboardEvent, type: 'start' | 'end') => {
+			const isStart = type === 'start';
+			const current = isStart ? this.data.min : this.data.max;
+			const minBound = this.config.min;
+			const maxBound = this.config.max;
+			const sibling = isStart ? this.data.max : this.data.min;
+			const step = this.config.step;
+			const bigStep = step * 10;
+
+			let next = current;
+			switch (e.key) {
+				case 'ArrowLeft':
+				case 'ArrowDown':
+					next = current - step;
+					break;
+				case 'ArrowRight':
+				case 'ArrowUp':
+					next = current + step;
+					break;
+				case 'PageDown':
+					next = current - bigStep;
+					break;
+				case 'PageUp':
+					next = current + bigStep;
+					break;
+				case 'Home':
+					next = isStart ? minBound : sibling;
+					break;
+				case 'End':
+					next = isStart ? sibling : maxBound;
+					break;
+				default:
+					return;
+			}
+
+			e.preventDefault();
+			const width = wrapper.clientWidth;
+			if (isStart) {
+				applyStartValue(next, width);
+			} else {
+				applyEndValue(next, width);
+			}
+		};
+
+		const endTouchMove = (e: TouchEvent) => {
+			if (!endDragging) return;
+			e.preventDefault();
+			const deltaX = e.touches[0].clientX - dragStartX;
+			const width = wrapper.clientWidth;
+			const valueDelta = deltaToValue(deltaX, width);
+			applyEndValue(dragStartValue + valueDelta, width);
+		};
+
+		const endTouchEnd = () => {
+			endDragging = false;
+		};
+
+		// Attach mouse/touch listeners
+		const startKeyDown = (e: KeyboardEvent) => handleKey(e, 'start');
+		const endKeyDown = (e: KeyboardEvent) => handleKey(e, 'end');
+
+		start.addEventListener('mousedown', startMouseDown);
+		start.addEventListener('touchstart', startTouchStart, { passive: false });
+		start.addEventListener('keydown', startKeyDown);
+
+		end.addEventListener('mousedown', endMouseDown);
+		end.addEventListener('touchstart', endTouchStart, { passive: false });
+		end.addEventListener('keydown', endKeyDown);
+
+		// Global move and up listeners for dragging
+		document.addEventListener('mousemove', startMouseMove);
+		document.addEventListener('mousemove', endMouseMove);
+		document.addEventListener('mouseup', startMouseUp);
+		document.addEventListener('mouseup', endMouseUp);
+
+		document.addEventListener('touchmove', startTouchMove, { passive: false });
+		document.addEventListener('touchmove', endTouchMove, { passive: false });
+		document.addEventListener('touchend', startTouchEnd, { passive: false });
+		document.addEventListener('touchend', endTouchEnd, { passive: false });
+
+		let doAnimate = true;
+		const animate = () => {
+			if (!doAnimate) return;
+
+			const { min, max } = this.data;
+
+			const rect = wrapper.getBoundingClientRect();
+			svg.setAttribute('viewBox', `0 0 ${rect.width} 50`);
+			line.setAttribute('x1', HANDLE_RADIUS.toString());
+			line.setAttribute('x2', `${rect.width - HANDLE_RADIUS}`);
+
+			if (!startDragging && !endDragging) {
+				const startPos = valueToPos(min, rect.width);
+				const endPos = valueToPos(max, rect.width);
+
+				start.setAttribute('cx', startPos.toString());
+				end.setAttribute('cx', endPos.toString());
+				rangeLine.setAttribute('x1', startPos.toString());
+				rangeLine.setAttribute('x2', endPos.toString());
+				setAria(start, min, 'Minimum value');
+				setAria(end, max, 'Maximum value');
+			}
+
+			requestAnimationFrame(animate);
+		};
+
+		requestAnimationFrame(animate);
+
+		return () => {
+			start.removeEventListener('mousedown', startMouseDown);
+			start.removeEventListener('touchstart', startTouchStart);
+			start.removeEventListener('keydown', startKeyDown);
+
+			end.removeEventListener('mousedown', endMouseDown);
+			end.removeEventListener('touchstart', endTouchStart);
+			end.removeEventListener('keydown', endKeyDown);
+
+			document.removeEventListener('mousemove', startMouseMove);
+			document.removeEventListener('mousemove', endMouseMove);
+			document.removeEventListener('mouseup', startMouseUp);
+			document.removeEventListener('mouseup', endMouseUp);
+
+			document.removeEventListener('touchmove', startTouchMove);
+			document.removeEventListener('touchmove', endTouchMove);
+			document.removeEventListener('touchend', startTouchEnd);
+			document.removeEventListener('touchend', endTouchEnd);
+
+			doAnimate = false;
+		};
+	}
+
+	/**
+	 * Revert the slider to its initial or configured min/max values.
+	 *
+	 * @example
+	 * slider.revert();
+	 */
+	revert() {
+		this.set({
+			min: this.config.init ? this.config.init[0] : this.config.min,
+			max: this.config.init ? this.config.init[1] : this.config.max
 		});
 	}
 }

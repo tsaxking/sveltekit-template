@@ -1,6 +1,14 @@
+/**
+ * @fileoverview Global undo/redo stack with keyboard shortcuts.
+ *
+ * @example
+ * import { Stack } from '$lib/utils/stack';
+ * const stack = new Stack({ name: 'editor' });
+ * Stack.use(stack);
+ */
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
-import { Keyboard } from './keybinds';
+import { Keyboard } from '../services/keybinds';
 import { EventEmitter } from 'ts-utils/event-emitter';
 
 /**

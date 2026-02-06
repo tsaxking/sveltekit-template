@@ -1,3 +1,16 @@
+<!--
+@component
+Popup notification history list.
+
+**Props**
+- `test`: `boolean` — Populate with test data on mount.
+
+**Example**
+```svelte
+<NotificationHistory test={false} />
+```
+-->
+
 <script lang="ts">
 	import { history } from '$lib/utils/prompts';
 	import { onMount } from 'svelte';

@@ -1,8 +1,11 @@
+/**
+ * @fileoverview Server load for admin struct data `/dashboard/admin/data/[struct]`.
+ */
 import { DB } from '$lib/server/db/index.js';
 import { Account } from '$lib/server/structs/account.js';
 import { redirect, fail } from '@sveltejs/kit';
 import { count, ilike } from 'drizzle-orm';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { ServerCode } from 'ts-utils/status';
 
 export const load = async (event) => {

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Admin API endpoint for `/dashboard/admin`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { redirect, fail } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';

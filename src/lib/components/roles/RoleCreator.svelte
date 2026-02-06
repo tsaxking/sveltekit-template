@@ -1,3 +1,19 @@
+<!--
+@component
+Role creation form for a parent role.
+
+**Props**
+- `parent`: `Permissions.RoleData` — Parent role.
+- `oncreate`?: `(role: Permissions.RoleData) => void` — Called after creation.
+
+**Exports**
+- `save()`: create the role.
+
+**Example**
+```svelte
+<RoleCreator {parent} oncreate={(role) => console.log(role)} />
+```
+-->
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 	import { alert } from '$lib/utils/prompts';

@@ -1,4 +1,4 @@
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { DB } from '../src/lib/server/db';
 import { Limiting } from '../src/lib/server/structs/limiting';
 

@@ -1,3 +1,7 @@
+<!--
+@component
+Admin roles list page at `/dashboard/admin/role`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import Modal from '$lib/components/bootstrap/Modal.svelte';
@@ -7,7 +11,7 @@
 	import { contextmenu } from '$lib/utils/contextmenu.js';
 	import { alert } from '$lib/utils/prompts.js';
 	import { onMount } from 'svelte';
-	import nav from '$lib/imports/admin.js';
+	import nav from '$lib/nav/admin.js';
 	import {
 		TextFilterModule,
 		NumberFilterModule,

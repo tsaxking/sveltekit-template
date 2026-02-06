@@ -1,6 +1,15 @@
+/**
+ * @fileoverview Server-side file upload helpers.
+ *
+ * Provides file upload receiving and stopgap XHR-based upload support.
+ *
+ * @example
+ * const uploader = new FileUploader('/tmp/uploads');
+ * const result = await uploader.receiveFile(file, account);
+ */
 import fs from 'fs/promises';
 import path from 'path';
-import { Account } from '$lib/server/structs/account';
+import { Account } from '../structs/account';
 import { ServerCode } from 'ts-utils/status';
 import { fail } from '@sveltejs/kit';
 import { EventEmitter } from 'ts-utils/event-emitter';

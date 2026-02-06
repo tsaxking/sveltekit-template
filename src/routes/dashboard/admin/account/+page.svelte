@@ -1,3 +1,11 @@
+<!--
+@component
+Admin accounts list page at `/dashboard/admin/account`.
+-->
+<!--
+@component
+Admin accounts list page at `/dashboard/admin/account`.
+-->
 <script lang="ts">
 	import Grid from '$lib/components/general/Grid.svelte';
 	import { Account } from '$lib/model/account.js';
@@ -7,7 +15,7 @@
 	import { Permissions } from '$lib/model/permissions.js';
 	import { writable } from 'svelte/store';
 	import { contextmenu } from '$lib/utils/contextmenu.js';
-	import nav from '$lib/imports/admin.js';
+	import nav from '$lib/nav/admin.js';
 	nav();
 
 	const { data } = $props();

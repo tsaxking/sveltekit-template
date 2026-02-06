@@ -1,19 +1,34 @@
+/**
+ * @fileoverview Client-side analytics activity tracker.
+ *
+ * Tracks active time on a page and reports it to the server on unload or
+ * inactivity.
+ *
+ * @example
+ * import { init } from '$lib/services/analytics';
+ * init();
+ */
 import { browser } from '$app/environment';
 import { attempt } from 'ts-utils/check';
 import { Loop } from 'ts-utils/loop';
 
 let called = false;
+/**
+ * Sends the final activity duration to the server.
+ *
+ * @param {number} seconds - Active duration in seconds.
+ */
 const close = (seconds: number) => {
 	return attempt(() => {
 		if (called || !browser) return;
 		called = true;
 
-		// navigator.sendBeacon('/analytics/close', JSON.stringify({
+		// navigator.sendBeacon('/api/analytics/close', JSON.stringify({
 		//     page: window.location.pathname,
 		//     duration: seconds,
 		// }));
 
-		fetch('/analytics/close', {
+		fetch('/api/analytics/close', {
 			body: JSON.stringify({
 				page: window.location.pathname,
 				duration: seconds
@@ -23,6 +38,9 @@ const close = (seconds: number) => {
 	});
 };
 
+/**
+ * Initializes browser activity tracking.
+ */
 export const init = () => {
 	return attempt(() => {
 		if (!browser) throw new Error('This analytics.init() can only be called in the browser');

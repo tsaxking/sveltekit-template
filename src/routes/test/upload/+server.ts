@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Test upload endpoint at `/test/upload`.
+ */
 import { json, fail } from '@sveltejs/kit';
 import fs from 'fs/promises';
 import path from 'path';

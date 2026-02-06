@@ -1,3 +1,25 @@
+<!--
+@component
+File upload modal backed by Uppy dashboard.
+
+**Props**
+- `multiple`?: `boolean` — Allow multiple file selection.
+- `message`?: `string` — Button and modal title.
+- `endpoint`: `string` — Upload endpoint URL.
+- `allowedFileTypes`?: `string[]` — Restrict file types.
+- `allowLocal`?: `boolean` — Allow local file selection.
+- `btnClasses`?: `string` — Button CSS classes.
+
+**Exports**
+- `on(event, handler)`: subscribe to `'load' | 'error'` events.
+- `getUppy()`: return the Uppy instance.
+- `show()`: open the modal.
+
+**Example**
+```svelte
+<FileUploader endpoint="/api/upload" />
+```
+-->
 <script lang="ts">
 	import Uppy from '@uppy/core';
 	import Dashboard from '@uppy/svelte/dashboard';
@@ -22,51 +44,61 @@
 		multiple?: boolean;
 		message?: string;
 		endpoint: string;
-		usage: 'images' | 'general';
+		allowedFileTypes?: string[];
 		allowLocal?: boolean;
+		btnClasses?: string;
 	}
 
 	const {
 		multiple = true,
 		message = 'Upload Files',
 		endpoint,
-		usage = 'images',
-		allowLocal = true
+		allowLocal = true,
+		btnClasses = 'btn btn-primary',
+		allowedFileTypes = []
 	}: Props = $props();
 
-	const allowedFileTypes = usage === 'images' ? ['image/*'] : ['*'];
+	const uppy = $derived(
+		new Uppy({
+			debug: false,
+			allowMultipleUploads: multiple,
+			restrictions: { allowedFileTypes }
+		})
+	);
 
-	export const uppy = new Uppy({
-		debug: false,
-		allowMultipleUploads: multiple,
-		restrictions: { allowedFileTypes }
-	});
+	export const getUppy = () => uppy;
 
-	uppy.use(XHRUpload, {
-		endpoint,
-		onAfterResponse(xhr) {
-			if (xhr.status >= 200 && xhr.status < 300) {
-				emitter.emit(
-					'load',
-					z
-						.object({
-							url: z.string()
-						})
-						.parse(JSON.parse(xhr.responseText)).url
-				);
-				modal.hide();
-			} else {
-				console.error(xhr.responseText);
-				emitter.emit('error', 'Failed to upload file.');
-				error(500, 'Failed to upload file.');
+	$effect(() => {
+		uppy.use(XHRUpload, {
+			endpoint,
+			onAfterResponse(xhr) {
+				if (xhr.status >= 200 && xhr.status < 300) {
+					emitter.emit(
+						'load',
+						z
+							.object({
+								url: z.string()
+							})
+							.parse(JSON.parse(xhr.responseText)).url
+					);
+					modal.hide();
+				} else {
+					console.error(xhr.responseText);
+					emitter.emit('error', 'Failed to upload file.');
+					error(500, 'Failed to upload file.');
+				}
 			}
-		}
+		});
 	});
 
 	let modal: Modal;
+
+	export const show = () => {
+		modal.show();
+	};
 </script>
 
-<button type="button" class="btn btn-primary" onclick={() => modal.show()}>
+<button type="button" class={btnClasses} onclick={() => modal.show()}>
 	<i class="material-icons">add</i>
 	{message}
 </button>

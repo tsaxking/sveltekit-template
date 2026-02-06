@@ -1,6 +1,6 @@
 import { DB } from '$lib/server/db';
 import { Test } from '$lib/server/structs/testing';
-import { StructStream } from 'drizzle-struct/back-end';
+import { StructStream } from 'drizzle-struct';
 import { describe, expect, beforeAll, test } from 'vitest';
 
 describe('Run tests on the Test Struct', () => {

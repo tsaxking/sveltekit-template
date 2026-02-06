@@ -1,3 +1,15 @@
+<!--
+@component
+Profile display shell for an account.
+
+**Props**
+- `account`: `Account.AccountData` — Account data to display.
+
+**Example**
+```svelte
+<Profile {account} />
+```
+-->
 <script lang="ts">
 	import type { Account } from '$lib/model/account';
 

@@ -1,71 +1,56 @@
+/**
+ * @fileoverview Analytics structures and helpers for tracking visited links.
+ *
+ * Links are recorded per session and optionally associated with an account.
+ * Helper methods aggregate and deduplicate URLs for a given account.
+ *
+ * @example
+ * import { Analytics } from '$lib/server/structs/analytics';
+ * const count = await Analytics.getCount(account).unwrap();
+ */
 import { text, integer } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import type { Account } from './account';
 import { attemptAsync } from 'ts-utils/check';
 import { DB } from '../db';
 import { Session } from './session';
 import { eq, or } from 'drizzle-orm';
-import { z } from 'zod';
-import { DataAction, PropertyAction } from 'drizzle-struct/types';
 
 export namespace Analytics {
+	/**
+	 * Analytics link record.
+	 *
+	 * @property {string} session - Session ID for the visit.
+	 * @property {string} url - Visited URL.
+	 * @property {number} duration - Time spent in milliseconds.
+	 * @property {string} account - Optional account ID.
+	 */
 	export const Links = new Struct({
 		name: 'analytics_links',
 		structure: {
+			/** Session ID for the visit. */
 			session: text('session').notNull(),
+			/** Visited URL. */
 			url: text('url').notNull(),
+			/** Time spent in milliseconds. */
 			duration: integer('duration').notNull(),
+			/** Optional account ID. */
 			account: text('account').notNull().default('')
 		}
 	});
 
 	export type LinkData = typeof Links.sample;
 
-	for (const i of [...Object.values(DataAction), ...Object.values(PropertyAction)]) {
-		Links.block(i, () => true, 'Cannot perform this action on analytics links');
-	}
+	// for (const i of [...Object.values(DataAction), ...Object.values(PropertyAction)]) {
+	// 	Links.block(i, () => true, 'Cannot perform this action on analytics links');
+	// }
 
-	Links.queryListen('my-links', async (event, data) => {
-		const account = event.locals.account;
-
-		const parsed = z
-			.object({
-				offset: z.number(),
-				limit: z.number()
-			})
-			.safeParse(data);
-
-		if (!parsed.success) {
-			throw new Error('Invalid data');
-		}
-
-		if (!account) {
-			const links = await Links.fromProperty('session', event.locals.session.id, {
-				type: 'all'
-			}).unwrap();
-			const filtered = links.filter(
-				(v, i, a) => a.findIndex((v2) => v2.data.url === v.data.url) === i
-			);
-			const limited = filtered.slice(parsed.data.offset, parsed.data.offset + parsed.data.limit);
-			return limited;
-		}
-
-		return getAccountLinks(account, parsed.data).unwrap();
-	});
-
-	Links.sendListen('count', async (event) => {
-		const account = event.locals.account;
-		if (!account) {
-			const links = await Links.fromProperty('session', event.locals.session.id, {
-				type: 'all'
-			}).unwrap();
-			return links.filter((v, i, a) => a.findIndex((v2) => v2.data.url === v.data.url) === i)
-				.length;
-		} else {
-			return getCount(account).unwrap();
-		}
-	});
-
+	/**
+	 * Returns unique links visited by an account, paged and newest-first.
+	 *
+	 * @param {Account.AccountData} account - Account to query.
+	 * @param {{ limit: number; offset: number }} config - Paging configuration.
+	 */
 	export const getAccountLinks = (
 		account: Account.AccountData,
 		config: {
@@ -93,6 +78,11 @@ export namespace Analytics {
 		});
 	};
 
+	/**
+	 * Returns the total number of unique links for an account.
+	 *
+	 * @param {Account.AccountData} account - Account to query.
+	 */
 	export const getCount = (account: Account.AccountData) => {
 		return attemptAsync(async () => {
 			const links = await getAccountLinks(account, {

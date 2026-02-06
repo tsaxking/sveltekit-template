@@ -1,11 +1,31 @@
+/**
+ * @fileoverview Dashboard layout model with cards, persistence, and sizing helpers.
+ *
+ * @example
+ * import { Dashboard } from '$lib/model/dashboard';
+ * const card = new Dashboard.Card({
+ *   name: 'Example',
+ *   icon: { type: 'material-icons', name: 'home' },
+ *   id: 'example-card',
+ *   size: { width: 3, height: 2 }
+ * });
+ * const dash = new Dashboard.Dashboard({ name: 'Main', id: 'main', cards: [card] });
+ */
 import { browser } from '$app/environment';
-import { writable, type Subscriber, type Unsubscriber, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import { attempt } from 'ts-utils/check';
 import { z } from 'zod';
 import type { Icon } from '$lib/types/icons';
+import { WritableArray, WritableBase } from '$lib/services/writables';
 
+/**
+ * Dashboard data models and helpers.
+ */
 export namespace Dashboard {
+	/**
+	 * Returns the current grid size bucket based on window width.
+	 */
 	export const getGridSize = () => {
 		if (!browser) return 'xl';
 		const width = window.innerWidth;
@@ -23,6 +43,9 @@ export namespace Dashboard {
 		}
 	};
 
+	/**
+	 * Default column counts per breakpoint.
+	 */
 	export const sizes = {
 		xs: 12,
 		sm: 12,
@@ -33,6 +56,14 @@ export namespace Dashboard {
 
 	// const order: (keyof typeof sizes)[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
+	/**
+	 * Stored card state persisted in `WritableBase`.
+	 *
+	 * @property {boolean} show - Whether the card is visible.
+	 * @property {boolean} maximized - Whether the card is maximized.
+	 * @property {number} width - Current grid width.
+	 * @property {number} height - Current grid height.
+	 */
 	type CardData = {
 		show: boolean;
 		maximized: boolean;
@@ -40,16 +71,68 @@ export namespace Dashboard {
 		height: number;
 	};
 
-	export class Dashboard {
+	/**
+	 * Size rules for a card, including optional breakpoints.
+	 *
+	 * @property xs - Breakpoint size for extra-small screens.
+	 * @property sm - Breakpoint size for small screens.
+	 * @property md - Breakpoint size for medium screens.
+	 * @property lg - Breakpoint size for large screens.
+	 * @property xl - Breakpoint size for extra-large screens.
+	 * @property width - Default width.
+	 * @property height - Default height.
+	 */
+	type CardSize = {
+		xs?: { width: number; height: number; order?: number };
+		sm?: { width: number; height: number; order?: number };
+		md?: { width: number; height: number; order?: number };
+		lg?: { width: number; height: number; order?: number };
+		xl?: { width: number; height: number; order?: number };
+		width: number;
+		height: number;
+	};
+
+	/**
+	 * Card configuration.
+	 *
+	 * @property name - Display name.
+	 * @property icon - Icon definition.
+	 * @property id - Unique id.
+	 * @property size - Size rules.
+	 */
+	type CardConfig = {
+		name: string;
+		icon: Icon;
+		id: string;
+		size: CardSize;
+	};
+
+	/**
+	 * Dashboard configuration.
+	 *
+	 * @property name - Display name.
+	 * @property id - Unique id used for persistence.
+	 * @property cards - Card instances to manage.
+	 */
+	type DashboardConfig = {
+		name: string;
+		id: string;
+		cards: Card[];
+	};
+
+	/**
+	 * Dashboard container managing a collection of cards.
+	 */
+	export class Dashboard extends WritableArray<Card> {
 		private readonly listeners = new Set<() => void>();
 
-		constructor(
-			public readonly config: {
-				name: string;
-				id: string;
-				cards: Card[];
-			}
-		) {
+		/**
+		 * Creates a dashboard.
+		 *
+		 * @param config - Dashboard configuration.
+		 */
+		constructor(public readonly config: DashboardConfig) {
+			super(config.cards);
 			const hidden = this.pull();
 			this.hiddenCards.set(hidden);
 			for (const card of config.cards) {
@@ -72,20 +155,40 @@ export namespace Dashboard {
 			}
 		}
 
+		/** Dashboard id used for storage keys. */
 		get id() {
 			return this.config.id;
 		}
 
+		/** Dashboard display name. */
 		get name() {
 			return this.config.name;
 		}
 
+		/** Managed card instances. */
 		get cards() {
 			return this.config.cards;
 		}
 
+		/** Cards sorted by order. */
+		get orderedCards() {
+			const a = new WritableArray(
+				[...this.config.cards].sort((a, b) => a.getOrder() - b.getOrder())
+			);
+
+			a.onAllUnsubscribe(
+				this.subscribe(() => {
+					a.set([...this.config.cards].sort((a, b) => a.getOrder() - b.getOrder()));
+				})
+			);
+
+			return a;
+		}
+
+		/** Set of currently hidden cards. */
 		public hiddenCards = writable(new Set<Card>());
 
+		/** Persists hidden card ids to localStorage. */
 		save() {
 			return attempt(() => {
 				if (!browser) return;
@@ -96,6 +199,7 @@ export namespace Dashboard {
 			});
 		}
 
+		/** Restores hidden cards from localStorage. */
 		pull() {
 			if (!browser) return new Set<Card>();
 			const hidden = localStorage.getItem(`v1-dashboard-cards-${this.id}`);
@@ -109,14 +213,23 @@ export namespace Dashboard {
 				arr.data.map((id) => Card.cards.get(id)).filter((card): card is Card => !!card)
 			);
 		}
+
+		/** Attaches resize listeners for reflow. */
+		init() {
+			if (!browser) return;
+			document.addEventListener('resize', () => {
+				this.inform();
+			});
+		}
 	}
 
-	export class Card implements Writable<CardData> {
+	/**
+	 * Dashboard card state and configuration.
+	 */
+	export class Card extends WritableBase<CardData> {
 		public static readonly cards = new Map<string, Card>();
 
 		public state: CardData;
-
-		private readonly subscribers = new Set<(value: CardData) => void>();
 
 		private readonly em = new EventEmitter<{
 			show: boolean;
@@ -128,22 +241,18 @@ export namespace Dashboard {
 		public readonly once = this.em.once.bind(this.em);
 		public readonly emit = this.em.emit.bind(this.em);
 
-		constructor(
-			public readonly config: {
-				name: string;
-				icon: Icon;
-				id: string;
-				size: {
-					xs?: { width: number; height: number };
-					sm?: { width: number; height: number };
-					md?: { width: number; height: number };
-					lg?: { width: number; height: number };
-					xl?: { width: number; height: number };
-					width: number;
-					height: number;
-				};
-			}
-		) {
+		/**
+		 * Creates a dashboard card.
+		 *
+		 * @param config - Card configuration.
+		 */
+		constructor(public readonly config: CardConfig) {
+			super({
+				show: true,
+				maximized: false,
+				width: config.size.width,
+				height: config.size.height
+			});
 			if (!Number.isInteger(config.size.width) || !Number.isInteger(config.size.height)) {
 				throw new Error('Width and height must be integers');
 			}
@@ -165,6 +274,7 @@ export namespace Dashboard {
 			// }
 		}
 
+		/** Returns the current size for the active breakpoint. */
 		getSize() {
 			const size = getGridSize();
 
@@ -191,53 +301,24 @@ export namespace Dashboard {
 			};
 		}
 
+		/** Display order for the active breakpoint. */
+		getOrder() {
+			const size = getGridSize();
+			const s = this.config.size[size];
+			return s?.order ?? 0;
+		}
+
+		/** Default width for the card. */
 		get width() {
 			return this.config.size.width;
 		}
 
+		/** Default height for the card. */
 		get height() {
 			return this.config.size.height;
 		}
 
-		set(value: CardData) {
-			this.state = value;
-			this.subscribers.forEach((subscriber) => subscriber(this.state));
-			// if (this.state.show) {
-			// 	hiddenCards.update((cards) => {
-			// 		cards.delete(this);
-			// 		return cards;
-			// 	});
-			// } else {
-			// 	hiddenCards.update((cards) => {
-			// 		cards.add(this);
-			// 		return cards;
-			// 	});
-			// }
-
-			// save();
-		}
-
-		update(fn: (value: CardData) => CardData) {
-			this.set(fn(this.state));
-		}
-
-		private _onAllUnsubscribe?: () => void;
-
-		subscribe(run: Subscriber<CardData>, invalidate?: () => void): Unsubscriber {
-			this.subscribers.add(run);
-			run(this.state);
-
-			return () => {
-				this.subscribers.delete(run);
-				invalidate?.();
-				if (this.subscribers.size === 0) this._onAllUnsubscribe?.();
-			};
-		}
-
-		public onAllUnsubscribe(fn: () => void) {
-			this._onAllUnsubscribe = fn;
-		}
-
+		/** Shows the card and emits a `show` event. */
 		show() {
 			this.update((state) => ({
 				...state,
@@ -247,6 +328,7 @@ export namespace Dashboard {
 			this.emit('show', true);
 		}
 
+		/** Hides the card and emits a `show` event. */
 		hide() {
 			this.update((state) => ({
 				...state,
@@ -256,16 +338,19 @@ export namespace Dashboard {
 			this.emit('show', false);
 		}
 
+		/** Clears the maximized state and emits `maximized`. */
 		minimize() {
 			this.update((state) => ({ ...state, maximized: false }));
 			this.emit('maximized', false);
 		}
 
+		/** Sets the maximized state and emits `maximized`. */
 		maximize() {
 			this.update((state) => ({ ...state, maximized: true }));
 			this.emit('maximized', true);
 		}
 
+		/** Recomputes size based on the current breakpoint. */
 		resize() {
 			this.update((state) => ({
 				...state,

@@ -1,5 +1,15 @@
+/**
+ * @fileoverview IP and session limiting, blocking, and rate-limit utilities.
+ *
+ * This module manages page rulesets, blocked entities, and rate-limit
+ * enforcement using Redis counters.
+ *
+ * @example
+ * import { Limiting } from '$lib/server/structs/limiting';
+ * const limited = Limiting.isIpLimitedPage('/admin').unwrap();
+ */
 import { text } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import type { Session } from './session';
 import type { Account } from './account';
 import { attempt, attemptAsync } from 'ts-utils/check';
@@ -7,7 +17,7 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import redis from '../services/redis';
-import { config } from '../utils/env';
+import { config, str } from '../utils/env';
 import { pathMatch } from '../utils/file-match';
 
 export namespace Limiting {
@@ -48,19 +58,30 @@ export namespace Limiting {
 		);
 	}
 
+	/**
+	 * Per-page IP allow list entry.
+	 *
+	 * @property {string} ip - IP address allowed for a page.
+	 * @property {string} page - Page path pattern.
+	 */
 	export const PageRuleset = new Struct({
 		name: 'page_ruleset',
 		structure: {
+			/** IP address allowed for a page. */
 			ip: text('ip').notNull(),
+			/** Page path pattern. */
 			page: text('page').notNull()
 		}
 	});
 
 	// Prevent duplicates
 	PageRuleset.on('create', async (rs) => {
-		const rules = PageRuleset.fromProperty('ip', rs.data.ip, {
-			type: 'stream'
-		});
+		const rules = PageRuleset.get(
+			{ ip: rs.data.ip },
+			{
+				type: 'stream'
+			}
+		);
 
 		rules.pipe((r) => {
 			if (r.data.page === rs.data.page && r.id !== rs.id) {
@@ -69,65 +90,128 @@ export namespace Limiting {
 		});
 	});
 
+	/**
+	 * Checks whether a page is subject to IP limiting.
+	 *
+	 * @param {string} page - Page path.
+	 */
 	export const isIpLimitedPage = (page: string) => {
 		return attempt(() => {
 			return limits.ip.test(page);
 		});
 	};
 
+	/**
+	 * Checks whether a page is blocked for all users.
+	 *
+	 * @param {string} page - Page path.
+	 */
 	export const isBlockedPage = (page: string) => {
 		return attempt(() => {
 			return limits.blocked.test(page);
 		});
 	};
 
+	/**
+	 * Determines whether an IP is allowed to access a limited page.
+	 *
+	 * @param {string} ip - Client IP address.
+	 * @param {string} page - Requested page path.
+	 */
 	export const isIpAllowed = (ip: string, page: string) => {
 		return attemptAsync(async () => {
 			const manifest = limits.ip.getPattern(page);
-			const rules = await PageRuleset.fromProperty('ip', ip, {
-				type: 'all'
-			}).unwrap();
+			const rules = await PageRuleset.get(
+				{ ip },
+				{
+					type: 'all'
+				}
+			).unwrap();
 			return !!rules.find((r) => manifest.includes(r.data.page));
 		});
 	};
 
+	/**
+	 * Blocked IP record.
+	 *
+	 * @property {string} ip - Blocked IP address.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedIps = new Struct({
 		name: 'blocked_ips',
 		structure: {
+			/** Blocked IP address. */
 			ip: text('ip').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
 
+	/**
+	 * Blocked session record.
+	 *
+	 * @property {string} session - Blocked session ID.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedSessions = new Struct({
 		name: 'blocked_sessions',
 		structure: {
+			/** Blocked session ID. */
 			session: text('session').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
 
+	/**
+	 * Blocked fingerprint record.
+	 *
+	 * @property {string} fingerprint - Fingerprint hash.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedFingerprints = new Struct({
 		name: 'blocked_fingerprints',
 		structure: {
+			/** Fingerprint hash. */
 			fingerprint: text('fingerprint').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
 
+	/**
+	 * Blocked account record.
+	 *
+	 * @property {string} account - Blocked account ID.
+	 * @property {string} reason - Reason for blocking.
+	 */
 	export const BlockedAccounts = new Struct({
 		name: 'blocked_accounts',
 		structure: {
+			/** Blocked account ID. */
 			account: text('account').notNull(),
+			/** Reason for blocking. */
 			reason: text('reason').notNull()
 		}
 	});
 
+	/**
+	 * Thresholds for escalating violations.
+	 *
+	 * @property {number} warn - Violation score to warn.
+	 * @property {number} block - Violation score to block.
+	 */
 	export const ViolationTiers = {
 		warn: 10,
 		block: 50
 	};
 
+	/**
+	 * Checks whether a session, IP, fingerprint, or account is blocked.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData} [account] - Optional account.
+	 */
 	export const isBlocked = (session: Session.SessionData, account?: Account.AccountData) => {
 		return attemptAsync<
 			| {
@@ -138,45 +222,66 @@ export namespace Limiting {
 					blocked: false;
 			  }
 		>(async () => {
-			const ipBlocked = await BlockedIps.fromProperty('ip', session.data.ip, {
-				type: 'single'
-			}).unwrap();
+			const ipBlocked = await BlockedIps.get(
+				{ ip: session.data.ip },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (ipBlocked) return { blocked: true, reason: ipBlocked.data.reason };
-			const sessionBlocked = await BlockedSessions.fromProperty('session', session.id, {
-				type: 'single'
-			}).unwrap();
+			const sessionBlocked = await BlockedSessions.get(
+				{ session: session.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (sessionBlocked) return { blocked: true, reason: sessionBlocked.data.reason };
-			const fingerprintBlocked = await BlockedFingerprints.fromProperty(
-				'fingerprint',
-				session.data.fingerprint,
+			const fingerprintBlocked = await BlockedFingerprints.get(
+				{ fingerprint: session.data.fingerprint },
 				{ type: 'single' }
 			).unwrap();
 			if (fingerprintBlocked) return { blocked: true, reason: fingerprintBlocked.data.reason };
 			if (account) {
-				const accountBlocked = await BlockedAccounts.fromProperty('account', account.id, {
-					type: 'single'
-				}).unwrap();
+				const accountBlocked = await BlockedAccounts.get(
+					{ account: account.id },
+					{
+						type: 'single'
+					}
+				).unwrap();
 				if (accountBlocked) return { blocked: true, reason: accountBlocked.data.reason };
 			}
 			return { blocked: false };
 		});
 	};
 
+	/**
+	 * Builds a fingerprint hash from request headers.
+	 *
+	 * @param {Request} request - Incoming request.
+	 */
 	export const getFingerprint = (request: Request) => {
 		const ip = request.headers.get('x-forwarded-for') ?? '';
 		const ua = request.headers.get('user-agent') ?? '';
 		const accept = request.headers.get('accept') ?? '';
 		const language = request.headers.get('accept-language') ?? '';
 
-		const salt = config.sessions.fingerprint_secret;
+		const salt = str('FINGERPRINT_SECRET', true);
 
 		const raw = `${ip}|${ua}|${accept}|${language}|${salt}`;
 
 		return createHash('sha256').update(raw).digest('hex');
 	};
 
+	/**
+	 * Redis counter group for rate limits and violations.
+	 */
 	const limitService = redis.createItemGroup('rate_limit', 'number');
 
+	/**
+	 * Increments and checks the rate limit counter for a key.
+	 *
+	 * @param {string} key - Rate limit key (e.g., IP or session).
+	 */
 	export const rateLimit = async (key: string) => {
 		return attemptAsync(async () => {
 			if (!config.limiting.enabled) return false;
@@ -192,6 +297,14 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Increments violation counters and returns the new severity.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData | undefined} account - Optional account.
+	 * @param {number} increment - Violation increment amount.
+	 * @param {string} reason - Reason for the violation.
+	 */
 	export const violate = async (
 		session: Session.SessionData,
 		account: Account.AccountData | undefined,
@@ -233,9 +346,12 @@ export namespace Limiting {
 			}
 
 			// If the score is 50 or more, block the IP, session, fingerprint, and account.
-			const sessionExists = await BlockedSessions.fromProperty('session', session.id, {
-				type: 'single'
-			}).unwrap();
+			const sessionExists = await BlockedSessions.get(
+				{ session: session.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (!sessionExists) {
 				await BlockedSessions.new({
 					session: session.id,
@@ -249,9 +365,12 @@ export namespace Limiting {
 					.unwrap();
 			}
 
-			const ipExists = await BlockedIps.fromProperty('ip', session.data.ip, {
-				type: 'single'
-			}).unwrap();
+			const ipExists = await BlockedIps.get(
+				{ ip: session.data.ip },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (!ipExists) {
 				await BlockedIps.new({
 					ip: session.data.ip,
@@ -265,9 +384,8 @@ export namespace Limiting {
 					.unwrap();
 			}
 
-			const fingerprintExists = await BlockedFingerprints.fromProperty(
-				'fingerprint',
-				session.data.fingerprint,
+			const fingerprintExists = await BlockedFingerprints.get(
+				{ fingerprint: session.data.fingerprint },
 				{ type: 'single' }
 			).unwrap();
 			if (!fingerprintExists) {
@@ -287,6 +405,12 @@ export namespace Limiting {
 		});
 	};
 
+	/**
+	 * Returns the highest violation score for the given identifiers.
+	 *
+	 * @param {Session.SessionData} session - Active session.
+	 * @param {Account.AccountData} [account] - Optional account.
+	 */
 	export const violationSeverity = (
 		session: Session.SessionData,
 		account?: Account.AccountData

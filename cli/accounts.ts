@@ -1,3 +1,6 @@
+/**
+ * @fileoverview CLI helpers and menu actions for account management.
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Account } from '../src/lib/server/structs/account';
 import { selectData, structActions, viewData } from './struct';
@@ -6,6 +9,15 @@ import terminal from '../src/lib/server/utils/terminal';
 import { Logs } from '../src/lib/server/structs/log';
 import { attemptAsync } from 'ts-utils/check';
 
+/**
+ * Prompt the user to select an account from all accounts, optionally filtered.
+ *
+ * @param filter - Optional filter to apply to the account list.
+ * @returns Result wrapper containing the selected account or a cancellation message.
+ *
+ * @example
+ * const account = (await selectAccount((a) => a.data.verified)).unwrap();
+ */
 export const selectAccount = (filter?: (account: Account.AccountData) => boolean) => {
 	return attemptAsync(async () => {
 		const accounts = (
@@ -30,6 +42,11 @@ export const selectAccount = (filter?: (account: Account.AccountData) => boolean
 	});
 };
 
+/**
+ * Accounts CLI folder with common account maintenance actions.
+ *
+ * Actions include listing, creating, verifying, role promotion, and log viewing.
+ */
 export default new Folder('Accounts', 'Edit accounts', '👤', [
 	new Action('List', 'List all accounts', '📋', async () => {
 		return (
@@ -161,9 +178,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		const admin = admins[a];
 
 		const adminData = (
-			await Account.Admins.fromProperty('accountId', admin.id, {
-				type: 'single'
-			})
+			await Account.Admins.get(
+				{ accountId: admin.id },
+				{
+					type: 'single'
+				}
+			)
 		).unwrap();
 
 		if (!adminData) return terminal.log('Invalid admin');
@@ -233,9 +253,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		const developer = developers[a];
 
 		const developerData = (
-			await Account.Developers.fromProperty('accountId', developer.id, {
-				type: 'single'
-			})
+			await Account.Developers.get(
+				{ accountId: developer.id },
+				{
+					type: 'single'
+				}
+			)
 		).unwrap();
 
 		if (!developerData) return terminal.log('Invalid developer');
@@ -265,9 +288,12 @@ export default new Folder('Accounts', 'Edit accounts', '👤', [
 		if (!account) return terminal.log('Invalid account');
 
 		const logs = (
-			await Logs.Log.fromProperty('accountId', account.id, {
-				type: 'stream'
-			}).await()
+			await Logs.Log.get(
+				{ accountId: account.id },
+				{
+					type: 'stream'
+				}
+			).await()
 		).unwrap();
 
 		terminal.log('LOGS:', logs.length);

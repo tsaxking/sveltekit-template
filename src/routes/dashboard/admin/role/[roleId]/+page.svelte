@@ -1,6 +1,10 @@
+<!--
+@component
+Admin role detail page at `/dashboard/admin/role/[roleId]`.
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	import nav from '$lib/imports/admin.js';
+	import nav from '$lib/nav/admin.js';
 	import Grid from '$lib/components/general/Grid.svelte';
 	import RoleEditor from '$lib/components/roles/RoleRulesetEditor.svelte';
 	import { Permissions } from '$lib/model/permissions';

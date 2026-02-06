@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load for admin account detail `/dashboard/admin/account/[accountId]`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';
 import { redirect, fail } from '@sveltejs/kit';
@@ -21,15 +24,21 @@ export const load = async (event) => {
 	const limit = Number(event.url.searchParams.get('limit') || '50');
 	const offset = Number(event.url.searchParams.get('page') || '0') * limit;
 
-	const sessions = await Session.Session.fromProperty('accountId', event.params.accountId, {
-		type: 'array',
-		limit,
-		offset
-	}).unwrap();
+	const sessions = await Session.Session.get(
+		{ accountId: event.params.accountId },
+		{
+			type: 'array',
+			limit,
+			offset
+		}
+	).unwrap();
 
-	const total = await Session.Session.fromProperty('accountId', event.params.accountId, {
-		type: 'count'
-	}).unwrap();
+	const total = await Session.Session.get(
+		{ accountId: event.params.accountId },
+		{
+			type: 'count'
+		}
+	).unwrap();
 
 	return {
 		sessions: sessions.map((s) => s.safe()),

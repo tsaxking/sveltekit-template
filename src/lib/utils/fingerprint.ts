@@ -1,7 +1,18 @@
+/**
+ * @fileoverview Browser fingerprint collection and reporting.
+ *
+ * @example
+ * import { fingerprint } from '$lib/utils/fingerprint';
+ * await fingerprint();
+ */
 import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
 import { attemptAsync } from 'ts-utils/check';
 import { browser } from '$app/environment';
+import { fingerprint as fp } from '$lib/remotes/analytics.remote';
 
+/**
+ * Computes a browser fingerprint and reports it to the server.
+ */
 export const fingerprint = () => {
 	return attemptAsync(async () => {
 		if (!browser) {
@@ -12,17 +23,7 @@ export const fingerprint = () => {
 			throw new Error('Failed to retrieve fingerprint');
 		}
 
-		const res = await fetch('/fp', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ fingerprint: fingerprint.toString() })
-		});
-
-		if (!res.ok) {
-			throw new Error('Failed to send fingerprint to server');
-		}
+		await fp({ fingerprint });
 		return fingerprint;
 	});
 };

@@ -1,3 +1,17 @@
+<!--
+@component
+Datetime input that normalizes to an ISO string on change.
+
+**Props**
+- `data`: `string` — Current value (bindable).
+- `header`: `string` — Unused label placeholder.
+- `onChange`: `(value: string) => void` — Called with ISO string.
+
+**Example**
+```svelte
+<DateInput bind:data onChange={(v) => console.log(v)} />
+```
+-->
 <script lang="ts">
 	interface Props {
 		data: string;

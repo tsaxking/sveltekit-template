@@ -7,7 +7,7 @@ import {
 	StructData,
 	type Blank,
 	type Structable
-} from 'drizzle-struct/back-end';
+} from 'drizzle-struct';
 import fs from 'fs';
 import path from 'path';
 import { select, selectFromTable, repeatPrompt, confirm, prompt, viewTable } from './utils';
@@ -212,82 +212,6 @@ otherwise dates will not work.
 			).unwrap();
 			return selectDataPipe(struct, all, next, options);
 		}),
-	fromProperty: async <T extends Struct>(
-		struct: T,
-		next?: Next,
-		options?: {
-			omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-		}
-	) =>
-		attemptAsync(async () => {
-			const res = (
-				await select({
-					clear: true,
-					message: `Select a property from ${struct.name}`,
-					options: Object.keys(struct.data.structure).map((k) => ({
-						name: k,
-						value: k
-					}))
-				})
-			).unwrap();
-
-			if (!res) {
-				return doNext('No property selected', undefined, next);
-			}
-
-			const value = (
-				await repeatPrompt({
-					clear: true,
-					message: `Enter a value for ${res} (${struct.data.structure[res]})`,
-					validate: (str) => checkStrType(str, (struct.data.structure[res] as any).config.dataType)
-				})
-			).unwrap();
-
-			const data = (
-				await struct
-					.fromProperty(res, value, {
-						type: 'stream'
-					})
-					.await()
-			).unwrap();
-			return selectDataPipe(struct, data, next, options);
-		}),
-	// fromUniverse: async <T extends Struct>(
-	// 	struct: T,
-	// 	next?: Next,
-	// 	options?: {
-	// 		omit?: (keyof (T['data']['structure'] & typeof globalCols))[];
-	// 	}
-	// ) =>
-	// 	attemptAsync(async () => {
-	// 		const universes = (
-	// 			await Universes.Universe.all({
-	// 				type: 'stream'
-	// 			}).await()
-	// 		).unwrap();
-	// 		const res = (
-	// 			await select({
-	// 				message: 'Select a universe',
-	// 				options: universes.map((u) => ({
-	// 					name: u.data.name,
-	// 					value: u
-	// 				}))
-	// 			})
-	// 		).unwrap();
-
-	// 		if (!res) {
-	// 			return doNext('No universe selected', undefined, next);
-	// 		}
-
-	// 		const data = (
-	// 			await struct
-	// 				.fromProperty('universe', res.id, {
-	// 					type: 'stream'
-	// 				})
-	// 				.await()
-	// 		).unwrap();
-	// 		return selectDataPipe(struct, data, next, options);
-	// 	}),
 	archived: async <T extends Struct>(
 		struct: T,
 		next?: Next,
@@ -612,9 +536,12 @@ export const dataActions = {
 	viewLogs: async <T extends StructData>(data: T, next?: Next) =>
 		attemptAsync(async () => {
 			const logs = (
-				await Logs.Log.fromProperty('dataId', String(data.id), {
-					type: 'stream'
-				}).await()
+				await Logs.Log.get(
+					{ dataId: String(data.id) },
+					{
+						type: 'stream'
+					}
+				).await()
 			).unwrap();
 
 			terminal.log(

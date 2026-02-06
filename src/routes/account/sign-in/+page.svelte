@@ -1,3 +1,7 @@
+<!--
+@component
+Sign-in page at `/account/sign-in`.
+-->
 <script lang="ts">
 	import '$lib/styles/gsi.css';
 	import type { ActionData } from './$types';
@@ -10,9 +14,11 @@
 
 	// let user = $state(form?.user || '');
 
-	if (form?.redirect && browser) {
-		goto(form.redirect);
-	}
+	$effect(() => {
+		if (form?.redirect && browser) {
+			goto(form.redirect);
+		}
+	});
 
 	const requestPasswordReset = () => {
 		new Form()

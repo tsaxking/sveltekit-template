@@ -1,3 +1,44 @@
+<!--
+@component
+AG Grid wrapper with optional filter input and selection helpers.
+See AG Grid docs: https://www.ag-grid.com/javascript-data-grid/getting-started/
+
+**Props**
+- `filter`?: `boolean` — Show quick filter input.
+- `opts`: `Omit<GridOptions<T>, 'rowData'>` — Grid options without row data.
+- `data`: `Readable<T[]>` — Store of row data.
+- `style`?: `string` — Additional container styles.
+- `rowNumbers`?: `boolean | { start: number }` — Show row numbers.
+- `layer`?: `number` — Theme layer for CSS variables.
+- `height`: `string | number` — Grid height.
+- `modules`?: `Module[]` — Extra AG Grid modules.
+- `multiSelect`?: `boolean` — Enable checkbox selection.
+
+**Exports**
+- `on(event)`: subscribe to `'filter' | 'init' | 'ready'` events.
+- `off(event)`: unsubscribe.
+- `getGrid()`: return the grid API instance.
+- `getSelection()`: return selected rows.
+- `rerender()`: refresh visible cells.
+
+**Example**
+```svelte
+<Grid
+	{data}
+	opts={{
+		columnDefs: [
+			{ field: 'name', sortable: true, filter: true },
+			{ field: 'status', valueFormatter: (p) => String(p.value ?? '') }
+		],
+		defaultColDef: { resizable: true, flex: 1 },
+		rowSelection: 'single',
+		animateRows: true
+	}}
+	height="400px"
+	filter
+/>
+```
+-->
 <script lang="ts" generics="T">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -57,19 +98,21 @@
 		multiSelect = false
 	}: Props = $props();
 
-	ModuleRegistry.registerModules([
-		...modules,
-		ClientSideRowModelModule,
-		PaginationModule,
-		ValidationModule,
-		RowApiModule,
-		QuickFilterModule,
-		RowSelectionModule,
-		RenderApiModule,
-		EventApiModule,
-		RowStyleModule,
-		CellStyleModule
-	]);
+	$effect(() =>
+		ModuleRegistry.registerModules([
+			...modules,
+			ClientSideRowModelModule,
+			PaginationModule,
+			ValidationModule,
+			RowApiModule,
+			QuickFilterModule,
+			RowSelectionModule,
+			RenderApiModule,
+			EventApiModule,
+			RowStyleModule,
+			CellStyleModule
+		])
+	);
 
 	const em = new EventEmitter<{
 		filter: T[];
@@ -102,17 +145,18 @@
 	};
 
 	// Create a custom dark theme using Theming API
-	const darkTheme = themeQuartz.withParams({
-		backgroundColor: `var(--layer-${layer})`,
-		browserColorScheme: 'dark',
-		chromeBackgroundColor: {
-			ref: 'foregroundColor',
-			mix: 0.07,
-			onto: 'backgroundColor'
-		},
-		foregroundColor: `var(--text-layer-${layer})`,
-		headerFontSize: 14
-	});
+	const gridTheme = $derived(
+		themeQuartz.withParams({
+			backgroundColor: `var(--layer-${layer})`,
+			chromeBackgroundColor: {
+				ref: 'foregroundColor',
+				mix: 0.07,
+				onto: 'backgroundColor'
+			},
+			foregroundColor: `var(--text-layer-${layer})`,
+			headerFontSize: 14
+		})
+	);
 
 	let gridDiv: HTMLDivElement;
 	let grid: GridApi<T>;
@@ -137,9 +181,9 @@
 		if (!opts.columnDefs) {
 			throw new Error('Column definitions are required');
 		}
-		em.emit('init', gridDiv); // Emit the init event with the grid container
+		em.emit('init', gridDiv);
 		const gridOptions: GridOptions<T> = {
-			theme: darkTheme,
+			theme: gridTheme,
 			...opts,
 			rowData: $data,
 			columnDefs: [
@@ -192,13 +236,18 @@
 				return (params.node as any).checkboxSelected ? 'row-checked' : '';
 			}
 		};
-		grid = createGrid(gridDiv, gridOptions); // Create the grid with custom options
-		em.emit('ready', grid); // Emit the ready event with the grid API
+		grid = createGrid(gridDiv, gridOptions);
+		em.emit('ready', grid);
 
-		return data.subscribe((r) => {
-			grid.setGridOption('rowData', r); // Set the row data from the provided store
+		const dataUnsub = data.subscribe((r) => {
+			grid.setGridOption('rowData', r);
 			onDataFilter();
 		});
+
+		return () => {
+			dataUnsub();
+			grid.destroy();
+		};
 	});
 </script>
 

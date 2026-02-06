@@ -1,3 +1,22 @@
+<!--
+@component
+Dashboard card container with maximize and hide controls.
+
+**Props**
+- `body`: `Snippet` — Card body content.
+- `card`: `Dashboard.Card` — Card controller.
+- `style`?: `string` — Extra inline styles.
+
+**Example**
+```svelte
+<Card {card}>
+	{#snippet body()}
+		<p>Card content</p>
+	{/snippet}
+</Card>
+```
+-->
+
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import { capitalize } from 'ts-utils/text';
@@ -15,7 +34,7 @@
 
 	let { body, card, style = '' }: Props = $props();
 
-	let height = $state(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
+	let height = $derived(card.height * CARD_HEIGHT + (card.height - 1) * GAP);
 
 	let resizeTimeout: number | undefined;
 	const onResize = () => {

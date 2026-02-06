@@ -1,3 +1,29 @@
+<!--
+@component
+Bootstrap card with optional glow, minimize, and hide controls.
+
+**Props**
+- `title`: `string` — Card title.
+- `body`: `Snippet` — Card body content.
+- `color`?: `BootstrapColor` — Background color class.
+- `classes`?: `string` — Additional CSS classes.
+- `glowColor`?: `BootstrapColor` — Glow accent color.
+
+**Exports**
+- `minimize()`: hide body content.
+- `maximize()`: show body content.
+- `hide()`: hide card.
+- `show()`: show card.
+
+**Example**
+```svelte
+<Card title="Stats">
+	{#snippet body()}
+		<p>Content</p>
+	{/snippet}
+</Card>
+```
+-->
 <script lang="ts">
 	import type { BootstrapColor } from 'colors/color';
 	import type { Snippet } from 'svelte';
@@ -12,8 +38,8 @@
 
 	const { title, body, color, classes = '', glowColor }: Props = $props();
 
-	const glowColorProxy = glowColor ? `glow glow-${glowColor}` : 'shadow';
-	const colorProxy = color ? `bg-${color}` : '';
+	const glowColorProxy = $derived(glowColor ? `glow glow-${glowColor}` : 'shadow');
+	const colorProxy = $derived(color ? `bg-${color}` : '');
 
 	let minimized = $state(false);
 	let hidden = $state(false);

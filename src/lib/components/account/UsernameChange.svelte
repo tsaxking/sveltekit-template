@@ -1,3 +1,15 @@
+<!--
+@component
+Username change input with availability checks.
+
+**Props**
+- `account`: `Account.AccountData` — Current account.
+
+**Example**
+```svelte
+<UsernameChange {account} />
+```
+-->
 <script lang="ts">
 	import { Account } from '$lib/model/account';
 

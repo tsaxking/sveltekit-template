@@ -1,46 +1,47 @@
+/**
+ * @fileoverview Permissions and role-based access control structs.
+ *
+ * Defines roles, entitlements, rulesets, and helpers for permission checks.
+ *
+ * @example
+ * import { Permissions } from '$lib/server/structs/permissions';
+ * const roles = await Permissions.searchRoles('admin', { offset: 0, limit: 10 }).unwrap();
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // See /diagrams/permissions.excalidraw for the diagram of this file
 
 import { text } from 'drizzle-orm/pg-core';
-import {
-	DataVersion,
-	Struct,
-	StructData,
-	type Blank,
-	type Structable
-} from 'drizzle-struct/back-end';
+import { DataVersion, Struct, StructData, type Blank, type Structable } from 'drizzle-struct';
 import { attempt, attemptAsync, resolveAll } from 'ts-utils/check';
 import { Account } from './account';
-import { PropertyAction, DataAction } from 'drizzle-struct/types';
+import { PropertyAction, DataAction } from '../../types/struct';
 import { DB } from '../db';
 import { and, eq, ilike, inArray } from 'drizzle-orm';
-import type { Entitlement, Features } from '$lib/types/entitlements';
+import type { Entitlement, Features } from '../../types/entitlements';
 import { z } from 'zod';
 import terminal from '../utils/terminal';
 import path from 'path';
 import fs from 'fs';
-import {
-	ActionBypass,
-	CallListener,
-	QueryListener,
-	SendListener
-} from '../services/struct-listeners';
-import type { RequestEvent } from '@sveltejs/kit';
+import structRegistry from '../services/struct-registry';
 
 export namespace Permissions {
 	/**
 	 * Blocks all edit on a struct.
 	 * @param struct The struct to block actions on.
 	 */
-	const block = (struct: Struct<any, any>) => {
-		struct.block(DataAction.Delete, () => true, `Cannot delete ${struct.name}`);
-		struct.block(DataAction.Create, () => true, `Cannot create new ${struct.name}`);
-		struct.block(PropertyAction.Update, () => true, `Cannot update ${struct.name}`);
-		struct.block(DataAction.Archive, () => true, `Cannot archive ${struct.name}`);
-		struct.block(DataAction.RestoreArchive, () => true, `Cannot restore ${struct.name}`);
-		struct.block(DataAction.DeleteVersion, () => true, `Cannot delete version of ${struct.name}`);
-		struct.block(DataAction.RestoreVersion, () => true, `Cannot create version of ${struct.name}`);
+	const registerAndBlock = (struct: Struct<any, any>) => {
+		return structRegistry
+			.register(struct)
+			.block(DataAction.Delete)
+			.block(DataAction.Create)
+			.block(DataAction.Delete)
+			.block(DataAction.Create)
+			.block(PropertyAction.Update)
+			.block(DataAction.Archive)
+			.block(DataAction.RestoreArchive)
+			.block(DataAction.DeleteVersion)
+			.block(DataAction.RestoreVersion);
 	};
 
 	/*
@@ -51,146 +52,18 @@ export namespace Permissions {
 	export const Role = new Struct({
 		name: 'role',
 		structure: {
+			/** Role name. */
 			name: text('name').notNull(),
+			/** Role description. */
 			description: text('description').notNull(),
+			/** Parent role ID for hierarchy. */
 			parent: text('parent').notNull().default(''), // Parent role for hierarchy. A parent role can manage its child roles.
+			/** UI color hex code. */
 			color: text('color').notNull().default('#000000') // Color for UI purposes
 		}
 	});
 
-	SendListener.on(
-		'search',
-		Role,
-		z.object({
-			searchKey: z.string(),
-			offset: z.number().int(),
-			limit: z.number().int()
-		}),
-		async (event, data) => {
-			const account = event.locals.account;
-			if (!account)
-				return {
-					success: false,
-					message: 'Not logged in'
-				};
-			const roles = await searchRoles(data.searchKey, {
-				offset: data.offset,
-				limit: data.limit
-			});
-			if (roles.isErr()) {
-				return {
-					success: false,
-					message: 'Internal server error'
-				};
-			}
-
-			const res = await filterPropertyActionFromAccount(account, roles.value, PropertyAction.Read);
-
-			if (res.isErr()) {
-				return {
-					success: false,
-					message: 'Internal server error'
-				};
-			}
-
-			return {
-				success: true,
-				data: {
-					roles: res.value
-				}
-			};
-		}
-	).bypass((event) => !!event.locals.account && Account.isAdmin(event.locals.account).unwrap());
-
-	CallListener.on(
-		'create-role',
-		Role,
-		z.object({
-			name: z.string(),
-			description: z.string(),
-			parent: z.string(),
-			color: z.string().refine((val) => /^#([0-9A-F]{3}){1,2}$/i.test(val), {
-				message: 'Invalid color format'
-			})
-		}),
-		async (event, data) => {
-			if (!event.locals.account) {
-				return {
-					success: false,
-					message: 'Not logged in'
-				};
-			}
-
-			const parentRole = await Role.fromId(data.parent).unwrap();
-			if (!parentRole) {
-				return {
-					success: false,
-					message: 'No parent role found'
-				};
-			}
-
-			PERMIT: {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-				// if an account has that role or higher in the hierarchy, they can create child roles.
-				const highestRole = await getHighestLevelRole(
-					parentRole,
-					event.locals.account,
-					true
-				).unwrap();
-				if (!highestRole) {
-					return {
-						success: false,
-						message:
-							'You do not have permission to create a role under this parent role. You must have the parent role or a role higher in the hierarchy and possess the necessary permissions.'
-					};
-				}
-
-				const canCreate = await Permissions.canCreate(
-					event.locals.account,
-					Role,
-					parentRole.getAttributes().unwrap()
-				).unwrap();
-
-				if (!canCreate) {
-					return {
-						success: false,
-						message: 'You do not have permission to create a role under this parent role'
-					};
-				}
-
-				// Ensure there are no duplicate names within the whole system
-				const [upper, lower] = await Promise.all([
-					getUpperHierarchy(parentRole, true).unwrap(),
-					getLowerHierarchy(parentRole, true).unwrap()
-				]);
-
-				if (
-					[...upper, ...lower].some((r) => r.data.name.toLowerCase() === data.name.toLowerCase())
-				) {
-					return {
-						success: false,
-						message: 'A role with this name already exists in the hierarchy.'
-					};
-				}
-			}
-
-			await Role.new({
-				name: data.name,
-				description: data.description,
-				parent: data.parent,
-				color: data.color
-			}).unwrap();
-
-			return {
-				success: true,
-				data: {}
-			};
-		}
-	).bypass((event) => !!event.locals.account && Account.isAdmin(event.locals.account).unwrap());
-
-	const searchRoles = (
+	export const searchRoles = (
 		searchKey: string,
 		config: {
 			offset: number;
@@ -253,7 +126,12 @@ export namespace Permissions {
 
 	Role.on('delete', async (role) => {
 		const parent = await getParent(role).unwrap();
-		Role.fromProperty('parent', role.id, { type: 'stream' }).pipe(async (child) => {
+		Role.get(
+			{
+				parent: role.id
+			},
+			{ type: 'stream' }
+		).pipe(async (child) => {
 			if (parent) {
 				const res = await child.update({
 					parent: parent.id
@@ -268,10 +146,20 @@ export namespace Permissions {
 				child.delete();
 			}
 		});
-		RoleAccount.fromProperty('role', role.id, { type: 'stream' }).pipe((ra) => {
+		RoleAccount.get(
+			{
+				role: role.id
+			},
+			{ type: 'stream' }
+		).pipe((ra) => {
 			ra.delete();
 		});
-		RoleRuleset.fromProperty('role', role.id, { type: 'stream' }).pipe((rr) => {
+		RoleRuleset.get(
+			{
+				role: role.id
+			},
+			{ type: 'stream' }
+		).pipe((rr) => {
 			rr.delete();
 		});
 	});
@@ -284,262 +172,62 @@ export namespace Permissions {
 	export const RoleAccount = new Struct({
 		name: 'role_account',
 		structure: {
+			/** Role ID. */
 			role: text('role').notNull(),
+			/** Account ID. */
 			account: text('account').notNull()
 		}
 	});
 
-	block(RoleAccount);
+	registerAndBlock(RoleAccount);
 
 	export type RoleAccountData = typeof RoleAccount.sample;
-
-	const manageMemberAuth = async (event: RequestEvent, data: { role: string; account: string }) => {
-		if (!event.locals.account) {
-			return 'Not logged in';
-		}
-
-		if (await Account.isAdmin(event.locals.account)) {
-			return true;
-		}
-
-		const role = await Role.fromId(data.role).unwrap();
-
-		if (!role) {
-			return 'Role not found';
-		}
-
-		// account should be in the role or higher and be granted permission to manage members
-		const hierarchy = await getUpperHierarchy(role, true).unwrap();
-		const accountRoles = await getRolesFromAccountWithinHierarchy(
-			event.locals.account,
-			hierarchy
-		).unwrap();
-		if (accountRoles.length === 0) {
-			return 'You are not a member of a parent role or the role itself, you cannot manage its membership';
-		}
-
-		const rulesets = await getRulesetsfromRoles(accountRoles).unwrap();
-		if (!rulesets.some((r) => r.data.entitlement === 'manage-members')) {
-			return 'You do not have permission to manage members of this role';
-		}
-
-		return true;
-	};
-
-	CallListener.on(
-		'add-to-role',
-		RoleAccount,
-		z.object({
-			role: z.string(),
-			account: z.string()
-		}),
-		async (event, data) => {
-			if (!event.locals.account) {
-				throw new Error('Not logged in'); // should be handled by auth already
-			}
-
-			const role = await Role.fromId(data.role).unwrap();
-			if (!role) {
-				throw new Error('Role not found'); // should be handled by auth already
-			}
-
-			const accountToAdd = await Account.Account.fromId(data.account).unwrap();
-			if (!accountToAdd) {
-				return {
-					success: false,
-					message: 'Account to add not found'
-				};
-			}
-
-			const isInRole = await Permissions.isInRole(role, accountToAdd).unwrap();
-
-			if (isInRole) {
-				return {
-					success: false,
-					message: 'Account is already in role'
-				};
-			}
-
-			await RoleAccount.new({
-				role: role.id,
-				account: accountToAdd.id
-			}).unwrap();
-
-			return {
-				success: true
-			};
-		}
-	).auth(manageMemberAuth);
-
-	CallListener.on(
-		'remove-from-role',
-		RoleAccount,
-		z.object({
-			role: z.string(),
-			account: z.string()
-		}),
-		async (event, data) => {
-			const res = await DB.select()
-				.from(RoleAccount.table)
-				.where(
-					and(eq(RoleAccount.table.role, data.role), eq(RoleAccount.table.account, data.account))
-				)
-				.limit(1);
-
-			if (res.length === 0) {
-				return {
-					success: false,
-					message: 'Account is not in role'
-				};
-			}
-
-			const ra = RoleAccount.Generator(res[0]);
-
-			if (ra.data.account === event.locals.account?.data.id) {
-				const role = await Role.fromId(data.role).unwrap();
-				if (!role) {
-					return {
-						success: false,
-						message: 'Role not found'
-					};
-				}
-
-				const upper = await getUpperHierarchy(role, false).unwrap();
-				if (upper.length === 0) {
-					return {
-						success: false,
-						message:
-							'You cannot remove yourself from this role because you are a top-level role. You can only be removed by another member of the role or a parent role.'
-					};
-				}
-
-				const inHigherRoles = await getRolesFromAccountWithinHierarchy(
-					event.locals.account,
-					upper
-				).unwrap();
-				if (inHigherRoles.length === 0) {
-					return {
-						success: false,
-						message:
-							'You cannot remove yourself from this role because you are a member of a top-level role. You can only be removed by another member of the role or a parent role.'
-					};
-				}
-			}
-
-			await ra.delete().unwrap();
-			return {
-				success: true
-			};
-		}
-	).auth(manageMemberAuth);
 
 	export const Entitlement = new Struct({
 		name: 'entitlements',
 		structure: {
+			/** Unique entitlement name. */
 			name: text('name').notNull().unique(),
+			/** Entitlement description. */
 			description: text('description').notNull().default(''),
+			/** JSON string of struct names. */
 			structs: text('structs').notNull().default('[]'), // JSON string of struct names
+			/** JSON string of permission rules. */
 			permissions: text('permissions').notNull().default('[]'), // JSON string of permissions
+			/** Group name for UI organization. */
 			group: text('group').notNull(), // Group name for UI organization
+			/** JSON string of features enabled by this entitlement. */
 			features: text('features').notNull().default('[]'), // JSON string of features that this entitlement enables
+			/** Default feature scope list (JSON string). */
 			defaultFeatureScopes: text('default_feature_scopes').notNull().default('[]') // Default feature scope for this entitlement
 		}
 	});
 
-	ActionBypass.on(PropertyAction.Read, Entitlement, () => true); // anyone can read entitlements
-
-	block(Entitlement);
+	registerAndBlock(Entitlement).block(PropertyAction.Read, () => false); // overwrite the read block to make it readable
 
 	export type EntitlementData = typeof Entitlement.sample;
 
 	export const RoleRuleset = new Struct({
 		name: 'role_rulesets',
 		structure: {
+			/** Ruleset name. */
 			name: text('name').notNull(),
+			/** Ruleset description. */
 			description: text('description').notNull(),
+			/** Role ID the ruleset belongs to. */
 			role: text('role').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]'),
+			/** Parent ruleset ID. */
 			parent: text('parent').notNull().default('') // parent ruleset id
 		}
 	});
 
-	block(RoleRuleset);
-
-	QueryListener.on('my-permissions', RoleRuleset, z.object({}), async (event) => {
-		if (!event.locals.account) {
-			throw new Error('No Authenticated account found');
-		}
-
-		const rs = await getRulesetsFromAccount(event.locals.account).unwrap();
-		return rs.filter((r) => r.struct.name === 'role_rulesets') as RoleRulesetData[];
-	});
-
-	QueryListener.on(
-		'from-role',
-		RoleRuleset,
-		z.object({
-			role: z.string()
-		}),
-		async (event, data) => {
-			const role = await Role.fromId(data.role).unwrap();
-
-			if (!role) {
-				throw new Error('Role not found');
-			}
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-				// If the account is at or higher than the role's level, they can view the rulesets
-				const parent = await getHighestLevelRole(role, event.locals.account, true).unwrap();
-				if (!parent) {
-					throw new Error("You do not have permission to view this role's rulesets");
-				}
-			} else {
-				throw new Error('No Authenticated account found');
-			}
-
-			return getRulesetsFromRole(role).unwrap();
-		}
-	);
-
-	QueryListener.on(
-		'available-permissions',
-		RoleRuleset,
-		z.object({
-			role: z.string()
-		}),
-		async (event, data) => {
-			const role = await Role.fromId(data.role).unwrap();
-			if (!role) {
-				throw new Error('Role not found');
-			}
-
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-				// If the account is higher than the role's level, they can view the rulesets
-				const parent = await getHighestLevelRole(role, event.locals.account, false).unwrap();
-				if (!parent) {
-					throw new Error("You do not have permission to view this role's rulesets");
-				}
-			} else {
-				throw new Error('No Authenticated account found');
-			}
-
-			if (!role.data.parent) return getRulesetsFromRole(role).unwrap();
-
-			const parent = await getParent(role).unwrap();
-			if (!parent) {
-				throw new Error('No parent role found for this role');
-			}
-
-			return getRulesetsFromRole(parent).unwrap();
-		}
-	);
+	registerAndBlock(RoleRuleset);
 
 	export const getTopLevelRole = (role: RoleData) => {
 		return attemptAsync(async () => {
@@ -577,9 +265,14 @@ export namespace Permissions {
 	 * @returns  A promise that resolves to an array of child roles.
 	 */
 	export const getChildren = (role: RoleData) => {
-		return Role.fromProperty('parent', role.id, {
-			type: 'all'
-		});
+		return Role.get(
+			{
+				parent: role.id
+			},
+			{
+				type: 'all'
+			}
+		);
 	};
 
 	/**
@@ -716,6 +409,11 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a ruleset to a role.
+	 *
+	 * @param {{ role: RoleData; entitlement: Entitlement; targetAttribute: string; featureScopes: string[]; parentRuleset?: RoleRulesetData; name: string; description: string }} config
+	 */
 	export const grantRoleRuleset = (config: {
 		role: RoleData;
 		entitlement: Entitlement;
@@ -746,6 +444,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Grants a role to an account.
+	 *
+	 * @param {RoleData} role - Role to grant.
+	 * @param {Account.AccountData} account - Account to receive the role.
+	 */
 	export const grantRole = (role: RoleData, account: Account.AccountData) => {
 		return RoleAccount.new({
 			role: role.id,
@@ -753,6 +457,12 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a role from an account.
+	 *
+	 * @param {RoleData} role - Role to revoke.
+	 * @param {Account.AccountData} account - Account to remove from the role.
+	 */
 	export const revokeRole = (role: RoleData, account: Account.AccountData) => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -769,6 +479,13 @@ export namespace Permissions {
 		});
 	};
 
+	/**
+	 * Revokes a ruleset from a role.
+	 *
+	 * @param {RoleData} role - Role to update.
+	 * @param {Entitlement} entitlement - Entitlement name.
+	 * @param {string} targetAttribute - Target attribute selector.
+	 */
 	export const revokeRoleRuleset = (
 		role: RoleData,
 		entitlement: Entitlement,
@@ -781,365 +498,23 @@ export namespace Permissions {
 		});
 	};
 
-	CallListener.on(
-		'grant-permission',
-		RoleRuleset,
-		z.object({
-			role: z.string(),
-			ruleset: z.string()
-		}),
-		async (event, data) => {
-			const role = await Role.fromId(data.role).unwrap();
-			if (!role) {
-				return {
-					success: false,
-					message: 'Role not found'
-				};
-			}
-
-			const ruleset = await RoleRuleset.fromId(data.ruleset).unwrap();
-			if (!ruleset) {
-				return {
-					success: false,
-					message: 'Ruleset not found'
-				};
-			}
-
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-
-				const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
-					type: 'single'
-				}).unwrap();
-				if (!entitlement) {
-					return {
-						success: false,
-						message: 'Entitlement not found'
-					};
-				}
-
-				// Not inclusive because we want to check if the user is able to grant permissions on the role itself.
-				// A user cannot grant permissions to a role that is not in their hierarchy or is the highest level role they are a part of.
-				const highestLevelRole = await getHighestLevelRole(
-					role,
-					event.locals.account,
-					false
-				).unwrap();
-				if (!highestLevelRole) {
-					return {
-						success: false,
-						message: 'You do not have permission to manage permissions on this role'
-						// code: EventErrorCode.NoPermission,
-					};
-				}
-
-				// these rulesets are the only ones that can be granted to child roles.
-				const rulesets = await getRulesetsFromRole(highestLevelRole).unwrap();
-				// Check to see if the managing account has the permission they're attempting to grant
-				if (
-					!rulesets.some(
-						(r) =>
-							r.data.entitlement === entitlement.data.name &&
-							r.data.targetAttribute === ruleset.data.targetAttribute
-					)
-				) {
-					return {
-						success: false,
-						message: 'You do not have permission to grant this entitlement on this target attribute'
-					};
-				}
-
-				// check to see if they already have this permission
-				const existing = await getRoleRuleset(
-					role,
-					entitlement.data.name,
-					ruleset.data.targetAttribute
-				).unwrap();
-				if (existing) {
-					return {
-						success: false,
-						message: 'This role already has this permission'
-					};
-				}
-
-				// All checks have passed
-			} else {
-				return {
-					success: false,
-					message: 'No Authenticated account found'
-					// code: EventErrorCode.NoAccount,
-				};
-			}
-			grantRoleRuleset({
-				role: role,
-				entitlement: ruleset.data.entitlement as Entitlement,
-				targetAttribute: ruleset.data.targetAttribute,
-				featureScopes: (JSON.parse(ruleset.data.featureScopes) as string[]) || [],
-				parentRuleset: ruleset,
-				name: ruleset.data.name,
-				description: ruleset.data.description
-			});
-
-			return {
-				success: true,
-				message: 'Permission granted successfully'
-			};
-		}
-	);
-
-	CallListener.on(
-		'revoke-permission',
-		RoleRuleset,
-		z.object({
-			ruleset: z.string()
-		}),
-		async (event, data) => {
-			const ruleset = await RoleRuleset.fromId(data.ruleset).unwrap();
-			if (!ruleset) {
-				return {
-					success: false,
-					message: 'Ruleset not found'
-				};
-			}
-
-			const role = await Role.fromId(ruleset.data.role).unwrap();
-			if (!role) {
-				return {
-					success: false,
-					message: 'Role not found'
-				};
-			}
-
-			const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
-				type: 'single'
-			}).unwrap();
-			if (!entitlement) {
-				return {
-					success: false,
-					message: 'Entitlement not found'
-				};
-			}
-
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-
-				const highestLevelRole = await getHighestLevelRole(
-					role,
-					event.locals.account,
-					false
-				).unwrap();
-				if (!highestLevelRole) {
-					return {
-						success: false,
-						message: 'You do not have permission to manage permissions on this role'
-						// code: EventErrorCode.NoPermission,
-					};
-				}
-
-				const rulesets = await getRulesetsFromRole(highestLevelRole).unwrap();
-				if (
-					!rulesets.some(
-						(r) =>
-							r.data.entitlement === entitlement.data.name &&
-							r.data.targetAttribute === ruleset.data.targetAttribute
-					)
-				) {
-					return {
-						success: false,
-						message:
-							'You do not have permission to revoke this entitlement on this target attribute'
-					};
-				}
-			} else {
-				return {
-					success: false,
-					message: 'No Authenticated account found'
-					// code: EventErrorCode.NoAccount,
-				};
-			}
-
-			await revokeRoleRuleset(
-				role,
-				entitlement.data.name as Entitlement,
-				ruleset.data.targetAttribute
-			).unwrap();
-
-			return {
-				success: true,
-				message: 'Permission revoked successfully'
-			};
-		}
-	);
-
 	export type RoleRulesetData = typeof RoleRuleset.sample;
 
 	export const AccountRuleset = new Struct({
 		name: 'account_rulesets',
 		structure: {
+			/** Account ID the ruleset is scoped to. */
 			account: text('account').notNull(),
+			/** Entitlement name. */
 			entitlement: text('entitlement').notNull(),
+			/** Target attribute selector. */
 			targetAttribute: text('target_attribute').notNull(),
+			/** Feature scope list (JSON string). */
 			featureScopes: text('feature_scopes').notNull().default('[]')
 		}
 	});
 
-	QueryListener.on('my-permissions', AccountRuleset, z.object({}), async (event) => {
-		if (!event.locals.account) {
-			throw new Error('No Authenticated account found');
-		}
-
-		const rs = await getRulesetsFromAccount(event.locals.account).unwrap();
-		return rs.filter((r) => r.struct.name === 'account_rulesets') as AccountRulesetData[];
-	});
-
-	CallListener.on(
-		'grant-permission',
-		AccountRuleset,
-		z.object({
-			account: z.string(),
-			entitlement: z.string(),
-			targetAttribute: z.string(),
-			featureScopes: z.array(z.string())
-		}),
-		async (event, data) => {
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-
-				const entitlement = await Entitlement.fromProperty('name', data.entitlement, {
-					type: 'single'
-				}).unwrap();
-				if (!entitlement) {
-					return {
-						success: false,
-						message: 'Entitlement not found'
-					};
-				}
-
-				const account = await Account.Account.fromId(data.account).unwrap();
-				if (!account) {
-					return {
-						success: false,
-						message: 'Account not found'
-					};
-				}
-
-				const rulesets = await getRulesetsFromAccount(event.locals.account).unwrap();
-				if (
-					!rulesets.some(
-						(r) =>
-							r.data.entitlement === entitlement.data.name &&
-							r.data.targetAttribute === data.targetAttribute
-					)
-				) {
-					return {
-						success: false,
-						message: 'You do not have permission to grant this entitlement on this target attribute'
-					};
-				}
-			} else {
-				return {
-					success: false,
-					message: 'No Authenticated account found'
-					// code: EventErrorCode.NoAccount,
-				};
-			}
-
-			AccountRuleset.new({
-				account: data.account,
-				entitlement: data.entitlement,
-				targetAttribute: data.targetAttribute,
-				featureScopes: JSON.stringify(data.featureScopes)
-			}).unwrap();
-
-			return {
-				success: true,
-				message: 'Permission granted successfully'
-			};
-		}
-	);
-
-	CallListener.on(
-		'revoke-permission',
-		AccountRuleset,
-		z.object({
-			ruleset: z.string()
-		}),
-		async (event, data) => {
-			const ruleset = await AccountRuleset.fromId(data.ruleset).unwrap();
-			if (!ruleset) {
-				return {
-					success: false,
-					message: 'Ruleset not found'
-				};
-			}
-
-			const entitlement = await Entitlement.fromProperty('name', ruleset.data.entitlement, {
-				type: 'single'
-			}).unwrap();
-			if (!entitlement) {
-				return {
-					success: false,
-					message: 'Entitlement not found'
-				};
-			}
-
-			const account = await Account.Account.fromId(ruleset.data.account).unwrap();
-			if (!account) {
-				return {
-					success: false,
-					message: 'Account not found'
-				};
-			}
-
-			PERMIT: if (event.locals.account) {
-				if (await Account.isAdmin(event.locals.account)) {
-					break PERMIT;
-				}
-
-				const rulesets = await getRulesetsFromAccount(event.locals.account).unwrap();
-				if (
-					!rulesets.some(
-						(r) =>
-							r.data.entitlement === entitlement.data.name &&
-							r.data.targetAttribute === ruleset.data.targetAttribute
-					)
-				) {
-					return {
-						success: false,
-						message:
-							'You do not have permission to revoke this entitlement on this target attribute'
-					};
-				}
-			} else {
-				return {
-					success: false,
-					message: 'No Authenticated account found'
-					// code: EventErrorCode.NoAccount,
-				};
-			}
-
-			if (!ruleset) {
-				return {
-					success: false,
-					message: 'This account does not have this permission'
-				};
-			}
-
-			await ruleset.delete().unwrap();
-			return {
-				success: true,
-				message: 'Permission revoked successfully'
-			};
-		}
-	);
-
-	block(AccountRuleset);
+	registerAndBlock(AccountRuleset);
 
 	export type AccountRulesetData = typeof AccountRuleset.sample;
 
@@ -1218,7 +593,14 @@ export namespace Permissions {
 	 * @returns A promise that resolves to an array of rulesets associated with the role.
 	 */
 	export const getRulesetsFromRole = (role: RoleData) => {
-		return RoleRuleset.fromProperty('role', role.id, { type: 'all' });
+		return RoleRuleset.get(
+			{
+				role: role.id
+			},
+			{
+				type: 'all'
+			}
+		);
 	};
 
 	/**
@@ -1247,7 +629,7 @@ export namespace Permissions {
 	 */
 	export const canCreate = <T extends Blank>(
 		account: Account.AccountData,
-		struct: Struct<T, string>,
+		struct: Struct<T>,
 		attributes: string[]
 	) => {
 		return attemptAsync(async () => {
@@ -1377,7 +759,7 @@ export namespace Permissions {
 	 */
 	export const filterPropertyActionFromAccount = <T extends Blank>(
 		account: Account.AccountData,
-		data: StructData<T, string>[] | DataVersion<T, string>[],
+		data: StructData<T>[] | DataVersion<T>[],
 		action: PropertyAction
 	) => {
 		return attemptAsync<Partial<Structable<T>>[]>(async () => {
@@ -1407,15 +789,14 @@ export namespace Permissions {
 				permissions: permissionsByName[r.data.entitlement]
 			}));
 
+			const registry = structRegistry.get(struct.name);
+			if (!registry) {
+				throw new Error(`Struct ${struct.name} is not registered in the struct registry`);
+			}
+
 			return data
 				.map((d) => {
-					if (
-						Array.from(ActionBypass.listeners).some((b) => {
-							if (action !== b.action) return false;
-							if (b.struct.name !== struct.name) return false;
-							return b.runWithAccount(account, d);
-						})
-					) {
+					if (registry.isBypassed(action, account, d as any).unwrap()) {
 						return d.data;
 					}
 					// if (struct.bypasses.some((b) => b.action === action && b.condition(account, d.data))) {
@@ -1737,9 +1118,14 @@ export type Features = \n	${
 		}
 
 		const run = async () => {
-			const e = await Permissions.Entitlement.fromProperty('name', entitlement.name, {
-				type: 'single'
-			}).unwrap();
+			const e = await Permissions.Entitlement.get(
+				{
+					name: entitlement.name
+				},
+				{
+					type: 'single'
+				}
+			).unwrap();
 
 			if (e) {
 				terminal.log('Updating entitlement: ', entitlement.name);

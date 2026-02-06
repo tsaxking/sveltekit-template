@@ -1,3 +1,7 @@
+<!--
+@component
+Example database page at `/examples/db`.
+-->
 <script lang="ts">
 	import { Table } from '$lib/services/db/table';
 	import { onMount } from 'svelte';
@@ -10,7 +14,6 @@
 	let data = $state(User.arr());
 
 	const pull = async () => {
-		console.log('pulling data');
 		data = await User.all({
 			pagination: false
 		}).unwrap();

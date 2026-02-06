@@ -1,3 +1,21 @@
+<!--
+@component
+Account search input with debounced query results.
+
+**Props**
+- `onselect`: `(account: Account.AccountData) => void` — Called when an account is chosen.
+- `onsearch`?: `(accounts: Account.AccountData[]) => void` — Called with search results.
+- `filter`?: `(account: Account.AccountData) => boolean` — Optional filter.
+
+**Exports**
+- `search(query: string)`: run a debounced search.
+- `select(account: Account.AccountData)`: select an account programmatically.
+
+**Example**
+```svelte
+<AccountSearch onselect={(account) => console.log(account)} />
+```
+-->
 <script lang="ts">
 	import { Account } from '$lib/model/account';
 
@@ -41,7 +59,7 @@
 	{#if query}
 		<div class="search-results card mt-1">
 			<ul class="list-group list-group-flush">
-				{#each $results as account}
+				{#each $results as account (account.data.id)}
 					<li class="list-group-item list-group-item-action">
 						<button type="button" class="btn" onclick={() => select(account)}>
 							{account.data.username} - {account.data.firstName}

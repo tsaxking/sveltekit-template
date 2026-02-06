@@ -1,3 +1,18 @@
+<!--
+@component
+Side navigation offcanvas that renders sections from the navbar registry.
+
+**Props**
+- `id`: `string` — Offcanvas element id.
+
+**Exports**
+- `hide()`: close any open offcanvas menus.
+
+**Example**
+```svelte
+<SideNav id="pages" />
+```
+-->
 <script lang="ts">
 	import { Navbar } from '$lib/model/navbar';
 	import { onMount } from 'svelte';
@@ -57,7 +72,15 @@
 					<ul class="list-unstyled">
 						{#each section.links as link}
 							<li class="ps-3 mb-2">
-								<a class="text-reset text-decoration-none" href={link.href} onclick={hide}>
+								<a
+									class:disabled={link.disabled}
+									class="text-reset text-decoration-none"
+									{...link.disabled ? {} : { href: link.href }}
+									{...link.disabled ? {} : { onclick: hide }}
+									target={link.external ? '_blank' : '_self'}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+									{...link.disabled ? { tabindex: -1, 'aria-disabled': 'true' } : {}}
+								>
 									{#if link.icon.type === 'material-icons'}
 										<i class="material-icons">{link.icon.name}</i>
 									{:else if link.icon.type === 'fontawesome'}
@@ -79,3 +102,10 @@
 		</ul>
 	</div>
 </div>
+
+<style>
+	a.disabled {
+		pointer-events: none;
+		opacity: 0.6;
+	}
+</style>

@@ -1,12 +1,13 @@
 import * as testing from '@playwright/test';
 import { Account } from '../src/lib/server/structs/account';
 import { Permissions } from '../src/lib/server/structs/permissions';
+import '../src/lib/server/structs/session';
 import { Test } from '../src/lib/server/structs/testing';
-import { Struct } from 'drizzle-struct/back-end';
 import { DB } from '../src/lib/server/db';
 import { logging, signIn } from './test-utils';
 import { v4 as uuid } from 'uuid';
 import { sleep } from 'ts-utils/sleep';
+import { Struct } from 'drizzle-struct';
 
 const expect = testing.expect;
 const test = testing.test;
@@ -72,9 +73,12 @@ afterAll(async () => {
 		await hierarchy.role.delete().unwrap();
 		await Promise.all(hierarchy.rulesets.map((rs) => rs.delete().unwrap()));
 	}
-	const tests = await Test.TestPermissions.fromProperty('name', `Test User ${id}`, {
-		type: 'all'
-	}).unwrap();
+	const tests = await Test.TestPermissions.get(
+		{ name: `Test User ${id}` },
+		{
+			type: 'all'
+		}
+	).unwrap();
 
 	await Promise.all(tests.map((t) => t.delete().unwrap()));
 });
@@ -98,9 +102,12 @@ describe('Log in as user with specific permissions', () => {
 
 		expect(permissions.length).toBe(2);
 
-		const foundItems = await Test.TestPermissions.fromProperty('name', `Test User ${id}`, {
-			type: 'all'
-		}).unwrap();
+		const foundItems = await Test.TestPermissions.get(
+			{ name: `Test User ${id}` },
+			{
+				type: 'all'
+			}
+		).unwrap();
 
 		expect(foundItems.length).toBe(5);
 

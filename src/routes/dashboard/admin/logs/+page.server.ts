@@ -1,6 +1,9 @@
+/**
+ * @fileoverview Server load for admin logs `/dashboard/admin/logs`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import { Logs } from '$lib/server/structs/log.js';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { fail, redirect } from '@sveltejs/kit';
 import { ServerCode } from 'ts-utils/status';
 

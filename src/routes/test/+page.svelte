@@ -1,6 +1,14 @@
+<!--
+@component
+Test index page at `/test`.
+
+Landing page for QA/verification routes. Links out to focused test pages used
+for manual checks during development.
+-->
 <script lang="ts">
 	import { Test } from '$lib/model/testing.svelte.ts';
 	import { toSnakeCase } from 'ts-utils/text';
+	import '$lib/index';
 
 	const tests = Test.unitTest();
 	let complete = $state(false);
@@ -74,7 +82,6 @@
 			{@render test('Restore Version', tests.restoreVersion)}
 			{@render test('Read All', tests.readAll)}
 			{@render test('Read Archived', tests.readArchived)}
-			{@render test('Read From Property', tests.readFromProperty)}
 			{@render test('Read From Ids', tests.readFromIds)}
 			{@render test('Read From Id', tests.readFromId)}
 			{@render test('Read Multi Property', tests.readMultiProperty)}

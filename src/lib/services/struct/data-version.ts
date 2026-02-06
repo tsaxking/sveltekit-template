@@ -1,14 +1,19 @@
+/**
+ * @fileoverview Struct data version wrappers.
+ *
+ * @example
+ * import { StructDataVersion } from '$lib/services/struct/data-version';
+ */
 import {
 	type Blank,
 	Struct,
 	type Structable,
 	type PartialStructable,
-	type GlobalCols,
-	type StatusMessage
+	type GlobalCols
 } from './index';
 import { attemptAsync } from 'ts-utils/check';
-import { DataAction } from 'drizzle-struct/types';
-import { z } from 'zod';
+import { WritableBase } from '$lib/services/writables';
+import * as remote from '$lib/remotes/struct.remote';
 
 /**
  * Version history of a data, requiring global columns and a version history id and created date
@@ -31,7 +36,7 @@ export type VersionStructable<T extends Blank> = Structable<{
  * @typedef {StructDataVersion}
  * @template {Blank} T
  */
-export class StructDataVersion<T extends Blank> {
+export class StructDataVersion<T extends Blank> extends WritableBase<PartialStructable<T>> {
 	/**
 	 * Creates an instance of StructDataVersion.
 	 *
@@ -44,14 +49,16 @@ export class StructDataVersion<T extends Blank> {
 	 */
 	constructor(
 		public readonly struct: Struct<T>,
-		public readonly data: PartialStructable<
+		data: PartialStructable<
 			T &
 				GlobalCols & {
 					vhId: 'string';
 					vhCreated: 'date';
 				}
 		>
-	) {}
+	) {
+		super(data);
+	}
 
 	/**
 	 * unique version history id
@@ -129,20 +136,12 @@ export class StructDataVersion<T extends Blank> {
 	 * @returns {*}
 	 */
 	delete() {
-		return attemptAsync<StatusMessage>(async () => {
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional()
-				})
-				.parse(
-					await this.struct
-						.postReq(DataAction.DeleteVersion, {
-							id: this.data.id,
-							vhId: this.data.vhId
-						})
-						.then((r) => r.unwrap())
-				);
+		return attemptAsync(async () => {
+			if (!this.data.vhId) throw new Error('No vhId available to delete version');
+			await remote.removeVersion({
+				struct: this.struct.data.name,
+				vhId: String(this.data.vhId)
+			});
 		});
 	}
 
@@ -152,20 +151,12 @@ export class StructDataVersion<T extends Blank> {
 	 * @returns {*}
 	 */
 	restore() {
-		return attemptAsync<StatusMessage>(async () => {
-			return z
-				.object({
-					success: z.boolean(),
-					message: z.string().optional()
-				})
-				.parse(
-					await this.struct
-						.postReq(DataAction.RestoreVersion, {
-							id: this.data.id,
-							vhId: this.data.vhId
-						})
-						.then((r) => r.unwrap())
-				);
+		return attemptAsync(async () => {
+			if (!this.data.vhId) throw new Error('No vhId available to restore version');
+			await remote.restoreVersion({
+				struct: this.struct.data.name,
+				vhId: String(this.data.vhId)
+			});
 		});
 	}
 }

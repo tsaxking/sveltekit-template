@@ -1,3 +1,7 @@
+<!--
+@component
+Sign-up page at `/account/sign-up`.
+-->
 <script lang="ts">
 	import '$lib/styles/gsi.css';
 	import { passwordStrength } from 'check-password-strength';
@@ -10,25 +14,13 @@
 
 	let password = $state('');
 	let confirmPassword = $state('');
-	let passwordResult: {
-		id: number;
-		value: 'Too Weak' | 'Weak' | 'Medium' | 'Strong';
-		contains: ('lowercase' | 'uppercase' | 'symbol' | 'number')[];
-		length: number;
-	} = $state({
-		id: 0,
-		value: 'Too Weak',
-		contains: [],
-		length: 0
-	});
+	const passwordResult = $derived(passwordStrength(password));
 
 	$effect(() => {
-		passwordResult = passwordStrength(password);
+		if (form?.redirect && browser) {
+			goto(form.redirect);
+		}
 	});
-
-	if (form?.redirect && browser) {
-		goto(form.redirect);
-	}
 </script>
 
 <main>

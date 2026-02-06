@@ -1,11 +1,13 @@
-import {
-	type Subscriber,
-	type Unsubscriber,
-	type Updater,
-	type Writable,
-	writable,
-	get
-} from 'svelte/store';
+/**
+ * @fileoverview IndexedDB table wrapper with reactive stores.
+ *
+ * Provides Dexie-backed CRUD helpers and Svelte store integration.
+ *
+ * @example
+ * import { Table } from '$lib/services/db/table';
+ * const users = new Table('users', { name: 'string' });
+ */
+import { type Updater, type Writable, writable, get } from 'svelte/store';
 import {
 	_init,
 	_define,
@@ -15,24 +17,8 @@ import {
 } from '.';
 import { attemptAsync, type ResultPromise } from 'ts-utils/check';
 import { ComplexEventEmitter } from 'ts-utils/event-emitter';
-
-/**
- * Debounce function that delays execution until after a specified time has passed
- * without the function being called again. Used for performance optimization to
- * prevent excessive UI updates during rapid data changes.
- *
- * @template T - Function type that extends a function with any parameters
- * @param {T} func - The function to debounce
- * @param {number} delay - The delay in milliseconds to wait before executing
- * @returns {T} The debounced function with the same signature
- */
-const debounce = <T extends (...args: unknown[]) => void>(func: T, delay: number): T => {
-	let timeoutId: ReturnType<typeof setTimeout>;
-	return ((...args: Parameters<T>) => {
-		clearTimeout(timeoutId);
-		timeoutId = setTimeout(() => func(...args), delay);
-	}) as T;
-};
+import { debounce } from 'ts-utils';
+import { WritableArray, WritableBase } from '$lib/services/writables';
 
 /**
  * Configuration object for read operations that determines pagination behavior
@@ -165,7 +151,7 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 			_init();
 			const newData = {
 				...data,
-				id: crypto.randomUUID(),
+				id: Math.random().toString(36).substring(2, 10) + Date.now().toString(36),
 				created_at: new Date(),
 				updated_at: new Date()
 			};
@@ -285,161 +271,6 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 	}
 
 	/**
-	 * Retrieves records matching a specific property value as a reactive data array
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match
-	 * @param {ReadConfig<false>} config - Configuration with pagination disabled
-	 * @returns {ResultPromise<TableDataArr<Name, Type>>} Promise resolving to a reactive data array
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<false>
-	): ResultPromise<TableDataArr<Name, Type>>;
-
-	/**
-	 * Retrieves records matching a specific property value as a paginated reactive data array
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match
-	 * @param {ReadConfig<true>} config - Configuration with pagination enabled
-	 * @returns {ResultPromise<PaginatedTableData<Name, Type>>} Promise resolving to a paginated data array
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<true>
-	): ResultPromise<PaginatedTableData<Name, Type>>;
-
-	/**
-	 * Retrieves records with a specific property value, with optional pagination and real-time sync.
-	 * Automatically handles adding/removing items when their properties change.
-	 *
-	 * @template {keyof Type} K
-	 * @param {K} key - The property key to filter by
-	 * @param {SchemaFieldReturnType<Type[K]>} value - The value to match exactly
-	 * @param {ReadConfig<boolean>} config - Configuration object specifying pagination behavior
-	 * @returns {ResultPromise<TableDataArr<Name, Type> | PaginatedTableData<Name, Type>>} Reactive filtered data collection
-	 */
-	fromProperty<K extends keyof Type>(
-		key: K,
-		value: SchemaFieldReturnType<Type[K]>,
-		config: ReadConfig<boolean>
-	) {
-		return attemptAsync(async () => {
-			_init();
-			if (config.pagination) {
-				const total = await this.table()
-					.where(key as string)
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					.equals(value as any)
-					.count();
-				const datas = await this.table()
-					.where(key as string)
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					.equals(value as any)
-					.offset(config.pagination.page * config.pagination.pageSize)
-					.limit(config.pagination.pageSize)
-					.toArray();
-				const arr = new PaginatedTableData(
-					this,
-					datas.map((data) => this.Generator(data)),
-					total,
-					config.pagination.page,
-					config.pagination.pageSize,
-					async (page, pageSize) => {
-						_init();
-						const datas = await this.table()
-							.where(key as string)
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							.equals(value as any)
-							.offset(page * pageSize)
-							.limit(pageSize)
-							.toArray();
-						return datas.map((data) => this.Generator(data));
-					},
-					async () => {
-						return await this.table()
-							.where(key as string)
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-							.equals(value as any)
-							.count();
-					}
-				);
-				const offNew = this.on('new', (d) => {
-					if (d.data[key] === value) {
-						arr.add(d);
-					}
-				});
-				const offDelete = this.on('delete', (d) => {
-					arr.remove(d);
-				});
-				const offUpdate = this.on('update', (d) => {
-					if (d.data[key] === value) {
-						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-						if (!exists) {
-							arr.add(d);
-						}
-					} else {
-						const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-						if (exists) {
-							arr.remove(d);
-						}
-					}
-				});
-				arr.onAllUnsubscribe(() => {
-					offNew();
-					offDelete();
-					offUpdate();
-				});
-				return arr;
-			}
-			const has = this.writables.get(`${String(key)}=${String(value)}`);
-			if (has) return has;
-			const datas = await this.table()
-				.where(key as string)
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.equals(value as any)
-				.toArray();
-			const arr = new TableDataArr(
-				this,
-				datas.map((data) => this.Generator(data))
-			);
-			this.writables.set(`${String(key)}=${String(value)}`, arr);
-			const offNew = this.on('new', (d) => {
-				if (d.data[key] === value) {
-					arr.add(d);
-				}
-			});
-			const offDelete = this.on('delete', (d) => {
-				arr.remove(d);
-			});
-			const offUpdate = this.on('update', (d) => {
-				if (d.data[key] === value) {
-					const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-					if (!exists) {
-						arr.add(d);
-					}
-				} else {
-					const exists = arr.data.find((dd) => dd.data.id === d.data.id);
-					if (exists) {
-						arr.remove(d);
-					}
-				}
-			});
-			arr.onAllUnsubscribe(() => {
-				offNew();
-				offDelete();
-				offUpdate();
-			});
-			return arr;
-		});
-	}
-
-	/**
 	 * Returns a sample TableData instance for TypeScript type inference.
 	 * This is only used for development and type checking - never call at runtime.
 	 *
@@ -488,6 +319,95 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
 	arr() {
 		return new TableDataArr(this, []);
 	}
+
+	get(
+		data: {
+			[K in keyof Type]?: SchemaFieldReturnType<Type[K]>;
+		},
+		config: ReadConfig<boolean>
+	): ResultPromise<TableDataArr<Name, Type> | PaginatedTableData<Name, Type>> {
+		return attemptAsync(async () => {
+			_init();
+
+			if (config.pagination) {
+				const total = await this.table().where(data).count();
+				const datas = await this.table()
+					.where(data)
+					.offset(config.pagination.page * config.pagination.pageSize)
+					.limit(config.pagination.pageSize);
+				const arr = new PaginatedTableData(
+					this,
+					(await datas.toArray()).map((d) => this.Generator(d)),
+					total,
+					config.pagination.page,
+					config.pagination.pageSize,
+					async (page, pageSize) => {
+						_init();
+						const datas = await this.table()
+							.where(data)
+							.offset(page * pageSize)
+							.limit(pageSize)
+							.toArray();
+						return datas.map((d) => this.Generator(d));
+					},
+					async () => {
+						return await this.table().where(data).count();
+					}
+				);
+
+				return arr;
+			}
+
+			const datas = await this.table().where(data);
+			const arr = new TableDataArr(
+				this,
+				(await datas.toArray()).map((d) => this.Generator(d))
+			);
+
+			const onNew = (d: TableData<Name, Type>) => {
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						return;
+					}
+				}
+				arr.add(d);
+			};
+			const onDelete = (d: TableData<Name, Type>) => {
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						return;
+					}
+				}
+				arr.remove(d);
+			};
+
+			const onUpdate = (d: TableData<Name, Type>) => {
+				let match = true;
+				for (const key in data) {
+					if (d.data[key] !== data[key]) {
+						match = false;
+					}
+				}
+				if (match) {
+					arr.add(d);
+				} else {
+					arr.remove(d);
+				}
+			};
+
+			const offNew = this.on('new', onNew);
+			const offDelete = this.on('delete', onDelete);
+			const offUpdate = this.on('update', onUpdate);
+
+			arr.onAllUnsubscribe(() => {
+				offNew();
+				offDelete();
+				offUpdate();
+			});
+
+			return arr;
+		});
+	}
 }
 
 /**
@@ -501,9 +421,9 @@ export class Table<Name extends string, Type extends SchemaDefinition> {
  * @template {SchemaDefinition} Type - The schema definition
  * @implements {Writable<TableStructable<Type>>}
  */
-export class TableData<Name extends string, Type extends SchemaDefinition>
-	implements Writable<TableStructable<Type>>
-{
+export class TableData<Name extends string, Type extends SchemaDefinition> extends WritableBase<
+	TableStructable<Type>
+> {
 	/**
 	 * Creates an instance of TableData.
 	 *
@@ -513,49 +433,9 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
 	 */
 	constructor(
 		public table: Table<Name, Type>,
-		public data: TableStructable<Type>
-	) {}
-
-	/**
-	 * Set of subscribers listening to changes in this record
-	 *
-	 * @private
-	 * @readonly
-	 * @type {Set<(value: TableStructable<Type>) => void>}
-	 */
-	private readonly subscribers = new Set<(value: TableStructable<Type>) => void>();
-
-	/**
-	 * Notifies all subscribers about data changes
-	 *
-	 * @private
-	 * @returns {void}
-	 */
-	private inform() {
-		for (const s of this.subscribers) {
-			s(this.data);
-		}
-	}
-
-	/**
-	 * Subscribes to changes in this record (Svelte store interface)
-	 *
-	 * @param {Subscriber<TableStructable<Type>>} fn - Callback function that receives the current data
-	 * @returns {Unsubscriber} Unsubscribe function
-	 * @example
-	 * ```typescript
-	 * const user = await userTable.fromId('123');
-	 * const unsubscribe = user.subscribe(data => {
-	 *   console.log('User updated:', data);
-	 * });
-	 * ```
-	 */
-	subscribe(fn: Subscriber<TableStructable<Type>>): Unsubscriber {
-		this.subscribers.add(fn);
-		fn(this.data);
-		return () => {
-			this.subscribers.delete(fn);
-		};
+		data: TableStructable<Type>
+	) {
+		super(data);
 	}
 
 	/**
@@ -595,9 +475,7 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
 	 */
 	update(fn: Updater<TableStructable<Type>>) {
 		return attemptAsync(async () => {
-			const newData = fn(this.data);
-			this.data = newData;
-			await this.save().unwrap();
+			await this.set(fn(this.data)).unwrap();
 		});
 	}
 
@@ -647,9 +525,9 @@ export class TableData<Name extends string, Type extends SchemaDefinition>
  * @template {SchemaDefinition} Type - The schema definition
  * @implements {Writable<TableData<Name, Type>[]>}
  */
-export class TableDataArr<Name extends string, Type extends SchemaDefinition>
-	implements Writable<TableData<Name, Type>[]>
-{
+export class TableDataArr<Name extends string, Type extends SchemaDefinition> extends WritableArray<
+	TableData<Name, Type>
+> {
 	/**
 	 * Event emitter for array-level events (add/remove)
 	 *
@@ -680,17 +558,10 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 */
 	constructor(
 		public table: Table<Name, Type>,
-		public data: TableData<Name, Type>[]
-	) {}
-
-	/**
-	 * Set of subscribers listening to array changes
-	 *
-	 * @private
-	 * @readonly
-	 * @type {Set<(value: TableData<Name, Type>[]) => void>}
-	 */
-	private readonly subscribers = new Set<(value: TableData<Name, Type>[]) => void>();
+		data: TableData<Name, Type>[]
+	) {
+		super(data);
+	}
 
 	/**
 	 * Immediate notification for critical updates
@@ -698,7 +569,7 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 * @private
 	 * @returns {void}
 	 */
-	private informImmediate() {
+	_informImmediate() {
 		for (const s of this.subscribers) {
 			const data = this.data.filter(this._filter).sort(this._sort);
 			if (this._reverse) data.reverse();
@@ -712,8 +583,8 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 * @private
 	 * @type {() => void}
 	 */
-	private informDebounced = debounce(() => {
-		this.informImmediate();
+	_informDebounced = debounce(() => {
+		this._informImmediate();
 	}, __APP_ENV__.indexed_db.debounce_interval_ms);
 
 	/**
@@ -724,58 +595,10 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	 */
 	public inform(immediate = false) {
 		if (immediate) {
-			this.informImmediate();
+			this._informImmediate();
 		} else {
-			this.informDebounced();
+			this._informDebounced();
 		}
-	}
-
-	/**
-	 * Subscribes to changes in this array (Svelte store interface)
-	 *
-	 * @param {Subscriber<TableData<Name, Type>[]>} fn - Callback function that receives the current filtered/sorted data
-	 * @returns {Unsubscriber} Unsubscribe function
-	 * @example
-	 * ```typescript
-	 * const users = userTable.arr();
-	 * const unsubscribe = users.subscribe(data => {
-	 *   console.log('Users updated:', data.length);
-	 * });
-	 * ```
-	 */
-	subscribe(fn: Subscriber<TableData<Name, Type>[]>): Unsubscriber {
-		this.subscribers.add(fn);
-		// Use immediate notification for initial subscription to ensure sync
-		fn(this.data.filter(this._filter).sort(this._sort));
-		return () => {
-			this.subscribers.delete(fn);
-			if (this.subscribers.size === 0) {
-				this._onAllUnsubscribe();
-			}
-		};
-	}
-
-	/**
-	 * Sets the entire array data (Svelte store interface)
-	 *
-	 * @param {TableData<Name, Type>[]} value - New array data to set
-	 * @returns {void}
-	 */
-	set(value: TableData<Name, Type>[]) {
-		this.data = value;
-		this.inform(true); // Immediate for direct data changes
-	}
-
-	/**
-	 * Updates the array using an updater function (Svelte store interface)
-	 *
-	 * @param {Updater<TableData<Name, Type>[]>} fn - Function that receives current data and returns new data
-	 * @returns {void}
-	 */
-	update(fn: Updater<TableData<Name, Type>[]>): void {
-		const newData = fn(this.data);
-		this.data = newData;
-		this.inform(true); // Immediate for direct data changes
 	}
 
 	/**
@@ -795,105 +618,47 @@ export class TableDataArr<Name extends string, Type extends SchemaDefinition>
 	}
 
 	/**
-	 * Removes an item from the array by ID
+	 * Removes items from the array based on a predicate function
+	 * @param fn - Predicate function to determine which items to remove
+	 */
+	remove(fn: (item: TableData<Name, Type>) => boolean): void;
+	/**
+	 * Removes specific items from the array by ID
+	 * @param items - Items to remove from the array
+	 */
+	remove(...items: TableData<Name, Type>[]): void;
+	/**
+	 * Removes items from the array by ID or based on a predicate function
 	 *
-	 * @param {TableData<Name, Type>} item - Item to remove from the array
+	 * @param items - Predicate function or specific items to remove
 	 * @returns {void}
 	 */
-	remove(item: TableData<Name, Type>) {
+	remove(...items: (TableData<Name, Type> | ((item: TableData<Name, Type>) => boolean))[]): void {
 		const len = this.data.length;
-		this.data = this.data.filter((d) => d.data.id !== item.data.id);
-		if (this.data.length !== len) {
-			this.emit('remove', item);
+
+		// If first argument is a function, treat it as a predicate
+		if (items.length === 1 && typeof items[0] === 'function') {
+			const predicate = items[0] as (item: TableData<Name, Type>) => boolean;
+			const removed = this.data.filter(predicate);
+			this.data = this.data.filter((d) => !predicate(d));
+			if (this.data.length !== len && removed.length > 0) {
+				for (const item of removed) {
+					this.emit('remove', item);
+				}
+			}
+		} else {
+			// Otherwise, remove all specified items by ID
+			const itemsToRemove = items as TableData<Name, Type>[];
+			const idsToRemove = new Set(itemsToRemove.map((item) => item.data.id));
+			this.data = this.data.filter((d) => !idsToRemove.has(d.data.id));
+			if (this.data.length !== len) {
+				for (const item of itemsToRemove) {
+					this.emit('remove', item);
+				}
+			}
 		}
+
 		this.inform(); // Debounced for event-driven updates
-	}
-
-	/**
-	 * Indicates whether the current sort order is reversed
-	 *
-	 * @private
-	 * @type {boolean}
-	 */
-	private _reverse = false;
-
-	/**
-	 * Toggles the sort order between ascending and descending
-	 *
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.reverse();
-	 * ```
-	 */
-	public reverse() {
-		this._reverse = !this._reverse;
-		this.inform(true);
-	}
-
-	/**
-	 * Internal sort function (no-op by default)
-	 *
-	 * @private
-	 * @type {(a: TableData<Name, Type>, b: TableData<Name, Type>) => number}
-	 */
-	private _sort = (a: TableData<Name, Type>, b: TableData<Name, Type>) =>
-		b.data.updated_at.getTime() - a.data.updated_at.getTime();
-
-	/**
-	 * Sets the sort function for this array
-	 *
-	 * @param {(a: TableData<Name, Type>, b: TableData<Name, Type>) => number} compareFn - Sort comparison function
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.sort((a, b) => a.data.name.localeCompare(b.data.name));
-	 * ```
-	 */
-	sort(compareFn: (a: TableData<Name, Type>, b: TableData<Name, Type>) => number) {
-		this._sort = compareFn;
-		this.inform(true); // Immediate for UI operations like sorting
-	}
-
-	/**
-	 * Internal filter function (passes all by default)
-	 *
-	 * @private
-	 * @type {(item: TableData<Name, Type>) => boolean}
-	 */
-	private _filter = (_item: TableData<Name, Type>) => true;
-
-	/**
-	 * Sets the filter function for this array
-	 *
-	 * @param {(item: TableData<Name, Type>) => boolean} filterFn - Filter predicate function
-	 * @returns {void}
-	 * @example
-	 * ```typescript
-	 * users.filter(user => user.data.active === true);
-	 * ```
-	 */
-	filter(filterFn: (item: TableData<Name, Type>) => boolean) {
-		this._filter = filterFn;
-		this.inform(true); // Immediate for UI operations like filtering
-	}
-
-	/**
-	 * Cleanup callback executed when all subscribers are removed
-	 *
-	 * @private
-	 * @type {() => void}
-	 */
-	private _onAllUnsubscribe = () => {};
-
-	/**
-	 * Sets a callback to execute when all subscribers are removed
-	 *
-	 * @param {() => void} fn - Cleanup function to execute
-	 * @returns {void}
-	 */
-	onAllUnsubscribe(fn: () => void) {
-		this._onAllUnsubscribe = fn;
 	}
 }
 

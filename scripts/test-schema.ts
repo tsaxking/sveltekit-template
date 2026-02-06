@@ -1,4 +1,4 @@
-import { globalCols, Struct } from 'drizzle-struct/back-end';
+import { globalCols, Struct } from 'drizzle-struct';
 import { openStructs } from '../cli/struct';
 import { DB, client } from '../src/lib/server/db';
 import { fromCamelCase, fromSnakeCase, toSnakeCase, toCamelCase } from 'ts-utils/text';

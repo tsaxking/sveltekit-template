@@ -1,3 +1,28 @@
+<!--
+@component
+Toast notification rendered in a portal.
+
+**Props**
+- `title`: `string` — Toast title.
+- `message`: `string` — Toast body text.
+- `color`: `BootstrapColor` — Base color.
+- `autoHide`: `number` — Auto-hide timeout in milliseconds.
+- `icon`?: `Snippet` — Optional icon snippet.
+- `animate`: `boolean` — Toggle entrance/exit animations.
+- `textColor`?: `BootstrapColor` — Override text color.
+- `onHide`?: `() => void` — Called after hide.
+- `onShow`?: `() => void` — Called after show.
+
+**Exports**
+- `show()`: show toast.
+- `hide()`: hide toast.
+- `destroy()`: cleanup timers.
+
+**Example**
+```svelte
+<Toast title="Updated" message="Saved" color="success" autoHide={4000} animate={true} />
+```
+-->
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import type { BootstrapColor } from 'colors/color';
@@ -53,9 +78,11 @@
 
 	let timeout: any | undefined;
 
-	if (autoHide > 0) {
-		timeout = setTimeout(() => hide(), autoHide);
-	}
+	$effect(() => {
+		if (autoHide > 0) {
+			timeout = setTimeout(() => hide(), autoHide);
+		}
+	});
 
 	onMount(() => destroy);
 
@@ -92,7 +119,7 @@
 		onShow?.();
 	};
 
-	let textColorProxy = $state(textColor);
+	let textColorProxy = $derived(textColor);
 	$effect(() => {
 		if (!textColorProxy) {
 			switch (color) {

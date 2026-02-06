@@ -1,8 +1,12 @@
+<!--
+@component
+Admin analytics page at `/dashboard/admin/analytics`.
+-->
 <script lang="ts">
 	import DB from '$lib/components/dashboard/Dashboard.svelte';
 	import Card from '$lib/components/dashboard/Card.svelte';
 	import { Dashboard } from '$lib/model/dashboard.js';
-	import nav from '$lib/imports/admin';
+	import nav from '$lib/nav/admin.js';
 	import { Chart, registerables } from 'chart.js';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';

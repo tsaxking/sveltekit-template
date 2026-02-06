@@ -1,20 +1,25 @@
+/**
+ * @fileoverview Struct event bridge for SSE and Redis.
+ *
+ * Emits struct CRUD events to connected clients and propagates events across
+ * servers via Redis.
+ *
+ * @example
+ * import { createStructEventService } from '$lib/server/services/struct-event';
+ * createStructEventService(MyStruct);
+ */
 import { Session } from '../structs/session';
-import {
-	Struct,
-	type Blank,
-	StructData,
-	type Structable,
-	DataVersion
-} from 'drizzle-struct/back-end';
+import { Struct, type Blank, StructData, type Structable, DataVersion } from 'drizzle-struct';
 import { Account } from '../structs/account';
 import { Permissions } from '../structs/permissions';
-import { PropertyAction } from 'drizzle-struct/types';
+import { PropertyAction } from '../../types/struct';
 import { sse } from './sse';
 import { z } from 'zod';
 import { EventEmitter } from 'ts-utils/event-emitter';
 import terminal from '../utils/terminal';
 import { attempt } from 'ts-utils/check';
 import redis from './redis';
+import structRegistry from './struct-registry';
 
 const pack = (data: unknown) => {
 	return JSON.stringify({
@@ -55,7 +60,7 @@ export const createStructEventService = (struct: Struct<Blank, string>) => {
 		event: string,
 		data: StructData<typeof struct.data.structure, typeof struct.data.name>
 	) => {
-		if (!struct.frontend) return;
+		if (!structRegistry.has(struct.name)) return;
 		// console.log(sse);
 		sse.each(async (connection) => {
 			if (struct.name === 'test') {

@@ -1,3 +1,19 @@
+<!--
+@component
+Flatpickr date input wrapper. For more information, go to: https://flatpickr.js.org/getting-started/
+
+**Props**
+- `id`: `string` — Input id.
+- `value`?: `Date | null` — Initial date.
+- `options`?: `Partial<flatpickr.Options.Options>` — Flatpickr options.
+- `className`?: `string` — CSS class for the input.
+- `onChange`?: `(date: Date) => void` — Called when a date is selected.
+
+**Example**
+```svelte
+<Flatpickr id="start" value={startDate} onChange={(d) => (startDate = d)} />
+```
+-->
 <script lang="ts">
 	import flatpickr from 'flatpickr';
 	import { onMount, onDestroy } from 'svelte';

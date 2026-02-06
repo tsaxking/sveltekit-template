@@ -1,3 +1,15 @@
+<!--
+@component
+Row of minimized dashboard cards for quick restore.
+
+**Props**
+- `dashboard`: `Dashboard.Dashboard` — Dashboard controller.
+
+**Example**
+```svelte
+<MinimizedCards {dashboard} />
+```
+-->
 <script lang="ts">
 	import { Dashboard } from '$lib/model/dashboard';
 
@@ -7,7 +19,7 @@
 
 	const { dashboard }: Props = $props();
 
-	const cards = $state(dashboard.hiddenCards);
+	const cards = $derived(dashboard.hiddenCards);
 </script>
 
 {#if $cards.size > 0}

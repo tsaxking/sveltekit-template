@@ -1,3 +1,7 @@
+<!--
+@component
+Example page for state stack at `/examples/statestack`.
+-->
 <script lang="ts">
 	import { writable } from 'svelte/store';
 	import { useCommandStack } from '$lib/services/event-stack';

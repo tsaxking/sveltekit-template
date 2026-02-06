@@ -1,5 +1,23 @@
+/**
+ * @fileoverview Account domain structs, helpers, and notification utilities.
+ *
+ * This module defines the primary account struct and related entities such as
+ * account settings, admin/developer memberships, account info, notifications,
+ * and password reset tokens. It also provides helper functions for hashing,
+ * querying, and notifications.
+ *
+ * @example
+ * import { Account } from '$lib/server/structs/account';
+ * const account = await Account.createAccount({
+ *   username: 'jdoe',
+ *   email: 'jdoe@example.com',
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ *   password: 'S3cure!'
+ * }).unwrap();
+ */
 import { boolean, text } from 'drizzle-orm/pg-core';
-import { Struct } from 'drizzle-struct/back-end';
+import { Struct } from 'drizzle-struct';
 import { uuid } from '../utils/uuid';
 import { attempt, attemptAsync } from 'ts-utils/check';
 import crypto from 'crypto';
@@ -8,27 +26,47 @@ import { eq, or, ilike } from 'drizzle-orm';
 import type { Notification } from '../../types/notification';
 import { Session } from './session';
 import { sse } from '../services/sse';
-import { DataAction, PropertyAction } from 'drizzle-struct/types';
-// import { Universes } from './universe';
 import { sendEmail } from '../services/email';
 import type { Icon } from '../../types/icons';
-import { z } from 'zod';
 import { Permissions } from './permissions';
-import { QueryListener } from '../services/struct-listeners';
 import { config, domain } from '../utils/env';
+import structRegistry from '../services/struct-registry';
+import { DataAction, PropertyAction } from '../../types/struct';
 
 export namespace Account {
+	/**
+	 * Core account record.
+	 *
+	 * @property {string} username - Unique public username.
+	 * @property {string} key - Password hash.
+	 * @property {string} salt - Password salt.
+	 * @property {string} firstName - First name.
+	 * @property {string} lastName - Last name.
+	 * @property {string} email - Unique email address.
+	 * @property {boolean} verified - Email verification status.
+	 * @property {string} verification - Verification token.
+	 * @property {string} lastLogin - ISO timestamp of the last login.
+	 */
 	export const Account = new Struct({
 		name: 'account',
 		structure: {
+			/** Unique public username. */
 			username: text('username').notNull().unique(),
+			/** Password hash. */
 			key: text('key').notNull(),
+			/** Password salt. */
 			salt: text('salt').notNull(),
+			/** First name. */
 			firstName: text('first_name').notNull(),
+			/** Last name. */
 			lastName: text('last_name').notNull(),
+			/** Unique email address. */
 			email: text('email').notNull().unique(),
+			/** Email verification status. */
 			verified: boolean('verified').notNull(),
+			/** Verification token. */
 			verification: text('verification').notNull(),
+			/** ISO timestamp of last login. */
 			lastLogin: text('last_login').notNull().default('')
 		},
 		generators: {
@@ -37,107 +75,131 @@ export namespace Account {
 		safes: ['key', 'salt', 'verification']
 	});
 
-	QueryListener.on(
-		'search',
-		Account,
-		z.object({
-			query: z.string().min(1).max(255),
-			limit: z.number().min(1).max(100).default(10),
-			offset: z.number().min(0).default(0)
-		}),
-		async (event, data) => {
-			if (!event.locals.account) {
-				throw new Error('Not logged in');
-			}
-
-			return searchAccounts(data.query, {
-				type: 'array',
-				limit: data.limit || 10,
-				offset: data.offset || 0
-			}).unwrap();
-		}
-	);
-
-	Account.sendListen('self', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
-		if (!account) {
-			return new Error('Not logged in');
-		}
-		return account.safe();
-	});
-
-	Account.sendListen('username-exists', async (event, data) => {
-		const parsed = z
-			.object({
-				username: z.string().min(1)
-			})
-			.safeParse(data);
-
-		if (!parsed.success) {
-			throw new Error('Invalid data recieved');
-		}
-
-		const account = await Account.fromProperty('username', parsed.data.username, {
-			type: 'count'
-		}).unwrap();
-
-		return account > 0;
-	});
+	structRegistry.register(Account);
 
 	Account.on('delete', async (a) => {
-		Admins.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Developers.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		AccountNotification.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Settings.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		PasswordReset.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((a) => a.delete());
-		Session.Session.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe((s) => s.delete());
-		AccountInfo.fromProperty('accountId', a.id, {
-			type: 'stream'
-		}).pipe(async (a) => {
+		Admins.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Developers.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		AccountNotification.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Settings.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		PasswordReset.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((a) => a.delete());
+		Session.Session.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((s) => s.delete());
+		AccountInfo.get(
+			{ accountId: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe(async (a) => {
 			const versions = await a.getVersions().unwrapOr([]);
 			await Promise.all(versions.map((v) => v.delete()));
 			a.delete();
 		});
-		Permissions.RoleAccount.fromProperty('account', a.id, {
-			type: 'stream'
-		}).pipe((ra) => ra.delete());
-		Permissions.AccountRuleset.fromProperty('account', a.id, {
-			type: 'stream'
-		}).pipe((ar) => ar.delete());
+		Permissions.RoleAccount.get(
+			{ account: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((ra) => ra.delete());
+		Permissions.AccountRuleset.get(
+			{ account: a.id },
+			{
+				type: 'stream'
+			}
+		).pipe((ar) => ar.delete());
 	});
 
+	/**
+	 * Per-account key/value settings.
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {string} setting - Setting key.
+	 * @property {string} value - Setting value.
+	 */
+	export const Settings = new Struct({
+		name: 'account_settings',
+		structure: {
+			/** Owning account ID. */
+			accountId: text('account_id').notNull(),
+			/** Setting key. */
+			setting: text('setting').notNull(),
+			/** Setting value. */
+			value: text('value').notNull()
+		}
+	});
+
+	structRegistry
+		.register(Settings)
+		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId)
+		.bypass(DataAction.Create, (account) => account.id === account.id);
+
+	/**
+	 * Membership for admin accounts.
+	 *
+	 * @property {string} accountId - Account ID of the admin.
+	 */
 	export const Admins = new Struct({
 		name: 'admins',
 		structure: {
+			/** Account ID of the admin. */
 			accountId: text('account_id').notNull().unique()
 		}
 	});
 
+	/**
+	 * Checks whether an account is an admin.
+	 *
+	 * @param {AccountData} account - Account to check.
+	 */
 	export const isAdmin = (account: AccountData) => {
 		return attemptAsync(async () => {
 			return (
 				(
-					await Admins.fromProperty('accountId', account.id, {
-						type: 'count'
-					})
+					await Admins.get(
+						{ accountId: account.id },
+						{
+							type: 'count'
+						}
+					)
 				).unwrap() > 0
 			);
 		});
 	};
 
+	/**
+	 * Returns all admin accounts.
+	 */
 	export const getAdmins = () => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -147,13 +209,22 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Membership for developer accounts.
+	 *
+	 * @property {string} accountId - Account ID of the developer.
+	 */
 	export const Developers = new Struct({
 		name: 'developers',
 		structure: {
+			/** Account ID of the developer. */
 			accountId: text('account_id').notNull().unique()
 		}
 	});
 
+	/**
+	 * Returns all developer accounts.
+	 */
 	export const getDevelopers = () => {
 		return attemptAsync(async () => {
 			const res = await DB.select()
@@ -163,28 +234,54 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Checks whether an account is a developer.
+	 *
+	 * @param {AccountData} account - Account to check.
+	 */
 	export const isDeveloper = (account: AccountData) => {
 		return attemptAsync(async () => {
 			return (
 				(
-					await Developers.fromProperty('accountId', account.id, {
-						type: 'count'
-					})
+					await Developers.get(
+						{ accountId: account.id },
+						{
+							type: 'count'
+						}
+					)
 				).unwrap() > 0
 			);
 		});
 	};
 	export type AccountData = typeof Account.sample;
 
+	/**
+	 * Extended account profile info (versioned).
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {'all'|'friends'|'none'} viewOnline - Online visibility.
+	 * @property {string} picture - Profile image URL.
+	 * @property {string} bio - Short biography.
+	 * @property {string} website - Personal website URL.
+	 * @property {string} socials - Serialized social links.
+	 * @property {'default'|'dark'|'light'} theme - UI theme preference.
+	 */
 	export const AccountInfo = new Struct({
 		name: 'account_info',
 		structure: {
+			/** Owning account ID. */
 			accountId: text('account_id').notNull(),
+			/** Online visibility setting. */
 			viewOnline: text('view_online').notNull().default('all'), // allow others to see if user is online
+			/** Profile image URL. */
 			picture: text('picture').notNull(),
+			/** Short biography. */
 			bio: text('bio').notNull(),
+			/** Personal website URL. */
 			website: text('website').notNull(),
+			/** Serialized social links. */
 			socials: text('socials').notNull().default(''),
+			/** Theme preference. */
 			theme: text('theme').notNull().default('default')
 		},
 		versionHistory: {
@@ -196,6 +293,8 @@ export namespace Account {
 			theme: (e) => typeof e === 'string' && ['default', 'dark', 'light'].includes(e)
 		}
 	});
+
+	structRegistry.register(AccountInfo);
 
 	export type AccountInfoData = typeof AccountInfo.sample;
 
@@ -221,6 +320,11 @@ export namespace Account {
 		});
 	});
 
+	/**
+	 * Determines whether an account is currently online.
+	 *
+	 * @param {string} accountId - Account ID to check.
+	 */
 	export const isOnline = (accountId: string) => {
 		return attemptAsync(async () => {
 			const account = await Account.fromId(accountId).unwrap();
@@ -228,9 +332,12 @@ export namespace Account {
 			const info = await getAccountInfo(account).unwrap();
 			if (info.data.viewOnline !== 'all') return false;
 			let isOnline = false;
-			const stream = Session.Session.fromProperty('accountId', accountId, {
-				type: 'stream'
-			});
+			const stream = Session.Session.get(
+				{ accountId },
+				{
+					type: 'stream'
+				}
+			);
 			await stream.pipe((s) => {
 				if (s.data.tabs > 0) {
 					isOnline = true;
@@ -241,11 +348,19 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Retrieves account info, creating a default record if missing.
+	 *
+	 * @param {AccountData} account - Owning account.
+	 */
 	export const getAccountInfo = (account: AccountData) => {
 		return attemptAsync(async () => {
-			const info = await AccountInfo.fromProperty('accountId', account.id, {
-				type: 'single'
-			}).unwrap();
+			const info = await AccountInfo.get(
+				{ accountId: account.id },
+				{
+					type: 'single'
+				}
+			).unwrap();
 			if (info) return info;
 			return AccountInfo.new({
 				accountId: account.id,
@@ -259,53 +374,63 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Notification record for an account.
+	 *
+	 * @property {string} accountId - Recipient account ID.
+	 * @property {string} title - Notification title.
+	 * @property {string} severity - Severity level.
+	 * @property {string} message - Notification body.
+	 * @property {string} icon - Icon name.
+	 * @property {string} iconType - Icon set type.
+	 * @property {string} link - Associated link.
+	 * @property {boolean} read - Read/unread state.
+	 */
 	export const AccountNotification = new Struct({
 		name: 'account_notification',
 		structure: {
+			/** Recipient account ID. */
 			accountId: text('account_id').notNull(),
+			/** Notification title. */
 			title: text('title').notNull(),
+			/** Severity level. */
 			severity: text('severity').notNull(),
+			/** Notification body. */
 			message: text('message').notNull(),
+			/** Icon name. */
 			icon: text('icon').notNull(),
+			/** Icon set type. */
 			iconType: text('icon_type').notNull().default(''),
+			/** Associated link. */
 			link: text('link').notNull(),
+			/** Read/unread state. */
 			read: boolean('read').notNull()
 		}
 	});
 
-	AccountNotification.bypass(DataAction.Delete, (a, b) => a.id === b?.accountId);
-	AccountNotification.bypass(PropertyAction.Update, (a, b) => a.id === b?.accountId);
-	AccountNotification.bypass(PropertyAction.Read, (a, b) => a.id === b?.accountId);
-	AccountNotification.queryListen('get-own-notifs', async (event) => {
-		const session = (await Session.getSession(event)).unwrap();
-		const account = (await Session.getAccount(session)).unwrap();
+	structRegistry
+		.register(AccountNotification)
+		.bypass(DataAction.Delete, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Update, (account, item) => account.id === item?.data.accountId)
+		.bypass(PropertyAction.Read, (account, item) => account.id === item?.data.accountId);
 
-		if (!account) {
-			return new Error('Not logged in');
-		}
-
-		return AccountNotification.fromProperty('accountId', account.id, {
-			type: 'stream'
-		});
-	});
-
-	export const Settings = new Struct({
-		name: 'account_settings',
-		structure: {
-			accountId: text('account_id').notNull(),
-			setting: text('setting').notNull(),
-			value: text('value').notNull()
-		}
-	});
-
-	Settings.bypass('*', (account, setting) => account.id === setting?.accountId);
-
+	/**
+	 * Password reset link lifetime in milliseconds.
+	 */
 	const PASSWORD_REQUEST_LIFETIME = config.sessions.password_request_lifetime;
 
+	/**
+	 * Password reset token.
+	 *
+	 * @property {string} accountId - Owning account ID.
+	 * @property {string} expires - ISO timestamp when the token expires.
+	 */
 	export const PasswordReset = new Struct({
 		name: 'password_reset',
 		structure: {
+			/** Owning account ID. */
 			accountId: text('account_id').notNull(),
+			/** ISO timestamp when the token expires. */
 			expires: text('expires').notNull()
 		},
 		lifetime: PASSWORD_REQUEST_LIFETIME,
@@ -319,6 +444,11 @@ export namespace Account {
 		}
 	});
 
+	/**
+	 * Generates a new password hash and salt.
+	 *
+	 * @param {string} password - Plaintext password.
+	 */
 	export const newHash = (password: string) => {
 		return attempt(() => {
 			const salt = crypto.randomBytes(32).toString('hex');
@@ -327,12 +457,24 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Hashes a password using a provided salt.
+	 *
+	 * @param {string} password - Plaintext password.
+	 * @param {string} salt - Salt used for hashing.
+	 */
 	export const hash = (password: string, salt: string) => {
 		return attempt(() => {
 			return crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
 		});
 	};
 
+	/**
+	 * Creates a new account with hashed credentials.
+	 *
+	 * @param {{ username: string; email: string; firstName: string; lastName: string; password: string }} data
+	 * @param {{ canUpdate?: boolean }} [config] - Optional struct creation config.
+	 */
 	export const createAccount = (
 		data: {
 			username: string;
@@ -373,6 +515,12 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Searches accounts by username or email.
+	 *
+	 * @param {string} query - Search term.
+	 * @param {{ type: 'array'; limit: number; offset: number }} config - Paging config.
+	 */
 	export const searchAccounts = (
 		query: string,
 		config: {
@@ -397,14 +545,29 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Sends a notification to active sessions via SSE.
+	 *
+	 * @param {string} accountId - Recipient account ID.
+	 * @param {Notification} notification - Notification payload.
+	 */
 	export const notifyPopup = (accountId: string, notification: Notification) => {
 		return attemptAsync(async () => {
-			Session.Session.fromProperty('accountId', accountId, {
-				type: 'stream'
-			}).pipe((s) => sse.fromSession(s.id).notify(notification));
+			Session.Session.get(
+				{ accountId },
+				{
+					type: 'stream'
+				}
+			).pipe((s) => sse.fromSession(s.id).notify(notification));
 		});
 	};
 
+	/**
+	 * Persists a notification and sends it over SSE.
+	 *
+	 * @param {string} accountId - Recipient account ID.
+	 * @param {Notification & { icon: Icon; link: string }} notif - Notification payload.
+	 */
 	export const sendAccountNotif = (
 		accountId: string,
 		notif: Notification & {
@@ -425,6 +588,11 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Creates a new account from OAuth user info.
+	 *
+	 * @param {{ email?: string | null; given_name?: string | null; family_name?: string | null }} data
+	 */
 	export const createAccountFromOauth = (data: {
 		email?: string | null;
 		given_name?: string | null;
@@ -466,17 +634,33 @@ export namespace Account {
 		});
 	};
 
+	/**
+	 * Streams all settings for the given account.
+	 *
+	 * @param {string} accountId - Account ID.
+	 */
 	export const getSettings = (accountId: string) => {
-		return Settings.fromProperty('accountId', accountId, {
-			type: 'stream'
-		}).await();
+		return Settings.get(
+			{ accountId },
+			{
+				type: 'stream'
+			}
+		).await();
 	};
 
+	/**
+	 * Creates a password reset token and sends the reset email.
+	 *
+	 * @param {AccountData} account - Account requesting a reset.
+	 */
 	export const requestPasswordReset = (account: AccountData) => {
 		return attemptAsync(async () => {
-			PasswordReset.fromProperty('accountId', account.id, {
-				type: 'stream'
-			}).pipe((pr) => pr.delete());
+			PasswordReset.get(
+				{ accountId: account.id },
+				{
+					type: 'stream'
+				}
+			).pipe((pr) => pr.delete());
 
 			const pr = (
 				await PasswordReset.new({

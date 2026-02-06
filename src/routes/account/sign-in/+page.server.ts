@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Server load/actions for `/account/sign-in`.
+ */
+/**
+ * @fileoverview Server load/actions for `/account/sign-in`.
+ */
 import { fail, redirect } from '@sveltejs/kit';
 import { Account } from '$lib/server/structs/account.js';
 import { Session } from '$lib/server/structs/session.js';
@@ -30,9 +36,12 @@ export const actions = {
 		let account: Account.AccountData | undefined;
 
 		ACCOUNT: {
-			const user = await Account.Account.fromProperty('username', res.data.username, {
-				type: 'single'
-			});
+			const user = await Account.Account.get(
+				{ username: res.data.username },
+				{
+					type: 'single'
+				}
+			);
 			if (user.isErr()) {
 				return fail(ServerCode.internalServerError, {
 					user: res.data.username,
@@ -42,9 +51,12 @@ export const actions = {
 			account = user.value;
 			if (account) break ACCOUNT;
 
-			const email = await Account.Account.fromProperty('email', res.data.username, {
-				type: 'single'
-			});
+			const email = await Account.Account.get(
+				{ email: res.data.username },
+				{
+					type: 'single'
+				}
+			);
 			if (email.isErr()) {
 				return fail(ServerCode.internalServerError, {
 					user: res.data.username,
@@ -94,7 +106,7 @@ export const actions = {
 			port: false,
 			protocol: true
 		});
-		const redirectUri = `${url}/oauth/sign-in`;
+		const redirectUri = `${url}/api/oauth/sign-in`;
 		const client = new OAuth2Client({
 			clientSecret: str('OAUTH2_CLIENT_SECRET', true),
 			clientId: str('OAUTH2_CLIENT_ID', true),
@@ -127,14 +139,14 @@ export const actions = {
 			return exit();
 		}
 
-		let account = await Account.Account.fromProperty('username', user.data, { type: 'single' });
+		let account = await Account.Account.get({ username: user.data }, { type: 'single' });
 		if (account.isErr()) {
 			terminal.error(account.error);
 			return exit();
 		}
 
 		if (!account.value) {
-			account = await Account.Account.fromProperty('email', user.data, { type: 'single' });
+			account = await Account.Account.get({ email: user.data }, { type: 'single' });
 			if (account.isErr()) {
 				terminal.error(account.error);
 				return exit();

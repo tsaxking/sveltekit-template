@@ -1,3 +1,19 @@
+<!--
+@component
+Role ruleset editor grouped by entitlement.
+
+**Props**
+- `role`: `Permissions.RoleData` — Role being edited.
+- `saveOnChange`: `boolean` — Save immediately on changes.
+
+**Exports**
+- `save()`: persist all rule changes.
+
+**Example**
+```svelte
+<RoleRulesetEditor {role} saveOnChange={false} />
+```
+-->
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 	import { onMount } from 'svelte';
@@ -21,7 +37,12 @@
 	}>({});
 
 	onMount(() => {
-		availablePermissions = Permissions.getAvailableRolePermissions(role);
+		const res = Permissions.getAvailableRolePermissions(role);
+		if (res.isOk()) {
+			availablePermissions = res.value;
+		} else {
+			console.error('Failed to load available permissions:', res.error);
+		}
 		entitlements = Permissions.getEntitlements();
 
 		const assign = () => {

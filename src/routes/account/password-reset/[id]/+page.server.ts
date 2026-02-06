@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Server load/actions for `/account/password-reset/[id]`.
+ */
 import { Account } from '$lib/server/structs/account.js';
 import terminal from '$lib/server/utils/terminal.js';
 import { fail, redirect } from '@sveltejs/kit';

@@ -1,3 +1,16 @@
+<!--
+@component
+Role search list with selection handler.
+
+**Props**
+- `onselect`: `(role: Permissions.RoleData) => void` — Called with selected role.
+
+**Example**
+```svelte
+<RoleSelect onselect={(role) => console.log(role)} />
+```
+-->
+
 <script lang="ts">
 	import { Permissions } from '$lib/model/permissions';
 
@@ -9,7 +22,7 @@
 
 	const { onselect }: Props = $props();
 
-	let roles: Permissions.RoleData[] = $state([]);
+	let roles = $state(Permissions.Role.arr());
 	let searchKey = $state('');
 
 	let offset = $state(0);
@@ -20,18 +33,10 @@
 	const search = () => {
 		if (searchTimeout) clearTimeout(searchTimeout);
 		searchTimeout = setTimeout(async () => {
-			roles = [];
-
-			const res = await Permissions.searchRoles(searchKey, {
+			roles = Permissions.searchRoles(searchKey, {
 				offset,
 				limit
 			});
-
-			if (res.isOk()) {
-				roles = res.value;
-			} else {
-				console.error(res.error);
-			}
 		}, 300);
 	};
 </script>
@@ -48,7 +53,7 @@
 		<label for="role-search-{id}">Search Roles</label>
 	</div>
 	<ul class="list-group">
-		{#each roles as role}
+		{#each $roles as role}
 			<li class="list-group-item p-0">
 				<button type="button" class="btn btn-dark w-100 h-100" onclick={() => onselect(role)}>
 					{role.data.name}

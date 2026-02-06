@@ -1,3 +1,15 @@
+<!--
+@component
+Notification card with read/unread and delete actions.
+
+**Props**
+- `notification`: `Account.AccountNotificationData` — Notification model.
+
+**Example**
+```svelte
+<Notification {notification} />
+```
+-->
 <script lang="ts">
 	import { Account } from '$lib/model/account';
 
