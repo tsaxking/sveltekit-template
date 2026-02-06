@@ -18,7 +18,7 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
 		watch: process.argv.includes('watch'),
-		environment: 'jsdom',
+		environment: 'jsdom'
 	},
 	ssr: {
 		noExternal: ['node-html-parser']
