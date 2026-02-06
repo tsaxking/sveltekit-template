@@ -1,4 +1,10 @@
-import { WritableArray, WritableBase, WritableAsync, WritableMap, WritableSet } from '$lib/services/writables';
+import {
+	WritableArray,
+	WritableBase,
+	WritableAsync,
+	WritableMap,
+	WritableSet
+} from '$lib/services/writables';
 import { sleep } from 'ts-utils';
 import { describe, expect, test, vi } from 'vitest';
 

@@ -934,7 +934,6 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	}
 }
 
-
 /**
  * Writable set store with reactive Set operations.
  *
@@ -1030,7 +1029,6 @@ export class WritableSet<T> extends WritableBase<Set<T>> {
 		this.inform();
 	}
 }
-
 
 /**
  * Writable map store with reactive Map operations.
@@ -1135,7 +1133,7 @@ export class WritableMap<K, V> extends WritableBase<Map<K, V>> {
  * @export
  * @class WritableAsync
  * @template T
- * @extends {WritableBase<{ status: 'idle' | 'pending' | 'fulfilled' | 'rejected'; data?: T; error?: unknown; promise?: Promise<T>; }>} 
+ * @extends {WritableBase<{ status: 'idle' | 'pending' | 'fulfilled' | 'rejected'; data?: T; error?: unknown; promise?: Promise<T>; }>}
  */
 export class WritableAsync<T> extends WritableBase<{
 	status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
@@ -1215,7 +1213,14 @@ export class WritableAsync<T> extends WritableBase<{
 	 */
 	// eslint-disable-next-line no-redeclare
 	status(reactive: true): WritableBase<'idle' | 'pending' | 'fulfilled' | 'rejected'>;
-	status(reactive: boolean): WritableBase<'idle' | 'pending' | 'fulfilled' | 'rejected'> | 'idle' | 'pending' | 'fulfilled' | 'rejected' {
+	status(
+		reactive: boolean
+	):
+		| WritableBase<'idle' | 'pending' | 'fulfilled' | 'rejected'>
+		| 'idle'
+		| 'pending'
+		| 'fulfilled'
+		| 'rejected' {
 		if (!reactive) {
 			return this.data.status;
 		}
