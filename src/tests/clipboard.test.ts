@@ -17,7 +17,9 @@ describe('clipboard utilities', () => {
 		const { copy } = await import('$lib/utils/clipboard');
 		copy('hello', true);
 
+		const { notify } = await import('$lib/utils/prompts');
 		expect(writeText).toHaveBeenCalledWith('hello');
+		expect(notify).toHaveBeenCalledTimes(1);
 	});
 
 	test('copyCanvas writes clipboard item', async () => {
