@@ -55,16 +55,16 @@ export const getFeatureMetadata = (feature: string) => {
 			if (!feature.endsWith('.md')) feature += '.md';
 			const rs = fs.createReadStream(path.resolve(process.cwd(), 'static', 'features', feature));
 			let on = false;
-			const obj = {
+			const obj: Feature = {
 				id: feature.replace('.md', ''),
 				name: '',
 				description: '',
 				date: -1,
 				icon: {
-					type: '',
-					name: ''
+					type: 'material-icons',
+					name: 'question_mark'
 				},
-				picture: undefined,
+				picture: undefined
 			};
 			rs.on('data', (chunk) => {
 				const chunks = chunk.toString().split('\n');
@@ -95,7 +95,7 @@ export const getFeatureMetadata = (feature: string) => {
 				}
 			});
 			rs.on('close', () => {
-				res(obj as Feature);
+				res(obj);
 			});
 			rs.on('error', (e) => {
 				rej(e);

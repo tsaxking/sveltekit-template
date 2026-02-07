@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/general/Icon.svelte';
-import Navbar from '$lib/components/general/Navbar.svelte';
+	import Navbar from '$lib/components/general/Navbar.svelte';
 	import nav from '$lib/nav/feature.js';
 	import * as remote from '$lib/remotes/features.remote';
 	import type { Feature } from '$lib/types/features';
@@ -33,7 +33,12 @@ import Navbar from '$lib/components/general/Navbar.svelte';
 						<div class="card-body">
 							<div class="d-flex">
 								{#if feature.picture}
-									<img src={feature.picture} alt={feature.name} class="rounded me-3" style="width: 40px; height: 40px;" />
+									<img
+										src={feature.picture}
+										alt={feature.name}
+										class="rounded me-3"
+										style="width: 40px; height: 40px;"
+									/>
 								{/if}
 								<div>
 									<h5 class="card-title">

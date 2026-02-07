@@ -26,7 +26,7 @@ const close = (seconds: number) => {
 
 		remote.close({
 			page: window.location.pathname,
-			duration: seconds,
+			duration: seconds
 		});
 	});
 };

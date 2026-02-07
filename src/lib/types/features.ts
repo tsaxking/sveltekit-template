@@ -6,5 +6,5 @@ export type Feature = {
 	description: string;
 	date: number;
 	icon: Icon;
-    picture?: string;
+	picture?: string;
 };
