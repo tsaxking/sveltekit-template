@@ -49,17 +49,8 @@ Notifications offcanvas panel with unread count binding.
 		])
 	);
 
-	let features: string[] = $state(
-		[]
-	);
-
 	onMount(() => {
 		notifications = Account.getNotifs(/*limit, page*/);
-		Features.getUnread().then(r => {
-			if (r.isOk()) {
-				features = r.value;
-			}
-		});
 
 		const unsub = notifications.subscribe((d) => {
 			notifs = d.filter((n) => !n.data.read).length;

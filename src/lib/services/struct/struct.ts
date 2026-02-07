@@ -18,7 +18,6 @@ import { StructDataVersion } from './data-version';
 import { StructData } from './struct-data';
 import { StructDataStage } from './data-staging';
 import { DataArr, PaginationDataArr } from './data-arr';
-import { sse } from '../sse';
 import * as remote from '$lib/remotes/struct.remote';
 import { browser } from '$app/environment';
 import { WritableBase } from '../writables';

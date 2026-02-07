@@ -993,7 +993,7 @@ export class WritableSet<T> extends WritableBase<Set<T>> {
 	 * const hasOne = set.has(1, false);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	has(item: T, reactive: false): boolean;
 	/**
 	 * Checks whether the set has an item and returns a reactive store.
@@ -1008,7 +1008,7 @@ export class WritableSet<T> extends WritableBase<Set<T>> {
 	 * hasOne.subscribe(console.log);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	has(item: T, reactive: true): WritableBase<boolean>;
 	has(item: T, reactive: boolean): WritableBase<boolean> | boolean {
 		if (!reactive) {
@@ -1090,7 +1090,7 @@ export class WritableMap<K, V> extends WritableBase<Map<K, V>> {
 	 * const hasA = map.has('a', false);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	has(key: K, reactive: false): boolean;
 	/**
 	 * Checks whether the map has a key and returns a reactive store.
@@ -1105,7 +1105,7 @@ export class WritableMap<K, V> extends WritableBase<Map<K, V>> {
 	 * hasA.subscribe(console.log);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	has(key: K, reactive: true): WritableBase<boolean>;
 	has(key: K, reactive: boolean): WritableBase<boolean> | boolean {
 		if (!reactive) {
@@ -1197,7 +1197,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * const status = asyncStore.status(false);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	status(reactive: false): 'idle' | 'pending' | 'fulfilled' | 'rejected';
 	/**
 	 * Returns a reactive store for status updates.
@@ -1211,7 +1211,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * status.subscribe(console.log);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	status(reactive: true): WritableBase<'idle' | 'pending' | 'fulfilled' | 'rejected'>;
 	status(
 		reactive: boolean
@@ -1245,7 +1245,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * const value = asyncStore.result(false);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	result(reactive: false): T | undefined;
 	/**
 	 * Returns a reactive store for result updates.
@@ -1259,7 +1259,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * value.subscribe(console.log);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	result(reactive: true): WritableBase<T | undefined>;
 	result(reactive: boolean): WritableBase<T | undefined> | T | undefined {
 		if (!reactive) {
@@ -1286,7 +1286,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * const error = asyncStore.error(false);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	error(reactive: false): unknown;
 	/**
 	 * Returns a reactive store for error updates.
@@ -1300,7 +1300,7 @@ export class WritableAsync<T> extends WritableBase<{
 	 * error.subscribe(console.log);
 	 * ```
 	 */
-	// eslint-disable-next-line no-redeclare
+
 	error(reactive: true): WritableBase<unknown>;
 	error(reactive: boolean): WritableBase<unknown> | unknown {
 		if (!reactive) {

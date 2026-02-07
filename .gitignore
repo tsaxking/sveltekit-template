@@ -53,3 +53,5 @@ config.json
 config.docker.json
 
 docs/
+
+private/features.json

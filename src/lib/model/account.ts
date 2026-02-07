@@ -179,6 +179,8 @@ export namespace Account {
 		return self;
 	};
 
+	const notifications = AccountNotification.arr();
+
 	/**
 	 * Fetches the current account's notifications.
 	 *
@@ -187,13 +189,12 @@ export namespace Account {
 	 * const notifs = Account.getNotifs({ limit: 10, page: 0 });
 	 */
 	export const getNotifs = (config?: { limit: number; page: number }) => {
-		const w = AccountNotification.arr();
 		remote
 			.getNotifications({
 				...config
 			})
 			.then((res) => {
-				w.set(
+				notifications.set(
 					res.map((d) =>
 						AccountNotification.Generator({
 							...d,
@@ -203,7 +204,16 @@ export namespace Account {
 					)
 				);
 			});
-		return w;
+
+		AccountNotification.on('update', () => notifications.inform());
+		AccountNotification.on('new', (notif) => {
+			notifications.set([notif, ...notifications.data]);
+		});
+		AccountNotification.on('delete', (notif) => {
+			notifications.set(notifications.data.filter((n) => n.data.id !== notif.data.id));
+		});
+
+		return notifications;
 	};
 
 	/**

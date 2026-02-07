@@ -1,27 +1,37 @@
 <script lang="ts">
-    import { marked } from 'marked';
+	/* eslint-disable svelte/no-dom-manipulating */
+	import Navbar from '$lib/components/general/Navbar.svelte';
+	import { marked } from 'marked';
 	import { onMount } from 'svelte';
+	import nav from '$lib/nav/feature.js';
 
-    const { data } = $props();
+	nav();
 
-    const feature = $derived(data.feature);
+	const { data } = $props();
 
-    let html: HTMLElement;
+	const feature = $derived(data.feature);
 
-    const render = async () => {
-        html.innerHTML = await marked.parse(feature);
-    };
+	let html: HTMLElement;
 
+	const render = async () => {
+		const parsed = feature.replace(/^---[\s\S]*?---\s*/m, '');
+		const htmlText = await marked.parse(parsed);
+		const el = document.createElement('div');
+		
+		el.innerHTML = htmlText;
+		html.append(el);
+	};
 
-    onMount(() => {
-        render();
+	onMount(() => {
+		render();
 
-        return () => {
-            html.innerHTML = '';
-        }
-    });
+		return () => {
+			html.querySelectorAll('div').forEach((e) => e.remove());
+		};
+	});
 </script>
 
+<Navbar title={__APP_ENV__.name}/>
 <div class="container layer-2">
-    <div bind:this={html}></div>
+	<div bind:this={html}></div>
 </div>
