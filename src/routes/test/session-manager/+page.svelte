@@ -24,7 +24,9 @@ Session manager test page at `/test/session-manager`.
 		const res = await SessionManager.init();
 		if (res.isErr()) {
 			errorMessage = res.error?.message ?? 'Failed to refresh connections.';
+			return;
 		}
+		errorMessage = null;
 	};
 
 	const sendTestEvent = async (connection: Connection) => {
