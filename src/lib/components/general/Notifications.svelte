@@ -16,7 +16,6 @@ Notifications offcanvas panel with unread count binding.
 	import Notification from '../account/Notification.svelte';
 	import { rawModal } from '$lib/utils/prompts';
 	import NotificationHistory from '../account/NotificationHistory.svelte';
-	import { Features } from '$lib/model/features';
 
 	const id = 'notifications';
 

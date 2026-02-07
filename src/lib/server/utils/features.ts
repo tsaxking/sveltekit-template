@@ -4,14 +4,7 @@ import path from 'path';
 import z from 'zod';
 import { Account } from '../structs/account';
 import type { Icon } from '$lib/types/icons';
-
-export type Feature = {
-	id: string;
-	name: string;
-	description: string;
-	date: number;
-	icon: Icon;
-};
+import { type Feature } from '../../types/features';
 
 export const getCachedList = () => {
 	return attemptAsync(async () => {

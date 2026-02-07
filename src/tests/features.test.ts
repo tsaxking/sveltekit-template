@@ -86,7 +86,7 @@ describe('Ensure features utilities work correctly', () => {
 				title: 'New Feature: Feature B',
 				message: 'Second feature',
 				severity: 'info',
-				link: '/features/Feature B'
+				link: '/features/feature-b'
 			})
 		);
 

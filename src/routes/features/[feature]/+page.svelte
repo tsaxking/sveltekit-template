@@ -17,7 +17,7 @@
 		const parsed = feature.replace(/^---[\s\S]*?---\s*/m, '');
 		const htmlText = await marked.parse(parsed);
 		const el = document.createElement('div');
-		
+
 		el.innerHTML = htmlText;
 		html.append(el);
 	};
@@ -31,7 +31,7 @@
 	});
 </script>
 
-<Navbar title={__APP_ENV__.name}/>
+<Navbar title={__APP_ENV__.name} />
 <div class="container layer-2">
 	<div bind:this={html}></div>
 </div>
