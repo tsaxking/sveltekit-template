@@ -28,6 +28,11 @@ Session manager test page at `/test/session-manager`.
 	const sendTestEvent = async (connection: Connection) => {
 		lastAction = null;
 		lastActionError = null;
+
+		if (!manager.id) {
+			lastActionError = 'Session manager is not ready yet.';
+			return;
+		}
 		const res = await connection.send('session-manager:test', {
 			from: manager.id,
 			at: new Date().toISOString(),
