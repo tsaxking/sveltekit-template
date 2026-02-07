@@ -16,7 +16,8 @@ describe('fullscreen utilities', () => {
 		const exit = fullscreen();
 		expect(typeof exit).toBe('function');
 
+		const callsBefore = exitFullscreen.mock.calls.length;
 		exit();
-		expect(exitFullscreen).toHaveBeenCalled();
+		expect(exitFullscreen.mock.calls.length).toBe(callsBefore + 1);
 	});
 });
