@@ -19,6 +19,8 @@ Session manager test page at `/test/session-manager`.
 	let sseConnected = false;
 
 	const refreshConnections = async () => {
+		// Clear existing connections so that init() does not append duplicates.
+		SessionManager.connections.length = 0;
 		const res = await SessionManager.init();
 		if (res.isErr()) {
 			errorMessage = res.error?.message ?? 'Failed to refresh connections.';
