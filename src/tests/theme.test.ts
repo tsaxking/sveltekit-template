@@ -13,9 +13,9 @@ describe('theme utilities', () => {
 	});
 
 	test('initializes from localStorage when present', async () => {
-		localStorage.setItem('theme', 'light');
+		localStorage.setItem('theme', 'dark');
 		vi.resetModules();
 		const { theme } = await import('$lib/utils/theme');
-		expect(get(theme)).toBe('light');
+		expect(get(theme)).toBe('dark');
 	});
 });
