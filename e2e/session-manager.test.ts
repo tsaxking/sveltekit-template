@@ -61,9 +61,11 @@ describe('Session manager', () => {
 		await signIn(page, 'testadminsessionmanager', 'Password123!');
 		await page.goto('/test/session-manager');
 
-		await expect.poll(async () => {
-			return page.getByTestId('manager-state').getAttribute('data-state');
-		}).toBe('Connected');
+		await expect
+			.poll(async () => {
+				return page.getByTestId('manager-state').getAttribute('data-state');
+			})
+			.toBe('Connected');
 
 		const clientContext = await browser.newContext();
 		const clientPage = await clientContext.newPage();
@@ -72,9 +74,11 @@ describe('Session manager', () => {
 		try {
 			await clientPage.goto('/test/session-manager/client');
 
-			await expect.poll(async () => {
-				return clientPage.getByTestId('client-connection').getAttribute('data-connected');
-			}).toBe('true');
+			await expect
+				.poll(async () => {
+					return clientPage.getByTestId('client-connection').getAttribute('data-connected');
+				})
+				.toBe('true');
 
 			const clientRow = page.locator(
 				'[data-testid="connection-row"][data-connection-url*="/test/session-manager/client"]'
@@ -84,10 +88,12 @@ describe('Session manager', () => {
 
 			await clientRow.first().locator('[data-testid="send-test"]').click();
 
-			await expect.poll(async () => {
-				const text = await clientPage.getByTestId('client-event-count').textContent();
-				return Number(text ?? 0);
-			}).toBeGreaterThan(0);
+			await expect
+				.poll(async () => {
+					const text = await clientPage.getByTestId('client-event-count').textContent();
+					return Number(text ?? 0);
+				})
+				.toBeGreaterThan(0);
 
 			const lastEvent = await clientPage.getByTestId('client-last-event').textContent();
 			expect(lastEvent ?? '').toContain('/test/session-manager/client');

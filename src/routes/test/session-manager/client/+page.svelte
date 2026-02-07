@@ -24,11 +24,7 @@
 
 <div class="container">
 	<h1>Session Manager Client</h1>
-	<p
-		data-testid="client-connection"
-		data-connected={connected}
-		data-uuid={sse.uuid}
-	>
+	<p data-testid="client-connection" data-connected={connected} data-uuid={sse.uuid}>
 		SSE Connected: {connected ? 'true' : 'false'}
 	</p>
 	<p data-testid="client-event-count">{eventCount}</p>
