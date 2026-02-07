@@ -4,7 +4,10 @@ description: You can view all new features and bug fixes here!
 date: 2025/11/14
 icon-type: material-icons
 icon-name: new_releases
+picture: /assets/favicon.png
 ---
+
+![Favicon]({{ domain }}/assets/favicon.png "Favicon")
 
 # New Features
 

@@ -63,7 +63,8 @@ export const getFeatureMetadata = (feature: string) => {
 				icon: {
 					type: '',
 					name: ''
-				}
+				},
+				picture: undefined,
 			};
 			rs.on('data', (chunk) => {
 				const chunks = chunk.toString().split('\n');
@@ -86,6 +87,9 @@ export const getFeatureMetadata = (feature: string) => {
 						}
 						if (str.startsWith('icon-name')) {
 							obj.icon.name = str.replace('icon-name: ', '');
+						}
+						if (str.startsWith('picture')) {
+							obj.picture = str.replace('picture: ', '');
 						}
 					}
 				}
