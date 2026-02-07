@@ -91,6 +91,6 @@ describe('Ensure features utilities work correctly', () => {
 		);
 
 		const cached = await features.getCachedList().unwrap();
-		expect(cached.sort()).toEqual(['Feature A', 'Feature B']);
+		expect(cached.sort()).toEqual(['feature-a', 'feature-b']);
 	});
 });
