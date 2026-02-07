@@ -11,6 +11,7 @@
 import { browser } from '$app/environment';
 import { attempt } from 'ts-utils/check';
 import { Loop } from 'ts-utils/loop';
+import * as remote from '$lib/remotes/analytics.remote';
 
 let called = false;
 /**
@@ -23,17 +24,9 @@ const close = (seconds: number) => {
 		if (called || !browser) return;
 		called = true;
 
-		// navigator.sendBeacon('/api/analytics/close', JSON.stringify({
-		//     page: window.location.pathname,
-		//     duration: seconds,
-		// }));
-
-		fetch('/api/analytics/close', {
-			body: JSON.stringify({
-				page: window.location.pathname,
-				duration: seconds
-			}),
-			method: 'POST'
+		remote.close({
+			page: window.location.pathname,
+			duration: seconds
 		});
 	});
 };

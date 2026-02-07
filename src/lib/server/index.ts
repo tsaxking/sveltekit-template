@@ -13,6 +13,7 @@ import { Account } from './structs/account';
 import terminal from './utils/terminal';
 import testSchema from '../../../scripts/test-schema';
 import { config } from './utils/env';
+import { makeFeatureNotifications } from './utils/features';
 
 testSchema('false');
 
@@ -70,6 +71,8 @@ export const postBuild = async () => {
 			}
 		).unwrap();
 	}
+
+	await makeFeatureNotifications().unwrap();
 };
 
 /**

@@ -90,7 +90,9 @@ Top navigation bar with stack controls, theme toggle, account menu, and notifica
 			>
 				<i class="material-icons"> notifications </i>
 				{#if notifs}
-					<span class="position-absolute badge rounded-pill bg-danger">
+					<span
+						class="position-absolute badge rounded-pill bg-danger animate__animated animate__bounce animate__delay-2s animate__repeat-2"
+					>
 						{notifs}
 						<span class="visually-hidden">unread messages</span>
 					</span>

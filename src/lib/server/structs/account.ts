@@ -588,6 +588,21 @@ export namespace Account {
 		});
 	};
 
+	export const globalNotification = (
+		notif: Notification & {
+			icon: Icon;
+			link: string;
+		}
+	) => {
+		return attemptAsync(async () => {
+			const accounts = await DB.select({
+				id: Account.table.id
+			}).from(Account.table);
+
+			return Promise.all(accounts.map((a) => sendAccountNotif(a.id, notif).unwrap()));
+		});
+	};
+
 	/**
 	 * Creates a new account from OAuth user info.
 	 *

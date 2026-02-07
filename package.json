@@ -160,6 +160,7 @@
 		"ignore": "^7.0.5",
 		"jsoneditor": "^10.3.0",
 		"markdown-it": "^14.1.0",
+		"marked": "^17.0.0",
 		"math": "git+https://github.com/tsaxking/calculations#v1.0.0",
 		"mime-types": "^3.0.1",
 		"mjml": "^4.15.3",
