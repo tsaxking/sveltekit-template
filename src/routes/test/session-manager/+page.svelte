@@ -5,6 +5,7 @@ Session manager test page at `/test/session-manager`.
 <script lang="ts">
 	import Grid from '$lib/components/general/Grid.svelte';
 	import { SessionManager, type Connection } from '$lib/services/session-manager';
+	import { sse } from '$lib/services/sse';
 	import { contextmenu } from '$lib/utils/contextmenu';
 	import { onMount } from 'svelte';
 
@@ -15,6 +16,7 @@ Session manager test page at `/test/session-manager`.
 	let errorMessage: string | null = null;
 	let lastAction: string | null = null;
 	let lastActionError: string | null = null;
+	let sseConnected = false;
 
 	const refreshConnections = async () => {
 		const res = await SessionManager.init();
@@ -38,16 +40,24 @@ Session manager test page at `/test/session-manager`.
 		lastAction = `Sent test event to ${connection.url}`;
 	};
 
+	const startManager = async () => {
+		const res = await manager.start();
+		if (res.isErr()) {
+			errorMessage = res.error?.message ?? 'Failed to start session manager.';
+			return;
+		}
+		await refreshConnections();
+		setTimeout(() => {
+			refreshConnections();
+		}, 1000);
+	};
+
 	onMount(() => {
-		const startManager = async () => {
-			const res = await manager.start();
-			if (res.isErr()) {
-				errorMessage = res.error?.message ?? 'Failed to start session manager.';
-				return;
-			}
-			await refreshConnections();
-		};
-		startManager();
+		sse.on('connect', () => {
+			sseConnected = true;
+			startManager();
+		});
+		sse.connect();
 		return () => {};
 	});
 </script>
@@ -67,6 +77,9 @@ Session manager test page at `/test/session-manager`.
 					{$managerState}
 				</span>
 			</h1>
+			<p class="text-muted" data-testid="sse-state" data-connected={sseConnected}>
+				SSE Connected: {sseConnected ? 'true' : 'false'}
+			</p>
 			<p class="text-muted" data-testid="manager-id">Manager ID: {manager.id ?? 'none'}</p>
 			{#if errorMessage}
 				<p class="text-danger" data-testid="manager-error">{errorMessage}</p>

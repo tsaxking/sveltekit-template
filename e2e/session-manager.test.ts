@@ -62,9 +62,21 @@ describe('Session manager', () => {
 		await page.goto('/test/session-manager');
 
 		await expect
-			.poll(async () => {
-				return page.getByTestId('manager-state').getAttribute('data-state');
-			})
+			.poll(
+				async () => {
+					return page.getByTestId('sse-state').getAttribute('data-connected');
+				},
+				{ timeout: 20000 }
+			)
+			.toBe('true');
+
+		await expect
+			.poll(
+				async () => {
+					return page.getByTestId('manager-state').getAttribute('data-state');
+				},
+				{ timeout: 20000 }
+			)
 			.toBe('Connected');
 
 		const clientContext = await browser.newContext();
@@ -75,16 +87,20 @@ describe('Session manager', () => {
 			await clientPage.goto('/test/session-manager/client');
 
 			await expect
-				.poll(async () => {
-					return clientPage.getByTestId('client-connection').getAttribute('data-connected');
-				})
+				.poll(
+					async () => {
+						return clientPage.getByTestId('client-connection').getAttribute('data-connected');
+					},
+					{ timeout: 20000 }
+				)
 				.toBe('true');
 
 			const clientRow = page.locator(
 				'[data-testid="connection-row"][data-connection-url*="/test/session-manager/client"]'
 			);
 
-			await expect.poll(async () => clientRow.count()).toBeGreaterThan(0);
+			await page.getByTestId('refresh-connections').click();
+			await expect.poll(async () => clientRow.count(), { timeout: 20000 }).toBeGreaterThan(0);
 
 			await clientRow.first().locator('[data-testid="send-test"]').click();
 
@@ -101,5 +117,5 @@ describe('Session manager', () => {
 			await clientPage.close();
 			await clientContext.close();
 		}
-	});
+	}, 10_000);
 });

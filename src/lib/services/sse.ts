@@ -56,6 +56,9 @@ class SSE {
 	/** Flag indicating if connection is intentionally disconnected */
 	private isDisconnected = false;
 
+	/** Flag indicating if SSE is currently connected */
+	private isConnected = false;
+
 	/** Flag indicating if reconnection is in progress */
 	private isReconnecting = false;
 
@@ -154,6 +157,7 @@ class SSE {
 			 */
 			const handleConnect = () => {
 				this.log('SSE connection established.');
+				this.isConnected = true;
 				this.emitter.emit('connect', undefined);
 				this.reconnectAttempt = 0;
 				this.pingFailures = 0;
@@ -210,6 +214,7 @@ class SSE {
 			 */
 			const handleError = () => {
 				console.warn('SSE connection lost, retrying...');
+				this.isConnected = false;
 				source.close();
 				if (!this.isReconnecting) {
 					this.isReconnecting = true;
@@ -233,6 +238,7 @@ class SSE {
 			 */
 			const closeConnection = () => {
 				source.close();
+				this.isConnected = false;
 				source.removeEventListener('open', handleConnect);
 				source.removeEventListener('message', handleMessage);
 				source.removeEventListener('error', handleError);
@@ -318,7 +324,7 @@ class SSE {
 	public waitForConnection(timeout: number) {
 		return new Promise<void>((resolve, reject) => {
 			let settled = false;
-			if (!this.isDisconnected) {
+			if (this.isConnected) {
 				this.log('SSE connection already established.');
 				return resolve();
 			}
