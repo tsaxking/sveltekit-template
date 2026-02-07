@@ -180,6 +180,7 @@ export namespace Account {
 	};
 
 	const notifications = AccountNotification.arr();
+	let notifSubbed = false;
 
 	/**
 	 * Fetches the current account's notifications.
@@ -189,6 +190,10 @@ export namespace Account {
 	 * const notifs = Account.getNotifs({ limit: 10, page: 0 });
 	 */
 	export const getNotifs = (config?: { limit: number; page: number }) => {
+		if (notifSubbed) {
+			return notifications;
+		}
+		notifSubbed = true;
 		remote
 			.getNotifications({
 				...config

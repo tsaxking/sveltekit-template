@@ -45,7 +45,7 @@ export const makeFeatureNotifications = () => {
 			)
 		);
 
-		await saveListCache(features.map((f) => f.name));
+		await saveListCache(features.map((f) => f.id)).unwrap();
 	});
 };
 
