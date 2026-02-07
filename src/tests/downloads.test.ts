@@ -1,6 +1,10 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi, afterEach } from 'vitest';
 
 describe('downloads utilities', () => {
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
+
 	test('downloadUrl creates anchor and clicks', async () => {
 		const click = vi.fn();
 		const appendSpy = vi.spyOn(document.body, 'appendChild');
