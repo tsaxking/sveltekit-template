@@ -46,10 +46,9 @@ export const create = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -62,6 +61,12 @@ export const create = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const isBypassed = registry.isBypassed(DataAction.Create, account);
 			if (isBypassed.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -239,7 +244,6 @@ export const update = command(
 		}
 
 		BLOCKS: {
-			if (await isAdmin()) break BLOCKS;
 			const blocked = registry.isBlocked(PropertyAction.Update, account, targetData.value);
 			if (blocked.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -248,6 +252,7 @@ export const update = command(
 				terminal.error(`Update action is blocked for struct ${data.struct}`);
 				return error(403, 'Unauthorized');
 			}
+			if (await isAdmin()) break BLOCKS;
 		}
 
 		const filtered = await Permissions.filterPropertyActionFromAccount(
@@ -310,10 +315,9 @@ export const archive = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -326,6 +330,12 @@ export const archive = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const bypassed = registry.isBypassed(DataAction.Archive, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -381,10 +391,9 @@ export const restoreArchive = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -397,6 +406,12 @@ export const restoreArchive = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const bypassed = registry.isBypassed(DataAction.RestoreArchive, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -491,10 +506,9 @@ export const restoreVersion = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -507,6 +521,12 @@ export const restoreVersion = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const bypassed = registry.isBypassed(DataAction.RestoreVersion, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -566,10 +586,9 @@ export const remove = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -582,6 +601,12 @@ export const remove = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const bypassed = registry.isBypassed(DataAction.Delete, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');
@@ -643,10 +668,9 @@ export const removeVersion = command(
 		}
 
 		const account = await getAccount();
-		PERMIT: if (account && data.struct !== 'test') {
-			if (await Account.isAdmin(account)) {
-				// Admins can always archive data
-				break PERMIT;
+		PERMIT: if (data.struct !== 'test') {
+			if (!account) {
+				return error(403, 'Unauthorized');
 			}
 
 			{
@@ -659,6 +683,12 @@ export const removeVersion = command(
 					return error(403, 'Unauthorized');
 				}
 			}
+
+			if (await Account.isAdmin(account)) {
+				// Admins can always archive data
+				break PERMIT;
+			}
+
 			const bypassed = registry.isBypassed(DataAction.DeleteVersion, account, targetData.value);
 			if (bypassed.isErr()) {
 				return error(500, 'Internal Server Error');

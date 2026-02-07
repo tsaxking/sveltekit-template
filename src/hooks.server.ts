@@ -107,8 +107,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const autoSignIn = config.sessions.auto_sign_in;
+	const disableAutoSignIn =
+		event.request.headers.get('x-no-auto-sign-in') === 'true' ||
+		event.cookies.get('no_auto_sign_in') === 'true';
 
-	if (autoSignIn && config.environment !== 'prod') {
+	if (autoSignIn && config.environment !== 'prod' && !disableAutoSignIn) {
 		const a = await Account.Account.get({ username: autoSignIn }, { type: 'single' });
 		if (a.isOk() && a.value) {
 			event.locals.account = a.value;

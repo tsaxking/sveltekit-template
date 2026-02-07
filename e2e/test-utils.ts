@@ -26,7 +26,20 @@ export const signIn = async (page: Page, username: string, password: string) => 
 	await usernameInput.fill(username);
 	await passwordInput.fill(password);
 
+	const signInResponse = page.waitForResponse((response) => {
+		return response.request().method() === 'POST' && response.url().includes('/account/sign-in');
+	});
+
 	await signInButton.click();
+	await signInResponse;
+	await page.waitForLoadState('networkidle');
+	await page
+		.waitForURL((url) => !url.pathname.startsWith('/account/sign-in'), {
+			timeout: 2000
+		})
+		.catch(() => {
+			// Some tests navigate immediately after sign-in; ignore if redirect is slow.
+		});
 
 	const sessions = await Session.Session.get(
 		{ accountId: account.id },
