@@ -355,6 +355,26 @@ export class WritableBase<T> implements Writable<T> {
 	equals(other: WritableBase<T>): boolean {
 		return deepEqual(this.data, other.data);
 	}
+
+
+
+	/**
+	 * Creates a new WritableBase that derives its value from this WritableBase using the provided transform function. The derived WritableBase will automatically update whenever this WritableBase changes, applying the transform function to produce the new value.
+	 * @param transform - Function that transforms this WritableBase's data into the type of the derived WritableBase
+	 * @param config - Optional configuration for the derived WritableBase (debounceMs and debug)
+	 * @returns {WritableBase<U>} A new WritableBase instance that derives its value from this one
+	 * @example
+	 * ```typescript
+	 * const store = new WritableBase(1);
+	 * const derived = store.derive(num => `Number is: ${num}`);
+	 * store.set(2); // derived will update to "Number is: 2"
+	 * ```
+	 */
+	derive<U>(transform: (data: T) => U, config?: { debounceMs?: number; debug?: boolean }): WritableBase<U> {
+		const derived = new WritableBase<U>(transform(this.data), config);
+		derived.pipeData(this, transform);
+		return derived;
+	}
 }
 
 /**
