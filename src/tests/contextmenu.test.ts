@@ -12,19 +12,17 @@ describe('contextmenu utilities', () => {
 	test('clamps position within viewport and removes on click', async () => {
 		Object.defineProperty(window, 'innerWidth', { value: 300, configurable: true });
 		Object.defineProperty(window, 'innerHeight', { value: 200, configurable: true });
-			const rectSpy = vi
-				.spyOn(HTMLElement.prototype, 'getBoundingClientRect')
-				.mockReturnValue({
-					width: 200,
-					height: 150,
-					top: 0,
-					left: 0,
-					right: 200,
-					bottom: 150,
-					x: 0,
-					y: 0,
-					toJSON: () => ({})
-				} as DOMRect);
+		const rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+			width: 200,
+			height: 150,
+			top: 0,
+			left: 0,
+			right: 200,
+			bottom: 150,
+			x: 0,
+			y: 0,
+			toJSON: () => ({})
+		} as DOMRect);
 
 		const event = new MouseEvent('contextmenu', { clientX: 290, clientY: 190, bubbles: true });
 
@@ -47,12 +45,12 @@ describe('contextmenu utilities', () => {
 
 		const left = parseInt(menu.style.left, 10);
 		const top = parseInt(menu.style.top, 10);
-			expect(left).toBeLessThanOrEqual(92);
-			expect(top).toBeLessThanOrEqual(42);
+		expect(left).toBeLessThanOrEqual(92);
+		expect(top).toBeLessThanOrEqual(42);
 
-			await new Promise((resolve) => setTimeout(resolve, 20));
-			document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+		await new Promise((resolve) => setTimeout(resolve, 20));
+		document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 		expect(document.querySelector('.contextmenu')).toBeNull();
-			rectSpy.mockRestore();
+		rectSpy.mockRestore();
 	});
 });

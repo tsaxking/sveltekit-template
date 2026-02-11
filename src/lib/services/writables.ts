@@ -355,6 +355,27 @@ export class WritableBase<T> implements Writable<T> {
 	equals(other: WritableBase<T>): boolean {
 		return deepEqual(this.data, other.data);
 	}
+
+	/**
+	 * Creates a new WritableBase that derives its value from this WritableBase using the provided transform function. The derived WritableBase will automatically update whenever this WritableBase changes, applying the transform function to produce the new value.
+	 * @param transform - Function that transforms this WritableBase's data into the type of the derived WritableBase
+	 * @param config - Optional configuration for the derived WritableBase (debounceMs and debug)
+	 * @returns {WritableBase<U>} A new WritableBase instance that derives its value from this one
+	 * @example
+	 * ```typescript
+	 * const store = new WritableBase(1);
+	 * const derived = store.derive(num => `Number is: ${num}`);
+	 * store.set(2); // derived will update to "Number is: 2"
+	 * ```
+	 */
+	derive<U>(
+		transform: (data: T) => U,
+		config?: { debounceMs?: number; debug?: boolean }
+	): WritableBase<U> {
+		const derived = new WritableBase<U>(transform(this.data), config);
+		derived.pipeData(this, transform);
+		return derived;
+	}
 }
 
 /**
@@ -600,6 +621,26 @@ export class WritableArray<T> extends WritableBase<T[]> {
 		for (let i = 0; i < this.data.length; i++) {
 			fn(this.data[i], i, this.data);
 		}
+	}
+
+	/**
+	 * Applies a function against an accumulator and each element in the array to reduce it to a single value. The resulting WritableBase will reactively update when the original array changes.
+	 * @param fn - Reducer function that takes an accumulator, current item, index, and the array, and returns the new accumulator value
+	 * @param initialValue - Initial value for the reduction
+	 * @returns {WritableBase<U>} A new WritableBase that holds the reduced value
+	 * @example
+	 * ```typescript
+	 * const store = new WritableArray([1, 2, 3]);
+	 * const sum = store.reduce((acc, item) => acc + item, 0);
+	 * store.subscribe(() => {
+	 *  console.log("Total:", sum.data); // logs the sum of the array whenever it changes
+	 * });
+	 * ```
+	 */
+	reduce<U>(fn: (acc: U, item: T, index: number, arr: T[]) => U, initialValue: U): WritableBase<U> {
+		const reduced = new WritableBase<U>(initialValue);
+		reduced.pipeData(this, (arr) => arr.reduce(fn, initialValue));
+		return reduced;
 	}
 
 	/**

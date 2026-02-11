@@ -176,6 +176,11 @@ export namespace Account {
 	 * Returns the singleton writable for the current account.
 	 */
 	export const getSelf = (): SingleWritable<typeof Account.data.structure> => {
+		if (browser) {
+			remote.self().then((res) => {
+				self.set(Account.Generator(res));
+			});
+		}
 		return self;
 	};
 

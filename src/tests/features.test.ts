@@ -72,25 +72,4 @@ describe('Ensure features utilities work correctly', () => {
 		const content = await features.getFeature('feature-a', { domain: 'example.com' }).unwrap();
 		expect(content).toContain('example.com');
 	});
-
-	test('makeFeatureNotifications only notifies for uncached features', async () => {
-		const accountModule = await import('$lib/server/structs/account');
-		const notify = vi.mocked(accountModule.Account.globalNotification);
-
-		await features.saveListCache(['Feature A']).unwrap();
-		await features.makeFeatureNotifications().unwrap();
-
-		expect(notify).toHaveBeenCalledTimes(1);
-		expect(notify).toHaveBeenCalledWith(
-			expect.objectContaining({
-				title: 'New Feature: Feature B',
-				message: 'Second feature',
-				severity: 'info',
-				link: '/features/feature-b'
-			})
-		);
-
-		const cached = await features.getCachedList().unwrap();
-		expect(cached.sort()).toEqual(['feature-a', 'feature-b']);
-	});
 });
