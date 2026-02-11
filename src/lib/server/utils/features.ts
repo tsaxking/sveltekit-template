@@ -28,8 +28,10 @@ export const saveListCache = (list: string[]) => {
 export const makeFeatureNotifications = () => {
 	return attemptAsync(async () => {
 		const features = await getFeatureList().unwrap();
-		const cached = await getCachedList().unwrap();
-		const newFeatures = features.filter((f) => !cached.includes(f.name));
+		const cached = await getCachedList().unwrapOr([]);
+		console.log('Features:', features);
+		console.log('Cached:', cached);
+		const newFeatures = features.filter((f) => !cached.includes(f.id));
 
 		await Promise.all(
 			newFeatures.map((f) =>

@@ -623,6 +623,26 @@ export class WritableArray<T> extends WritableBase<T[]> {
 	}
 
 	/**
+	 * Applies a function against an accumulator and each element in the array to reduce it to a single value. The resulting WritableBase will reactively update when the original array changes.
+	 * @param fn - Reducer function that takes an accumulator, current item, index, and the array, and returns the new accumulator value
+	 * @param initialValue - Initial value for the reduction
+	 * @returns {WritableBase<U>} A new WritableBase that holds the reduced value
+	 * @example
+	 * ```typescript
+	 * const store = new WritableArray([1, 2, 3]);
+	 * const sum = store.reduce((acc, item) => acc + item, 0);
+	 * store.subscribe(() => {
+	 *  console.log("Total:", sum.data); // logs the sum of the array whenever it changes
+	 * });
+	 * ```
+	 */
+	reduce<U>(fn: (acc: U, item: T, index: number, arr: T[]) => U, initialValue: U): WritableBase<U> {
+		const reduced = new WritableBase<U>(initialValue);
+		reduced.pipeData(this, (arr) => arr.reduce(fn, initialValue));
+		return reduced;
+	}
+
+	/**
 	 * Removes items from the array based on a predicate function
 	 * @param fn - Predicate function to determine which items to remove
 	 * @returns {void}
