@@ -356,8 +356,6 @@ export class WritableBase<T> implements Writable<T> {
 		return deepEqual(this.data, other.data);
 	}
 
-
-
 	/**
 	 * Creates a new WritableBase that derives its value from this WritableBase using the provided transform function. The derived WritableBase will automatically update whenever this WritableBase changes, applying the transform function to produce the new value.
 	 * @param transform - Function that transforms this WritableBase's data into the type of the derived WritableBase
@@ -370,7 +368,10 @@ export class WritableBase<T> implements Writable<T> {
 	 * store.set(2); // derived will update to "Number is: 2"
 	 * ```
 	 */
-	derive<U>(transform: (data: T) => U, config?: { debounceMs?: number; debug?: boolean }): WritableBase<U> {
+	derive<U>(
+		transform: (data: T) => U,
+		config?: { debounceMs?: number; debug?: boolean }
+	): WritableBase<U> {
 		const derived = new WritableBase<U>(transform(this.data), config);
 		derived.pipeData(this, transform);
 		return derived;
