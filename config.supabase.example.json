@@ -1,0 +1,71 @@
+{
+	"environment": "dev",
+	"app_name": "Your App Name",
+	"network": {
+		"host": "localhost",
+		"port": 3000,
+		"protocol": "http"
+	},
+	"database": {
+		"connectionUrl": "postgresql://postgres:postgres@localhost:54322/postgres"
+	},
+	"sessions": {
+		"auto_sign_in": "username",
+		"duration": 604800000,
+		"password_request_lifetime": 3600000
+	},
+	"redis": {
+		"url": "redis://localhost:6379",
+		"name": "your_redis_name"
+	},
+	"logs": {
+		"enabled": true,
+		"outdir": "logs",
+		"level": ["info", "error", "warn"]
+	},
+	"admin": {
+		"user": "admin_username",
+		"pass": "admin_password",
+		"email": "admin_email@example.com",
+		"first_name": "Admin",
+		"last_name": "User"
+	},
+	"email": {
+		"queue_name": "email_queue",
+		"max_size": 100,
+		"support_email": "someemail@email.com"
+	},
+	"ntp": {
+		"server": "ntp_server_name"
+	},
+	"limiting": {
+		"enabled": true,
+		"requests": 100,
+		"window": 600
+	},
+	"struct_batching": {
+		"enabled": true,
+		"interval": 100,
+		"timeout": 10000,
+		"limit": 100,
+		"batch_size": 10,
+		"debug": true
+	},
+	"struct_cache": {
+		"enabled": true,
+		"debug": false
+	},
+	"indexed_db": {
+		"enabled": true,
+		"db_name": "app_indexed_db",
+		"version": 1,
+		"debug": true,
+		"debounce_interval_ms": 16
+	},
+	"sse": {
+		"debug": false,
+		"ping_interval_ms": 30000,
+		"state_report_threshold": 5000,
+		"do_report": true
+	}
+}

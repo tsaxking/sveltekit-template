@@ -38,6 +38,10 @@
 			"description": "Database configuration",
 			"type": "object",
 			"properties": {
+				"connectionUrl": {
+					"type": "string",
+					"description": "Full PostgreSQL connection URL (e.g., for Supabase). If provided, overrides individual connection parameters."
+				},
 				"port": {
 					"type": "integer",
 					"minimum": 1,
@@ -61,7 +65,7 @@
 					"description": "Database name"
 				}
 			},
-			"required": ["port", "host", "user", "pass", "name"],
+			"required": [],
 			"additionalProperties": false
 		},
 		"sessions": {
