@@ -21,12 +21,13 @@ import z from 'zod';
  * @property {string} network.host - Bind host.
  * @property {number} network.port - Bind port.
  * @property {'http'|'https'} network.protocol - Protocol.
- * @property {{ port: number; host: string; user: string; pass: string; name: string }} database - Database connection.
- * @property {number} database.port - Database port.
- * @property {string} database.host - Database host.
- * @property {string} database.user - Database user.
- * @property {string} database.pass - Database password.
- * @property {string} database.name - Database name.
+ * @property {{ connectionUrl?: string; port?: number; host?: string; user?: string; pass?: string; name?: string }} database - Database connection.
+ * @property {string | undefined} database.connectionUrl - Optional full connection URL (e.g., for Supabase).
+ * @property {number | undefined} database.port - Database port.
+ * @property {string | undefined} database.host - Database host.
+ * @property {string | undefined} database.user - Database user.
+ * @property {string | undefined} database.pass - Database password.
+ * @property {string | undefined} database.name - Database name.
  * @property {{ auto_sign_in?: string; duration: number; password_request_lifetime: number }} sessions - Session configuration.
  * @property {string | undefined} sessions.auto_sign_in - Optional auto sign-in token.
  * @property {number} sessions.duration - Session lifetime in ms.
@@ -84,13 +85,33 @@ export default z.object({
 		port: z.number().min(1).max(65535),
 		protocol: z.enum(['http', 'https'])
 	}),
-	database: z.object({
-		port: z.number().min(1).max(65535),
-		host: z.string().min(1),
-		user: z.string().min(1),
-		pass: z.string().min(1),
-		name: z.string().min(1)
-	}),
+	database: z
+		.object({
+			connectionUrl: z.string().optional(),
+			port: z.number().min(1).max(65535).optional(),
+			host: z.string().min(1).optional(),
+			user: z.string().min(1).optional(),
+			pass: z.string().min(1).optional(),
+			name: z.string().min(1).optional()
+		})
+		.refine(
+			(data) => {
+				// Either connectionUrl OR all individual fields must be provided
+				const hasConnectionUrl = !!data.connectionUrl;
+				const hasIndividualFields = !!(
+					data.host &&
+					data.port &&
+					data.user &&
+					data.pass &&
+					data.name
+				);
+				return hasConnectionUrl || hasIndividualFields;
+			},
+			{
+				message:
+					'Either connectionUrl or all of (host, port, user, pass, name) must be provided'
+			}
+		),
 	sessions: z.object({
 		auto_sign_in: z.string().optional(),
 		duration: z.number().min(1),

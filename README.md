@@ -108,7 +108,37 @@ To set up the project, copy the .env.example file to .env and fill in the requir
 
 ### Database
 
-We use postgres as the database and drizzle-orm as a wrapper around it.
+We use PostgreSQL as the database and drizzle-orm as a wrapper around it.
+
+**Supabase Support**: This template now supports Supabase! See [SUPABASE_INTEGRATION.md](SUPABASE_INTEGRATION.md) for details on using Supabase instead of (or alongside) a self-hosted PostgreSQL database.
+
+#### Database Connection Options
+
+You can configure the database connection in `config.json` using either:
+
+1. **Individual parameters** (traditional PostgreSQL):
+   ```json
+   {
+     "database": {
+       "host": "localhost",
+       "port": 5432,
+       "user": "username",
+       "pass": "password",
+       "name": "db"
+     }
+   }
+   ```
+
+2. **Connection URL** (Supabase or any PostgreSQL):
+   ```json
+   {
+     "database": {
+       "connectionUrl": "postgresql://user:pass@host:port/dbname"
+     }
+   }
+   ```
+
+See `config.example.json` for the traditional setup or `config.supabase.example.json` for Supabase.
 
 #### Setup (services)
 
