@@ -110,7 +110,7 @@ To set up the project, copy the .env.example file to .env and fill in the requir
 
 We use PostgreSQL as the database and drizzle-orm as a wrapper around it.
 
-**Supabase Support**: This template now supports Supabase! See [docs/SUPABASE_INTEGRATION.md](docs/SUPABASE_INTEGRATION.md) for details on using Supabase instead of (or alongside) a self-hosted PostgreSQL database.
+**Supabase Support**: This template now supports Supabase! See [SUPABASE_INTEGRATION.md](SUPABASE_INTEGRATION.md) for details on using Supabase instead of (or alongside) a self-hosted PostgreSQL database.
 
 #### Database Connection Options
 
