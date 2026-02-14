@@ -54,7 +54,9 @@ jobs:
             git@github.com:tsaxking/sfz-budgeting.git,
             git@github.com:4sight-live/streaming-service.git,
             git@github.com:lordbagel42/better-fundraising.git,
-            git@github.com:Ansodo-SophieH/tracker-app.git
+            git@github.com:Ansodo-SophieH/tracker-app.git,
+            git@github.com:tsaxking/tsaxking-com.git,
+            git@github.com:tsaxking/nginx-manager.git
           ]
 
     steps:
