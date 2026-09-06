@@ -1,10 +1,29 @@
 import sbParseLog from './sb-parse-log';
-import { set } from '../../src/lib/server/utils/env-utils';
+import fs from 'fs';
+import path from 'path';
+
+const setEnvFileVars = (vars: Record<string, string>) => {
+	const envPath = path.join(process.cwd(), '.env');
+	const existing = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf-8') : '';
+	const lines = existing.length ? existing.split(/\r?\n/) : [];
+
+	for (const [key, value] of Object.entries(vars)) {
+		const line = `${key}=${value}`;
+		const index = lines.findIndex((entry) => entry.startsWith(`${key}=`));
+		if (index === -1) {
+			lines.push(line);
+		} else {
+			lines[index] = line;
+		}
+	}
+
+	const output = lines.join('\n').trimEnd() + '\n';
+	fs.writeFileSync(envPath, output, 'utf-8');
+};
 
 export default async () => {
 	const parsed = sbParseLog();
-
-	set({
+	const vars = {
 		SB_STUDIO_URL: parsed.development_tools_studio,
 		SB_MAILPIT_URL: parsed.development_tools_mailpit,
 		SB_MCP_URL: parsed.development_tools_mcp,
@@ -19,5 +38,7 @@ export default async () => {
 		SB_PUBLIC_URL: parsed.apis_project_url.replace('127.0.0.1', 'localhost'),
 		SB_POSTGRES_PASSWORD: 'postgres',
 		SB_TENANT_ID: ''
-	});
+	};
+
+	setEnvFileVars(vars);
 };

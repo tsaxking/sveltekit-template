@@ -6,7 +6,371 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type Database = {}
+export type Database = {
+  core: {
+    Tables: {
+      account_notification: {
+        Row: {
+          account_id: string
+          archived: boolean
+          created_at: string
+          icon: string
+          icon_type: string
+          id: string
+          link: string | null
+          message: string
+          read: boolean
+          severity: string
+          title: string
+        }
+        Insert: {
+          account_id: string
+          archived?: boolean
+          created_at?: string
+          icon: string
+          icon_type: string
+          id?: string
+          link?: string | null
+          message: string
+          read?: boolean
+          severity: string
+          title: string
+        }
+        Update: {
+          account_id?: string
+          archived?: boolean
+          created_at?: string
+          icon?: string
+          icon_type?: string
+          id?: string
+          link?: string | null
+          message?: string
+          read?: boolean
+          severity?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      admin: {
+        Row: {
+          archived: boolean
+          created_at: string
+          id: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      cached_request: {
+        Row: {
+          archived: boolean
+          created_at: string
+          headers: string
+          id: string
+          response: string
+          status: number
+          ttl: number
+          url: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          headers: string
+          id?: string
+          response: string
+          status: number
+          ttl: number
+          url: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          headers?: string
+          id?: string
+          response?: string
+          status?: number
+          ttl?: number
+          url?: string
+        }
+        Relationships: []
+      }
+      profile: {
+        Row: {
+          archived: boolean
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          username: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          username: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      role: {
+        Row: {
+          archived: boolean
+          color: string
+          created_at: string
+          description: string
+          id: string
+          name: string
+        }
+        Insert: {
+          archived?: boolean
+          color: string
+          created_at?: string
+          description: string
+          id?: string
+          name: string
+        }
+        Update: {
+          archived?: boolean
+          color?: string
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      role_account: {
+        Row: {
+          account: string | null
+          archived: boolean
+          created_at: string
+          id: string
+          role: string | null
+        }
+        Insert: {
+          account?: string | null
+          archived?: boolean
+          created_at?: string
+          id?: string
+          role?: string | null
+        }
+        Update: {
+          account?: string | null
+          archived?: boolean
+          created_at?: string
+          id?: string
+          role?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_account_role_fkey"
+            columns: ["role"]
+            isOneToOne: false
+            referencedRelation: "role"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      session: {
+        Row: {
+          account_id: string | null
+          archived: boolean
+          created_at: string
+          id: string
+          prev_url: string | null
+        }
+        Insert: {
+          account_id?: string | null
+          archived?: boolean
+          created_at?: string
+          id?: string
+          prev_url?: string | null
+        }
+        Update: {
+          account_id?: string | null
+          archived?: boolean
+          created_at?: string
+          id?: string
+          prev_url?: string | null
+        }
+        Relationships: []
+      }
+      session_tab: {
+        Row: {
+          archived: boolean
+          created_at: string
+          id: string
+          session_id: string
+          url: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+          session_id: string
+          url: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+          session_id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_tab_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "session"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      has_role: { Args: { required_role: string }; Returns: boolean }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+  public: {
+    Tables: {
+      _template: {
+        Row: {
+          archived: boolean
+          created_at: string
+          id: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      get_schemas_and_tables: {
+        Args: never
+        Returns: {
+          schema_name: string
+          table_name: string
+        }[]
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+  test: {
+    Tables: {
+      join_test: {
+        Row: {
+          archived: boolean
+          created_at: string
+          id: number
+          test_id: string | null
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          id?: number
+          test_id?: string | null
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          id?: number
+          test_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "join_test_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "test"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test: {
+        Row: {
+          age: number
+          archived: boolean
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          age: number
+          archived?: boolean
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          age?: number
+          archived?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
 
@@ -125,21 +489,314 @@ export type CompositeTypes<
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
 
-export const Constants = {} as const
+export const Constants = {
+  core: {
+    Enums: {},
+  },
+  public: {
+    Enums: {},
+  },
+  test: {
+    Enums: {},
+  },
+} as const
 
 export type SchemaName = keyof Database;
 
 export type DatabasePivoted = {
 	Row: {
-
+		"core": {
+			"account_notification": {
+				"account_id": string;
+				"archived": boolean;
+				"created_at": string;
+				"icon": string;
+				"icon_type": string;
+				"id": string;
+				"link": string | null;
+				"message": string;
+				"read": boolean;
+				"severity": string;
+				"title": string;
+			};
+			"admin": {
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+			};
+			"cached_request": {
+				"archived": boolean;
+				"created_at": string;
+				"headers": string;
+				"id": string;
+				"response": string;
+				"status": number;
+				"ttl": number;
+				"url": string;
+			};
+			"profile": {
+				"archived": boolean;
+				"created_at": string;
+				"email": string;
+				"first_name": string;
+				"id": string;
+				"last_name": string;
+				"username": string;
+			};
+			"role": {
+				"archived": boolean;
+				"color": string;
+				"created_at": string;
+				"description": string;
+				"id": string;
+				"name": string;
+			};
+			"role_account": {
+				"account": string | null;
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+				"role": string | null;
+			};
+			"session": {
+				"account_id": string | null;
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+				"prev_url": string | null;
+			};
+			"session_tab": {
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+				"session_id": string;
+				"url": string;
+			};
+		};
+		"public": {
+			"_template": {
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+			};
+		};
+		"test": {
+			"join_test": {
+				"archived": boolean;
+				"created_at": string;
+				"id": number;
+				"test_id": string | null;
+			};
+			"test": {
+				"age": number;
+				"archived": boolean;
+				"created_at": string;
+				"id": string;
+				"name": string;
+			};
+		};
 	};
 	Insert: {
-
+		"core": {
+			"account_notification": {
+				"account_id": string;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"icon": string;
+				"icon_type": string;
+				"id"?: string;
+				"link"?: string | null;
+				"message": string;
+				"read"?: boolean;
+				"severity": string;
+				"title": string;
+			};
+			"admin": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+			};
+			"cached_request": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"headers": string;
+				"id"?: string;
+				"response": string;
+				"status": number;
+				"ttl": number;
+				"url": string;
+			};
+			"profile": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"email": string;
+				"first_name": string;
+				"id": string;
+				"last_name": string;
+				"username": string;
+			};
+			"role": {
+				"archived"?: boolean;
+				"color": string;
+				"created_at"?: string;
+				"description": string;
+				"id"?: string;
+				"name": string;
+			};
+			"role_account": {
+				"account"?: string | null;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"role"?: string | null;
+			};
+			"session": {
+				"account_id"?: string | null;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"prev_url"?: string | null;
+			};
+			"session_tab": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"session_id": string;
+				"url": string;
+			};
+		};
+		"public": {
+			"_template": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+			};
+		};
+		"test": {
+			"join_test": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: number;
+				"test_id"?: string | null;
+			};
+			"test": {
+				"age": number;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"name": string;
+			};
+		};
 	};
 	Update: {
-
+		"core": {
+			"account_notification": {
+				"account_id"?: string;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"icon"?: string;
+				"icon_type"?: string;
+				"id"?: string;
+				"link"?: string | null;
+				"message"?: string;
+				"read"?: boolean;
+				"severity"?: string;
+				"title"?: string;
+			};
+			"admin": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+			};
+			"cached_request": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"headers"?: string;
+				"id"?: string;
+				"response"?: string;
+				"status"?: number;
+				"ttl"?: number;
+				"url"?: string;
+			};
+			"profile": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"email"?: string;
+				"first_name"?: string;
+				"id"?: string;
+				"last_name"?: string;
+				"username"?: string;
+			};
+			"role": {
+				"archived"?: boolean;
+				"color"?: string;
+				"created_at"?: string;
+				"description"?: string;
+				"id"?: string;
+				"name"?: string;
+			};
+			"role_account": {
+				"account"?: string | null;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"role"?: string | null;
+			};
+			"session": {
+				"account_id"?: string | null;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"prev_url"?: string | null;
+			};
+			"session_tab": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"session_id"?: string;
+				"url"?: string;
+			};
+		};
+		"public": {
+			"_template": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+			};
+		};
+		"test": {
+			"join_test": {
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: number;
+				"test_id"?: string | null;
+			};
+			"test": {
+				"age"?: number;
+				"archived"?: boolean;
+				"created_at"?: string;
+				"id"?: string;
+				"name"?: string;
+			};
+		};
 	};
 	Relationships: {
-
+		"core": {
+			"account_notification": Database["core"]['Tables']["account_notification"]['Relationships'];
+			"admin": Database["core"]['Tables']["admin"]['Relationships'];
+			"cached_request": Database["core"]['Tables']["cached_request"]['Relationships'];
+			"profile": Database["core"]['Tables']["profile"]['Relationships'];
+			"role": Database["core"]['Tables']["role"]['Relationships'];
+			"role_account": Database["core"]['Tables']["role_account"]['Relationships'];
+			"session": Database["core"]['Tables']["session"]['Relationships'];
+			"session_tab": Database["core"]['Tables']["session_tab"]['Relationships'];
+		};
+		"public": {
+			"_template": Database["public"]['Tables']["_template"]['Relationships'];
+		};
+		"test": {
+			"join_test": Database["test"]['Tables']["join_test"]['Relationships'];
+			"test": Database["test"]['Tables']["test"]['Relationships'];
+		};
 	};
 };

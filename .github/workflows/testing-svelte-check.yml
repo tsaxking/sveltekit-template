@@ -15,22 +15,30 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: self-hosted-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tsc:
     env:
       PUPPETEER_SKIP_DOWNLOAD: true
+      CI: true
+      NODE_OPTIONS: --max-old-space-size=4096
     runs-on: self-hosted
     steps:
       - name: Retrieve git dependencies
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'true'
+          clean: true
+          fetch-depth: 1
           #  token: ${{ secrets.GH_TOKEN }}
 
       - name: Install dependencies
         run: |
+          set -euo pipefail
           echo "Installing dependencies..."
-          pnpm add -D typescript@5.9.3
           pnpm install --frozen-lockfile
 
       - name: Load .env variables
@@ -40,9 +48,11 @@ jobs:
 
       - name: Set up Supabase Config
         run: |
+          set -euo pipefail
           echo "Setting up Supabase config..."
           COMMIT_HASH=$(git rev-parse --short HEAD)
           SCHEMA_NAME="svelte_check_${COMMIT_HASH}"
+          echo "SCHEMA_NAME=${SCHEMA_NAME}" >> "$GITHUB_ENV"
           sed -i "s/^project_id = .*/project_id = \"${SCHEMA_NAME}\"/" supabase/config.toml
           pnpm script supabase/sb-random-ports
           pnpm sb:start --debug
@@ -66,8 +76,23 @@ jobs:
       - name: Shutdown supabase
         if: always()
         run: |
+          set +e
           pnpm sb:stop --no-backup || true
-          docker rm -f $(docker ps -aq --filter "name=supabase-${SCHEMA_NAME}") || true
+          if [ -n "${SCHEMA_NAME:-}" ]; then
+            docker ps -aq --filter "name=${SCHEMA_NAME}" | xargs -r docker rm -f || true
+            docker network ls -q --filter "name=${SCHEMA_NAME}" | xargs -r docker network rm || true
+            docker volume ls -q --filter "name=${SCHEMA_NAME}" | xargs -r docker volume rm || true
+          fi
+
+      - name: Runner housekeeping
+        if: always()
+        run: |
+          set +e
+          pnpm store prune || true
+          docker container prune -f --filter "until=24h" || true
+          docker image prune -f --filter "until=72h" || true
+          docker volume prune -f --filter "until=72h" || true
+          docker builder prune -f --filter "until=72h" || true
 
       - name: Clean up Supabase config
         if: always()

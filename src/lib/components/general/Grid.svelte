@@ -126,6 +126,8 @@ See AG Grid docs: https://www.ag-grid.com/javascript-data-grid/getting-started/
 
 	export const getGrid = () => grid;
 
+	export const getContainer = () => gridDiv;
+
 	export const getSortedNodes = (): T[] => {
 		const nodes: T[] = [];
 		if (!grid) return nodes;

@@ -15,17 +15,27 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: self-hosted-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   e2e-tests:
     env:
       PUPPETEER_SKIP_DOWNLOAD: true
+      CI: true
+      NODE_OPTIONS: --max-old-space-size=4096
+      PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
     # this has a chance of infinite loop if we write a test wrong, timeout should catch it eventually.
     timeout-minutes: 5
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 1
 
       - name: Load .env variables
         run: |
@@ -33,16 +43,18 @@ jobs:
           echo "Loaded .env variables"
       - name: Install dependencies
         run: |
-          echo "Installing dependencies..."
-          pnpm add -D typescript@5.9.3
+          set -euo pipefail
+          echo "Installing dependencies (cache-aware)..."
           pnpm install --frozen-lockfile
           pnpm exec playwright install
 
       - name: Set up Supabase Config
         run: |
+          set -euo pipefail
           echo "Setting up Supabase config..."
           COMMIT_HASH=$(git rev-parse --short HEAD)
           SCHEMA_NAME="e2e_test_${COMMIT_HASH}"
+          echo "SCHEMA_NAME=${SCHEMA_NAME}" >> "$GITHUB_ENV"
           sed -i "s/^project_id = .*/project_id = \"${SCHEMA_NAME}\"/" supabase/config.toml
           pnpm script supabase/sb-random-ports
           pnpm sb:start --debug
@@ -67,8 +79,25 @@ jobs:
       - name: Shutdown supabase
         if: always()
         run: |
+          set +e
           pnpm sb:stop --no-backup || true
-          docker rm -f $(docker ps -aq --filter "name=supabase-${SCHEMA_NAME}") || true
+          if [ -n "${SCHEMA_NAME:-}" ]; then
+            docker ps -aq --filter "name=${SCHEMA_NAME}" | xargs -r docker rm -f || true
+            docker network ls -q --filter "name=${SCHEMA_NAME}" | xargs -r docker network rm || true
+            docker volume ls -q --filter "name=${SCHEMA_NAME}" | xargs -r docker volume rm || true
+          fi
+
+      - name: Runner housekeeping
+        if: always()
+        run: |
+          set +e
+          # Keep dependency cache useful while reclaiming stale artifacts.
+          pnpm store prune || true
+          docker container prune -f --filter "until=24h" || true
+          docker image prune -f --filter "until=72h" || true
+          docker volume prune -f --filter "until=72h" || true
+          docker builder prune -f --filter "until=72h" || true
+          find ~/.cache/ms-playwright -mindepth 1 -maxdepth 1 -type d -mtime +14 -exec rm -rf {} + 2>/dev/null || true
 
       - name: Clean up Supabase config
         if: always()

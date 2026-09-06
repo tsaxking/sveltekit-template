@@ -41,6 +41,7 @@ import { browser } from '$app/env';
 import { DexieTable } from '$lib/services/db/table';
 import { is_online, on_network_change } from '$lib/utils/online.svelte';
 import { stable_stringify } from '$lib/utils/json';
+import { postgresChangesFilter } from '@supabase/supabase-js';
 /**
  * Typed Supabase client for this app with a `serviceRole` flag used for privileged server-side work.
  */
@@ -362,16 +363,6 @@ const QueryCache = new DexieTable({
 let offline_setup = false;
 
 /**
- * Returns true when running under test environments.
- *
- * @returns {boolean} Whether current runtime appears to be tests.
- */
-const _is_test_runtime = () => {
-	if (typeof process === 'undefined') return false;
-	return process.env.VITEST === 'true' || process.env.NODE_ENV === 'test';
-};
-
-/**
  * Initializes the offline queue replay listener for this Supabase client.
  *
  * When connectivity returns, the app replays queued local insert/update/delete operations
@@ -538,10 +529,13 @@ type Subscription<S extends RowSchemaName, T extends RowTableNames<S>> = {
 
 /**
  * Active subscriptions keyed by `schema.table`.
+ *
+ * Multiple query listeners may target the same table, so we store them in a stack and
+ * invoke every matching callback payload instead of overwriting the previous one.
  */
 const subscriptions = new SvelteMap<
 	`${string}.${string}`,
-	Subscription<RowSchemaName, RowTableNames<RowSchemaName>>
+	Subscription<RowSchemaName, RowTableNames<RowSchemaName>>[]
 >();
 
 /**
@@ -555,92 +549,97 @@ let subscribe_timeout: ReturnType<typeof setTimeout> | null = null;
  * @returns {void}
  */
 const reset_realtime = (client: Client) => {
-	SupaStruct.structs.values().next().value?.log('Resetting realtime channel bindings');
 	if (subscribe_timeout) clearTimeout(subscribe_timeout);
 	subscribe_timeout = setTimeout(async () => {
-		// stop subscription and reset
-		const _responses = await client.removeAllChannels();
-		SupaStruct.structs.values().next().value?.log('Removed existing realtime channels', _responses);
+		const channels = client.getChannels();
+		for (const c of channels) {
+			if (c.topic === 'table-db-changes') {
+				await client.removeChannel(c);
+			}
+		}
 
 		const channel = client.channel('table-db-changes');
 
-		for (const subscription of subscriptions.values()) {
-			channel.on(
-				'postgres_changes',
-				{
-					event: '*',
-					schema: subscription.struct.schema,
-					table: subscription.struct.table,
-					filter: subscription.filter === '*' ? undefined : subscription.filter
-				},
-				async (payload) => {
-					const type = payload.eventType;
-					subscription.struct.log('Recieved realtime payload:', payload);
-					try {
-						subscription.callback?.(
-							subscription.struct.Generator(payload.new as any, {
-								cache: false
-							}),
-							type,
-							payload.old as any
-						);
-					} catch (error) {
-						subscription.struct.log('Realtime subscription callback failed', {
-							error,
-							payload
-						});
-					}
-					switch (type) {
-						case 'INSERT':
-							{
-								if (payload.new) {
-									subscription.struct.Hydrate([payload.new as any]);
+		for (const subscriptions_for_table of subscriptions.values()) {
+			for (const subscription of subscriptions_for_table) {
+				channel.on(
+					'postgres_changes',
+					{
+						event: '*',
+						schema: subscription.struct.schema,
+						table: subscription.struct.table,
+						filter: subscription.filter === '*' ? undefined : subscription.filter
+					},
+					async (payload) => {
+						const type = payload.eventType;
+						try {
+							subscription.callback?.(
+								subscription.struct.Generator(payload.new as any, {
+									cache: false
+								}),
+								type,
+								payload.old as any
+							);
+						} catch (error) {
+							console.log('Realtime subscription callback failed', {
+								error,
+								payload
+							});
+						}
+						switch (type) {
+							case 'INSERT':
+								{
+									if (payload.new) {
+										subscription.struct.Hydrate([payload.new as any]);
+									}
 								}
-							}
-							break;
-						case 'UPDATE':
-							{
-								if (payload.new) {
-									subscription.struct.Hydrate([payload.new as any]);
+								break;
+							case 'UPDATE':
+								{
+									if (payload.new) {
+										subscription.struct.Hydrate([payload.new as any]);
+									}
 								}
-							}
-							break;
-						case 'DELETE':
-							{
-								const idValue = (payload.old as { id?: string } | null)?.id;
-								if (!idValue) {
-									subscription.struct.log('Realtime DELETE payload missing old.id', payload);
-									break;
-								}
-								const id = String(idValue);
-								subscription.struct['purge_cache']([id]);
-								const dexie = subscription.struct['getDexie'](
-									subscription.struct['getSchemaDefinition']().Row as any
-								);
-								if (dexie) {
-									await Promise.resolve(dexie['remove'](id)).catch((error) => {
-										subscription.struct.log('Failed to remove deleted realtime row from Dexie', {
-											id,
-											error
+								break;
+							case 'DELETE':
+								{
+									const idValue = (payload.old as { id?: string } | null)?.id;
+									if (!idValue) {
+										console.log('Realtime DELETE payload missing old.id', payload);
+										break;
+									}
+									const id = String(idValue);
+									subscription.struct['purge_cache']([id]);
+									const dexie = subscription.struct['getDexie'](
+										subscription.struct['getSchemaDefinition']().Row as any
+									);
+									if (dexie) {
+										await Promise.resolve(dexie['remove'](id)).catch((error) => {
+											console.log('Failed to remove deleted realtime row from Dexie', {
+												id,
+												error
+											});
 										});
-									});
+									}
 								}
-							}
-							break;
+								break;
+						}
 					}
-				}
-			);
-		}
-
-		channel.subscribe((status, err) => {
-			const logger = subscriptions.values().next().value?.struct;
-			if (status === 'SUBSCRIBED') {
-				logger?.log('Realtime subscription status: SUBSCRIBED');
-			} else {
-				logger?.log('Realtime subscription status update', { status, err });
+				);
 			}
-		});
-	}, 0);
+		}
+		try {
+			channel.subscribe((status, err) => {
+				if (status === 'SUBSCRIBED') {
+					console.log('Realtime subscription status: SUBSCRIBED');
+				} else {
+					console.log('Realtime subscription status update', { status, err });
+				}
+			});
+		} catch (error) {
+			console.error('Failed to subscribe to realtime channel', error);
+		}
+	}, 1000);
 };
 
 /**
@@ -704,10 +703,10 @@ const add_subscription = <S extends RowSchemaName, T extends RowTableNames<S>>(
 ) => {
 	return attemptAsync(async () => {
 		subscription.struct.log('Adding subscription', subscription);
-		subscriptions.set(
-			`${subscription.struct.schema}.${String(subscription.struct.table)}`,
-			subscription as any
-		);
+		const key = `${subscription.struct.schema}.${String(subscription.struct.table)}` as const;
+		const existing = subscriptions.get(key) ?? [];
+		existing.push(subscription as any);
+		subscriptions.set(key, existing);
 		reset_realtime(client);
 	});
 };
@@ -779,30 +778,6 @@ export class SupaStruct<Schema extends RowSchemaName, RowName extends RowTableNa
 			//
 		}
 		return instance;
-	}
-
-	/**
-	 * Initializes the shared realtime listener for the supplied client.
-	 *
-	 * @param {Client} client - Supabase client that should own the channel bindings.
-	 * @returns {void}
-	 */
-	public static initRealtime(client: Client) {
-		SupaStruct.structs.values().next().value?.log('Initializing shared realtime listener');
-		reset_realtime(client);
-	}
-
-	/**
-	 * Stops any queued realtime rebind and clears active channel subscriptions.
-	 *
-	 * @returns {void}
-	 */
-	public static stopRealtime() {
-		SupaStruct.structs.values().next().value?.log('Stopping shared realtime listener');
-		if (subscribe_timeout) {
-			clearTimeout(subscribe_timeout);
-			subscribe_timeout = null;
-		}
 	}
 
 	/**
@@ -1457,7 +1432,7 @@ export class SupaStruct<Schema extends RowSchemaName, RowName extends RowTableNa
 				value: value as any
 			}));
 		const search: SearchQuery<Schema, RowName> | '*' = conditions.length
-			? { type: 'or', conditions }
+			? { type: 'and', conditions }
 			: '*';
 
 		return new SupaQuery(this, search, required);
@@ -1915,30 +1890,55 @@ class SupaQuery<
 	 */
 	private build_realtime_string(filter: SearchQuery<Schema, RowName> | '*'): string {
 		this.struct.log('Building realtime filter string', filter);
-		if (filter === '*') return '*';
+		const f = postgresChangesFilter();
+		if (filter === '*') return f.build();
 
-		const walk = (node: SearchQuery<Schema, RowName>): string => {
+		const walk = (node: SearchQuery<Schema, RowName>) => {
 			if ('field' in node) {
-				const value = Array.isArray(node.value)
-					? `(${node.value.map((v) => this.serializeFilterValue(v)).join(',')})`
-					: this.serializeFilterValue(node.value);
-
-				switch (node.operator) {
-					case 'in':
-						return `${String(node.field)}=in.(${Array.isArray(node.value) ? node.value.map((v) => this.serializeFilterValue(v)).join(',') : this.serializeFilterValue(node.value)})`;
-					case 'like':
-						return `${String(node.field)}=like.${value}`;
+				const { field, value, operator } = node;
+				switch (operator) {
+					case 'eq':
+						return f.eq(String(field), value as any);
+					case 'gt':
+						return f.gt(String(field), value as any);
+					case 'gte':
+						return f.gte(String(field), value as any);
+					case 'lt':
+						return f.lt(String(field), value as any);
+					case 'lte':
+						return f.lte(String(field), value as any);
 					case 'ilike':
-						return `${String(node.field)}=ilike.${value}`;
+						return f.ilike(String(field), value as any);
+					case 'like':
+						return f.like(String(field), value as any);
+					case 'in':
+						return f.in(String(field), value as any);
+					case 'neq':
+						return f.neq(String(field), value as any);
 					default:
-						return `${String(node.field)}=${node.operator}.${value}`;
+						throw new Error(`Unsupported operator: ${operator}`);
+				}
+			} else {
+				const { type, conditions } = node;
+				switch (type) {
+					case 'and': {
+						for (const condition of conditions) walk(condition);
+						return f;
+					}
+					case 'or': {
+						console.warn(
+							'Unable to do "or" conditions on realtime, they will be treated as "and" conditions.'
+						);
+						for (const condition of conditions) walk(condition);
+						return f;
+					}
+					default:
+						throw new Error(`Unsupported condition type: ${type}`);
 				}
 			}
-
-			return `(${node.conditions.map(walk).join(',')})`;
 		};
-
-		return walk(filter);
+		walk(filter);
+		return f.build();
 	}
 
 	/**
@@ -1965,7 +1965,11 @@ class SupaQuery<
 		: SupaStructData<Schema, RowName, Required> | null {
 		const [[first], last] = [this.reactive, this._default];
 		if (first) return first as any;
-		if (last) return last as any;
+		if (last)
+			return this.struct.Generator(this._default as any, {
+				cache: false,
+				required: this.required as any
+			});
 		return null as any;
 	}
 
@@ -2300,8 +2304,8 @@ class SupaQuery<
 			if (cached.isOk() && cached.value) {
 				if (cached.value.raw.version !== QUERY_CACHE_VERSION) {
 					await cached.value.delete();
-				// } else if (Date.now() - cached.value.raw.last_sync <= ttl) {
-				// 	return this.reactive;
+					// } else if (Date.now() - cached.value.raw.last_sync <= ttl) {
+					// 	return this.reactive;
 				}
 			}
 
@@ -3043,7 +3047,10 @@ class _SupaPagination<
 	get reactive(): SupaStructData<Schema, RowName, Required>[] {
 		return this._currentPageIds
 			.map((id) => this.struct.cache.get(id))
-			.filter((item) => !!item) as SupaStructData<Schema, RowName, Required>[];
+			.filter((item, i, a) => {
+				if (!item) return false;
+				return a.indexOf(item) === i;
+			}) as SupaStructData<Schema, RowName, Required>[];
 	}
 
 	/**

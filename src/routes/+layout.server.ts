@@ -13,7 +13,7 @@ export const load = async (event) => {
 			url: env.SB_PUBLIC_URL,
 			public_key: env.SB_PUBLIC_KEY,
 			s3_access_key: env.SB_STORAGE_ACCESS_KEY
-		},
+		}
 	};
 
 	if (userError) {
