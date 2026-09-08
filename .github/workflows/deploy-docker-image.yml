@@ -4,10 +4,6 @@ on:
   release:
     types: [published]
 
-concurrency:
-  group: self-hosted-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   pre-check:
     runs-on: ubuntu-latest

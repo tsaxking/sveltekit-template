@@ -3,6 +3,8 @@
 	import type { Body, Meta } from '@uppy/core';
 	import { onMount } from 'svelte';
 
+	const { data } = $props();
+
 	let fileUploader: FileUploader<Meta, Body>;
 	let uploadResult = $state('');
 
@@ -37,6 +39,7 @@
 		text: 'Upload a Text File',
 		classes: 'btn btn-primary'
 	}}
+	supabase={data.supabase}
 />
 
 <p data-testid="upload-result">{uploadResult}</p>

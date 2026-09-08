@@ -17,24 +17,16 @@ Account search input with debounced query results.
 ```
 -->
 <script lang="ts">
-	import supabase from '$lib/services/supabase';
 	import { SupaStructData, SupaStruct } from '$lib/services/supabase/supastruct.svelte';
 
 	interface Props {
 		onselect: (account: SupaStructData<'core', 'profile'>) => void;
 		onsearch?: (account: SupaStructData<'core', 'profile'>[]) => void;
 		filter?: (account: SupaStructData<'core', 'profile'>) => boolean;
+		Profile: SupaStruct<'core', 'profile'>;
 	}
 
-	const { onselect, onsearch, filter }: Props = $props();
-
-	const struct = $state(
-		SupaStruct.get({
-			client: supabase,
-			schema: 'core',
-			table: 'profile'
-		})
-	);
+	const { onselect, onsearch, filter, Profile }: Props = $props();
 
 	let query = $state('');
 
@@ -45,7 +37,7 @@ Account search input with debounced query results.
 	export const search = (username: string) => {
 		if (timeout) clearTimeout(timeout);
 		timeout = setTimeout(async () => {
-			const res = await struct.search({
+			const res = await Profile.search({
 				field: 'username',
 				operator: 'ilike',
 				value: `%${username}%`

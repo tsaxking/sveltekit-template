@@ -23,8 +23,6 @@
 		done = false;
 		pass = false;
 
-		SupaStruct.initRealtime(data.supabase);
-
 		const prefix = `t-${Math.random().toString(36).slice(2, 7)}`;
 		const writer = SupaStruct.get({
 			client: data.supabase,

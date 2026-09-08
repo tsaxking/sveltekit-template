@@ -7,12 +7,14 @@ on:
 jobs:
   add-to-projects:
     runs-on: self-hosted
+    timeout-minutes: 5
 
     steps:
       - name: Add issue to all linked projects
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           # Get repo projects
           projects=$(gh api graphql -f query='
             query($owner:String!, $repo:String!) {

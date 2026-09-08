@@ -10,37 +10,29 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
-
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: self-hosted
+    env:
+      CI: true
+      NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 1
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: v24.13.1
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.30.0
-
       - name: Install Dependencies
         run: |
-          npm i -g typescript
+          set -euo pipefail
           pnpm install --frozen-lockfile
 
       - name: Configure project
@@ -58,3 +50,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Runner housekeeping
+        if: always()
+        run: |
+          set +e
+          pnpm store prune || true
+          rm -f .env || true

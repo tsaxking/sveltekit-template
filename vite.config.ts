@@ -36,8 +36,7 @@ export default defineConfig({
 				remoteFunctions: true
 			},
 			alias: {
-				$lib: 'src/lib',
-				'#lib': 'src/lib'
+				$lib: 'src/lib'
 			}
 		})
 	],
