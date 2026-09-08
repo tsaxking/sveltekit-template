@@ -38,7 +38,6 @@ export default defineConfig({
 			},
 			alias: {
 				$lib: 'src/lib',
-				'#lib': 'src/lib'
 			}
 		})
 	],

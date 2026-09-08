@@ -1,6 +1,6 @@
 services:
   app:
-    image: my-app:latest
+    image: sveltekit-template:latest
     pull_policy: never
     container_name: myapp_container
     env_file:

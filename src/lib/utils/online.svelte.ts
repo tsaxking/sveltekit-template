@@ -22,6 +22,8 @@ export const is_online = () => {
 	return online_state;
 };
 
+const latency_states: number[] = [];
+
 const get_latency = async () => {
 	const last_interaction = get_last_interaction();
 	if (last_interaction && Date.now() - last_interaction > 60000) {
@@ -30,7 +32,7 @@ const get_latency = async () => {
 	}
 	const start = performance.now();
 	try {
-		const res = await fetch('/api/ping');
+		const res = await fetch('/healthcheck');
 		if (!res.ok) {
 			// failed to ping
 			em.emit('latency', -1);
@@ -38,7 +40,11 @@ const get_latency = async () => {
 			return -1;
 		}
 		const end = performance.now();
-		em.emit('latency', end - start);
+		latency_states.push(end - start);
+		if (latency_states.length === 11) latency_states.shift();
+		const sum = latency_states.reduce((acc, cur) => acc + cur, 0);
+		const avg = sum / latency_states.length;
+		em.emit('latency', avg);
 		return end - start;
 	} catch {
 		em.emit('latency', -1);
@@ -67,5 +73,5 @@ if (browser) {
 			}
 			online_state = true;
 		}
-	}, 10_000); // check every 10 seconds
+	}, 2000); // check every 2 seconds
 }

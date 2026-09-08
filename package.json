@@ -4,8 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"start": "node --env-file=.env ./src/server.js",
-		"cli": "npx vite-node ./cli/index.ts",
+		"start": "node ./src/server.js",
 		"dev": "vite dev",
 		"tools": "node --inspect --env-file=.env ./src/server.js",
 		"debug": "vite --debug",
